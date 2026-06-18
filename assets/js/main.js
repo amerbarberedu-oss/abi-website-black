@@ -11,25 +11,8 @@
   if (saved && THEMES.indexOf(saved) > -1) document.documentElement.setAttribute('data-theme', saved);
   else if (saved !== null || true) { if (!saved) document.documentElement.removeAttribute('data-theme'); }
 
-  /* ---------- Mobile nav ---------- */
-  var menuBtn = document.querySelector('.menu-btn');
-  var nav = document.querySelector('.nav');
-  if (menuBtn && nav) {
-    menuBtn.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    // expand submenus on tap (mobile)
-    nav.querySelectorAll('.has-sub > a').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        if (window.matchMedia('(max-width: 1080px)').matches) {
-          e.preventDefault();
-          a.parentElement.classList.toggle('open');
-        }
-      });
-    });
-  }
+  /* Mobile nav is handled by landing.js (.hamburger/.nav-drawer); the old
+     .menu-btn/.nav markup no longer exists, so no wiring is needed here. */
 
   /* ---------- Next start date: first Monday of next month (always current) ---------- */
   function firstMonday(year, month) {
