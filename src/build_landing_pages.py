@@ -513,7 +513,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=50">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=51">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
@@ -560,7 +560,6 @@ def header(p, s, pre):
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <span class="bpole" aria-hidden="true"><span class="bpole-stripes"></span></span>
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
     %s
