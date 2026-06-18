@@ -195,26 +195,6 @@ html.js .in-view .section-head h2, html.js .section-head.in-view h2 { clip-path:
   100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-/* ---------- Theme picker ---------- */
-.theme-picker { display: flex; align-items: center; gap: 8px; }
-.theme-picker .tp-label {
-  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--text-on-dark-mute);
-}
-.theme-dot {
-  width: 19px; height: 19px; border-radius: 50%; cursor: pointer; padding: 0;
-  border: 2px solid rgba(255,255,255,.3);
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.theme-dot:hover { transform: scale(1.25); }
-.theme-dot[aria-pressed="true"] {
-  border-color: #fff; transform: scale(1.18);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--gold) 60%, transparent);
-}
-.theme-dot.t-midnight { background: linear-gradient(135deg, #101316 50%, #c9a227 50%); }
-.theme-dot.t-classic  { background: linear-gradient(135deg, #1a2433 50%, #b3322e 50%); }
-.theme-dot.t-emerald  { background: linear-gradient(135deg, #0e1f19 50%, #ab883a 50%); }
-.theme-dot.t-noir     { background: linear-gradient(135deg, #0b0b0c 50%, #d6203c 50%); }
 
 /* Smooth theme cross-fade */
 html.theming, html.theming body, html.theming section, html.theming .card,
