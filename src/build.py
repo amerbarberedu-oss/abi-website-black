@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=49">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=50">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
@@ -75,6 +75,7 @@ TEMPLATE = """<!DOCTYPE html>
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
+      <span class="bpole" aria-hidden="true"><span class="bpole-stripes"></span></span>
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
     {langtoggle}
