@@ -1166,3 +1166,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .earn-amt{font-size:1.7rem}
 }
 @media (prefers-reduced-motion:reduce){.succeed-badge{transition:none}.succeed-badge:hover{transform:none}}
+
+/* cf3d — black cinematic 3D coverflow gallery */
+.cf3d-stage{position:relative;margin:8px 0 10px}
+.cf3d-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:46px 44vw;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cf3d-track::-webkit-scrollbar{display:none}
+.cf3d-card{flex:0 0 auto;width:300px;aspect-ratio:3/4;scroll-snap-align:center;position:relative;border:0;padding:0;cursor:pointer;background:#0b0e14;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.6);transition:opacity .2s ease;will-change:transform}
+.cf3d-card img{width:100%;height:100%;object-fit:cover;display:block}
+.cf3d-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:120;width:52px;height:52px;border-radius:50%;border:1px solid rgba(217,164,65,.5);background:rgba(11,14,20,.7);color:#d9a441;font-size:30px;cursor:pointer;backdrop-filter:blur(6px)}
+.cf3d-arrow.prev{left:12px}.cf3d-arrow.next{right:12px}
+.cf3d-sub{color:#9aa3b2;margin:.3rem 0 1rem}
+.cf3d-reels{display:flex;gap:16px;overflow-x:auto;padding:6px 2px 18px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.cf3d-reels::-webkit-scrollbar{display:none}
+.cf3d-reel{position:relative;flex:0 0 auto;width:190px;aspect-ratio:9/16;scroll-snap-align:start;border:1px solid rgba(217,164,65,.25);cursor:pointer;background:linear-gradient(160deg,#15110a,#0b0e14);border-radius:16px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.55);transition:transform .2s ease,border-color .2s ease}
+.cf3d-reel:hover{transform:translateY(-5px);border-color:rgba(217,164,65,.7)}
+.cf3d-reel video{width:100%;height:100%;object-fit:cover;display:block}
+.cf3d-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#d9a441;background:radial-gradient(circle,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.cf3d-lb{position:fixed;inset:0;z-index:300;background:rgba(2,3,6,.96);display:none;align-items:center;justify-content:center;padding:20px}
+.cf3d-lb.on{display:flex}
+.cf3d-lb img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.8)}
+.cf3d-lb-x{position:absolute;top:14px;right:20px;font-size:34px;color:#d9a441;background:0;border:0;cursor:pointer;line-height:1}
+@media(max-width:640px){.cf3d-track{padding:36px 30vw}.cf3d-card{width:230px}}
+@media(prefers-reduced-motion:reduce){.cf3d-card,.cf3d-reel{transition:none}}
