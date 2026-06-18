@@ -7,7 +7,7 @@ import json, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src', 'pages')
-SITE_URL = 'https://www.abi.edu'
+SITE_URL = 'https://abi-website-black.vercel.app'
 
 # ── Next class date (first Monday of upcoming month), computed at build time ──
 def _next_first_monday():
@@ -210,7 +210,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 <script src="{root}assets/js/main.js?v=31" defer></script>
 <script src="{root}assets/js/effects.js?v=31" defer></script>
-<script src="{root}assets/js/landing.js?v=30" defer></script>
+<script src="{root}assets/js/landing.js?v=31" defer></script>
 </body>
 </html>
 """
@@ -250,8 +250,7 @@ ORG_SCHEMA = {
     ],
     "areaServed": ["New York City", "Manhattan", "Bronx", "Queens", "Brooklyn", "Westchester", "New Jersey", "Connecticut"],
     "knowsLanguage": ["en", "es"],
-    "priceRange": "$$",
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.3", "reviewCount": "100", "bestRating": "5"}
+    "priceRange": "$$"
 }
 
 def course_schema(name, desc, hours, weeks, price):
@@ -375,7 +374,7 @@ PAGES = [
      "500-Hour Master Barber Program (4 Months) | American Barber Institute",
      "Become a licensed Master Barber in NY in 4 months. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans. NYS Board Exam prep & job placement.",
      "en", [course_schema("500 Hour Master Barber Program",
-        "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 4600)]),
+        "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/200-hour-barber-fundamentals.html", "program-200.html",
      "200-Hour Barber Fundamentals Program (2 Months) | American Barber Institute",
      "Hands-on 200-hour barbering fundamentals for apprentices and licensed cosmetologists. $3,600 with a weekly payment plan. Monday–Friday afternoons.",
@@ -504,6 +503,11 @@ def build():
                 .replace('<b data-h>0</b>', '<b data-h>%s</b>' % CD_H)
                 .replace('<b data-m>0</b>', '<b data-m>%s</b>' % CD_M)
                 .replace('<b data-s>0</b>', '<b data-s>%s</b>' % CD_S))
+        # 404 page must not be indexed by search engines.
+        if out == '404.html':
+            html = html.replace(
+                '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
+                '<meta name="robots" content="noindex">')
         dest = os.path.join(ROOT, out)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(html)

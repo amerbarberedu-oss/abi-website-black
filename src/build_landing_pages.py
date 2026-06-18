@@ -6,7 +6,7 @@ Run: python3 build.py   → writes pages next to this script.
 import os, json, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://www.abi.edu"
+SITE = "https://abi-website-black.vercel.app"
 
 # ── Next class date: first Monday of the upcoming month (computed at build) ──
 def _next_first_monday():
@@ -25,6 +25,17 @@ NEXT_MON = _next_first_monday()
 NEXT_START_EN = NEXT_MON.strftime("%a, %b ") + str(NEXT_MON.day)          # e.g. "Mon, Jul 6"
 _ES_MO = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
 NEXT_START_ES = "lun, %s %d" % (_ES_MO[NEXT_MON.month - 1], NEXT_MON.day)  # e.g. "lun, jul 6"
+
+# Countdown defaults baked at build time so the no-JS view shows real
+# numbers (not all-zeros). JS still enhances these into a live countdown.
+_CD_DT = datetime.datetime.combine(NEXT_MON, datetime.time(0, 0))
+_CD_REMAIN = max(int((_CD_DT - datetime.datetime.now()).total_seconds()), 0)
+CD_VALS = {
+    "d": str(_CD_REMAIN // 86400),
+    "h": str((_CD_REMAIN % 86400) // 3600),
+    "m": str((_CD_REMAIN % 3600) // 60),
+    "s": str(_CD_REMAIN % 60),
+}
 
 # ───────────────────────── icons ─────────────────────────
 def icon(name, size=22):
@@ -485,8 +496,7 @@ def head(p, s, pre):
     jsonld = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TradeSchool","name":"American Barber Institute",
 "url":"%s%s","telephone":"%s","foundingDate":"1996",
-"address":{"@type":"PostalAddress","streetAddress":"%s"},
-"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.3","reviewCount":"100"}}
+"address":{"@type":"PostalAddress","streetAddress":"%s"}}
 </script>
 <script type="application/ld+json">%s</script>
 <script type="application/ld+json">%s</script>""" % (SITE, p["url"], p["campus"]["tel_disp"], p["campus"]["addr"],
@@ -494,7 +504,7 @@ def head(p, s, pre):
             {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in FAQS[p["lang"]]]}, ensure_ascii=False),
         json.dumps({"@context":"https://schema.org","@type":"Course","name":"500-Hour Master Barber Program",
             "description":p["desc"],"provider":{"@type":"TradeSchool","name":"American Barber Institute","sameAs":SITE},
-            "offers":{"@type":"Offer","price":"4600","priceCurrency":"USD","category":"Tuition"},
+            "offers":{"@type":"Offer","price":"5600","priceCurrency":"USD","category":"Tuition"},
             "hasCourseInstance":{"@type":"CourseInstance","courseMode":"Onsite","location":p["campus"]["addr"]}}, ensure_ascii=False))
     return """<!DOCTYPE html>
 <html lang="%s">
@@ -746,8 +756,8 @@ def sec_testi(p, s):
         "Ver todas las reseñas en Google →" if p["lang"]=="es" else "View all reviews on Google →")
 
 def sec_countdown(p, s):
-    cells = "".join('<div class="count-cell"><b data-cd-%s>0</b><span>%s</span></div>'
-                    % (k, lbl) for k, lbl in zip("dhms", s["count_lbl"]))
+    cells = "".join('<div class="count-cell"><b data-cd-%s>%s</b><span>%s</span></div>'
+                    % (k, CD_VALS[k], lbl) for k, lbl in zip("dhms", s["count_lbl"]))
     return """
 <section class="sec" style="padding:2.6rem 0;text-align:center"><div class="container rv">
   <span class="eyebrow">%s</span>
@@ -982,7 +992,7 @@ def footer(p, s, pre):
   </div>
 </div>
 <script src="/assets/js/effects.js?v=31" defer></script>
-<script src="%sassets/js/landing.js?v=30" defer></script>
+<script src="%sassets/js/landing.js?v=31" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],

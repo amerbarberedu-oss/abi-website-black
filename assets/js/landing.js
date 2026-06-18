@@ -6,11 +6,11 @@
   document.documentElement.classList.add('js');
 
   /* ── CONFIG ──────────────────────────────────────────────
-     Set your Formspree (or other) endpoint once, here.
-     Create a free form at https://formspree.io → replace the ID.
-     Leads can also be forwarded by Formspree to admission@abi.edu
-     and into the LeadConnector CRM via Zapier/webhook.            */
-  var FORM_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
+     Lead form endpoint. Posts to FormSubmit's AJAX endpoint, which
+     delivers submissions to admission@abi.edu (the same inbox the
+     site's mailto forms use). Returns JSON; the submit handler shows
+     success only on response.ok and an error message otherwise.      */
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/admission@abi.edu';
 
   /* ── Next start date: first Monday of next month ───────── */
   function nextFirstMonday() {
