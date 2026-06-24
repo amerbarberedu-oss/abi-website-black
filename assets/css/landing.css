@@ -1405,3 +1405,19 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 
 /* footer logo: new white-bg logo on dark footer -> clean white badge */
 .foot-logo{background:#fff;border-radius:10px;padding:9px 13px;height:auto!important;max-width:230px;width:auto;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+
+/* ============================================================================
+   v10.6 — home full-width background-image banners (static, group photos, text overlaid)
+   ========================================================================== */
+.home-banner{position:relative;background-size:cover;background-position:center center;
+  padding:clamp(3.4rem,8vw,6rem) 0;color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+.home-banner__in{max-width:780px}
+.home-banner h2{color:#fff!important;font-size:clamp(1.75rem,3.6vw,2.7rem);letter-spacing:-.012em;margin:.2rem 0 .6rem}
+.home-banner .eyebrow{color:#bcd0ff!important}
+.home-banner .lead,.home-banner .prose,.home-banner .prose p,.home-banner .prose li,.home-banner p{color:#eef1f8!important}
+.home-banner .prose ul{margin:1.1rem 0 0;padding:0;list-style:none;display:grid;gap:.55rem}
+.home-banner .prose li{position:relative;padding-left:1.7rem;font-weight:500}
+.home-banner .prose li::before{content:"\2713";position:absolute;left:0;top:0;color:#8fb0ff;font-weight:700}
+
+/* partner photo (Untouchable Cutz fixed: was an invisible white logo) */
+.partner-media:not(.partner-logo) img{width:100%;height:100%;object-fit:cover}
