@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=31">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=53">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=57">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
@@ -83,7 +83,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="hdr-in">
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
-      <span class="brand-addr">48 West 39th Street, New York, NY 10018<br>121 Westchester Square, Bronx, NY 10461</span>
+      <span class="brand-addr">48 West 39th Street<br>New York, NY 10018<br>121 Westchester Square<br>Bronx, NY 10461</span>
     </a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>

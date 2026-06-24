@@ -527,7 +527,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=53">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=57">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
@@ -583,7 +583,7 @@ def header(p, s, pre):
   <div class="hdr-in">
     <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
-      <span class="brand-addr">48 West 39th Street, New York, NY 10018<br>121 Westchester Square, Bronx, NY 10461</span>
+      <span class="brand-addr">48 West 39th Street<br>New York, NY 10018<br>121 Westchester Square<br>Bronx, NY 10461</span>
     </a>
     <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
