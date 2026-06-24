@@ -1469,3 +1469,7 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
   display:grid;place-items:center;border-radius:50%;font-size:.78rem;font-weight:800;color:#fff;
   background:linear-gradient(135deg,#1b2fd9,#3ad0ff);box-shadow:0 3px 9px rgba(27,47,217,.42)}
 @media (max-width:760px){.duo{grid-template-columns:1fr}}
+
+/* v10.10 — earnings figures: home cards are white, so force the amount BLACK (a later
+   .earn-amt rule for the dark inner-page tiers was leaking white-on-white) */
+.earn .earn-amt{color:#0a0c10!important}
