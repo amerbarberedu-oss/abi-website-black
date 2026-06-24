@@ -316,11 +316,15 @@ _LOCATIONS_ARCHIVED = [
 
 NAV = {
  "en": [("About","about.html"),("Instructors","instructors.html"),("Programs","programs/index.html"),
-        ("Admissions","admissions.html"),("$3 Haircuts","haircuts.html"),("Jobs","jobs.html"),
-        ("Gallery","gallery.html"),("FAQs","faq.html"),("Contact","contact.html")],
+        ("Schedule","schedule.html"),("Admissions","admissions.html"),("Tuition","tuition.html"),
+        ("$3 Haircuts","haircuts.html"),("Jobs","jobs.html"),("Partners","partners.html"),
+        ("Resources","resources.html"),("Gallery","gallery.html"),("Blog","blog/index.html"),
+        ("FAQs","faq.html"),("Contact","contact.html")],
  "es": [("Nosotros","about.html"),("Instructores","instructors.html"),("Programas","programs/index.html"),
-        ("Admisiones","admissions.html"),("Cortes de $3","haircuts.html"),("Empleos","jobs.html"),
-        ("Galería","gallery.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
+        ("Horario","schedule.html"),("Admisiones","admissions.html"),("Matrícula","tuition.html"),
+        ("Cortes de $3","haircuts.html"),("Empleos","jobs.html"),("Aliados","partners.html"),
+        ("Recursos","resources.html"),("Galería","gallery.html"),("Blog","blog/index.html"),
+        ("Preguntas","faq.html"),("Contacto","contact.html")],
 }
 NAV_LOC_LABEL = {"en": "Locations", "es": "Ubicaciones"}
 LOC_NAMES = [("Queens","barber-school-queens-ny"),("Brooklyn","barber-school-brooklyn-new-york"),
@@ -1001,6 +1005,23 @@ def footer(p, s, pre):
               s["exit_h"], s["exit_p"], s["exit_cta"], pre)
 
 # ───────────────────────── assemble ─────────────────────────
+def sec_leadership(p, s):
+    es = p["lang"] == "es"
+    eb = "Una Bienvenida Personal" if es else "A Personal Welcome"
+    h2 = "Bienvenida del Equipo de Liderazgo" if es else "Welcome from the Leadership Team"
+    p1 = ("Hola, soy Alex — gracias por dar el primer paso hacia tu carrera de barbero. Cada gran barbero que he conocido empezó exactamente donde estás ahora: con curiosidad, un poco nervioso y listo para trabajar."
+          if es else
+          "Hi, I'm Alex — thank you for taking the first step toward your barbering career. Every great barber I've known started exactly where you are now: curious, a little nervous, and ready to work.")
+    p2 = ("En ABI no solo enseñamos técnica. Construimos la confianza, la disciplina y la comunidad que te llevan desde tu primer degradado hasta tu propia silla. Ya sea un nuevo capítulo o el sueño que has perseguido por años, aquí eres bienvenido. Completa el formulario, sube tus documentos en minutos, y espero conocerte."
+          if es else
+          "At ABI we don't just teach technique. We build the confidence, the discipline, and the community that carry you from your first fade to your own chair. Whether this is a new chapter or the dream you've been chasing for years, you're welcome here. Fill out the form, upload your documents in minutes, and I look forward to meeting you.")
+    sig = "— El Equipo de Liderazgo de American Barber Institute" if es else "— The American Barber Institute Leadership Team"
+    return """
+<section class="sec sec-alt"><div class="container rv" style="max-width:880px">
+  <span class="eyebrow">%s</span><h2>%s</h2>
+  <div class="prose"><p>%s</p><p>%s</p><p><strong>%s</strong></p></div>
+</div></section>""" % (eb, h2, p1, p2, sig)
+
 def build(p):
     s = S[p["lang"]]
     depth = p["path"].count("/")
@@ -1013,7 +1034,7 @@ def build(p):
     elif p["type"] == "splash":
         parts += [sec_steps(p, s), sec_earnings(p, s), sec_tuition(p, s),
                   sec_dates(p, s), sec_videos(p, s, pre), sec_gallery(p, s, pre),
-                  sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
+                  sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "location":
         parts += [sec_location(p, s), sec_tuition(p, s), sec_dates(p, s), sec_videos(p, s, pre),
                   sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
