@@ -59,11 +59,26 @@
   var burger = document.querySelector('.hamburger');
   var drawer = document.querySelector('.nav-drawer');
   if (burger && drawer) {
+    // Cap the drawer to the space between its top and the viewport bottom so it always
+    // fits on screen and scrolls internally (the inner padding clears the sticky CTA).
+    function sizeDrawer() {
+      var top = drawer.getBoundingClientRect().top;
+      drawer.style.maxHeight = Math.max(180, window.innerHeight - top - 6) + 'px';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    }
     burger.addEventListener('click', function () {
       var open = drawer.classList.toggle('open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       document.body.classList.toggle('nav-open', open);
+      if (open) sizeDrawer();
     });
+    drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+    window.addEventListener('resize', function () { if (drawer.classList.contains('open')) sizeDrawer(); });
   }
 
   /* ── Accordion ──────────────────────────────────────────── */

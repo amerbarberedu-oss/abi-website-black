@@ -118,7 +118,7 @@ S = {
   "closing_h": "Ready to Start Your Barbering Career?",
   "closing_p": "New classes begin the first Monday of every month. Seats fill fast — call us or reserve your spot today, in English or Spanish.",
   "closing_cta": "Reserve Your Spot", "closing_call": "Call",
-  "mbar_call": "Call Now", "mbar_cta": "Become a Barber",
+  "mbar_call": "Call Now", "mbar_text": "Text Us", "mbar_cta": "Apply Now",
   "bubble_tip": "Hey, I'm one of the assistants at ABI. How can I help?",
   "exit_h": "Wait — your chair is waiting",
   "exit_p": "Classes start the first Monday of every month and seats are limited. Leave your info and an admissions advisor will call you within 24 hours.",
@@ -186,7 +186,7 @@ S = {
   "closing_h": "¿Listo para Empezar Tu Carrera de Barbería?",
   "closing_p": "Las clases nuevas comienzan el primer lunes de cada mes. Los cupos se llenan rápido — llámanos o reserva tu lugar hoy.",
   "closing_cta": "Reserva Tu Lugar", "closing_call": "Llámanos",
-  "mbar_call": "Llámanos", "mbar_cta": "Conviértete en Barbero",
+  "mbar_call": "Llámanos", "mbar_text": "Escríbenos", "mbar_cta": "Aplica Ahora",
   "bubble_tip": "Hola, soy uno de los asistentes de ABI. ¿Cómo puedo ayudarte?",
   "exit_h": "Espera — tu silla te está esperando",
   "exit_p": "Las clases comienzan el primer lunes de cada mes y los cupos son limitados. Déjanos tu información y un asesor de admisiones te llamará dentro de 24 horas.",
@@ -979,8 +979,9 @@ def footer(p, s, pre):
   <div class="ftr-legal">© American Barber Institute (ABI). All rights reserved. · %s · *$150/week refers to Plan C weekly payments.</div>
 </div></footer>
 <div class="mbar">
-  <a class="mbar-call" href="tel:%s">%s %s</a>
-  <a class="mbar-cta" href="#reserve">%s</a>
+  <a class="mbar-call" href="tel:%s"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg> <span>%s</span></a>
+  <a class="mbar-text" href="sms:+12122902289"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> <span>%s</span></a>
+  <a class="mbar-cta" href="#reserve"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg> <span>%s</span></a>
 </div>
 <div class="bubble-tip">%s<button class="tip-x" aria-label="Close">✕</button></div>
 <button class="bubble" aria-label="%s">%s</button>
@@ -995,7 +996,7 @@ def footer(p, s, pre):
 <script src="%sassets/js/landing.js?v=31" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
-              p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
+              p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
               s["bubble_tip"], s["reserve"], icon("chat",26),
               s["exit_h"], s["exit_p"], s["exit_cta"], pre)
 
