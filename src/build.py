@@ -84,11 +84,11 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}jobs.html">Jobs</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}partners.html">Partners</a><a href="{root}instructors.html">Instructors</a><a href="{root}contact.html">Contact</a></nav>
+    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}partners.html">Partners</a><a href="{root}instructors.html">Instructors</a><a href="{root}contact.html">Contact</a></nav>
     <a class="header-cta" href="{root}contact.html">Become a Barber <span aria-hidden="true">&#9986;</span></a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -151,7 +151,6 @@ TEMPLATE = """<!DOCTYPE html>
           <li><a href="{root}admissions.html">Class Schedule</a></li>
           <li><a href="{root}tuition.html">Tuition Calculator</a></li>
           <li><a href="{root}faq.html">FAQs</a></li>
-          <li><a href="{root}haircuts.html">Haircuts</a></li>
           <li><a href="{root}resources.html">Resources</a></li>
           <li><a href="{root}jobs.html">Job Placement</a></li>
           <li><a href="{root}partners.html">Partners</a></li>
@@ -326,10 +325,6 @@ PAGES = [
      "ACCESS-VR — Tuition-Covered Barber Training | ABI",
      "ACCESS-VR pays tuition, tools and books for qualified New Yorkers with disabilities. Train as a barber at ABI with full vocational rehabilitation support.",
      "en", []),
-    ("haircuts.html", "haircuts.html",
-     "$3 Haircuts in Manhattan — Services Menu | ABI",
-     "Get a quality $3 haircut by supervised student barbers in Midtown Manhattan: fades, tapers, shape-ups, razor shaves and more. Free haircut coupon available.",
-     "en", []),
     ("jobs.html", "jobs.html",
      "Job Placement & Shop Registration | American Barber Institute",
      "ABI maintains a full-time job placement office. Graduates often finish with multiple offers. Barbershop owners: register your shop to hire our trained graduates.",
@@ -444,7 +439,7 @@ PAGE_BG = {
     'about.html': 'abi-nyc-008.jpg',
     'instructors.html': 'abi-students-031.jpg', 'admissions.html': 'abi-students-130.jpg', 'schedule.html': 'abi-students-139.jpg',
     'veterans.html': 'abi-students-188.jpg',
-    'access-vr.html': 'abi-students-025.jpg', 'haircuts.html': 'abi-students-020.jpg',
+    'access-vr.html': 'abi-students-025.jpg',
     'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
     'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg', 'tuition.html': 'abi-nyc-008.jpg',
     'jobs/job-opportunities.html': 'abi-students-056.jpg', 'jobs/shop-registration.html': 'abi-students-236.jpg',
