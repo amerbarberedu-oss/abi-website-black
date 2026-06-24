@@ -1083,8 +1083,8 @@ def build(p):
                   sec_videos(p, s, pre),
                   sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "splash":
-        parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s), sec_zero(p, s),
-                  sec_earnings(p, s), sec_includes(p, s), sec_tuition(p, s),
+        parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s), sec_includes(p, s),
+                  sec_zero(p, s), sec_earnings(p, s), sec_tuition(p, s),
                   sec_dates(p, s), sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
                   sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "location":
