@@ -191,7 +191,7 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 /* chips */
 .chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.4rem}
 .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.85rem;font-weight:500}
-.chip::before{content:"✂ ";color:var(--blue)}
+.chip::before{content:"";color:var(--blue)}
 
 /* curriculum accordion */
 .acc{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
@@ -498,7 +498,7 @@ html,body{overflow-x:clip}
 .inst-diff-head{font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.82rem;color:var(--blue);margin:1rem 0 .5rem}
 .inst-diff{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
 .inst-diff li{position:relative;padding-left:1.5rem;font-size:.95rem;line-height:1.45}
-.inst-diff li::before{content:"✂";position:absolute;left:0;color:var(--gold,#caa14a)}
+.inst-diff li::before{content:"✓";position:absolute;left:0;color:var(--blue,#1b2fd9)}
 .inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:1.4rem}
 .inst-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.6rem;box-shadow:0 4px 18px rgba(15,20,32,.06);display:flex;flex-direction:column;gap:.6rem}
 .inst-card h3{font-size:1.25rem;margin:.4rem 0 .2rem}
@@ -983,9 +983,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:46rem;margin-top:1.8rem}
 .features .feature{
   display:flex;align-items:flex-start;gap:.55rem;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18)!important;
+  background:rgba(10,14,30,.62)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  border:1px solid rgba(255,255,255,.3)!important;
   border-radius:12px;padding:.8rem .85rem;font-size:.85rem;line-height:1.35;
-  text-shadow:0 1px 6px rgba(0,0,0,.5)}
+  text-shadow:0 1px 6px rgba(0,0,0,.7)}
 /* kill the old divider borders that made them look cramped/overlapping */
 .features .feature:nth-child(-n+3),.features .feature:nth-child(4),.features .feature+.feature{
   border:1px solid rgba(255,255,255,.18)!important;border-left:1px solid rgba(255,255,255,.18)!important;

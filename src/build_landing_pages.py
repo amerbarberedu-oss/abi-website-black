@@ -101,7 +101,7 @@ S = {
      "price":"$4,600","terms":"$500 down (incl. $100 registration) + 16 weekly payments of $250 + final $100","pop":True},
     {"name":"Plan C — Weekend","sched":"Sat & Sun · 9:00 AM – 7:00 PM","hours":"18 hrs/week · 27 weeks (~6–7 months)",
      "price":"$4,600","terms":"$550 down (incl. $100 registration) + 27 weekly payments of $150","pop":False}],
-  "pop_tag": "Most Popular", "plan_cta": "Let's Do It ✂",
+  "pop_tag": "Most Popular", "plan_cta": "Let's Do It",
   "plans_note": "Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
   "req_eb": "Admissions", "req_h": "Entrance Requirements",
   "reqs": ["Social Security Card","High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
@@ -167,7 +167,7 @@ S = {
      "price":"$4,600","terms":"$500 de pago inicial (incluye $100 de inscripción) + 16 pagos semanales de $250 + pago final de $100","pop":True},
     {"name":"Plan C — Fines de Semana","sched":"Sáb y Dom · 9:00 AM – 7:00 PM","hours":"18 hrs/semana · 27 semanas (~6–7 meses)",
      "price":"$4,600","terms":"$550 de pago inicial (incluye $100 de inscripción) + 27 pagos semanales de $150","pop":False}],
-  "pop_tag": "Más Popular", "plan_cta": "¡Hagámoslo! ✂",
+  "pop_tag": "Más Popular", "plan_cta": "¡Hagámoslo!",
   "plans_note": "Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI o con otros proveedores. Asistencia financiera ACCES-VR disponible. Beneficios de Post-9/11 GI Bill® y VA aceptados.",
   "req_eb": "Admisiones", "req_h": "Requisitos de Admisión",
   "reqs": ["Tarjeta de Seguro Social","Diploma de Preparatoria (HSD) o GED — o aprobar el examen ATB de admisión en ABI",
@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=62">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=63">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -531,7 +531,7 @@ def header(p, s, pre):
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
-    <a class="header-cta" href="#reserve">Become a Barber <span aria-hidden="true">&#9986;</span></a>
+    <a class="header-cta" href="#reserve">Become a Barber</a>
     <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
@@ -614,7 +614,7 @@ TICKER = {
  "es": ["Degradados Clásicos","Fades Bajos","Fades Medios","Fades Altos","Líneas con Navaja","Afeitado con Toalla Caliente","Pompadours","Recortes de Barba","Shape Ups","Caesars","Flat Tops","High-Top Fades","Mohawks","Blowouts"],
 }
 def sec_ticker(p, s):
-    items = "".join('<span>%s</span><span class="sc">✂</span>' % t for t in TICKER[p["lang"]])
+    items = "".join('<span>%s</span><span class="sc">•</span>' % t for t in TICKER[p["lang"]])
     return '<div class="ticker" aria-hidden="true"><div class="ticker-track">%s%s</div></div>' % (items, items)
 
 def sec_stats(p, s):
