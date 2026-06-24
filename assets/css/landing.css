@@ -1039,10 +1039,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    REV v42 — INSTRUCTOR PHOTOS + JOB OPPORTUNITIES BOARD
    ============================================================ */
 /* real instructor photos in place of monogram avatars */
-.inst-photo{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center top;display:block;border:2px solid rgba(27,47,217,.18);box-shadow:0 4px 14px rgba(15,20,32,.18)}
-.inst-avatar--lg.inst-photo{width:148px;height:148px;margin-bottom:.4rem}
+/* Instructor photos: large, centered circular headshots, consistent across cards */
+.inst-photo{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:center top;display:block;border:3px solid rgba(27,47,217,.2);box-shadow:0 6px 20px rgba(15,20,32,.22);align-self:center;transform:none!important}
+.inst-avatar--lg.inst-photo{width:172px;height:172px;margin-bottom:.4rem}
 .inst-group-photo{width:100%;height:auto;max-height:540px;object-fit:contain;border-radius:18px;margin:0 0 1.6rem;box-shadow:0 12px 34px rgba(15,20,32,.18);display:block}
-@media(max-width:560px){.inst-photo{width:84px;height:84px}.inst-avatar--lg.inst-photo{width:124px;height:124px}.inst-group-photo{max-height:360px}}
+/* center the photo, role badge and name; keep bio text left-aligned for readability */
+.inst-card{align-items:center;text-align:center}
+.inst-card .inst-tag,.inst-card h3{align-self:center}
+.inst-card p,.inst-card ul,.inst-card .inst-diff,.inst-card .inst-diff-head{text-align:left;align-self:stretch}
+.inst-card:hover .inst-photo{transform:scale(1.05)!important}
+@media(max-width:560px){.inst-photo{width:132px;height:132px}.inst-avatar--lg.inst-photo{width:148px;height:148px}.inst-group-photo{max-height:360px}}
 
 /* job opportunities board */
 .job-tools{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin:1.2rem 0}
