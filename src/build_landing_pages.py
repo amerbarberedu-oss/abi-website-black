@@ -123,8 +123,8 @@ S = {
   "exit_cta": "Reserve My Spot",
   "f_about": "New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.",
   "f_visit": "Visit Us", "f_links": "Quick Links",
-  "f_linkitems": [("Programs","/programs/index.html"),("Admissions","/admissions.html"),
-                  ("Veterans · GI Bill®","/veterans.html"),("Admissions","/admissions.html"),
+  "f_linkitems": [("Programs","/programs/index.html"),("Instructors","/instructors.html"),
+                  ("Gallery","/gallery.html"),("Blog","/blog/index.html"),
                   ("Contact","/contact.html")],
   "gibill": "GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA).",
   "details_h": "Program Details", "d_dur": "Duration", "d_tui": "Tuition", "d_from": "from", "d_sch": "Schedules",
@@ -189,8 +189,8 @@ S = {
   "exit_cta": "Reservar Mi Lugar",
   "f_about": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años. Licenciada por el Departamento de Educación del Estado de NY. Est. 1996.",
   "f_visit": "Visítanos", "f_links": "Enlaces Rápidos",
-  "f_linkitems": [("Programas","/programs/index.html"),("Admisiones","/admissions.html"),
-                  ("Veteranos · GI Bill®","/veterans.html"),("Admisiones","/admissions.html"),
+  "f_linkitems": [("Programas","/programs/index.html"),("Instructores","/instructors.html"),
+                  ("Galería","/gallery.html"),("Blog","/blog/index.html"),
                   ("Contacto","/contact.html")],
   "gibill": "GI BILL® es una marca registrada del Departamento de Asuntos de Veteranos de EE. UU. (VA).",
   "details_h": "Detalles del Programa", "d_dur": "Duración", "d_tui": "Matrícula", "d_from": "desde", "d_sch": "Horarios",
@@ -311,16 +311,12 @@ _LOCATIONS_ARCHIVED = [
 
 
 NAV = {
- "en": [("About","about.html"),("Instructors","instructors.html"),("Programs","programs/index.html"),
-        ("Schedule","schedule.html"),("Admissions","admissions.html"),("Tuition","tuition.html"),
-        ("Jobs","jobs.html"),("Partners","partners.html"),
-        ("Resources","resources.html"),("Gallery","gallery.html"),("Blog","blog/index.html"),
-        ("FAQs","faq.html"),("Contact","contact.html")],
- "es": [("Nosotros","about.html"),("Instructores","instructors.html"),("Programas","programs/index.html"),
-        ("Horario","schedule.html"),("Admisiones","admissions.html"),("Matrícula","tuition.html"),
-        ("Empleos","jobs.html"),("Aliados","partners.html"),
-        ("Recursos","resources.html"),("Galería","gallery.html"),("Blog","blog/index.html"),
-        ("Preguntas","faq.html"),("Contacto","contact.html")],
+ "en": [("About","about.html"),("Programs","programs/index.html"),("Instructors","instructors.html"),
+        ("Partners","partners.html"),("Resources","resources.html"),("Gallery","gallery.html"),
+        ("Blog","blog/index.html"),("Jobs","jobs.html"),("FAQs","faq.html"),("Contact","contact.html")],
+ "es": [("Nosotros","about.html"),("Programas","programs/index.html"),("Instructores","instructors.html"),
+        ("Aliados","partners.html"),("Recursos","resources.html"),("Galería","gallery.html"),
+        ("Blog","blog/index.html"),("Empleos","jobs.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
 }
 NAV_LOC_LABEL = {"en": "Locations", "es": "Ubicaciones"}
 LOC_NAMES = [("Queens","barber-school-queens-ny"),("Brooklyn","barber-school-brooklyn-new-york"),
@@ -389,57 +385,7 @@ LOC_ES = {
 }
 
 PAGES = []
-# program pages
-PAGES.append({"type":"program","lang":"en","path":"500-hours-master-barber-program-landing-page/index.html",
- "url":"/500-hours-master-barber-program-landing-page","alt":"/es/500-hours-master-barber-program-landing-page",
- "title":"500 Hour Master Barber Program — Manhattan | American Barber Institute",
- "desc":"Become a licensed Master Barber in New York in as little as 4 months. Comprehensive 500-hour hands-on training in Manhattan with flexible schedules, job placement, and NY State Board Exam prep. Starting at $4,600.",
- "campus":MANHATTAN,"h1a":"500 Hours.","h1b":"Barber Program.","script":"Start Today.",
- "sub":"Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Manhattan campus.",
- "about":ABOUT_MAN_EN,"about_h":"About the Program","tech":TECH_MAN_EN,"curr":CURR_MAN_EN,
- "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
-PAGES.append({"type":"program","lang":"es","path":"es/500-hours-master-barber-program-landing-page/index.html",
- "url":"/es/500-hours-master-barber-program-landing-page","alt":"/500-hours-master-barber-program-landing-page",
- "title":"Programa de Barbero Maestro de 500 Horas — Manhattan | American Barber Institute",
- "desc":"Conviértete en Barbero Maestro licenciado en Nueva York en tan solo 4 meses. Entrenamiento práctico de 500 horas en Manhattan, horarios flexibles, asistencia de empleo y preparación para el examen del Estado de NY. Desde $4,600.",
- "campus":MANHATTAN,"h1a":"500 Horas.","h1b":"Programa de Barbero.","script":"Empieza Hoy.",
- "sub":"Conviértete en Barbero Maestro licenciado en tan solo <b>cuatro meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede de Manhattan.",
- "about":ABOUT_MAN_ES,"about_h":"Sobre el Programa","tech":TECH_MAN_ES,"curr":CURR_MAN_ES,
- "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
-PAGES.append({"type":"program","lang":"en","path":"master-barber-program-bronx/index.html",
- "url":"/master-barber-program-bronx","alt":"/es/master-barber-program-bronx",
- "title":"Master Barber Program — Bronx | American Barber Institute",
- "desc":"Become a licensed Master Barber in New York at our Bronx campus. 500-hour hands-on training with full-time and weekend schedules, flexible payment plans, and NY State Board Exam prep. Starting at $4,600. Se habla español.",
- "campus":BRONX,"h1a":"Barber Operator","h1b":"Program.","script":"Start Today.",
- "sub":"Become a licensed Master Barber with affordable payment plans, full-time and weekend schedules, and <b>bilingual instruction</b> at our Bronx campus. Se habla español.",
- "about":ABOUT_BX_EN,"about_h":"About the Program","tech":TECH_BX_EN,"curr":CURR_BX_EN,
- "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
-PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bronx/index.html",
- "url":"/es/master-barber-program-bronx","alt":"/master-barber-program-bronx",
- "title":"Programa de Barbero Maestro — Bronx | American Barber Institute",
- "desc":"Conviértete en Barbero Maestro licenciado en Nueva York en nuestra sede del Bronx. Entrenamiento práctico de 500 horas con horarios de tiempo completo y fines de semana, planes de pago flexibles y preparación para el examen del Estado de NY. Desde $4,600. Se habla español.",
- "campus":BRONX,"h1a":"Programa de Barbero","h1b":"Operador.","script":"Empieza Hoy.",
- "sub":"Conviértete en Barbero Maestro licenciado con planes de pago asequibles, horarios de tiempo completo y fines de semana, e <b>instrucción bilingüe</b> en nuestra sede del Bronx. Se habla español.",
- "about":ABOUT_BX_ES,"about_h":"Sobre el Programa","tech":TECH_BX_ES,"curr":CURR_BX_ES,
- "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
-# splash pages
-for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
-    (1,("Your Future.","Your Career.","Tu Futuro.","Tu Carrera.")),
-    (2,("A New Career.","In 17 Weeks.","Una Nueva Carrera.","En 17 Semanas."))):
-    PAGES.append({"type":"splash","lang":"en","path":"splash-page-%d/index.html"%n,
-     "url":"/splash-page-%d"%n,"alt":"/es/splash-page-%d"%n,
-     "title":"Become a Licensed Barber in NYC | American Barber Institute",
-     "desc":"New York's only dedicated barber school — changing lives for over 30 years. Become a licensed barber in as little as 17 weeks. Hands-on training. Real skills. Real opportunities.",
-     "campus":MANHATTAN,"h1a":h1a_en,"h1b":h1b_en,"script":"Start Today.",
-     "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
-     "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600","variant":n})
-    PAGES.append({"type":"splash","lang":"es","path":"es/splash-page-%d/index.html"%n,
-     "url":"/es/splash-page-%d"%n,"alt":"/splash-page-%d"%n,
-     "title":"Conviértete en Barbero Licenciado en NYC | American Barber Institute",
-     "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años.",
-     "campus":MANHATTAN,"h1a":h1a_es,"h1b":h1b_es,"script":"Empieza Hoy.",
-     "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
-     "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
+# home page only — program-landing / splash / location funnel pages removed per client request
 PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "url":"/","alt":"/es",
  "title":"Barber School NYC | American Barber Institute",

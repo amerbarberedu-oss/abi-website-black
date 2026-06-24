@@ -86,11 +86,11 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
+    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
     <a class="header-cta" href="{root}contact.html">Become a Barber <span aria-hidden="true">&#9986;</span></a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -150,8 +150,7 @@ TEMPLATE = """<!DOCTYPE html>
         <ul>
           <li><a href="{root}about.html">About ABI</a></li>
           <li><a href="{root}programs/index.html">Programs</a></li>
-          <li><a href="{root}admissions.html">Class Schedule</a></li>
-          <li><a href="{root}tuition.html">Tuition Calculator</a></li>
+          <li><a href="{root}instructors.html">Instructors</a></li>
           <li><a href="{root}faq.html">FAQs</a></li>
           <li><a href="{root}resources.html">Resources</a></li>
           <li><a href="{root}jobs.html">Job Placement</a></li>
@@ -183,7 +182,7 @@ TEMPLATE = """<!DOCTYPE html>
   </div>
   <div class="foot-legal">
     <div class="wrap">
-      <div>© <span id="yr"></span> American Barber Institute (ABI). All rights reserved. · <a href="{root}privacy.html">Privacy Policy</a></div>
+      <div>© <span id="yr"></span> American Barber Institute (ABI). All rights reserved.</div>
       <div>GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA). Info: <a href="https://www.benefits.va.gov/gibill" rel="noopener">benefits.va.gov/gibill</a></div>
     </div>
   </div>
@@ -312,22 +311,6 @@ PAGES = [
      "Our Instructors | Master Barber Teachers in NYC",
      "Meet ABI's master instructors — including King David Ayeoribe and Emmy-featured Harold “Barkim” Brown — with 50+ years of combined barbering experience.",
      "en", [INSTRUCTORS_SCHEMA]),
-    ("admissions.html", "admissions.html",
-     "Admissions & Requirements | American Barber Institute",
-     "How to enroll at ABI: entrance requirements, class schedules, holiday calendar and the 4 simple steps to get started. New classes every month.",
-     "en", []),
-    ("schedule.html", "schedule.html",
-     "Class Schedule & Start Dates | American Barber Institute",
-     "Upcoming start dates at ABI's Manhattan & Bronx campuses — new classes begin the first Monday of every month. Morning, afternoon & weekend schedules.",
-     "en", []),
-    ("veterans.html", "veterans.html",
-     "Veterans — GI Bill® Approved Barber Training | ABI",
-     "VA-approved barber training in NYC under Title 38 USC § 3676. Use your GI Bill® benefits to become a licensed Master Barber. We guide you through every step.",
-     "en", []),
-    ("access-vr.html", "access-vr.html",
-     "ACCESS-VR — Tuition-Covered Barber Training | ABI",
-     "ACCESS-VR pays tuition, tools and books for qualified New Yorkers with disabilities. Train as a barber at ABI with full vocational rehabilitation support.",
-     "en", []),
     ("jobs.html", "jobs.html",
      "Job Placement & Shop Registration | American Barber Institute",
      "ABI maintains a full-time job placement office. Graduates often finish with multiple offers. Barbershop owners: register your shop to hire our trained graduates.",
@@ -348,18 +331,6 @@ PAGES = [
      "Barbering Resources & State Licensing Boards | ABI",
      "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
      "en", []),
-    ("jobs/job-opportunities.html", "job-opportunities.html",
-     "Barber Job Opportunities in NYC | American Barber Institute",
-     "Current openings and our network of New York-area barbershops hiring licensed barbers. ABI graduates get priority placement.",
-     "en", []),
-    ("jobs/shop-registration.html", "shop-registration.html",
-     "Register Your Shop — Hire ABI Barbers | American Barber Institute",
-     "Barbershop owners: join ABI's job placement network and get matched with skilled, licensed, board-prepared barbers ready to work.",
-     "en", []),
-    ("tuition.html", "tuition.html",
-     "Tuition & Payment Calculator | American Barber Institute",
-     "Estimate your barber-school tuition, down payment and weekly payments instantly. Compare all ABI programs. ACCES-VR, GI Bill® and weekly payment plans accepted.",
-     "en", []),
     ("partners.html", "partners.html",
      "Our Partners | Where ABI Barbers Work in NYC",
      "Where ABI graduates work: Levels Barbershop, Diamond Fadez, Untouchable Cutz, Expo Gentlemen Salon, Otis & Finn and the NYC Barber Shop Museum.",
@@ -368,29 +339,10 @@ PAGES = [
      "Page Not Found | American Barber Institute",
      "The page you're looking for doesn't exist. Return to American Barber Institute's homepage or browse our barber programs.",
      "en", []),
-    ("privacy.html", "privacy.html",
-     "Privacy Policy | American Barber Institute",
-     "How American Barber Institute collects, uses, and protects your personal information.",
-     "en", []),
     ("programs/index.html", "programs-index.html",
      "Barber Programs in NYC | American Barber Institute",
      "ABI's NYS-licensed barber programs at our Manhattan & Bronx campuses: 500-Hour Master Barber, 50-Hour Barber Refresher and the 3-Hour Contagious Diseases course.",
      "en", []),
-    ("programs/500-hour-master-barber.html", "program-500.html",
-     "500-Hour Master Barber Program (4 Months) | American Barber Institute",
-     "Become a licensed Master Barber in NY in 4 months. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans. NYS Board Exam prep & job placement.",
-     "en", [course_schema("500 Hour Master Barber Program",
-        "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
-    ("programs/50-hour-barber-refresher.html", "program-50.html",
-     "50-Hour Barber Refresher Program (2 Weeks) | American Barber Institute",
-     "Sharpen your skills and prepare for the NY State Board Exam in 2 weeks. For cosmetologists, hairdressers and barber apprentices. $1,500 with split payments.",
-     "en", [course_schema("50 Hour Barber Refresher Program",
-        "Two-week refresher preparing licensed professionals for the New York State Barbering Licensing Examination.", 50, 2, 1500)]),
-    ("programs/contagious-diseases.html", "program-cd.html",
-     "3-Hour Contagious Diseases Program (Home Study) — $100 | American Barber Institute",
-     "NY-required Transmission of Contagious Diseases course for barber operators and apprentices. Complete by mail for $100 — booklet, exam and two certificates.",
-     "en", [course_schema("3 Hours Contagious Diseases Program",
-        "Home-study course on transmission of contagious diseases, sanitation and sterilization required for NY barber licensure.", 3, 1, 100)]),
     ("blog/index.html", "blog-index.html",
      "Blog — Barbering Career Advice & News | American Barber Institute",
      "Advice from NYC's only dedicated barber school: licensing, careers, shop ownership, marketing your barbershop, and life after barber school.",
@@ -426,16 +378,11 @@ def faq_schema_from(body):
 # page gets a distinct photo; program subpages reuse from the same set.
 PAGE_BG = {
     'about.html': 'abi-nyc-008.jpg',
-    'instructors.html': 'abi-students-031.jpg', 'admissions.html': 'abi-students-130.jpg', 'schedule.html': 'abi-students-139.jpg',
-    'veterans.html': 'abi-students-188.jpg',
-    'access-vr.html': 'abi-students-025.jpg',
+    'instructors.html': 'abi-students-031.jpg',
     'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
-    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg', 'tuition.html': 'abi-nyc-008.jpg',
-    'jobs/job-opportunities.html': 'abi-students-056.jpg', 'jobs/shop-registration.html': 'abi-students-236.jpg',
-    'resources.html': 'abi-students-190.jpg', 'privacy.html': 'abi-nyc-013.jpg',
-    'programs/index.html': 'abi-students-107.jpg', 'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
-    'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
-    'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
+    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg',
+    'resources.html': 'abi-students-190.jpg',
+    'programs/index.html': 'abi-students-107.jpg',
     'blog/index.html': 'abi-students-095.jpg',
 }
 _DEFAULT_BG = 'abi-students-107.jpg'
@@ -483,7 +430,7 @@ def build():
             oglocale='es_ES' if lang == 'es' else 'en_US',
             pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
             root=root, body=body, schema=schema_tags, langtoggle=langtoggle,
-            lp=root + ('es/' if lang == 'es' else '') + '500-hours-master-barber-program-landing-page/',
+            lp=root + 'programs/index.html',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')
         # Bake real next-class date + countdown defaults so they never render
@@ -506,7 +453,7 @@ def build():
         if out != '404.html':  # keep the error page out of the sitemap
             written.append(out)
     # sitemap
-    written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html']
+    written += ['index.html', 'es/index.html']
     import datetime
     _today = datetime.date.today().isoformat()
     urls = '\n'.join(

@@ -7,7 +7,22 @@
     { "source": "/programs/scalp-micro-pigmentation", "destination": "/programs/", "permanent": true },
     { "source": "/programs/scalp-micro-pigmentation.html", "destination": "/programs/", "permanent": true },
     { "source": "/programs/license-transfer", "destination": "/programs/", "permanent": true },
-    { "source": "/programs/license-transfer.html", "destination": "/programs/", "permanent": true }
+    { "source": "/programs/license-transfer.html", "destination": "/programs/", "permanent": true },
+    { "source": "/programs/500-hour-master-barber", "destination": "/programs/", "permanent": true },
+    { "source": "/programs/50-hour-barber-refresher", "destination": "/programs/", "permanent": true },
+    { "source": "/programs/contagious-diseases", "destination": "/programs/", "permanent": true },
+    { "source": "/admissions", "destination": "/contact", "permanent": true },
+    { "source": "/tuition", "destination": "/contact", "permanent": true },
+    { "source": "/schedule", "destination": "/contact", "permanent": true },
+    { "source": "/veterans", "destination": "/resources", "permanent": true },
+    { "source": "/access-vr", "destination": "/resources", "permanent": true },
+    { "source": "/privacy", "destination": "/", "permanent": true },
+    { "source": "/jobs/job-opportunities", "destination": "/jobs", "permanent": true },
+    { "source": "/jobs/shop-registration", "destination": "/jobs", "permanent": true },
+    { "source": "/500-hours-master-barber-program-landing-page", "destination": "/", "permanent": true },
+    { "source": "/master-barber-program-bronx", "destination": "/programs/", "permanent": true },
+    { "source": "/splash-page-1", "destination": "/", "permanent": true },
+    { "source": "/splash-page-2", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
