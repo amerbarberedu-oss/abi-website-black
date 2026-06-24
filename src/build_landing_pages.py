@@ -527,7 +527,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=52">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=53">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
@@ -540,6 +540,10 @@ def header(p, s, pre):
     pills = "".join(
         '<a class="phone-pill" href="tel:%s">%s<span><span class="lbl">%s: </span>%s</span></a>'
         % (tel, icon("phone",16), lbl, disp) for lbl, disp, tel in s["en_es_phones"])
+    # EN/ES number pills shown in the top banner (matches the approved header layout)
+    tbcalls = "".join(
+        '<a class="tb-call" href="tel:%s"><b class="tb-flag">%s</b><span class="tb-num">%s</span></a>'
+        % (tel, ("EN" if i == 0 else "ES"), disp) for i, (lbl, disp, tel) in enumerate(s["en_es_phones"]))
     home = pre + ("es/index.html" if lang == "es" else "index.html")
     # language toggle target
     alt = p.get("alt")
@@ -570,15 +574,18 @@ def header(p, s, pre):
     else:
         lt = '<div class="lang-toggle" role="group" aria-label="Language"><a class="is-active" aria-current="true">EN</a><a href="%s">ES</a></div>' % alt_href
     return """
-<div class="topbar">%s<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="ABI Blue" title="ABI Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight Gold" title="Midnight Gold"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic Americana" title="Classic Americana"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Crimson Noir" title="Crimson Noir"></button></span></div>
+<div class="topbar">
+  <div class="tb-promo">%s</div>
+  <div class="tb-calls">%s</div>
+  <span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="ABI Blue" title="ABI Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight Gold" title="Midnight Gold"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic Americana" title="Classic Americana"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Crimson Noir" title="Crimson Noir"></button></span>
+</div>
 <header class="hdr">
   <div class="hdr-in">
-    <a class="logo" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
+    <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
+      <span class="brand-addr">48 West 39th Street, New York, NY 10018<br>121 Westchester Square, Bronx, NY 10461</span>
     </a>
-    %s
-    <div class="hdr-phones">%s</div>
-    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="mainnav" aria-label="Main">%s
     <span class="mn-lang"><a href="%s" %s>EN</a> | <a href="%s" %s>ES</a></span>
@@ -591,7 +598,7 @@ def header(p, s, pre):
 </div>
 <div class="startpill-wrap">
   <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start>%s</b></span></span>
-</div>""" % (s["topbar"], home, lt, pills, items,
+</div>""" % (s["topbar"], tbcalls, home, lt, items,
              en_href, 'style="color:var(--blue)"' if lang == "en" else "",
              es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
              s["limited"], s["reserve"],
