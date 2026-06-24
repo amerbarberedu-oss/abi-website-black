@@ -62,6 +62,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="stylesheet" href="{root}assets/css/style.css?v=31">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/landing.css?v=61">
+<link rel="stylesheet" href="{root}assets/css/upgrade.css?v=1">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
@@ -69,6 +70,7 @@ TEMPLATE = """<!DOCTYPE html>
 {schema}
 </head>
 <body style="--page-bg:url('/assets/img/{pagebg}')">
+<div class="abi-deco" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="topbar">
@@ -218,6 +220,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/main.js?v=31" defer></script>
 <script src="{root}assets/js/effects.js?v=31" defer></script>
 <script src="{root}assets/js/landing.js?v=31" defer></script>
+<script src="{root}assets/js/upgrade.js?v=1" defer></script>
 </body>
 </html>
 """

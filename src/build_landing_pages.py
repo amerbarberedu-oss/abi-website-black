@@ -524,12 +524,14 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="%sassets/css/landing.css?v=61">
+<link rel="stylesheet" href="%sassets/css/upgrade.css?v=1">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
-<body>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
-             p["title"], p["desc"], SITE, p["url"], pre, jsonld)
+<body>
+<div class="abi-deco" aria-hidden="true"></div>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
+             p["title"], p["desc"], SITE, p["url"], pre, pre, jsonld)
 
 def header(p, s, pre):
     lang = p["lang"]
@@ -999,6 +1001,7 @@ def footer(p, s, pre):
 </div>
 <script src="/assets/js/effects.js?v=31" defer></script>
 <script src="%sassets/js/landing.js?v=31" defer></script>
+<script src="/assets/js/upgrade.js?v=1" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
@@ -1075,19 +1078,69 @@ def sec_includes(p, s):
     h2 = "Lo que incluye cada programa" if es else "What's included in every program"
     return '<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
 
+# ── ported from the 10-site DNA: AI-logo brand video + showcase B-roll (live CDN pull) ──
+CDN = "https://assets-lilac-five.vercel.app/"
+
+# real barbershop B-roll clips (served from the live CDN) with bilingual captions
+SHOWCASE_CLIPS = [
+    ("barbershop-interior-busy-atmosphere", "Inside our NYC clinic floor", "Dentro de nuestra clínica en NYC"),
+    ("barber-cutting-hair-clippers",        "Clipper work, up close",       "Trabajo de máquina, de cerca"),
+    ("group-in-blue-smocks-instructor",     "Learning with our instructors","Aprendiendo con instructores"),
+    ("barber-grooms-beard-straight-razor",  "Straight-razor technique",     "Técnica de navaja"),
+    ("five-men-in-barbershop",              "The ABI community",            "La comunidad ABI"),
+    ("students-interacting-in-workshop",    "Hands-on from day one",        "Práctica desde el primer día"),
+]
+
+def sec_brandband(p, s, pre):
+    es = p["lang"] == "es"
+    kick = "Desde 1996" if es else "Since 1996"
+    sub = ("La única escuela de barbería dedicada de NYC — entrenamiento práctico, licencia del estado de NY y colocación laboral."
+           if es else
+           "NYC's only dedicated barber school — hands-on training, NY State licensing, and real job placement.")
+    return ('<section class="abi-brandband" data-reveal>'
+            '<div class="abi-brandband__frame">'
+            '<video class="abi-brandband__video" muted playsinline loop preload="none" '
+            'poster="/assets/img/abi-logo.gif" data-src="%svideos/american_barber_institute_logo.mp4"></video>'
+            '<div class="abi-brandband__copy">'
+            '<p class="abi-brandband__kicker">%s</p>'
+            '<h2 class="abi-brandband__title abi-brandband__title--shimmer">American Barber Institute</h2>'
+            '<p class="abi-brandband__sub">%s</p>'
+            '</div></div></section>') % (CDN, kick, sub)
+
+def sec_showcase(p, s, pre):
+    es = p["lang"] == "es"
+    eb = "Por Dentro" if es else "Inside ABI"
+    h = "Mira la vida real en ABI" if es else "See real life at ABI"
+    lead = ("Clips reales de nuestras aulas y la clínica de barbería — entrenamiento práctico, todos los días."
+            if es else
+            "Real clips from our classrooms and barber clinic — hands-on training, every single day.")
+    cards = ""
+    for i, (name, cap_en, cap_es) in enumerate(SHOWCASE_CLIPS):
+        cards += ('<article class="abi-clip abi-tilt" data-reveal data-reveal-d="%d">'
+                  '<video class="abi-clip__video" muted playsinline loop preload="none" '
+                  'data-src="%sshowcase/vid/%s.mp4"></video>'
+                  '<div class="abi-clip__cap">%s</div>'
+                  '<span class="abi-tilt__glare" aria-hidden="true"></span>'
+                  '</article>') % ((i % 3) + 1, CDN, name, (cap_es if es else cap_en))
+    return ('<section class="abi-section abi-section--alt"><div class="abi-section__inner">'
+            '<div class="abi-section__head" data-reveal><p class="abi-eyebrow">%s</p>'
+            '<h2 class="abi-h2">%s</h2><p class="abi-lead">%s</p></div>'
+            '<div class="abi-showcase">%s</div></div></section>') % (eb, h, lead, cards)
+
 def build(p):
     s = S[p["lang"]]
     depth = p["path"].count("/")
     pre = "../" * depth
-    parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre), sec_ticker(p, s), sec_stats(p, s)]
+    parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre), sec_brandband(p, s, pre), sec_ticker(p, s), sec_stats(p, s)]
     if p["type"] == "program":
         parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
-                  sec_tuition(p, s), sec_reqs(p, s), sec_dates(p, s), sec_videos(p, s, pre),
+                  sec_tuition(p, s), sec_reqs(p, s), sec_dates(p, s), sec_showcase(p, s, pre),
+                  sec_videos(p, s, pre),
                   sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "splash":
         parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s), sec_zero(p, s),
                   sec_earnings(p, s), sec_includes(p, s), sec_tuition(p, s),
-                  sec_dates(p, s), sec_videos(p, s, pre), sec_gallery(p, s, pre),
+                  sec_dates(p, s), sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
                   sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "location":
         parts += [sec_location(p, s), sec_tuition(p, s), sec_dates(p, s), sec_videos(p, s, pre),
