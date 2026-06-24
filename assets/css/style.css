@@ -568,22 +568,22 @@ footer.site a:hover { color: var(--gold-bright); }
 /* ---------- Mobile sticky CTA ---------- */
 .mobile-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; display: none;
-  grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--ink-3);
-  border-top: 1px solid var(--ink-3);
-  padding-bottom: env(safe-area-inset-bottom);
+  gap: 8px; padding: 9px 11px calc(9px + env(safe-area-inset-bottom));
+  background: #0d1017; border-top: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 -10px 30px rgba(0,0,0,.5);
 }
 .mobile-cta a, .mobile-cta button {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  padding: 10px 6px; font-family: var(--font-display); text-transform: uppercase;
-  letter-spacing: .03em; font-weight: 700; font-size: .74rem; text-decoration: none; line-height: 1.1;
-  border: none; cursor: pointer; min-height: 56px;
+  flex: 1; min-width: 0; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 6px;
+  min-height: 48px; border-radius: 12px; font-family: var(--font-display); text-transform: uppercase;
+  letter-spacing: .01em; font-weight: 800; font-size: clamp(.6rem,2.7vw,.82rem); text-decoration: none; line-height: 1;
+  white-space: nowrap; border: none; cursor: pointer;
 }
-.mobile-cta svg { flex-shrink: 0; }
-.mobile-cta .call { background: var(--ink); color: #fff; }
+.mobile-cta svg { flex-shrink: 0; width: 16px; height: 16px; }
+.mobile-cta .call { background: transparent; color: #fff; border: 1.6px solid rgba(255,255,255,.55); }
 .mobile-cta .text { background: var(--blue); color: #fff; }
 .mobile-cta .apply { background: var(--gold); color: var(--on-accent); }
-@media (min-width: 380px) { .mobile-cta a, .mobile-cta button { flex-direction: row; gap: 7px; font-size: .8rem; } }
-@media (max-width: 1080px) { .mobile-cta { display: grid; } body { padding-bottom: 64px; } }
+@media (max-width: 340px) { .mobile-cta a, .mobile-cta button { gap: 4px; font-size: .56rem; } .mobile-cta svg { width: 13px; height: 13px; } }
+@media (max-width: 1080px) { .mobile-cta { display: flex; } body { padding-bottom: 72px; } }
 
 /* ---------- Utilities ---------- */
 .center { text-align: center; }

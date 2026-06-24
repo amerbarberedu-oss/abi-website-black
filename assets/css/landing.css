@@ -34,7 +34,9 @@ a{color:inherit;text-decoration:none}
 .logo-abi{font-size:2.1rem;font-weight:800;color:var(--blue);letter-spacing:-.03em;line-height:1}
 .logo-words{font-size:.8rem;font-weight:700;color:var(--blue);line-height:1.15;text-transform:uppercase;letter-spacing:.02em}
 .hdr-phones{display:flex;gap:.8rem;margin-left:auto;align-items:center}
-.phone-pill{display:flex;align-items:center;gap:.5rem;border:1px solid var(--line);border-radius:10px;padding:.6rem 1.1rem;font-weight:600;font-size:.95rem;white-space:nowrap}
+.phone-pill{display:inline-flex;align-items:center;gap:.5rem;border:1.6px solid var(--blue,#1b2fd9);border-radius:999px;padding:.5rem 1.05rem;font-weight:800;font-size:.92rem;white-space:nowrap;color:var(--blue,#1b2fd9);transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.phone-pill:hover{background:var(--blue,#1b2fd9);color:#fff;transform:translateY(-1px);box-shadow:0 6px 16px rgba(27,47,217,.3)}
+.phone-pill:hover svg{color:#fff}
 .phone-pill svg{flex-shrink:0;color:var(--blue)}
 .btn-call{padding:.65rem 2rem;font-size:.95rem}
 .hamburger{background:none;border:none;cursor:pointer;padding:.4rem;display:flex;flex-direction:column;gap:5px}
@@ -109,9 +111,11 @@ a{color:inherit;text-decoration:none}
 .nav-drawer a{font-size:1.06rem;font-weight:600;padding:.95rem .4rem;border-top:1px solid rgba(15,20,32,.08);color:var(--ink,#0f1420)}
 .nav-drawer a:first-child{border-top:none}
 .nav-drawer a:hover{color:var(--blue)}
-/* Compact mobile header — drop the wide dual phone pills (calling lives in the sticky bar +
-   drawer), so the header stays a clean single row instead of wrapping to ~3 rows. */
-@media (max-width:768px){.hdr-phones{display:none}}
+/* Hide the floating chat bubble on mobile — the 3-action sticky bar (Call/Text/Apply) covers
+   contact and the bubble was overlapping it. Phone numbers stay visible in the header row. */
+@media (max-width:1080px){.bubble,.bubble-tip{display:none!important}}
+/* Mobile header phones: clean centered row (numbers only, labels hidden) below logo row. */
+@media (max-width:768px){.hdr-phones{justify-content:center}.hdr-phones .phone-pill{font-size:.86rem;padding:.45rem .9rem}}
 /* Social icons — bigger, interactive, pop to link */
 .socials{display:flex;gap:.55rem;margin-top:1rem}
 .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);transition:transform .2s cubic-bezier(.2,.7,.2,1),background .2s ease}
@@ -278,13 +282,17 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 .ftr-legal{margin-top:2rem;padding-top:1.4rem;border-top:1px solid #23262e;font-size:.74rem;color:#7b8090}
 
 /* sticky mobile bar */
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;grid-template-columns:1fr 1fr 1fr;box-shadow:0 -4px 18px rgba(0,0,0,.18)}
-.mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 6px;font-weight:700;font-size:.74rem;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;min-height:56px}
-.mbar a svg{flex-shrink:0}
-.mbar .mbar-call{background:#10131a;color:#fff}
-.mbar .mbar-text{background:var(--blue);color:#fff}
-.mbar .mbar-cta{background:var(--gold);color:var(--on-accent)}
-@media (min-width:380px){.mbar a{flex-direction:row;gap:7px;font-size:.8rem}}
+/* Premium 3-action sticky bar (Call / Text / Apply) — dark bar, rounded pill buttons,
+   icons, generous tap targets. Mirrors the polished 10-site sticky-call treatment. */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:8px;padding:9px 11px calc(9px + env(safe-area-inset-bottom,0));background:#0d1017;border-top:1px solid rgba(255,255,255,.12);box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+.mbar a{flex:1;min-width:0;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-height:48px;border-radius:12px;font-weight:800;font-size:clamp(.6rem,2.7vw,.82rem);letter-spacing:.01em;text-transform:uppercase;line-height:1;white-space:nowrap;text-decoration:none;transition:transform .15s ease,filter .15s ease}
+.mbar a:active{transform:translateY(1px)}
+.mbar a:hover{filter:brightness(1.06)}
+.mbar a svg{flex-shrink:0;width:16px;height:16px}
+.mbar .mbar-call{background:transparent;color:#fff;border:1.6px solid rgba(255,255,255,.55)}
+.mbar .mbar-text{background:var(--blue,#1b2fd9);color:#fff}
+.mbar .mbar-cta{background:var(--gold,#e5a019);color:#1a1205}
+@media (max-width:340px){.mbar a{gap:4px;font-size:.56rem}.mbar a svg{width:13px;height:13px}}
 
 /* chat-style bubble → scrolls to form */
 .bubble{position:fixed;right:1.4rem;bottom:1.6rem;z-index:80;width:58px;height:58px;border-radius:50%;background:var(--red);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transition:transform .15s}
@@ -325,7 +333,7 @@ html.js .rv.in{opacity:1;transform:none}
   .features{grid-template-columns:repeat(2,1fr)}
   .features .feature{border:none!important;padding-left:0!important}
   .features .feature{border-bottom:1px solid rgba(255,255,255,.2)!important}
-  .mbar{display:grid}
+  .mbar{display:flex}
   .ftr{padding-bottom:7.5rem}
   .bubble{bottom:5.2rem}
   .bubble-tip{bottom:5.6rem}
