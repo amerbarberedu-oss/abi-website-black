@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=65">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=66">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -699,13 +699,32 @@ def sec_testi(p, s):
         cards += """<div class="testi-card rv"><div class="stars">★★★★★</div><p>"%s"</p>
   <div class="testi-who"><div class="testi-av">%s</div><div><b>%s</b><span>%s</span></div></div></div>""" % (
             t["q"], ini, t["n"], t["r"])
+    es = p["lang"] == "es"
+    GMAPS = "https://www.google.com/maps/search/?api=1&query=American%20Barber%20Institute%2C%2048%20West%2039th%20Street%2C%20New%20York%2C%20NY%2010018"
+    gG = ('<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">'
+          '<path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>'
+          '<path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>'
+          '<path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>'
+          '<path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>')
+    count_txt = "Basado en más de 100 reseñas de Google" if es else "Based on 100+ Google reviews"
+    cta_txt = "Léelas todas en Google →" if es else "Read them all on Google →"
+    themes = (["Instructores profesionales","Asequible","Ambiente acogedor","Muy capacitados","Altamente recomendado"]
+              if es else
+              ["Professional instructors","Affordable","Welcoming environment","Very knowledgeable","Highly recommended"])
+    chips = "".join('<span class="g-chip">%s</span>' % t for t in themes)
+    badge = ('<div class="greviews-badge rv"><span class="g-mark">%s</span>'
+             '<div class="g-meta"><div class="g-top"><b class="g-score">4.6</b>'
+             '<span class="g-stars">★★★★★</span></div><span class="g-count">%s</span></div>'
+             '<a class="g-cta btn btn-blue" href="%s" target="_blank" rel="noopener">%s</a></div>'
+             '<div class="g-chips rv">%s</div>') % (gG, count_txt, GMAPS, cta_txt, chips)
     return """
 <section class="sec sec-alt"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
+  %s
   <div class="testi">%s</div>
-  <p><a class="greview" href="https://maps.google.com/?q=American+Barber+Institute+48+West+39th+Street+New+York" target="_blank" rel="noopener">★ %s</a></p>
-</div></section>""" % (s["testi_eb"], s["testi_h"], s["testi_sub"], cards,
-        "Ver todas las reseñas en Google →" if p["lang"]=="es" else "View all reviews on Google →")
+  <p><a class="greview" href="%s" target="_blank" rel="noopener">★ %s</a></p>
+</div></section>""" % (s["testi_eb"], s["testi_h"], s["testi_sub"], badge, cards, GMAPS,
+        "Ver todas las reseñas en Google →" if es else "View all reviews on Google →")
 
 def sec_countdown(p, s):
     cells = "".join('<div class="count-cell"><b data-cd-%s>%s</b><span>%s</span></div>'
