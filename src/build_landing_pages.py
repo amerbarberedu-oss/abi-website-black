@@ -527,7 +527,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=58">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=60">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
@@ -540,10 +540,12 @@ def header(p, s, pre):
     pills = "".join(
         '<a class="phone-pill" href="tel:%s">%s<span><span class="lbl">%s: </span>%s</span></a>'
         % (tel, icon("phone",16), lbl, disp) for lbl, disp, tel in s["en_es_phones"])
-    # EN/ES number pills shown in the top banner (matches the approved header layout)
+    # EN/ES number pills shown side-by-side in the top banner (matches the approved layout).
+    # Label ("Call Admissions" / "En Español") shows on desktop, hidden on mobile to fit.
+    _calllabels = ["Call Admissions", "En Español"] if lang == "en" else ["Llama a Admisiones", "En Español"]
     tbcalls = "".join(
-        '<a class="tb-call" href="tel:%s"><b class="tb-flag">%s</b><span class="tb-num">%s</span></a>'
-        % (tel, ("EN" if i == 0 else "ES"), disp) for i, (lbl, disp, tel) in enumerate(s["en_es_phones"]))
+        '<a class="tb-call" href="tel:%s"><b class="tb-flag">%s</b><span class="tb-label">%s</span><span class="tb-num">%s</span></a>'
+        % (tel, ("EN" if i == 0 else "ES"), (_calllabels[i] if i < 2 else ""), disp) for i, (lbl, disp, tel) in enumerate(s["en_es_phones"]))
     home = pre + ("es/index.html" if lang == "es" else "index.html")
     # language toggle target
     alt = p.get("alt")
@@ -584,11 +586,10 @@ def header(p, s, pre):
     <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
+    <nav class="mainnav" aria-label="Main">%s</nav>
+    <a class="header-cta" href="#reserve">Become a Barber <span aria-hidden="true">&#9986;</span></a>
     <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="mainnav" aria-label="Main">%s
-    <span class="mn-lang"><a href="%s" %s>EN</a> | <a href="%s" %s>ES</a></span>
-  </nav>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
 </header>
 <div class="urgency">
@@ -597,9 +598,7 @@ def header(p, s, pre):
 </div>
 <div class="startpill-wrap">
   <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start>%s</b></span></span>
-</div>""" % (s["topbar"], tbcalls, home, lt, items,
-             en_href, 'style="color:var(--blue)"' if lang == "en" else "",
-             es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
+</div>""" % (s["topbar"], tbcalls, home, items, lt, drawer,
              s["limited"], s["reserve"],
              icon("pin",16), p["campus"]["name_"+lang], s["next_start"],
              NEXT_START_ES if lang == "es" else NEXT_START_EN)

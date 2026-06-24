@@ -933,9 +933,47 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .brand-addr{font-size:.58rem;line-height:1.42;color:#1a2230;font-weight:600;text-align:left;white-space:nowrap}
 .hdr-right{display:flex;align-items:center;gap:.65rem;margin-left:auto;flex-shrink:0}
 .hdr-in{flex-wrap:nowrap}
-@media (max-width:560px){.brand-plate{gap:.4rem;padding:.4rem .6rem}.brand-plate .logo-img{height:42px}.tb-call{font-size:.94rem}.hdr-right{gap:.5rem}.lang-toggle{font-size:.74rem}.lang-toggle a{padding:.34rem .54rem}}
+@media (max-width:560px){.brand-plate{gap:.4rem;padding:.4rem .6rem}.brand-plate .logo-img{height:42px}.tb-calls{gap:8px}.tb-call{font-size:.84rem;padding:.5rem .7rem;gap:.4rem}.hdr-right{gap:.5rem}.lang-toggle{font-size:.74rem}.lang-toggle a{padding:.34rem .54rem}}
+@media (max-width:400px){.tb-call{font-size:.78rem;padding:.48rem .6rem}.tb-flag{min-width:26px;height:22px;font-size:.66rem}}
 @media (max-width:389px){.brand-plate .logo-img{height:36px}}
 @media (max-width:340px){.brand-plate .logo-img{height:32px}}
+
+/* ============ REFERENCE HEADER STRUCTURE (blue palette, dark header row) ============ */
+/* Banner pills: side-by-side, centered, equal. Label shows on desktop only. */
+.tb-calls{display:flex!important;flex-direction:row!important;flex-wrap:nowrap;justify-content:center;align-items:center;gap:14px;margin-top:.6rem}
+.tb-call{flex:0 1 auto;width:auto!important;min-width:0;justify-content:center}
+.tb-call .tb-label{display:none}
+.tb-num{white-space:nowrap}
+/* Dark header row (overrides theme glass). White plate + light nav pop against it. */
+.hdr{background:#0e1117!important;border-bottom:1px solid rgba(255,255,255,.1)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.hdr-in{display:flex;align-items:center;gap:1rem;flex-wrap:nowrap}
+.brand-plate{flex-shrink:0}
+/* Glassy EN|ES toggle */
+.lang-toggle{border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.06)}
+.lang-toggle a{color:#cfd6e6}
+.lang-toggle a+a{border-left:1px solid rgba(255,255,255,.2)}
+.lang-toggle a.is-active,.lang-toggle a:hover{background:linear-gradient(135deg,#2b6bff,#19c6e6);color:#fff}
+/* Cyan hamburger on the dark header */
+.hamburger span{background:#7fe0ff!important}
+/* "Become a Barber" CTA (blue) */
+.header-cta{display:none;align-items:center;gap:.45rem;background:var(--blue,#1b2fd9);color:#fff;font-weight:800;font-size:.95rem;padding:.62rem 1.25rem;border-radius:999px;white-space:nowrap;text-decoration:none;transition:filter .2s,transform .2s}
+.header-cta:hover{filter:brightness(1.12);transform:translateY(-1px);color:#fff}
+/* DESKTOP (>=1200): inline horizontal nav + CTA, no hamburger, labeled pills */
+@media (min-width:1200px){
+  .mainnav{display:flex!important;position:static!important;flex:1;justify-content:center;align-items:center;gap:1.05rem;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important;max-height:none!important;overflow:visible!important;opacity:1!important;visibility:visible!important;transform:none!important}
+  .mainnav a{color:#e7ebf5;border:0!important;padding:.4rem .15rem;font-size:.9rem;white-space:nowrap;min-height:auto}
+  .mainnav a:hover{color:#5b8bff;background:transparent}
+  .header-cta{display:inline-flex}
+  .hamburger{display:none!important}
+  .tb-call .tb-label{display:inline}
+  .tb-call{font-size:1rem;padding:.55rem 1.3rem}
+}
+/* MOBILE / TABLET (<1200): hamburger + drawer; inline nav and CTA hidden */
+@media (max-width:1199px){
+  .mainnav{display:none!important}
+  .hamburger{display:flex!important}
+  .header-cta{display:none!important}
+}
 @media (max-width:380px){.tb-call{font-size:.82rem;gap:.4rem}}
 
 /* ============================================================

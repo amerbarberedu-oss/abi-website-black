@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=31">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=58">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=60">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
@@ -74,8 +74,8 @@ TEMPLATE = """<!DOCTYPE html>
 <div class="topbar">
   <div class="tb-promo">Start your barber journey today for only $150 per week*</div>
   <div class="tb-calls">
-    <a class="tb-call" href="tel:+12122902289"><b class="tb-flag">EN</b><span class="tb-num">(212) 290-2289</span></a>
-    <a class="tb-call" href="tel:+12122900278"><b class="tb-flag">ES</b><span class="tb-num">(212) 290-0278</span></a>
+    <a class="tb-call" href="tel:+12122902289"><b class="tb-flag">EN</b><span class="tb-label">Call Admissions</span><span class="tb-num">(212) 290-2289</span></a>
+    <a class="tb-call" href="tel:+12122900278"><b class="tb-flag">ES</b><span class="tb-label">En Español</span><span class="tb-num">(212) 290-0278</span></a>
   </div>
   <span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="Blue theme" title="Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight theme" title="Midnight"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic theme" title="Classic"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald theme" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Noir theme" title="Noir"></button></span>
 </div>
@@ -84,11 +84,10 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
+    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}jobs.html">Jobs</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}partners.html">Partners</a><a href="{root}instructors.html">Instructors</a><a href="{root}contact.html">Contact</a></nav>
+    <a class="header-cta" href="{root}contact.html">Become a Barber <span aria-hidden="true">&#9986;</span></a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
-    <span class="mn-lang"><a href="{root}index.html" style="color:var(--blue)">EN</a> | <a href="{root}es/index.html">ES</a></span>
-  </nav>
   <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
