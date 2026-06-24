@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=66">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=67">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1007,16 +1007,30 @@ def sec_pills(p, s):
 
 def sec_skills(p, s):
     es = p["lang"] == "es"
-    items = (["Corte de cabello y degradados modernos","Trabajo de barba y técnicas de afeitado","Arreglo y peinado","Sanitización y control de infecciones","Habilidades reales de barbería en las primeras semanas"]
-             if es else
-             ["Haircutting and modern fades","Beard work and shaving techniques","Grooming and styling","Sanitation and infection control","Real barbershop skills within the first few weeks"])
-    lis = "".join("<li>%s</li>" % x for x in items)
-    eb = "Habilidades Reales" if es else "Real Skills"
-    h2 = "Entrenamiento práctico que importa" if es else "Hands-On Training That Matters"
-    pp = ("Desde las primeras semanas estarás en el piso aprendiendo habilidades reales de barbería — no solo teoría. Nuestros instructores aportan décadas de experiencia profesional en cada sesión."
-          if es else
-          "From the first few weeks, you'll be on the floor learning real barbering skills — not just theory. Our instructors bring decades of professional experience into every session.")
-    return '<section class="home-banner" style="background-image:linear-gradient(180deg,rgba(7,11,24,.80),rgba(7,11,24,.60)),url(\'/assets/img/home-group.jpg\')"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, pp, lis)
+    # ── Column A: Real Skills / Hands-On Training ──
+    a_eb = "Habilidades Reales" if es else "Real Skills"
+    a_h = "Entrenamiento práctico que importa" if es else "Hands-On Training That Matters"
+    a_p = ("Desde las primeras semanas estarás en el piso aprendiendo habilidades reales de barbería — no solo teoría. Nuestros instructores aportan décadas de experiencia profesional en cada sesión."
+           if es else
+           "From the first few weeks, you'll be on the floor learning real barbering skills — not just theory. Our instructors bring decades of professional experience into every session.")
+    a_items = (["Corte de cabello y degradados modernos","Trabajo de barba y técnicas de afeitado","Arreglo y peinado","Sanitización y control de infecciones","Habilidades reales de barbería en las primeras semanas"]
+               if es else
+               ["Haircutting and modern fades","Beard work and shaving techniques","Grooming and styling","Sanitation and infection control","Real barbershop skills within the first few weeks"])
+    # ── Column B: What you get / What's included ──
+    b_eb = "Lo que recibes" if es else "What you get"
+    b_h = "Lo que incluye cada programa" if es else "What's included in every program"
+    b_p = ("Cada programa de ABI incluye todo lo que necesitas para licenciarte y empezar a trabajar."
+           if es else
+           "Every ABI program comes with everything you need to get licensed and start working.")
+    b_items = (["Programa de barbería aprobado por el estado","Preparación completa para el Examen de la Junta Estatal de NY","Experiencia práctica real en las primeras semanas","Mentoría de profesionales experimentados","Servicios de colocación laboral al graduarte","Acceso a ambos campus de Manhattan y el Bronx"]
+               if es else
+               ["State-approved barber training program","Full preparation for the NY State Board Exam","Real hands-on experience within the first few weeks","Mentorship from seasoned professionals","Job placement services upon graduation","Access to both Manhattan & Bronx campuses"])
+    la = "".join("<li>%s</li>" % x for x in a_items)
+    lb = "".join("<li>%s</li>" % x for x in b_items)
+    return ('<section class="duo-sec"><div class="container"><div class="duo">'
+            '<article class="duo-card duo-card--a"><span class="duo-eb">%s</span><h2 class="duo-h">%s</h2><p class="duo-lead">%s</p><ul class="duo-list">%s</ul></article>'
+            '<article class="duo-card duo-card--b"><span class="duo-eb">%s</span><h2 class="duo-h">%s</h2><p class="duo-lead">%s</p><ul class="duo-list">%s</ul></article>'
+            '</div></div></section>') % (a_eb, a_h, a_p, la, b_eb, b_h, b_p, lb)
 
 def sec_zero(p, s):
     es = p["lang"] == "es"
@@ -1102,7 +1116,7 @@ def build(p):
                   sec_videos(p, s, pre),
                   sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "splash":
-        parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s), sec_includes(p, s),
+        parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s),
                   sec_zero(p, s), sec_earnings(p, s), sec_tuition(p, s),
                   sec_dates(p, s), sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
                   sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
