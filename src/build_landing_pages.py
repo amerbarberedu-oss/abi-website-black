@@ -469,10 +469,10 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=63">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=64">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
-<script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
 %s
 </head>
 <body>
@@ -523,12 +523,11 @@ def header(p, s, pre):
 <div class="topbar">
   <div class="tb-promo">%s</div>
   <div class="tb-calls">%s</div>
-  <span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="ABI Blue" title="ABI Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight Gold" title="Midnight Gold"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic Americana" title="Classic Americana"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Crimson Noir" title="Crimson Noir"></button></span>
 </div>
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
+      <img class="logo-img" src="/assets/img/new-abi-logo.jpg" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
     <a class="header-cta" href="#reserve">Become a Barber</a>
@@ -998,7 +997,7 @@ def sec_skills(p, s):
     pp = ("Desde las primeras semanas estarás en el piso aprendiendo habilidades reales de barbería — no solo teoría. Nuestros instructores aportan décadas de experiencia profesional en cada sesión."
           if es else
           "From the first few weeks, you'll be on the floor learning real barbering skills — not just theory. Our instructors bring decades of professional experience into every session.")
-    return '<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, pp, lis)
+    return '<section class="sec sec-alt"><div class="container split"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p><div class="prose"><ul>%s</ul></div></div><div class="rv split-media"><img class="home-shot" loading="lazy" src="/assets/img/abi-students-139.jpg" alt="ABI students getting hands-on barbering training on the clinic floor" width="760" height="600"></div></div></section>' % (eb, h2, pp, lis)
 
 def sec_zero(p, s):
     es = p["lang"] == "es"
@@ -1022,7 +1021,7 @@ def sec_includes(p, s):
     lis = "".join("<li>%s</li>" % x for x in items)
     eb = "Lo que recibes" if es else "What you get"
     h2 = "Lo que incluye cada programa" if es else "What's included in every program"
-    return '<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
+    return '<section class="sec sec-alt"><div class="container split"><div class="rv split-media"><img class="home-shot" loading="lazy" src="/assets/img/abi-students-105.jpg" alt="Inside the American Barber Institute campus in New York City" width="760" height="600"></div><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></div></section>' % (eb, h2, lis)
 
 # ── ported from the 10-site DNA: AI-logo brand video + showcase B-roll (live CDN pull) ──
 CDN = "https://assets-lilac-five.vercel.app/"
@@ -1046,7 +1045,7 @@ def sec_brandband(p, s, pre):
     return ('<section class="abi-brandband" data-reveal>'
             '<div class="abi-brandband__frame">'
             '<video class="abi-brandband__video" muted playsinline loop preload="none" '
-            'poster="/assets/img/abi-logo.gif" data-src="%svideos/american_barber_institute_logo.mp4"></video>'
+            'poster="/assets/img/new-abi-logo.jpg" data-src="%svideos/american_barber_institute_logo.mp4"></video>'
             '<div class="abi-brandband__copy">'
             '<p class="abi-brandband__kicker">%s</p>'
             '<h2 class="abi-brandband__title abi-brandband__title--shimmer">American Barber Institute</h2>'
