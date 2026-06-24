@@ -608,3 +608,27 @@ html.js .reveal.in { opacity: 1; transform: none; }
   padding: 12px 20px; z-index: 999; font-weight: 700; border-radius: 0 0 8px 0;
 }
 .skip:focus { left: 0; }
+
+/* ===== v10.1 audit fixes (05-schedule): stack schedule into clean boxes on mobile ===== */
+@media (max-width:640px){
+  .cards{grid-template-columns:1fr !important;}   /* defeat inline 3-col on admissions */
+}
+@media (max-width:560px){
+  .glance{grid-template-columns:1fr !important;}
+  .glance > div, .glance > div[style*="span 2"]{grid-column:1 / -1 !important;}
+  .glance b{font-size:1.1rem;letter-spacing:.01em;overflow-wrap:anywhere;}
+}
+.card-body p, .glance b{overflow-wrap:anywhere;}
+
+/* ===== v10.1 programs-by-campus split (reduced program set) ===== */
+.campus-split{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:48px auto 0;max-width:980px;}
+.campus-col{background:#fff;border:1px solid var(--line,#e3e6ee);border-radius:14px;padding:1.5rem 1.6rem;box-shadow:0 8px 24px rgba(16,19,26,.07);}
+.campus-name{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:1.18rem;color:var(--blue,#1b2fd9);margin:0 0 .9rem;}
+.campus-name svg{flex:0 0 auto;}
+.campus-name span{flex:1 1 100%;font-weight:500;font-size:.86rem;color:#5a6172;letter-spacing:.01em;}
+.campus-progs{list-style:none;margin:0;padding:0;}
+.campus-progs li{border-top:1px solid var(--line,#e3e6ee);}
+.campus-progs li:first-child{border-top:0;}
+.campus-progs a{display:block;padding:.8rem .2rem;font-weight:600;color:var(--ink,#10131a);text-decoration:none;transition:color .15s,padding .15s;}
+.campus-progs a:hover{color:var(--blue,#1b2fd9);padding-left:.5rem;}
+@media (max-width:680px){.campus-split{grid-template-columns:1fr;}}

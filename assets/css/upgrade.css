@@ -484,3 +484,10 @@
 @media (max-width:840px){
   .abi-clear-mbar{ padding-bottom:calc(7.5rem + env(safe-area-inset-bottom, 0)); }
 }
+
+/* ===== v10.1 audit fixes (02-text-bg) ===== */
+/* drop low-contrast cyan stop so gradient text stays legible mid-animation */
+.abi-gradtext{background:linear-gradient(95deg,#1b2fd9,#2742ff,#1b2fd9) !important;
+  -webkit-background-clip:text !important;background-clip:text !important;background-size:200% !important;}
+/* decorative ambient layer must never paint over content */
+.abi-deco{z-index:-1 !important;}

@@ -59,10 +59,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=31">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=61">
-<link rel="stylesheet" href="{root}assets/css/upgrade.css?v=1">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=62">
+<link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
@@ -86,7 +86,7 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}partners.html">Partners</a><a href="{root}instructors.html">Instructors</a><a href="{root}contact.html">Contact</a></nav>
+    <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}tuition.html">Tuition</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
     <a class="header-cta" href="{root}contact.html">Become a Barber <span aria-hidden="true">&#9986;</span></a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
@@ -374,37 +374,23 @@ PAGES = [
      "en", []),
     ("programs/index.html", "programs-index.html",
      "Barber Programs in NYC | American Barber Institute",
-     "Compare ABI's NYS-licensed programs: 500-hour Master Barber, 200-hour Fundamentals, 50-hour Refresher, Scalp Micro-Pigmentation & License Transfer.",
+     "ABI's NYS-licensed barber programs at our Manhattan & Bronx campuses: 500-Hour Master Barber, 50-Hour Barber Refresher and the 3-Hour Contagious Diseases course.",
      "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
      "500-Hour Master Barber Program (4 Months) | American Barber Institute",
      "Become a licensed Master Barber in NY in 4 months. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans. NYS Board Exam prep & job placement.",
      "en", [course_schema("500 Hour Master Barber Program",
         "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
-    ("programs/200-hour-barber-fundamentals.html", "program-200.html",
-     "200-Hour Barber Fundamentals Program (2 Months) | American Barber Institute",
-     "Hands-on 200-hour barbering fundamentals for apprentices and licensed cosmetologists. $3,600 with a weekly payment plan. Monday–Friday afternoons.",
-     "en", [course_schema("200 Hour Barber Fundamentals Program",
-        "Two-month program training apprentice registrants and licensed cosmetologists in practical and theoretical barbering.", 200, 8, 3600)]),
     ("programs/50-hour-barber-refresher.html", "program-50.html",
      "50-Hour Barber Refresher Program (2 Weeks) | American Barber Institute",
      "Sharpen your skills and prepare for the NY State Board Exam in 2 weeks. For cosmetologists, hairdressers and barber apprentices. $1,500 with split payments.",
      "en", [course_schema("50 Hour Barber Refresher Program",
         "Two-week refresher preparing licensed professionals for the New York State Barbering Licensing Examination.", 50, 2, 1500)]),
-    ("programs/scalp-micro-pigmentation.html", "program-smp.html",
-     "50-Hour Scalp Micro-Pigmentation Program | American Barber Institute",
-     "Weekend SMP certification in NYC: hairline design, pigments, device work and client care. $3,500 including tool kit, over 4 weekends.",
-     "en", [course_schema("50 Hour Scalp Micro-Pigmentation Program",
-        "Weekend program teaching scalp micro-pigmentation: hairline design, pigment selection, hygiene and client care.", 50, 4, 3500)]),
     ("programs/contagious-diseases.html", "program-cd.html",
      "3-Hour Contagious Diseases Program (Home Study) — $100 | American Barber Institute",
      "NY-required Transmission of Contagious Diseases course for barber operators and apprentices. Complete by mail for $100 — booklet, exam and two certificates.",
      "en", [course_schema("3 Hours Contagious Diseases Program",
         "Home-study course on transmission of contagious diseases, sanitation and sterilization required for NY barber licensure.", 3, 1, 100)]),
-    ("programs/license-transfer.html", "program-lt.html",
-     "NY Barber & Cosmetology License Transfer Service | American Barber Institute",
-     "Working with a license from another state or country? ABI manages your entire NYS licensure or reciprocity application from start to finish.",
-     "en", []),
     ("blog/index.html", "blog-index.html",
      "Blog — Barbering Career Advice & News | American Barber Institute",
      "Advice from NYC's only dedicated barber school: licensing, careers, shop ownership, marketing your barbershop, and life after barber school.",
@@ -448,9 +434,9 @@ PAGE_BG = {
     'jobs/job-opportunities.html': 'abi-students-056.jpg', 'jobs/shop-registration.html': 'abi-students-236.jpg',
     'resources.html': 'abi-students-190.jpg', 'privacy.html': 'abi-nyc-013.jpg',
     'programs/index.html': 'abi-students-107.jpg', 'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
-    'programs/200-hour-barber-fundamentals.html': 'abi-students-125.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
-    'programs/scalp-micro-pigmentation.html': 'abi-students-190.jpg', 'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
-    'programs/license-transfer.html': 'abi-nyc-032.jpg', 'blog/index.html': 'abi-students-095.jpg',
+    'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
+    'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
+    'blog/index.html': 'abi-students-095.jpg',
 }
 _DEFAULT_BG = 'abi-students-107.jpg'
 

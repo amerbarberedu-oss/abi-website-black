@@ -1268,3 +1268,84 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cf3d-lb-x{position:absolute;top:14px;right:20px;font-size:34px;color:#d9a441;background:0;border:0;cursor:pointer;line-height:1}
 @media(max-width:640px){.cf3d-track{padding:36px 30vw}.cf3d-card{width:230px}}
 @media(prefers-reduced-motion:reduce){.cf3d-card,.cf3d-reel{transition:none}}
+
+/* ============================================================================
+   v10.1 AUDIT FIXES  (appended — later rules win; neutralizes earlier duplicates)
+   Refs: _audit/01-header-nav, 02-text-bg, 03-instructors, 05-schedule
+   ========================================================================== */
+
+/* contrast-correct brand tokens (royal-blue anchor + on-dark variants) */
+:root{
+  --blue-deep:#0f1b7a;
+  --blue-on-dark:#8b9bff;   /* accent text on dark/ink ~5.6:1 */
+  --blue-bright:#6e80ff;
+  --surface:#ffffff;
+  --surface-alt:#f5f7fb;
+  --page-tint-a:#f5f7fb;
+  --page-tint-b:#eef2f9;
+}
+
+/* ---- 02: kill the full-page photo bleed; flat legible page tint ---- */
+body{background:linear-gradient(180deg,var(--page-tint-a),var(--page-tint-b)) !important;}
+body::before{content:none !important;}          /* remove fixed page-wide photo */
+/* opaque content surfaces so nothing shows through behind text */
+.sec, section.sec, .alt, .sec-alt, .feature, .formcard, .prose, .closing-wrap{background:var(--surface);} 
+.sec.alt, .sec-alt, section.alt{background:var(--surface-alt) !important;}
+.feature{background:var(--surface) !important;}
+
+/* ---- 02: hero accent + script underline legible on dark ---- */
+.hero-h1 .accent{color:var(--blue-on-dark) !important;filter:none !important;}
+.hero-script::after{background:var(--blue-bright) !important;}
+.hero-grad{background:linear-gradient(90deg,rgba(8,10,16,.86) 0%,rgba(8,10,16,.62) 55%,rgba(8,10,16,.5) 100%) !important;}
+
+/* ---- 02: re-skin gold CTA to on-brand blue gradient ---- */
+.btn-gold{background:linear-gradient(135deg,#2742ff,#1b2fd9) !important;color:#fff !important;border:0 !important;}
+.btn-gold:hover{background:linear-gradient(135deg,#1b2fd9,#1322a8) !important;}
+
+/* ---- 01: ONE-LINE main nav, clean hamburger switch (defeats leaked flex-wrap:wrap) ---- */
+@media (max-width:1199px){
+  .mainnav{display:none !important;}
+  .hamburger{display:flex !important;}
+  .header-cta{display:none !important;}
+}
+@media (min-width:1200px){
+  .mainnav{display:flex !important;flex-wrap:nowrap !important;position:static !important;
+           flex:1 1 auto;justify-content:center;align-items:center;
+           gap:clamp(.3rem,.7vw,.7rem);background:transparent !important;border:0 !important;
+           padding:0 !important;box-shadow:none !important;max-height:none !important;
+           overflow:visible !important;opacity:1 !important;visibility:visible !important;
+           transform:none !important;white-space:nowrap;}
+  .mainnav a{white-space:nowrap;flex:0 0 auto;border:0 !important;padding:.4rem .25rem;
+             font-size:clamp(.7rem,.85vw,.86rem);min-height:auto;}
+  .hamburger{display:none !important;}
+  .header-cta{display:inline-flex !important;}
+}
+
+/* ---- 03: instructors — single clean class, BIGGER circular headshots that fit faces ---- */
+.inst-photo, .inst-avatar.inst-photo, .inst-avatar--lg.inst-photo{
+  width:clamp(160px,22vw,220px) !important;height:auto !important;aspect-ratio:1/1 !important;
+  border-radius:50% !important;object-fit:cover !important;object-position:50% 25%;
+  display:block !important;margin:0 auto .9rem !important;background:#dfe4f0 !important;
+  border:0 !important;transform:none !important;
+  box-shadow:0 0 0 4px #fff,0 0 0 7px var(--blue),0 14px 30px rgba(16,19,26,.22) !important;
+}
+.inst-feature .inst-photo, .inst-photo--lg, .inst-avatar--lg.inst-photo{
+  width:clamp(220px,30vw,320px) !important;
+  box-shadow:0 0 0 5px #fff,0 0 0 9px var(--blue),0 18px 40px rgba(16,19,26,.28) !important;
+}
+.inst-card{align-items:center;text-align:center;}
+.inst-card .inst-tag{margin:0 auto .35rem;}
+.inst-card p, .inst-card ul, .inst-card .inst-diff{text-align:left;align-self:stretch;}
+.inst-card:hover .inst-photo{transform:translateY(-3px) !important;transition:transform .25s ease;}
+.inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem;}
+.inst-group-photo img, .inst-group-photo{object-fit:cover !important;max-height:460px;width:100%;border-radius:18px;}
+@media (max-width:560px){
+  .inst-photo{width:clamp(150px,52vw,180px) !important;}
+  .inst-feature .inst-photo{width:clamp(190px,60vw,240px) !important;}
+}
+
+/* ---- 05: schedule date-grid tighter floor on small phones ---- */
+@media (max-width:560px){
+  .date-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr)) !important;gap:.75rem !important;}
+}
+.card-body p, .tuition .when, .date-card{overflow-wrap:anywhere;}
