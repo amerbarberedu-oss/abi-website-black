@@ -98,9 +98,10 @@
   var wrap = document.createElement("div");
   wrap.className = "abibot";
   wrap.innerHTML =
-    '<button class="abibot-fab" aria-label="' + (ES ? "Abrir chat" : "Open chat") + '">' +
+    '<button class="abibot-fab" aria-label="' + (ES ? "Abrir el asistente de IA de ABI" : "Open ABI AI Assistant") + '">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3-.4-4.3-1L3 21l1.6-4.8A8.5 8.5 0 1 1 21 12z"/></svg>' +
-      '<span class="abibot-fab-dot"></span></button>' +
+      '<span class="abibot-fab-badge">AI</span>' +
+      '<span class="abibot-fab-label">' + (ES ? "Asistente IA" : "AI Assistant") + '</span></button>' +
     '<div class="abibot-panel" role="dialog" aria-label="ABI assistant" hidden>' +
       '<div class="abibot-head"><span class="abibot-ava">ABI</span>' +
         '<div><b>' + (ES ? "Asistente de ABI" : "ABI Assistant") + '</b><span>' + (ES ? "Normalmente responde al instante" : "Typically replies instantly") + '</span></div>' +

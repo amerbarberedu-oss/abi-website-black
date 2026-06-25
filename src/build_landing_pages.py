@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=76">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=77">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1047,7 +1047,7 @@ def footer(p, s, pre):
 <script src="/assets/js/effects.js?v=32" defer></script>
 <script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
-<script src="/assets/js/chatbot.js?v=1" defer></script>
+<script src="/assets/js/chatbot.js?v=2" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
