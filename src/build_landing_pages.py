@@ -407,7 +407,7 @@ PAGES = []
 # home page only — program-landing / splash / location funnel pages removed per client request
 PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "url":"/","alt":"/es",
- "title":"Barber School NYC | American Barber Institute",
+ "title":"American Barber Institute | Barber School NYC",
  "desc":"NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes every month.",
  "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
  "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
@@ -495,15 +495,19 @@ def head(p, s, pre):
 <meta name="description" content="%s">
 <link rel="canonical" href="%s%s">
 %s
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/icon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-icon.png">
 <meta property="og:title" content="%s">
 <meta property="og:description" content="%s">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="American Barber Institute">
 <meta property="og:url" content="%s%s">
 <meta name="theme-color" content="#1b2fd9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=81">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=82">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
