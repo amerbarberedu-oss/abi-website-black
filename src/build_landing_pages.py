@@ -312,10 +312,10 @@ _LOCATIONS_ARCHIVED = [
 
 NAV = {
  "en": [("About","about.html"),("Programs","programs/index.html"),("Instructors","instructors.html"),
-        ("Partners","partners.html"),("Resources","resources.html"),("Gallery","gallery.html"),
+        ("Partners","partners.html"),("Resources","resources.html"),("Gallery","gallery.html"),("Haircuts","haircuts.html"),
         ("Blog","blog/index.html"),("Jobs","jobs.html"),("FAQs","faq.html"),("Contact","contact.html")],
  "es": [("Nosotros","about.html"),("Programas","programs/index.html"),("Instructores","instructors.html"),
-        ("Aliados","partners.html"),("Recursos","resources.html"),("Galería","gallery.html"),
+        ("Aliados","partners.html"),("Recursos","resources.html"),("Galería","gallery.html"),("Cortes","haircuts.html"),
         ("Blog","blog/index.html"),("Empleos","jobs.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
 }
 NAV_LOC_LABEL = {"en": "Locations", "es": "Ubicaciones"}
@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=74">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=76">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -868,8 +868,8 @@ VIDEOS = [
  ("iU0fUj3a8uw", {"en":"Our courses are hands-on, fun and engaging","es":"Nuestros cursos son prácticos, divertidos y motivadores"}),
  ("ozV_RcSk0P4", {"en":"Tour our two-floor, 3,000 sq ft Manhattan campus","es":"Recorre nuestro campus de 3,000 pies² en Manhattan"}),
 ]
-GALLERY = ["abi-students-001.jpg","abi-students-008.jpg","abi-students-017.jpg","abi-students-095.jpg",
-           "abi-nyc-005.jpg","abi-students-056.jpg","abi-students-065.jpg","abi-students-080.jpg"]
+GALLERY = ["gallery/hair-02.jpg","gallery/hair-03.jpg","gallery/hair-06.jpg","gallery/team-02.jpg",
+           "gallery/team-05.jpg","gallery/grp-01.jpg","gallery/cut-05.jpg","gallery/cut-09.jpg"]
 
 def sec_faq(p, s):
     es = p["lang"] == "es"
@@ -1047,6 +1047,7 @@ def footer(p, s, pre):
 <script src="/assets/js/effects.js?v=32" defer></script>
 <script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
+<script src="/assets/js/chatbot.js?v=1" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],

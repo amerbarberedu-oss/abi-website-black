@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=74">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=76">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -84,11 +84,11 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/new-abi-logo.jpg" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
+    <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
     <a class="header-cta" href="{root}contact.html">Become a Barber</a>
     <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 <div class="campusbar"><div class="campusbar-in">
 <a class="campus-card" href="{root}contact.html#manhattan"><span class="campus-pole" aria-hidden="true"></span><span class="campus-info"><span class="campus-name">Manhattan Campus</span><span class="campus-addr">48 West 39th Street, New York, NY 10018</span><span class="campus-next">Next Start: July</span></span></a>
@@ -222,6 +222,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=32" defer></script>
 <script src="{root}assets/js/landing.js?v=32" defer></script>
 <script src="{root}assets/js/upgrade.js?v=2" defer></script>
+<script src="{root}assets/js/chatbot.js?v=1" defer></script>
 </body>
 </html>
 """
@@ -321,6 +322,10 @@ PAGES = [
      "Gallery — Student Work & Campus | ABI",
      "See our students' haircuts, our 3,000 sq ft Midtown Manhattan campus, and life at New York's only dedicated barber school.",
      "en", []),
+    ("haircuts.html", "haircuts.html",
+     "$3 Student Haircuts — Manhattan & Bronx | American Barber Institute",
+     "Get a great cut for just $3 at American Barber Institute. Student barbers, supervised by licensed instructors, at our Manhattan and Bronx locations. Fades, tapers, beard trims and more.",
+     "en", []),
     ("faq.html", "faq.html",
      "Frequently Asked Questions | American Barber Institute",
      "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
@@ -399,19 +404,19 @@ def faq_schema_from(body):
 # Per-page background — uses ONLY the client-approved image set. Each main
 # page gets a distinct photo; program subpages reuse from the same set.
 PAGE_BG = {
-    'about.html': 'abi-nyc-008.jpg',
-    'instructors.html': 'abi-students-031.jpg',
-    'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
-    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg',
-    'resources.html': 'abi-students-190.jpg',
-    'programs/index.html': 'abi-students-107.jpg',
-    'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
-    'programs/500-hour-master-barber-bronx.html': 'abi-students-130.jpg',
-    'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
-    'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
-    'blog/index.html': 'abi-students-095.jpg',
+    'about.html': 'gallery/grp-01.jpg',
+    'instructors.html': 'gallery/team-02.jpg',
+    'jobs.html': 'gallery/cut-05.jpg', 'gallery.html': 'gallery/hair-02.jpg',
+    'faq.html': 'gallery/cut-09.jpg', 'contact.html': 'gallery/shop-04.jpg', 'partners.html': 'gallery/grp-04.jpg',
+    'resources.html': 'gallery/team-05.jpg', 'haircuts.html': 'gallery/cut-01.jpg',
+    'programs/index.html': 'gallery/cut-13.jpg',
+    'programs/500-hour-master-barber.html': 'gallery/cut-22.jpg',
+    'programs/500-hour-master-barber-bronx.html': 'gallery/grp-05.jpg',
+    'programs/50-hour-barber-refresher.html': 'gallery/cut-18.jpg',
+    'programs/contagious-diseases.html': 'gallery/shop-03.jpg',
+    'blog/index.html': 'gallery/grp-02.jpg',
 }
-_DEFAULT_BG = 'abi-students-107.jpg'
+_DEFAULT_BG = 'gallery/cut-05.jpg'
 
 def build():
     written = []
