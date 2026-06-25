@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=71">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=74">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -501,8 +501,8 @@ def header(p, s, pre):
         alt_href = pre + ("index.html" if lang == "es" else "es/index.html")
     en_href = alt_href if lang == "es" else "#"
     es_href = alt_href if lang == "en" else "#"
-    # main nav
-    items = ""
+    # main nav (HOME first, then NAV items)
+    items = '<a href="%s">%s</a>' % (home, "Inicio" if lang == "es" else "Home")
     drawer = '<a href="%s">%s</a>' % (home, "Inicio" if lang == "es" else "Home")
     for label, target in NAV[lang]:
         if target is None:
@@ -519,7 +519,28 @@ def header(p, s, pre):
         lt = '<div class="lang-toggle" role="group" aria-label="Idioma"><a href="%s">EN</a><a class="is-active" aria-current="true">ES</a></div>' % alt_href
     else:
         lt = '<div class="lang-toggle" role="group" aria-label="Language"><a class="is-active" aria-current="true">EN</a><a href="%s">ES</a></div>' % alt_href
-    return """
+    # urgency line (ABI blue) + campus bar (both addresses, two clickable campus buttons)
+    if lang == "es":
+        u1, u2 = "Cupos Limitados Disponibles", "Inscripción Abierta Ahora"
+        c_man, c_bx, c_ns = "Campus de Manhattan", "Campus del Bronx", "Próximo inicio: Julio"
+    else:
+        u1, u2 = "Limited Seats Available", "Enrollment Now Open"
+        c_man, c_bx, c_ns = "Manhattan Campus", "Bronx Campus", "Next Start: July"
+    campusbar = (
+        '<div class="campusbar"><div class="campusbar-in">'
+        '<a class="campus-card" href="%(pre)scontact.html#manhattan">'
+          '<span class="campus-pole" aria-hidden="true"></span>'
+          '<span class="campus-info"><span class="campus-name">%(man)s</span>'
+          '<span class="campus-addr">48 West 39th Street, New York, NY 10018</span>'
+          '<span class="campus-next">%(ns)s</span></span></a>'
+        '<a class="campus-card" href="%(pre)scontact.html#bronx">'
+          '<span class="campus-pole" aria-hidden="true"></span>'
+          '<span class="campus-info"><span class="campus-name">%(bx)s</span>'
+          '<span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span>'
+          '<span class="campus-next">%(ns)s</span></span></a>'
+        '</div></div>'
+    ) % {"pre": pre, "man": c_man, "bx": c_bx, "ns": c_ns}
+    return ("""
 <div class="topbar">
   <div class="tb-promo">%s</div>
   <div class="tb-calls">%s</div>
@@ -539,12 +560,7 @@ def header(p, s, pre):
   <div class="urgency-flame">%s</div>
   <div class="urgency-sub">%s</div>
 </div>
-<div class="startpill-wrap">
-  <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start>%s</b></span></span>
-</div>""" % (s["topbar"], tbcalls, home, items, lt, drawer,
-             s["limited"], s["reserve"],
-             icon("pin",16), p["campus"]["name_"+lang], s["next_start"],
-             NEXT_START_ES if lang == "es" else NEXT_START_EN)
+""" + campusbar) % (s["topbar"], tbcalls, home, items, lt, drawer, u1, u2)
 
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
@@ -721,7 +737,7 @@ def sec_testi(p, s):
              '<a class="g-cta btn btn-blue" href="%s" target="_blank" rel="noopener">%s</a></div>'
              '<div class="g-chips rv">%s</div>') % (gG, count_txt, GMAPS, cta_txt, chips)
     return """
-<section class="sec sec-alt"><div class="container">
+<section class="sec sec-alt" id="reviews"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
   %s
   <div class="testi">%s</div>
@@ -908,15 +924,77 @@ def sec_gallery(p, s, pre):
             '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
             '</div></section>' % (eb, h, imgs, pre, more))
 
+START_DATES = [
+    ("2026", [("Aug","Monday, August 3"),("Sep","Monday, September 7"),("Oct","Monday, October 5"),
+              ("Nov","Monday, November 2"),("Dec","Monday, December 7")]),
+    ("2027", [("Jan","Monday, January 4"),("Feb","Monday, February 1"),("Mar","Monday, March 1"),
+              ("Apr","Monday, April 5"),("May","Monday, May 3"),("Jun","Monday, June 7"),
+              ("Jul","Monday, July 5"),("Aug","Monday, August 2"),("Sep","Monday, September 6"),
+              ("Oct","Monday, October 4"),("Nov","Monday, November 1"),("Dec","Monday, December 6")]),
+    ("2028", [("Jan","Monday, January 3"),("Feb","Monday, February 7"),("Mar","Monday, March 6"),
+              ("Apr","Monday, April 3"),("May","Monday, May 1"),("Jun","Monday, June 5"),
+              ("Jul","Monday, July 3"),("Aug","Monday, August 7"),("Sep","Monday, September 4"),
+              ("Oct","Monday, October 2"),("Nov","Monday, November 6"),("Dec","Monday, December 4")]),
+]
+# start dates that land on a federal holiday (the Labor-Day Mondays)
+HOLIDAY_START = {"Monday, September 7","Monday, September 6","Monday, September 4"}
+HOLIDAYS = [
+    ("2026", [("Independence Day","Friday, July 3"),("Labor Day","Monday, September 7"),
+              ("Columbus Day","Monday, October 12"),("Veterans Day","Wednesday, November 11"),
+              ("Thanksgiving Day","Thursday, November 26"),("Christmas Day","Friday, December 25")]),
+    ("2027", [("New Year's Day","Friday, January 1"),("Martin Luther King Jr. Day","Monday, January 18"),
+              ("Presidents Day","Monday, February 15"),("Memorial Day","Monday, May 31"),
+              ("Juneteenth","Friday, June 18"),("Independence Day","Monday, July 5"),
+              ("Labor Day","Monday, September 6"),("Columbus Day","Monday, October 11"),
+              ("Veterans Day","Thursday, November 11"),("Thanksgiving Day","Thursday, November 25"),
+              ("Christmas Day","Friday, December 24")]),
+    ("2028", [("New Year's Day","Friday, December 31, 2027"),("Martin Luther King Jr. Day","Monday, January 17"),
+              ("Presidents Day","Monday, February 21"),("Memorial Day","Monday, May 29"),
+              ("Juneteenth","Monday, June 19"),("Independence Day","Tuesday, July 4"),
+              ("Labor Day","Monday, September 4"),("Columbus Day","Monday, October 9"),
+              ("Veterans Day","Friday, November 10"),("Thanksgiving Day","Thursday, November 23"),
+              ("Christmas Day","Monday, December 25")]),
+]
+
 def sec_dates(p, s):
     es = p["lang"] == "es"
     eb = "Fechas de Inicio" if es else "Start Dates"
     h = "Próximas Fechas de Inicio de Clases" if es else "Upcoming Class Start Dates"
-    sub = ("Las clases nuevas comienzan el primer lunes de cada mes. Reserva tu lugar para la próxima fecha." if es
-           else "New classes begin the first Monday of every month. Reserve your seat for the next start.")
-    return ('<section class="sec" style="padding:2.8rem 0"><div class="container rv">'
+    sub = ("Las clases nuevas comienzan el primer lunes de cada mes. Estas son todas las próximas fechas de inicio." if es
+           else "New classes begin the first Monday of every month. Here are all the upcoming start dates.")
+    hflag = ("Comienza después del feriado — contacta a admisiones." if es
+             else "Begins after the observed holiday — contact admissions.")
+    # start dates grid
+    ycards = ""
+    for yr, months in START_DATES:
+        rows = ""
+        for mo, dt in months:
+            extra = ('<span class="date-flag">%s</span>' % hflag) if dt in HOLIDAY_START else ""
+            rows += ('<li class="date-row%s"><span class="date-mo">%s</span>'
+                     '<span class="date-day">%s</span>%s</li>'
+                     % (" is-holiday" if dt in HOLIDAY_START else "", mo, dt, extra))
+        ycards += '<div class="date-card"><h3 class="date-yr">%s</h3><ul class="date-list">%s</ul></div>' % (yr, rows)
+    # holidays grid
+    hh = "Días Feriados Federales — ABI Cerrado" if es else "Federal Holidays — ABI Closed"
+    hsub = ("ABI cierra en todos los feriados federales de EE.UU. Si un feriado cae en fin de semana, "
+            "cerramos el día hábil observado más cercano." if es else
+            "ABI is closed on all U.S. federal holidays. When a holiday falls on a weekend, we close on the "
+            "nearest observed weekday. The dates below reflect the actual closure dates.")
+    hcards = ""
+    for yr, hols in HOLIDAYS:
+        rows = "".join('<li class="hol-row"><span class="hol-name">%s</span><span class="hol-day">%s</span></li>' % (n, d) for n, d in hols)
+        hcards += '<div class="date-card"><h3 class="date-yr">%s</h3><ul class="hol-list">%s</ul></div>' % (yr, rows)
+    note = ("Algunas fechas de inicio pueden caer en un feriado federal. Cuando eso ocurre, las clases comienzan "
+            "después del feriado observado — contacta a admisiones para confirmar el horario exacto del campus." if es else
+            "Some start dates may fall on a federal holiday. When that happens, classes begin after the observed "
+            "holiday — please contact admissions to confirm the exact campus schedule.")
+    return ('<section class="sec sec-dates"><div class="container rv">'
             '<span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p>'
-            '<div class="dates" data-start-dates></div></div></section>' % (eb, h, sub))
+            '<div class="date-grid">%s</div>'
+            '<div class="date-note">%s</div>'
+            '<h2 class="date-hol-h">%s</h2><p class="lead">%s</p>'
+            '<div class="date-grid">%s</div>'
+            '</div></section>' % (eb, h, sub, ycards, note, hh, hsub, hcards))
 
 def closing(p, s):
     return """
@@ -966,8 +1044,8 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="/assets/js/effects.js?v=31" defer></script>
-<script src="%sassets/js/landing.js?v=31" defer></script>
+<script src="/assets/js/effects.js?v=32" defer></script>
+<script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
@@ -1001,6 +1079,9 @@ def sec_pills(p, s):
         ("NY State Licensed","Licenciado por NY","Dept. of Education (BPSS)","Depto. de Educación (BPSS)"),
         ("Financial Assistance","Asistencia Financiera","ACCES-VR, VA & more","ACCES-VR, VA y más"),
         ("Career Support","Apoyo Profesional","Job placement assistance","Asistencia de colocación laboral"),
+        ("Flexible Payment Plans","Planes de Pago Flexibles","Financial assistance available","Asistencia financiera disponible"),
+        ("Established 1996","Fundado en 1996","30 years of exceptional barber education","30 años de educación de barbería excepcional"),
+        ("Celebrity Barber Instructors","Instructores Barberos Famosos","Learn directly from experienced celebrity and master barbers","Aprende de barberos famosos y maestros con experiencia"),
     ]
     cells = "".join('<div class="feature"><h3>%s</h3><p>%s</p></div>' % (te if not es else ts, se if not es else ss)
                     for (te, ts, se, ss) in pills)
