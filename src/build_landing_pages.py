@@ -3,10 +3,28 @@
 """ABI landing page generator — one template, 17 pages (EN/ES, multi-location).
 Run: python3 build.py   → writes pages next to this script.
 """
-import os, json, datetime
+import os, json, datetime, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://abi-website-black.vercel.app"
+
+# Rewrite internal links foo.html → /foo so they match canonical clean URLs
+# (Vercel cleanUrls:true otherwise 308-redirects every .html link).
+def clean_links(html):
+    def repl(m):
+        url = m.group(1)
+        low = url.lower()
+        if low.startswith(("http://", "https://", "//", "mailto:", "tel:", "sms:",
+                           "javascript:", "data:", "#")):
+            return m.group(0)
+        mm = re.match(r'^([^#?]*)([#?].*)?$', url)
+        path, suffix = mm.group(1), (mm.group(2) or "")
+        if path.endswith("index.html"):
+            path = path[:-len("index.html")] or "/"
+        elif path.endswith(".html"):
+            path = path[:-len(".html")]
+        return 'href="%s%s"' % (path, suffix)
+    return re.sub(r'href="([^"]*)"', repl, html)
 
 # ── Next class date: first Monday of the upcoming month (computed at build) ──
 def _next_first_monday():
@@ -440,13 +458,28 @@ def head(p, s, pre):
         alt = ('<link rel="alternate" hreflang="en" href="%s%s">\n'
                '<link rel="alternate" hreflang="es" href="%s%s">\n'
                '<link rel="alternate" hreflang="x-default" href="%s%s">' % (SITE,en_url,SITE,es_url,SITE,en_url))
-    jsonld = """<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TradeSchool","name":"American Barber Institute",
-"url":"%s%s","telephone":"%s","foundingDate":"1996",
-"address":{"@type":"PostalAddress","streetAddress":"%s"}}
-</script>
+    localbiz = json.dumps({
+        "@context": "https://schema.org",
+        "@type": ["TradeSchool", "LocalBusiness"],
+        "name": "American Barber Institute", "alternateName": "ABI",
+        "url": SITE + p["url"], "logo": SITE + "/assets/img/favicon.svg",
+        "foundingDate": "1996",
+        "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan and the Bronx with financial aid, veterans GI Bill and ACCES-VR options, and job placement.",
+        "telephone": "+1-212-290-2289", "email": "admission@abi.edu",
+        "address": [
+            {"@type": "PostalAddress", "streetAddress": "48 West 39th Street", "addressLocality": "New York", "addressRegion": "NY", "postalCode": "10018", "addressCountry": "US"},
+            {"@type": "PostalAddress", "streetAddress": "121 Westchester Square", "addressLocality": "Bronx", "addressRegion": "NY", "postalCode": "10461", "addressCountry": "US"}],
+        "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "19:00"}],
+        "sameAs": ["https://www.facebook.com/Abi.Education/", "https://www.instagram.com/americanbarberinstitute/", "https://twitter.com/amerbarberedu"],
+        "areaServed": ["New York City", "Manhattan", "Bronx", "Queens", "Brooklyn", "Westchester", "New Jersey", "Connecticut"],
+        "knowsLanguage": ["en", "es"], "priceRange": "$$"
+    }, ensure_ascii=False)
+    jsonld = """<script type="application/ld+json">%s</script>
 <script type="application/ld+json">%s</script>
-<script type="application/ld+json">%s</script>""" % (SITE, p["url"], p["campus"]["tel_disp"], p["campus"]["addr"],
+<script type="application/ld+json">%s</script>""" % (localbiz,
         json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
             {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in FAQS[p["lang"]]]}, ensure_ascii=False),
         json.dumps({"@context":"https://schema.org","@type":"Course","name":"500-Hour Master Barber Program",
@@ -470,7 +503,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=79">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=80">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -919,7 +952,7 @@ def sec_gallery(p, s, pre):
                 "Cliente en la silla de la clínica de ABI",
                 "Estudiantes de barbería en el campus de Manhattan"]
     _alts = _alts_es if es else _alts_en
-    imgs = "".join('<a href="%sgallery.html"><img loading="lazy" src="%sassets/img/%s" alt="%s"></a>'
+    imgs = "".join('<a href="%sgallery.html"><img loading="lazy" width="800" height="600" src="%sassets/img/%s" alt="%s"></a>'
                    % (pre, pre, g, _alts[i % len(_alts)]) for i, g in enumerate(GALLERY))
     return ('<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2>'
             '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
@@ -1056,12 +1089,23 @@ def sec_leadership(p, s):
     p2 = ("En ABI no solo enseñamos técnica. Construimos la confianza, la disciplina y la comunidad que te llevan desde tu primer degradado hasta tu propia silla. Ya sea un nuevo capítulo o el sueño que has perseguido por años, aquí eres bienvenido. Completa el formulario, sube tus documentos en minutos, y espero conocerte."
           if es else
           "At ABI we don't just teach technique. We build the confidence, the discipline, and the community that carry you from your first fade to your own chair. Whether this is a new chapter or the dream you've been chasing for years, you're welcome here. Fill out the form, upload your documents in minutes, and I look forward to meeting you.")
-    sig = "— El Equipo de Liderazgo de American Barber Institute" if es else "— The American Barber Institute Leadership Team"
+    sig = "El Equipo de Liderazgo de American Barber Institute" if es else "The American Barber Institute Leadership Team"
+    sigrole = "Liderazgo · Fundado en 1996" if es else "Leadership Team · Established 1996"
+    quote = ("Cada gran barbero empezó exactamente donde tú estás ahora." if es
+             else "Every great barber started exactly where you are now.")
     return """
-<section class="sec sec-alt"><div class="container rv" style="max-width:880px">
-  <span class="eyebrow">%s</span><h2>%s</h2>
-  <div class="prose"><p>%s</p><p>%s</p><p><strong>%s</strong></p></div>
-</div></section>""" % (eb, h2, p1, p2, sig)
+<section class="sec welcome-sec"><div class="container">
+  <div class="welcome-card rv">
+    <div class="welcome-aside" aria-hidden="true"><span class="welcome-pole"></span><span class="welcome-mono">ABI</span></div>
+    <div class="welcome-body">
+      <span class="eyebrow welcome-eb">%s</span>
+      <h2 class="welcome-h">%s</h2>
+      <p class="welcome-quote">%s</p>
+      <p>%s</p><p>%s</p>
+      <div class="welcome-sig"><span class="welcome-sig-name">%s</span><span class="welcome-sig-role">%s</span></div>
+    </div>
+  </div>
+</div></section>""" % (eb, h2, quote, p1, p2, sig, sigrole)
 
 def sec_pills(p, s):
     es = p["lang"] == "es"
@@ -1110,17 +1154,29 @@ def sec_skills(p, s):
 
 def sec_zero(p, s):
     es = p["lang"] == "es"
-    cats = [("Starting Fresh","Empezando de Cero","Welcome","Bienvenido"),
-            ("Career Change","Cambio de Carrera","Perfect fit","Ideal para ti"),
-            ("Some Experience","Con Experiencia","Build on it","Aprovéchala")]
-    cells = "".join('<div class="feature"><h3>%s</h3><p>%s</p></div>' % (ce if not es else cs, ne if not es else ns)
-                    for (ce, cs, ne, ns) in cats)
+    cats = [("Starting Fresh","Empezando de Cero",
+             "Never picked up clippers? Perfect — we start at the fundamentals and build real skill from day one.",
+             "¿Nunca tomaste una máquina? Perfecto — empezamos por lo básico y construimos habilidad real desde el primer día."),
+            ("Career Change","Cambio de Carrera",
+             "Switching paths? Barbering is a stable, creative, in-demand trade you can own.",
+             "¿Cambiando de rumbo? La barbería es un oficio estable, creativo y muy demandado que puedes hacer tuyo."),
+            ("Some Experience","Con Experiencia",
+             "Already cutting? We sharpen your technique and get you fully licensed and working.",
+             "¿Ya cortas? Pulimos tu técnica y te dejamos licenciado y trabajando.")]
+    cells = ""
+    for i, (ce, cs, ne, ns) in enumerate(cats):
+        cells += ('<div class="zero-step" data-reveal data-reveal-d="%d">'
+                  '<span class="zero-num">%02d</span>'
+                  '<h3 class="zero-h">%s</h3><p>%s</p></div>'
+                  % (i + 1, i + 1, ce if not es else cs, ne if not es else ns))
     eb = "De Cero a Profesional" if es else "Zero to Pro"
     h2 = "No necesitas experiencia" if es else "No Experience Needed"
     pp = ("Ya sea que empieces de cero, cambies de carrera o tengas algo de experiencia — te entrenamos desde principiante hasta profesional licenciado. Solo necesitas las ganas de triunfar."
           if es else
           "Whether you're starting from zero, switching careers, or have some background — we train you from beginner to licensed professional. All you need is the drive to succeed.")
-    return '<section class="sec"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p><div class="feature-grid">%s</div></div></section>' % (eb, h2, pp, cells)
+    return ('<section class="sec zero-sec"><div class="container">'
+            '<div class="rv zero-head"><span class="eyebrow">%s</span><h2 class="zero-title">%s</h2><p class="lead">%s</p></div>'
+            '<div class="zero-grid">%s</div></div></section>' % (eb, h2, pp, cells))
 
 def sec_includes(p, s):
     es = p["lang"] == "es"
@@ -1203,7 +1259,7 @@ def build(p):
     out = os.path.join(ROOT, p["path"])
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        f.write("\n".join(parts))
+        f.write(clean_links("\n".join(parts)))
     return p["path"]
 
 if __name__ == "__main__":

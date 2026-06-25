@@ -39,6 +39,8 @@ TEMPLATE = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="en" href="{canonical}">
+<link rel="alternate" hreflang="x-default" href="{canonical}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -61,7 +63,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=79">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=80">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -289,6 +291,68 @@ def course_schema(name, desc, hours, weeks, price):
         "timeRequired": f"P{weeks}W"
     }
 
+def video_schema(vid, name, desc, upload):
+    """YouTube-backed VideoObject for rich-result eligibility (tour/haircut clips)."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": name,
+        "description": desc,
+        "thumbnailUrl": [f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"],
+        "uploadDate": upload,
+        "contentUrl": f"https://www.youtube.com/watch?v={vid}",
+        "embedUrl": f"https://www.youtube.com/embed/{vid}",
+        "publisher": {"@type": "Organization", "name": "American Barber Institute",
+                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/favicon.svg"}}
+    }
+
+def article_schema(title, url, date="2024-02-01"):
+    return {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "datePublished": date,
+        "dateModified": date,
+        "image": SITE_URL + "/assets/img/og-cover.jpg",
+        "author": {"@type": "Organization", "name": "American Barber Institute"},
+        "publisher": {"@type": "Organization", "name": "American Barber Institute",
+                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/favicon.svg"}},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": url}
+    }
+
+# Rewrite internal links from foo.html → /foo (clean URLs match canonical + cleanUrls:true,
+# eliminating the 308 redirect hop search engines were following).
+def clean_links(html):
+    def repl(m):
+        url = m.group(1)
+        low = url.lower()
+        if low.startswith(("http://", "https://", "//", "mailto:", "tel:", "sms:",
+                           "javascript:", "data:", "#")):
+            return m.group(0)
+        mm = re.match(r'^([^#?]*)([#?].*)?$', url)
+        path, suffix = mm.group(1), (mm.group(2) or "")
+        if path.endswith("index.html"):
+            path = path[:-len("index.html")] or "/"
+        elif path.endswith(".html"):
+            path = path[:-len(".html")]
+        return 'href="%s%s"' % (path, suffix)
+    return re.sub(r'href="([^"]*)"', repl, html)
+
+VIDEO_SCHEMAS = {
+    "about.html": [
+        video_schema("TFpNNqsc_EA", "American Barber Institute — Virtual Campus Tour",
+                     "Take a virtual tour of the American Barber Institute Manhattan campus and clinic floor.", "2024-03-01"),
+        video_schema("iU0fUj3a8uw", "Inside the ABI Barber Clinic",
+                     "A look inside the hands-on barber clinic where ABI students train on real clients.", "2024-03-01"),
+        video_schema("ozV_RcSk0P4", "Life as an ABI Barbering Student",
+                     "What a day of training looks like for students at American Barber Institute.", "2024-03-01"),
+    ],
+    "haircuts.html": [
+        video_schema("oM8KfWfeTWA", "$3 Student Haircuts at American Barber Institute",
+                     "Get a quality cut for $3 from supervised ABI student barbers in Manhattan and the Bronx.", "2024-04-01"),
+    ],
+}
+
 # ---------------------------------------------------------------- pages
 def _person(name, role, campus):
     return {"@type": "Person", "name": name, "jobTitle": role,
@@ -389,7 +453,7 @@ if os.path.exists(_blog_manifest):
             f"blog/{_p['slug']}.html", _p['partial'],
             f"{_p['title']} | American Barber Institute Blog",
             f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
-            "en", []))
+            "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}")]))
 
 FAQ_SCHEMA_PLACEHOLDER = "FAQ_SCHEMA"
 
@@ -418,7 +482,7 @@ PAGE_BG = {
     'programs/500-hour-master-barber.html': 'gallery/cut-22.jpg',
     'programs/500-hour-master-barber-bronx.html': 'gallery/grp-05.jpg',
     'programs/50-hour-barber-refresher.html': 'gallery/cut-18.jpg',
-    'programs/contagious-diseases.html': 'gallery/shop-03.jpg',
+    'programs/contagious-diseases.html': 'gallery/grp-10.jpg',
     'blog/index.html': 'gallery/grp-02.jpg',
 }
 _DEFAULT_BG = 'gallery/cut-05.jpg'
@@ -451,6 +515,9 @@ def build():
         # LocalBusiness/TradeSchool on every page (local SEO + AI grounding)
         if ORG_SCHEMA not in resolved:
             resolved.append(ORG_SCHEMA)
+        # VideoObject markup for pages that embed YouTube clips (rich results)
+        for vs in VIDEO_SCHEMAS.get(out, []):
+            resolved.append(vs)
         schema_tags = '\n'.join(
             f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>'
             for s in resolved)
@@ -486,6 +553,7 @@ def build():
             html = html.replace(
                 '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
                 '<meta name="robots" content="noindex">')
+        html = clean_links(html)
         dest = os.path.join(ROOT, out)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(html)
