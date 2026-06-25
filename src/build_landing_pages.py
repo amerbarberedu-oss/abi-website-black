@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=69">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=70">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1081,7 +1081,7 @@ def sec_brandband(p, s, pre):
     return ('<section class="abi-brandband" data-reveal>'
             '<div class="abi-brandband__frame">'
             '<video class="abi-brandband__video" muted playsinline loop preload="none" '
-            'data-src="%svideos/futuristic_abi_wordmark_animation.mp4"></video>'
+            'data-src="%svideos/animated_logo_transition_america-_3.mp4"></video>'
             '<div class="abi-brandband__copy">'
             '<p class="abi-brandband__kicker">%s</p>'
             '<h2 class="abi-brandband__title abi-brandband__title--shimmer">American Barber Institute</h2>'
