@@ -63,7 +63,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=80">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=81">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -84,7 +84,7 @@ TEMPLATE = """<!DOCTYPE html>
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <img class="logo-img" src="{root}assets/img/new-abi-logo.jpg" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
+      <img class="logo-img" src="{root}assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
     <a class="header-cta" href="{root}contact.html">Become a Barber</a>
@@ -93,8 +93,8 @@ TEMPLATE = """<!DOCTYPE html>
   <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 <div class="campusbar"><div class="campusbar-in">
-<a class="campus-card" href="{root}contact.html#manhattan"><span class="campus-pole" aria-hidden="true"></span><span class="campus-info"><span class="campus-name">Manhattan Campus</span><span class="campus-addr">48 West 39th Street, New York, NY 10018</span><span class="campus-next">Next Start: July</span></span></a>
-<a class="campus-card" href="{root}contact.html#bronx"><span class="campus-pole" aria-hidden="true"></span><span class="campus-info"><span class="campus-name">Bronx Campus</span><span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span><span class="campus-next">Next Start: July</span></span></a>
+<a class="campus-card" href="{root}contact.html#manhattan"><span class="campus-info"><span class="campus-name">Manhattan Campus</span><span class="campus-addr">48 West 39th Street, New York, NY 10018</span><span class="campus-next">Next Start: July</span></span></a>
+<a class="campus-card" href="{root}contact.html#bronx"><span class="campus-info"><span class="campus-name">Bronx Campus</span><span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span><span class="campus-next">Next Start: July</span></span></a>
 </div></div>
 
 <main id="main">

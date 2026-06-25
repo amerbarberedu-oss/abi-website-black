@@ -1579,13 +1579,6 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 .campus-next{font-size:.8rem;font-weight:800;color:var(--blue);letter-spacing:.03em;text-transform:uppercase;margin-top:.15rem}
 .campus-card::after{content:"→";margin-left:auto;color:var(--blue);font-size:1.2rem;font-weight:700;transition:transform .2s ease}
 .campus-card:hover::after{transform:translateX(4px)}
-/* spinning barber pole */
-.campus-pole{flex:0 0 auto;width:15px;height:46px;border-radius:9px;
-  background:repeating-linear-gradient(45deg,#e23b3b 0 7px,#fff 7px 14px,#1b2fd9 14px 21px);
-  background-size:100% 220%;box-shadow:inset 0 0 0 2px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.22);
-  animation:campusPole 1.1s linear infinite}
-@keyframes campusPole{from{background-position:0 0}to{background-position:0 -220%}}
-@media (prefers-reduced-motion:reduce){.campus-pole{animation:none}}
 @media (max-width:560px){.campus-card{flex:1 1 100%}}
 
 /* ---- Hero: let the photo show (lighter overlay, keep text readable) ---- */
@@ -1633,7 +1626,6 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .sched-card{position:relative;overflow:hidden;background:linear-gradient(150deg,#ffffff,#eef2ff);border:1px solid rgba(27,47,217,.18);border-radius:20px;padding:1.7rem 1.6rem;box-shadow:0 10px 30px rgba(27,47,217,.10);display:flex;flex-direction:column;gap:.5rem;transition:transform .22s ease,box-shadow .22s ease}
 .sched-card:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(27,47,217,.20)}
 .sched-card--feature{border-color:var(--blue);box-shadow:0 14px 38px rgba(27,47,217,.22)}
-.sched-pole{position:absolute;top:0;right:1.4rem;width:13px;height:42px;border-radius:0 0 8px 8px;background:repeating-linear-gradient(45deg,#e23b3b 0 6px,#fff 6px 12px,#1b2fd9 12px 18px);background-size:100% 220%;animation:campusPole 1.1s linear infinite}
 .sched-card h3{font-size:1.5rem;margin:.2rem 0 0;color:#0c1020}
 .sched-when{font-weight:700;color:var(--blue);font-size:.92rem;margin:0}
 .sched-list{list-style:none;margin:.6rem 0 1.1rem;padding:0;display:flex;flex-direction:column;gap:.55rem}
@@ -1643,7 +1635,7 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .sched-list b{color:#0c1020;font-weight:800;text-align:right}
 .sched-card .btn{margin-top:auto;width:100%;text-align:center}
 .sched-note{font-size:.84rem;color:#5a6172;margin-top:1.2rem;line-height:1.5}
-@media (max-width:860px){.sched-grid{grid-template-columns:1fr}.sched-pole{animation:none}}
+@media (max-width:860px){.sched-grid{grid-template-columns:1fr}}
 
 /* ============================================================================
    v11.1 — Haircuts page, AI chatbot, subtle backgrounds, 12-item nav
@@ -1669,7 +1661,7 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .styles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-top:1.4rem}
 .style-chip{display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-radius:12px;font-weight:700;color:#0c1020;background:linear-gradient(145deg,#fff,#f3f6ff);border:1px solid rgba(27,47,217,.16);box-shadow:0 4px 14px rgba(16,19,26,.05);transition:transform .2s ease,box-shadow .2s ease}
 .style-chip:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(27,47,217,.16)}
-.style-chip::before{content:"✂";color:var(--blue);font-size:1rem}
+.style-chip::before{content:"";flex:0 0 auto;width:7px;height:7px;border-radius:2px;background:var(--blue)}
 
 /* ---- Subtle background imagery (text stays fully readable) ---- */
 .sec-alt,.section.alt,section.alt{position:relative;isolation:isolate}
@@ -1815,10 +1807,6 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   background:linear-gradient(160deg,#0ea5e9 0%,#1b2fd9 100%);color:#fff;padding:2rem 1rem}
 .welcome-mono{font-family:'Poppins',sans-serif;font-weight:800;font-size:2.6rem;letter-spacing:.04em;
   text-shadow:0 2px 10px rgba(0,0,0,.25)}
-.welcome-pole{width:14px;height:120px;border-radius:8px;background:repeating-linear-gradient(45deg,#fff 0 8px,#bae6fd 8px 16px,#1b2fd9 16px 24px);
-  box-shadow:0 6px 18px rgba(0,0,0,.25);background-size:100% 200%}
-@media (prefers-reduced-motion:no-preference){.welcome-pole{animation:welcomePole 3s linear infinite}}
-@keyframes welcomePole{to{background-position:0 -200%}}
 .welcome-body{padding:2.4rem 2.6rem}
 .welcome-eb{color:#0ea5e9}
 .welcome-h{color:#0c4a6e;margin:.2rem 0 1rem}
@@ -1828,8 +1816,6 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .welcome-sig-name{font-weight:800;color:#0c4a6e;font-size:1.02rem}
 .welcome-sig-role{color:#0ea5e9;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;margin-top:.15rem}
 @media (max-width:760px){.welcome-card{grid-template-columns:1fr}.welcome-aside{flex-direction:row;padding:1.4rem}
-  .welcome-pole{width:90px;height:14px;background:repeating-linear-gradient(135deg,#fff 0 8px,#bae6fd 8px 16px,#1b2fd9 16px 24px);background-size:200% 100%}
-  @keyframes welcomePole{to{background-position:-200% 0}}
   .welcome-mono{font-size:2rem}.welcome-body{padding:1.6rem 1.4rem}.welcome-quote{font-size:1.45rem}}
 
 /* ============ v11.5 — Zero to Pro (sky-blue numbered journey) ============ */
@@ -1944,3 +1930,13 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .icl-tag{align-self:flex-start;font-size:.64rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
   background:linear-gradient(150deg,#38bdf8,#1b2fd9);padding:.2rem .55rem;border-radius:999px}
 @media (max-width:780px){.icl-feature{grid-template-columns:1fr;gap:1.3rem}}
+
+/* ============ v11.6 — lift AI fab above the mobile action bar (.mbar shows <=840px) ============
+   .mbar is ~74px tall + iOS safe-area; the AI fab must clear it on every width where the bar shows. */
+@media (max-width:840px){
+  .abibot{right:16px;bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+  .abibot-panel{bottom:72px}
+}
+@media (max-width:560px){
+  .abibot{right:12px;bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+}

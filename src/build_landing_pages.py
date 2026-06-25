@@ -503,7 +503,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=80">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=81">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -563,12 +563,10 @@ def header(p, s, pre):
     campusbar = (
         '<div class="campusbar"><div class="campusbar-in">'
         '<a class="campus-card" href="%(pre)scontact.html#manhattan">'
-          '<span class="campus-pole" aria-hidden="true"></span>'
           '<span class="campus-info"><span class="campus-name">%(man)s</span>'
           '<span class="campus-addr">48 West 39th Street, New York, NY 10018</span>'
           '<span class="campus-next">%(ns)s</span></span></a>'
         '<a class="campus-card" href="%(pre)scontact.html#bronx">'
-          '<span class="campus-pole" aria-hidden="true"></span>'
           '<span class="campus-info"><span class="campus-name">%(bx)s</span>'
           '<span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span>'
           '<span class="campus-next">%(ns)s</span></span></a>'
@@ -582,7 +580,7 @@ def header(p, s, pre):
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <img class="logo-img" src="/assets/img/new-abi-logo.jpg" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
+      <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
     <a class="header-cta" href="#reserve">Become a Barber</a>
@@ -1096,7 +1094,7 @@ def sec_leadership(p, s):
     return """
 <section class="sec welcome-sec"><div class="container">
   <div class="welcome-card rv">
-    <div class="welcome-aside" aria-hidden="true"><span class="welcome-pole"></span><span class="welcome-mono">ABI</span></div>
+    <div class="welcome-aside" aria-hidden="true"><span class="welcome-mono">ABI</span></div>
     <div class="welcome-body">
       <span class="eyebrow welcome-eb">%s</span>
       <h2 class="welcome-h">%s</h2>
