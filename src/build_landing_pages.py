@@ -124,7 +124,8 @@ S = {
   "f_about": "New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.",
   "f_visit": "Visit Us", "f_links": "Quick Links",
   "f_linkitems": [("Programs","/programs/index.html"),("Instructors","/instructors.html"),
-                  ("Gallery","/gallery.html"),("Blog","/blog/index.html"),
+                  ("Gallery","/gallery.html"),("Haircuts","/haircuts.html"),
+                  ("Virtual Tour","/about.html#tour"),("Blog","/blog/index.html"),
                   ("Contact","/contact.html")],
   "gibill": "GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA).",
   "details_h": "Program Details", "d_dur": "Duration", "d_tui": "Tuition", "d_from": "from", "d_sch": "Schedules",
@@ -189,7 +190,7 @@ S = {
   "exit_cta": "Reservar Mi Lugar",
   "f_about": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años. Licenciada por el Departamento de Educación del Estado de NY. Est. 1996.",
   "f_visit": "Visítanos", "f_links": "Enlaces Rápidos",
-  "f_linkitems": [("Programas","/programs/index.html"),("Instructores","/instructors.html"),
+  "f_linkitems": [("Programas","/programs/index.html"),("Instructores","/instructors.html"),("Tour Virtual","/about.html#tour"),
                   ("Galería","/gallery.html"),("Blog","/blog/index.html"),
                   ("Contacto","/contact.html")],
   "gibill": "GI BILL® es una marca registrada del Departamento de Asuntos de Veteranos de EE. UU. (VA).",
@@ -469,7 +470,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=78">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=79">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>

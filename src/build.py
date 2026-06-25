@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=78">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=79">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -158,6 +158,8 @@ TEMPLATE = """<!DOCTYPE html>
           <li><a href="{root}jobs.html">Job Placement</a></li>
           <li><a href="{root}partners.html">Partners</a></li>
           <li><a href="{root}gallery.html">Gallery</a></li>
+          <li><a href="{root}haircuts.html">$3 Haircuts</a></li>
+          <li><a href="{root}about.html#tour">Virtual Tour</a></li>
           <li><a href="{root}blog/index.html">Blog</a></li>
           <li><a href="{root}contact.html">Contact</a></li>
         </ul>
@@ -254,7 +256,10 @@ ORG_SCHEMA = {
         "addressCountry": "US"
     }],
     "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
-    "openingHours": "Mo-Fr 08:00-20:00",
+    "openingHoursSpecification": [
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"},
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "19:00"}
+    ],
     "sameAs": [
         "https://www.facebook.com/Abi.Education/",
         "https://www.instagram.com/americanbarberinstitute/",
@@ -428,7 +433,7 @@ def build():
         body = open(path, encoding='utf-8').read()
         depth = out.count('/')
         root = '../' * depth
-        canonical = f"{SITE_URL}/{out}".replace('/index.html', '/')
+        canonical = f"{SITE_URL}/{out}".replace('/index.html', '/').replace('.html', '')
         resolved = []
         for s in schemas:
             if s == FAQ_SCHEMA_PLACEHOLDER:
@@ -443,6 +448,9 @@ def build():
             crumb_items.append({"@type": "ListItem", "position": 2, "name": short, "item": canonical})
         resolved.append({"@context": "https://schema.org", "@type": "BreadcrumbList",
                          "itemListElement": crumb_items})
+        # LocalBusiness/TradeSchool on every page (local SEO + AI grounding)
+        if ORG_SCHEMA not in resolved:
+            resolved.append(ORG_SCHEMA)
         schema_tags = '\n'.join(
             f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>'
             for s in resolved)
@@ -488,7 +496,7 @@ def build():
     import datetime
     _today = datetime.date.today().isoformat()
     urls = '\n'.join(
-        (f'  <url><loc>{SITE_URL}/{o}</loc><lastmod>{_today}</lastmod></url>').replace('/index.html', '/')
+        (f'  <url><loc>{SITE_URL}/{o}</loc><lastmod>{_today}</lastmod></url>').replace('/index.html', '/').replace('.html', '')
         for o in written)
     open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
