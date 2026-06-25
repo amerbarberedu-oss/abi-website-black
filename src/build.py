@@ -239,7 +239,7 @@ ORG_SCHEMA = {
     "name": "American Barber Institute",
     "alternateName": "ABI",
     "url": SITE_URL,
-    "logo": SITE_URL + "/assets/img/favicon.svg",
+    "logo": SITE_URL + "/icon.png",
     "foundingDate": "1996",
     "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCESS-VR options, and job placement.",
     "telephone": "+1-212-290-2289",
@@ -305,7 +305,7 @@ def video_schema(vid, name, desc, upload):
         "contentUrl": f"https://www.youtube.com/watch?v={vid}",
         "embedUrl": f"https://www.youtube.com/embed/{vid}",
         "publisher": {"@type": "Organization", "name": "American Barber Institute",
-                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/favicon.svg"}}
+                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png"}}
     }
 
 def article_schema(title, url, date="2024-02-01"):
@@ -318,7 +318,7 @@ def article_schema(title, url, date="2024-02-01"):
         "image": SITE_URL + "/assets/img/og-cover.jpg",
         "author": {"@type": "Organization", "name": "American Barber Institute"},
         "publisher": {"@type": "Organization", "name": "American Barber Institute",
-                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/favicon.svg"}},
+                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png"}},
         "mainEntityOfPage": {"@type": "WebPage", "@id": url}
     }
 

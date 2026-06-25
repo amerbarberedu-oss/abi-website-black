@@ -462,7 +462,7 @@ def head(p, s, pre):
         "@context": "https://schema.org",
         "@type": ["TradeSchool", "LocalBusiness"],
         "name": "American Barber Institute", "alternateName": "ABI",
-        "url": SITE + p["url"], "logo": SITE + "/assets/img/favicon.svg",
+        "url": SITE + p["url"], "logo": SITE + "/icon.png",
         "foundingDate": "1996",
         "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan and the Bronx with financial aid, veterans GI Bill and ACCES-VR options, and job placement.",
         "telephone": "+1-212-290-2289", "email": "admission@abi.edu",
