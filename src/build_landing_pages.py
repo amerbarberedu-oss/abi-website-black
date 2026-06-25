@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=77">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=78">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -962,39 +962,29 @@ def sec_dates(p, s):
     h = "Próximas Fechas de Inicio de Clases" if es else "Upcoming Class Start Dates"
     sub = ("Las clases nuevas comienzan el primer lunes de cada mes. Estas son todas las próximas fechas de inicio." if es
            else "New classes begin the first Monday of every month. Here are all the upcoming start dates.")
-    hflag = ("Comienza después del feriado — contacta a admisiones." if es
-             else "Begins after the observed holiday — contact admissions.")
-    # start dates grid
+    # start dates
     ycards = ""
-    for yr, months in START_DATES:
-        rows = ""
-        for mo, dt in months:
-            extra = ('<span class="date-flag">%s</span>' % hflag) if dt in HOLIDAY_START else ""
-            rows += ('<li class="date-row%s"><span class="date-mo">%s</span>'
-                     '<span class="date-day">%s</span>%s</li>'
-                     % (" is-holiday" if dt in HOLIDAY_START else "", mo, dt, extra))
-        ycards += '<div class="date-card"><h3 class="date-yr">%s</h3><ul class="date-list">%s</ul></div>' % (yr, rows)
-    # holidays grid
+    for i, (yr, months) in enumerate(START_DATES):
+        rows = "".join('<li class="scal-row"><span class="scal-mo">%s</span><span class="scal-day">%s</span></li>' % (mo, dt)
+                       for mo, dt in months)
+        ycards += ('<div class="scal-card" data-reveal data-reveal-d="%d"><h3 class="scal-yr">%s</h3>'
+                   '<ul class="scal-list">%s</ul></div>' % ((i % 3) + 1, yr, rows))
+    # federal holidays (closures)
     hh = "Días Feriados Federales — ABI Cerrado" if es else "Federal Holidays — ABI Closed"
-    hsub = ("ABI cierra en todos los feriados federales de EE.UU. Si un feriado cae en fin de semana, "
-            "cerramos el día hábil observado más cercano." if es else
-            "ABI is closed on all U.S. federal holidays. When a holiday falls on a weekend, we close on the "
-            "nearest observed weekday. The dates below reflect the actual closure dates.")
+    hsub = ("ABI cierra en todos los feriados federales de EE.UU. Estas son las fechas de cierre." if es else
+            "ABI is closed on all U.S. federal holidays. These are our closure dates.")
     hcards = ""
-    for yr, hols in HOLIDAYS:
-        rows = "".join('<li class="hol-row"><span class="hol-name">%s</span><span class="hol-day">%s</span></li>' % (n, d) for n, d in hols)
-        hcards += '<div class="date-card"><h3 class="date-yr">%s</h3><ul class="hol-list">%s</ul></div>' % (yr, rows)
-    note = ("Algunas fechas de inicio pueden caer en un feriado federal. Cuando eso ocurre, las clases comienzan "
-            "después del feriado observado — contacta a admisiones para confirmar el horario exacto del campus." if es else
-            "Some start dates may fall on a federal holiday. When that happens, classes begin after the observed "
-            "holiday — please contact admissions to confirm the exact campus schedule.")
-    return ('<section class="sec sec-dates"><div class="container rv">'
-            '<span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p>'
-            '<div class="date-grid">%s</div>'
-            '<div class="date-note">%s</div>'
-            '<h2 class="date-hol-h">%s</h2><p class="lead">%s</p>'
-            '<div class="date-grid">%s</div>'
-            '</div></section>' % (eb, h, sub, ycards, note, hh, hsub, hcards))
+    for i, (yr, hols) in enumerate(HOLIDAYS):
+        rows = "".join('<li class="scal-row scal-row--hol"><span class="scal-hname">%s</span><span class="scal-day">%s</span></li>' % (n, d)
+                       for n, d in hols)
+        hcards += ('<div class="scal-card scal-card--hol" data-reveal data-reveal-d="%d"><h3 class="scal-yr">%s</h3>'
+                   '<ul class="scal-list">%s</ul></div>' % ((i % 3) + 1, yr, rows))
+    return ('<section class="sec scal-sec"><div class="container">'
+            '<div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>'
+            '<div class="scal-grid">%s</div>'
+            '<div class="rv scal-holhead"><h2 class="scal-hol-h">%s</h2><p class="lead">%s</p></div>'
+            '<div class="scal-grid">%s</div>'
+            '</div></section>' % (eb, h, sub, ycards, hh, hsub, hcards))
 
 def closing(p, s):
     return """

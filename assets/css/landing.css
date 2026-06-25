@@ -1762,3 +1762,34 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .gal-vscroll img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .gal-vscroll a:hover img{transform:scale(1.05)}
 .gal-vscroll::after{content:"↓ scroll";position:sticky;bottom:0;align-self:center;font-size:.72rem;color:#9aa3b8;background:rgba(11,14,20,.8);padding:3px 12px;border-radius:999px;pointer-events:none}
+
+/* ============================================================================
+   v11.3 — REBUILT class-dates + holidays (sky-blue, animated, mobile-clear).
+   auto-fit grid → never cramped on mobile. Replaces old .date-grid/.sec-dates.
+   ========================================================================== */
+.scal-sec{background:linear-gradient(165deg,#ecf6ff 0%,#dbe9ff 100%)}
+.scal-sec .eyebrow{color:#0ea5e9}
+.scal-sec h2,.scal-hol-h{color:#0c4a6e}
+.scal-sec .lead{color:#345}
+.scal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:1.8rem 0}
+.scal-holhead{margin-top:2.8rem}
+.scal-hol-h{margin:0 0 .4rem}
+.scal-card{background:linear-gradient(160deg,#ffffff 0%,#eaf4ff 100%);border:1px solid #bfdbfe;border-radius:20px;
+  padding:1.5rem 1.55rem;box-shadow:0 12px 32px rgba(14,165,233,.14);transition:transform .25s ease,box-shadow .25s ease}
+.scal-card:hover{transform:translateY(-5px);box-shadow:0 22px 46px rgba(14,165,233,.26)}
+.scal-card--hol{background:linear-gradient(160deg,#ffffff 0%,#e7f6ff 100%);border-color:#a5e0fb}
+.scal-yr{font-size:1.7rem;font-weight:900;margin:0 0 1rem;color:#0284c7;letter-spacing:.01em;display:flex;align-items:center;gap:.55rem}
+.scal-yr::before{content:"";width:10px;height:26px;border-radius:4px;background:linear-gradient(180deg,#38bdf8,#0284c7)}
+.scal-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.scal-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding:.62rem .15rem;border-bottom:1px solid rgba(14,165,233,.16)}
+.scal-row:last-child{border-bottom:0}
+.scal-mo{font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#0ea5e9;min-width:2.4rem}
+.scal-hname{font-weight:700;color:#0f2747;font-size:.92rem;flex:1 1 60%}
+.scal-day{font-weight:800;color:#0b3a63;font-size:.95rem;text-align:right;white-space:nowrap}
+/* entrance animation (in addition to data-reveal stagger) */
+@media (prefers-reduced-motion:no-preference){
+  .scal-card{will-change:transform}
+  .scal-card[data-reveal]:not(.is-in){opacity:0;transform:translateY(26px)}
+  .scal-card.is-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+}
