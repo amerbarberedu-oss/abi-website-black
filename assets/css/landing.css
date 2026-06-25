@@ -1339,7 +1339,7 @@ body::before{content:none !important;}          /* remove fixed page-wide photo 
 .inst-card p, .inst-card ul, .inst-card .inst-diff{text-align:left;align-self:stretch;}
 .inst-card:hover .inst-photo{transform:translateY(-3px) !important;transition:transform .25s ease;}
 .inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem;}
-.inst-group-photo img, .inst-group-photo{object-fit:cover !important;max-height:460px;width:100%;border-radius:18px;}
+.inst-group-photo img, .inst-group-photo{object-fit:contain !important;max-height:none !important;height:auto !important;width:100%;border-radius:18px;background:#0e1117;}
 @media (max-width:560px){
   .inst-photo{width:clamp(150px,52vw,180px) !important;}
   .inst-feature .inst-photo{width:clamp(190px,60vw,240px) !important;}

@@ -73,10 +73,10 @@ S = {
   "form_sub": "Fill out the form and an Admissions Advisor will contact you.",
   "fn": "First Name", "ln": "Last Name", "ph": "Phone", "em": "Email",
   "q_loc": "Which School Location Would You Prefer To Attend?",
-  "q_fmt": "What is your Preferred Learning Format?",
+  "q_fmt": "Which is your preferred language of communication?",
   "opt_loc": "Select a location", "opt_fmt": "Select an option",
   "locs": ["Manhattan Campus — 48 West 39th Street", "Bronx Campus — 121 Westchester Square"],
-  "fmts": ["Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
+  "fmts": ["English", "Español"],
   "submit": "Submit",
   "consent": "By clicking “submit” you consent that ABI can contact you via phone, SMS or email for booking confirmations or promotional offers.",
   "success_h": "Thank you!", "success_p": "An ABI admissions agent will call you within 24 hours.",
@@ -139,10 +139,10 @@ S = {
   "form_sub": "Completa el formulario y un asesor de admisiones te contactará.",
   "fn": "Nombre", "ln": "Apellido", "ph": "Teléfono", "em": "Correo Electrónico",
   "q_loc": "¿A cuál sede te gustaría asistir?",
-  "q_fmt": "¿Cuál es tu horario preferido?",
+  "q_fmt": "¿Cuál es tu idioma de comunicación preferido?",
   "opt_loc": "Selecciona una sede", "opt_fmt": "Selecciona una opción",
   "locs": ["Sede de Manhattan — 48 West 39th Street", "Sede del Bronx — 121 Westchester Square"],
-  "fmts": ["Mañanas · Lun–Vie 8:00 AM–2:00 PM", "Tardes · Lun–Vie 2:00 PM–8:00 PM", "Fines de Semana · Sáb–Dom 9:00 AM–7:00 PM"],
+  "fmts": ["Inglés", "Español"],
   "submit": "Enviar",
   "consent": "Al hacer clic en “enviar” aceptas que ABI pueda contactarte por teléfono, SMS o correo electrónico para confirmaciones de citas u ofertas promocionales.",
   "success_h": "¡Gracias!", "success_p": "Un agente de admisiones de ABI te llamará dentro de 24 horas.",
@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=68">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=69">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -549,6 +549,7 @@ def header(p, s, pre):
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
     fmts = "".join('<option>%s</option>' % o for o in s["fmts"])
+    msg_label = "Mensaje para ABI" if p["lang"] == "es" else "Message for ABI"
     return """
 <div class="formcard" id="reserve">
   <div class="formcard-head">
@@ -571,10 +572,12 @@ def lead_form(p, s):
       %s<input type="tel" name="phone" placeholder="(917) 693-0872" required autocomplete="tel"></div>
     <div class="field has-ico"><label>%s <span class="req">*</span></label>
       %s<input type="email" name="email" placeholder="name@email.com" required autocomplete="email"></div>
-    <div class="field select"><label>%s <span class="req">*</span></label>
-      <select name="campus_preference" required><option value="" selected disabled>%s</option>%s</select></div>
-    <div class="field select"><label>%s <span class="req">*</span></label>
-      <select name="schedule_preference" required><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field select"><label>%s</label>
+      <select name="campus_preference"><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field select"><label>%s</label>
+      <select name="language_preference"><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field"><label>%s</label>
+      <textarea name="message" rows="3" placeholder="%s"></textarea></div>
     <button class="btn btn-blue btn-submit" type="submit">%s</button>
     <div class="form-error">%s <a href="tel:%s"><b>%s</b></a></div>
     <p class="form-consent">%s</p>
@@ -583,7 +586,7 @@ def lead_form(p, s):
 </div>""" % (icon("user",20), s["reserve"], s["form_sub"], p["url"], p["lang"],
              s["fn"], s["fn"], s["ln"], s["ln"],
              s["ph"], icon("phone",15), s["em"], icon("mail",15),
-             s["q_loc"], s["opt_loc"], locs, s["q_fmt"], s["opt_fmt"], fmts,
+             s["q_loc"], s["opt_loc"], locs, s["q_fmt"], s["opt_fmt"], fmts, msg_label, msg_label,
              s["submit"], s["form_err"], p["campus"]["tel"], p["campus"]["tel_disp"], s["consent"],
              icon("check",42), s["success_h"], s["success_p"])
 
@@ -1078,7 +1081,7 @@ def sec_brandband(p, s, pre):
     return ('<section class="abi-brandband" data-reveal>'
             '<div class="abi-brandband__frame">'
             '<video class="abi-brandband__video" muted playsinline loop preload="none" '
-            'poster="/assets/img/new-abi-logo.jpg" data-src="%svideos/american_barber_institute_logo.mp4"></video>'
+            'data-src="%svideos/futuristic_abi_wordmark_animation.mp4"></video>'
             '<div class="abi-brandband__copy">'
             '<p class="abi-brandband__kicker">%s</p>'
             '<h2 class="abi-brandband__title abi-brandband__title--shimmer">American Barber Institute</h2>'
