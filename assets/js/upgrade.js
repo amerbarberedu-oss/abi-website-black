@@ -173,7 +173,7 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: '0px 0px 15% 0px' });
 
     els.forEach(function (el) { io.observe(el); });
   }

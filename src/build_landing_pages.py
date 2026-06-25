@@ -392,26 +392,26 @@ PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "desc":"NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes every month.",
  "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
  "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
- "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
+ "hero_img":"home-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
 PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
  "url":"/es","alt":"/",
  "title":"Escuela de Barbería en NYC | American Barber Institute",
  "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años. Clases nuevas el primer lunes de cada mes.",
  "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
  "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
- "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
+ "hero_img":"home-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
 # location pages (EN + ES)
 for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
      "url":"/"+L["slug"],"alt":"/es/"+L["slug"],"title":L["title"],"desc":L["desc"],
      "campus":L["campus"],"h1a":L["h1"],"h1b":"","script":"Start Today.",
-     "sub":L["intro"][0],"loc":L,"hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
+     "sub":L["intro"][0],"loc":L,"hero_img":"home-hero.jpg","dur":"~4 Months","tui":"$4,600"})
     E = LOC_ES[L["slug"]]
     LE = dict(L); LE.update(E)
     PAGES.append({"type":"location","lang":"es","path":"es/"+L["slug"]+"/index.html",
      "url":"/es/"+L["slug"],"alt":"/"+L["slug"],"title":E["title"],"desc":E["desc"],
      "campus":L["campus"],"h1a":E["h1"],"h1b":"","script":"Empieza Hoy.",
-     "sub":E["intro"][0],"loc":LE,"hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
+     "sub":E["intro"][0],"loc":LE,"hero_img":"home-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
 
 # ── GLOBAL HERO OVERRIDE: exact mockup content on every landing page ──
 for _p in PAGES:
@@ -469,7 +469,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=70">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=71">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -968,7 +968,7 @@ def footer(p, s, pre):
 </div>
 <script src="/assets/js/effects.js?v=31" defer></script>
 <script src="%sassets/js/landing.js?v=31" defer></script>
-<script src="/assets/js/upgrade.js?v=1" defer></script>
+<script src="/assets/js/upgrade.js?v=2" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
