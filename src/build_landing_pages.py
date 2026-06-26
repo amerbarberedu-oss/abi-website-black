@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=94">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=95">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1217,20 +1217,51 @@ SHOWCASE_CLIPS = [
 ]
 
 def sec_brandband(p, s, pre):
+    # v13.2: rebuilt as a portrait-video testimonial section — Video-321 plays on hover,
+    # whole 9:16 vertical video shown uncropped (object-fit:contain).
     es = p["lang"] == "es"
-    kick = "Desde 1996" if es else "Since 1996"
-    sub = ("La única escuela de barbería dedicada de NYC — entrenamiento práctico, licencia del estado de NY y colocación laboral."
+    eb = "Testimonios" if es else "Student Voices"
+    h = "Real Voices, Real Cuts" if not es else "Voces reales, cortes reales"
+    sub = ("Pasa al reproductor para escuchar a un estudiante de ABI compartir su experiencia — directo, sin guion, sin filtros."
            if es else
-           "NYC's only dedicated barber school — hands-on training, NY State licensing, and real job placement.")
-    return ('<section class="abi-brandband" data-reveal>'
-            '<div class="abi-brandband__frame">'
-            '<video class="abi-brandband__video" muted playsinline loop preload="none" '
-            'data-src="%svideos/animated_logo_transition_america-_3.mp4"></video>'
-            '<div class="abi-brandband__copy">'
-            '<p class="abi-brandband__kicker">%s</p>'
-            '<h2 class="abi-brandband__title abi-brandband__title--shimmer">American Barber Institute</h2>'
-            '<p class="abi-brandband__sub">%s</p>'
-            '</div></div></section>') % (CDN, kick, sub)
+           "Hover the player to hear an ABI student share their experience — direct, unscripted, unfiltered.")
+    points = (["Entrenamiento práctico desde la primera semana",
+               "Mentores que llevan décadas detrás de la silla",
+               "Asistencia de colocación laboral al graduarte"]
+              if es else
+              ["Hands-on training from week one",
+               "Mentors with decades behind the chair",
+               "Job-placement assistance on graduation"])
+    bullets = "".join('<li>%s</li>' % p_ for p_ in points)
+    return ('<section class="abi-reel" data-reveal>'
+            '<div class="abi-reel__frame">'
+            '<div class="abi-reel__media">'
+            '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
+            'src="/assets/videos/video-321.mp4" '
+            'aria-label="ABI student testimonial video"></video>'
+            '<button type="button" class="abi-reel__play" aria-label="Play/Pause">'
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+            '</button>'
+            '</div>'
+            '<div class="abi-reel__copy">'
+            '<p class="abi-reel__kicker">%s</p>'
+            '<h2 class="abi-reel__title">%s</h2>'
+            '<p class="abi-reel__sub">%s</p>'
+            '<ul class="abi-reel__points">%s</ul>'
+            '</div>'
+            '</div>'
+            '<script>(function(){'
+            'var m=document.currentScript.parentNode.querySelector(".abi-reel__media");'
+            'if(!m)return;'
+            'var v=m.querySelector("video"),b=m.querySelector(".abi-reel__play");'
+            'function play(){v.play().then(function(){m.classList.add("is-playing")}).catch(function(){})}'
+            'function pause(){v.pause();m.classList.remove("is-playing")}'
+            'm.addEventListener("mouseenter",play);'
+            'm.addEventListener("mouseleave",pause);'
+            'm.addEventListener("click",function(){v.paused?play():pause()});'
+            'b.addEventListener("click",function(e){e.stopPropagation();v.paused?play():pause()});'
+            '})();</script>'
+            '</section>') % (eb, h, sub, bullets)
 
 def sec_showcase(p, s, pre):
     es = p["lang"] == "es"
