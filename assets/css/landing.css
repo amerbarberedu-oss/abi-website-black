@@ -1425,21 +1425,81 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 /* ============================================================================
    v10.8 — Google reviews badge (real ABI NYC 4.6 / 100+ rating + live link)
    ========================================================================== */
-.greviews-badge{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;background:#fff;
-  border:1px solid #e6e8ef;border-radius:16px;padding:1.1rem 1.4rem;margin:1.5rem auto 1rem;
-  max-width:640px;box-shadow:0 12px 30px rgba(16,19,26,.09)}
+/* v13.5 — Haircuts hero: single-line contact prompt with highlighted phone (replaces
+   the old gold/ghost button pair per client) */
+.hair-contact-line{
+  margin:1.4rem 0 0;
+  font-size:1.08rem;line-height:1.55;
+  color:#fff!important;
+  max-width:48rem;
+  text-shadow:0 1px 10px rgba(0,0,0,.55);
+}
+.hair-contact-line .hair-phone{
+  display:inline-block;
+  font-weight:800;
+  color:#7fd9ff!important;
+  text-decoration:none;
+  border-bottom:2px solid rgba(127,217,255,.55);
+  padding-bottom:1px;
+  margin:0 .2rem;
+  transition:color .15s,border-color .15s;
+}
+.hair-contact-line .hair-phone:hover{color:#bfe5ff!important;border-color:#bfe5ff}
+@media (max-width:560px){.hair-contact-line{font-size:1rem}}
+
+/* v13.5 — Softer Google Reviews badge: no dark-blue dominance, true rounded corners,
+   light-airy aesthetic so the card breathes against the gallery photo bg. */
+.greviews-badge{
+  display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;
+  background:#fff;
+  border:0!important;
+  border-radius:22px!important;
+  padding:1.25rem 1.55rem;margin:1.6rem auto 1rem;
+  max-width:680px;
+  box-shadow:0 18px 44px rgba(16,19,26,.10),0 1px 0 rgba(16,19,26,.04);
+}
 .greviews-badge .g-mark{flex:0 0 auto;line-height:0}
-.greviews-badge .g-meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.12}
-.greviews-badge .g-top{display:flex;align-items:center;gap:.5rem}
-.greviews-badge .g-score{font-size:1.95rem;font-weight:800;color:#0a0c10}
-.greviews-badge .g-stars{color:#fbbc05;font-size:1.18rem;letter-spacing:1px}
-.greviews-badge .g-count{font-size:.85rem;color:#5a6070;font-weight:600;margin-top:.15rem}
-.greviews-badge .g-cta{margin-left:auto;white-space:nowrap}
-.g-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:.2rem auto 1.7rem;max-width:780px}
-.g-chip{background:#eef1ff;color:#1b2fd9;border:1px solid color-mix(in srgb,#1b2fd9 18%,transparent);
-  border-radius:999px;padding:.4rem .9rem;font-size:.82rem;font-weight:600}
-@media (max-width:600px){.greviews-badge{flex-direction:column;text-align:center}
-  .greviews-badge .g-cta{margin:.3rem 0 0}.greviews-badge .g-meta{align-items:center}}
+.greviews-badge .g-meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;gap:.05rem}
+.greviews-badge .g-top{display:flex;align-items:center;gap:.55rem}
+.greviews-badge .g-score{font-size:2rem;font-weight:800;color:#1a1d24}
+.greviews-badge .g-stars{color:#fbbc05;font-size:1.2rem;letter-spacing:1px}
+.greviews-badge .g-count{font-size:.88rem;color:#5a6070;font-weight:500;margin-top:.2rem}
+.greviews-badge .g-cta{
+  margin-left:auto;white-space:nowrap;
+  background:#f4f6fc!important;
+  color:#1f2433!important;
+  border:1px solid #e5e8f0!important;
+  border-radius:14px!important;
+  padding:.7rem 1.15rem!important;
+  font-weight:700!important;font-size:.9rem!important;
+  box-shadow:none!important;
+  transition:background .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.greviews-badge .g-cta:hover{
+  background:#eaf0fb!important;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(16,19,26,.08)!important;
+}
+
+/* Soft chips — no harsh blue border */
+.g-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin:.4rem auto 1.7rem;max-width:780px}
+.g-chip{
+  background:#f4f6fc!important;
+  color:#3a4660!important;
+  border:0!important;
+  border-radius:999px!important;
+  padding:.5rem 1rem!important;
+  font-size:.84rem!important;font-weight:600!important;
+  box-shadow:0 1px 0 rgba(16,19,26,.04);
+  transition:background .18s ease;
+}
+.g-chip:hover{background:#eaf0fb!important}
+
+@media (max-width:600px){
+  .greviews-badge{flex-direction:column;text-align:center;padding:1.1rem 1.2rem}
+  .greviews-badge .g-cta{margin:.5rem 0 0;width:100%;text-align:center}
+  .greviews-badge .g-meta{align-items:center}
+}
 
 /* ============================================================================
    v10.9 — side-by-side sky-blue gradient cards (replaces the old image banners)
