@@ -2061,47 +2061,66 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .abi-reel__media.is-playing .abi-reel__play{opacity:0;pointer-events:none;transform:scale(.85)}
 .abi-reel__media:hover .abi-reel__play{transform:scale(1.05)}
 
+/* v13.6 — single bright sky-blue (#38bdf8) for ALL testimonial text — strong
+   contrast on the deep-navy gradient, interactive hover on each bullet */
+:root{--reel-blue:#38bdf8;--reel-blue-bright:#7fd9ff;--reel-blue-deep:#0ea5e9}
+
 .abi-reel__copy{padding:.2rem .6rem 1rem;text-align:center}
 .abi-reel__kicker{
-  margin:0 0 .4rem;font-weight:800;font-size:.86rem;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:#7fd9ff!important;
-  text-shadow:0 0 14px rgba(127,217,255,.65),0 2px 6px rgba(0,0,0,.4);
+  margin:0 0 .45rem;font-weight:800;font-size:.88rem;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--reel-blue)!important;
+  text-shadow:0 0 16px rgba(56,189,248,.55),0 2px 6px rgba(0,0,0,.5);
 }
 .abi-reel__title{
-  margin:0 0 .65rem;
+  margin:0 0 .7rem;
   font-size:clamp(1.7rem,3.6vw,2.6rem);
-  font-weight:800;line-height:1.1;letter-spacing:-.01em;
-  background:linear-gradient(95deg,#aee4ff 0%,#5fb8ff 38%,#7fd9ff 66%,#bfe5ff 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent!important;
-  text-shadow:0 2px 22px rgba(0,0,0,.45);
-  filter:drop-shadow(0 0 14px rgba(127,217,255,.35));
+  font-weight:900;line-height:1.08;letter-spacing:-.01em;
+  color:var(--reel-blue)!important;
+  -webkit-text-fill-color:initial!important;
+  background:none!important;
+  text-shadow:0 0 22px rgba(56,189,248,.45),0 2px 18px rgba(0,0,0,.55);
+  filter:none!important;
 }
 .abi-reel__sub{
-  margin:0 auto 1rem;max-width:36rem;
-  color:#cfe6ff!important;
-  font-size:1.05rem;line-height:1.55;
-  text-shadow:0 1px 8px rgba(0,0,0,.45);
+  margin:0 auto 1.1rem;max-width:38rem;
+  color:var(--reel-blue)!important;
+  font-size:1.06rem;line-height:1.55;font-weight:500;
+  text-shadow:0 1px 10px rgba(0,0,0,.55);
 }
-.abi-reel__points{list-style:none;padding:0;margin:0 auto;max-width:34rem;display:grid;gap:.55rem;text-align:left}
+.abi-reel__points{
+  list-style:none;padding:0;margin:0 auto;max-width:36rem;
+  display:grid;gap:.42rem;text-align:left;
+}
 .abi-reel__points li{
-  font-size:.98rem;line-height:1.5;
-  padding-left:1.6rem;position:relative;
-  text-shadow:0 1px 6px rgba(0,0,0,.45);
+  display:flex;align-items:flex-start;gap:.65rem;
+  color:var(--reel-blue)!important;
+  font-size:.98rem;line-height:1.45;font-weight:600;
+  padding:.4rem .65rem;border-radius:10px;
+  background:rgba(56,189,248,.04);
+  border:1px solid rgba(56,189,248,.14);
+  text-shadow:0 1px 8px rgba(0,0,0,.5);
+  transition:background .22s ease,border-color .22s ease,transform .22s ease,box-shadow .22s ease;
+  cursor:default;
 }
-/* Three distinct sky-blue shades cycling across bullets */
-.abi-reel__points li:nth-child(1){color:#aee4ff!important}
-.abi-reel__points li:nth-child(2){color:#7fd9ff!important}
-.abi-reel__points li:nth-child(3){color:#bfd0ff!important}
-.abi-reel__points li::before{
-  content:"";position:absolute;left:0;top:.55em;
-  width:9px;height:9px;border-radius:2px;
-  background:#7fd9ff;
-  box-shadow:0 0 10px rgba(127,217,255,.85),0 0 22px rgba(95,184,255,.4);
+.abi-reel__points li:hover{
+  background:rgba(56,189,248,.14);
+  border-color:rgba(56,189,248,.42);
+  transform:translateX(4px);
+  box-shadow:0 8px 22px rgba(56,189,248,.18);
 }
-.abi-reel__points li:nth-child(2)::before{background:#aee4ff;box-shadow:0 0 10px rgba(174,228,255,.85)}
-.abi-reel__points li:nth-child(3)::before{background:#5fb8ff;box-shadow:0 0 10px rgba(95,184,255,.85)}
+.abi-reel__bullet-mark{
+  flex-shrink:0;display:inline-block;
+  width:14px;height:14px;border-radius:4px;
+  margin-top:.32em;
+  background:linear-gradient(135deg,var(--reel-blue-bright),var(--reel-blue-deep));
+  box-shadow:0 0 12px rgba(56,189,248,.75),0 0 28px rgba(14,165,233,.42);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.abi-reel__points li:hover .abi-reel__bullet-mark{
+  transform:rotate(45deg) scale(1.12);
+  box-shadow:0 0 16px rgba(56,189,248,.95),0 0 36px rgba(14,165,233,.6);
+}
 
 /* Desktop: video left, copy right */
 @media (min-width:880px){

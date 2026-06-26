@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=98">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=99">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1227,13 +1227,25 @@ def sec_brandband(p, s, pre):
            if es else
            "Hover the player to hear an ABI student share their experience — direct, unscripted, unfiltered.")
     points = (["Entrenamiento práctico desde la primera semana",
-               "Mentores que llevan décadas detrás de la silla",
-               "Asistencia de colocación laboral al graduarte"]
+               "Clientes reales en nuestra clínica de barbería en el campus",
+               "Mentores con décadas detrás de la silla",
+               "Preparación completa para el Examen del Estado de NY",
+               "Horarios flexibles — mañana, tarde y fin de semana",
+               "Ayuda financiera: ACCES-VR, GI Bill y VA",
+               "Tarifa semanal desde $150 — planes de pago",
+               "Asistencia de colocación laboral al graduarte",
+               "Dos campus en NYC — Manhattan y Bronx"]
               if es else
               ["Hands-on training from week one",
+               "Real clients in our on-campus barber clinic",
                "Mentors with decades behind the chair",
-               "Job-placement assistance on graduation"])
-    bullets = "".join('<li>%s</li>' % p_ for p_ in points)
+               "Full prep for the NY State Board Exam",
+               "Flexible schedules — morning, afternoon, weekend",
+               "Financial aid — ACCES-VR, GI Bill® and VA",
+               "Weekly tuition from $150 — flexible payment plans",
+               "Job-placement assistance on graduation",
+               "Two NYC campuses — Manhattan and the Bronx"])
+    bullets = "".join('<li><span class="abi-reel__bullet-mark" aria-hidden="true"></span><span>%s</span></li>' % p_ for p_ in points)
     return ('<section class="abi-reel" data-reveal>'
             '<div class="abi-reel__frame">'
             '<div class="abi-reel__media">'
