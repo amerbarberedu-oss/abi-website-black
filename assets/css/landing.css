@@ -1939,15 +1939,47 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
    ============================================================ */
 .campusbar,.campusbar-in,.campus-card,.trust-strip,section.trust{display:none!important}
 
-/* Restore canonical EN|ES placement — inside .hdr-right, visible on all viewports */
-.hdr-right{display:flex!important;align-items:center;gap:.6rem;margin-left:auto;flex-shrink:0;position:relative;z-index:5}
-.hdr-right .lang-toggle{display:inline-flex!important;flex-shrink:0;background:rgba(255,255,255,.08)!important;border:1.6px solid #7fd9ff!important}
-/* Override the light-theme rule that paints toggle text black (invisible on dark .hdr bg) */
-.hdr-right .lang-toggle a{color:#e7ebf5!important}
-.hdr-right .lang-toggle a.is-active{color:#0a1020!important;background:#7fd9ff!important}
-@media (max-width:420px){
-  .hdr-right .lang-toggle{font-size:.72rem}
-  .hdr-right .lang-toggle a{padding:.34rem .54rem}
+/* ============================================================
+   v12.8 — GUARANTEE EN|ES visible: pin .hdr-right to the right
+   edge of the header, above all nav/CTA content, on every viewport.
+   ============================================================ */
+.hdr{position:relative}
+.hdr-in{position:relative;padding-right:170px!important}
+.hdr-right{
+  display:flex!important;align-items:center;gap:.6rem;
+  position:absolute!important;
+  top:50%!important;right:max(1rem,2vw)!important;
+  transform:translateY(-50%)!important;
+  z-index:50!important;
+  flex-shrink:0;
+}
+.hdr-right .lang-toggle{
+  display:inline-flex!important;flex-shrink:0;
+  background:#ffffff!important;
+  border:2px solid #1b2fd9!important;
+  border-radius:999px!important;
+  font-size:.86rem!important;font-weight:800!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.18)!important;
+  overflow:hidden!important;
+}
+.hdr-right .lang-toggle a{
+  color:#1b2fd9!important;
+  padding:.42rem .72rem!important;
+  text-decoration:none!important;
+  transition:background .2s,color .2s!important;
+}
+.hdr-right .lang-toggle a.is-active,
+.hdr-right .lang-toggle a:hover{
+  background:#1b2fd9!important;color:#fff!important;
+}
+/* Make room for the absolutely-positioned EN|ES on smaller breakpoints */
+@media (max-width:1199px){
+  .hdr-in{padding-right:140px!important}
+}
+@media (max-width:560px){
+  .hdr-in{padding-right:120px!important}
+  .hdr-right .lang-toggle{font-size:.74rem!important}
+  .hdr-right .lang-toggle a{padding:.34rem .54rem!important}
 }
 
 /* FAQs nav dropdown (FAQs → FAQs / Schedules) */
