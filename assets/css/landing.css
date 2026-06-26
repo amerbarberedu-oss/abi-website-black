@@ -2105,65 +2105,47 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .abi-reel__media.is-playing .abi-reel__play{opacity:0;pointer-events:none;transform:scale(.85)}
 .abi-reel__media:hover .abi-reel__play{transform:scale(1.05)}
 
-/* v13.6 — single bright sky-blue (#38bdf8) for ALL testimonial text — strong
-   contrast on the deep-navy gradient, interactive hover on each bullet */
-:root{--reel-blue:#38bdf8;--reel-blue-bright:#7fd9ff;--reel-blue-deep:#0ea5e9}
-
-.abi-reel__copy{padding:.2rem .6rem 1rem;text-align:center}
+/* v13.8 — Reel testimonial: ONE simple blue (#93c5fd) for all text.
+   No gradients, no chip backgrounds, no glow — just clean readable blue. */
+.abi-reel__copy{padding:.2rem .6rem 1rem;text-align:center;color:#93c5fd}
 .abi-reel__kicker{
-  margin:0 0 .45rem;font-weight:800;font-size:.88rem;
+  margin:0 0 .5rem;font-weight:800;font-size:.88rem;
   letter-spacing:.24em;text-transform:uppercase;
-  color:var(--reel-blue)!important;
-  text-shadow:0 0 16px rgba(56,189,248,.55),0 2px 6px rgba(0,0,0,.5);
+  color:#93c5fd!important;
 }
 .abi-reel__title{
-  margin:0 0 .7rem;
+  margin:0 0 .75rem;
   font-size:clamp(1.7rem,3.6vw,2.6rem);
   font-weight:900;line-height:1.08;letter-spacing:-.01em;
-  color:var(--reel-blue)!important;
+  color:#93c5fd!important;
   -webkit-text-fill-color:initial!important;
   background:none!important;
-  text-shadow:0 0 22px rgba(56,189,248,.45),0 2px 18px rgba(0,0,0,.55);
+  text-shadow:none!important;
   filter:none!important;
 }
 .abi-reel__sub{
-  margin:0 auto 1.1rem;max-width:38rem;
-  color:var(--reel-blue)!important;
+  margin:0 auto 1.2rem;max-width:38rem;
+  color:#93c5fd!important;
   font-size:1.06rem;line-height:1.55;font-weight:500;
-  text-shadow:0 1px 10px rgba(0,0,0,.55);
 }
 .abi-reel__points{
   list-style:none;padding:0;margin:0 auto;max-width:36rem;
-  display:grid;gap:.42rem;text-align:left;
+  display:grid;gap:.55rem;text-align:left;
 }
 .abi-reel__points li{
-  display:flex;align-items:flex-start;gap:.65rem;
-  color:var(--reel-blue)!important;
-  font-size:.98rem;line-height:1.45;font-weight:600;
-  padding:.4rem .65rem;border-radius:10px;
-  background:rgba(56,189,248,.04);
-  border:1px solid rgba(56,189,248,.14);
-  text-shadow:0 1px 8px rgba(0,0,0,.5);
-  transition:background .22s ease,border-color .22s ease,transform .22s ease,box-shadow .22s ease;
-  cursor:default;
-}
-.abi-reel__points li:hover{
-  background:rgba(56,189,248,.14);
-  border-color:rgba(56,189,248,.42);
-  transform:translateX(4px);
-  box-shadow:0 8px 22px rgba(56,189,248,.18);
+  display:flex;align-items:flex-start;gap:.7rem;
+  color:#93c5fd!important;
+  font-size:1rem;line-height:1.5;font-weight:600;
+  padding:0;background:none!important;border:0!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
 }
 .abi-reel__bullet-mark{
   flex-shrink:0;display:inline-block;
-  width:14px;height:14px;border-radius:4px;
-  margin-top:.32em;
-  background:linear-gradient(135deg,var(--reel-blue-bright),var(--reel-blue-deep));
-  box-shadow:0 0 12px rgba(56,189,248,.75),0 0 28px rgba(14,165,233,.42);
-  transition:transform .22s ease,box-shadow .22s ease;
-}
-.abi-reel__points li:hover .abi-reel__bullet-mark{
-  transform:rotate(45deg) scale(1.12);
-  box-shadow:0 0 16px rgba(56,189,248,.95),0 0 36px rgba(14,165,233,.6);
+  width:8px;height:8px;border-radius:50%;
+  margin-top:.55em;
+  background:#93c5fd;
+  box-shadow:none!important;
 }
 
 /* Desktop: video left, copy right */
