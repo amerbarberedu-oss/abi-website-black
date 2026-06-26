@@ -1940,6 +1940,33 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .campusbar,.campusbar-in,.campus-card,.trust-strip,section.trust{display:none!important}
 
 /* ============================================================
+   v13.0 — shrink mainnav so EN|ES + Become-a-Barber fit on desktop
+   ============================================================ */
+@media (min-width:1200px){
+  .hdr-in{gap:.45rem!important;padding-left:.5rem;padding-right:.5rem}
+  .mainnav{gap:clamp(.1rem,.35vw,.45rem)!important;flex:0 1 auto!important}
+  .mainnav a,header.hdr nav.mainnav>a{
+    font-size:clamp(.62rem,.7vw,.76rem)!important;
+    padding:.32rem .18rem!important;
+    letter-spacing:.04em!important;
+  }
+  .header-cta{
+    font-size:.72rem!important;
+    padding:.45rem .85rem!important;
+    max-width:160px;
+  }
+  .hdr-in > .lang-toggle{font-size:.72rem!important;margin-left:.35rem!important}
+  .hdr-in > .lang-toggle a{padding:.36rem .55rem!important}
+  .brand-plate .logo-img{height:62px!important;width:auto!important}
+}
+@media (min-width:1400px){
+  .mainnav a,header.hdr nav.mainnav>a{font-size:.82rem!important;padding:.4rem .25rem!important}
+  .header-cta{font-size:.78rem!important;padding:.5rem 1rem!important;max-width:180px}
+  .hdr-in > .lang-toggle{font-size:.78rem!important}
+  .hdr-in > .lang-toggle a{padding:.4rem .68rem!important}
+}
+
+/* ============================================================
    v12.9 — Header order: logo → nav → EN|ES → Become-a-Barber → hamburger
    .lang-toggle is now a top-level flex child of .hdr-in (no wrapper)
    ============================================================ */
