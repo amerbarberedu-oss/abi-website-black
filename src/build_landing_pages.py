@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=87">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=88">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -549,6 +549,12 @@ def header(p, s, pre):
             items += ('<div class="mn-sub"><a href="%s%s%s/">%s %s</a><div class="mn-drop">%s</div></div>'
                       % (pre, "es/" if lang == "es" else "", LOC_NAMES[0][1], NAV_LOC_LABEL[lang], icon("chev",13), drop))
             drawer += '<a href="%s%s%s/">%s</a>' % (pre, "es/" if lang == "es" else "", LOC_NAMES[0][1], NAV_LOC_LABEL[lang])
+        elif label in ("FAQs", "Preguntas"):
+            sch_lbl = "Horarios" if lang == "es" else "Schedules"
+            items += ('<span class="nav-drop"><a href="%s%s" class="nav-drop-trigger">%s ▾</a>'
+                      '<span class="nav-drop-menu"><a href="%s%s">%s</a><a href="%sschedules.html">%s</a></span></span>'
+                      % (pre, target, label, pre, target, label, pre, sch_lbl))
+            drawer += '<a href="%s%s">%s</a><a href="%sschedules.html">%s</a>' % (pre, target, label, pre, sch_lbl)
         else:
             items += '<a href="%s%s">%s</a>' % (pre, target, label)
             drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
@@ -587,7 +593,7 @@ def header(p, s, pre):
       <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
-    <div class="hdr-cta-group">%s<a class="header-cta" href="#reserve">Become a Barber</a></div>
+    <div class="hdr-cta-group"><a class="header-cta" href="#reserve">Become a Barber</a>%s</div>
     <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
@@ -1242,18 +1248,19 @@ def build(p):
     depth = p["path"].count("/")
     pre = "../" * depth
     parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre), sec_brandband(p, s, pre), sec_ticker(p, s), sec_stats(p, s)]
+    # v12.5: sec_dates removed from landing pages — content moved to /schedules under FAQ dropdown
     if p["type"] == "program":
         parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
-                  sec_tuition(p, s), sec_reqs(p, s), sec_dates(p, s), sec_showcase(p, s, pre),
+                  sec_tuition(p, s), sec_reqs(p, s), sec_showcase(p, s, pre),
                   sec_videos(p, s, pre),
                   sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "splash":
         parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s),
                   sec_zero(p, s), sec_earnings(p, s), sec_tuition(p, s),
-                  sec_dates(p, s), sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
+                  sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
                   sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "location":
-        parts += [sec_location(p, s), sec_tuition(p, s), sec_dates(p, s), sec_videos(p, s, pre),
+        parts += [sec_location(p, s), sec_tuition(p, s), sec_videos(p, s, pre),
                   sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     parts += [footer(p, s, pre)]
     out = os.path.join(ROOT, p["path"])

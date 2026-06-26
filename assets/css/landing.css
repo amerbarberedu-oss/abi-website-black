@@ -1954,6 +1954,32 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   .hdr-cta-group .lang-toggle a{padding:.32rem .5rem}
 }
 
+/* FAQs nav dropdown (FAQs → FAQs / Schedules) */
+.nav-drop{position:relative;display:inline-block}
+.nav-drop-trigger{cursor:pointer}
+.nav-drop-menu{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-4px);
+  display:flex;flex-direction:column;
+  background:#0a1020;border:1px solid rgba(127,217,255,.28);border-radius:12px;
+  box-shadow:0 18px 44px rgba(0,0,0,.55);
+  padding:.35rem;min-width:170px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;
+  z-index:120;
+}
+.nav-drop:hover .nav-drop-menu,.nav-drop:focus-within .nav-drop-menu{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(2px);
+  transition-delay:0s;
+}
+.nav-drop-menu a{
+  display:block;padding:.55rem .8rem;color:#cfe6ff!important;font-size:.86rem!important;
+  white-space:nowrap;border-radius:8px;text-decoration:none;
+}
+.nav-drop-menu a:hover{background:rgba(127,217,255,.14);color:#fff!important}
+@media (max-width:1199px){
+  .nav-drop-menu{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;background:transparent;border:0;box-shadow:none;padding:0 0 0 1rem}
+}
+
 /* AI chatbot pre-chat gate — collect contact info before any Q&A */
 .abibot-gate{background:linear-gradient(135deg,#0a1245,#1322a8);color:#fff;padding:1rem;border-radius:14px;margin:.4rem 0;box-shadow:0 4px 18px rgba(8,12,42,.35)}
 .abibot-gate-h{margin:0 0 .8rem;font-size:.94rem;font-weight:600;line-height:1.4;color:#fff}
