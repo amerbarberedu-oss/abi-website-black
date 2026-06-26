@@ -583,7 +583,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=110">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=111">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1348,6 +1348,7 @@ def sec_brandband(p, s, pre):
             '<div class="abi-reel__media">'
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
             'src="/assets/videos/video-321.mp4" '
+            'poster="/assets/img/video-321-poster.jpg" '
             'aria-label="ABI student testimonial video"></video>'
             '</div>'
             '<div class="abi-reel__copy">'
@@ -1370,10 +1371,11 @@ def sec_showcase(p, s, pre):
     for i, (name, cap_en, cap_es) in enumerate(SHOWCASE_CLIPS):
         cards += ('<article class="abi-clip abi-tilt" data-reveal data-reveal-d="%d">'
                   '<video class="abi-clip__video" muted playsinline loop preload="none" '
+                  'poster="/assets/img/posters/showcase-%d.jpg" '
                   'data-src="%sshowcase/vid/%s.mp4"></video>'
                   '<div class="abi-clip__cap">%s</div>'
                   '<span class="abi-tilt__glare" aria-hidden="true"></span>'
-                  '</article>') % ((i % 3) + 1, CDN, name, (cap_es if es else cap_en))
+                  '</article>') % ((i % 3) + 1, i + 1, CDN, name, (cap_es if es else cap_en))
     return ('<section class="abi-section abi-section--alt"><div class="abi-section__inner">'
             '<div class="abi-section__head" data-reveal><p class="abi-eyebrow">%s</p>'
             '<h2 class="abi-h2">%s</h2><p class="abi-lead">%s</p></div>'

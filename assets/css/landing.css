@@ -2362,3 +2362,25 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .abibot-gate-btn{background:#7fd9ff;color:#0a1020;border:0;border-radius:999px;padding:.7rem 1.1rem;font-weight:800;cursor:pointer;margin-top:.25rem;transition:filter .2s}
 .abibot-gate-btn:hover{filter:brightness(1.08)}
 .abibot-gate-note{margin:.5rem 0 0;font-size:.72rem;line-height:1.4;color:rgba(255,255,255,.78)}
+
+/* ═══════════ v15.1.0 — Student Voices + universal video posters ═════════════
+   Student Voices text: previous sky-blue (#93c5fd) was unreadable on the
+   white-glass section surface. Override to near-black so it pops cleanly. */
+.abi-reel__copy,
+.abi-reel__kicker,
+.abi-reel__title,
+.abi-reel__sub,
+.abi-reel__points li{
+  color:#0a0c10!important;
+  -webkit-text-fill-color:#0a0c10!important;
+  background:none!important;
+  text-shadow:none!important;
+}
+.abi-reel__bullet-mark{background:#0a0c10!important}
+
+/* Every <video> gets a dark-navy bg fallback (not pure black) so when the
+   poster image hasn't loaded yet or the video file fails on a slow / blocked
+   network, the box never renders as a stark black rectangle. */
+video{background-color:#1a1f2e}
+.abi-reel__video, .abi-clip__video,
+.gal-reel video, .gal-aitile video, .gal-film video{background-color:#1a1f2e}
