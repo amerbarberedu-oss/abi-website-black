@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=104">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=105">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1220,7 +1220,7 @@ def sec_includes(p, s):
     lis = "".join("<li>%s</li>" % x for x in items)
     eb = "Lo que recibes" if es else "What you get"
     h2 = "Lo que incluye cada programa" if es else "What's included in every program"
-    return '<section class="home-banner home-banner--alt" style="background-image:linear-gradient(180deg,rgba(7,11,24,.80),rgba(7,11,24,.60)),url(\'/assets/img/home-shop.jpg\')"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
+    return '<section class="home-banner home-banner--alt" style="background-image:url(\'/assets/img/home-shop.jpg\')"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
 
 # ── ported from the 10-site DNA: AI-logo brand video + showcase B-roll (live CDN pull) ──
 CDN = "https://assets-lilac-five.vercel.app/"

@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none}
 
 /* ── Hero ────────────────────────────────── */
 .hero{position:relative;background:var(--ink);color:#fff}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:1}
 .hero-particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .hero-in{z-index:2}
 /* Real animated ABI logo (abi-logo.gif) — interactive/alive */
@@ -540,7 +540,7 @@ html,body{overflow-x:clip}
 /* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
 /* Per-page background image (different best photo per page) */
 body{background:#eef2f7}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(232,236,243,.34),rgba(232,236,243,.46)),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
 .page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* keep hero text crisp over the clearer photo */
@@ -708,14 +708,10 @@ section.alt{background:rgba(246,248,252,.60)!important;backdrop-filter:blur(7px)
    ============================================================ */
 
 /* --- Hero: stronger scrim so text never sits over a bright patch --- */
-.hero-bg{opacity:.42}
-.hero-grad{
-  background:
-    linear-gradient(90deg,rgba(6,8,14,.92) 0%,rgba(6,8,14,.66) 50%,rgba(6,8,14,.42) 100%),
-    linear-gradient(0deg,rgba(6,8,14,.55) 0%,rgba(6,8,14,.10) 40%);
-}
+.hero-bg{opacity:1}
+.hero-grad{background:none}
 @media (max-width:900px){
-  .hero-grad{background:linear-gradient(180deg,rgba(6,8,14,.90) 0%,rgba(6,8,14,.70) 100%)}
+  .hero-grad{background:none}
 }
 
 /* --- Hero headline + subhead: bright + glow --- */
@@ -1494,14 +1490,14 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
    through ~55%, text stays readable via softer wash + text-shadow */
 .sec.bg-hero{
   position:relative;isolation:isolate;
-  background-image:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.62)),url("/assets/img/home-hero.jpg")!important;
-  background-size:cover,cover!important;
-  background-position:center,center!important;
-  background-attachment:scroll,scroll!important;
-  background-repeat:no-repeat,no-repeat!important;
+  background-image:url("/assets/img/home-hero.jpg")!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-attachment:scroll!important;
+  background-repeat:no-repeat!important;
 }
 .sec.bg-hero.sec-alt{
-  background-image:linear-gradient(rgba(245,247,252,.5),rgba(245,247,252,.6)),url("/assets/img/home-hero.jpg")!important;
+  background-image:url("/assets/img/home-hero.jpg")!important;
 }
 section.sec.bg-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 /* Strengthen text legibility on the now-more-visible photo */
