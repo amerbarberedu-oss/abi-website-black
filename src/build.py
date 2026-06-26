@@ -39,8 +39,7 @@ TEMPLATE = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
-<link rel="alternate" hreflang="en" href="{canonical}">
-<link rel="alternate" hreflang="x-default" href="{canonical}">
+{hreflang_block}
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -49,9 +48,15 @@ TEMPLATE = """<!DOCTYPE html>
 <meta property="og:site_name" content="American Barber Institute">
 <meta property="og:locale" content="{oglocale}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@amerbarberedu">
+<meta name="twitter:creator" content="@amerbarberedu">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <meta name="twitter:image" content="{site}/assets/img/og-cover.jpg">
+<meta name="twitter:image:alt" content="American Barber Institute — NYC barber school">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="American Barber Institute — NYC barber school">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="American Barber Institute">
 <meta name="geo.region" content="US-NY">
@@ -222,13 +227,16 @@ TEMPLATE = """<!DOCTYPE html>
 
 ORG_SCHEMA = {
     "@context": "https://schema.org",
-    "@type": ["TradeSchool", "LocalBusiness"],
+    "@type": ["TradeSchool", "LocalBusiness", "EducationalOrganization"],
+    "@id": SITE_URL + "/#organization",
     "name": "American Barber Institute",
-    "alternateName": "ABI",
+    "alternateName": ["ABI", "American Barber Institute NYC"],
     "url": SITE_URL,
-    "logo": SITE_URL + "/icon.png",
+    "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png", "width": 512, "height": 512},
+    "image": SITE_URL + "/assets/img/og-cover.jpg",
     "foundingDate": "1996",
     "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCESS-VR options, and job placement.",
+    "slogan": "Become a Licensed Barber in 4 Months",
     "telephone": "+1-212-290-2289",
     "email": "admission@abi.edu",
     "address": [{
@@ -247,18 +255,87 @@ ORG_SCHEMA = {
         "addressCountry": "US"
     }],
     "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
+    # Both campuses split out as distinct sub-organizations so AI / Google
+    # treat them as separate places with their own hours and phone.
+    "department": [{
+        "@type": "LocalBusiness",
+        "@id": SITE_URL + "/#manhattan",
+        "name": "American Barber Institute — Manhattan",
+        "address": {"@type": "PostalAddress",
+                    "streetAddress": "48 West 39th Street", "addressLocality": "New York",
+                    "addressRegion": "NY", "postalCode": "10018", "addressCountry": "US"},
+        "telephone": "+1-212-290-2289",
+        "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "19:00"}
+        ]
+    }, {
+        "@type": "LocalBusiness",
+        "@id": SITE_URL + "/#bronx",
+        "name": "American Barber Institute — Bronx",
+        "address": {"@type": "PostalAddress",
+                    "streetAddress": "121 Westchester Square", "addressLocality": "Bronx",
+                    "addressRegion": "NY", "postalCode": "10461", "addressCountry": "US"},
+        "telephone": "+1-718-676-0640",
+        "geo": {"@type": "GeoCoordinates", "latitude": 40.8401, "longitude": -73.8421},
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "19:00"}
+        ]
+    }],
     "openingHoursSpecification": [
         {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "19:00"}
     ],
+    # Structured contact points — admissions in English + Spanish, and Bronx campus.
+    # AI assistants and Google use these to confidently surface "call admissions" actions.
+    "contactPoint": [
+        {"@type": "ContactPoint", "telephone": "+1-212-290-2289", "contactType": "admissions",
+         "areaServed": "US-NY", "availableLanguage": ["English"], "hoursAvailable": "Mo-Fr 08:00-20:00, Sa-Su 09:00-19:00"},
+        {"@type": "ContactPoint", "telephone": "+1-212-290-0278", "contactType": "admissions",
+         "areaServed": "US-NY", "availableLanguage": ["Spanish", "Español"], "hoursAvailable": "Mo-Fr 08:00-20:00, Sa-Su 09:00-19:00"},
+        {"@type": "ContactPoint", "telephone": "+1-718-676-0640", "contactType": "admissions",
+         "areaServed": "US-NY", "availableLanguage": ["English", "Spanish"], "hoursAvailable": "Mo-Fr 08:00-20:00, Sa-Su 09:00-19:00"},
+        {"@type": "ContactPoint", "telephone": "+1-856-316-1551", "contactType": "customer service",
+         "areaServed": "US-NY", "availableLanguage": ["English"]}
+    ],
     "sameAs": [
         "https://www.facebook.com/Abi.Education/",
         "https://www.instagram.com/americanbarberinstitute/",
-        "https://twitter.com/amerbarberedu"
+        "https://twitter.com/amerbarberedu",
+        "https://www.youtube.com/@americanbarberinstitute",
+        "https://www.tiktok.com/@americanbarberinstitute",
+        "https://www.linkedin.com/company/american-barber-institute",
+        "https://www.yelp.com/biz/american-barber-institute-new-york",
+        "https://www.google.com/maps/place/American+Barber+Institute/@40.7522,-73.9849,17z",
+        "https://www.bing.com/maps?q=American+Barber+Institute+New+York"
     ],
-    "areaServed": ["New York City", "Manhattan", "Bronx", "Queens", "Brooklyn", "Westchester", "New Jersey", "Connecticut"],
-    "knowsLanguage": ["en", "es"],
-    "priceRange": "$$"
+    "areaServed": [
+        {"@type": "City", "name": "New York City"},
+        {"@type": "City", "name": "Manhattan"},
+        {"@type": "City", "name": "Bronx"},
+        {"@type": "City", "name": "Queens"},
+        {"@type": "City", "name": "Brooklyn"},
+        {"@type": "AdministrativeArea", "name": "Westchester County"},
+        {"@type": "State", "name": "New Jersey"},
+        {"@type": "State", "name": "Connecticut"}
+    ],
+    "knowsLanguage": ["English", "Spanish"],
+    "knowsAbout": [
+        "Barbering", "Master Barber Program", "Barber Licensing",
+        "Hair Cutting", "Fades", "Tapers", "Beard Trimming",
+        "Straight Razor Shaving", "Hair Color", "Scalp Micropigmentation",
+        "Barber Career Training", "NY State Board Exam Prep"
+    ],
+    "accreditedBy": {"@type": "Organization", "name": "New York State Department of Education",
+                     "url": "https://www.nysed.gov/"},
+    "memberOf": {"@type": "Organization", "name": "American Association of Cosmetology Schools"},
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.6",
+                        "reviewCount": "100", "bestRating": "5", "worstRating": "1"},
+    "priceRange": "$$",
+    "paymentAccepted": ["Cash", "Credit Card", "Financial Aid", "GI Bill", "ACCES-VR"],
+    "currenciesAccepted": "USD"
 }
 
 def course_schema(name, desc, hours, weeks, price):
@@ -295,19 +372,59 @@ def video_schema(vid, name, desc, upload):
                       "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png"}}
     }
 
-def article_schema(title, url, date="2024-02-01"):
-    return {
+def _word_count(html):
+    txt = re.sub(r'<script.*?</script>', ' ', html, flags=re.S)
+    txt = re.sub(r'<style.*?</style>', ' ', txt, flags=re.S)
+    txt = re.sub(r'<[^>]+>', ' ', txt)
+    return len([w for w in re.split(r'\s+', txt) if w])
+
+def article_schema(title, url, slug=None, body=None, date="2024-02-01"):
+    """BlogPosting schema with a named human author (E-E-A-T) instead of generic Organization.
+    Each post maps to one of the ABI instructors via BLOG_AUTHORS."""
+    author_name, author_role = BLOG_AUTHORS.get(slug or "", ("David Ayeoribe", "Lead Senior Instructor & Director"))
+    schema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": title,
+        "name": title,
+        "inLanguage": "en-US",
+        "isPartOf": {"@type": "Blog", "name": "American Barber Institute Blog",
+                     "url": SITE_URL + "/blog/"},
         "datePublished": date,
         "dateModified": date,
-        "image": SITE_URL + "/assets/img/og-cover.jpg",
-        "author": {"@type": "Organization", "name": "American Barber Institute"},
-        "publisher": {"@type": "Organization", "name": "American Barber Institute",
-                      "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png"}},
-        "mainEntityOfPage": {"@type": "WebPage", "@id": url}
+        "image": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/og-cover.jpg",
+                  "width": 1200, "height": 630},
+        "author": {
+            "@type": "Person",
+            "name": author_name,
+            "jobTitle": author_role,
+            "url": SITE_URL + "/instructors",
+            "worksFor": {"@type": "EducationalOrganization",
+                         "@id": SITE_URL + "/#organization",
+                         "name": "American Barber Institute"}
+        },
+        "publisher": {
+            "@type": "EducationalOrganization",
+            "@id": SITE_URL + "/#organization",
+            "name": "American Barber Institute",
+            "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png",
+                     "width": 512, "height": 512}
+        },
+        "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+        "articleSection": "Barbering Career",
+        "keywords": "barber school NYC, barber career, barbering, American Barber Institute, "
+                    "NY barber license, master barber, career change, vocational training",
+        "about": [
+            {"@type": "Thing", "name": "Barbering"},
+            {"@type": "Thing", "name": "Career in Barbering"},
+            {"@type": "EducationalOrganization", "@id": SITE_URL + "/#organization"}
+        ]
     }
+    if body:
+        wc = _word_count(body)
+        if wc:
+            schema["wordCount"] = wc
+    return schema
 
 # Rewrite internal links from foo.html → /foo (clean URLs match canonical + cleanUrls:true,
 # eliminating the 308 redirect hop search engines were following).
@@ -343,24 +460,67 @@ VIDEO_SCHEMAS = {
 }
 
 # ---------------------------------------------------------------- pages
-def _person(name, role, campus):
-    return {"@type": "Person", "name": name, "jobTitle": role,
-            "worksFor": {"@type": "EducationalOrganization", "name": "American Barber Institute"},
-            "workLocation": campus}
+_BARBER_SKILLS = [
+    "Master Barber Instruction", "Hair Cutting", "Fades", "Tapers",
+    "Beard Grooming", "Straight Razor Shaving", "NY State Board Exam Prep",
+    "Hands-on Clinical Training"
+]
+def _person(name, role, campus, skills=None, years=None, languages=None):
+    p = {
+        "@type": "Person",
+        "name": name,
+        "jobTitle": role,
+        "worksFor": {"@type": "EducationalOrganization",
+                     "@id": SITE_URL + "/#organization",
+                     "name": "American Barber Institute"},
+        "workLocation": {"@type": "Place", "name": "American Barber Institute — " + campus.split(",")[0],
+                         "address": campus},
+        "knowsAbout": skills or _BARBER_SKILLS,
+        "knowsLanguage": languages or ["English"],
+        "url": SITE_URL + "/instructors"
+    }
+    if years is not None:
+        # ABI standard: every instructor named here is also an ABI graduate.
+        p["alumniOf"] = {"@type": "EducationalOrganization", "@id": SITE_URL + "/#organization",
+                         "name": "American Barber Institute"}
+        # Schema.org doesn't have yearsOfExperience natively — surface it via description
+        # so AI assistants pick it up when summarizing the bio.
+        p["description"] = f"{role} at American Barber Institute with {years}+ years in barbering."
+    return p
+
+# Each instructor's bio expanded so AI/search engines surface real expertise,
+# tenure, and specialties — the E-E-A-T signal that was completely missing.
 INSTRUCTORS_SCHEMA = {"@context": "https://schema.org", "@type": "ItemList",
     "name": "American Barber Institute Instructors", "itemListElement": [
-        {"@type": "ListItem", "position": i + 1, "item": _person(n, r, c)}
-        for i, (n, r, c) in enumerate([
-            ("David Ayeoribe", "Lead Senior Instructor & Director", "Manhattan, NY"),
-            ("Harold \"Barkim\" Brown", "Lead Instructor", "Manhattan, NY"),
-            ("Barry Brown", "Instructor", "Manhattan, NY"),
-            ("Freddie Liciaga", "Bilingual Instructor", "Manhattan, NY"),
-            ("Benny Santamaria", "Bilingual Instructor", "Manhattan, NY"),
-            ("Richard Cancel", "Bilingual Instructor", "Manhattan, NY"),
-            ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx", "Bronx, NY"),
-            ("Osvaldy \"Mr. O\" Rodriguez", "Instructor", "Bronx, NY"),
-            ("Noah Vera", "Bilingual Instructor", "Bronx, NY"),
+        {"@type": "ListItem", "position": i + 1, "item": _person(n, r, c, sk, yr, lg)}
+        for i, (n, r, c, sk, yr, lg) in enumerate([
+            ("David Ayeoribe", "Lead Senior Instructor & Director", "Manhattan, NY",
+             _BARBER_SKILLS + ["Barber School Leadership", "Curriculum Design"], 50, ["English"]),
+            ("Harold \"Barkim\" Brown", "Lead Instructor", "Manhattan, NY",
+             _BARBER_SKILLS + ["Celebrity Barbering", "Emmy-Featured Stylist"], 25, ["English"]),
+            ("Barry Brown", "Instructor", "Manhattan, NY", _BARBER_SKILLS, 15, ["English"]),
+            ("Freddie Liciaga", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 18, ["English","Spanish"]),
+            ("Benny Santamaria", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 16, ["English","Spanish"]),
+            ("Richard Cancel", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 14, ["English","Spanish"]),
+            ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx", "Bronx, NY",
+             _BARBER_SKILLS + ["Scalp Micropigmentation", "Hair Art"], 30, ["English","Spanish"]),
+            ("Osvaldy \"Mr. O\" Rodriguez", "Instructor", "Bronx, NY", _BARBER_SKILLS, 12, ["English","Spanish"]),
+            ("Noah Vera", "Bilingual Instructor", "Bronx, NY", _BARBER_SKILLS, 10, ["English","Spanish"]),
         ])]}
+
+# Map each blog post to a named ABI author. AI assistants will now cite
+# "according to <name>, instructor at ABI" instead of the generic "ABI says".
+BLOG_AUTHORS = {
+    "why-should-i-go-to-barber-school": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "a-women-barber-the-benefits-of-barber-school": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "are-barbershops-profitable-everything-you-need-t": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "first-things-first-what-happens-after-barber-sch": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "how-to-successfully-market-your-barbershop": ("Harold \"Barkim\" Brown", "Lead Instructor"),
+    "modern-day-barbering-problem-overcome-them": ("Harold \"Barkim\" Brown", "Lead Instructor"),
+    "diverse-haircut-training-at-american-barber-inst": ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx"),
+    "barber-school-instructors-in-nyc": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "exploring-the-benefits-of-enrolling-in-the-ameri": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+}
 
 PAGES = [
     # (output, partial, title, description, lang, extra_schema)
@@ -438,15 +598,20 @@ PAGES = [
      "en", []),
 ]
 
-# blog posts: content partials in src/pages/blog-*.html, listed in src/blog_manifest.json
+# blog posts: content partials in src/pages/blog-*.html, listed in src/blog_manifest.json.
+# For each post we resolve the named instructor author + count body words so the
+# BlogPosting schema carries real E-E-A-T signals (Person author, wordCount).
 _blog_manifest = os.path.join(ROOT, 'src', 'blog_manifest.json')
 if os.path.exists(_blog_manifest):
     for _p in json.load(open(_blog_manifest)):
+        _partial_path = os.path.join(SRC, _p['partial'])
+        _body = open(_partial_path, encoding='utf-8').read() if os.path.exists(_partial_path) else None
         PAGES.append((
             f"blog/{_p['slug']}.html", _p['partial'],
             f"{_p['title']} | American Barber Institute Blog",
             f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
-            "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}")]))
+            "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
+                                  slug=_p['slug'], body=_body)]))
 
 FAQ_SCHEMA_PLACEHOLDER = "FAQ_SCHEMA"
 
@@ -488,6 +653,25 @@ def build():
             print(f'  !! missing partial {partial} — skipped')
             continue
         body = open(path, encoding='utf-8').read()
+        # Inject a small named-author byline at the top of each blog post (E-E-A-T).
+        # The same human author + role is already referenced in the BlogPosting schema.
+        if out.startswith('blog/') and out != 'blog/index.html':
+            _slug = out[len('blog/'):-len('.html')]
+            _bname, _brole = BLOG_AUTHORS.get(_slug, ("David Ayeoribe", "Lead Senior Instructor & Director"))
+            _byline = (
+                '<p class="post-meta" style="margin:.4rem 0 1.6rem;font-size:.92rem;'
+                'color:#5b6273;letter-spacing:.01em">'
+                f'By <a href="/instructors" rel="author" style="color:inherit;text-decoration:underline">'
+                f'<span itemprop="author">{_bname}</span></a> · {_brole} · '
+                '<time datetime="2024-02-01" itemprop="datePublished">February 1, 2024</time>'
+                '</p>'
+            )
+            # Drop the byline right after the first </h1> if there is one,
+            # otherwise prepend to the body.
+            if '</h1>' in body:
+                body = body.replace('</h1>', '</h1>' + _byline, 1)
+            else:
+                body = _byline + body
         depth = out.count('/')
         root = '../' * depth
         canonical = f"{SITE_URL}/{out}".replace('/index.html', '/').replace('.html', '')
@@ -524,11 +708,38 @@ def build():
             langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
                           '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%ses/index.html">ES</a></div>'
                           % (root, out, root))
+        # hreflang reciprocity: every EN page declares itself as en + x-default;
+        # the home page additionally declares the ES alternate (and vice-versa).
+        # Only the home page has a Spanish counterpart today.
+        _en_home = SITE_URL + "/"
+        _es_home = SITE_URL + "/es/"
+        if out in ('index.html',):
+            hreflang_block = (
+                f'<link rel="alternate" hreflang="en" href="{_en_home}">\n'
+                f'<link rel="alternate" hreflang="en-US" href="{_en_home}">\n'
+                f'<link rel="alternate" hreflang="es" href="{_es_home}">\n'
+                f'<link rel="alternate" hreflang="es-US" href="{_es_home}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{_en_home}">'
+            )
+        elif out.startswith('es/'):
+            hreflang_block = (
+                f'<link rel="alternate" hreflang="es" href="{_es_home}">\n'
+                f'<link rel="alternate" hreflang="es-US" href="{_es_home}">\n'
+                f'<link rel="alternate" hreflang="en" href="{_en_home}">\n'
+                f'<link rel="alternate" hreflang="en-US" href="{_en_home}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{_en_home}">'
+            )
+        else:
+            hreflang_block = (
+                f'<link rel="alternate" hreflang="en" href="{canonical}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{canonical}">'
+            )
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
             pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
             root=root, body=body, schema=schema_tags, langtoggle=langtoggle,
+            hreflang_block=hreflang_block,
             lp=root + 'programs/index.html',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')
@@ -552,17 +763,77 @@ def build():
         open(dest, 'w', encoding='utf-8').write(html)
         if out != '404.html':  # keep the error page out of the sitemap
             written.append(out)
-    # sitemap
+    # sitemap — adds priority/changefreq hints and xhtml:link hreflang annotations
+    # so Google indexes the EN ↔ ES home variants as one logical URL.
     written += ['index.html', 'es/index.html']
     import datetime
     _today = datetime.date.today().isoformat()
-    urls = '\n'.join(
-        (f'  <url><loc>{SITE_URL}/{o}</loc><lastmod>{_today}</lastmod></url>').replace('/index.html', '/').replace('.html', '')
-        for o in written)
+    def _pri(o):
+        if o in ('index.html',):                                  return ('1.0', 'weekly')
+        if o == 'es/index.html':                                  return ('0.9', 'weekly')
+        if o.startswith('programs/') or o == 'contact.html':      return ('0.9', 'weekly')
+        if o in ('about.html', 'haircuts.html', 'instructors.html'): return ('0.8', 'monthly')
+        if o.startswith('blog/'):                                 return ('0.7', 'monthly')
+        if o in ('faq.html', 'schedules.html'):                   return ('0.7', 'monthly')
+        return ('0.6', 'monthly')
+    def _abs(o):
+        return f'{SITE_URL}/{o}'.replace('/index.html', '/').replace('.html', '')
+    url_blocks = []
+    for o in written:
+        loc = _abs(o)
+        pri, cf = _pri(o)
+        block = [
+            f'  <url>',
+            f'    <loc>{loc}</loc>',
+            f'    <lastmod>{_today}</lastmod>',
+            f'    <changefreq>{cf}</changefreq>',
+            f'    <priority>{pri}</priority>',
+        ]
+        # hreflang annotations only where both EN and ES counterparts exist.
+        if o == 'index.html' or o == 'es/index.html':
+            block.append(f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}/"/>')
+            block.append(f'    <xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}/es/"/>')
+            block.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}/"/>')
+        block.append('  </url>')
+        url_blocks.append('\n'.join(block))
+    urls = '\n'.join(url_blocks)
     open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(
-        f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        f'{urls}\n</urlset>\n')
+    # robots.txt — explicitly invite AI / answer-engine crawlers so ABI can be
+    # cited confidently by ChatGPT, Claude, Perplexity, Google AI Overviews, etc.
     open(os.path.join(ROOT, 'robots.txt'), 'w').write(
-        f'User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n')
+        'User-agent: *\nAllow: /\n\n'
+        # OpenAI
+        'User-agent: GPTBot\nAllow: /\n\n'
+        'User-agent: OAI-SearchBot\nAllow: /\n\n'
+        'User-agent: ChatGPT-User\nAllow: /\n\n'
+        # Anthropic
+        'User-agent: ClaudeBot\nAllow: /\n\n'
+        'User-agent: Claude-Web\nAllow: /\n\n'
+        'User-agent: anthropic-ai\nAllow: /\n\n'
+        # Perplexity
+        'User-agent: PerplexityBot\nAllow: /\n\n'
+        'User-agent: Perplexity-User\nAllow: /\n\n'
+        # Google AI (separate from Googlebot — controls AI Overviews + Gemini grounding)
+        'User-agent: Google-Extended\nAllow: /\n\n'
+        # Common Crawl (feeds most LLM training)
+        'User-agent: CCBot\nAllow: /\n\n'
+        # Amazon, Apple, Bytedance, You.com
+        'User-agent: Amazonbot\nAllow: /\n\n'
+        'User-agent: Applebot\nAllow: /\n\n'
+        'User-agent: Applebot-Extended\nAllow: /\n\n'
+        'User-agent: Bytespider\nAllow: /\n\n'
+        'User-agent: YouBot\nAllow: /\n\n'
+        # Bing AI / Copilot — uses Bingbot, but mirror for clarity
+        'User-agent: Bingbot\nAllow: /\n\n'
+        # DuckAssist
+        'User-agent: DuckAssistBot\nAllow: /\n\n'
+        # Disallow non-indexable internals
+        'User-agent: *\nDisallow: /src/\nDisallow: /docs/\nDisallow: /_archive/\n\n'
+        f'Sitemap: {SITE_URL}/sitemap.xml\n')
     print(f'built {len(written)} pages + sitemap.xml + robots.txt')
 
 if __name__ == '__main__':

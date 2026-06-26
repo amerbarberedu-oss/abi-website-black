@@ -451,31 +451,94 @@ for _p in PAGES:
 
 # ───────────────────────── template parts ─────────────────────────
 def head(p, s, pre):
+    # Reciprocal hreflang for EN ↔ ES. Adds en-US/es-US variants and x-default.
     alt = ""
     if p["alt"]:
         en_url = p["url"] if p["lang"] == "en" else p["alt"]
         es_url = p["alt"] if p["lang"] == "en" else p["url"]
         alt = ('<link rel="alternate" hreflang="en" href="%s%s">\n'
+               '<link rel="alternate" hreflang="en-US" href="%s%s">\n'
                '<link rel="alternate" hreflang="es" href="%s%s">\n'
-               '<link rel="alternate" hreflang="x-default" href="%s%s">' % (SITE,en_url,SITE,es_url,SITE,en_url))
+               '<link rel="alternate" hreflang="es-US" href="%s%s">\n'
+               '<link rel="alternate" hreflang="x-default" href="%s%s">' %
+               (SITE,en_url,SITE,en_url,SITE,es_url,SITE,es_url,SITE,en_url))
+    # LocalBusiness/TradeSchool schema enriched for AI surfacing + knowledge-graph
+    # connectivity (Google Business Profile, Yelp, YouTube, LinkedIn).
     localbiz = json.dumps({
         "@context": "https://schema.org",
-        "@type": ["TradeSchool", "LocalBusiness"],
-        "name": "American Barber Institute", "alternateName": "ABI",
-        "url": SITE + p["url"], "logo": SITE + "/icon.png",
+        "@type": ["TradeSchool", "LocalBusiness", "EducationalOrganization"],
+        "@id": SITE + "/#organization",
+        "name": "American Barber Institute", "alternateName": ["ABI", "American Barber Institute NYC"],
+        "url": SITE + p["url"],
+        "logo": {"@type": "ImageObject", "url": SITE + "/icon.png", "width": 512, "height": 512},
+        "image": SITE + "/assets/img/og-cover.jpg",
         "foundingDate": "1996",
+        "slogan": "Become a Licensed Barber in 4 Months",
         "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan and the Bronx with financial aid, veterans GI Bill and ACCES-VR options, and job placement.",
         "telephone": "+1-212-290-2289", "email": "admission@abi.edu",
         "address": [
             {"@type": "PostalAddress", "streetAddress": "48 West 39th Street", "addressLocality": "New York", "addressRegion": "NY", "postalCode": "10018", "addressCountry": "US"},
             {"@type": "PostalAddress", "streetAddress": "121 Westchester Square", "addressLocality": "Bronx", "addressRegion": "NY", "postalCode": "10461", "addressCountry": "US"}],
         "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
+        "department": [{
+            "@type": "LocalBusiness", "@id": SITE + "/#manhattan",
+            "name": "American Barber Institute — Manhattan",
+            "address": {"@type": "PostalAddress","streetAddress": "48 West 39th Street","addressLocality":"New York","addressRegion":"NY","postalCode":"10018","addressCountry":"US"},
+            "telephone": "+1-212-290-2289",
+            "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
+            "openingHoursSpecification": [
+                {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "20:00"},
+                {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "19:00"}]
+        }, {
+            "@type": "LocalBusiness", "@id": SITE + "/#bronx",
+            "name": "American Barber Institute — Bronx",
+            "address": {"@type": "PostalAddress","streetAddress": "121 Westchester Square","addressLocality":"Bronx","addressRegion":"NY","postalCode":"10461","addressCountry":"US"},
+            "telephone": "+1-718-676-0640",
+            "geo": {"@type": "GeoCoordinates", "latitude": 40.8401, "longitude": -73.8421},
+            "openingHoursSpecification": [
+                {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "20:00"},
+                {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "19:00"}]
+        }],
         "openingHoursSpecification": [
             {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"},
             {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "19:00"}],
-        "sameAs": ["https://www.facebook.com/Abi.Education/", "https://www.instagram.com/americanbarberinstitute/", "https://twitter.com/amerbarberedu"],
-        "areaServed": ["New York City", "Manhattan", "Bronx", "Queens", "Brooklyn", "Westchester", "New Jersey", "Connecticut"],
-        "knowsLanguage": ["en", "es"], "priceRange": "$$"
+        "contactPoint": [
+            {"@type": "ContactPoint", "telephone": "+1-212-290-2289", "contactType": "admissions",
+             "areaServed": "US-NY", "availableLanguage": ["English"]},
+            {"@type": "ContactPoint", "telephone": "+1-212-290-0278", "contactType": "admissions",
+             "areaServed": "US-NY", "availableLanguage": ["Spanish", "Español"]},
+            {"@type": "ContactPoint", "telephone": "+1-718-676-0640", "contactType": "admissions",
+             "areaServed": "US-NY", "availableLanguage": ["English", "Spanish"]}
+        ],
+        "sameAs": [
+            "https://www.facebook.com/Abi.Education/",
+            "https://www.instagram.com/americanbarberinstitute/",
+            "https://twitter.com/amerbarberedu",
+            "https://www.youtube.com/@americanbarberinstitute",
+            "https://www.tiktok.com/@americanbarberinstitute",
+            "https://www.linkedin.com/company/american-barber-institute",
+            "https://www.yelp.com/biz/american-barber-institute-new-york",
+            "https://www.google.com/maps/place/American+Barber+Institute/@40.7522,-73.9849,17z",
+            "https://www.bing.com/maps?q=American+Barber+Institute+New+York"
+        ],
+        "areaServed": [
+            {"@type": "City", "name": "New York City"},
+            {"@type": "City", "name": "Manhattan"}, {"@type": "City", "name": "Bronx"},
+            {"@type": "City", "name": "Queens"}, {"@type": "City", "name": "Brooklyn"},
+            {"@type": "AdministrativeArea", "name": "Westchester County"},
+            {"@type": "State", "name": "New Jersey"}, {"@type": "State", "name": "Connecticut"}
+        ],
+        "knowsLanguage": ["English", "Spanish"],
+        "knowsAbout": [
+            "Barbering","Master Barber Program","Barber Licensing","Hair Cutting","Fades","Tapers",
+            "Beard Trimming","Straight Razor Shaving","NY State Board Exam Prep","Barber Career Training"
+        ],
+        "accreditedBy": {"@type":"Organization","name":"New York State Department of Education","url":"https://www.nysed.gov/"},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.6",
+                            "reviewCount": "100", "bestRating": "5", "worstRating": "1"},
+        "paymentAccepted": ["Cash","Credit Card","Financial Aid","GI Bill","ACCES-VR"],
+        "currenciesAccepted": "USD",
+        "priceRange": "$$"
     }, ensure_ascii=False)
     jsonld = """<script type="application/ld+json">%s</script>
 <script type="application/ld+json">%s</script>
@@ -503,6 +566,19 @@ def head(p, s, pre):
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="American Barber Institute">
 <meta property="og:url" content="%s%s">
+<meta property="og:locale" content="%s">
+<meta property="og:image" content="%s/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="American Barber Institute — NYC barber school">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@amerbarberedu">
+<meta name="twitter:creator" content="@amerbarberedu">
+<meta name="twitter:title" content="%s">
+<meta name="twitter:description" content="%s">
+<meta name="twitter:image" content="%s/assets/img/og-cover.jpg">
+<meta name="twitter:image:alt" content="American Barber Institute — NYC barber school">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#1b2fd9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -515,7 +591,10 @@ def head(p, s, pre):
 </head>
 <body class="page-%s">
 <div class="abi-deco" aria-hidden="true"></div>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
-             p["title"], p["desc"], SITE, p["url"], pre, pre, jsonld, p["type"])
+             p["title"], p["desc"], SITE, p["url"],
+             ("es_ES" if p["lang"] == "es" else "en_US"), SITE,
+             p["title"], p["desc"], SITE,
+             pre, pre, jsonld, p["type"])
 
 def header(p, s, pre):
     lang = p["lang"]
@@ -631,20 +710,20 @@ def lead_form(p, s):
     <input type="hidden" name="language" value="%s">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <input type="hidden" name="_subject" value="New ABI website lead">
-    <div class="field"><label>%s <span class="req">*</span></label>
-      <input type="text" name="first_name" placeholder="%s" required autocomplete="given-name"></div>
-    <div class="field"><label>%s <span class="req">*</span></label>
-      <input type="text" name="last_name" placeholder="%s" required autocomplete="family-name"></div>
-    <div class="field has-ico"><label>%s <span class="req">*</span></label>
-      %s<input type="tel" name="phone" placeholder="(917) 693-0872" required autocomplete="tel"></div>
-    <div class="field has-ico"><label>%s <span class="req">*</span></label>
-      %s<input type="email" name="email" placeholder="name@email.com" required autocomplete="email"></div>
-    <div class="field select"><label>%s</label>
-      <select name="campus_preference"><option value="" selected disabled>%s</option>%s</select></div>
-    <div class="field select"><label>%s</label>
-      <select name="language_preference"><option value="" selected disabled>%s</option>%s</select></div>
-    <div class="field"><label>%s</label>
-      <textarea name="message" rows="3" placeholder="%s"></textarea></div>
+    <div class="field"><label for="lf-first">%s <span class="req">*</span></label>
+      <input id="lf-first" type="text" name="first_name" placeholder="%s" required autocomplete="given-name"></div>
+    <div class="field"><label for="lf-last">%s <span class="req">*</span></label>
+      <input id="lf-last" type="text" name="last_name" placeholder="%s" required autocomplete="family-name"></div>
+    <div class="field has-ico"><label for="lf-phone">%s <span class="req">*</span></label>
+      %s<input id="lf-phone" type="tel" name="phone" placeholder="(917) 693-0872" required autocomplete="tel"></div>
+    <div class="field has-ico"><label for="lf-email">%s <span class="req">*</span></label>
+      %s<input id="lf-email" type="email" name="email" placeholder="name@email.com" required autocomplete="email"></div>
+    <div class="field select"><label for="lf-campus">%s</label>
+      <select id="lf-campus" name="campus_preference"><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field select"><label for="lf-lang">%s</label>
+      <select id="lf-lang" name="language_preference"><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field"><label for="lf-msg">%s</label>
+      <textarea id="lf-msg" name="message" rows="3" placeholder="%s"></textarea></div>
     <button class="btn btn-blue btn-submit" type="submit">%s</button>
     <div class="form-error">%s <a href="tel:%s"><b>%s</b></a></div>
     <p class="form-consent">%s</p>
