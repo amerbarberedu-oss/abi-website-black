@@ -1490,22 +1490,53 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
   .hero-cd-cell span{font-size:.58rem;letter-spacing:.12em}
 }
 
-/* Three sections gain a faded hero-image background — text stays readable
-   via a strong white wash on top of the photo */
+/* Three sections gain a clearly-visible hero-image background — photo shows
+   through ~55%, text stays readable via softer wash + text-shadow */
 .sec.bg-hero{
   position:relative;isolation:isolate;
-  background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url("/assets/img/home-hero.jpg")!important;
+  background-image:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.62)),url("/assets/img/home-hero.jpg")!important;
   background-size:cover,cover!important;
   background-position:center,center!important;
   background-attachment:scroll,scroll!important;
   background-repeat:no-repeat,no-repeat!important;
 }
 .sec.bg-hero.sec-alt{
-  background-image:linear-gradient(rgba(247,248,252,.84),rgba(247,248,252,.92)),url("/assets/img/home-hero.jpg")!important;
+  background-image:linear-gradient(rgba(245,247,252,.5),rgba(245,247,252,.6)),url("/assets/img/home-hero.jpg")!important;
 }
-/* Defeat the universal :not(...) translucent wash on these specific sections so the photo
-   peeks through clearly (rather than getting another half-white layer on top) */
 section.sec.bg-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* Strengthen text legibility on the now-more-visible photo */
+.sec.bg-hero h2,
+.sec.bg-hero h3,
+.sec.bg-hero .feature h3,
+.sec.bg-hero .zero-h,
+.sec.bg-hero .duo-h{
+  text-shadow:0 1px 2px rgba(255,255,255,.85),0 0 14px rgba(255,255,255,.55);
+}
+.sec.bg-hero p,
+.sec.bg-hero .feature p,
+.sec.bg-hero li,
+.sec.bg-hero .lead,
+.sec.bg-hero .earn-note{
+  text-shadow:0 1px 2px rgba(255,255,255,.8);
+}
+/* Boost contrast inside the feature/duo/earn cards by giving each card its
+   own lightly translucent backdrop so cards don't get lost on the photo */
+.sec.bg-hero .feature{
+  background:rgba(255,255,255,.82)!important;
+  backdrop-filter:blur(4px) saturate(1.04);
+  -webkit-backdrop-filter:blur(4px) saturate(1.04);
+}
+.sec.bg-hero .zero-step{
+  background:rgba(255,255,255,.82)!important;
+  backdrop-filter:blur(4px) saturate(1.04);
+  -webkit-backdrop-filter:blur(4px) saturate(1.04);
+}
+.sec.bg-hero .earn-card,
+.sec.bg-hero .earn>div{
+  background:rgba(255,255,255,.88)!important;
+  backdrop-filter:blur(4px) saturate(1.04);
+  -webkit-backdrop-filter:blur(4px) saturate(1.04);
+}
 
 /* v13.7 — Haircuts hero: centered layout with periwinkle pill CALL button
    matching client screenshot 1:1 */
