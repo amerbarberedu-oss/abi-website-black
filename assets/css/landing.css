@@ -1488,30 +1488,20 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 
 /* Three sections gain a clearly-visible hero-image background — photo shows
    through ~55%, text stays readable via softer wash + text-shadow */
-/* v14.6 — per-section background photos on the homepage.
-   Each section gets ONE unique image chosen for its content. A shared dark
-   editorial scrim makes white text always readable; cards are dark glass.
-   Scoped to body.page-splash so inner pages keep their existing surfaces. */
+/* v15.0.4 — per-section background photos on the homepage.
+   FINAL: the v14.6 dark scrim + dark glass cards have been REMOVED. Photos
+   show naturally. Cards revert to light translucent glass. Text reverts to
+   default dark colors. Per-section photo selection is unchanged. This is
+   the settled state — see memory rule abi-dont-touch-images. */
 .sec-photo{
-  position:relative;isolation:isolate;color:#fff;
+  position:relative;isolation:isolate;
   background-size:cover!important;
   background-position:center!important;
   background-attachment:scroll!important;
   background-repeat:no-repeat!important;
-  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
-.sec-photo h2,.sec-photo h3,.sec-photo .eyebrow,
-.sec-photo .feature h3,.sec-photo .zero-h,.sec-photo .duo-h{
-  color:#fff!important;text-shadow:none!important;
-}
-.sec-photo p,.sec-photo li,.sec-photo .lead,.sec-photo .earn-note,
-.sec-photo .plan-sched,.sec-photo .plan-hours,.sec-photo .plan-terms,
-.sec-photo .plans-note,.sec-photo .testi-card p,
-.sec-photo .faq summary,.sec-photo .faq p{
-  color:rgba(255,255,255,.90)!important;text-shadow:none!important;
-}
-.sec-photo .eyebrow{color:#9fb4ff!important}
-/* Dark-glass cards across every card variant on .sec-photo sections */
+/* Cards over photos get a light translucent glass surface so the photo
+   shows around the cards while card content stays readable in default dark text. */
 .sec-photo .feature,
 .sec-photo .zero-step,
 .sec-photo .earn-card,.sec-photo .earn>div,
@@ -1521,51 +1511,22 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 .sec-photo .yt,
 .sec-photo .gal-reel,
 .sec-photo .video-card{
-  background:rgba(20,24,40,.55)!important;
-  backdrop-filter:blur(14px) saturate(1.15);
-  -webkit-backdrop-filter:blur(14px) saturate(1.15);
-  border:1px solid rgba(255,255,255,.10)!important;
-  color:#fff!important;
+  background:rgba(255,255,255,.88)!important;
+  backdrop-filter:blur(10px) saturate(1.1);
+  -webkit-backdrop-filter:blur(10px) saturate(1.1);
+  border:1px solid rgba(255,255,255,.6)!important;
 }
-.sec-photo .feature h3,.sec-photo .zero-step h3,
-.sec-photo .earn-card h3,.sec-photo .plan-name,
-.sec-photo .testi-card .who,.sec-photo .faq summary{color:#fff!important}
-.sec-photo .feature p,.sec-photo .zero-step p,
-.sec-photo .earn-card p,.sec-photo .earn-card .num,
-.sec-photo .earn-card .label,
-.sec-photo .testi-card p{color:rgba(255,255,255,.88)!important}
-.sec-photo .plan-price{color:#fff!important}
 
-/* ── Per-section unique photo (homepage only) ──────────────────────── */
-body.page-splash .sec--pills{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.70) 0%,rgba(8,10,18,.80) 100%),url("/assets/img/gallery/cut-05.jpg")!important;
-}
-body.page-splash .sec--steps{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/shop-02.jpg")!important;
-}
-body.page-splash .sec--zero{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.72) 0%,rgba(8,10,18,.82) 100%),url("/assets/img/gallery/cut-03.jpg")!important;
-  background-position:center 35%!important;
-}
-body.page-splash .sec--earnings{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/cut-08.jpg")!important;
-}
-body.page-splash .sec--tuition{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.78) 0%,rgba(8,10,18,.86) 100%),url("/assets/img/abi-nyc-013.jpg")!important;
-}
-body.page-splash .sec--videos{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.72) 0%,rgba(8,10,18,.82) 100%),url("/assets/img/abi-students-217.jpg")!important;
-  background-position:center 25%!important;
-}
-body.page-splash .sec--gallery{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/shop-03.jpg")!important;
-}
-body.page-splash .sec--testi{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.76) 0%,rgba(8,10,18,.86) 100%),url("/assets/img/about.jpg")!important;
-}
-body.page-splash .sec--faq{
-  background-image:linear-gradient(180deg,rgba(8,10,18,.78) 0%,rgba(8,10,18,.88) 100%),url("/assets/img/abi-students-031.jpg")!important;
-}
+/* ── Per-section unique photo (homepage only) — NO dark gradient overlay ── */
+body.page-splash .sec--pills{    background-image:url("/assets/img/gallery/cut-05.jpg")!important; }
+body.page-splash .sec--steps{    background-image:url("/assets/img/gallery/shop-02.jpg")!important; }
+body.page-splash .sec--zero{     background-image:url("/assets/img/gallery/cut-03.jpg")!important; background-position:center 35%!important; }
+body.page-splash .sec--earnings{ background-image:url("/assets/img/gallery/cut-08.jpg")!important; }
+body.page-splash .sec--tuition{  background-image:url("/assets/img/abi-nyc-013.jpg")!important; }
+body.page-splash .sec--videos{   background-image:url("/assets/img/abi-students-217.jpg")!important; background-position:center 25%!important; }
+body.page-splash .sec--gallery{  background-image:url("/assets/img/gallery/shop-03.jpg")!important; }
+body.page-splash .sec--testi{    background-image:url("/assets/img/about.jpg")!important; }
+body.page-splash .sec--faq{      background-image:url("/assets/img/abi-students-031.jpg")!important; }
 
 /* v13.7 — Haircuts hero: centered layout with periwinkle pill CALL button
    matching client screenshot 1:1 */
