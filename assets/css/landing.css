@@ -574,7 +574,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-grad
 .cta-band .kicker{color:var(--gold-bright,#f4c44a)}
 .cta-band h2,.cta-band p{color:#fff}
 /* Clean content surfaces (photos live in dedicated bands, not behind every section) */
-section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust):not(.res-hero):not(.res-sec):not(.res-cta):not(.icl-sec){background:rgba(255,255,255,.70);backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
+section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust):not(.res-hero):not(.res-sec):not(.res-cta):not(.icl-sec):not(.bg-hero):not(.zero-sec){background:rgba(255,255,255,.70);backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
 section.alt{background:rgba(246,248,252,.60)!important;backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
 /* Gallery lightbox */
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
@@ -1425,6 +1425,88 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 /* ============================================================================
    v10.8 — Google reviews badge (real ABI NYC 4.6 / 100+ rating + live link)
    ========================================================================== */
+/* ============================================================
+   v14.1 — In-hero countdown (left column, under the feature chips,
+   fills the empty space beside the lead-form) + faded hero-image bg
+   on the three text-only sections (Why ABI, Zero to Pro, Earnings).
+   ============================================================ */
+.hero-cd{
+  margin:1.6rem 0 0;
+  padding:1.3rem 1.3rem 1.4rem;
+  max-width:34rem;
+  background:rgba(8,12,28,.42);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  backdrop-filter:blur(8px) saturate(1.05);
+  -webkit-backdrop-filter:blur(8px) saturate(1.05);
+  box-shadow:0 18px 44px rgba(0,0,0,.4);
+}
+.hero-cd-h{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.4rem,2.6vw,1.95rem);font-weight:400;line-height:1.1;
+  color:#fff!important;
+  text-shadow:0 1px 10px rgba(0,0,0,.45);
+}
+.hero-cd-date{
+  margin:.15rem 0 .55rem;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.3rem,2.5vw,1.85rem);font-weight:400;line-height:1.1;
+  color:#5fb8ff!important;
+  text-shadow:0 1px 10px rgba(0,0,0,.4);
+}
+.hero-cd-sub{
+  margin:0 0 1rem;
+  font-size:.92rem;font-weight:500;color:#e8eaf2!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.5);
+}
+.hero-cd-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:.55rem;
+}
+.hero-cd-cell{
+  border:1.5px solid rgba(255,255,255,.65);
+  border-radius:14px;
+  padding:.7rem .3rem .55rem;
+  text-align:center;
+  background:transparent;
+}
+.hero-cd-cell b{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.3rem,2.4vw,1.85rem);font-weight:400;line-height:1;
+  color:#fff!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.45);
+}
+.hero-cd-cell span{
+  display:block;margin-top:.35rem;
+  font-size:.62rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.92)!important;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+@media (max-width:520px){
+  .hero-cd{padding:1rem 1rem 1.05rem;margin-top:1.1rem}
+  .hero-cd-cell{padding:.55rem .25rem .45rem}
+  .hero-cd-cell span{font-size:.58rem;letter-spacing:.12em}
+}
+
+/* Three sections gain a faded hero-image background — text stays readable
+   via a strong white wash on top of the photo */
+.sec.bg-hero{
+  position:relative;isolation:isolate;
+  background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url("/assets/img/home-hero.jpg")!important;
+  background-size:cover,cover!important;
+  background-position:center,center!important;
+  background-attachment:scroll,scroll!important;
+  background-repeat:no-repeat,no-repeat!important;
+}
+.sec.bg-hero.sec-alt{
+  background-image:linear-gradient(rgba(247,248,252,.84),rgba(247,248,252,.92)),url("/assets/img/home-hero.jpg")!important;
+}
+/* Defeat the universal :not(...) translucent wash on these specific sections so the photo
+   peeks through clearly (rather than getting another half-white layer on top) */
+section.sec.bg-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
 /* v13.7 — Haircuts hero: centered layout with periwinkle pill CALL button
    matching client screenshot 1:1 */
 .hair-hero{text-align:center}

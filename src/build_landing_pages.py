@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=101">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=103">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -660,6 +660,23 @@ def lead_form(p, s):
 def hero(p, s, pre):
     feats = "".join('<div class="feature">%s<span>%s</span></div>' % (icon(i,20), t) for i, t in s["features"])
     h1b = '<span class="accent">%s</span><br>' % p["h1b"] if p["h1b"] else ""
+    # v14.1: in-hero countdown — placed inside hero-copy under features (left side, under the chips)
+    es = p["lang"] == "es"
+    h_cd_top = "Próxima Fecha de Inicio" if es else "Next Starting Date"
+    cd_sub   = ("Las clases nuevas comienzan el primer lunes de cada mes."
+                if es else
+                "New Classes Begin On The First Monday Of Each Month.")
+    _wk = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."][NEXT_MON.weekday()]
+    _mo = NEXT_MON.strftime("%B")
+    cd_date = "%s %s %d, %d" % (_wk, _mo, NEXT_MON.day, NEXT_MON.year)
+    cd_cells = "".join('<div class="hero-cd-cell"><b data-cd-%s>%s</b><span>%s</span></div>'
+                       % (k, CD_VALS[k], lbl) for k, lbl in zip("dhms", s["count_lbl"]))
+    hero_cd = ('<div class="hero-cd" data-countdown>'
+               '<h2 class="hero-cd-h">%s</h2>'
+               '<p class="hero-cd-date">%s</p>'
+               '<p class="hero-cd-sub">%s</p>'
+               '<div class="hero-cd-grid">%s</div>'
+               '</div>') % (h_cd_top, cd_date, cd_sub, cd_cells)
     return """
 <section class="hero">
   <div class="hero-bg" style="background-image:url('/assets/img/%s'),url('/assets/img/about.jpg')"></div>
@@ -669,12 +686,13 @@ def hero(p, s, pre):
       <h1 class="hero-h1">%s<br>%s<span class="hero-script">%s</span></h1>
       <p class="hero-sub">%s</p>
       <div class="features">%s</div>
+      %s
     </div>
     %s
   </div>
 </section>""" % (
         p["hero_img"],
-        p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s))
+        p["h1a"], h1b, p["script"], p["sub"], feats, hero_cd, lead_form(p, s))
 
 TICKER = {
  "en": ["Classic Tapers","Low Fades","Mid Fades","High Fades","Razor Lineups","Hot Towel Shaves","Pompadours","Beard Trims","Shape Ups","Caesars","Flat Tops","High-Top Fades","Mohawks","Blowouts"],
@@ -834,7 +852,7 @@ def sec_earnings(p, s):
         note = "Earnings figures are estimates only and are not guaranteed. Actual income will vary based on individual effort, hours worked, location and market conditions."
     cards = "".join('<div class="earn-card%s rv"><div class="earn-yr">%s</div><div class="earn-amt">%s</div><p>%s</p></div>'
                     % (" mid" if mid else "", yr, amt, d) for yr, amt, d, mid in rows)
-    return '<section class="sec sec-alt"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
+    return '<section class="sec sec-alt bg-hero"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
 
 def sec_location(p, s):
     L = p["loc"]; c = L["campus"]; es = p["lang"] == "es"
@@ -1139,7 +1157,7 @@ def sec_pills(p, s):
                     for (te, ts, se, ss) in pills)
     eb = "Por Qué ABI" if es else "Why ABI"
     h2 = "Construido para que empieces a trabajar" if es else "Built to get you working"
-    return '<section class="sec"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="feature-grid">%s</div></div></section>' % (eb, h2, cells)
+    return '<section class="sec bg-hero"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="feature-grid">%s</div></div></section>' % (eb, h2, cells)
 
 def sec_skills(p, s):
     es = p["lang"] == "es"
@@ -1190,7 +1208,7 @@ def sec_zero(p, s):
     pp = ("Ya sea que empieces de cero, cambies de carrera o tengas algo de experiencia — te entrenamos desde principiante hasta profesional licenciado. Solo necesitas las ganas de triunfar."
           if es else
           "Whether you're starting from zero, switching careers, or have some background — we train you from beginner to licensed professional. All you need is the drive to succeed.")
-    return ('<section class="sec zero-sec"><div class="container">'
+    return ('<section class="sec zero-sec bg-hero"><div class="container">'
             '<div class="rv zero-head"><span class="eyebrow">%s</span><h2 class="zero-title">%s</h2><p class="lead">%s</p></div>'
             '<div class="zero-grid">%s</div></div></section>' % (eb, h2, pp, cells))
 
@@ -1292,15 +1310,15 @@ def build(p):
         parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
                   sec_tuition(p, s), sec_reqs(p, s), sec_showcase(p, s, pre),
                   sec_videos(p, s, pre),
-                  sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
+                  sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s)]
     elif p["type"] == "splash":
         parts += [sec_pills(p, s), sec_steps(p, s), sec_skills(p, s),
                   sec_zero(p, s), sec_earnings(p, s), sec_tuition(p, s),
                   sec_showcase(p, s, pre), sec_videos(p, s, pre), sec_gallery(p, s, pre),
-                  sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s), sec_countdown(p, s)]
+                  sec_testi(p, s), sec_leadership(p, s), sec_faq(p, s)]
     elif p["type"] == "location":
         parts += [sec_location(p, s), sec_tuition(p, s), sec_videos(p, s, pre),
-                  sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
+                  sec_testi(p, s), sec_faq(p, s)]
     parts += [footer(p, s, pre)]
     out = os.path.join(ROOT, p["path"])
     os.makedirs(os.path.dirname(out), exist_ok=True)
