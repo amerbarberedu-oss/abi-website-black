@@ -1940,6 +1940,28 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .campusbar,.campusbar-in,.campus-card,.trust-strip,section.trust{display:none!important}
 
 /* ============================================================
+   v13.4 — Universal sound button injected by video-sound.js on every <video>
+   ============================================================ */
+.vs-btn{
+  position:absolute;top:.65rem;right:.65rem;z-index:25;
+  width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.62);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 6px 18px rgba(0,0,0,.4);
+  transition:background .15s ease,transform .15s ease;
+  padding:0;
+}
+.vs-btn svg{width:20px;height:20px;display:block}
+.vs-btn:hover{background:#1b2fd9;transform:scale(1.08)}
+.vs-btn.vs-muted{background:rgba(0,0,0,.55)}
+.vs-btn.vs-muted:hover{background:#1b2fd9}
+@media (max-width:560px){
+  .vs-btn{width:34px;height:34px;top:.5rem;right:.5rem}
+  .vs-btn svg{width:17px;height:17px}
+}
+
+/* ============================================================
    v13.2 — Student-voices reel section (portrait 9:16 testimonial video,
    uncropped, hover-to-play). Replaces old .abi-brandband band.
    ============================================================ */

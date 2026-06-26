@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=96">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=97">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1087,6 +1087,7 @@ def footer(p, s, pre):
 <script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
 <script src="/assets/js/chatbot.js?v=3" defer></script>
+<script src="/assets/js/video-sound.js?v=1" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
@@ -1239,9 +1240,6 @@ def sec_brandband(p, s, pre):
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
             'src="/assets/videos/video-321.mp4" '
             'aria-label="ABI student testimonial video"></video>'
-            '<button type="button" class="abi-reel__play" aria-label="Play/Pause">'
-            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
-            '</button>'
             '</div>'
             '<div class="abi-reel__copy">'
             '<p class="abi-reel__kicker">%s</p>'
@@ -1250,17 +1248,6 @@ def sec_brandband(p, s, pre):
             '<ul class="abi-reel__points">%s</ul>'
             '</div>'
             '</div>'
-            '<script>(function(){'
-            'var m=document.currentScript.parentNode.querySelector(".abi-reel__media");'
-            'if(!m)return;'
-            'var v=m.querySelector("video"),b=m.querySelector(".abi-reel__play");'
-            'function play(){v.play().then(function(){m.classList.add("is-playing")}).catch(function(){})}'
-            'function pause(){v.pause();m.classList.remove("is-playing")}'
-            'm.addEventListener("mouseenter",play);'
-            'm.addEventListener("mouseleave",pause);'
-            'm.addEventListener("click",function(){v.paused?play():pause()});'
-            'b.addEventListener("click",function(e){e.stopPropagation();v.paused?play():pause()});'
-            '})();</script>'
             '</section>') % (eb, h, sub, bullets)
 
 def sec_showcase(p, s, pre):
