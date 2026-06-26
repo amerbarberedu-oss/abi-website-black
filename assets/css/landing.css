@@ -574,7 +574,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:var(--page-
 .cta-band .kicker{color:var(--gold-bright,#f4c44a)}
 .cta-band h2,.cta-band p{color:#fff}
 /* Clean content surfaces (photos live in dedicated bands, not behind every section) */
-section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust):not(.res-hero):not(.res-sec):not(.res-cta):not(.icl-sec):not(.bg-hero):not(.zero-sec){background:rgba(255,255,255,.70);backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
+section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust):not(.res-hero):not(.res-sec):not(.res-cta):not(.icl-sec):not(.bg-hero):not(.zero-sec):not(.sec-photo){background:rgba(255,255,255,.70);backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
 section.alt{background:rgba(246,248,252,.60)!important;backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
 /* Gallery lightbox */
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
@@ -1488,64 +1488,84 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 
 /* Three sections gain a clearly-visible hero-image background — photo shows
    through ~55%, text stays readable via softer wash + text-shadow */
-/* v14.5 — editorial dark-scrim treatment.
-   Photo shows through ~25%, text is white and crisp, cards are dark glass.
-   Same photo across the three sections, but background-position varies so
-   the eye sees a different crop each time. */
-.sec.bg-hero{
+/* v14.6 — per-section background photos on the homepage.
+   Each section gets ONE unique image chosen for its content. A shared dark
+   editorial scrim makes white text always readable; cards are dark glass.
+   Scoped to body.page-splash so inner pages keep their existing surfaces. */
+.sec-photo{
   position:relative;isolation:isolate;color:#fff;
-  background-image:
-    linear-gradient(180deg,rgba(8,10,18,.72) 0%,rgba(8,10,18,.82) 100%),
-    url("/assets/img/home-hero.jpg")!important;
-  background-size:cover,cover!important;
-  background-position:center 28%,center 28%!important;
-  background-attachment:scroll,scroll!important;
-  background-repeat:no-repeat,no-repeat!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-attachment:scroll!important;
+  background-repeat:no-repeat!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
-.sec.bg-hero.zero-sec{
-  background-position:center 50%,center 50%!important;
+.sec-photo h2,.sec-photo h3,.sec-photo .eyebrow,
+.sec-photo .feature h3,.sec-photo .zero-h,.sec-photo .duo-h{
+  color:#fff!important;text-shadow:none!important;
 }
-.sec.bg-hero.sec-alt{
-  background-image:
-    linear-gradient(180deg,rgba(8,10,18,.78) 0%,rgba(8,10,18,.86) 100%),
-    url("/assets/img/home-hero.jpg")!important;
-  background-position:center 72%,center 72%!important;
+.sec-photo p,.sec-photo li,.sec-photo .lead,.sec-photo .earn-note,
+.sec-photo .plan-sched,.sec-photo .plan-hours,.sec-photo .plan-terms,
+.sec-photo .plans-note,.sec-photo .testi-card p,
+.sec-photo .faq summary,.sec-photo .faq p{
+  color:rgba(255,255,255,.90)!important;text-shadow:none!important;
 }
-section.sec.bg-hero{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-/* White text on the dark scrim — no text-shadow needed */
-.sec.bg-hero h2,
-.sec.bg-hero h3,
-.sec.bg-hero .feature h3,
-.sec.bg-hero .zero-h,
-.sec.bg-hero .duo-h,
-.sec.bg-hero .eyebrow{color:#fff!important;text-shadow:none!important}
-.sec.bg-hero p,
-.sec.bg-hero .feature p,
-.sec.bg-hero li,
-.sec.bg-hero .lead,
-.sec.bg-hero .earn-note{color:rgba(255,255,255,.88)!important;text-shadow:none!important}
-.sec.bg-hero .eyebrow{color:#9fb4ff!important}
-/* Dark glass cards — harmonize with photo instead of blocking it */
-.sec.bg-hero .feature,
-.sec.bg-hero .zero-step,
-.sec.bg-hero .earn-card,
-.sec.bg-hero .earn>div{
+.sec-photo .eyebrow{color:#9fb4ff!important}
+/* Dark-glass cards across every card variant on .sec-photo sections */
+.sec-photo .feature,
+.sec-photo .zero-step,
+.sec-photo .earn-card,.sec-photo .earn>div,
+.sec-photo .plan,
+.sec-photo .testi-card,
+.sec-photo .faq details,
+.sec-photo .yt,
+.sec-photo .gal-reel,
+.sec-photo .video-card{
   background:rgba(20,24,40,.55)!important;
   backdrop-filter:blur(14px) saturate(1.15);
   -webkit-backdrop-filter:blur(14px) saturate(1.15);
   border:1px solid rgba(255,255,255,.10)!important;
   color:#fff!important;
 }
-.sec.bg-hero .feature h3,
-.sec.bg-hero .zero-step h3,
-.sec.bg-hero .earn-card h3,
-.sec.bg-hero .earn>div h3{color:#fff!important}
-.sec.bg-hero .feature p,
-.sec.bg-hero .zero-step p,
-.sec.bg-hero .earn-card p,
-.sec.bg-hero .earn>div p,
-.sec.bg-hero .earn-card .num,
-.sec.bg-hero .earn-card .label{color:rgba(255,255,255,.85)!important}
+.sec-photo .feature h3,.sec-photo .zero-step h3,
+.sec-photo .earn-card h3,.sec-photo .plan-name,
+.sec-photo .testi-card .who,.sec-photo .faq summary{color:#fff!important}
+.sec-photo .feature p,.sec-photo .zero-step p,
+.sec-photo .earn-card p,.sec-photo .earn-card .num,
+.sec-photo .earn-card .label,
+.sec-photo .testi-card p{color:rgba(255,255,255,.88)!important}
+.sec-photo .plan-price{color:#fff!important}
+
+/* ── Per-section unique photo (homepage only) ──────────────────────── */
+body.page-splash .sec--pills{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.70) 0%,rgba(8,10,18,.80) 100%),url("/assets/img/gallery/cut-05.jpg")!important;
+}
+body.page-splash .sec--steps{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/shop-02.jpg")!important;
+}
+body.page-splash .sec--zero{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.72) 0%,rgba(8,10,18,.82) 100%),url("/assets/img/gallery/cut-03.jpg")!important;
+  background-position:center 35%!important;
+}
+body.page-splash .sec--earnings{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/cut-08.jpg")!important;
+}
+body.page-splash .sec--tuition{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.78) 0%,rgba(8,10,18,.86) 100%),url("/assets/img/abi-nyc-013.jpg")!important;
+}
+body.page-splash .sec--videos{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.72) 0%,rgba(8,10,18,.82) 100%),url("/assets/img/abi-students-217.jpg")!important;
+  background-position:center 25%!important;
+}
+body.page-splash .sec--gallery{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%,rgba(8,10,18,.84) 100%),url("/assets/img/gallery/shop-03.jpg")!important;
+}
+body.page-splash .sec--testi{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.76) 0%,rgba(8,10,18,.86) 100%),url("/assets/img/about.jpg")!important;
+}
+body.page-splash .sec--faq{
+  background-image:linear-gradient(180deg,rgba(8,10,18,.78) 0%,rgba(8,10,18,.88) 100%),url("/assets/img/abi-students-031.jpg")!important;
+}
 
 /* v13.7 — Haircuts hero: centered layout with periwinkle pill CALL button
    matching client screenshot 1:1 */

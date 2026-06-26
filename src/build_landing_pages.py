@@ -507,15 +507,15 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=106">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=107">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
 %s
 </head>
-<body>
+<body class="page-%s">
 <div class="abi-deco" aria-hidden="true"></div>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
-             p["title"], p["desc"], SITE, p["url"], pre, pre, jsonld)
+             p["title"], p["desc"], SITE, p["url"], pre, pre, jsonld, p["type"])
 
 def header(p, s, pre):
     lang = p["lang"]
@@ -764,7 +764,7 @@ def sec_tuition(p, s):
             '<div class="plan-tag">%s</div>' % s["pop_tag"] if pl["pop"] else "",
             pl["name"], pl["sched"], pl["hours"], pl["price"], pl["terms"], s["plan_cta"])
     return """
-<section class="sec sec-alt"><div class="container">
+<section class="sec sec-alt sec-photo sec--tuition"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
   <div class="plans">%s</div>
   <p class="plans-note">%s</p>
@@ -804,7 +804,7 @@ def sec_testi(p, s):
              '<a class="g-cta btn btn-blue" href="%s" target="_blank" rel="noopener">%s</a></div>'
              '<div class="g-chips rv">%s</div>') % (gG, count_txt, GMAPS, cta_txt, chips)
     return """
-<section class="sec sec-alt" id="reviews"><div class="container">
+<section class="sec sec-alt sec-photo sec--testi" id="reviews"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
   %s
   <div class="testi">%s</div>
@@ -835,7 +835,7 @@ def sec_steps(p, s):
         eb, h = "3 Easy Steps", "Become a Professional Barber in 3 Easy Steps"
     cards = "".join('<div class="step rv"><div class="step-num">0%d</div><b>%s</b><p>%s</p></div>'
                     % (i, t, d) for i, (t, d) in enumerate(steps, 1))
-    return '<section class="sec"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="steps">%s</div></div></section>' % (eb, h, cards)
+    return '<section class="sec sec-photo sec--steps"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="steps">%s</div></div></section>' % (eb, h, cards)
 
 def sec_earnings(p, s):
     if p["lang"] == "es":
@@ -852,7 +852,7 @@ def sec_earnings(p, s):
         note = "Earnings figures are estimates only and are not guaranteed. Actual income will vary based on individual effort, hours worked, location and market conditions."
     cards = "".join('<div class="earn-card%s rv"><div class="earn-yr">%s</div><div class="earn-amt">%s</div><p>%s</p></div>'
                     % (" mid" if mid else "", yr, amt, d) for yr, amt, d, mid in rows)
-    return '<section class="sec sec-alt bg-hero"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
+    return '<section class="sec sec-alt sec-photo sec--earnings"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
 
 def sec_location(p, s):
     L = p["loc"]; c = L["campus"]; es = p["lang"] == "es"
@@ -948,7 +948,7 @@ def sec_faq(p, s):
                   '<h3 style="font-size:1rem;font-weight:600;margin:0">%s</h3><span class="chev">%s</span></button>'
                   '<div class="acc-body"><p style="color:var(--ink-soft);font-size:.95rem">%s</p></div></div>'
                   % (" open" if i == 1 else "", i, q, icon("chev",18), a))
-    return ('<section class="sec sec-alt" id="faq"><div class="container rv" style="max-width:880px">'
+    return ('<section class="sec sec-alt sec-photo sec--faq" id="faq"><div class="container rv" style="max-width:880px">'
             '<span class="eyebrow">%s</span><h2>%s</h2><div class="acc">%s</div></div></section>' % (eb, h, items))
 
 def sec_videos(p, s, pre):
@@ -960,7 +960,7 @@ def sec_videos(p, s, pre):
         cards += ('<div class="rv"><button class="yt" data-yt="%s" aria-label="Play video">'
                   '<img loading="lazy" src="https://i.ytimg.com/vi/%s/hqdefault.jpg" alt="%s">'
                   '<span class="play"></span></button><p class="yt-cap">%s</p></div>' % (vid, vid, cap[p["lang"]], cap[p["lang"]]))
-    return ('<section class="sec"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div>'
+    return ('<section class="sec sec-photo sec--videos"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div>'
             '<div class="videos">%s</div></div></section>' % (eb, h, cards))
 
 def sec_gallery(p, s, pre):
@@ -987,7 +987,7 @@ def sec_gallery(p, s, pre):
     _alts = _alts_es if es else _alts_en
     imgs = "".join('<a href="%sgallery.html"><img loading="lazy" width="800" height="600" src="%sassets/img/%s" alt="%s"></a>'
                    % (pre, pre, g, _alts[i % len(_alts)]) for i, g in enumerate(GALLERY))
-    return ('<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2>'
+    return ('<section class="sec sec-alt sec-photo sec--gallery"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2>'
             '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
             '</div></section>' % (eb, h, imgs, pre, more))
 
@@ -1157,7 +1157,7 @@ def sec_pills(p, s):
                     for (te, ts, se, ss) in pills)
     eb = "Por Qué ABI" if es else "Why ABI"
     h2 = "Construido para que empieces a trabajar" if es else "Built to get you working"
-    return '<section class="sec bg-hero"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="feature-grid">%s</div></div></section>' % (eb, h2, cells)
+    return '<section class="sec sec-photo sec--pills"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="feature-grid">%s</div></div></section>' % (eb, h2, cells)
 
 def sec_skills(p, s):
     es = p["lang"] == "es"
@@ -1208,7 +1208,7 @@ def sec_zero(p, s):
     pp = ("Ya sea que empieces de cero, cambies de carrera o tengas algo de experiencia — te entrenamos desde principiante hasta profesional licenciado. Solo necesitas las ganas de triunfar."
           if es else
           "Whether you're starting from zero, switching careers, or have some background — we train you from beginner to licensed professional. All you need is the drive to succeed.")
-    return ('<section class="sec zero-sec bg-hero"><div class="container">'
+    return ('<section class="sec zero-sec sec-photo sec--zero"><div class="container">'
             '<div class="rv zero-head"><span class="eyebrow">%s</span><h2 class="zero-title">%s</h2><p class="lead">%s</p></div>'
             '<div class="zero-grid">%s</div></div></section>' % (eb, h2, pp, cells))
 
