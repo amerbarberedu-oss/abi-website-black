@@ -169,9 +169,48 @@
       });
   }
 
-  function open() {
-    panel.hidden = false;
-    fab.classList.add("is-open");
+  // v12.4: pre-chat contact gate — name/email/phone before any Q&A
+  var contactSubmitted = false;
+  try { contactSubmitted = !!sessionStorage.getItem("abibot-contact"); } catch (e) {}
+
+  function renderContactGate() {
+    var b = document.createElement("div");
+    b.className = "abibot-gate";
+    b.innerHTML =
+      '<p class="abibot-gate-h">' + (ES
+        ? "Hola 👋 Antes de empezar, comparte tus datos de contacto:"
+        : "Hi 👋 Before we start, please share your contact info:") + '</p>' +
+      '<form class="abibot-gate-form" novalidate>' +
+        '<input type="text" name="name" required placeholder="' + (ES ? "Nombre completo" : "Full name") + '" autocomplete="name">' +
+        '<input type="email" name="email" required placeholder="' + (ES ? "Correo electrónico" : "Email") + '" autocomplete="email">' +
+        '<input type="tel" name="phone" required placeholder="' + (ES ? "Teléfono" : "Phone") + '" autocomplete="tel">' +
+        '<button type="submit" class="abibot-gate-btn">' + (ES ? "Comenzar el chat" : "Start chat") + '</button>' +
+        '<p class="abibot-gate-note">' + (ES
+          ? "Al enviar aceptas recibir SMS o emails de ABI. Pueden aplicar tarifas."
+          : "By submitting you agree to receive SMS or emails from ABI. Rates may apply.") + '</p>' +
+      '</form>';
+    log.appendChild(b);
+    var gf = b.querySelector("form");
+    gf.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = {
+        name: gf.name.value.trim(),
+        email: gf.email.value.trim(),
+        phone: gf.phone.value.trim(),
+        ts: new Date().toISOString(),
+        page: location.pathname
+      };
+      if (!data.name || !data.email || !data.phone) return;
+      try { sessionStorage.setItem("abibot-contact", JSON.stringify(data)); } catch (e) {}
+      contactSubmitted = true;
+      b.remove();
+      form.style.display = "";
+      chipsEl.style.display = "";
+      startChat();
+    });
+  }
+
+  function startChat() {
     if (!greeted) {
       greeted = true;
       add("bot", GREET);
@@ -183,6 +222,19 @@
       }, 900);
     }
     setTimeout(function () { input.focus(); }, 120);
+  }
+
+  function open() {
+    panel.hidden = false;
+    fab.classList.add("is-open");
+    if (!contactSubmitted) {
+      form.style.display = "none";
+      chipsEl.style.display = "none";
+      if (!log.querySelector(".abibot-gate")) renderContactGate();
+    } else {
+      form.style.display = "";
+      startChat();
+    }
   }
   function close() { panel.hidden = true; fab.classList.remove("is-open"); }
 

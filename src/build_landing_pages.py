@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=82">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=87">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -587,8 +587,8 @@ def header(p, s, pre):
       <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
-    <a class="header-cta" href="#reserve">Become a Barber</a>
-    <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <div class="hdr-cta-group">%s<a class="header-cta" href="#reserve">Become a Barber</a></div>
+    <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
 </header>
@@ -596,7 +596,7 @@ def header(p, s, pre):
   <div class="urgency-flame">%s</div>
   <div class="urgency-sub">%s</div>
 </div>
-""" + campusbar) % (s["topbar"], tbcalls, home, items, lt, drawer, u1, u2)
+""") % (s["topbar"], tbcalls, home, items, lt, drawer, u1, u2)
 
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
@@ -657,11 +657,9 @@ def hero(p, s, pre):
     </div>
     %s
   </div>
-</section>
-<section class="trust"><div class="container trust-in">%s</div></section>""" % (
+</section>""" % (
         p["hero_img"],
-        p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s),
-        "".join('<div class="trust-item">%s<span>%s</span></div>' % (icon(i,30), t) for i, t in s["trust"]))
+        p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s))
 
 TICKER = {
  "en": ["Classic Tapers","Low Fades","Mid Fades","High Fades","Razor Lineups","Hot Towel Shaves","Pompadours","Beard Trims","Shape Ups","Caesars","Flat Tops","High-Top Fades","Mohawks","Blowouts"],
@@ -1073,7 +1071,7 @@ def footer(p, s, pre):
 <script src="/assets/js/effects.js?v=32" defer></script>
 <script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
-<script src="/assets/js/chatbot.js?v=2" defer></script>
+<script src="/assets/js/chatbot.js?v=3" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],

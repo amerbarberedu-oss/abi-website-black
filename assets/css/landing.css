@@ -1932,3 +1932,34 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 @media (max-width:560px){
   .abibot{right:12px;bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 }
+
+/* ============================================================
+   v12.4 — surgical client edits: kill campusbar+trust-strip,
+   EN|ES toggle besides Become-a-Barber on all viewports, chatbot gate
+   ============================================================ */
+.campusbar,.campusbar-in,.campus-card,.trust-strip,section.trust{display:none!important}
+
+.hdr-cta-group{display:inline-flex;align-items:center;gap:.55rem;flex-shrink:0;margin-left:auto}
+.hdr-cta-group .lang-toggle{display:inline-flex!important;flex-shrink:0}
+@media (min-width:1200px){
+  .hdr-cta-group{margin-left:0}
+  .hdr-cta-group .header-cta{display:inline-flex!important;font-size:.78rem;padding:.5rem 1rem;max-width:170px;white-space:nowrap}
+}
+@media (max-width:1199px){
+  .hdr-cta-group .header-cta{display:none!important}
+  .hdr-cta-group{margin-left:auto;margin-right:.3rem}
+}
+@media (max-width:420px){
+  .hdr-cta-group .lang-toggle{font-size:.7rem}
+  .hdr-cta-group .lang-toggle a{padding:.32rem .5rem}
+}
+
+/* AI chatbot pre-chat gate — collect contact info before any Q&A */
+.abibot-gate{background:linear-gradient(135deg,#0a1245,#1322a8);color:#fff;padding:1rem;border-radius:14px;margin:.4rem 0;box-shadow:0 4px 18px rgba(8,12,42,.35)}
+.abibot-gate-h{margin:0 0 .8rem;font-size:.94rem;font-weight:600;line-height:1.4;color:#fff}
+.abibot-gate-form{display:flex;flex-direction:column;gap:.55rem}
+.abibot-gate-form input{border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.96);color:#0a1020;border-radius:10px;padding:.65rem .9rem;font-size:.92rem;outline:none}
+.abibot-gate-form input:focus{border-color:#7fd9ff;box-shadow:0 0 0 3px rgba(127,217,255,.28)}
+.abibot-gate-btn{background:#7fd9ff;color:#0a1020;border:0;border-radius:999px;padding:.7rem 1.1rem;font-weight:800;cursor:pointer;margin-top:.25rem;transition:filter .2s}
+.abibot-gate-btn:hover{filter:brightness(1.08)}
+.abibot-gate-note{margin:.5rem 0 0;font-size:.72rem;line-height:1.4;color:rgba(255,255,255,.78)}

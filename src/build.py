@@ -65,7 +65,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=82">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=87">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -89,30 +89,15 @@ TEMPLATE = """<!DOCTYPE html>
       <img class="logo-img" src="{root}assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a></nav>
-    <a class="header-cta" href="{root}contact.html">Become a Barber</a>
-    <div class="hdr-right">{langtoggle}<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <div class="hdr-cta-group">{langtoggle}<a class="header-cta" href="{root}contact.html">Become a Barber</a></div>
+    <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
-<div class="campusbar"><div class="campusbar-in">
-<a class="campus-card" href="{root}contact.html#manhattan"><span class="campus-info"><span class="campus-name">Manhattan Campus</span><span class="campus-addr">48 West 39th Street, New York, NY 10018</span><span class="campus-next">Next Start: July</span></span></a>
-<a class="campus-card" href="{root}contact.html#bronx"><span class="campus-info"><span class="campus-name">Bronx Campus</span><span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span><span class="campus-next">Next Start: July</span></span></a>
-</div></div>
 
 <main id="main">
 {body}
 </main>
-
-<section class="trust-strip" aria-label="Why choose ABI">
-  <div class="wrap">
-    <div class="trust-item"><strong data-count="30" data-suffix="+">30+</strong><span>Years of Experience</span></div>
-    <div class="trust-item"><strong data-count="10000" data-suffix="+">10,000+</strong><span>Graduates Trained</span></div>
-    <div class="trust-item"><strong>NYS</strong><span>Licensed Barber Program</span></div>
-    <div class="trust-item"><strong data-count="100" data-suffix="%">100%</strong><span>Hands-On Training</span></div>
-    <div class="trust-item"><strong>2</strong><span>Manhattan &amp; Bronx Campuses</span></div>
-    <div class="trust-item"><strong>$150/wk</strong><span>Flexible Payment Plans</span></div>
-  </div>
-</section>
 
 <section class="cta-band">
   <div class="wrap">
@@ -228,7 +213,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=32" defer></script>
 <script src="{root}assets/js/landing.js?v=32" defer></script>
 <script src="{root}assets/js/upgrade.js?v=2" defer></script>
-<script src="{root}assets/js/chatbot.js?v=2" defer></script>
+<script src="{root}assets/js/chatbot.js?v=3" defer></script>
 </body>
 </html>
 """
