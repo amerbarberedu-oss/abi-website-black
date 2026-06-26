@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=93">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=94">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -555,6 +555,14 @@ def header(p, s, pre):
                       '<span class="nav-drop-menu"><a href="%s%s">%s</a><a href="%sschedules.html">%s</a></span></span>'
                       % (pre, target, label, pre, target, label, pre, sch_lbl))
             drawer += '<a href="%s%s">%s</a><a href="%sschedules.html">%s</a>' % (pre, target, label, pre, sch_lbl)
+        elif label in ("Jobs", "Empleos"):
+            res_lbl = "Recursos" if lang == "es" else "Resources"
+            items += ('<span class="nav-drop"><a href="%s%s" class="nav-drop-trigger">%s ▾</a>'
+                      '<span class="nav-drop-menu"><a href="%s%s">%s</a><a href="%sresources.html">%s</a></span></span>'
+                      % (pre, target, label, pre, target, label, pre, res_lbl))
+            drawer += '<a href="%s%s">%s</a><a href="%sresources.html">%s</a>' % (pre, target, label, pre, res_lbl)
+        elif label in ("Resources", "Recursos"):
+            continue
         else:
             items += '<a href="%s%s">%s</a>' % (pre, target, label)
             drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
