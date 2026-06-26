@@ -507,7 +507,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=88">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=89">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -593,8 +593,8 @@ def header(p, s, pre):
       <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
     <nav class="mainnav" aria-label="Main">%s</nav>
-    <div class="hdr-cta-group"><a class="header-cta" href="#reserve">Become a Barber</a>%s</div>
-    <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <a class="header-cta" href="#reserve">Become a Barber</a>
+    <div class="hdr-right">%s<button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
 </header>
