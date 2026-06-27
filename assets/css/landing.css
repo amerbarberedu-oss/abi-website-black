@@ -1752,12 +1752,23 @@ body.page-splash .sec--faq{
 @media (min-width:1200px){
   header.hdr nav.mainnav{display:flex!important;flex-wrap:nowrap;justify-content:center;align-items:center;
     gap:1.15rem;border-top:1px solid var(--line);padding:.7rem 1rem;background:#fff}
-  header.hdr nav.mainnav>a{font-size:.92rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    color:#0c1020;white-space:nowrap;padding:.25rem .1rem;position:relative;transition:color .2s ease}
-  header.hdr nav.mainnav>a:hover{color:var(--blue)}
-  header.hdr nav.mainnav>a::after{content:"";position:absolute;left:0;right:0;bottom:-.35rem;height:2px;
+  /* v16.1 — Jobs and FAQs are wrapped in <span class="nav-drop"> so the direct-child
+     selector misses them. Apply the SAME look to the nav-drop trigger too. */
+  header.hdr nav.mainnav>a,
+  header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:.92rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:#0c1020;white-space:nowrap;padding:.25rem .1rem;position:relative;transition:color .2s ease;
+    text-decoration:none;display:inline-block}
+  header.hdr nav.mainnav>a:hover,
+  header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger:hover{color:var(--blue)}
+  header.hdr nav.mainnav>a::after,
+  header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger::after{
+    content:"";position:absolute;left:0;right:0;bottom:-.35rem;height:2px;
     background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
-  header.hdr nav.mainnav>a:hover::after,header.hdr nav.mainnav>a[aria-current="page"]::after{transform:scaleX(1)}
+  header.hdr nav.mainnav>a:hover::after,
+  header.hdr nav.mainnav>a[aria-current="page"]::after,
+  header.hdr nav.mainnav>.nav-drop:hover>.nav-drop-trigger::after,
+  header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger[aria-current="page"]::after{transform:scaleX(1)}
   header.hdr .hamburger{display:none!important}
 }
 @media (max-width:1199px){
