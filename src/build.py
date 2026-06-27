@@ -70,7 +70,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=120">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=122">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -542,14 +542,14 @@ PAGES = [
      "en", []),
     ("haircuts.html", "haircuts.html",
      "$3 Student Haircuts — Manhattan & Bronx | American Barber Institute",
-     "Get a great cut for just $3 at American Barber Institute. Student barbers, supervised by licensed instructors, at our Manhattan and Bronx locations. Fades, tapers, beard trims and more.",
+     "Great cuts for $3 at ABI. Student barbers supervised by licensed instructors at our Manhattan and Bronx locations. Fades, tapers, beard trims and more.",
      "en", []),
     ("faq.html", "faq.html",
      "Frequently Asked Questions | American Barber Institute",
      "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
      "en", ["FAQ_SCHEMA"]),
     ("schedules.html", "schedules.html",
-     "Class Start Dates & Federal Holiday Calendar | American Barber Institute",
+     "Class Schedules & Holiday Calendar | American Barber Institute",
      "Every upcoming class start date and federal-holiday closure for ABI's Manhattan and Bronx campuses through 2028.",
      "en", []),
     ("contact.html", "contact.html",
@@ -573,23 +573,23 @@ PAGES = [
      "ABI's NYS-licensed barber programs at our Manhattan & Bronx campuses: 500-Hour Master Barber, 50-Hour Barber Refresher and the 3-Hour Contagious Diseases course.",
      "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
-     "500-Hour Master Barber Program (4 Months) — Manhattan | American Barber Institute",
-     "Become a licensed Master Barber in NY in 4 months at our Manhattan campus (48 West 39th Street). Morning, afternoon or weekend schedules from $4,600 with weekly payment plans. NYS Board Exam prep & job placement.",
+     "500-Hour Master Barber Program — Manhattan | ABI NYC",
+     "Become a licensed Master Barber in 4 months at our Manhattan campus. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans.",
      "en", [course_schema("500 Hour Master Barber Program",
         "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/500-hour-master-barber-bronx.html", "program-500-bronx.html",
-     "500-Hour Master Barber Program — Bronx | American Barber Institute",
-     "Become a licensed Master Barber at ABI's Bronx campus (121 Westchester Square). 500-hour hands-on training, full-time & weekend schedules, payment plans, job placement and bilingual instruction. Se habla español.",
+     "500-Hour Master Barber Program — Bronx | ABI NYC",
+     "Become a licensed Master Barber at ABI's Bronx campus. 500-hour hands-on training, flexible schedules, payment plans, job placement and bilingual instruction.",
      "en", [course_schema("500 Hour Master Barber Program — Bronx",
         "Four-month NYS-licensed master barber training at the Bronx campus with bilingual instruction, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/50-hour-barber-refresher.html", "program-50.html",
-     "50-Hour Barber Refresher Program (2 Weeks) — Manhattan | American Barber Institute",
-     "Sharpen your skills and prepare for the NY State Board Exam in 2 weeks at our Manhattan campus. For cosmetologists, hairdressers and barber apprentices. $1,500 with split payments.",
+     "50-Hour Barber Refresher (2 Weeks) — Manhattan | ABI",
+     "Sharpen your skills and prep for the NY State Board Exam in 2 weeks at our Manhattan campus. For cosmetologists, hairdressers and barber apprentices.",
      "en", [course_schema("50 Hour Barber Refresher Program",
         "Two-week refresher preparing licensed professionals for the New York State Barbering Licensing Examination.", 50, 2, 1500)]),
     ("programs/contagious-diseases.html", "program-cd.html",
-     "3-Hour Contagious Diseases Program (Home Study) — $100 | American Barber Institute",
-     "NY-required Transmission of Contagious Diseases course for barber operators and apprentices — offered at both Manhattan & Bronx campuses. Complete by mail for $100 — booklet, exam and two certificates.",
+     "3-Hour Contagious Diseases Home Study — $100 | ABI",
+     "NY-required Contagious Diseases course for barber operators and apprentices. Complete by mail for $100 — booklet, exam and two certificates.",
      "en", [course_schema("3 Hours Contagious Diseases Program",
         "Home-study course on transmission of contagious diseases, sanitation and sterilization required for NY barber licensure.", 3, 1, 100)]),
     ("blog/index.html", "blog-index.html",
@@ -608,7 +608,7 @@ if os.path.exists(_blog_manifest):
         _body = open(_partial_path, encoding='utf-8').read() if os.path.exists(_partial_path) else None
         PAGES.append((
             f"blog/{_p['slug']}.html", _p['partial'],
-            f"{_p['title']} | American Barber Institute Blog",
+            f"{_p['title']} | ABI Blog",
             f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
             "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
                                   slug=_p['slug'], body=_body)]))
@@ -673,8 +673,15 @@ def build():
             else:
                 body = _byline + body
         depth = out.count('/')
-        root = '../' * depth
-        canonical = f"{SITE_URL}/{out}".replace('/index.html', '/').replace('.html', '')
+        # 404.html is served by Vercel for any unknown URL — at any depth — so its
+        # asset/nav references MUST be absolute (root = '/') not relative.
+        root = '/' if out == '404.html' else ('../' * depth)
+        if out == '404.html':
+            # 404 must not be indexed and must not claim a canonical URL of its own
+            # (avoids soft-404 signals). Point self-referential meta at the home.
+            canonical = f"{SITE_URL}/"
+        else:
+            canonical = f"{SITE_URL}/{out}".replace('/index.html', '/').replace('.html', '')
         resolved = []
         for s in schemas:
             if s == FAQ_SCHEMA_PLACEHOLDER:
@@ -777,7 +784,12 @@ def build():
         if o in ('faq.html', 'schedules.html'):                   return ('0.7', 'monthly')
         return ('0.6', 'monthly')
     def _abs(o):
-        return f'{SITE_URL}/{o}'.replace('/index.html', '/').replace('.html', '')
+        # Vercel cleanUrls + trailingSlash:false → URLs are bare (no .html, no /).
+        # Root paths (index.html, es/index.html) are special-cased to /  and /es .
+        if o == 'index.html': return SITE_URL + '/'
+        if o == 'es/index.html': return SITE_URL + '/es'
+        u = f'{SITE_URL}/{o}'.replace('/index.html', '').replace('.html', '')
+        return u
     url_blocks = []
     for o in written:
         loc = _abs(o)
@@ -792,7 +804,7 @@ def build():
         # hreflang annotations only where both EN and ES counterparts exist.
         if o == 'index.html' or o == 'es/index.html':
             block.append(f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}/"/>')
-            block.append(f'    <xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}/es/"/>')
+            block.append(f'    <xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}/es"/>')
             block.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}/"/>')
         block.append('  </url>')
         url_blocks.append('\n'.join(block))
