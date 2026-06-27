@@ -320,6 +320,17 @@ html.js .rv.in{opacity:1;transform:none}
   .hero-grad{background:linear-gradient(180deg,rgba(8,10,16,.85) 0%,rgba(8,10,16,.55) 100%)}
   .hdr-phones .phone-pill span.lbl{display:none}
 }
+/* v16.2 — Mobile-only hero photo (per client mockup): use the bright white-walled
+   barbershop portrait, override the desktop hero-bg image. */
+@media (max-width:768px){
+  .hero .hero-bg{
+    background-image:url('/assets/img/home-hero-mobile.jpg')!important;
+    background-position:center 25%!important;
+    background-size:cover!important;
+  }
+  /* lighter scrim so the bright clean photo reads clearly behind the headline */
+  .hero .hero-grad{background:linear-gradient(180deg,rgba(8,10,16,.10) 0%,rgba(8,10,16,.35) 55%,rgba(8,10,16,.78) 100%)!important}
+}
 @media (max-width:840px){
   .topbar{font-size:.68rem;letter-spacing:.1em}
   .btn-call{display:none}
