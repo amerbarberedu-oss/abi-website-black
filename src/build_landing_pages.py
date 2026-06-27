@@ -583,7 +583,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=111">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=116">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -741,18 +741,20 @@ def hero(p, s, pre):
     h1b = '<span class="accent">%s</span><br>' % p["h1b"] if p["h1b"] else ""
     # v14.1: in-hero countdown — placed inside hero-copy under features (left side, under the chips)
     es = p["lang"] == "es"
-    h_cd_top = "Próxima Fecha de Inicio" if es else "Next Starting Date"
+    h_cd_top = "Próxima Fecha de Inicio:" if es else "Next Starting Date:"
     cd_sub   = ("Las clases nuevas comienzan el primer lunes de cada mes."
                 if es else
-                "New Classes Begin On The First Monday Of Each Month.")
-    _wk = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."][NEXT_MON.weekday()]
+                "New classes begin the first Monday of each month.")
+    # v16.0 — full weekday name + sentence-case sub line. Title + date render
+    # as a single line ("Next Starting Date: Monday, July 6, 2026") via flex.
+    _wk = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][NEXT_MON.weekday()]
     _mo = NEXT_MON.strftime("%B")
-    cd_date = "%s %s %d, %d" % (_wk, _mo, NEXT_MON.day, NEXT_MON.year)
+    cd_date = "%s, %s %d, %d" % (_wk, _mo, NEXT_MON.day, NEXT_MON.year)
     cd_cells = "".join('<div class="hero-cd-cell"><b data-cd-%s>%s</b><span>%s</span></div>'
                        % (k, CD_VALS[k], lbl) for k, lbl in zip("dhms", s["count_lbl"]))
     hero_cd = ('<div class="hero-cd" data-countdown>'
-               '<h2 class="hero-cd-h">%s</h2>'
-               '<p class="hero-cd-date">%s</p>'
+               '<h2 class="hero-cd-h"><span class="hero-cd-h-label">%s</span> '
+               '<span class="hero-cd-h-date">%s</span></h2>'
                '<p class="hero-cd-sub">%s</p>'
                '<div class="hero-cd-grid">%s</div>'
                '</div>') % (h_cd_top, cd_date, cd_sub, cd_cells)
@@ -1299,7 +1301,8 @@ def sec_includes(p, s):
     lis = "".join("<li>%s</li>" % x for x in items)
     eb = "Lo que recibes" if es else "What you get"
     h2 = "Lo que incluye cada programa" if es else "What's included in every program"
-    return '<section class="home-banner home-banner--alt" style="background-image:linear-gradient(180deg,rgba(8,10,18,.74) 0%%,rgba(8,10,18,.86) 100%%),url(\'/assets/img/home-hero.jpg\');background-position:center 85%%,center 85%%;background-size:cover,cover;background-repeat:no-repeat,no-repeat"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
+    # v16.0 — clean light-blue/white banner, no background photo.
+    return '<section class="home-banner home-banner--alt" style="background:linear-gradient(135deg,#eaf2ff 0%%,#dfeaff 55%%,#ffffff 100%%);color:#0a1020"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
 
 # ── ported from the 10-site DNA: AI-logo brand video + showcase B-roll (live CDN pull) ──
 CDN = "https://assets-lilac-five.vercel.app/"
@@ -1343,6 +1346,8 @@ def sec_brandband(p, s, pre):
                "Job-placement assistance on graduation",
                "Two NYC campuses — Manhattan and the Bronx"])
     bullets = "".join('<li><span class="abi-reel__bullet-mark" aria-hidden="true"></span><span>%s</span></li>' % p_ for p_ in points)
+    # v16.0 — twin portrait testimonial videos flanking the copy block.
+    # Desktop layout: video | copy | video. Mobile: video, copy, video (natural DOM order).
     return ('<section class="abi-reel" data-reveal>'
             '<div class="abi-reel__frame">'
             '<div class="abi-reel__media">'
@@ -1356,6 +1361,12 @@ def sec_brandband(p, s, pre):
             '<h2 class="abi-reel__title">%s</h2>'
             '<p class="abi-reel__sub">%s</p>'
             '<ul class="abi-reel__points">%s</ul>'
+            '</div>'
+            '<div class="abi-reel__media">'
+            '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
+            'src="/assets/videos/Video-124.mp4" '
+            'poster="/assets/img/video-124-poster.jpg" '
+            'aria-label="ABI student testimonial video — second voice"></video>'
             '</div>'
             '</div>'
             '</section>') % (eb, h, sub, bullets)

@@ -537,24 +537,21 @@ html,body{overflow-x:clip}
 .trust-item strong{transition:transform .2s ease}
 .trust-strip .trust-item:hover strong{transform:scale(1.08)}
 
-/* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
-/* Per-page background image (different best photo per page) */
-body{background:#eef2f7}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
-/* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
-.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
-/* keep hero text crisp over the clearer photo */
-.page-hero h1{text-shadow:0 2px 16px rgba(0,0,0,.55)}
-.page-hero p,.page-hero .crumbs{text-shadow:0 1px 10px rgba(0,0,0,.5)}
-/* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
+/* ═══════════ v16.0 — Clean white background, light-blue accents ═══════════
+   Per client direction: remove ALL background photographs site-wide.
+   Body is solid white. Section photos and gallery photos remain in their
+   own cards/grids. Page-hero is now a light-blue → white gradient (no photo). */
+body{background:#ffffff}
+body::before{content:none!important;background:none!important}
+/* Page-hero: light-blue/white gradient banner, dark navy text (no photo) */
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#eaf2ff 0%,#dfeaff 55%,#ffffff 100%);color:#0a1020;padding:3.4rem 1rem 3rem;border:none;border-bottom:1px solid #e3ecf8}
+.page-hero h1{color:#0a1020!important;text-shadow:none}
+.page-hero p,.page-hero .crumbs,.page-hero .crumbs a,.page-hero a{color:#3a4763!important;text-shadow:none}
+.page-hero .crumbs a{opacity:1}
 @media (max-width:768px){
   body{background-attachment:scroll!important}
-  /* near-uniform dark scrim on phones so full-width hero text is always readable */
-  .page-hero{background-attachment:scroll;background-image:linear-gradient(180deg,rgba(8,10,14,.84),rgba(8,10,14,.68)),var(--page-bg,url(../img/abi-students-107.jpg))}
+  .page-hero{background:linear-gradient(135deg,#eaf2ff 0%,#dfeaff 55%,#ffffff 100%)}
 }
-.page-hero h1,.page-hero p,.page-hero a{color:#fff}
-.page-hero .crumbs a{color:#fff;opacity:.85}
-.page-hero h1{text-shadow:0 2px 18px rgba(0,0,0,.35)}
 /* Glassmorphism — header + cards */
 .hdr{background:rgba(255,255,255,.62)!important;backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border-bottom:1px solid rgba(255,255,255,.5)}
 .mainnav{background:rgba(255,255,255,.45)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
@@ -1405,15 +1402,16 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
 /* ============================================================================
    v10.6 — home full-width background-image banners (static, group photos, text overlaid)
    ========================================================================== */
+/* v16.0 — light-blue/white banner (was dark photo) */
 .home-banner{position:relative;background-size:cover;background-position:center center;
-  padding:clamp(3.4rem,8vw,6rem) 0;color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+  padding:clamp(3.4rem,8vw,6rem) 0;color:#0a1020;border-top:1px solid #e3ecf8}
 .home-banner__in{max-width:780px}
-.home-banner h2{color:#fff!important;font-size:clamp(1.75rem,3.6vw,2.7rem);letter-spacing:-.012em;margin:.2rem 0 .6rem}
-.home-banner .eyebrow{color:#bcd0ff!important}
-.home-banner .lead,.home-banner .prose,.home-banner .prose p,.home-banner .prose li,.home-banner p{color:#eef1f8!important}
+.home-banner h2{color:#0a1020!important;font-size:clamp(1.75rem,3.6vw,2.7rem);letter-spacing:-.012em;margin:.2rem 0 .6rem}
+.home-banner .eyebrow{color:#1b2fd9!important;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.home-banner .lead,.home-banner .prose,.home-banner .prose p,.home-banner .prose li,.home-banner p{color:#3a4763!important}
 .home-banner .prose ul{margin:1.1rem 0 0;padding:0;list-style:none;display:grid;gap:.55rem}
 .home-banner .prose li{position:relative;padding-left:1.7rem;font-weight:500}
-.home-banner .prose li::before{content:"\2713";position:absolute;left:0;top:0;color:#8fb0ff;font-weight:700}
+.home-banner .prose li::before{content:"\2713";position:absolute;left:0;top:0;color:#1b2fd9;font-weight:700}
 
 /* partner photo (Untouchable Cutz fixed: was an invisible white logo) */
 .partner-media:not(.partner-logo) img{width:100%;height:100%;object-fit:cover}
@@ -1437,19 +1435,20 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
   -webkit-backdrop-filter:blur(8px) saturate(1.05);
   box-shadow:0 18px 44px rgba(0,0,0,.4);
 }
+/* v16.0 — title + date render inline on one row, wrapping gracefully on mobile */
 .hero-cd-h{
-  margin:0;
+  margin:0 0 .5rem;
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(1.4rem,2.6vw,1.95rem);font-weight:400;line-height:1.1;
+  font-size:clamp(1.15rem,2.2vw,1.7rem);font-weight:400;line-height:1.2;
   color:#fff!important;
   text-shadow:0 1px 10px rgba(0,0,0,.45);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem;
 }
-.hero-cd-date{
-  margin:.15rem 0 .55rem;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(1.3rem,2.5vw,1.85rem);font-weight:400;line-height:1.1;
-  color:#5fb8ff!important;
-  text-shadow:0 1px 10px rgba(0,0,0,.4);
+.hero-cd-h-label{color:#fff!important;font-weight:400}
+.hero-cd-h-date{color:#5fb8ff!important;font-weight:500;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+@media (max-width:520px){
+  .hero-cd-h{font-size:clamp(1rem,4.2vw,1.25rem);gap:.3rem;justify-content:flex-start}
+  .hero-cd-h-date{white-space:nowrap}
 }
 .hero-cd-sub{
   margin:0 0 1rem;
@@ -1517,20 +1516,20 @@ section.dark h2,section.dark h3,section.dark p,section.dark li,
   border:1px solid rgba(255,255,255,.6)!important;
 }
 
-/* ── Per-section unique photo (homepage only) ──────────────────────────────
-   BALANCED v15.0.5: a soft LIGHT wash (40→55% white) is layered over each
-   photo so headlines and section text sitting directly on the photo stay
-   readable, while the photo still shows through clearly (~55%). Not dark,
-   not fully bright — the middle ground the user asked for. */
-body.page-splash .sec--pills{    background-image:linear-gradient(180deg,rgba(255,255,255,.40) 0%,rgba(255,255,255,.55) 100%),url("/assets/img/gallery/cut-05.jpg")!important; }
-body.page-splash .sec--steps{    background-image:linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.58) 100%),url("/assets/img/gallery/shop-02.jpg")!important; }
-body.page-splash .sec--zero{     background-image:linear-gradient(180deg,rgba(255,255,255,.40) 0%,rgba(255,255,255,.55) 100%),url("/assets/img/gallery/cut-03.jpg")!important; background-position:center 35%!important; }
-body.page-splash .sec--earnings{ background-image:linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.58) 100%),url("/assets/img/gallery/cut-08.jpg")!important; }
-body.page-splash .sec--tuition{  background-image:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.60) 100%),url("/assets/img/abi-nyc-013.jpg")!important; }
-body.page-splash .sec--videos{   background-image:linear-gradient(180deg,rgba(255,255,255,.40) 0%,rgba(255,255,255,.55) 100%),url("/assets/img/abi-students-217.jpg")!important; background-position:center 25%!important; }
-body.page-splash .sec--gallery{  background-image:linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.58) 100%),url("/assets/img/gallery/shop-03.jpg")!important; }
-body.page-splash .sec--testi{    background-image:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.60) 100%),url("/assets/img/about.jpg")!important; }
-body.page-splash .sec--faq{      background-image:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.60) 100%),url("/assets/img/abi-students-031.jpg")!important; }
+/* v16.0 — per-section background photos REMOVED. Clean white surface
+   throughout; cards and gallery photos remain. */
+body.page-splash .sec--pills,
+body.page-splash .sec--steps,
+body.page-splash .sec--zero,
+body.page-splash .sec--earnings,
+body.page-splash .sec--tuition,
+body.page-splash .sec--videos,
+body.page-splash .sec--gallery,
+body.page-splash .sec--testi,
+body.page-splash .sec--faq{
+  background-image:none!important;
+  background:#ffffff!important;
+}
 
 /* v13.7 — Haircuts hero: centered layout with periwinkle pill CALL button
    matching client screenshot 1:1 */
@@ -2176,12 +2175,14 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
    v13.2 — Student-voices reel section (portrait 9:16 testimonial video,
    uncropped, hover-to-play). Replaces old .abi-brandband band.
    ============================================================ */
+/* v16.0 — clean white card on white page, light-blue accents (was dark navy) */
 .abi-reel{
   position:relative;z-index:1;
   margin:3rem auto;width:min(1240px,94%);
-  background:linear-gradient(135deg,#05082a 0%,#0a1245 45%,#0f1a6e 100%);
+  background:#ffffff;
+  border:1px solid #e3ecf8;
   border-radius:22px;overflow:hidden;
-  box-shadow:0 22px 56px rgba(5,8,42,.55),0 2px 0 rgba(255,255,255,.10) inset;
+  box-shadow:0 12px 32px rgba(15,30,80,.08),0 2px 0 rgba(255,255,255,.65) inset;
 }
 .abi-reel__frame{
   display:grid;grid-template-columns:1fr;gap:1.4rem;
@@ -2255,13 +2256,15 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   box-shadow:none!important;
 }
 
-/* Desktop: video left, copy right */
+/* Desktop: video LEFT, copy CENTER, video RIGHT (v16.0 — twin testimonials) */
 @media (min-width:880px){
-  .abi-reel__frame{grid-template-columns:minmax(280px,360px) 1fr;gap:2rem;padding:1.6rem 2rem;align-items:center}
-  .abi-reel__media{margin:0;width:100%;max-width:360px}
-  .abi-reel__copy{text-align:left;padding:.4rem 0}
-  .abi-reel__points{margin:0}
-  .abi-reel__sub{margin:0 0 1rem}
+  .abi-reel__frame{
+    grid-template-columns:minmax(260px,320px) 1fr minmax(260px,320px);
+    gap:1.8rem;padding:1.6rem 2rem;align-items:center;
+  }
+  .abi-reel__media{margin:0;width:100%;max-width:320px}
+  .abi-reel__copy{text-align:center;padding:.4rem .6rem}
+  .abi-reel__points{margin:0 auto}
 }
 
 /* ============================================================
