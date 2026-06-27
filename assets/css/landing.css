@@ -320,16 +320,41 @@ html.js .rv.in{opacity:1;transform:none}
   .hero-grad{background:linear-gradient(180deg,rgba(8,10,16,.85) 0%,rgba(8,10,16,.55) 100%)}
   .hdr-phones .phone-pill span.lbl{display:none}
 }
-/* v16.2 — Mobile-only hero photo (per client mockup): use the bright white-walled
-   barbershop portrait, override the desktop hero-bg image. */
+/* v16.3 — Mobile hero (per client mockup): the bright white-walled barbershop
+   portrait shows at NATURAL aspect (538x800), anchored to the TOP of the hero,
+   spanning full mobile width. No stretching, no awkward cropping. Below the
+   photo the hero fades into solid dark navy so the headline overlay near the
+   photo's bottom reads cleanly. The kenburns pan is disabled on mobile so the
+   image stays put. */
 @media (max-width:768px){
+  .hero{background-color:#0a1020}
   .hero .hero-bg{
     background-image:url('/assets/img/home-hero-mobile.jpg')!important;
-    background-position:center 25%!important;
-    background-size:cover!important;
+    background-size:contain!important;          /* show whole image, no crop */
+    background-position:top center!important;   /* anchor at top */
+    background-repeat:no-repeat!important;
+    background-color:#0a1020;
+    animation:none!important;
+    transform:none!important;
   }
-  /* lighter scrim so the bright clean photo reads clearly behind the headline */
-  .hero .hero-grad{background:linear-gradient(180deg,rgba(8,10,16,.10) 0%,rgba(8,10,16,.35) 55%,rgba(8,10,16,.78) 100%)!important}
+  html.js .hero-bg{animation:none!important;transform:none!important}
+  /* Soft gradient: nearly transparent over the photo's top/middle, deepening to
+     solid dark at the bottom so the headline overlay sits readable on the
+     photo's lower portion. */
+  .hero .hero-grad{
+    background:linear-gradient(180deg,
+      rgba(8,10,16,.05) 0%,
+      rgba(8,10,16,.05) 50%,
+      rgba(8,10,16,.45) 75%,
+      rgba(8,10,16,.92) 95%,
+      #0a1020 100%
+    )!important;
+  }
+  /* Push hero copy down so the H1 overlays the bottom ~30% of the photo,
+     matching the mockup. Image height = 100vw * (800/538) ≈ 148.7vw; we want
+     copy to start around 65–70% down the image = ~100vw from the top. */
+  .hero-in{padding-top:0!important}
+  .hero-copy{padding-top:100vw!important}
 }
 @media (max-width:840px){
   .topbar{font-size:.68rem;letter-spacing:.1em}
