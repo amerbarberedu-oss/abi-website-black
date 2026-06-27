@@ -128,7 +128,17 @@
     }
 
     v.addEventListener("volumechange", syncBtn);
-    v.addEventListener("play", function () { syncBtn(); syncPlay(); });
+    v.addEventListener("play", function () {
+      /* v16.7 — exclusive playback for Student Voices: starting one testimonial
+       * pauses any other reel that's already playing. Like Instagram Reels —
+       * only one talks at a time. */
+      if (isReel) {
+        document.querySelectorAll("video.abi-reel__video").forEach(function (other) {
+          if (other !== v && !other.paused) other.pause();
+        });
+      }
+      syncBtn(); syncPlay();
+    });
     v.addEventListener("pause", function () { syncBtn(); syncPlay(); });
 
     syncBtn();
