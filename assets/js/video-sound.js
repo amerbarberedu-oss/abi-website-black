@@ -32,7 +32,12 @@
     v.setAttribute("playsinline", "");
     if (!v.hasAttribute("loop")) v.setAttribute("loop", "");
 
-    /* Sound button */
+    /* v16.6 — Student Voices testimonial videos use a dedicated click-to-play
+     * pattern (centre play/pause + corner mute) instead of hover-autoplay. They
+     * carry audio so they shouldn't ambush visitors when the cursor sweeps past. */
+    var isReel = host.matches("[data-abi-reel]") || v.classList.contains("abi-reel__video");
+
+    /* Sound button (corner) — added to every video */
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "vs-btn vs-muted";
@@ -46,6 +51,14 @@
       btn.innerHTML = muted ? SVG_MUTE : SVG_VOL;
       btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
     }
+    /* Centre play/pause button — exists in DOM for reel videos. Reflect state. */
+    var playBtn = isReel ? host.querySelector(".abi-reel__play") : null;
+    function syncPlay() {
+      if (!playBtn) return;
+      var playing = !v.paused && !v.ended;
+      host.classList.toggle("is-playing", playing);
+      playBtn.setAttribute("aria-label", playing ? "Pause video" : "Play video");
+    }
 
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -58,43 +71,68 @@
       syncBtn();
     });
 
-    /* Hover behavior: play + try to unmute (only succeeds after user interaction) */
-    function onEnter() {
-      if (window.__abiUserInteracted) {
-        v.muted = false;
-        v.volume = 1;
+    if (isReel) {
+      /* Reel videos: click toggles PLAY/PAUSE; first play unmutes if the user
+       * has interacted with the page (autoplay-with-sound policy). */
+      function togglePlay() {
+        if (v.paused) {
+          if (window.__abiUserInteracted) { v.muted = false; v.volume = 1; }
+          v.play().catch(function () {
+            /* If audio is still blocked, fall back to muted playback */
+            v.muted = true;
+            v.play().catch(function () {});
+          });
+        } else {
+          v.pause();
+        }
+        syncBtn();
+        syncPlay();
       }
-      v.play().then(syncBtn).catch(function () {
-        /* If audio blocked, fall back to muted autoplay */
-        v.muted = true;
-        v.play().then(syncBtn).catch(function () {});
+      if (playBtn) playBtn.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation(); togglePlay();
+      });
+      v.addEventListener("click", function (e) {
+        if (e.target === btn || btn.contains(e.target)) return;
+        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+        togglePlay();
+      });
+      /* Pause when the reel scrolls fully out of view so audio doesn't trail
+       * the visitor down the page. */
+      if (typeof IntersectionObserver !== "undefined") {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (!en.isIntersecting && !v.paused) v.pause(); });
+        }, { threshold: 0 }).observe(host);
+      }
+    } else {
+      /* All other site videos keep the original hover-autoplay UX. */
+      function onEnter() {
+        if (window.__abiUserInteracted) { v.muted = false; v.volume = 1; }
+        v.play().then(syncBtn).catch(function () {
+          v.muted = true;
+          v.play().then(syncBtn).catch(function () {});
+        });
+      }
+      function onLeave() { v.pause(); v.muted = true; syncBtn(); }
+      host.addEventListener("mouseenter", onEnter);
+      host.addEventListener("mouseleave", onLeave);
+      v.addEventListener("click", function (e) {
+        if (e.target === btn || btn.contains(e.target)) return;
+        if (v.paused) {
+          if (window.__abiUserInteracted) v.muted = false;
+          v.play().catch(function () {});
+        } else {
+          v.muted = !v.muted;
+        }
+        syncBtn();
       });
     }
-    function onLeave() {
-      v.pause();
-      v.muted = true;
-      syncBtn();
-    }
-    host.addEventListener("mouseenter", onEnter);
-    host.addEventListener("mouseleave", onLeave);
-
-    /* Touch / click on the video itself toggles play/sound */
-    v.addEventListener("click", function (e) {
-      if (e.target === btn || btn.contains(e.target)) return;
-      if (v.paused) {
-        if (window.__abiUserInteracted) v.muted = false;
-        v.play().catch(function () {});
-      } else {
-        v.muted = !v.muted;
-      }
-      syncBtn();
-    });
 
     v.addEventListener("volumechange", syncBtn);
-    v.addEventListener("play", syncBtn);
-    v.addEventListener("pause", syncBtn);
+    v.addEventListener("play", function () { syncBtn(); syncPlay(); });
+    v.addEventListener("pause", function () { syncBtn(); syncPlay(); });
 
     syncBtn();
+    syncPlay();
   }
 
   function scan() {

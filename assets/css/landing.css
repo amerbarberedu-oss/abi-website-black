@@ -2248,17 +2248,43 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   object-fit:contain;       /* show ENTIRE video — no cropping */
   display:block;background:#000;
 }
+/* v16.6 — Center play/pause control. Visible & large when paused (call to action),
+   smaller and semi-transparent while playing so it doesn't block the video — yet
+   still tappable to pause. Hover/touch restores full visibility. Matches the
+   Instagram / TikTok / X reel UX pattern. */
 .abi-reel__play{
-  position:absolute;inset:0;margin:auto;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:74px;height:74px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(127,217,255,.95);color:#0a1020;
+  background:rgba(255,255,255,.95);color:#0a1020;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 12px 32px rgba(0,0,0,.5);
-  transition:opacity .2s,transform .2s;
+  box-shadow:0 12px 32px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.05);
+  transition:opacity .25s ease,transform .25s ease,background .2s ease;
+  z-index:3;
 }
-.abi-reel__play svg{width:32px;height:32px;margin-left:4px}
-.abi-reel__media.is-playing .abi-reel__play{opacity:0;pointer-events:none;transform:scale(.85)}
-.abi-reel__media:hover .abi-reel__play{transform:scale(1.05)}
+.abi-reel__play:hover{background:#fff;transform:translate(-50%,-50%) scale(1.06)}
+.abi-reel__play:focus-visible{outline:3px solid #5fb8ff;outline-offset:3px}
+.abi-reel__play svg{width:32px;height:32px;fill:currentColor;pointer-events:none}
+.abi-reel__icon-play{margin-left:4px}        /* triangle is visually off-center, nudge */
+.abi-reel__icon-pause{display:none}
+.abi-reel__media.is-playing .abi-reel__icon-play{display:none}
+.abi-reel__media.is-playing .abi-reel__icon-pause{display:block}
+/* When playing, the button shrinks + fades so it doesn't block the picture.
+   Hover or touch brings it back to full visibility for an obvious pause control. */
+.abi-reel__media.is-playing .abi-reel__play{
+  width:54px;height:54px;
+  background:rgba(255,255,255,.55);
+  opacity:.85;
+}
+.abi-reel__media.is-playing .abi-reel__play:hover{
+  background:#fff;opacity:1;
+  transform:translate(-50%,-50%) scale(1.06);
+}
+/* Phones don't have hover — keep the playing-state button at a comfortable size */
+@media (hover:none){
+  .abi-reel__media.is-playing .abi-reel__play{
+    width:60px;height:60px;background:rgba(255,255,255,.78);opacity:.92;
+  }
+}
 
 /* v13.8 — Reel testimonial: ONE simple blue (#93c5fd) for all text.
    No gradients, no chip backgrounds, no glow — just clean readable blue. */

@@ -583,7 +583,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=122">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=123">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=1" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
@@ -1186,7 +1186,7 @@ def footer(p, s, pre):
 <script src="%sassets/js/landing.js?v=32" defer></script>
 <script src="/assets/js/upgrade.js?v=2" defer></script>
 <script src="/assets/js/chatbot.js?v=3" defer></script>
-<script src="/assets/js/video-sound.js?v=1" defer></script>
+<script src="/assets/js/video-sound.js?v=2" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], s["mbar_call"], s["mbar_text"], s["mbar_cta"],
@@ -1348,13 +1348,24 @@ def sec_brandband(p, s, pre):
     bullets = "".join('<li><span class="abi-reel__bullet-mark" aria-hidden="true"></span><span>%s</span></li>' % p_ for p_ in points)
     # v16.0 — twin portrait testimonial videos flanking the copy block.
     # Desktop layout: video | copy | video. Mobile: video, copy, video (natural DOM order).
+    # v16.6 — Each testimonial video gets:
+    #   • center play/pause button (Instagram/TikTok pattern)
+    #   • click anywhere on the video toggles play/pause and unmutes on first play
+    #   • the corner mute toggle is injected automatically by video-sound.js
+    PLAY_ICON = ('<svg class="abi-reel__icon-play" viewBox="0 0 24 24" aria-hidden="true">'
+                 '<path d="M8 5v14l11-7z"/></svg>')
+    PAUSE_ICON = ('<svg class="abi-reel__icon-pause" viewBox="0 0 24 24" aria-hidden="true">'
+                  '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>')
+    play_btn = ('<button class="abi-reel__play" type="button" aria-label="Play video">'
+                + PLAY_ICON + PAUSE_ICON + '</button>')
     return ('<section class="abi-reel" data-reveal>'
             '<div class="abi-reel__frame">'
-            '<div class="abi-reel__media">'
+            '<div class="abi-reel__media" data-abi-reel>'
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
             'src="/assets/videos/video-321.mp4" '
             'poster="/assets/img/video-321-poster.jpg" '
             'aria-label="ABI student testimonial video"></video>'
+            + play_btn +
             '</div>'
             '<div class="abi-reel__copy">'
             '<p class="abi-reel__kicker">%s</p>'
@@ -1362,11 +1373,12 @@ def sec_brandband(p, s, pre):
             '<p class="abi-reel__sub">%s</p>'
             '<ul class="abi-reel__points">%s</ul>'
             '</div>'
-            '<div class="abi-reel__media">'
+            '<div class="abi-reel__media" data-abi-reel>'
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
             'src="/assets/videos/Video-124.mp4" '
             'poster="/assets/img/video-124-poster.jpg" '
             'aria-label="ABI student testimonial video — second voice"></video>'
+            + play_btn +
             '</div>'
             '</div>'
             '</section>') % (eb, h, sub, bullets)
