@@ -29,8 +29,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"   # placeholder; overwritten if deployed elsewhere
-CSS_V = "1"
-JS_V  = "1"
+CSS_V = "2"
+JS_V  = "2"
 
 
 # ── icons (small inline SVG library, no external font icons) ────────
@@ -144,13 +144,9 @@ def hero(p):
         '  <div class="lf-cd__grid">%s</div>\n'
         '</div>'
     ) % (NEXT_ISO, h(cd["label"]), h(cd["sub"]), cells)
-    ctas = (
-        '<div class="lf-hero__ctas">'
-        '<a class="lf-btn lf-btn--primary lf-btn--lg" href="#reserve">%s</a>'
-        '<a class="lf-btn lf-btn--secondary lf-btn--lg" href="tel:%s">%s</a>'
-        '<a class="lf-btn lf-btn--ghost lf-btn--lg" href="#reserve">%s</a>'
-        '</div>'
-    ) % (h(p["cta_primary"]), h(p["phone"][2]), h(p["cta_secondary"]), h(p["cta_ghost"]))
+    # CTAs removed from hero on desktop — handled by the fixed mobile bottom bar (.lf-mbar).
+    # Desktop visitors convert via the inline form on the right of the hero.
+    ctas = ""
     # Lead form (right column, conversion focus)
     name_lbl = "Tu nombre" if es else "Your name"
     phone_lbl = "Teléfono" if es else "Phone"
@@ -286,7 +282,7 @@ def section_student_voices(p):
     for i, (vid, poster) in enumerate(D.STUDENT_VOICES_VIDEOS, 1):
         media += (
             '<div class="lf-reel__media"><video class="lf-reel__video" muted loop playsinline'
-            ' preload="metadata" src="/assets/videos/%s"'
+            ' preload="none" src="/assets/videos/%s"'
             ' poster="/assets/img/%s" aria-label="ABI student testimonial %d"></video></div>'
             % (h(vid), h(poster), i)
         )
@@ -313,7 +309,7 @@ def section_bronx_extra(p):
     for i, (vid, poster) in enumerate(D.BRONX_EXTRA_VIDEOS, 1):
         media += (
             '<div class="lf-reel__media"><video class="lf-reel__video" muted loop playsinline'
-            ' preload="metadata" src="/assets/videos/%s"'
+            ' preload="none" src="/assets/videos/%s"'
             ' poster="/assets/img/%s" aria-label="Bronx student testimonial %d"></video></div>'
             % (h(vid), h(poster), i)
         )
@@ -396,6 +392,27 @@ def footer(p):
         '<a class="lf-soc" href="https://www.youtube.com/channel/UCy_pQUDfk2ldEp6_zyaIMhQ" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.5 12 4.5 12 4.5s-7 0-8.9.6A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.6 8.9.6 8.9.6s7 0 8.9-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.2zM9.8 15.3V8.7L15.9 12z"/></svg></a>'
         '<a class="lf-soc" href="https://www.pinterest.com/alexzholendz/american-barber-institute/" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.3-5.4s-.3-.7-.3-1.6c0-1.5.9-2.6 2-2.6.9 0 1.4.7 1.4 1.5 0 .9-.6 2.3-.9 3.6-.3 1.1.5 2 1.6 2 1.9 0 3.4-2 3.4-4.9 0-2.6-1.9-4.4-4.5-4.4a4.7 4.7 0 0 0-4.9 4.7c0 .9.4 1.9.8 2.5l-.3 1.1c-.1.4-.3.5-.7.3-1.2-.6-2-2.4-2-3.9 0-3.2 2.3-6.1 6.7-6.1 3.5 0 6.2 2.5 6.2 5.8 0 3.5-2.2 6.3-5.2 6.3-1 0-2-.5-2.3-1.1l-.6 2.4c-.2.9-.8 1.9-1.2 2.6A10 10 0 1 0 12 2z"/></svg></a>'
     )
+    # Mobile-only fixed bottom bar (.lf-mbar) — modelled on the original ABI site's
+    # .mbar pattern. Three thumb-reachable buttons: Call · Text · Apply.
+    # Hidden on desktop (≥769px) via CSS; on desktop the inline form is the CTA.
+    mbar_call = "Llamar"    if p["lang"] == "es" else "Call"
+    mbar_text = "SMS"       if p["lang"] == "es" else "Text"
+    mbar_cta  = "Aplicar"   if p["lang"] == "es" else "Apply"
+    icon_call = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>'
+    icon_text = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'
+    icon_cta  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'
+    mbar = (
+        '<nav class="lf-mbar" aria-label="%s">\n'
+        '  <a class="lf-mbar__btn lf-mbar__btn--call" href="tel:%s">%s<span>%s</span></a>\n'
+        '  <a class="lf-mbar__btn lf-mbar__btn--text" href="sms:%s">%s<span>%s</span></a>\n'
+        '  <a class="lf-mbar__btn lf-mbar__btn--cta"  href="#reserve">%s<span>%s</span></a>\n'
+        '</nav>\n'
+    ) % (
+        "Acciones rápidas" if p["lang"] == "es" else "Quick actions",
+        h(tel), icon_call, h(mbar_call),
+        h(tel), icon_text, h(mbar_text),
+        icon_cta, h(mbar_cta),
+    )
     return (
         '<footer class="lf-footer"><div class="lf-wrap">\n'
         '  <h3 class="lf-h2">%s</h3>\n'
@@ -409,12 +426,14 @@ def footer(p):
         '  <p class="lf-footer__fine">%s</p>\n'
         '</div></footer>\n'
         '<button class="lf-chat" aria-label="%s">%s</button>\n'
+        '%s'
     ) % (
         h(ft["h"]), h(ft["sub"]),
         h(ft["cta1"]), h(tel), h(ft["cta2"]), h(ft["cta3"]),
         socials, h(ft["fine"]),
         ("Chatear con admisiones" if p["lang"] == "es" else "Chat with admissions"),
         svg("chat", 26),
+        mbar,
     )
 
 
