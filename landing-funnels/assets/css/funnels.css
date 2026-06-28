@@ -699,3 +699,130 @@ body.lf-page--brnx-es {
 @media (max-width: 768px) {
   .lf-feature { background: rgba(255,255,255,.18); }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   v1.2 — Hard-hide mbar on desktop · Showcase clip thumbnails ·
+          Conversion-focused micro-animations (3D tilt, counter, glow)
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* Hard guarantee: the sticky bottom bar is mobile-only. */
+@media (min-width: 769px) {
+  .lf-mbar { display: none !important; }
+}
+
+/* Showcase clip — poster always visible, centered play overlay until played */
+.lf-clip {
+  cursor: pointer;
+}
+.lf-clip__video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  background: #1a1f2e;
+}
+.lf-clip__play {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px; height: 64px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  color: #0a1020;
+  display: grid; place-items: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,.45);
+  transition: transform .25s ease, opacity .25s ease, background .2s ease;
+  z-index: 2;
+}
+.lf-clip__play:hover { background: #fff; transform: translate(-50%, -50%) scale(1.08); }
+.lf-clip__play svg { width: 26px; height: 26px; margin-left: 3px; pointer-events: none; }
+.lf-clip.is-playing .lf-clip__play { opacity: 0; pointer-events: none; }
+.lf-clip:hover .lf-clip__cap { opacity: 1; }
+
+/* 3D card tilt — vanilla, perspective-based; JS sets --rx/--ry on mousemove */
+.lf-pill,
+.lf-plan,
+.lf-earn-card,
+.lf-review,
+.lf-step {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .2s ease;
+}
+.lf-tilt {
+  transform: perspective(1000px) rotateY(var(--rx, 0deg)) rotateX(var(--ry, 0deg)) translateZ(0);
+  box-shadow: var(--lf-shadow-md);
+}
+@media (hover: none) {
+  /* no hover on touch → disable tilt to avoid jitter */
+  .lf-tilt { transform: none !important; }
+}
+
+/* Stagger reveal — JS sets --rv-delay per item index */
+.lf-rv { transition-delay: var(--rv-delay, 0s); }
+
+/* Primary CTA glow pulse (subtle, hover only — avoids constant motion) */
+@keyframes lfGlow {
+  0%,100% { box-shadow: 0 8px 24px color-mix(in srgb, var(--lf-accent) 45%, transparent); }
+  50%     { box-shadow: 0 12px 38px color-mix(in srgb, var(--lf-accent) 70%, transparent); }
+}
+.lf-btn--primary:hover { animation: lfGlow 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .lf-btn--primary:hover { animation: none; }
+}
+
+/* Animated stat numbers — slight scale-in on reveal */
+.lf-stat.is-in .lf-stat__n {
+  animation: lfStatPop .55s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes lfStatPop {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Floating hero card subtle parallax — only on desktop */
+@media (min-width: 980px) and (prefers-reduced-motion: no-preference) {
+  .lf-hero__form {
+    transition: transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .lf-hero:hover .lf-hero__form { transform: translateY(-4px); }
+}
+
+/* Pill icon — slight bounce on card hover */
+.lf-pill { position: relative; }
+.lf-pill:hover .lf-pill__icon {
+  animation: lfBounce .55s ease;
+}
+@keyframes lfBounce {
+  0%,100% { transform: translateY(0); }
+  40%     { transform: translateY(-4px); }
+  70%     { transform: translateY(0); }
+}
+
+/* Premium gradient sheen on top section heads (subtle) */
+.lf-section__head h2 {
+  background: linear-gradient(135deg, var(--lf-ink) 0%, var(--lf-accent-dark) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* fallback for browsers that don't support background-clip:text */
+  color: var(--lf-ink);
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .lf-section__head h2 { color: var(--lf-ink); }
+}
+
+/* Sticky-CTA hint pulse on phones — gently draws attention to the mbar Apply button */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .lf-mbar__btn--cta::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 14px;
+    box-shadow: 0 0 0 0 currentColor;
+    animation: lfPulse 2.4s ease-out infinite;
+    pointer-events: none;
+    opacity: .55;
+  }
+  .lf-mbar__btn { position: relative; overflow: hidden; }
+}
+@keyframes lfPulse {
+  0%   { box-shadow: 0 0 0 0 currentColor; opacity: .5; }
+  70%  { box-shadow: 0 0 0 14px currentColor; opacity: 0; }
+  100% { box-shadow: 0 0 0 0 currentColor; opacity: 0; }
+}

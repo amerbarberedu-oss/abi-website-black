@@ -198,12 +198,92 @@
     qsa('.lf-reel__media').forEach(initReel);
     initReveal();
 
-    /* showcase clip hover-to-play (small clips at the Inside ABI section) */
-    qsa('.lf-clip video').forEach(function (v) {
+    /* showcase clip — click toggles play/pause; hover (desktop) starts play */
+    qsa('.lf-clip').forEach(function (host) {
+      var v = qs('video', host);
+      var pb = qs('.lf-clip__play', host);
+      if (!v) return;
       v.muted = true; v.loop = true;
-      var host = v.parentElement;
-      on(host, 'mouseenter', function () { v.play().catch(function () {}); });
-      on(host, 'mouseleave', function () { v.pause(); });
+      function syncPlaying() { host.classList.toggle('is-playing', !v.paused && !v.ended); }
+      function toggle() {
+        if (v.paused) v.play().catch(function () {});
+        else v.pause();
+      }
+      if (pb) on(pb, 'click', function (e) { e.preventDefault(); e.stopPropagation(); toggle(); });
+      on(host, 'click', function (e) {
+        if (pb && (e.target === pb || pb.contains(e.target))) return;
+        toggle();
+      });
+      /* desktop hover-preview */
+      on(host, 'mouseenter', function () { if (window.matchMedia('(hover:hover)').matches) v.play().catch(function () {}); });
+      on(host, 'mouseleave', function () { if (window.matchMedia('(hover:hover)').matches) v.pause(); });
+      on(v, 'play',  syncPlaying);
+      on(v, 'pause', syncPlaying);
+      /* off-screen pause */
+      if (typeof IntersectionObserver !== 'undefined') {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (!en.isIntersecting && !v.paused) v.pause(); });
+        }, { threshold: 0 }).observe(host);
+      }
+    });
+
+    /* 3D micro-tilt on cards — perspective-based, vanilla, mouse-only */
+    var TILT_TARGETS = '.lf-pill, .lf-plan, .lf-earn-card, .lf-review, .lf-step';
+    qsa(TILT_TARGETS).forEach(function (el) {
+      el.classList.add('lf-tilt');
+      on(el, 'mousemove', function (e) {
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width  - 0.5;
+        var y = (e.clientY - r.top)  / r.height - 0.5;
+        el.style.setProperty('--rx', (x * 7).toFixed(2) + 'deg');
+        el.style.setProperty('--ry', (-y * 7).toFixed(2) + 'deg');
+      });
+      on(el, 'mouseleave', function () {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+
+    /* Animated stat counters — count up when scrolled into view */
+    function animateNumber(el) {
+      var raw = el.textContent.trim();
+      // Parse "10,000+" or "$45k – $60k" type values — just animate the first integer found.
+      var m = raw.match(/(\$?)([\d,]+)(.*)/);
+      if (!m) return;
+      var prefix = m[1] || '';
+      var target = parseInt(m[2].replace(/,/g, ''), 10);
+      var suffix = m[3] || '';
+      if (!target) return;
+      var dur = 1200, t0 = null;
+      function tick(ts) {
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur);
+        var eased = 1 - Math.pow(1 - k, 3);    // ease-out cubic
+        var n = Math.floor(target * eased);
+        el.textContent = prefix + n.toLocaleString() + suffix;
+        if (k < 1) requestAnimationFrame(tick); else el.textContent = raw;
+      }
+      requestAnimationFrame(tick);
+    }
+    if (typeof IntersectionObserver !== 'undefined') {
+      var statIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('is-in');
+            qsa('.lf-stat__n', en.target).forEach(animateNumber);
+            statIo.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      qsa('.lf-stat').forEach(function (el) { statIo.observe(el); });
+    }
+
+    /* Stagger reveal — set --rv-delay per item index inside each section */
+    qsa('.lf-section, .lf-hero, .lf-pills, .lf-footer').forEach(function (sec) {
+      var items = qsa('.lf-rv', sec);
+      items.forEach(function (el, i) {
+        el.style.setProperty('--rv-delay', (i * 0.07).toFixed(2) + 's');
+      });
     });
 
     /* simple form handler (Formspree) — graceful no-op if action missing */

@@ -29,8 +29,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"   # placeholder; overwritten if deployed elsewhere
-CSS_V = "2"
-JS_V  = "2"
+CSS_V = "3"
+JS_V  = "3"
 
 
 # ── icons (small inline SVG library, no external font icons) ────────
@@ -263,14 +263,23 @@ def section_tuition(p):
 def section_showcase(p):
     eb, ti = D.SECTION_LABELS[p["lang"]]["showcase"]
     cards = ""
-    for slug, en_cap, es_cap in D.SHOWCASE_CLIPS:
+    for i, (slug, en_cap, es_cap) in enumerate(D.SHOWCASE_CLIPS, 1):
         cap = es_cap if p["lang"] == "es" else en_cap
+        # Direct src + preload="none" so the browser shows the poster immediately
+        # and only fetches video bytes when the user taps Play. Posters are real
+        # first-frame JPGs at /assets/img/lf-showcase-1..6.jpg.
         cards += (
-            '<div class="lf-clip lf-rv"><video muted playsinline loop preload="none"'
-            ' poster="/assets/img/lf-showcase-%s.jpg"'
-            ' data-src="%s%s.mp4"></video>'
+            '<div class="lf-clip lf-rv">'
+            '<video class="lf-clip__video" muted playsinline loop preload="none"'
+            ' poster="/assets/img/lf-showcase-%d.jpg"'
+            ' src="%s%s.mp4"></video>'
+            '<button class="lf-clip__play" type="button" aria-label="%s">'
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+            '</button>'
             '<div class="lf-clip__cap">%s</div></div>'
-            % (slug[:30], D.SHOWCASE_CDN_BASE, slug, h(cap))
+            % (i, D.SHOWCASE_CDN_BASE, slug,
+               "Reproducir" if p["lang"] == "es" else "Play",
+               h(cap))
         )
     return ('<section class="lf-section"><div class="lf-wrap">%s<div class="lf-showcase">%s</div></div></section>\n'
             % (section_head(eb, ti), cards))
@@ -286,7 +295,17 @@ def section_student_voices(p):
             ' poster="/assets/img/%s" aria-label="ABI student testimonial %d"></video></div>'
             % (h(vid), h(poster), i)
         )
-    points = "".join('<li>%s</li>' % h(x) for x in sv["points"])
+    # Last bullet — replace the dual-campus mention with a campus-specific one,
+    # so a Bronx landing page doesn't advertise the Manhattan campus and vice versa.
+    is_bx = p["campus"]["slug"] == "bronx"
+    if p["lang"] == "es":
+        last_bullet = ("Sede del Bronx — 121 Westchester Square" if is_bx
+                       else "Sede de Manhattan — 48 West 39th Street")
+    else:
+        last_bullet = ("Bronx Campus — 121 Westchester Square" if is_bx
+                       else "Manhattan Campus — 48 West 39th Street")
+    pts = list(sv["points"][:-1]) + [last_bullet]
+    points = "".join('<li>%s</li>' % h(x) for x in pts)
     return (
         '<section class="lf-section"><div class="lf-wrap">\n'
         '  <div class="lf-reel lf-reel--triple lf-rv">\n'
