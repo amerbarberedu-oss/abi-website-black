@@ -585,53 +585,17 @@ body.lf-page--brnx-es {
 }
 
 /* ═════════════════════════════════════════════════════════════════════
-   v1.1 — Mobile fixed bottom bar (.lf-mbar) + responsiveness polish
    ─────────────────────────────────────────────────────────────────────
-   The .lf-mbar mirrors the original ABI marketing site's .mbar: 3 thumb-
    reachable buttons fixed to the bottom of the viewport on mobile only.
    On desktop the bar is hidden — the inline hero form is the CTA.
    ═════════════════════════════════════════════════════════════════════ */
-.lf-mbar { display: none; }   /* hidden on desktop by default */
 
 @media (max-width: 768px) {
   body.lf-page {
     /* push every page's content up so it never sits behind the bar */
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
-  .lf-mbar {
-    display: flex;
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 90;
-    gap: .42rem;
-    padding: .55rem .55rem;
-    padding-bottom: calc(.55rem + env(safe-area-inset-bottom, 0px));
-    background: rgba(255,255,255,.96);
-    backdrop-filter: blur(10px) saturate(1.05);
-    -webkit-backdrop-filter: blur(10px) saturate(1.05);
-    border-top: 1px solid var(--lf-line);
-    box-shadow: 0 -10px 28px rgba(15,23,42,.14);
-  }
-  .lf-mbar__btn {
-    flex: 1;
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: .35rem;
-    min-height: 50px;
-    padding: .55rem .35rem;
-    border-radius: 14px;
-    font-weight: 800; font-size: .85rem; letter-spacing: .01em;
-    color: #fff;
-    transition: transform .12s ease, filter .15s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .lf-mbar__btn:active { transform: translateY(1px); filter: brightness(.95); }
-  .lf-mbar__btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
-  .lf-mbar__btn--call { background: #1a8540; }
-  .lf-mbar__btn--text { background: var(--lf-sky-deep); }
-  .lf-mbar__btn--cta  { background: linear-gradient(135deg, var(--lf-accent), var(--lf-accent-dark)); color: var(--lf-on-accent); }
 
   /* push the chat bubble above the bar so it never overlaps */
-  .lf-chat { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; }
   .lf-chat svg { width: 22px; height: 22px; }
 
   /* hero: tighter on small screens, but readable */
@@ -707,7 +671,6 @@ body.lf-page--brnx-es {
 
 /* Hard guarantee: the sticky bottom bar is mobile-only. */
 @media (min-width: 769px) {
-  .lf-mbar { display: none !important; }
 }
 
 /* Showcase clip — poster always visible, centered play overlay until played */
@@ -810,16 +773,6 @@ body.lf-page--brnx-es {
 
 /* Sticky-CTA hint pulse on phones — gently draws attention to the mbar Apply button */
 @media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
-  .lf-mbar__btn--cta::after {
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: 14px;
-    box-shadow: 0 0 0 0 currentColor;
-    animation: lfPulse 2.4s ease-out infinite;
-    pointer-events: none;
-    opacity: .55;
-  }
-  .lf-mbar__btn { position: relative; overflow: hidden; }
 }
 @keyframes lfPulse {
   0%   { box-shadow: 0 0 0 0 currentColor; opacity: .5; }
