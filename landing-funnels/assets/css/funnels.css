@@ -779,3 +779,118 @@ body.lf-page--brnx-es {
   70%  { box-shadow: 0 0 0 14px currentColor; opacity: 0; }
   100% { box-shadow: 0 0 0 0 currentColor; opacity: 0; }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   v1.4 — Authentic-content sections: hero kicker, About, Techniques,
+          Course Modules, Tuition terms, Entrance Requirements
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* hero headline pieces */
+.lf-hero__kicker {
+  display: inline-block; margin: 0 0 .8rem;
+  font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--lf-sky);
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3);
+  padding: .35rem .8rem; border-radius: var(--lf-r-pill);
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+}
+.lf-h1__b { display: inline; }
+.lf-h1__script {
+  font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400;
+  color: var(--lf-sky);
+}
+
+/* form label + section */
+.lf-form__label {
+  display: block; font-size: .82rem; font-weight: 600; color: var(--lf-muted);
+  margin-bottom: .3rem;
+}
+
+/* About the Program */
+.lf-about { display: grid; grid-template-columns: 1fr; gap: 1.6rem; }
+@media (min-width: 900px) { .lf-about { grid-template-columns: 1.7fr 1fr; align-items: start; } }
+.lf-about__body p { margin: 0 0 1rem; color: var(--lf-muted); font-size: 1rem; line-height: 1.7; }
+.lf-about__card {
+  background: #fff; border: 1px solid var(--lf-line); border-radius: var(--lf-r-md);
+  padding: 1.4rem; box-shadow: var(--lf-shadow-md);
+}
+.lf-about__card h3 { margin: 0 0 .6rem; color: var(--lf-ink); }
+.lf-about__addr, .lf-about__phone { margin: 0 0 .5rem; display: flex; align-items: flex-start; gap: .4rem; color: var(--lf-muted); font-size: .95rem; }
+.lf-about__addr svg { flex: 0 0 auto; color: var(--lf-accent); margin-top: 2px; }
+.lf-about__phone a { color: var(--lf-accent-dark); font-weight: 700; display: inline-flex; gap: .35rem; align-items: center; }
+.lf-about__details { list-style: none; padding: .9rem 0 0; margin: .9rem 0 0; border-top: 1px solid var(--lf-line); display: grid; gap: .4rem; }
+.lf-about__details li { color: var(--lf-muted); font-size: .9rem; }
+.lf-about__details b { color: var(--lf-ink); }
+
+/* Techniques chip grid */
+.lf-tech-grid { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.lf-tech {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--lf-accent-soft); color: var(--lf-accent-dark);
+  border: 1px solid color-mix(in srgb, var(--lf-accent) 35%, transparent);
+  padding: .5rem .9rem; border-radius: var(--lf-r-pill);
+  font-weight: 600; font-size: .9rem;
+}
+.lf-tech svg { color: var(--lf-accent); }
+
+/* Course Modules */
+.lf-modules { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 720px) { .lf-modules { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .lf-modules { grid-template-columns: repeat(3, 1fr); } }
+.lf-module {
+  background: #fff; border: 1px solid var(--lf-line); border-radius: var(--lf-r-md);
+  padding: 1.4rem; box-shadow: var(--lf-shadow-sm);
+}
+.lf-module__n {
+  font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700;
+  color: var(--lf-accent); line-height: 1; margin-bottom: .4rem;
+}
+.lf-module h3 { margin: 0 0 .7rem; color: var(--lf-ink); }
+.lf-module__list { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; }
+.lf-module__list li { position: relative; padding-left: 1.2rem; color: var(--lf-muted); font-size: .92rem; }
+.lf-module__list li::before { content: '·'; position: absolute; left: .3rem; color: var(--lf-accent); font-weight: 800; }
+
+/* Tuition — richer plan card */
+.lf-plan__sched { color: var(--lf-ink); font-weight: 600; font-size: .9rem; margin-top: .2rem; }
+.lf-plan__hours { color: var(--lf-soft-ink); font-size: .82rem; margin: .15rem 0 .6rem; }
+.lf-plan__terms { color: var(--lf-muted); font-size: .88rem; line-height: 1.5; margin-bottom: 1rem; }
+.lf-plan__badge {
+  position: absolute; top: -.7rem; right: 1rem;
+  background: var(--lf-accent); color: var(--lf-on-accent);
+  font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  padding: .25rem .7rem; border-radius: var(--lf-r-pill);
+}
+.lf-plan { position: relative; display: flex; flex-direction: column; }
+.lf-plan__cta { margin-top: auto; }
+.lf-tuition__note {
+  max-width: 760px; margin: 1.6rem auto 0; text-align: center;
+  color: var(--lf-soft-ink); font-size: .85rem; line-height: 1.6;
+}
+
+/* Entrance Requirements */
+.lf-reqs { list-style: none; padding: 0; margin: 0 auto; max-width: 760px;
+  display: grid; grid-template-columns: 1fr; gap: .7rem; }
+@media (min-width: 720px) { .lf-reqs { grid-template-columns: repeat(2, 1fr); } }
+.lf-req {
+  display: flex; align-items: flex-start; gap: .6rem;
+  background: #fff; border: 1px solid var(--lf-line); border-radius: var(--lf-r-md);
+  padding: .9rem 1.1rem; box-shadow: var(--lf-shadow-sm);
+  color: var(--lf-ink); font-weight: 600; font-size: .95rem;
+}
+.lf-req svg { flex: 0 0 auto; color: var(--lf-accent); margin-top: 1px; }
+
+/* Footer address line */
+.lf-footer__addr { color: var(--lf-soft-ink); font-size: .9rem; margin: 0 0 1.3rem;
+  display: inline-flex; align-items: center; gap: .4rem; justify-content: center; flex-wrap: wrap; }
+.lf-footer__addr svg { color: var(--lf-accent); }
+.lf-footer__addr a { color: var(--lf-accent-dark); font-weight: 700; }
+
+/* tilt now also applies to module + review + req + plan cards */
+.lf-module, .lf-req { transform-style: preserve-3d; will-change: transform;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; }
+
+@media (max-width: 768px) {
+  .lf-about__card { padding: 1.1rem; }
+  .lf-tech { font-size: .84rem; padding: .45rem .75rem; }
+  .lf-plan__badge { right: .7rem; }
+}

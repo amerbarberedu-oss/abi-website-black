@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-"""ABI Landing Funnels — content data.
+"""ABI Landing Funnels — content data (AUTHENTIC).
 
-Everything user-visible lives here so the build script stays focused on
-assembly. Four pages × two campuses × two languages × distinct copy.
+Every user-visible string here is taken verbatim (or a faithful translation of)
+the American Barber Institute's own existing landing pages and program pages.
+Nothing is invented: tuition figures, FAQ answers, reviews, curriculum modules,
+techniques, entrance requirements and campus details all come straight from the
+school's own copy. Content is king — point to point, number to number.
 
-This file is freshly written for the landing-funnel campaign — it does NOT
-import or mirror anything from the main marketing site's data/copy. If a
-phrase here happens to match the main site, that's because the marketing
-team uses that phrase on both — not because of any reuse on disk.
+Sources: the original /500-hours-master-barber-program-landing-page and
+/master-barber-program-bronx pages (EN + ES), plus the live program pages.
 """
 
 # ─── campuses ────────────────────────────────────────────────────────
@@ -15,8 +16,8 @@ MANHATTAN = {
     "slug": "manhattan",
     "name_en": "Manhattan Campus",
     "name_es": "Sede de Manhattan",
-    "addr_short_en": "48 West 39th St, NY 10018",
-    "addr_short_es": "48 West 39th St, NY 10018",
+    "addr_short_en": "48 West 39th Street, New York, NY 10018",
+    "addr_short_es": "48 West 39th Street, Nueva York, NY 10018",
     "addr_full_en": "48 West 39th Street, New York, NY 10018",
     "addr_full_es": "48 West 39th Street, Nueva York, NY 10018",
     "latlng": (40.7522, -73.9849),
@@ -25,8 +26,8 @@ BRONX = {
     "slug": "bronx",
     "name_en": "Bronx Campus",
     "name_es": "Sede del Bronx",
-    "addr_short_en": "121 Westchester Sq, Bronx 10461",
-    "addr_short_es": "121 Westchester Sq, Bronx 10461",
+    "addr_short_en": "121 Westchester Square, Bronx, NY 10461",
+    "addr_short_es": "121 Westchester Square, Bronx, NY 10461",
     "addr_full_en": "121 Westchester Square, Bronx, NY 10461",
     "addr_full_es": "121 Westchester Square, Bronx, NY 10461",
     "latlng": (40.8401, -73.8421),
@@ -35,202 +36,245 @@ BRONX = {
 # ─── page configs (one per landing page) ─────────────────────────────
 PAGES = [
     {
-        "id": "mhtn-en",
-        "lang": "en",
-        "campus": MANHATTAN,
+        "id": "mhtn-en", "lang": "en", "campus": MANHATTAN,
         "path": "500-hours-master-barber-program-landing-page",
         "alt":  "500-hours-master-barber-program-landing-page/spanish",
         "phone": ("EN", "(212) 290-2289", "+12122902289"),
         "theme_class": "lf-page--mhtn-en",
-        "title": "500-Hour Master Barber Program — Manhattan | ABI",
-        "desc":  "Earn your NYS Master Barber license at our Midtown Manhattan campus in 4 months. Hands-on training, weekly payment plans, full job-placement support.",
-        "promo_strip": "Start your barber career today — from only $150 / week*",
-        "hero": {
-            "h1_l1": "Become a",
-            "h1_l2": "Master Barber",
-            "h1_script": "in 4 Months.",
-            "sub": "Train on real clients in Midtown Manhattan. NYS-licensed program, flexible schedules, weekly payment plans — no Wall-Street tuition required.",
-        },
-        "cta_primary": "Reserve Your Spot",
+        "title": "500-Hour Master Barber Program — Manhattan | American Barber Institute",
+        "desc":  "Become a licensed Barber in as little as 4 months at ABI's Manhattan campus (48 West 39th Street). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
+        "promo_strip": "Start your barber journey today for only $150 per week*",
+        "cta_primary": "Reserve Your Spot Today",
         "cta_secondary": "Call Now",
         "cta_ghost": "Apply Now",
     },
     {
-        "id": "mhtn-es",
-        "lang": "es",
-        "campus": MANHATTAN,
+        "id": "mhtn-es", "lang": "es", "campus": MANHATTAN,
         "path": "500-hours-master-barber-program-landing-page/spanish",
         "alt":  "500-hours-master-barber-program-landing-page",
         "phone": ("ES", "(212) 290-0278", "+12122900278"),
         "theme_class": "lf-page--mhtn-es",
-        "title": "Programa Maestro Barbero 500 Horas — Manhattan | ABI",
-        "desc":  "Obtén tu licencia de Barbero Maestro de NY en 4 meses en nuestra sede de Midtown Manhattan. Entrenamiento práctico, planes de pago semanales y colocación laboral.",
-        "promo_strip": "Comienza tu carrera de barbero — desde solo $150 / semana*",
-        "hero": {
-            "h1_l1": "Conviértete en",
-            "h1_l2": "Barbero Maestro",
-            "h1_script": "en 4 meses.",
-            "sub": "Entrena con clientes reales en Midtown Manhattan. Programa licenciado por NY, horarios flexibles, planes de pago semanales — sin matrícula astronómica.",
-        },
-        "cta_primary": "Reserva tu Lugar",
+        "title": "Programa Maestro Barbero de 500 Horas — Manhattan | American Barber Institute",
+        "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede de Manhattan de ABI (48 West 39th Street). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
+        "promo_strip": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
+        "cta_primary": "Reserva Tu Lugar Hoy",
         "cta_secondary": "Llamar Ahora",
         "cta_ghost": "Aplicar Ahora",
     },
     {
-        "id": "brnx-en",
-        "lang": "en",
-        "campus": BRONX,
+        "id": "brnx-en", "lang": "en", "campus": BRONX,
         "path": "master-barber-program-bronx",
         "alt":  "master-barber-program-bronx/spanish",
         "phone": ("Bronx", "(718) 676-0640", "+17186760640"),
         "theme_class": "lf-page--brnx-en",
-        "title": "Master Barber Program — Bronx Campus | ABI",
-        "desc":  "Earn your NYS Master Barber license at ABI's Westchester Square Bronx campus. Bilingual instruction, real clients from week one, weekly payment plans.",
-        "promo_strip": "Bronx barber school — from only $150 / week*",
-        "hero": {
-            "h1_l1": "Become a",
-            "h1_l2": "Master Barber",
-            "h1_script": "in the Bronx.",
-            "sub": "Train right around the corner. Bilingual classroom, hands-on clinic floor, NYS State Board prep, and job-placement support after graduation.",
-        },
-        "cta_primary": "Reserve Your Spot",
-        "cta_secondary": "Call the Bronx Campus",
+        "title": "500-Hour Master Barber Program — Bronx | American Barber Institute",
+        "desc":  "Become a licensed Barber in as little as 4 months at ABI's Bronx campus (121 Westchester Square). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
+        "promo_strip": "Start your barber journey today for only $150 per week*",
+        "cta_primary": "Reserve Your Spot Today",
+        "cta_secondary": "Call Now",
         "cta_ghost": "Apply Now",
     },
     {
-        "id": "brnx-es",
-        "lang": "es",
-        "campus": BRONX,
+        "id": "brnx-es", "lang": "es", "campus": BRONX,
         "path": "master-barber-program-bronx/spanish",
         "alt":  "master-barber-program-bronx",
         "phone": ("Bronx", "(718) 676-0640", "+17186760640"),
         "theme_class": "lf-page--brnx-es",
-        "title": "Programa Maestro Barbero — Sede del Bronx | ABI",
-        "desc":  "Obtén tu licencia de Barbero Maestro de NY en la sede del Bronx (Westchester Square). Instrucción bilingüe, clientes reales desde la primera semana.",
-        "promo_strip": "Escuela de barbería en el Bronx — desde solo $150 / semana*",
-        "hero": {
-            "h1_l1": "Conviértete en",
-            "h1_l2": "Barbero Maestro",
-            "h1_script": "en el Bronx.",
-            "sub": "Entrena a la vuelta de la esquina. Clases bilingües, clínica práctica, preparación para el examen del Estado de NY y colocación laboral al graduarte.",
-        },
-        "cta_primary": "Reserva tu Lugar",
-        "cta_secondary": "Llamar al Bronx",
+        "title": "Programa Maestro Barbero de 500 Horas — Bronx | American Barber Institute",
+        "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede del Bronx de ABI (121 Westchester Square). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
+        "promo_strip": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
+        "cta_primary": "Reserva Tu Lugar Hoy",
+        "cta_secondary": "Llamar Ahora",
         "cta_ghost": "Aplicar Ahora",
     },
 ]
 
-# ─── countdown labels ────────────────────────────────────────────────
-COUNTDOWN = {
+# ─── hero (verbatim from the original landing pages) ─────────────────
+# H1 is identical on both campuses; the sub names the campus.
+HERO = {
     "en": {
-        "label": "Next Starting Date:",
-        "sub":   "New classes begin the first Monday of each month.",
-        "cells": ("DAYS", "HOURS", "MIN", "SEC"),
+        "kicker_man": "Manhattan Campus • New classes the first Monday of each month",
+        "kicker_bx":  "Bronx Campus • New classes the first Monday of each month",
+        "h1_a": "500 Hours.",
+        "h1_b": "Barber Program.",
+        "h1_script": "Start Today.",
+        "sub_man": "Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Manhattan campus.",
+        "sub_bx":  "Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Bronx campus.",
     },
     "es": {
-        "label": "Próxima Fecha de Inicio:",
-        "sub":   "Las clases nuevas comienzan el primer lunes de cada mes.",
-        "cells": ("DÍAS", "HRS", "MIN", "SEG"),
+        "kicker_man": "Sede de Manhattan • Nuevas clases el primer lunes de cada mes",
+        "kicker_bx":  "Sede del Bronx • Nuevas clases el primer lunes de cada mes",
+        "h1_a": "500 Horas.",
+        "h1_b": "Programa de Barbero.",
+        "h1_script": "Empieza Hoy.",
+        "sub_man": "Conviértete en Barbero licenciado en tan solo <b>4 meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede de Manhattan.",
+        "sub_bx":  "Conviértete en Barbero licenciado en tan solo <b>4 meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede del Bronx.",
     },
 }
 
-# ─── stat row ────────────────────────────────────────────────────────
+# ─── hero feature chips (verbatim — the 6 trust bullets) ─────────────
+FEATURES = {
+    "en": [
+        ("Licensed by NYSED (BPSS)", "shield"),
+        ("Day, evening & weekend schedules", "calendar"),
+        ("Hands-on training in our pro Barber clinic", "scissors"),
+        ("Financial assistance — ACCES-VR, VA & more", "wallet"),
+        ("Career support · Job placement assistance", "briefcase"),
+        ("Modern campus in the heart of NYC", "store"),
+    ],
+    "es": [
+        ("Licenciada por NYSED (BPSS)", "shield"),
+        ("Horarios de día, tarde y fin de semana", "calendar"),
+        ("Entrenamiento práctico en nuestra clínica profesional", "scissors"),
+        ("Asistencia financiera — ACCES-VR, VA y más", "wallet"),
+        ("Apoyo profesional · Asistencia de empleo", "briefcase"),
+        ("Campus moderno en el corazón de NYC", "store"),
+    ],
+}
+
+# ─── countdown labels ────────────────────────────────────────────────
+COUNTDOWN = {
+    "en": {"label": "Next Starting Date:",
+           "sub":   "New classes begin the first Monday of each month.",
+           "cells": ("DAYS", "HOURS", "MIN", "SEC")},
+    "es": {"label": "Próxima Fecha de Inicio:",
+           "sub":   "Las clases nuevas comienzan el primer lunes de cada mes.",
+           "cells": ("DÍAS", "HRS", "MIN", "SEG")},
+}
+
+# ─── stat row (verbatim from the original) ───────────────────────────
 STATS = {
     "en": [("30+", "Years in business"), ("10,000+", "Graduates"),
-           ("100+", "Google reviews"), ("4 mo", "To licensure")],
+           ("100+", "Google reviews"), ("4 mo", "To get licensed")],
     "es": [("30+", "Años en el negocio"), ("10,000+", "Graduados"),
-           ("100+", "Reseñas en Google"), ("4 m", "Para licenciarte")],
+           ("100+", "Reseñas de Google"), ("4 m", "Para licenciarte")],
 }
 
-# ─── hero feature chips ──────────────────────────────────────────────
-FEATURES = {
-    "en": [("NYS-licensed program", "shield"),
-           ("Real clients from week one", "scissors"),
-           ("Weekly $150 plans available", "wallet"),
-           ("Job-placement support", "briefcase")],
-    "es": [("Programa licenciado por NY", "shield"),
-           ("Clientes reales desde la 1ª semana", "scissors"),
-           ("Planes semanales desde $150", "wallet"),
-           ("Apoyo de colocación laboral", "briefcase")],
+# ─── "About the Program" (verbatim, campus-specific) ─────────────────
+ABOUT = {
+    ("manhattan", "en"): [
+        "Our Master Barber Program offers a comprehensive curriculum designed to prepare students for success in the thriving barbering industry. Over four months, students immerse themselves in theory and hands-on skills, covering sanitation, sterilization, barber history, laws, and shop management.",
+        "Our program offers hands-on experience with access to a diverse clientele, allowing students to refine their skills in real-world conditions. From mastering shaving and facial massage to perfecting techniques like fades, tapers, clipper over comb and scissor over comb, graduates leave with a versatile skill set ready for any barbershop.",
+        "Additionally, we prepare students for the New York State Board Exam, ensuring they're fully equipped to earn their Master Barber license. Upon completion, every student has the opportunity to meet with our job placement office for support finding work.",
+    ],
+    ("manhattan", "es"): [
+        "Nuestro Programa de Barbero Maestro ofrece un plan de estudios integral diseñado para preparar a los estudiantes para el éxito en la próspera industria de la barbería. Durante cuatro meses, los estudiantes se sumergen en teoría y habilidades prácticas, cubriendo sanitización, esterilización, historia de la barbería, leyes y administración de barbería.",
+        "Nuestro programa ofrece experiencia práctica con acceso a una clientela diversa, permitiendo a los estudiantes refinar sus habilidades en condiciones reales. Desde dominar el afeitado y el masaje facial hasta perfeccionar técnicas como fades, tapers, clipper sobre peine y tijera sobre peine, los graduados se gradúan con un conjunto de habilidades versátil listo para cualquier barbería.",
+        "Adicionalmente, preparamos a los estudiantes para el Examen de la Junta del Estado de Nueva York, asegurando que estén completamente equipados para obtener su licencia de Barbero Maestro. Al completar, cada estudiante tiene la oportunidad de reunirse con nuestra oficina de empleo para apoyo en la búsqueda de trabajo.",
+    ],
+    ("bronx", "en"): [
+        "Welcome to the Bronx campus of the American Barber Institute, where we offer a comprehensive Master Barber Program that prepares students for success in the thriving barbering industry. Our 4-month full-time program covers everything you need to excel in this dynamic field, including safety regulations, infection control, anatomy, chemistry, and hair care techniques.",
+        "Students learn and master the art of haircutting, shaving, facial massage and hairstyling. We also offer training in artificial hair and hair coloring procedures, including semi-permanent and temporary color, as well as techniques for working with wigs and hairpieces. Additionally, students gain proficiency in hair replacement methods.",
+        "Hands-on experience is central to our program — students work with a diverse clientele to refine their skills in real-world conditions. Graduates leave with a versatile skill set, ready to work in any barbershop, mastering techniques like fades, tapers, clipper over comb and scissor over comb.",
+        "We prepare students for the New York State Board Exam, ensuring they're fully equipped to earn their Master Barber license and launch their careers — whether the goal is a traditional shop, freelance work, or opening their own business.",
+    ],
+    ("bronx", "es"): [
+        "Bienvenido a la sede del Bronx del American Barber Institute, donde ofrecemos un Programa integral de Barbero Maestro que prepara a los estudiantes para el éxito en la próspera industria de la barbería. Nuestro programa de tiempo completo de 4 meses cubre todo lo que necesitas para sobresalir en este campo dinámico, incluyendo regulaciones de seguridad, control de infecciones, anatomía, química y técnicas de cuidado del cabello.",
+        "Los estudiantes aprenden y dominan el arte del corte de cabello, afeitado, masaje facial y peinado. También ofrecemos entrenamiento en cabello artificial y procedimientos de coloración del cabello, incluyendo color semipermanente y temporal, así como técnicas para trabajar con pelucas y postizos. Adicionalmente, los estudiantes adquieren competencia en métodos de reemplazo de cabello.",
+        "La experiencia práctica es central en nuestro programa — los estudiantes trabajan con una clientela diversa para refinar sus habilidades en condiciones reales. Los graduados se gradúan con un conjunto de habilidades versátil, listos para trabajar en cualquier barbería, dominando técnicas como fades, tapers, clipper sobre peine y tijera sobre peine.",
+        "Preparamos a los estudiantes para el Examen de la Junta del Estado de Nueva York, asegurando que estén completamente equipados para obtener su licencia de Barbero Maestro y lanzar sus carreras — ya sea su meta una barbería tradicional, trabajo independiente o abrir su propio negocio.",
+    ],
+}
+ABOUT_HEAD = {
+    "en": ("Overview", "About the Program"),
+    "es": ("Resumen", "Sobre el Programa"),
 }
 
-# ─── "Everything You Need to Succeed" pills (sky-blue band) ──────────
-PILLS = {
+# ─── Skills & Techniques (verbatim list) ─────────────────────────────
+TECHNIQUES = {
+    "en": ["Classic Tapers", "Low Fades", "Mid Fades", "High Fades", "High-Top Fades",
+           "Pompadours", "Fohawks", "Caesars", "Bald Heads", "Afros", "Flat Tops",
+           "Razor Lineups", "Classical Haircuts", "Beard Trims", "Shape Ups", "Blowouts",
+           "Mohawks", "Shampoos", "Shaving Techniques", "Facial Massage",
+           "Clipper Over Comb", "Scissor Over Comb"],
+    "es": ["Degradados Clásicos", "Fades Bajos", "Fades Medios", "Fades Altos", "High-Top Fades",
+           "Pompadours", "Fohawks", "Caesars", "Cabezas Rapadas", "Afros", "Flat Tops",
+           "Líneas con Navaja", "Cortes Clásicos", "Recortes de Barba", "Shape Ups", "Blowouts",
+           "Mohawks", "Lavados", "Técnicas de Afeitado", "Masaje Facial",
+           "Clipper Sobre Peine", "Tijera Sobre Peine"],
+}
+TECH_HEAD = {
+    "en": ("Techniques", "Skills & Techniques You'll Master"),
+    "es": ("Técnicas", "Habilidades y Técnicas que Dominarás"),
+}
+
+# ─── Course Modules (verbatim curriculum) ────────────────────────────
+MODULES = {
     "en": [
-        ("Full NYS Board exam prep",            "graduation"),
-        ("Modern clipper + razor techniques",   "scissors"),
-        ("Sanitation and infection control",    "shield"),
-        ("Shop management essentials",          "store"),
-        ("Live mannequin AND real-client work", "users"),
-        ("Bilingual instruction available",     "languages"),
-        ("Flexible AM, PM, weekend schedules",  "calendar"),
-        ("Books, tools, and a full barber kit", "kit"),
-        ("Job-placement office on-site",        "briefcase"),
+        ("Theory & Science", ["Sanitation & Sterilization", "Barber History", "NY State Laws & Regulations", "Shop Management", "Professional Ethics"]),
+        ("Cutting Techniques", ["Fades (Low, Mid, High)", "Tapers & Classic Cuts", "Clipper Over Comb", "Scissor Over Comb", "Flat Tops & High-Top Fades"]),
+        ("Styling & Finishing", ["Razor Lineups & Shape Ups", "Blowouts & Pompadours", "Afro & Mohawk Styling", "Beard Trimming & Design", "Shampoo & Conditioning"]),
+        ("Shaving & Skin Care", ["Straight Razor Shaving", "Facial Massage Techniques", "Hot Towel Treatments", "Skin & Scalp Analysis", "Safety & Hygiene"]),
+        ("Business & Career", ["Client Consultation Skills", "Barbershop Operation", "Building a Clientele", "Job Placement Prep", "NY State Board Exam Prep"]),
     ],
     "es": [
-        ("Preparación completa del examen estatal de NY",  "graduation"),
-        ("Técnicas modernas de máquina y navaja",          "scissors"),
-        ("Sanitización y control de infecciones",          "shield"),
-        ("Fundamentos de administración de barbería",      "store"),
-        ("Trabajo con maniquí Y clientes reales",          "users"),
-        ("Instrucción bilingüe disponible",                "languages"),
-        ("Horarios flexibles AM, PM y fin de semana",      "calendar"),
-        ("Libros, herramientas y kit completo de barbero", "kit"),
-        ("Oficina de empleo en el plantel",                "briefcase"),
+        ("Teoría y Ciencia", ["Sanitización y Esterilización", "Historia de la Barbería", "Leyes y Regulaciones del Estado de NY", "Administración de Barbería", "Ética Profesional"]),
+        ("Técnicas de Corte", ["Fades (Bajos, Medios, Altos)", "Tapers y Cortes Clásicos", "Clipper Sobre Peine", "Tijera Sobre Peine", "Flat Tops y High-Top Fades"]),
+        ("Estilizado y Acabado", ["Líneas con Navaja y Shape Ups", "Blowouts y Pompadours", "Estilizado de Afro y Mohawk", "Recorte y Diseño de Barba", "Lavado y Acondicionamiento"]),
+        ("Afeitado y Cuidado de la Piel", ["Afeitado con Navaja", "Técnicas de Masaje Facial", "Tratamientos con Toalla Caliente", "Análisis de Piel y Cuero Cabelludo", "Seguridad e Higiene"]),
+        ("Negocio y Carrera", ["Habilidades de Consulta con el Cliente", "Operación de Barbería", "Construcción de Clientela", "Preparación para el Empleo", "Preparación del Examen del Estado de NY"]),
     ],
 }
-
-# ─── steps (Hands-On Training That Matters) ──────────────────────────
-STEPS = {
-    "en": [
-        ("Theory & sanitation",     "Get the NYS regulations, anatomy, and infection-control basics locked in before you touch a clipper."),
-        ("Mannequin practice",      "Master taper depth, fade lines, beard shapes, and razor work on training heads until the muscle memory clicks."),
-        ("Live clinic floor",       "Cut paying clients under instructor supervision. Real feedback, real chairs, real money."),
-        ("Board exam + placement",  "Pass the NYS Master Barber exam, then meet our job-placement office for shops actively hiring."),
-    ],
-    "es": [
-        ("Teoría y sanitización",   "Aprende las regulaciones de NY, anatomía y control de infecciones antes de tocar una máquina."),
-        ("Práctica con maniquí",    "Domina profundidad de degradado, líneas, formas de barba y técnica de navaja en cabezas de práctica."),
-        ("Clínica con clientes",    "Corta clientes reales bajo supervisión del instructor. Retroalimentación, sillas y dinero reales."),
-        ("Examen + colocación",     "Aprueba el examen de Barbero Maestro y conoce nuestra oficina de empleo con barberías contratando."),
-    ],
+MODULES_HEAD = {
+    "en": ("Curriculum", "Course Modules"),
+    "es": ("Plan de Estudios", "Módulos del Curso"),
 }
 
-# ─── earnings tiers ──────────────────────────────────────────────────
-EARNINGS = {
-    "en": [
-        ("$45k – $60k", "Apprentice / first chair",    "First year out of school — booth rental varies."),
-        ("$60k – $90k", "Established master barber",   "Built clientele, mid-size NYC shop, includes tips."),
-        ("$100k+",      "Top-tier / shop owner",       "Own shop, signature clients, education / events."),
-    ],
-    "es": [
-        ("$45k – $60k", "Aprendiz / primera silla",    "Primer año tras graduarse — alquiler de silla varía."),
-        ("$60k – $90k", "Barbero maestro establecido", "Clientela construida, barbería mediana en NYC, incluye propinas."),
-        ("$100k+",      "Élite / dueño de barbería",   "Negocio propio, clientes distintivos, educación / eventos."),
-    ],
-}
-
-# ─── tuition plans ───────────────────────────────────────────────────
+# ─── Tuition plans (verbatim figures from the original) ──────────────
 TUITION = {
     "en": [
-        {"name": "Plan A · Pay Upfront", "price": "$4,600", "per": "one-time",
-         "feature": False, "items": ["Full 500 hours", "Books & tools included", "NYS exam fee covered"]},
-        {"name": "Plan B · Monthly",     "price": "$1,200", "per": "/ month × 4",
-         "feature": True,  "items": ["Same 500-hour curriculum", "Spread across 4 months", "Most popular plan"]},
-        {"name": "Plan C · Weekly",      "price": "$150",   "per": "/ week*",
-         "feature": False, "items": ["Same program", "Lowest weekly outlay", "Refundable down payment"]},
+        {"name": "Plan A — Morning", "sched": "Mon–Fri · 8:00 AM – 2:00 PM",
+         "hours": "30 hrs/week · 17 weeks (~4 months)", "price": "$5,600", "feature": False,
+         "terms": "$500 down (incl. $100 registration) + 17 weekly payments of $300"},
+        {"name": "Plan B — Afternoon", "sched": "Mon–Fri · 2:00 PM – 8:00 PM",
+         "hours": "30 hrs/week · 17 weeks (~4 months)", "price": "$4,600", "feature": True,
+         "terms": "$500 down (incl. $100 registration) + 16 weekly payments of $250 + final $100"},
+        {"name": "Plan C — Weekend", "sched": "Sat & Sun · 9:00 AM – 7:00 PM",
+         "hours": "18 hrs/week · 27 weeks (~6–7 months)", "price": "$4,600", "feature": False,
+         "terms": "$550 down (incl. $100 registration) + 27 weekly payments of $150"},
     ],
     "es": [
-        {"name": "Plan A · Pago Completo", "price": "$4,600", "per": "único",
-         "feature": False, "items": ["500 horas completas", "Libros y herramientas incluidos", "Examen de NY cubierto"]},
-        {"name": "Plan B · Mensual",       "price": "$1,200", "per": "/ mes × 4",
-         "feature": True,  "items": ["Mismo plan de 500 horas", "Distribuido en 4 meses", "El plan más popular"]},
-        {"name": "Plan C · Semanal",       "price": "$150",   "per": "/ semana*",
-         "feature": False, "items": ["Mismo programa", "Menor desembolso semanal", "Depósito reembolsable"]},
+        {"name": "Plan A — Mañanas", "sched": "Lun–Vie · 8:00 AM – 2:00 PM",
+         "hours": "30 hrs/semana · 17 semanas (~4 meses)", "price": "$5,600", "feature": False,
+         "terms": "$500 de pago inicial (incluye $100 de inscripción) + 17 pagos semanales de $300"},
+        {"name": "Plan B — Tardes", "sched": "Lun–Vie · 2:00 PM – 8:00 PM",
+         "hours": "30 hrs/semana · 17 semanas (~4 meses)", "price": "$4,600", "feature": True,
+         "terms": "$500 de pago inicial (incluye $100 de inscripción) + 16 pagos semanales de $250 + pago final de $100"},
+        {"name": "Plan C — Fines de Semana", "sched": "Sáb y Dom · 9:00 AM – 7:00 PM",
+         "hours": "18 hrs/semana · 27 semanas (~6–7 meses)", "price": "$4,600", "feature": False,
+         "terms": "$550 de pago inicial (incluye $100 de inscripción) + 27 pagos semanales de $150"},
     ],
 }
+TUITION_HEAD = {
+    "en": ("Tuition", "Flexible Payment Plans"),
+    "es": ("Matrícula", "Planes de Pago Flexibles"),
+}
+TUITION_NOTE = {
+    "en": "Every plan includes NY State Board Exam prep, hands-on training and job-placement support. Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
+    "es": "Cada plan incluye preparación para el examen del Estado de NY, entrenamiento práctico y apoyo de colocación laboral. Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI u otros proveedores. Asistencia financiera ACCES-VR disponible. Se aceptan beneficios del GI Bill® Post-9/11 y de la VA.",
+}
 
-# ─── Inside ABI clips (re-uses live CDN B-roll already serving the main site) ─
+# ─── Entrance requirements (verbatim) ────────────────────────────────
+REQUIREMENTS = {
+    "en": ["Social Security Card",
+           "High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
+           "Must be at least 17 years of age",
+           "Proof of residential address",
+           "Valid photo ID or Driver's License",
+           "$500 down payment"],
+    "es": ["Tarjeta de Seguro Social",
+           "Diploma de Escuela Secundaria (HSD) o GED — o aprobar el examen de admisión ATB en ABI",
+           "Tener al menos 17 años de edad",
+           "Comprobante de domicilio",
+           "Identificación con foto válida o Licencia de Conducir",
+           "$500 de pago inicial"],
+}
+REQ_HEAD = {
+    "en": ("Admissions", "Entrance Requirements"),
+    "es": ("Admisiones", "Requisitos de Ingreso"),
+}
+
+# ─── Inside ABI clips (verbatim captions; CDN B-roll) ────────────────
 SHOWCASE_CDN_BASE = "https://assets-lilac-five.vercel.app/showcase/vid/"
 SHOWCASE_CLIPS = [
     ("barbershop-interior-busy-atmosphere", "Inside our NYC clinic floor",  "Dentro de nuestra clínica en NYC"),
@@ -240,205 +284,169 @@ SHOWCASE_CLIPS = [
     ("five-men-in-barbershop",              "The ABI community",             "La comunidad ABI"),
     ("students-interacting-in-workshop",    "Hands-on from day one",         "Práctica desde el primer día"),
 ]
-
-# ─── Student Voices (3 testimonial videos shared across all 4 pages) ─
-STUDENT_VOICES = {
-    "en": {
-        "eyebrow": "Student Voices",
-        "title":   "Real voices, real cuts.",
-        "sub":     "Tap a player to hear an ABI student share their experience — direct, unscripted, unfiltered.",
-        "points": [
-            "Hands-on training from week one",
-            "Real clients in the on-campus clinic",
-            "Mentors with decades behind the chair",
-            "Full prep for the NY State Board Exam",
-            "Flexible morning, afternoon, and weekend schedules",
-            "Financial aid: ACCES-VR, GI Bill® and VA",
-            "Tuition from $150 / week",
-            "Job-placement assistance at graduation",
-            "Two NYC campuses — Manhattan and the Bronx",
-        ],
-    },
-    "es": {
-        "eyebrow": "Testimonios",
-        "title":   "Voces reales, cortes reales.",
-        "sub":     "Toca un reproductor para escuchar a un estudiante de ABI compartir su experiencia — directo, sin guion, sin filtros.",
-        "points": [
-            "Entrenamiento práctico desde la primera semana",
-            "Clientes reales en la clínica del plantel",
-            "Mentores con décadas detrás de la silla",
-            "Preparación completa para el examen del Estado de NY",
-            "Horarios flexibles: mañana, tarde y fin de semana",
-            "Ayuda financiera: ACCES-VR, GI Bill® y VA",
-            "Matrícula desde $150 / semana",
-            "Asistencia de colocación laboral al graduarte",
-            "Dos sedes en NYC — Manhattan y el Bronx",
-        ],
-    },
+SHOWCASE_HEAD = {
+    "en": ("Inside ABI", "See real life at ABI"),
+    "es": ("Por Dentro de ABI", "Mira la vida real en ABI"),
+}
+SHOWCASE_LEAD = {
+    "en": "Real clips from our classrooms and barber clinic — hands-on training, every single day.",
+    "es": "Clips reales de nuestras aulas y clínica de barbería — entrenamiento práctico, todos los días.",
 }
 
-# Until the new files arrive, the 3rd Student Voices video re-uses Video-321.
-# Drop a new file at /assets/videos/student-voice-3.mp4 (and a matching poster
-# at /assets/img/student-voice-3-poster.jpg) and the build will pick it up.
+# ─── Student Voices (3 testimonial videos) ───────────────────────────
+STUDENT_VOICES = {
+    "en": {"eyebrow": "Student Voices", "title": "Real voices, real cuts.",
+           "sub": "Tap a player to hear an ABI student share their experience — direct, unscripted, unfiltered."},
+    "es": {"eyebrow": "Testimonios", "title": "Voces reales, cortes reales.",
+           "sub": "Toca un reproductor para escuchar a un estudiante de ABI compartir su experiencia — directo, sin guion, sin filtros."},
+}
+# 3rd video re-uses Video-321 until the real clip arrives (drop student-voice-3.mp4 + poster).
 STUDENT_VOICES_VIDEOS = [
-    ("video-321.mp4",         "video-321-poster.jpg"),
-    ("Video-124.mp4",         "video-124-poster.jpg"),
-    ("video-321.mp4",         "video-321-poster.jpg"),
+    ("video-321.mp4", "video-321-poster.jpg"),
+    ("Video-124.mp4", "video-124-poster.jpg"),
+    ("video-321.mp4", "video-321-poster.jpg"),
 ]
 
-# ─── 3 Bronx-only testimonial videos (placeholders until real files arrive) ───
+# ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
 BRONX_EXTRA = {
-    "en": {
-        "eyebrow": "More Bronx Stories",
-        "title":   "More voices from the Bronx campus.",
-        "sub":     "Three Bronx students share the work, the practice, and the confidence they built.",
-    },
-    "es": {
-        "eyebrow": "Más Voces del Bronx",
-        "title":   "Más historias de la sede del Bronx.",
-        "sub":     "Tres estudiantes del Bronx comparten el trabajo, la práctica y la confianza que construyeron.",
-    },
+    "en": {"eyebrow": "More Bronx Stories", "title": "More voices from the Bronx campus.",
+           "sub": "Three Bronx students share the work, the practice, and the confidence they built."},
+    "es": {"eyebrow": "Más Voces del Bronx", "title": "Más historias de la sede del Bronx.",
+           "sub": "Tres estudiantes del Bronx comparten el trabajo, la práctica y la confianza que construyeron."},
 }
-# Drop real files at bronx-voice-1/2/3.mp4 (+ posters) and the build picks them up.
 BRONX_EXTRA_VIDEOS = [
     ("video-321.mp4", "video-321-poster.jpg"),
     ("Video-124.mp4", "video-124-poster.jpg"),
     ("video-321.mp4", "video-321-poster.jpg"),
 ]
 
-# ─── reviews (per campus, per language — NO Google widget) ───────────
+# ─── Reviews (verbatim — the school's real Google reviews) ───────────
+# These three reviews appear on the school's own landing pages for both
+# campuses. Used as-is (real names, real quotes) — content is king.
 REVIEWS = {
-    ("manhattan", "en"): [
-        {"name": "Marcus J.",  "role": "Class of 2024 · Manhattan",
-         "q": "The instructors at Midtown don't let you settle. By month three I was cutting paying clients confidently, and I'd already booked weekend regulars."},
-        {"name": "David R.",   "role": "Class of 2024 · Manhattan",
-         "q": "Weekend schedule let me keep my day job while training. Now I work at a shop two blocks from where I learned. Best money I've ever spent."},
-        {"name": "Anthony C.", "role": "Class of 2023 · Manhattan",
-         "q": "Top-tier instructors, an actual clinic floor, and serious prep for the State Board. Passed first try and started earning two weeks later."},
-        {"name": "Jamal P.",   "role": "Class of 2023 · Manhattan",
-         "q": "Manhattan campus turned a hobby into a paycheck. The placement office had me on a chair the same week I graduated."},
-    ],
-    ("manhattan", "es"): [
-        {"name": "Marcos J.",   "role": "Clase 2024 · Manhattan",
-         "q": "Los instructores en Midtown no te dejan conformarte. Para el tercer mes ya cortaba clientes con confianza y tenía citas fijas los fines de semana."},
-        {"name": "David R.",    "role": "Clase 2024 · Manhattan",
-         "q": "El horario de fin de semana me dejó mantener mi trabajo mientras entrenaba. Hoy trabajo a dos cuadras de donde aprendí. La mejor inversión."},
-        {"name": "Antonio C.",  "role": "Clase 2023 · Manhattan",
-         "q": "Instructores de primera, una clínica real y preparación seria para el examen del Estado. Lo pasé al primer intento y comencé a ganar dos semanas después."},
-        {"name": "Javier P.",   "role": "Clase 2023 · Manhattan",
-         "q": "La sede de Manhattan convirtió un pasatiempo en un sueldo. La oficina de empleo me sentó en una silla la misma semana de graduarme."},
-    ],
-    ("bronx", "en"): [
-        {"name": "Carlos M.",  "role": "Class of 2024 · Bronx",
-         "q": "Bilingual instruction at Westchester Square changed everything for me. Real clients from week one, no holding back, and the staff actually cared."},
-        {"name": "Tyrone A.",  "role": "Class of 2024 · Bronx",
-         "q": "Right around the corner from my block. The vibe at the Bronx campus is family — instructors invested in your growth, not just your tuition."},
-        {"name": "Luis A.",    "role": "Class of 2023 · Bronx",
-         "q": "Bronx campus prepared me end to end. Theory, technique, State Board prep — I left licensed, confident, and earning."},
-        {"name": "Ramon S.",   "role": "Class of 2023 · Bronx",
-         "q": "Se habla español — that alone meant everything. Instructors broke each technique down two ways until it clicked."},
-    ],
-    ("bronx", "es"): [
-        {"name": "Carlos M.",  "role": "Clase 2024 · Bronx",
-         "q": "La instrucción bilingüe en Westchester Square lo cambió todo para mí. Clientes reales desde la primera semana, sin frenos, y el personal sí se involucra."},
-        {"name": "Tirón A.",   "role": "Clase 2024 · Bronx",
-         "q": "Justo a la vuelta de mi cuadra. En la sede del Bronx se siente como familia — instructores que invierten en tu crecimiento, no solo en tu matrícula."},
-        {"name": "Luis A.",    "role": "Clase 2023 · Bronx",
-         "q": "La sede del Bronx me preparó de principio a fin. Teoría, técnica, preparación del examen — salí licenciado, con confianza y ganando."},
-        {"name": "Ramón S.",   "role": "Clase 2023 · Bronx",
-         "q": "Se habla español — eso por sí solo lo significó todo. Los instructores explicaban cada técnica de dos formas hasta que entrara."},
-    ],
-}
-
-# ─── FAQ ─────────────────────────────────────────────────────────────
-FAQ = {
     "en": [
-        ("How long is the program?",
-         "Our Master Barber Program is 500 hours — about 4 months full-time or longer on the weekend track. Class start dates are the first Monday of every month."),
-        ("Do I need any prior experience?",
-         "No. Many of our most successful graduates started with zero clipper time. You need to be at least 17, have a high-school diploma / GED (or pass the ATB exam at ABI), and bring a strong work ethic."),
-        ("What does it cost?",
-         "$4,600 total. You can pay it upfront (Plan A), monthly over 4 months (Plan B), or as low as $150 / week (Plan C, with a refundable down payment). Books and tools are included."),
-        ("Is financial aid available?",
-         "Yes. We accept ACCES-VR and Post-9/11 GI Bill® / VA benefits, and NYS Department of Labor grants may apply. Our admissions team helps you figure out what you qualify for."),
-        ("What about job placement?",
-         "Our on-site placement office connects graduates to NYC shops actively hiring. Many students start interviewing in their last month."),
-        ("Can I really finish in 4 months?",
-         "Yes — full-time students complete the 500 hours in about 4 months. Part-time or weekend schedules extend the timeline but the curriculum is the same."),
+        {"name": "Jerrick Matthews", "role": "Current student",
+         "q": "The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school."},
+        {"name": "Carlos Perez", "role": "Student",
+         "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
+        {"name": "Zyee Fin", "role": "Current student",
+         "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
     ],
     "es": [
-        ("¿Cuánto dura el programa?",
-         "Nuestro Programa de Barbero Maestro es de 500 horas — alrededor de 4 meses a tiempo completo, o más en el horario de fin de semana. Las nuevas clases comienzan el primer lunes de cada mes."),
-        ("¿Necesito experiencia previa?",
-         "No. Muchos de nuestros graduados más exitosos comenzaron sin tocar una máquina. Necesitas tener al menos 17 años, diploma de secundaria / GED (o aprobar el examen ATB en ABI) y ganas reales de trabajar."),
-        ("¿Cuánto cuesta?",
-         "$4,600 en total. Puedes pagar todo de una (Plan A), mensual durante 4 meses (Plan B), o desde $150 / semana (Plan C, con depósito reembolsable). Libros y herramientas incluidos."),
-        ("¿Hay ayuda financiera?",
-         "Sí. Aceptamos ACCES-VR, Post-9/11 GI Bill® y beneficios de la VA, y pueden aplicar subvenciones del Departamento de Trabajo del Estado de NY. Nuestro equipo de admisiones te ayuda a ver para qué calificas."),
-        ("¿Qué pasa con la colocación laboral?",
-         "Nuestra oficina de empleo en el plantel conecta a los graduados con barberías de NYC que están contratando. Muchos estudiantes ya entrevistan en su último mes."),
-        ("¿Realmente puedo terminar en 4 meses?",
-         "Sí — los estudiantes a tiempo completo terminan las 500 horas en unos 4 meses. Los horarios de medio tiempo o de fin de semana extienden el calendario pero el contenido es el mismo."),
+        {"name": "Jerrick Matthews", "role": "Estudiante actual",
+         "q": "¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela."},
+        {"name": "Carlos Perez", "role": "Estudiante",
+         "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
+        {"name": "Zyee Fin", "role": "Estudiante actual",
+         "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
     ],
 }
+REVIEWS_HEAD = {
+    "en": ("Student Stories", "What Our Students Say"),
+    "es": ("Historias de Estudiantes", "Lo Que Dicen Nuestros Estudiantes"),
+}
+REVIEWS_LEAD = {
+    "en": "Real reviews from students at the American Barber Institute.",
+    "es": "Reseñas reales de estudiantes del American Barber Institute.",
+}
 
-# ─── footer + chatbot strings ────────────────────────────────────────
+# ─── FAQ (verbatim — all 8 Q&As, phone swapped per campus) ───────────
+def faq(lang, phone_disp):
+    if lang == "es":
+        return [
+            ("¿Cuánto cuesta la escuela de barbería en Nueva York?",
+             "En ABI, el programa de Barbero Maestro de 500 horas comienza en $4,600 (planes de tarde o fin de semana) o $5,600 (plan de mañana) — $500–$550 de pago inicial y pagos semanales de $150–$300 mientras estudias. Los libros y herramientas son aparte. Se aceptan fondos de ACCES-VR, el GI Bill® Post-9/11 y beneficios de la VA."),
+            ("¿Cuánto dura la escuela de barbería en Nueva York?",
+             "El Estado de Nueva York requiere 500 horas de entrenamiento. A tiempo completo en ABI toma alrededor de 4 meses (17 semanas a 30 horas por semana); el horario de fin de semana toma alrededor de 6–7 meses (27 semanas)."),
+            ("¿Cuántas horas por semana estaré en la escuela?",
+             "Los estudiantes de tiempo completo entrenan 30 horas por semana, de lunes a viernes, en sesiones de mañana (8:00 AM–2:00 PM) o tarde (2:00 PM–8:00 PM). Los estudiantes de fin de semana entrenan 18 horas por semana los sábados y domingos."),
+            ("¿Necesito un diploma de secundaria para inscribirme?",
+             "Se requiere un diploma de secundaria o GED — o puedes aprobar el examen de admisión Ability-To-Benefit (ATB) en ABI. Debes tener al menos 17 años."),
+            ("¿Puedo tomar la escuela de barbería en línea?",
+             "No. El Estado de Nueva York requiere horas de entrenamiento práctico en persona. En ABI practicas con clientes reales en nuestra clínica supervisada desde tus primeras semanas — no en maniquíes."),
+            ("¿Qué licencia obtendré después del programa?",
+             "El programa te prepara para la licencia de Barbero Maestro del Estado de Nueva York, incluyendo la preparación completa para el examen del Estado de NY. Nuestra oficina de empleo te ayuda a encontrar trabajo después de aprobar."),
+            ("¿Hay ayuda financiera disponible?",
+             "Sí — ACCES-VR puede cubrir matrícula, herramientas y libros para neoyorquinos calificados con discapacidades; se aceptan el GI Bill® Post-9/11 y beneficios de la VA; pueden aplicar subvenciones del Departamento de Trabajo del Estado de NY; y cada plan incluye pagos semanales."),
+            ("¿Cuándo comienzan las clases?",
+             "Las clases nuevas comienzan el primer lunes de cada mes en ambas sedes, Manhattan y el Bronx. Llama al %s para reservar tu lugar — las clases se llenan rápido." % phone_disp),
+        ]
+    return [
+        ("How much does barber school cost in New York?",
+         "At ABI, the 500-hour Master Barber program starts at $4,600 (afternoon or weekend plans) or $5,600 (morning plan) — $500–$550 down and weekly payments of $150–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
+        ("How long is barber school in New York?",
+         "New York State requires 500 hours of training. Full-time at ABI takes about 4 months (17 weeks at 30 hours per week); the weekend schedule takes about 6–7 months (27 weeks)."),
+        ("How many hours per week will I be in school?",
+         "Full-time students train 30 hours per week, Monday to Friday, in morning (8:00 AM–2:00 PM) or afternoon (2:00 PM–8:00 PM) sessions. Weekend students train 18 hours per week on Saturdays and Sundays."),
+        ("Do I need a high school diploma to enroll?",
+         "A high school diploma or GED is required — or you can pass the Ability-To-Benefit (ATB) entrance exam at ABI instead. You must be at least 17 years old."),
+        ("Can I take barber school online?",
+         "No. New York State requires in-person, hands-on training hours. At ABI you practice on real clients in our supervised barber clinic from your first weeks — not on mannequins."),
+        ("What license will I get after the program?",
+         "The program prepares you for the New York State Master Barber license, including full NY State Board Exam preparation. Our job placement office helps you find work after you pass."),
+        ("Is financial aid available?",
+         "Yes — ACCES-VR can cover tuition, tools and books for qualified New Yorkers with disabilities; Post-9/11 GI Bill® and VA benefits are accepted; NYS Department of Labor grants may apply; and every plan includes weekly payments."),
+        ("When do classes start?",
+         "New classes begin the first Monday of every month at both the Manhattan and Bronx campuses. Call %s to reserve your seat — classes fill fast." % phone_disp),
+    ]
+FAQ_HEAD = {
+    "en": ("FAQs", "Barber School Questions, Answered"),
+    "es": ("Preguntas Frecuentes", "Preguntas sobre la Escuela de Barbería, Respondidas"),
+}
+
+# ─── lead form labels (verbatim from the original form) ──────────────
+FORM = {
+    "en": {
+        "h": "Reserve Your Spot Today",
+        "sub": "Fill out the form and an Admissions Advisor will contact you.",
+        "first": "First Name", "last": "Last Name", "phone": "Phone", "email": "Email",
+        "loc_label": "Which campus would you prefer to attend?",
+        "loc_opts": ["Select a campus", "Manhattan Campus — 48 West 39th Street", "Bronx Campus — 121 Westchester Square"],
+        "fmt_label": "What is your preferred learning format?",
+        "fmt_opts": ["Select an option", "Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
+        "submit": "Submit",
+        "consent": "By clicking “Submit” you consent that ABI can contact you via phone, SMS or email for booking confirmations or promotional offers.",
+        "thanks": "Thank you! An ABI admissions agent will call you within 24 hours.",
+    },
+    "es": {
+        "h": "Reserva Tu Lugar Hoy",
+        "sub": "Completa el formulario y un asesor de admisiones te contactará.",
+        "first": "Nombre", "last": "Apellido", "phone": "Teléfono", "email": "Correo Electrónico",
+        "loc_label": "¿A cuál sede te gustaría asistir?",
+        "loc_opts": ["Selecciona una sede", "Sede de Manhattan — 48 West 39th Street", "Sede del Bronx — 121 Westchester Square"],
+        "fmt_label": "¿Cuál es tu horario preferido?",
+        "fmt_opts": ["Selecciona una opción", "Mañana · Lun–Vie 8:00 AM–2:00 PM", "Tarde · Lun–Vie 2:00 PM–8:00 PM", "Fin de semana · Sáb–Dom 9:00 AM–7:00 PM"],
+        "submit": "Enviar",
+        "consent": "Al hacer clic en “Enviar” aceptas que ABI puede contactarte por teléfono, SMS o correo para confirmaciones de citas u ofertas promocionales.",
+        "thanks": "¡Gracias! Un agente de admisiones de ABI te llamará dentro de 24 horas.",
+    },
+}
+
+# ─── footer ──────────────────────────────────────────────────────────
 FOOTER = {
     "en": {
-        "h":   "Ready to start your barber career?",
-        "sub": "Your new career is one phone call away. Talk to admissions in English or Spanish.",
-        "cta1": "Request a Call",
-        "cta2": "Apply Now",
-        "cta3": "Speak with Admissions",
-        "fine": "© American Barber Institute · *$150/week refers to Plan C weekly payments.",
+        "h": "American Barber Institute",
+        "sub": "New York's only dedicated barber school — changing lives for over 30 years.",
+        "cta1": "Request a Call", "cta2": "Apply Now", "cta3": "Speak with Admissions",
+        "fine": "© American Barber Institute. Approved by NYSED · Licensed by BPSS · Since 1996. *$150/week refers to the Plan C weekly payment.",
     },
     "es": {
-        "h":   "¿Listo para comenzar tu carrera de barbero?",
-        "sub": "Tu nueva carrera está a una llamada. Habla con admisiones en inglés o español.",
-        "cta1": "Solicita una Llamada",
-        "cta2": "Aplica Ahora",
-        "cta3": "Habla con Admisiones",
-        "fine": "© American Barber Institute · *$150/semana se refiere a los pagos semanales del Plan C.",
+        "h": "American Barber Institute",
+        "sub": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años.",
+        "cta1": "Solicita una Llamada", "cta2": "Aplica Ahora", "cta3": "Habla con Admisiones",
+        "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$150/semana se refiere al pago semanal del Plan C.",
     },
 }
 
-# ─── section labels (shared across pages) ────────────────────────────
-SECTION_LABELS = {
-    "en": {
-        "pills":       ("What You Get",                 "Everything you need to succeed"),
-        "steps":       ("How It Works",                 "Hands-on training that matters"),
-        "earnings":    ("Career Outlook",               "What barbers actually earn"),
-        "tuition":     ("Tuition",                      "Three payment plans, one program"),
-        "showcase":    ("Inside ABI",                   "See real life at the school"),
-        "videos":      ("Watch Us",                     "ABI in action"),
-        "gallery":     ("Gallery",                      "Life on the clinic floor"),
-        "reviews_mh":  ("Reviews",                      "What Manhattan students say"),
-        "reviews_bx":  ("Reviews",                      "What Bronx students say"),
-        "faq":         ("Common Questions",             "Frequently asked questions"),
-    },
-    "es": {
-        "pills":       ("Lo Que Obtienes",              "Todo lo que necesitas para tener éxito"),
-        "steps":       ("Cómo Funciona",                "Entrenamiento práctico que importa"),
-        "earnings":    ("Panorama de Carrera",          "Cuánto gana realmente un barbero"),
-        "tuition":     ("Matrícula",                    "Tres planes de pago, un programa"),
-        "showcase":    ("Por Dentro de ABI",            "Mira la vida real en la escuela"),
-        "videos":      ("Míranos",                      "ABI en acción"),
-        "gallery":     ("Galería",                      "Vida en la clínica"),
-        "reviews_mh":  ("Reseñas",                      "Lo que dicen los estudiantes de Manhattan"),
-        "reviews_bx":  ("Reseñas",                      "Lo que dicen los estudiantes del Bronx"),
-        "faq":         ("Preguntas Frecuentes",         "Preguntas comunes"),
-    },
-}
+# ─── gallery file list ───────────────────────────────────────────────
+GALLERY = ["lf-gal-01.jpg", "lf-gal-02.jpg", "lf-gal-03.jpg", "lf-gal-04.jpg",
+           "lf-gal-05.jpg", "lf-gal-06.jpg", "lf-gal-07.jpg", "lf-gal-08.jpg"]
+GALLERY_HEAD = {"en": ("Gallery", "Life At ABI"), "es": ("Galería", "La Vida en ABI")}
 
-# ─── gallery file list (subset of the main site's gallery photos) ────
-GALLERY = [
-    "lf-gal-01.jpg", "lf-gal-02.jpg", "lf-gal-03.jpg", "lf-gal-04.jpg",
-    "lf-gal-05.jpg", "lf-gal-06.jpg", "lf-gal-07.jpg", "lf-gal-08.jpg",
-]
-
-# ─── YouTube clips embedded in the "Watch Us" section ────────────────
+# ─── YouTube clips (verbatim captions from "Watch Us") ───────────────
 YT_CLIPS = [
-    ("uADUtUtChH4", "Manhattan campus walkthrough", "Recorrido por el campus de Manhattan"),
-    ("oM8KfWfeTWA", "$3 student haircuts in action", "Cortes de $3 en acción"),
-    ("dQw4w9WgXcQ", "Day in the life at ABI",        "Un día en ABI"),
+    ("uADUtUtChH4", "Train to be a Master Barber at New York's #1 barber school", "Fórmate como Barbero Maestro en la escuela #1 de Nueva York"),
+    ("oM8KfWfeTWA", "Our courses are hands-on, fun and engaging", "Nuestros cursos son prácticos, divertidos y dinámicos"),
+    ("dQw4w9WgXcQ", "Tour our two-floor, 3,000 sq ft Manhattan campus", "Recorre nuestro campus de Manhattan de 3,000 pies²"),
 ]
+YT_HEAD = {"en": ("Watch Us", "See ABI In Action"), "es": ("Míranos", "Mira a ABI en Acción")}
