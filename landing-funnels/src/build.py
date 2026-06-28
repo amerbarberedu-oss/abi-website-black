@@ -29,8 +29,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"   # placeholder; overwritten if deployed elsewhere
-CSS_V = "4"
-JS_V  = "4"
+CSS_V = "3"
+JS_V  = "3"
 
 
 # ── icons (small inline SVG library, no external font icons) ────────
@@ -432,13 +432,15 @@ def footer(p):
         h(tel), icon_text, h(mbar_text),
         icon_cta, h(mbar_cta),
     )
-    # Footer CTA block removed per client direction — on desktop the inline hero
-    # form is the conversion target; on mobile the fixed .lf-mbar handles it.
-    # Footer now shows: closing message + social icons + fine print only.
     return (
         '<footer class="lf-footer"><div class="lf-wrap">\n'
         '  <h3 class="lf-h2">%s</h3>\n'
         '  <p>%s</p>\n'
+        '  <div class="lf-footer__ctas">\n'
+        '    <a class="lf-btn lf-btn--primary lf-btn--lg" href="#reserve">%s</a>\n'
+        '    <a class="lf-btn lf-btn--secondary lf-btn--lg" href="tel:%s">%s</a>\n'
+        '    <a class="lf-btn lf-btn--ghost lf-btn--lg" href="#reserve">%s</a>\n'
+        '  </div>\n'
         '  <div class="lf-footer__socials">%s</div>\n'
         '  <p class="lf-footer__fine">%s</p>\n'
         '</div></footer>\n'
@@ -446,6 +448,7 @@ def footer(p):
         '%s'
     ) % (
         h(ft["h"]), h(ft["sub"]),
+        h(ft["cta1"]), h(tel), h(ft["cta2"]), h(ft["cta3"]),
         socials, h(ft["fine"]),
         ("Chatear con admisiones" if p["lang"] == "es" else "Chat with admissions"),
         svg("chat", 26),
