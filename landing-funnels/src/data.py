@@ -300,11 +300,11 @@ STUDENT_VOICES = {
     "es": {"eyebrow": "Testimonios", "title": "Voces reales, cortes reales.",
            "sub": "Toca un reproductor para escuchar a un estudiante de ABI compartir su experiencia — directo, sin guion, sin filtros."},
 }
-# 3rd video re-uses Video-321 until the real clip arrives (drop student-voice-3.mp4 + poster).
+# 3 real testimonial clips — Video-321, Video-124, Video-325 (a.k.a. student-voice-3).
 STUDENT_VOICES_VIDEOS = [
     ("video-321.mp4", "video-321-poster.jpg"),
     ("Video-124.mp4", "video-124-poster.jpg"),
-    ("video-321.mp4", "video-321-poster.jpg"),
+    ("student-voice-3.mp4", "student-voice-3-poster.jpg"),
 ]
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
@@ -400,10 +400,14 @@ FORM = {
         "h": "Reserve Your Spot Today",
         "sub": "Fill out the form and an Admissions Advisor will contact you.",
         "first": "First Name", "last": "Last Name", "phone": "Phone", "email": "Email",
-        "loc_label": "Which campus would you prefer to attend?",
+        "loc_label": "Which School Location Would You Prefer To Attend?",
         "loc_opts": ["Select a campus", "Manhattan Campus — 48 West 39th Street", "Bronx Campus — 121 Westchester Square"],
         "fmt_label": "What is your preferred learning format?",
         "fmt_opts": ["Select an option", "Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
+        "lang_label": "Which is your preferred language of communication?",
+        "lang_opts": ["Select a language", "English", "Spanish / Español", "Other"],
+        "msg_label": "Message for ABI",
+        "msg_ph": "Tell us anything we should know — questions, schedule conflicts, financial aid needs, etc.",
         "submit": "Submit",
         "consent": "By clicking “Submit” you consent that ABI can contact you via phone, SMS or email for booking confirmations or promotional offers.",
         "thanks": "Thank you! An ABI admissions agent will call you within 24 hours.",
@@ -416,6 +420,10 @@ FORM = {
         "loc_opts": ["Selecciona una sede", "Sede de Manhattan — 48 West 39th Street", "Sede del Bronx — 121 Westchester Square"],
         "fmt_label": "¿Cuál es tu horario preferido?",
         "fmt_opts": ["Selecciona una opción", "Mañana · Lun–Vie 8:00 AM–2:00 PM", "Tarde · Lun–Vie 2:00 PM–8:00 PM", "Fin de semana · Sáb–Dom 9:00 AM–7:00 PM"],
+        "lang_label": "¿Cuál es tu idioma de comunicación preferido?",
+        "lang_opts": ["Selecciona un idioma", "Español", "Inglés / English", "Otro"],
+        "msg_label": "Mensaje para ABI",
+        "msg_ph": "Cuéntanos lo que debamos saber — preguntas, conflictos de horario, ayuda financiera, etc.",
         "submit": "Enviar",
         "consent": "Al hacer clic en “Enviar” aceptas que ABI puede contactarte por teléfono, SMS o correo para confirmaciones de citas u ofertas promocionales.",
         "thanks": "¡Gracias! Un agente de admisiones de ABI te llamará dentro de 24 horas.",
@@ -427,13 +435,11 @@ FOOTER = {
     "en": {
         "h": "American Barber Institute",
         "sub": "New York's only dedicated barber school — changing lives for over 30 years.",
-        "cta1": "Request a Call", "cta2": "Apply Now", "cta3": "Speak with Admissions",
         "fine": "© American Barber Institute. Approved by NYSED · Licensed by BPSS · Since 1996. *$150/week refers to the Plan C weekly payment.",
     },
     "es": {
         "h": "American Barber Institute",
         "sub": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años.",
-        "cta1": "Solicita una Llamada", "cta2": "Aplica Ahora", "cta3": "Habla con Admisiones",
         "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$150/semana se refiere al pago semanal del Plan C.",
     },
 }

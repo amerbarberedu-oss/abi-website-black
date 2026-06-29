@@ -26,8 +26,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "6"
-JS_V  = "6"
+CSS_V = "7"
+JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {
@@ -163,8 +163,9 @@ def hero(p):
 def lead_form(p):
     lang = p["lang"]
     f = D.FORM[lang]
-    loc_opts = "".join('<option>%s</option>' % h(o) for o in f["loc_opts"])
-    fmt_opts = "".join('<option>%s</option>' % h(o) for o in f["fmt_opts"])
+    loc_opts  = "".join('<option>%s</option>' % h(o) for o in f["loc_opts"])
+    fmt_opts  = "".join('<option>%s</option>' % h(o) for o in f["fmt_opts"])
+    lang_opts = "".join('<option>%s</option>' % h(o) for o in f["lang_opts"])
     return (
         '<div class="lf-hero__form lf-rv">\n'
         '<form class="lf-form" id="reserve" method="POST" action="https://formspree.io/f/xrgpkebw">\n'
@@ -174,15 +175,19 @@ def lead_form(p):
         '  <h3 class="lf-form__h">%(h)s</h3>\n'
         '  <p class="lf-form__sub">%(sub)s</p>\n'
         '  <div class="lf-form__row lf-form__row--2">'
-        '<input type="text" name="first_name" required placeholder="%(first)s">'
-        '<input type="text" name="last_name" required placeholder="%(last)s"></div>\n'
+        '<input type="text" name="first_name" required placeholder="%(first)s" autocomplete="given-name">'
+        '<input type="text" name="last_name" required placeholder="%(last)s" autocomplete="family-name"></div>\n'
         '  <div class="lf-form__row lf-form__row--2">'
-        '<input type="tel" name="phone" required placeholder="%(phone)s">'
-        '<input type="email" name="email" required placeholder="%(email)s"></div>\n'
+        '<input type="tel" name="phone" required placeholder="%(phone)s" autocomplete="tel">'
+        '<input type="email" name="email" required placeholder="%(email)s" autocomplete="email"></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(loc_label)s</label>'
         '<select name="campus_pref" required>%(loc_opts)s</select></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(fmt_label)s</label>'
         '<select name="format" required>%(fmt_opts)s</select></div>\n'
+        '  <div class="lf-form__row"><label class="lf-form__label">%(lang_label)s</label>'
+        '<select name="preferred_language" required>%(lang_opts)s</select></div>\n'
+        '  <div class="lf-form__row"><label class="lf-form__label">%(msg_label)s</label>'
+        '<textarea name="message" rows="4" placeholder="%(msg_ph)s"></textarea></div>\n'
         '  <button type="submit" class="lf-btn lf-btn--primary lf-btn--lg lf-form__submit">%(submit)s</button>\n'
         '  <p class="lf-form__fine">%(consent)s</p>\n'
         '</form></div>'
@@ -193,6 +198,8 @@ def lead_form(p):
         "phone": h(f["phone"]), "email": h(f["email"]),
         "loc_label": h(f["loc_label"]), "loc_opts": loc_opts,
         "fmt_label": h(f["fmt_label"]), "fmt_opts": fmt_opts,
+        "lang_label": h(f["lang_label"]), "lang_opts": lang_opts,
+        "msg_label": h(f["msg_label"]), "msg_ph": h(f["msg_ph"]),
         "submit": h(f["submit"]), "consent": h(f["consent"]),
     }
 
@@ -449,11 +456,6 @@ def footer(p):
         '  <h3 class="lf-h2">%s</h3>\n'
         '  <p>%s</p>\n'
         '  <p class="lf-footer__addr">%s%s · <a href="tel:%s">%s</a></p>\n'
-        '  <div class="lf-footer__ctas">\n'
-        '    <a class="lf-btn lf-btn--primary lf-btn--lg" href="#reserve">%s</a>\n'
-        '    <a class="lf-btn lf-btn--secondary lf-btn--lg" href="tel:%s">%s</a>\n'
-        '    <a class="lf-btn lf-btn--ghost lf-btn--lg" href="#reserve">%s</a>\n'
-        '  </div>\n'
         '  <div class="lf-footer__socials">%s</div>\n'
         '  <p class="lf-footer__fine">%s</p>\n'
         '</div></footer>\n'
@@ -461,7 +463,6 @@ def footer(p):
     ) % (
         h(ft["h"]), h(ft["sub"]),
         svg("pin", 14), h(addr), h(p["phone"][2]), h(p["phone"][1]),
-        h(ft["cta1"]), h(p["phone"][2]), h(ft["cta2"]), h(ft["cta3"]),
         socials, h(ft["fine"]),
         ("Chatear con admisiones" if p["lang"] == "es" else "Chat with admissions"),
         svg("chat", 26),
