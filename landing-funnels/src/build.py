@@ -85,8 +85,8 @@ def section_head(eyebrow, title, lead=None):
 
 # Campus → branded logo (each image bakes in its own street address)
 CAMPUS_LOGOS = {
-    "manhattan": "/assets/img/logo-manhattan.png",
-    "bronx":     "/assets/img/logo-bronx.png",
+    "manhattan": "/assets/img/logo-manhattan.png?v=2",
+    "bronx":     "/assets/img/logo-bronx.png?v=2",
 }
 
 # ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
