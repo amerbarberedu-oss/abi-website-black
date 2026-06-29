@@ -1023,19 +1023,32 @@ body.lf-page--brnx-es {
   .lf-hero .lf-h1 { color: var(--lf-ink); text-shadow: none; }
   .lf-hero__sub { color: var(--lf-muted); }
   .lf-hero__sub b { color: var(--lf-ink); }
-  /* Hide the duplicated kicker + headline (mobile hero owns those) */
+  /* Mobile hero owns the kicker + H1 + sub, so hide those duplicates */
   .lf-hero__kicker,
   .lf-hero .lf-h1,
-  .lf-hero__sub,
-  .lf-hero .lf-features,
-  .lf-hero .lf-cd { display: none; }
-  /* Chip styling for any remaining chips should match light theme */
+  .lf-hero__sub { display: none; }
+  /* PARITY: feature chips + countdown stay visible on mobile, just restyled
+     for the light alt-bg surface (desktop kept their on-image styling). */
   .lf-feature {
-    background: var(--lf-accent-soft);
-    border-color: color-mix(in srgb, var(--lf-accent) 30%, transparent);
-    color: var(--lf-accent-dark);
+    background: #fff;
+    border: 1px solid var(--lf-line);
+    color: var(--lf-ink);
     text-shadow: none;
+    box-shadow: 0 1px 2px rgba(15, 30, 80, .04);
   }
+  .lf-feature svg { color: var(--lf-accent); }
+  .lf-features { margin-top: .2rem; margin-bottom: 1.3rem; }
+  .lf-cd {
+    background: #fff;
+    border: 1px solid var(--lf-line);
+    border-radius: var(--lf-r-md);
+    box-shadow: var(--lf-shadow-sm);
+    color: var(--lf-ink);
+    padding: 1rem;
+    margin-bottom: 1.3rem;
+  }
+  .lf-cd__h, .lf-cd__sub { color: var(--lf-ink); }
+  .lf-cd__cell b { color: var(--lf-accent-dark); }
   /* Leave room at the bottom for the sticky 3-CTA bar */
   body.lf-page { padding-bottom: 78px; }
 }

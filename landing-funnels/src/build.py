@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "12"
+CSS_V = "13"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
