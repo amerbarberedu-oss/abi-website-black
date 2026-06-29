@@ -1195,16 +1195,16 @@ body.lf-page--brnx-es {
     text-align: left;
   }
   .lf-mhero__kicker {
-    display: inline-block;
+    display: block;
     margin: 0 0 .55rem;
-    padding: .32rem .7rem;
-    background: var(--lf-accent);
-    color: var(--lf-on-accent);
-    border-radius: var(--lf-r-pill);
+    padding: 0;
+    background: transparent;
+    color: #fff;
     font-size: .72rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: .12em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
   }
   .lf-mhero__h1 {
     font-family: 'Oswald', 'Poppins', sans-serif;
@@ -1234,10 +1234,33 @@ body.lf-page--brnx-es {
     line-height: 1;
     text-shadow: 0 2px 16px rgba(0, 0, 0, .55);
   }
+  /* CTA blends as a text link with arrow, no button box.
+     The sticky bottom bar + form below already carry the action weight. */
   .lf-mhero__cta {
-    width: 100%;
-    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    width: auto;
     margin-top: .35rem;
+    padding: 0;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    box-shadow: none;
+    border-bottom: 2px solid var(--lf-accent);
+    border-radius: 0;
+    font-family: 'Oswald', 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+  }
+  .lf-mhero__cta:hover { filter: brightness(1); transform: none; }
+  .lf-mhero__cta::after {
+    content: "→";
+    color: var(--lf-accent);
+    font-weight: 800;
   }
   /* The mobile photo hero (lf-mhero) already shows the kicker + H1.
      Hide them in the dark .lf-hero block to remove the visible duplicate.
