@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "9"
+CSS_V = "12"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -83,13 +83,15 @@ def section_head(eyebrow, title, lead=None):
     return out + '</div>'
 
 
-# Campus → branded logo (each logo has its own address baked into the image)
+# Campus → branded logo (each image bakes in its own street address)
 CAMPUS_LOGOS = {
-    "manhattan": "/assets/img/logo-manhattan.jpeg",
-    "bronx":     "/assets/img/logo-bronx.jpeg",
+    "manhattan": "/assets/img/logo-manhattan.png",
+    "bronx":     "/assets/img/logo-bronx.png",
 }
 
-# ── HEADER (slim — logo + campus phone + EN/ES) ─────────────────────
+# ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
+# Each campus logo already contains the street address baked into the
+# artwork, so we don't render a duplicate text address line in the header.
 def header(p):
     es = p["lang"] == "es"
     addr = p["campus"]["addr_short_es" if es else "addr_short_en"]
@@ -100,10 +102,10 @@ def header(p):
     return (
         '<div class="lf-topbar">%s</div>\n'
         '<header class="lf-hdr"><div class="lf-hdr__in">\n'
-        '  <div class="lf-brand">\n'
+        '  <a class="lf-brand lf-brand--campus" href="#reserve" aria-label="American Barber Institute — %s">\n'
         '    <img class="lf-brand__logo lf-brand__logo--campus" src="%s"'
-        ' alt="American Barber Institute — %s" width="420" height="170" fetchpriority="high">\n'
-        '  </div>\n'
+        ' alt="American Barber Institute — %s" width="500" height="200" fetchpriority="high">\n'
+        '  </a>\n'
         '  <div class="lf-hdr__right">\n'
         '    <a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
         '<span class="lf-phone__num">%s</span></a>\n'
@@ -115,12 +117,35 @@ def header(p):
         '</div></header>\n'
     ) % (
         h(p["promo_strip"]),
+        h(addr),
         h(logo_src), h(addr),
         h(tel), svg("phone", 16), h(flag), h(disp),
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
         "is-active" if es else "", h(es_href), ' aria-current="true"' if es else "",
     )
+
+
+# ── MOBILE HERO (image-led, mobile-only — hidden on desktop via CSS) ─
+def mobile_hero(p):
+    lang = p["lang"]; es = lang == "es"
+    H_ = D.HERO[lang]
+    is_bx = p["campus"]["slug"] == "bronx"
+    kicker = H_["kicker_bx"] if is_bx else H_["kicker_man"]
+    cta_label = "Reserve Your Spot" if not es else "Reserva Tu Lugar"
+    return (
+        '<section class="lf-mhero" aria-label="American Barber Institute clinic floor">\n'
+        '  <img class="lf-mhero__bg" src="/assets/img/lf-hero-mobile.jpg"'
+        ' alt="ABI students training on the clinic floor" loading="eager"'
+        ' fetchpriority="high" width="1080" height="1609">\n'
+        '  <div class="lf-mhero__scrim"></div>\n'
+        '  <div class="lf-mhero__copy">\n'
+        '    <p class="lf-mhero__kicker">%s</p>\n'
+        '    <h1 class="lf-mhero__h1">%s <span>%s</span> <em>%s</em></h1>\n'
+        '    <a class="lf-btn lf-btn--primary lf-btn--lg lf-mhero__cta" href="#reserve">%s</a>\n'
+        '  </div>\n'
+        '</section>\n'
+    ) % (h(kicker), h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
 
 
 # ── HERO ─────────────────────────────────────────────────────────────
@@ -597,6 +622,42 @@ def page_head(p):
     }
 
 
+CHAT_ICON  = '<path d="M21 12a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3-.4-4.3-1L3 21l1.6-4.8A8.5 8.5 0 1 1 21 12z"/>'
+SCISSORS_I = '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>'
+
+def mobile_cta_bar(p):
+    es = p["lang"] == "es"
+    tel = p["phone"][2]            # +1XXXXXXXXXX
+    sms_target = tel               # SMS goes to same campus number
+    labels = {
+        "call":  "Llamar" if es else "Call Now",
+        "text":  "Mensaje" if es else "Text Us",
+        "apply": "Aplicar" if es else "Apply Now",
+    }
+    return (
+        '<nav class="lf-mcta" aria-label="%s">\n'
+        '  <a class="lf-mcta__btn lf-mcta__btn--call" href="tel:%s">'
+        '%s<span>%s</span></a>\n'
+        '  <a class="lf-mcta__btn lf-mcta__btn--text" href="sms:%s">'
+        '%s<span>%s</span></a>\n'
+        '  <a class="lf-mcta__btn lf-mcta__btn--apply" href="#reserve">'
+        '%s<span>%s</span></a>\n'
+        '</nav>\n'
+    ) % (
+        "Acciones rápidas" if es else "Quick actions",
+        h(tel),       svg("phone", 16),    h(labels["call"]),
+        h(sms_target),
+        ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+         ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+         + CHAT_ICON + '</svg>'),
+        h(labels["text"]),
+        ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+         ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+         + SCISSORS_I + '</svg>'),
+        h(labels["apply"]),
+    )
+
+
 def page_tail():
     return '<script src="/assets/js/funnels.js?v=%s" defer></script>\n</body>\n</html>\n' % JS_V
 
@@ -606,6 +667,7 @@ def build_page(p):
     parts = [
         page_head(p),
         header(p),
+        mobile_hero(p),
         hero(p),
         section_stats(p),
         section_about(p),
@@ -618,13 +680,14 @@ def build_page(p):
     if p["campus"]["slug"] == "bronx":
         parts.append(section_bronx_extra(p))
     parts += [
-        section_student_voices(p),
         section_videos(p),
         section_gallery(p),
         section_reviews(p),
         section_contact(p),
+        section_student_voices(p),
         section_faq(p),
         footer(p),
+        mobile_cta_bar(p),
         page_tail(),
     ]
     out_dir = os.path.join(ROOT, p["path"])
