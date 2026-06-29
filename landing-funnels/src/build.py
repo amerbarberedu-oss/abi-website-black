@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "13"
+CSS_V = "14"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -99,8 +99,19 @@ def header(p):
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
     logo_src = CAMPUS_LOGOS[p["campus"]["slug"]]
+    # Topbar phone chips (campus-aware: 2 for Manhattan, 1 for Bronx)
+    chips = "".join(
+        '<a class="lf-topbar__chip" href="tel:%s">%s<b>%s</b> <span>%s</span></a>' % (
+            h(ph["tel"]), svg("phone", 14), h(ph["label"]), h(ph["display"])
+        )
+        for ph in D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
+    )
+    seats_kicker, seats_lead = D.SEATS_BANNER[p["lang"]]
     return (
-        '<div class="lf-topbar">%s</div>\n'
+        '<div class="lf-topbar">\n'
+        '  <p class="lf-topbar__promo">%s</p>\n'
+        '  <div class="lf-topbar__chips">%s</div>\n'
+        '</div>\n'
         '<header class="lf-hdr"><div class="lf-hdr__in">\n'
         '  <a class="lf-brand lf-brand--campus" href="#reserve" aria-label="American Barber Institute — %s">\n'
         '    <img class="lf-brand__logo lf-brand__logo--campus" src="%s"'
@@ -115,14 +126,21 @@ def header(p):
         '    </div>\n'
         '  </div>\n'
         '</div></header>\n'
+        '<div class="lf-seats" role="status">\n'
+        '  <span class="lf-seats__dot" aria-hidden="true"></span>\n'
+        '  <span class="lf-seats__kicker">%s</span>\n'
+        '  <span class="lf-seats__lead">%s</span>\n'
+        '</div>\n'
     ) % (
         h(p["promo_strip"]),
+        chips,
         h(addr),
         h(logo_src), h(addr),
         h(tel), svg("phone", 16), h(flag), h(disp),
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
         "is-active" if es else "", h(es_href), ' aria-current="true"' if es else "",
+        h(seats_kicker), h(seats_lead),
     )
 
 

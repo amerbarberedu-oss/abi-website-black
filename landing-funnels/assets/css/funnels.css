@@ -925,6 +925,234 @@ body.lf-page--brnx-es {
   .lf-plan__badge { right: .7rem; }
 }
 
+/* ===================================================================
+   MOBILE PARITY PASS — match abi-website-black.vercel.app mobile design
+   Affects only screens ≤ 768px. Desktop layout unchanged.
+   =================================================================== */
+
+/* ─ Topbar: promo + phone chips ─ */
+.lf-topbar__promo { margin: 0; }
+.lf-topbar__chips { display: none; }
+
+@media (max-width: 768px) {
+  .lf-topbar {
+    padding: .85rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    text-align: center;
+  }
+  .lf-topbar__promo {
+    font-size: .82rem;
+    letter-spacing: .04em;
+    line-height: 1.3;
+  }
+  .lf-topbar__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
+    justify-content: center;
+  }
+  .lf-topbar__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .5rem .85rem;
+    border-radius: var(--lf-r-pill);
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .55);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .lf-topbar__chip b { font-weight: 800; opacity: .85; }
+  .lf-topbar__chip svg { opacity: .9; }
+}
+
+/* ─ Limited Seats banner (right under header) ─ */
+.lf-seats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: .7rem 1rem;
+  background: #fff7d6;
+  border-bottom: 1px solid #f0e3a8;
+  font-size: .86rem;
+  flex-wrap: wrap;
+}
+.lf-seats__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e23d3d;
+  box-shadow: 0 0 0 4px rgba(226, 61, 61, .18);
+  animation: lf-pulse 1.6s ease-in-out infinite;
+}
+@keyframes lf-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(226, 61, 61, .18); }
+  50%      { box-shadow: 0 0 0 8px rgba(226, 61, 61, .05); }
+}
+.lf-seats__kicker {
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: #8a6500;
+  text-transform: uppercase;
+  font-size: .78rem;
+}
+.lf-seats__lead {
+  font-weight: 700;
+  color: var(--lf-accent-dark);
+}
+
+@media (max-width: 768px) {
+  .lf-seats { font-size: .82rem; padding: .6rem .8rem; }
+}
+
+/* ─ Mobile dark theme: hero, features, form, voices all dark navy ─ */
+@media (max-width: 768px) {
+  /* Continuous dark surface from hero through Student Voices */
+  .lf-mhero { background: #0a1226; }
+  .lf-hero {
+    background: #0a1226;
+    color: #fff;
+    padding: 1.6rem 0 1.4rem;
+  }
+  .lf-hero h1,
+  .lf-hero .lf-h1,
+  .lf-hero__sub { color: #fff; text-shadow: none; }
+  .lf-hero__sub { color: rgba(255,255,255,.86); }
+  .lf-hero__sub b { color: #fff; }
+
+  /* Feature chips: dark pill cards with circular icon background */
+  .lf-features {
+    flex-direction: column;
+    gap: .55rem;
+    align-items: stretch;
+    margin: .2rem 0 1.2rem;
+  }
+  .lf-feature {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: #fff;
+    padding: .85rem 1rem;
+    border-radius: 14px;
+    text-shadow: none;
+    box-shadow: none;
+    font-size: .92rem;
+    font-weight: 600;
+    text-align: left;
+  }
+  .lf-feature svg {
+    flex: 0 0 36px;
+    width: 36px; height: 36px;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(91, 142, 255, .22);
+    color: #9bc1ff;
+  }
+
+  /* Countdown card on dark theme */
+  .lf-cd {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: #fff;
+    border-radius: 14px;
+    padding: 1.1rem;
+    margin-bottom: 1.3rem;
+    box-shadow: none;
+  }
+  .lf-cd__h, .lf-cd__sub { color: #fff; }
+  .lf-cd__label { color: rgba(255,255,255,.7); font-weight: 600; }
+  .lf-cd__date { color: #ffd470; }
+  .lf-cd__cell {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    padding: .5rem .25rem;
+  }
+  .lf-cd__cell b { color: #fff; }
+  .lf-cd__cell span { color: rgba(255,255,255,.7); }
+
+  /* Form card: white card with icon-prefixed inputs + labels above */
+  .lf-form {
+    border-radius: 18px;
+    padding: 1.4rem 1.1rem;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  }
+  .lf-form__h {
+    display: flex; align-items: center; gap: .65rem;
+    margin-bottom: .25rem;
+  }
+  .lf-form__h::before {
+    content: "";
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--lf-sky-deep) url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") center/18px no-repeat;
+    flex: 0 0 36px;
+  }
+  .lf-form__row { margin-bottom: .9rem; }
+  .lf-form__row--2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .9rem;
+  }
+  .lf-form__row--2 > * { margin: 0; }
+
+  /* Student Voices section sits on dark too */
+  .lf-page .lf-section:has(.lf-reel) { background: #0a1226; color: #fff; }
+  .lf-page .lf-section:has(.lf-reel) .lf-eyebrow { color: #9bc1ff; }
+  .lf-page .lf-section:has(.lf-reel) .lf-h2 { color: #fff; }
+  .lf-page .lf-section:has(.lf-reel) .lf-lead { color: rgba(255,255,255,.78); }
+
+  /* Stats — 2x2 blue block instead of inline row */
+  .lf-stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--lf-sky-deep);
+    border-radius: 0;
+    padding: 1.4rem 1rem;
+    margin: 0 -1rem;  /* full-bleed */
+  }
+  .lf-stat { background: transparent !important; box-shadow: none !important; padding: 1rem .5rem !important; text-align: center; }
+  .lf-stat__n { color: #fff !important; font-size: 2.2rem !important; }
+  .lf-stat__label { color: rgba(255,255,255,.85) !important; }
+  /* lift the bg-alt off the stats section so the blue block sits clean */
+  .lf-section--tight { padding: 0 !important; background: transparent !important; }
+
+  /* AI-labeled chat bubble (replace plain chat icon) */
+  .lf-chat {
+    background: var(--lf-sky-deep) !important;
+    color: #fff !important;
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 90px !important;
+    width: 56px !important; height: 56px !important;
+    z-index: 55;
+  }
+  .lf-chat::after {
+    content: "AI";
+    position: absolute;
+    top: -6px; right: -6px;
+    background: #28e07a;
+    color: #00280f;
+    font-size: .68rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+  }
+
+  /* Hide phone num text in header (chips above already serve it) */
+  .lf-hdr__right .lf-phone { display: none; }
+}
+
 /* ───── Mobile-only image hero (lf-mhero) ───── */
 /* Hidden on desktop; full-bleed image with overlaid copy on mobile. */
 .lf-mhero { display: none; }
