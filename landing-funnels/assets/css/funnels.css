@@ -1239,9 +1239,12 @@ body.lf-page--brnx-es {
     justify-content: center;
     margin-top: .35rem;
   }
-  /* Hide the duplicated kicker (mobile photo hero owns it). H1 + sub stay
-     visible inside the dark hero block per parity with the marketing site. */
-  .lf-hero__kicker { display: none; }
+  /* The mobile photo hero (lf-mhero) already shows the kicker + H1.
+     Hide them in the dark .lf-hero block to remove the visible duplicate.
+     Sub headline also hidden — message already conveyed in the hero photo. */
+  .lf-hero__kicker,
+  .lf-hero .lf-h1,
+  .lf-hero__sub { display: none; }
   /* Leave room at the bottom for the sticky 3-CTA bar */
   body.lf-page { padding-bottom: 78px; }
 }
