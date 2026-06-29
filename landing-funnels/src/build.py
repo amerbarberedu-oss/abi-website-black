@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "7"
+CSS_V = "9"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -83,20 +83,26 @@ def section_head(eyebrow, title, lead=None):
     return out + '</div>'
 
 
-# ── HEADER (slim — logo + campus address + campus phone + EN/ES) ────
+# Campus → branded logo (each logo has its own address baked into the image)
+CAMPUS_LOGOS = {
+    "manhattan": "/assets/img/logo-manhattan.jpeg",
+    "bronx":     "/assets/img/logo-bronx.jpeg",
+}
+
+# ── HEADER (slim — logo + campus phone + EN/ES) ─────────────────────
 def header(p):
     es = p["lang"] == "es"
     addr = p["campus"]["addr_short_es" if es else "addr_short_en"]
     flag, disp, tel = p["phone"]
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
+    logo_src = CAMPUS_LOGOS[p["campus"]["slug"]]
     return (
         '<div class="lf-topbar">%s</div>\n'
         '<header class="lf-hdr"><div class="lf-hdr__in">\n'
         '  <div class="lf-brand">\n'
-        '    <img class="lf-brand__logo" src="/assets/img/logo-final.gif"'
-        ' alt="American Barber Institute — %s" width="385" height="99" fetchpriority="high">\n'
-        '    <div class="lf-brand__addr">%s%s</div>\n'
+        '    <img class="lf-brand__logo lf-brand__logo--campus" src="%s"'
+        ' alt="American Barber Institute — %s" width="420" height="170" fetchpriority="high">\n'
         '  </div>\n'
         '  <div class="lf-hdr__right">\n'
         '    <a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
@@ -109,8 +115,7 @@ def header(p):
         '</div></header>\n'
     ) % (
         h(p["promo_strip"]),
-        h(addr),
-        svg("pin", 14), h(addr),
+        h(logo_src), h(addr),
         h(tel), svg("phone", 16), h(flag), h(disp),
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
@@ -407,12 +412,13 @@ def section_gallery(p):
             % (section_head(eb, ti), items))
 
 
-# ── REVIEWS (real Google reviews, no widget / no map link) ──────────
+# ── REVIEWS (split per campus; real Google reviews, no widget) ──────
 def section_reviews(p):
     eb, ti = D.REVIEWS_HEAD[p["lang"]]
     lead = D.REVIEWS_LEAD[p["lang"]]
     cards = ""
-    for r in D.REVIEWS[p["lang"]]:
+    campus_slug = p["campus"]["slug"]
+    for r in D.REVIEWS_BY_CAMPUS[campus_slug][p["lang"]]:
         ini = "".join(w[0] for w in r["name"].split()[:2]).upper()
         cards += (
             '<div class="lf-review lf-rv"><div class="lf-review__stars">★★★★★</div>'
@@ -425,6 +431,54 @@ def section_reviews(p):
     return ('<section class="lf-section"><div class="lf-wrap">%s'
             '<div class="lf-reviews">%s</div></div></section>\n'
             % (section_head(eb, ti, lead), cards))
+
+
+# ── CONTACT BOX (campus-aware: Manhattan = 2 numbers, Bronx = 1) ─────
+def section_contact(p):
+    lang = p["lang"]
+    eb, ti = D.CONTACT_HEAD[lang]
+    L = D.CONTACT_LABELS[lang]
+    campus_slug = p["campus"]["slug"]
+    addr = p["campus"]["addr_full_es" if lang == "es" else "addr_full_en"]
+    name = p["campus"]["name_es" if lang == "es" else "name_en"]
+    lat, lng = p["campus"]["latlng"]
+    maps_url = "https://www.google.com/maps/search/?api=1&query=%s,%s" % (lat, lng)
+
+    phone_items = ""
+    for ph in D.CONTACT_PHONES_BY_CAMPUS[campus_slug]:
+        tag = L[ph["label_key"]]
+        phone_items += (
+            '<li class="lf-contact__phone">'
+            '<a href="tel:%s">%s<span class="lf-contact__num">%s</span></a>'
+            '<span class="lf-contact__tag">%s</span></li>'
+            % (h(ph["tel"]), svg("phone", 16), h(ph["display"]), h(tag))
+        )
+
+    return (
+        '<section class="lf-section lf-section--alt" id="contact"><div class="lf-wrap">%s\n'
+        '  <div class="lf-contact lf-rv">\n'
+        '    <div class="lf-contact__card">\n'
+        '      <h3 class="lf-h3">%s</h3>\n'
+        '      <p class="lf-contact__row"><span class="lf-contact__label">%s</span>'
+        '<span class="lf-contact__val">%s%s · '
+        '<a class="lf-contact__map" href="%s" target="_blank" rel="noopener">%s →</a></span></p>\n'
+        '      <p class="lf-contact__row"><span class="lf-contact__label">%s</span>'
+        '<ul class="lf-contact__phones">%s</ul></p>\n'
+        '      <p class="lf-contact__row"><span class="lf-contact__label">%s</span>'
+        '<a class="lf-contact__val" href="mailto:%s">%s</a></p>\n'
+        '      <p class="lf-contact__row"><span class="lf-contact__label">%s</span>'
+        '<span class="lf-contact__val">%s</span></p>\n'
+        '    </div>\n'
+        '  </div>\n'
+        '</div></section>\n'
+    ) % (
+        section_head(eb, ti),
+        h(name),
+        h(L["addr"]), svg("pin", 14), h(addr), h(maps_url), h(L["directions"]),
+        h(L["phone"]), phone_items,
+        h(L["email"]), h(D.CONTACT_EMAIL), h(D.CONTACT_EMAIL),
+        h(L["hours"]), h(D.CONTACT_HOURS[lang]),
+    )
 
 
 # ── FAQ ──────────────────────────────────────────────────────────────
@@ -568,6 +622,7 @@ def build_page(p):
         section_videos(p),
         section_gallery(p),
         section_reviews(p),
+        section_contact(p),
         section_faq(p),
         footer(p),
         page_tail(),

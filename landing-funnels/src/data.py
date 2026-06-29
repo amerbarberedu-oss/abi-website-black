@@ -45,8 +45,6 @@ PAGES = [
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Manhattan campus (48 West 39th Street). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
         "promo_strip": "Start your barber journey today for only $150 per week*",
         "cta_primary": "Reserve Your Spot Today",
-        "cta_secondary": "Call Now",
-        "cta_ghost": "Apply Now",
     },
     {
         "id": "mhtn-es", "lang": "es", "campus": MANHATTAN,
@@ -58,8 +56,6 @@ PAGES = [
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede de Manhattan de ABI (48 West 39th Street). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
         "promo_strip": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
         "cta_primary": "Reserva Tu Lugar Hoy",
-        "cta_secondary": "Llamar Ahora",
-        "cta_ghost": "Aplicar Ahora",
     },
     {
         "id": "brnx-en", "lang": "en", "campus": BRONX,
@@ -71,8 +67,6 @@ PAGES = [
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Bronx campus (121 Westchester Square). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
         "promo_strip": "Start your barber journey today for only $150 per week*",
         "cta_primary": "Reserve Your Spot Today",
-        "cta_secondary": "Call Now",
-        "cta_ghost": "Apply Now",
     },
     {
         "id": "brnx-es", "lang": "es", "campus": BRONX,
@@ -84,8 +78,6 @@ PAGES = [
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede del Bronx de ABI (121 Westchester Square). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
         "promo_strip": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
         "cta_primary": "Reserva Tu Lugar Hoy",
-        "cta_secondary": "Llamar Ahora",
-        "cta_ghost": "Aplicar Ahora",
     },
 ]
 
@@ -320,26 +312,43 @@ BRONX_EXTRA_VIDEOS = [
     ("video-321.mp4", "video-321-poster.jpg"),
 ]
 
-# ─── Reviews (verbatim — the school's real Google reviews) ───────────
-# These three reviews appear on the school's own landing pages for both
-# campuses. Used as-is (real names, real quotes) — content is king.
-REVIEWS = {
-    "en": [
-        {"name": "Jerrick Matthews", "role": "Current student",
-         "q": "The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school."},
-        {"name": "Carlos Perez", "role": "Student",
-         "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
-        {"name": "Zyee Fin", "role": "Current student",
-         "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
-    ],
-    "es": [
-        {"name": "Jerrick Matthews", "role": "Estudiante actual",
-         "q": "¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela."},
-        {"name": "Carlos Perez", "role": "Estudiante",
-         "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
-        {"name": "Zyee Fin", "role": "Estudiante actual",
-         "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
-    ],
+# ─── Reviews (split per campus; same content for now, swap real Bronx
+#     Google reviews into REVIEWS_BY_CAMPUS["bronx"] when available) ───
+_REVIEWS_EN_MANHATTAN = [
+    {"name": "Jerrick Matthews", "role": "Current student — Manhattan",
+     "q": "The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school."},
+    {"name": "Carlos Perez", "role": "Student — Manhattan",
+     "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
+    {"name": "Zyee Fin", "role": "Current student — Manhattan",
+     "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
+]
+_REVIEWS_ES_MANHATTAN = [
+    {"name": "Jerrick Matthews", "role": "Estudiante actual — Manhattan",
+     "q": "¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela."},
+    {"name": "Carlos Perez", "role": "Estudiante — Manhattan",
+     "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
+    {"name": "Zyee Fin", "role": "Estudiante actual — Manhattan",
+     "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
+]
+_REVIEWS_EN_BRONX = [
+    {"name": "Jerrick Matthews", "role": "Current student — Bronx",
+     "q": "The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school."},
+    {"name": "Carlos Perez", "role": "Student — Bronx",
+     "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
+    {"name": "Zyee Fin", "role": "Current student — Bronx",
+     "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
+]
+_REVIEWS_ES_BRONX = [
+    {"name": "Jerrick Matthews", "role": "Estudiante actual — Bronx",
+     "q": "¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela."},
+    {"name": "Carlos Perez", "role": "Estudiante — Bronx",
+     "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
+    {"name": "Zyee Fin", "role": "Estudiante actual — Bronx",
+     "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
+]
+REVIEWS_BY_CAMPUS = {
+    "manhattan": {"en": _REVIEWS_EN_MANHATTAN, "es": _REVIEWS_ES_MANHATTAN},
+    "bronx":     {"en": _REVIEWS_EN_BRONX,     "es": _REVIEWS_ES_BRONX},
 }
 REVIEWS_HEAD = {
     "en": ("Student Stories", "What Our Students Say"),
@@ -456,3 +465,50 @@ YT_CLIPS = [
     ("dQw4w9WgXcQ", "Tour our two-floor, 3,000 sq ft Manhattan campus", "Recorre nuestro campus de Manhattan de 3,000 pies²"),
 ]
 YT_HEAD = {"en": ("Watch Us", "See ABI In Action"), "es": ("Míranos", "Mira a ABI en Acción")}
+
+# ─── Contact box (campus-aware) ──────────────────────────────────────
+# Manhattan shows 2 numbers (EN + ES). Bronx shows 1 number only.
+CONTACT_EMAIL = "admission@abi.edu"
+CONTACT_HOURS = {
+    "en": "Mon–Sun · 8:00 AM – 8:00 PM",
+    "es": "Lun–Dom · 8:00 AM – 8:00 PM",
+}
+CONTACT_HEAD = {
+    "en": ("Contact", "Visit Our Campus"),
+    "es": ("Contacto", "Visita Nuestro Campus"),
+}
+CONTACT_LABELS = {
+    "en": {
+        "addr":   "Address",
+        "phone":  "Phone",
+        "email":  "Email",
+        "hours":  "Hours",
+        "directions": "Get directions",
+        "en_tag": "English",
+        "es_tag": "Español",
+        "bronx_tag": "Bronx",
+    },
+    "es": {
+        "addr":   "Dirección",
+        "phone":  "Teléfono",
+        "email":  "Correo",
+        "hours":  "Horario",
+        "directions": "Cómo llegar",
+        "en_tag": "Inglés",
+        "es_tag": "Español",
+        "bronx_tag": "Bronx",
+    },
+}
+# Manhattan campus → two phone numbers (EN line + ES line)
+CONTACT_PHONES_MANHATTAN = [
+    {"label_key": "en_tag", "display": "(212) 290-2289", "tel": "+12122902289"},
+    {"label_key": "es_tag", "display": "(212) 290-0278", "tel": "+12122900278"},
+]
+# Bronx campus → one phone number only
+CONTACT_PHONES_BRONX = [
+    {"label_key": "bronx_tag", "display": "(718) 676-0640", "tel": "+17186760640"},
+]
+CONTACT_PHONES_BY_CAMPUS = {
+    "manhattan": CONTACT_PHONES_MANHATTAN,
+    "bronx":     CONTACT_PHONES_BRONX,
+}
