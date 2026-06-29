@@ -359,8 +359,19 @@ REVIEWS_LEAD = {
     "es": "Reseñas reales de estudiantes del American Barber Institute.",
 }
 
-# ─── FAQ (verbatim — all 8 Q&As, phone swapped per campus) ───────────
-def faq(lang, phone_disp):
+# ─── Form campus options: locked to a single campus per page ─────────
+# Each landing page is campus-specific, so the dropdown shows only
+# that campus — no cross-campus leakage on the lead form.
+LOC_OPTS_BY_CAMPUS = {
+    ("manhattan", "en"): ["Manhattan Campus — 48 West 39th Street"],
+    ("manhattan", "es"): ["Sede de Manhattan — 48 West 39th Street"],
+    ("bronx",     "en"): ["Bronx Campus — 121 Westchester Square"],
+    ("bronx",     "es"): ["Sede del Bronx — 121 Westchester Square"],
+}
+
+
+# ─── FAQ (verbatim — all 8 Q&As, phone + campus swapped per page) ────
+def faq(lang, phone_disp, campus_name):
     if lang == "es":
         return [
             ("¿Cuánto cuesta la escuela de barbería en Nueva York?",
@@ -378,7 +389,7 @@ def faq(lang, phone_disp):
             ("¿Hay ayuda financiera disponible?",
              "Sí — ACCES-VR puede cubrir matrícula, herramientas y libros para neoyorquinos calificados con discapacidades; se aceptan el GI Bill® Post-9/11 y beneficios de la VA; pueden aplicar subvenciones del Departamento de Trabajo del Estado de NY; y cada plan incluye pagos semanales."),
             ("¿Cuándo comienzan las clases?",
-             "Las clases nuevas comienzan el primer lunes de cada mes en ambas sedes, Manhattan y el Bronx. Llama al %s para reservar tu lugar — las clases se llenan rápido." % phone_disp),
+             "Las clases nuevas comienzan el primer lunes de cada mes en nuestra %s. Llama al %s para reservar tu lugar — las clases se llenan rápido." % (campus_name, phone_disp)),
         ]
     return [
         ("How much does barber school cost in New York?",
@@ -396,7 +407,7 @@ def faq(lang, phone_disp):
         ("Is financial aid available?",
          "Yes — ACCES-VR can cover tuition, tools and books for qualified New Yorkers with disabilities; Post-9/11 GI Bill® and VA benefits are accepted; NYS Department of Labor grants may apply; and every plan includes weekly payments."),
         ("When do classes start?",
-         "New classes begin the first Monday of every month at both the Manhattan and Bronx campuses. Call %s to reserve your seat — classes fill fast." % phone_disp),
+         "New classes begin the first Monday of every month at our %s. Call %s to reserve your seat — classes fill fast." % (campus_name, phone_disp)),
     ]
 FAQ_HEAD = {
     "en": ("FAQs", "Barber School Questions, Answered"),
@@ -410,7 +421,6 @@ FORM = {
         "sub": "Fill out the form and an Admissions Advisor will contact you.",
         "first": "First Name", "last": "Last Name", "phone": "Phone", "email": "Email",
         "loc_label": "Which School Location Would You Prefer To Attend?",
-        "loc_opts": ["Select a campus", "Manhattan Campus — 48 West 39th Street", "Bronx Campus — 121 Westchester Square"],
         "fmt_label": "What is your preferred learning format?",
         "fmt_opts": ["Select an option", "Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
         "lang_label": "Which is your preferred language of communication?",
@@ -426,7 +436,6 @@ FORM = {
         "sub": "Completa el formulario y un asesor de admisiones te contactará.",
         "first": "Nombre", "last": "Apellido", "phone": "Teléfono", "email": "Correo Electrónico",
         "loc_label": "¿A cuál sede te gustaría asistir?",
-        "loc_opts": ["Selecciona una sede", "Sede de Manhattan — 48 West 39th Street", "Sede del Bronx — 121 Westchester Square"],
         "fmt_label": "¿Cuál es tu horario preferido?",
         "fmt_opts": ["Selecciona una opción", "Mañana · Lun–Vie 8:00 AM–2:00 PM", "Tarde · Lun–Vie 2:00 PM–8:00 PM", "Fin de semana · Sáb–Dom 9:00 AM–7:00 PM"],
         "lang_label": "¿Cuál es tu idioma de comunicación preferido?",
@@ -462,7 +471,7 @@ GALLERY_HEAD = {"en": ("Gallery", "Life At ABI"), "es": ("Galería", "La Vida en
 YT_CLIPS = [
     ("uADUtUtChH4", "Train to be a Master Barber at New York's #1 barber school", "Fórmate como Barbero Maestro en la escuela #1 de Nueva York"),
     ("oM8KfWfeTWA", "Our courses are hands-on, fun and engaging", "Nuestros cursos son prácticos, divertidos y dinámicos"),
-    ("dQw4w9WgXcQ", "Tour our two-floor, 3,000 sq ft Manhattan campus", "Recorre nuestro campus de Manhattan de 3,000 pies²"),
+    ("dQw4w9WgXcQ", "Tour our pro New York City barber clinic", "Recorre nuestra clínica profesional en Nueva York"),
 ]
 YT_HEAD = {"en": ("Watch Us", "See ABI In Action"), "es": ("Míranos", "Mira a ABI en Acción")}
 

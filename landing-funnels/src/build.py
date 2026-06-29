@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "17"
+CSS_V = "18"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -211,7 +211,9 @@ def hero(p):
 def lead_form(p):
     lang = p["lang"]
     f = D.FORM[lang]
-    loc_opts  = "".join('<option>%s</option>' % h(o) for o in f["loc_opts"])
+    # Campus dropdown is locked to the page's own campus — no cross-campus options.
+    loc_opts = "".join('<option>%s</option>' % h(o)
+                       for o in D.LOC_OPTS_BY_CAMPUS[(p["campus"]["slug"], lang)])
     fmt_opts  = "".join('<option>%s</option>' % h(o) for o in f["fmt_opts"])
     lang_opts = "".join('<option>%s</option>' % h(o) for o in f["lang_opts"])
     return (
@@ -529,7 +531,8 @@ def section_faq(p):
     eb, ti = D.FAQ_HEAD[p["lang"]]
     items = "".join(
         '<details class="lf-rv"><summary>%s</summary><div class="lf-faq__a">%s</div></details>'
-        % (h(q), h(a)) for q, a in D.faq(p["lang"], p["phone"][1])
+        % (h(q), h(a)) for q, a in D.faq(p["lang"], p["phone"][1],
+                                          p["campus"]["name_es" if p["lang"] == "es" else "name_en"])
     )
     return ('<section class="lf-section lf-section--alt"><div class="lf-wrap">%s'
             '<div class="lf-faq">%s</div></div></section>\n'
