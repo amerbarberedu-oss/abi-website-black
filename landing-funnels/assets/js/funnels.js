@@ -198,26 +198,37 @@
     qsa('.lf-reel__media').forEach(initReel);
     initReveal();
 
-    /* "Our Videos" — YouTube clips: click the thumbnail → swap in an
-       autoplaying privacy-friendly iframe (youtube-nocookie). */
-    qsa('.lf-clip[data-yt]').forEach(function (host) {
-      function play() {
-        var id = host.getAttribute('data-yt');
-        if (!id || host.dataset.loaded) return;
-        host.dataset.loaded = '1';
-        var ifr = document.createElement('iframe');
-        ifr.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
-        ifr.title = 'ABI video';
-        ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        ifr.allowFullscreen = true;
-        ifr.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
-        host.appendChild(ifr);
+    /* showcase clip — click toggles play/pause; hover (desktop) starts play */
+    qsa('.lf-clip').forEach(function (host) {
+      var v = qs('video', host);
+      var pb = qs('.lf-clip__play', host);
+      if (!v) return;
+      v.muted = true; v.loop = true;
+      function syncPlaying() { host.classList.toggle('is-playing', !v.paused && !v.ended); }
+      function toggle() {
+        if (v.paused) v.play().catch(function () {});
+        else v.pause();
       }
-      on(host, 'click', play);
+      if (pb) on(pb, 'click', function (e) { e.preventDefault(); e.stopPropagation(); toggle(); });
+      on(host, 'click', function (e) {
+        if (pb && (e.target === pb || pb.contains(e.target))) return;
+        toggle();
+      });
+      /* desktop hover-preview */
+      on(host, 'mouseenter', function () { if (window.matchMedia('(hover:hover)').matches) v.play().catch(function () {}); });
+      on(host, 'mouseleave', function () { if (window.matchMedia('(hover:hover)').matches) v.pause(); });
+      on(v, 'play',  syncPlaying);
+      on(v, 'pause', syncPlaying);
+      /* off-screen pause */
+      if (typeof IntersectionObserver !== 'undefined') {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (!en.isIntersecting && !v.paused) v.pause(); });
+        }, { threshold: 0 }).observe(host);
+      }
     });
 
     /* 3D micro-tilt on cards — perspective-based, vanilla, mouse-only */
-    var TILT_TARGETS = '.lf-plan, .lf-review, .lf-req, .lf-finance__card';
+    var TILT_TARGETS = '.lf-pill, .lf-plan, .lf-earn-card, .lf-review, .lf-step';
     qsa(TILT_TARGETS).forEach(function (el) {
       el.classList.add('lf-tilt');
       on(el, 'mousemove', function (e) {
