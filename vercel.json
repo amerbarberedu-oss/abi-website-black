@@ -16,10 +16,14 @@
     { "source": "/privacy", "destination": "/", "permanent": true },
     { "source": "/jobs/job-opportunities", "destination": "/jobs", "permanent": true },
     { "source": "/jobs/shop-registration", "destination": "/jobs", "permanent": true },
-    { "source": "/500-hours-master-barber-program-landing-page", "destination": "/", "permanent": true },
-    { "source": "/master-barber-program-bronx", "destination": "/programs/", "permanent": true },
     { "source": "/splash-page-1", "destination": "/", "permanent": true },
     { "source": "/splash-page-2", "destination": "/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/500-hours-master-barber-program-landing-page",         "destination": "/landing-funnels/500-hours-master-barber-program-landing-page/index.html" },
+    { "source": "/500-hours-master-barber-program-landing-page/spanish", "destination": "/landing-funnels/500-hours-master-barber-program-landing-page/spanish/index.html" },
+    { "source": "/master-barber-program-bronx",                          "destination": "/landing-funnels/master-barber-program-bronx/index.html" },
+    { "source": "/master-barber-program-bronx/spanish",                  "destination": "/landing-funnels/master-barber-program-bronx/spanish/index.html" }
   ],
   "headers": [
     {
