@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "24"
+CSS_V = "25"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -288,13 +288,8 @@ def section_about(p):
     body = "".join('<p>%s</p>' % h(x) for x in paras)
     addr = p["campus"]["addr_full_es" if p["lang"] == "es" else "addr_full_en"]
     name = p["campus"]["name_es" if p["lang"] == "es" else "name_en"]
-    dur_lbl  = "Duración" if p["lang"] == "es" else "Duration"
-    tui_lbl  = "Matrícula" if p["lang"] == "es" else "Tuition"
-    sch_lbl  = "Horarios" if p["lang"] == "es" else "Schedules"
-    dur_val  = "~4 meses" if p["lang"] == "es" else "~4 Months"
-    tui_val  = "desde $4,600" if p["lang"] == "es" else "from $4,600"
-    sch_val  = ("Mañana · Tarde · Fin de semana" if p["lang"] == "es"
-                else "Morning · Afternoon · Weekend")
+    # Duration / Tuition / Schedules <ul> removed per content spec.
+    # Keep only campus name + address + phone in the side card.
     return (
         '<section class="lf-section lf-section--alt"><div class="lf-wrap">%s\n'
         '  <div class="lf-about">\n'
@@ -303,15 +298,12 @@ def section_about(p):
         '      <h3 class="lf-h3">%s</h3>\n'
         '      <p class="lf-about__addr">%s%s</p>\n'
         '      <p class="lf-about__phone"><a href="tel:%s">%s %s</a></p>\n'
-        '      <ul class="lf-about__details">'
-        '<li><b>%s:</b> %s</li><li><b>%s:</b> %s</li><li><b>%s:</b> %s</li></ul>\n'
         '    </aside>\n'
         '  </div>\n'
         '</div></section>\n'
     ) % (section_head(eb, ti), body, h(name),
          svg("pin", 14), h(addr),
-         h(p["phone"][2]), svg("phone", 14), h(p["phone"][1]),
-         dur_lbl, dur_val, tui_lbl, tui_val, sch_lbl, sch_val)
+         h(p["phone"][2]), svg("phone", 14), h(p["phone"][1]))
 
 
 # ── 3 EASY STEPS (right after About) ─────────────────────────────────
