@@ -16,6 +16,8 @@
     { "source": "/privacy", "destination": "/", "permanent": true },
     { "source": "/jobs/job-opportunities", "destination": "/jobs", "permanent": true },
     { "source": "/jobs/shop-registration", "destination": "/jobs", "permanent": true },
+    { "source": "/500-hours-master-barber-program-landing-page", "destination": "/", "permanent": true },
+    { "source": "/master-barber-program-bronx", "destination": "/programs/", "permanent": true },
     { "source": "/splash-page-1", "destination": "/", "permanent": true },
     { "source": "/splash-page-2", "destination": "/", "permanent": true }
   ],

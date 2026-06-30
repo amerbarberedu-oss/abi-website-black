@@ -21,13 +21,11 @@ import datetime
 from html import escape as h
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# v3.0 — funnels are now part of the main marketing site. ROOT points at
-# the site root (two levels up: src/landing-funnels → src → site root).
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import data as D
 
-SITE = "https://abi-website-black.vercel.app"
+SITE = "https://abi-landing-funnels.vercel.app"
 CSS_V = "29"
 JS_V  = "10"
 
