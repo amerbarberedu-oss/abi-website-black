@@ -128,26 +128,39 @@
   line-height: 1.55;
 }
 
-/* ===== Countdown 2-line layout ===== */
+/* ===== Countdown — STRICT 2 lines only =====
+   Line 1: "Next Starting Date: Monday, July 6, 2026"
+   Line 2: "New Classes Begin the First Monday of Each Month."
+   Auto-scales font so neither line ever wraps to a third line. */
 .lf-cd__line {
   margin: 0 0 .35rem;
-  font-size: 1rem;
-  line-height: 1.35;
-  text-align: left;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -.005em;
 }
-.lf-cd__line--date { font-weight: 700; }
-.lf-cd__line--sub  { font-weight: 500; opacity: .88; margin-bottom: 1rem; }
-@media (max-width: 540px) {
-  .lf-cd__line { text-align: center; font-size: .92rem; }
+.lf-cd__line--date {
+  font-weight: 800;
+  font-size: clamp(.82rem, 3.4vw, 1.05rem);
+}
+.lf-cd__line--date .lf-cd__label { color: #fff; opacity: .88; font-weight: 600; }
+.lf-cd__line--date .lf-cd__date  { color: #ffd470; }
+.lf-cd__line--sub {
+  font-weight: 500;
+  font-size: clamp(.72rem, 2.95vw, .92rem);
+  opacity: .9;
+  margin-bottom: 1rem;
+}
+@media (min-width: 769px) {
+  .lf-cd__line { text-align: left; }
 }
 
 /* ===== Hide play button while a video is playing (set by funnels.js) ===== */
 .lf-clip.is-playing .lf-clip__play,
 .lf-reel__media.is-playing .lf-reel__play {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transform: scale(.5) !important;
-  transition: opacity .15s ease, transform .15s ease;
+  display: none !important;
 }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body.lf-page {
