@@ -2460,3 +2460,9 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 video{background-color:#1a1f2e}
 .abi-reel__video, .abi-clip__video,
 .gal-reel video, .gal-aitile video, .gal-film video{background-color:#1a1f2e}
+
+/* TCPA consent checkboxes (v2.1) */
+.form-consent-block { margin: 1rem 0 .9rem; padding: .9rem; background: #f7f8fc; border: 1px solid #e2e6f0; border-radius: 10px; display: flex; flex-direction: column; gap: .65rem; }
+.form-consent-row { display: grid; grid-template-columns: 22px 1fr; gap: .65rem; align-items: start; cursor: pointer; font-size: .78rem; line-height: 1.45; color: #5b6473; }
+.form-consent-row input[type="checkbox"] { width: 18px; height: 18px; margin-top: .15rem; cursor: pointer; }
+.form-consent-row:hover { color: #1a1f2e; }

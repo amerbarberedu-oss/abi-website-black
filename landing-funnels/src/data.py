@@ -420,16 +420,18 @@ FORM = {
         "h": "Reserve Your Spot Today",
         "sub": "Fill out the form and an Admissions Advisor will contact you.",
         "first": "First Name", "last": "Last Name", "phone": "Phone", "email": "Email",
-        "loc_label": "Which School Location Would You Prefer To Attend?",
+        "loc_label": "Which School Location Would You Prefer to Attend?",
         "fmt_label": "What is your preferred learning format?",
         "fmt_opts": ["Select an option", "Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
-        "lang_label": "Which is your preferred language of communication?",
+        "lang_label": "Which Is Your Preferred Language of Communication?",
         "lang_opts": ["Select a language", "English", "Spanish / Español", "Other"],
         "msg_label": "Message for ABI",
         "msg_ph": "Tell us anything we should know — questions, schedule conflicts, financial aid needs, etc.",
         "submit": "Submit",
         "trust": "Free • No obligation • Reply within 24 hours",
-        "consent": "By clicking “Submit” you consent that ABI can contact you via phone, SMS or email for booking confirmations or promotional offers.",
+        "consent_call": "I consent to receive automated or AI-assisted phone calls from American Barber Institute at the number provided. Message frequency may vary. You may opt out at any time by requesting removal during any call.",
+        "consent_sms": "I consent to receive text messages from American Barber Institute at the number provided, including information about programs, enrollment, and promotions. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for assistance.",
+        "consent": "By clicking “Submit,” you consent to American Barber Institute contacting you via phone, SMS, or email regarding enrollment, appointment confirmations, follow-ups, and promotional offers.",
         "thanks": "Thank you! An ABI admissions agent will call you within 24 hours.",
     },
     "es": {
@@ -445,7 +447,9 @@ FORM = {
         "msg_ph": "Cuéntanos lo que debamos saber — preguntas, conflictos de horario, ayuda financiera, etc.",
         "submit": "Enviar",
         "trust": "Gratis • Sin compromiso • Respondemos en 24 horas",
-        "consent": "Al hacer clic en “Enviar” aceptas que ABI puede contactarte por teléfono, SMS o correo para confirmaciones de citas u ofertas promocionales.",
+        "consent_call": "Doy mi consentimiento para recibir llamadas telefónicas automatizadas o asistidas por IA de American Barber Institute al número proporcionado. La frecuencia de los mensajes puede variar. Puedes optar por no recibirlos en cualquier momento solicitando la eliminación durante cualquier llamada.",
+        "consent_sms": "Doy mi consentimiento para recibir mensajes de texto de American Barber Institute al número proporcionado, incluyendo información sobre programas, inscripciones y promociones. Pueden aplicarse tarifas de mensajes y datos. Responde STOP para optar por no recibirlos en cualquier momento. Responde HELP para asistencia.",
+        "consent": "Al hacer clic en “Enviar”, das tu consentimiento para que American Barber Institute te contacte por teléfono, SMS o correo electrónico con respecto a inscripción, confirmaciones de citas, seguimientos y ofertas promocionales.",
         "thanks": "¡Gracias! Un agente de admisiones de ABI te llamará dentro de 24 horas.",
     },
 }
@@ -476,6 +480,25 @@ YT_CLIPS = [
     ("dQw4w9WgXcQ", "Tour our pro New York City barber clinic", "Recorre nuestra clínica profesional en Nueva York"),
 ]
 YT_HEAD = {"en": ("Watch Us", "See ABI In Action"), "es": ("Míranos", "Mira a ABI en Acción")}
+
+# ─── 3 Easy Steps section (between About and Techniques) ─────────────
+THREE_STEPS_HEAD = {
+    "en": ("3 Easy Steps", "Become a Professional Barber in 3 Easy Steps"),
+    "es": ("3 Pasos Fáciles", "Conviértete en Barbero Profesional en 3 Pasos Fáciles"),
+}
+THREE_STEPS = {
+    "en": [
+        ("Get Started", "Submit your information to start your barbering journey."),
+        ("Speak With an Advisor", "An ABI Admissions Advisor will answer your questions, explain the program, and review flexible payment plan options that fit your budget."),
+        ("Start Training", "Complete your enrollment and begin building your professional barbering career."),
+    ],
+    "es": [
+        ("Empieza", "Envía tu información para comenzar tu camino en la barbería."),
+        ("Habla con un Asesor", "Un Asesor de Admisiones de ABI responderá tus preguntas, explicará el programa y revisará las opciones de planes de pago flexibles que se ajusten a tu presupuesto."),
+        ("Comienza a Entrenar", "Completa tu inscripción y empieza a construir tu carrera profesional en la barbería."),
+    ],
+}
+
 
 # ─── Promo topbar — phone chips per campus ───────────────────────────
 # Manhattan shows 2 chips (EN + ES). Bronx shows 1 chip.

@@ -315,9 +315,33 @@
     });
   }
 
+  // ── Play button: hide instantly when a video starts playing ─────────
+  // Targets:
+  //   .lf-clip          (showcase + YouTube tiles) → button.lf-clip__play
+  //   .lf-reel__media   (student-voices reels)     → button.lf-reel__play
+  function wirePlayHide() {
+    qsa('.lf-clip video, .lf-reel__media video').forEach(function (v) {
+      on(v, 'play', function () {
+        var wrap = v.closest('.lf-clip') || v.closest('.lf-reel__media');
+        if (wrap) wrap.classList.add('is-playing');
+      });
+      on(v, 'pause', function () {
+        if (v.ended || v.currentTime === 0) {
+          var wrap = v.closest('.lf-clip') || v.closest('.lf-reel__media');
+          if (wrap) wrap.classList.remove('is-playing');
+        }
+      });
+      on(v, 'ended', function () {
+        var wrap = v.closest('.lf-clip') || v.closest('.lf-reel__media');
+        if (wrap) wrap.classList.remove('is-playing');
+      });
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () { init(); wirePlayHide(); });
   } else {
     init();
+    wirePlayHide();
   }
 })();

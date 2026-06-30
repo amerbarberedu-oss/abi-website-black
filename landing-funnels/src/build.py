@@ -26,8 +26,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "21"
-JS_V  = "8"
+CSS_V = "22"
+JS_V  = "9"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {
@@ -183,11 +183,15 @@ def hero(p):
         '<div class="lf-cd__cell"><b data-cd-%s>0</b><span>%s</span></div>' % (k, h(lbl))
         for k, lbl in zip("dhms", cd["cells"])
     )
+    # 2-line countdown:
+    #   Line 1: <icon> NEXT STARTING DATE: MONDAY, JULY 6, 2026
+    #   Line 2: <icon> NEW CLASSES BEGIN THE FIRST MONDAY OF EACH MONTH.
     countdown = (
         '<div class="lf-cd" data-target="%s">\n'
-        '  <h2 class="lf-cd__h"><span class="lf-cd__label">%s</span>'
-        ' <span class="lf-cd__date"></span></h2>\n'
-        '  <p class="lf-cd__sub">%s</p>\n'
+        '  <p class="lf-cd__line lf-cd__line--date">'
+        '<span class="lf-cd__label">%s</span> '
+        '<span class="lf-cd__date"></span></p>\n'
+        '  <p class="lf-cd__line lf-cd__line--sub">%s</p>\n'
         '  <div class="lf-cd__grid">%s</div>\n'
         '</div>'
     ) % (NEXT_ISO, h(cd["label"]), h(cd["sub"]), cells)
@@ -239,6 +243,14 @@ def lead_form(p):
         '<select name="preferred_language" required>%(lang_opts)s</select></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(msg_label)s</label>'
         '<textarea name="message" rows="4" placeholder="%(msg_ph)s"></textarea></div>\n'
+        '  <div class="lf-consent">\n'
+        '    <label class="lf-consent__row">'
+        '<input type="checkbox" name="consent_call" required>'
+        '<span>%(consent_call)s</span></label>\n'
+        '    <label class="lf-consent__row">'
+        '<input type="checkbox" name="consent_sms" required>'
+        '<span>%(consent_sms)s</span></label>\n'
+        '  </div>\n'
         '  <button type="submit" class="lf-btn lf-btn--primary lf-btn--lg lf-form__submit">%(submit)s</button>\n'
         '  <p class="lf-form__trust">✓ %(trust)s</p>\n'
         '  <p class="lf-form__fine">%(consent)s</p>\n'
@@ -252,7 +264,9 @@ def lead_form(p):
         "fmt_label": h(f["fmt_label"]), "fmt_opts": fmt_opts,
         "lang_label": h(f["lang_label"]), "lang_opts": lang_opts,
         "msg_label": h(f["msg_label"]), "msg_ph": h(f["msg_ph"]),
-        "submit": h(f["submit"]), "trust": h(f["trust"]), "consent": h(f["consent"]),
+        "submit": h(f["submit"]), "trust": h(f["trust"]),
+        "consent_call": h(f["consent_call"]), "consent_sms": h(f["consent_sms"]),
+        "consent": h(f["consent"]),
     }
 
 
@@ -298,6 +312,24 @@ def section_about(p):
          svg("pin", 14), h(addr),
          h(p["phone"][2]), svg("phone", 14), h(p["phone"][1]),
          dur_lbl, dur_val, tui_lbl, tui_val, sch_lbl, sch_val)
+
+
+# ── 3 EASY STEPS (right after About) ─────────────────────────────────
+def section_three_steps(p):
+    lang = p["lang"]
+    eb, ti = D.THREE_STEPS_HEAD[lang]
+    cards = ""
+    for i, (head, body) in enumerate(D.THREE_STEPS[lang], 1):
+        cards += (
+            '<div class="lf-step lf-rv">'
+            '<div class="lf-step__n">%02d</div>'
+            '<h3 class="lf-step__h">%s</h3>'
+            '<p class="lf-step__p">%s</p>'
+            '</div>'
+        ) % (i, h(head), h(body))
+    return ('<section class="lf-section"><div class="lf-wrap">%s'
+            '<div class="lf-steps">%s</div></div></section>\n'
+            % (section_head(eb, ti), cards))
 
 
 # ── SKILLS & TECHNIQUES ──────────────────────────────────────────────
@@ -798,17 +830,16 @@ def build_page(p):
         section_student_voices(p),
         section_stats(p),
         section_about(p),
+        section_three_steps(p),
         section_techniques(p),
-        section_modules(p),
         section_tuition(p),
         section_requirements(p),
         section_showcase(p),
     ]
-    # Bronx-extra triple-reel removed — it duplicated section_student_voices
-    # (same video files, same triple grid). Re-enable only when real
-    # Bronx-specific testimonial files exist in assets/videos/.
+    # Removed: section_modules (Course Modules), section_videos
+    # (See ABI in Action — YouTube clips), section_bronx_extra (duplicated
+    # Student Voices). Per content spec — no replacements.
     parts += [
-        section_videos(p),
         section_gallery(p),
         section_reviews(p),
         section_contact(p),
