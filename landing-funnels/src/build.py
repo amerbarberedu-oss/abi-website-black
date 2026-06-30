@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "18"
+CSS_V = "19"
 JS_V  = "7"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -699,8 +699,9 @@ def build_page(p):
         section_requirements(p),
         section_showcase(p),
     ]
-    if p["campus"]["slug"] == "bronx":
-        parts.append(section_bronx_extra(p))
+    # Bronx-extra triple-reel removed — it duplicated section_student_voices
+    # (same video files, same triple grid). Re-enable only when real
+    # Bronx-specific testimonial files exist in assets/videos/.
     parts += [
         section_videos(p),
         section_gallery(p),
