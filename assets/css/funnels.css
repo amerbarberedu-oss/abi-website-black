@@ -1147,44 +1147,56 @@ body.lf-page--brnx-es {
   .lf-topbar__chip svg { opacity: .9; }
 }
 
-/* ─ Limited Seats banner (right under header) ─ */
+/* ─ Limited Seats banner (right under header) — v3.2: strict 2-line layout
+   Line 1: 🔴 LIMITED SEATS AVAILABLE (gold, large, with pulsing dot)
+   Line 2: ENROLLMENT NOW OPEN (navy, slightly smaller)                   */
 .lf-seats {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: .55rem;
-  padding: .7rem 1rem;
+  column-gap: .65rem;
+  row-gap: .2rem;
+  padding: .85rem 1rem;
   background: #fff7d6;
   border-bottom: 1px solid #f0e3a8;
-  font-size: .86rem;
-  flex-wrap: wrap;
+  text-align: center;
 }
 .lf-seats__dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #e23d3d;
-  box-shadow: 0 0 0 4px rgba(226, 61, 61, .18);
+  box-shadow: 0 0 0 5px rgba(226, 61, 61, .20);
   animation: lf-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
 }
 @keyframes lf-pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(226, 61, 61, .18); }
-  50%      { box-shadow: 0 0 0 8px rgba(226, 61, 61, .05); }
+  0%, 100% { box-shadow: 0 0 0 5px rgba(226, 61, 61, .20); }
+  50%      { box-shadow: 0 0 0 10px rgba(226, 61, 61, .06); }
 }
 .lf-seats__kicker {
-  font-weight: 800;
-  letter-spacing: .08em;
+  font-weight: 900;
+  letter-spacing: .06em;
   color: #8a6500;
   text-transform: uppercase;
-  font-size: .78rem;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  line-height: 1.15;
 }
 .lf-seats__lead {
-  font-weight: 700;
+  /* force to row 2: spans the full width so it wraps below the dot+kicker */
+  flex-basis: 100%;
+  font-weight: 800;
+  letter-spacing: .04em;
   color: var(--lf-accent-dark);
+  text-transform: uppercase;
+  font-size: clamp(.85rem, 3.4vw, 1.1rem);
+  line-height: 1.2;
 }
 
-@media (max-width: 768px) {
-  .lf-seats { font-size: .82rem; padding: .6rem .8rem; }
+@media (max-width: 520px) {
+  .lf-seats { padding: .8rem .6rem; column-gap: .5rem; }
+  .lf-seats__dot { width: 10px; height: 10px; }
 }
 
 /* ─ Mobile dark theme: hero, features, form, voices all dark navy ─ */
