@@ -670,12 +670,16 @@ body.lf-page--brnx-es {
 .lf-review__name { font-weight: 700; color: var(--lf-ink); font-size: .92rem; line-height: 1.2; }
 .lf-review__role { color: var(--lf-soft-ink); font-size: .8rem; }
 
-/* ───── gallery ───── */
+/* ───── gallery — v3.0: ONE photo per row on mobile (improves readability),
+   2 per row on small tablets, 4 per row on desktop ───── */
 .lf-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: .55rem;
+  grid-template-columns: 1fr;
+  gap: .65rem;
+  max-width: 540px;
+  margin-inline: auto;
 }
+@media (min-width: 560px) { .lf-gallery { grid-template-columns: repeat(2, 1fr); max-width: none; } }
 @media (min-width: 720px) { .lf-gallery { grid-template-columns: repeat(4, 1fr); } }
 .lf-gallery img {
   width: 100%; aspect-ratio: 1/1; object-fit: cover;

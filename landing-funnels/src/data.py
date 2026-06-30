@@ -360,13 +360,25 @@ REVIEWS_LEAD = {
 }
 
 # ─── Form campus options: locked to a single campus per page ─────────
-# Each landing page is campus-specific, so the dropdown shows only
-# that campus — no cross-campus leakage on the lead form.
+# v3.0 — show BOTH campuses on every landing page so the prospect can
+# pick freely (Manhattan or Bronx) regardless of which landing they land on.
+_CAMPUS_OPTS_EN = [
+    "Select your preferred campus",
+    "Manhattan Campus — 48 West 39th Street",
+    "Bronx Campus — 121 Westchester Square",
+    "Either / No preference",
+]
+_CAMPUS_OPTS_ES = [
+    "Selecciona tu sede preferida",
+    "Sede de Manhattan — 48 West 39th Street",
+    "Sede del Bronx — 121 Westchester Square",
+    "Cualquiera / Sin preferencia",
+]
 LOC_OPTS_BY_CAMPUS = {
-    ("manhattan", "en"): ["Manhattan Campus — 48 West 39th Street"],
-    ("manhattan", "es"): ["Sede de Manhattan — 48 West 39th Street"],
-    ("bronx",     "en"): ["Bronx Campus — 121 Westchester Square"],
-    ("bronx",     "es"): ["Sede del Bronx — 121 Westchester Square"],
+    ("manhattan", "en"): _CAMPUS_OPTS_EN,
+    ("manhattan", "es"): _CAMPUS_OPTS_ES,
+    ("bronx",     "en"): _CAMPUS_OPTS_EN,
+    ("bronx",     "es"): _CAMPUS_OPTS_ES,
 }
 
 

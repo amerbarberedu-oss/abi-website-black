@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "29"
+CSS_V = "30"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -83,13 +83,13 @@ def section_head(eyebrow, title, lead=None):
     return out + '</div>'
 
 
-# Campus → branded logo (each image bakes in its own street address)
-# Animated spinning barber-pole GIFs (1.0–1.8 MB each, hosted locally).
-# GIF gives a true continuous spinning pole on desktop + mobile, no JS needed.
-CAMPUS_LOGOS = {
-    "manhattan": "/assets/img/logo-manhattan.gif",
-    "bronx":     "/assets/img/logo-bronx.gif",
-}
+# v3.0 — single brand logo across all 4 landing pages, identical to main
+# marketing site header. Spinning pole + both campus addresses baked in.
+LOGO_SRC = "/assets/img/logo-final.gif"
+LOGO_W, LOGO_H = 385, 99
+LOGO_ALT = ("American Barber Institute — "
+            "48 West 39th Street, New York, NY 10018 & "
+            "121 Westchester Square, Bronx, NY 10461")
 
 # ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
 # Each campus logo already contains the street address baked into the
@@ -100,7 +100,7 @@ def header(p):
     flag, disp, tel = p["phone"]
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
-    logo_src = CAMPUS_LOGOS[p["campus"]["slug"]]
+    logo_src = LOGO_SRC
     # Topbar phone chips (campus-aware: 2 for Manhattan, 1 for Bronx)
     chips = "".join(
         '<a class="lf-topbar__chip" href="tel:%s">%s<b>%s</b> <span>%s</span></a>' % (
@@ -115,9 +115,9 @@ def header(p):
         '  <div class="lf-topbar__chips">%s</div>\n'
         '</div>\n'
         '<header class="lf-hdr"><div class="lf-hdr__in">\n'
-        '  <a class="lf-brand lf-brand--campus" href="#reserve" aria-label="American Barber Institute — %s">\n'
-        '    <img class="lf-brand__logo lf-brand__logo--campus" src="%s"'
-        ' alt="American Barber Institute — %s" width="500" height="200" fetchpriority="high">\n'
+        '  <a class="lf-brand" href="#reserve" aria-label="American Barber Institute — %s">\n'
+        '    <img class="lf-brand__logo lf-brand__logo--final" src="%s"'
+        ' alt="%s" width="%d" height="%d" fetchpriority="high">\n'
         '  </a>\n'
         '  <div class="lf-hdr__right">\n'
         '    <a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
@@ -137,7 +137,7 @@ def header(p):
         h(p["promo_strip"]),
         chips,
         h(addr),
-        h(logo_src), h(addr),
+        h(logo_src), h(LOGO_ALT), LOGO_W, LOGO_H,
         h(tel), svg("phone", 16), h(flag), h(disp),
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
@@ -623,7 +623,7 @@ def page_head(p):
         "telephone": p["phone"][2],
         "email": "admission@abi.edu",
         "image": SITE + "/assets/img/lf-og-cover.jpg",
-        "logo": SITE + "/assets/img/logo-" + campus_slug + ".png",
+        "logo": SITE + LOGO_SRC,
         "description": p["desc"],
         "foundingDate": "1996",
         "priceRange": "$4,600–$5,600",
@@ -712,7 +712,7 @@ def page_head(p):
          "uploadDate": "2024-09-01",
          "contentUrl": SITE + "/assets/videos/" + vid,
          "publisher": {"@type": "Organization", "name": "American Barber Institute",
-                       "logo": {"@type": "ImageObject", "url": SITE + "/assets/img/logo-" + campus_slug + ".png"}}}
+                       "logo": {"@type": "ImageObject", "url": SITE + LOGO_SRC}}}
         for i, (vid, ps) in enumerate(student_voices_videos)
     ]
 
