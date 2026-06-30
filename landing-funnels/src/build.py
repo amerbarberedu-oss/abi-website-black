@@ -547,7 +547,8 @@ def section_contact(p):
         h(L["addr"]), svg("pin", 14), h(addr), h(maps_url), h(L["directions"]),
         h(L["phone"]), phone_items,
         h(L["email"]), h(D.CONTACT_EMAIL), h(D.CONTACT_EMAIL),
-        h(L["hours"]), h(D.CONTACT_HOURS[lang]),
+        h(L["hours"]),
+        "<br>".join(h(line) for line in D.CONTACT_HOURS[lang]),
     )
 
 
@@ -633,11 +634,14 @@ def page_head(p):
                     "addressCountry": "US"},
         "geo": {"@type": "GeoCoordinates",
                 "latitude": p["campus"]["latlng"][0], "longitude": p["campus"]["latlng"][1]},
-        "openingHoursSpecification": [{
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-            "opens": "08:00", "closes": "20:00"
-        }],
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+             "opens": "08:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Saturday","Sunday"],
+             "opens": "09:00", "closes": "19:00"},
+        ],
         "aggregateRating": {
             "@type": "AggregateRating", "ratingValue": "4.6",
             "reviewCount": "100", "bestRating": "5", "worstRating": "1"

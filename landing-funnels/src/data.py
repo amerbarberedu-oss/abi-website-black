@@ -533,9 +533,19 @@ SEATS_BANNER = {
 # ─── Contact box (campus-aware) ──────────────────────────────────────
 # Manhattan shows 2 numbers (EN + ES). Bronx shows 1 number only.
 CONTACT_EMAIL = "admission@abi.edu"
+# v3.3 — actual posted hours per the campus signage:
+#   Monday–Friday      8:00 AM – 8:00 PM
+#   Saturday & Sunday  9:00 AM – 7:00 PM
+# Stored as a 2-line list so the contact box renders them on separate lines.
 CONTACT_HOURS = {
-    "en": "Mon–Sun · 8:00 AM – 8:00 PM",
-    "es": "Lun–Dom · 8:00 AM – 8:00 PM",
+    "en": [
+        "Monday–Friday · 8:00 AM – 8:00 PM",
+        "Saturday & Sunday · 9:00 AM – 7:00 PM",
+    ],
+    "es": [
+        "Lunes–Viernes · 8:00 AM – 8:00 PM",
+        "Sábado y Domingo · 9:00 AM – 7:00 PM",
+    ],
 }
 CONTACT_HEAD = {
     "en": ("Contact", "Visit Our Campus"),
