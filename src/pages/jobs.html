@@ -48,8 +48,13 @@
             <div><label class="f" for="sr-phone">Phone *</label><input id="sr-phone" name="Phone" type="tel" required autocomplete="tel"></div>
             <div><label class="f" for="sr-email">Email *</label><input id="sr-email" name="Email" type="email" required autocomplete="email"></div>
             <div class="full"><label class="f" for="sr-addr">Shop location *</label><input id="sr-addr" name="Shop_address" required autocomplete="street-address"></div>
-            <div class="full"><label class="f" for="sr-pos">Positions &amp; the candidates you want</label><textarea id="sr-pos" name="Positions" rows="3" placeholder="e.g., 2 chairs available, full-time, commission split…"></textarea></div>
+            <div class="full"><label class="f" for="sr-pos">Positions &amp; the candidates you want</label><textarea id="sr-pos" name="Positions" rows="3" placeholder="e.g., 2 chairs available, full-time, commission split…"></textarea></div>          <div class="full"><div class="form-consent-block">
+            <label class="form-consent-row"><input type="checkbox" name="consent_call" required> <span>I consent to receive automated or AI-assisted phone calls from American Barber Institute at the number provided. Message frequency may vary. You may opt out at any time by requesting removal during any call.</span></label>
+            <label class="form-consent-row"><input type="checkbox" name="consent_sms" required> <span>I consent to receive text messages from American Barber Institute at the number provided, including information about programs, enrollment, and promotions. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for assistance.</span></label>
+          </div></div>
+
             <div class="full"><button class="btn btn-gold" type="submit">Register My Shop</button></div>
+          <p class="form-consent full">By clicking “Submit,” you consent to American Barber Institute contacting you via phone, SMS, or email regarding enrollment, appointment confirmations, follow-ups, and promotional offers.</p>
             <p class="form-note full" style="opacity:.8">Opens your email app addressed to admission@abi.edu with your shop details.</p>
             <p class="form-ok full" hidden style="color:var(--gold-bright);font-weight:600">Thanks! Your email draft is ready to send.</p>
           </div>
