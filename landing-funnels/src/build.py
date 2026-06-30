@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "23"
+CSS_V = "24"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -85,8 +85,8 @@ def section_head(eyebrow, title, lead=None):
 
 # Campus → branded logo (each image bakes in its own street address)
 CAMPUS_LOGOS = {
-    "manhattan": "/assets/img/logo-manhattan.png?v=2",
-    "bronx":     "/assets/img/logo-bronx.png?v=2",
+    "manhattan": "/assets/img/logo-manhattan.png?v=3",
+    "bronx":     "/assets/img/logo-bronx.png?v=3",
 }
 
 # ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
