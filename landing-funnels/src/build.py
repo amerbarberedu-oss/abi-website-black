@@ -26,8 +26,8 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "19"
-JS_V  = "7"
+CSS_V = "20"
+JS_V  = "8"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {
@@ -559,13 +559,10 @@ def footer(p):
         '  <div class="lf-footer__socials">%s</div>\n'
         '  <p class="lf-footer__fine">%s</p>\n'
         '</div></footer>\n'
-        '<button class="lf-chat" aria-label="%s">%s</button>\n'
     ) % (
         h(ft["h"]), h(ft["sub"]),
         svg("pin", 14), h(addr), h(p["phone"][2]), h(p["phone"][1]),
         socials, h(ft["fine"]),
-        ("Chatear con admisiones" if p["lang"] == "es" else "Chat with admissions"),
-        svg("chat", 26),
     )
 
 
@@ -631,6 +628,7 @@ def page_head(p):
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
+'<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '<script type="application/ld+json">%(ld1)s</script>\n'
 '<script type="application/ld+json">%(ld2)s</script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
@@ -680,7 +678,11 @@ def mobile_cta_bar(p):
 
 
 def page_tail():
-    return '<script src="/assets/js/funnels.js?v=%s" defer></script>\n</body>\n</html>\n' % JS_V
+    return (
+        '<script src="/assets/js/funnels.js?v=%s" defer></script>\n'
+        '<script src="/assets/js/chatbot.js?v=%s" defer></script>\n'
+        '</body>\n</html>\n'
+    ) % (JS_V, JS_V)
 
 
 # ── ASSEMBLE ─────────────────────────────────────────────────────────
