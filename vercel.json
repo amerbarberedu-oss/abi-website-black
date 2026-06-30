@@ -20,10 +20,10 @@
     { "source": "/splash-page-2", "destination": "/", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/500-hours-master-barber-program-landing-page",         "destination": "/landing-funnels/500-hours-master-barber-program-landing-page/index.html" },
-    { "source": "/500-hours-master-barber-program-landing-page/spanish", "destination": "/landing-funnels/500-hours-master-barber-program-landing-page/spanish/index.html" },
-    { "source": "/master-barber-program-bronx",                          "destination": "/landing-funnels/master-barber-program-bronx/index.html" },
-    { "source": "/master-barber-program-bronx/spanish",                  "destination": "/landing-funnels/master-barber-program-bronx/spanish/index.html" }
+    { "source": "/500-hours-master-barber-program-landing-page",         "destination": "/landing-funnels/500-hours-master-barber-program-landing-page" },
+    { "source": "/500-hours-master-barber-program-landing-page/spanish", "destination": "/landing-funnels/500-hours-master-barber-program-landing-page/spanish" },
+    { "source": "/master-barber-program-bronx",                          "destination": "/landing-funnels/master-barber-program-bronx" },
+    { "source": "/master-barber-program-bronx/spanish",                  "destination": "/landing-funnels/master-barber-program-bronx/spanish" }
   ],
   "headers": [
     {
