@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "31"
+CSS_V = "32"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -474,7 +474,7 @@ def section_videos(p):
 def section_gallery(p):
     eb, ti = D.GALLERY_HEAD[p["lang"]]
     items = "".join(
-        '<img loading="lazy" src="/assets/img/%s" alt="ABI clinic floor photo %d" width="600" height="600">'
+        '<img loading="lazy" src="/assets/img/%s" alt="ABI clinic floor photo %d" width="800" height="600">'
         % (h(g), i + 1) for i, g in enumerate(D.GALLERY)
     )
     return ('<section class="lf-section lf-section--alt"><div class="lf-wrap">%s'
