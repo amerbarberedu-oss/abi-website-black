@@ -324,11 +324,12 @@ body.lf-page--brnx-es {
    mix-blend-mode multiply lets any near-white background fall away
    against the white header without needing a true alpha channel. */
 .lf-brand__logo--campus {
-  height: 120px; width: auto;
-  max-width: 580px;
+  height: 148px; width: auto;
+  max-width: 660px;
   object-fit: contain;
   mix-blend-mode: multiply;
   background: transparent;
+  filter: contrast(1.04) saturate(1.02);
 }
 .lf-brand__addr {
   font-size: .78rem; color: var(--lf-muted); line-height: 1.35;
@@ -364,7 +365,7 @@ body.lf-page--brnx-es {
 @media (max-width: 720px) {
   .lf-brand__addr { display: none; }
   .lf-brand__logo { height: 46px; }
-  .lf-brand__logo--campus { height: 92px; max-width: 420px; }
+  .lf-brand__logo--campus { height: 112px; max-width: 500px; }
   .lf-phone__num { display: none; }
   .lf-phone { padding: .55rem .65rem; }
 }
@@ -622,17 +623,21 @@ body.lf-page--brnx-es {
 .lf-reel__icon-pause { display: none; }
 .lf-reel__media.is-playing .lf-reel__icon-play { display: none; }
 .lf-reel__media.is-playing .lf-reel__icon-pause { display: block; }
-.lf-reel__media.is-playing .lf-reel__play {
-  width: 54px; height: 54px;
-  background: rgba(255,255,255,.55); opacity: .85;
-}
+/* v2.8 — when video is playing, the play button vanishes COMPLETELY.
+   It returns only when the video pauses/ends (.is-playing class is removed). */
+.lf-reel__media.is-playing .lf-reel__play,
 .lf-reel__media.is-playing .lf-reel__play:hover {
-  background: #fff; opacity: 1;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translate(-50%, -50%) scale(.5) !important;
+  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
 }
 @media (hover: none) {
   .lf-reel__media.is-playing .lf-reel__play {
-    width: 60px; height: 60px;
-    background: rgba(255,255,255,.78); opacity: .92;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 }
 
@@ -789,7 +794,7 @@ body.lf-page--brnx-es {
   .lf-topbar { font-size: .82rem; padding: .45rem .8rem; }
   .lf-hdr__in { padding: .55rem .8rem; gap: .6rem; }
   .lf-brand__logo { height: 42px; }
-  .lf-brand__logo--campus { height: 78px; max-width: 310px; }
+  .lf-brand__logo--campus { height: 96px; max-width: 380px; }
   .lf-hdr__right { gap: .5rem; }
   .lf-lang { font-size: .76rem; }
   .lf-lang a { padding: .35rem .55rem; }
@@ -1113,25 +1118,30 @@ body.lf-page--brnx-es {
     letter-spacing: .04em;
     line-height: 1.3;
   }
+  /* v2.8 — force EN | ES side-by-side on Manhattan mobile (no wrap) */
   .lf-topbar__chips {
     display: flex;
-    flex-wrap: wrap;
-    gap: .55rem;
+    flex-wrap: nowrap;
+    gap: .45rem;
     justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   .lf-topbar__chip {
     display: inline-flex;
     align-items: center;
-    gap: .4rem;
-    padding: .5rem .85rem;
+    gap: .35rem;
+    padding: .42rem .7rem;
     border-radius: var(--lf-r-pill);
-    background: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .14);
     border: 1px solid rgba(255, 255, 255, .55);
     color: #fff;
-    font-size: .82rem;
+    font-size: .78rem;
     font-weight: 600;
     line-height: 1;
     text-decoration: none;
+    white-space: nowrap;
+    flex: 0 1 auto;
   }
   .lf-topbar__chip b { font-weight: 800; opacity: .85; }
   .lf-topbar__chip svg { opacity: .9; }
