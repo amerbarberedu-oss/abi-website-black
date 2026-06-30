@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "25"
+CSS_V = "26"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -84,9 +84,11 @@ def section_head(eyebrow, title, lead=None):
 
 
 # Campus → branded logo (each image bakes in its own street address)
+# Animated spinning barber-pole GIFs (1.0–1.8 MB each, hosted locally).
+# GIF gives a true continuous spinning pole on desktop + mobile, no JS needed.
 CAMPUS_LOGOS = {
-    "manhattan": "/assets/img/logo-manhattan.png?v=3",
-    "bronx":     "/assets/img/logo-bronx.png?v=3",
+    "manhattan": "/assets/img/logo-manhattan.gif",
+    "bronx":     "/assets/img/logo-bronx.gif",
 }
 
 # ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
