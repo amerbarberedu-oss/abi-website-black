@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "20"
+CSS_V = "21"
 JS_V  = "8"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -152,18 +152,19 @@ def mobile_hero(p):
     kicker = H_["kicker_bx"] if is_bx else H_["kicker_man"]
     cta_label = "Reserve Your Spot" if not es else "Reserva Tu Lugar"
     return (
-        '<section class="lf-mhero" aria-label="American Barber Institute clinic floor">\n'
+        '<section class="lf-mhero" aria-label="American Barber Institute %s clinic floor">\n'
         '  <img class="lf-mhero__bg" src="/assets/img/lf-hero-mobile.jpg"'
-        ' alt="ABI students training on the clinic floor" loading="eager"'
+        ' alt="ABI barber students training on the clinic floor at the %s" loading="eager"'
         ' fetchpriority="high" width="1080" height="1609">\n'
         '  <div class="lf-mhero__scrim"></div>\n'
         '  <div class="lf-mhero__copy">\n'
         '    <p class="lf-mhero__kicker">%s</p>\n'
-        '    <h1 class="lf-mhero__h1">%s <span>%s</span> <em>%s</em></h1>\n'
+        '    <p class="lf-mhero__h1" role="heading" aria-level="1">%s <span>%s</span> <em>%s</em></p>\n'
         '    <a class="lf-btn lf-btn--primary lf-btn--lg lf-mhero__cta" href="#reserve">%s</a>\n'
         '  </div>\n'
         '</section>\n'
-    ) % (h(kicker), h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
+    ) % (h(p["campus"]["name_en"]), h(p["campus"]["name_en"]),
+         h(kicker), h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
 
 
 # ── HERO ─────────────────────────────────────────────────────────────
@@ -239,6 +240,7 @@ def lead_form(p):
         '  <div class="lf-form__row"><label class="lf-form__label">%(msg_label)s</label>'
         '<textarea name="message" rows="4" placeholder="%(msg_ph)s"></textarea></div>\n'
         '  <button type="submit" class="lf-btn lf-btn--primary lf-btn--lg lf-form__submit">%(submit)s</button>\n'
+        '  <p class="lf-form__trust">✓ %(trust)s</p>\n'
         '  <p class="lf-form__fine">%(consent)s</p>\n'
         '</form></div>'
     ) % {
@@ -250,7 +252,7 @@ def lead_form(p):
         "fmt_label": h(f["fmt_label"]), "fmt_opts": fmt_opts,
         "lang_label": h(f["lang_label"]), "lang_opts": lang_opts,
         "msg_label": h(f["msg_label"]), "msg_ph": h(f["msg_ph"]),
-        "submit": h(f["submit"]), "consent": h(f["consent"]),
+        "submit": h(f["submit"]), "trust": h(f["trust"]), "consent": h(f["consent"]),
     }
 
 
@@ -566,36 +568,130 @@ def footer(p):
     )
 
 
+# ── Social profiles (sameAs for Organization schema) ────────────────
+SAME_AS = [
+    "https://www.facebook.com/Abi.Education/",
+    "https://www.instagram.com/americanbarberinstitute/",
+    "https://twitter.com/amerbarberedu",
+    "https://www.youtube.com/channel/UCy_pQUDfk2ldEp6_zyaIMhQ",
+    "https://www.pinterest.com/alexzholendz/american-barber-institute/",
+]
+
+
 # ── HEAD ─────────────────────────────────────────────────────────────
 def page_head(p):
     es = p["lang"] == "es"
     canonical = SITE + "/" + p["path"]
     alt_url   = SITE + "/" + p["alt"]
     en_url, es_url = (alt_url, canonical) if es else (canonical, alt_url)
-    ld = {
+    campus_slug = p["campus"]["slug"]
+    campus_name = p["campus"]["name_es" if es else "name_en"]
+
+    # 1) Primary: TradeSchool + LocalBusiness + EducationalOrganization
+    ld_org = {
         "@context": "https://schema.org",
         "@type": ["TradeSchool", "LocalBusiness", "EducationalOrganization"],
+        "@id": canonical + "#org",
         "name": "American Barber Institute — " + p["campus"]["name_en"],
-        "url": canonical, "telephone": p["phone"][2],
-        "image": SITE + "/assets/img/lf-og-cover.jpg", "description": p["desc"],
+        "url": canonical,
+        "telephone": p["phone"][2],
+        "email": "admission@abi.edu",
+        "image": SITE + "/assets/img/lf-og-cover.jpg",
+        "logo": SITE + "/assets/img/logo-" + campus_slug + ".png",
+        "description": p["desc"],
         "foundingDate": "1996",
+        "priceRange": "$4,600–$5,600",
+        "sameAs": SAME_AS,
         "address": {"@type": "PostalAddress",
                     "streetAddress": p["campus"]["addr_full_en"].split(",")[0].strip(),
-                    "addressLocality": "Bronx" if p["campus"]["slug"] == "bronx" else "New York",
+                    "addressLocality": "Bronx" if campus_slug == "bronx" else "New York",
                     "addressRegion": "NY",
-                    "postalCode": "10461" if p["campus"]["slug"] == "bronx" else "10018",
+                    "postalCode": "10461" if campus_slug == "bronx" else "10018",
                     "addressCountry": "US"},
         "geo": {"@type": "GeoCoordinates",
                 "latitude": p["campus"]["latlng"][0], "longitude": p["campus"]["latlng"][1]},
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.6",
-                            "reviewCount": "100", "bestRating": "5", "worstRating": "1"},
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00", "closes": "20:00"
+        }],
+        "aggregateRating": {
+            "@type": "AggregateRating", "ratingValue": "4.6",
+            "reviewCount": "100", "bestRating": "5", "worstRating": "1"
+        },
+        "review": [
+            {"@type": "Review",
+             "author": {"@type": "Person", "name": r["name"]},
+             "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+             "reviewBody": r["q"]}
+            for r in D.REVIEWS_BY_CAMPUS[campus_slug][p["lang"]]
+        ],
         "paymentAccepted": ["Cash", "Credit Card", "Financial Aid", "GI Bill", "ACCES-VR"],
     }
-    course = {
+
+    # 2) Course
+    ld_course = {
         "@context": "https://schema.org", "@type": "Course",
-        "name": "500-Hour Master Barber Program", "description": p["desc"],
-        "provider": {"@type": "TradeSchool", "name": "American Barber Institute"},
+        "name": "500-Hour Master Barber Program",
+        "description": p["desc"],
+        "provider": {"@type": "TradeSchool", "@id": canonical + "#org",
+                     "name": "American Barber Institute",
+                     "sameAs": "https://www.abi.edu/"},
+        "educationalCredentialAwarded": "Eligibility for New York State Master Barber license",
+        "occupationalCredentialAwarded": "NY State Master Barber license (after passing State Board Exam)",
+        "timeRequired": "PT500H",
+        "inLanguage": ["en", "es"],
+        "hasCourseInstance": [{
+            "@type": "CourseInstance",
+            "courseMode": "in-person",
+            "name": "500-Hour Master Barber Program — " + campus_name,
+            "location": {"@type": "Place", "name": campus_name,
+                         "address": ld_org["address"]},
+            "courseWorkload": "PT30H",  # 30 hrs/week full-time
+            "instructor": {"@type": "Person", "name": "King David Ayeoribe"}
+        }],
+        "offers": [
+            {"@type": "Offer", "name": "Plan A — Morning",   "price": "5600", "priceCurrency": "USD", "category": "Tuition"},
+            {"@type": "Offer", "name": "Plan B — Afternoon", "price": "4600", "priceCurrency": "USD", "category": "Tuition"},
+            {"@type": "Offer", "name": "Plan C — Weekend",   "price": "4600", "priceCurrency": "USD", "category": "Tuition"},
+        ]
     }
+
+    # 3) FAQPage — every page's 8 FAQs as structured data
+    ld_faq = {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in D.faq(p["lang"], p["phone"][1], campus_name)
+        ]
+    }
+
+    # 4) BreadcrumbList
+    ld_bc = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "American Barber Institute", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "500-Hour Master Barber Program — " + campus_name, "item": canonical},
+        ]
+    }
+
+    # 5) VideoObject (one per testimonial) so video clips are AEO-friendly
+    student_voices_videos = D.STUDENT_VOICES_VIDEOS
+    ld_videos = [
+        {"@context": "https://schema.org", "@type": "VideoObject",
+         "name": "ABI Student Testimonial " + str(i + 1),
+         "description": "Student of the American Barber Institute (ABI) sharing their experience at the " + campus_name + ".",
+         "thumbnailUrl": SITE + "/assets/img/" + ps,
+         "uploadDate": "2024-09-01",
+         "contentUrl": SITE + "/assets/videos/" + vid,
+         "publisher": {"@type": "Organization", "name": "American Barber Institute",
+                       "logo": {"@type": "ImageObject", "url": SITE + "/assets/img/logo-" + campus_slug + ".png"}}}
+        for i, (vid, ps) in enumerate(student_voices_videos)
+    ]
+
+    # Combine into one ordered list; emit each as its own <script>
+    ld_blocks = [ld_org, ld_course, ld_faq, ld_bc] + ld_videos
     return (
 '<!DOCTYPE html>\n<html lang="%(lang)s">\n<head>\n'
 '<meta charset="utf-8">\n'
@@ -629,15 +725,17 @@ def page_head(p):
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
-'<script type="application/ld+json">%(ld1)s</script>\n'
-'<script type="application/ld+json">%(ld2)s</script>\n'
+'%(ld_scripts)s'
 '</head>\n<body class="lf-page %(theme)s">\n'
     ) % {
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
         "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
         "site": SITE, "oglocale": "es_ES" if es else "en_US", "cssv": CSS_V,
-        "ld1": json.dumps(ld, ensure_ascii=False),
-        "ld2": json.dumps(course, ensure_ascii=False), "theme": p["theme_class"],
+        "ld_scripts": "".join(
+            '<script type="application/ld+json">%s</script>\n' % json.dumps(b, ensure_ascii=False)
+            for b in ld_blocks
+        ),
+        "theme": p["theme_class"],
     }
 
 
@@ -687,9 +785,14 @@ def page_tail():
 
 # ── ASSEMBLE ─────────────────────────────────────────────────────────
 def build_page(p):
+    skip_link = ('<a class="lf-skip" href="#content">'
+                 + ('Saltar al contenido' if p["lang"] == "es" else 'Skip to content')
+                 + '</a>\n')
     parts = [
         page_head(p),
+        skip_link,
         header(p),
+        '<main id="content">\n',
         mobile_hero(p),
         hero(p),
         section_student_voices(p),
@@ -710,6 +813,7 @@ def build_page(p):
         section_reviews(p),
         section_contact(p),
         section_faq(p),
+        '</main>\n',
         footer(p),
         mobile_cta_bar(p),
         page_tail(),
