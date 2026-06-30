@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "32"
+CSS_V = "33"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -97,16 +97,26 @@ LOGO_ALT = ("American Barber Institute — "
 def header(p):
     es = p["lang"] == "es"
     addr = p["campus"]["addr_short_es" if es else "addr_short_en"]
-    flag, disp, tel = p["phone"]
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
     logo_src = LOGO_SRC
+    campus_slug = p["campus"]["slug"]
+    campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[campus_slug]
     # Topbar phone chips (campus-aware: 2 for Manhattan, 1 for Bronx)
     chips = "".join(
         '<a class="lf-topbar__chip" href="tel:%s">%s<b>%s</b> <span>%s</span></a>' % (
             h(ph["tel"]), svg("phone", 14), h(ph["label"]), h(ph["display"])
         )
-        for ph in D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
+        for ph in campus_phones
+    )
+    # Header phones (desktop): same 2 chips for Manhattan, 1 for Bronx —
+    # so both Manhattan numbers (EN + ES) are visible above the fold on desktop.
+    phones_html = "".join(
+        '<a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
+        '<span class="lf-phone__num">%s</span></a>' % (
+            h(ph["tel"]), svg("phone", 16), h(ph["label"]), h(ph["display"])
+        )
+        for ph in campus_phones
     )
     seats_kicker, seats_lead = D.SEATS_BANNER[p["lang"]]
     return (
@@ -120,8 +130,7 @@ def header(p):
         ' alt="%s" width="%d" height="%d" fetchpriority="high">\n'
         '  </a>\n'
         '  <div class="lf-hdr__right">\n'
-        '    <a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
-        '<span class="lf-phone__num">%s</span></a>\n'
+        '    <div class="lf-hdr__phones">%s</div>\n'
         '    <div class="lf-lang" role="group" aria-label="%s">\n'
         '      <a class="%s" href="%s"%s>EN</a>\n'
         '      <a class="%s" href="%s"%s>ES</a>\n'
@@ -138,7 +147,7 @@ def header(p):
         chips,
         h(addr),
         h(logo_src), h(LOGO_ALT), LOGO_W, LOGO_H,
-        h(tel), svg("phone", 16), h(flag), h(disp),
+        phones_html,
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
         "is-active" if es else "", h(es_href), ' aria-current="true"' if es else "",

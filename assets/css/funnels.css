@@ -336,6 +336,8 @@ body.lf-page--brnx-es {
   font-weight: 600; max-width: 26ch;
 }
 .lf-hdr__right { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; justify-content: flex-end; }
+/* v3.5 — multiple campus phones side by side in header (Manhattan = 2, Bronx = 1) */
+.lf-hdr__phones { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .lf-phone {
   display: inline-flex; align-items: center; gap: .45rem;
   padding: .5rem .85rem; background: var(--lf-accent-soft);
@@ -368,6 +370,8 @@ body.lf-page--brnx-es {
   .lf-brand__logo--campus { height: 64px; max-width: 300px; }
   .lf-phone__num { display: none; }
   .lf-phone { padding: .45rem .6rem; }
+  /* v3.5 — hide header phones on mobile; the topbar chips already show all campus numbers */
+  .lf-hdr__phones { display: none; }
 }
 
 /* ───── hero ───── */
