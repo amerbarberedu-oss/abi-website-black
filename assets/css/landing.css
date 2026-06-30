@@ -2268,21 +2268,20 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .abi-reel__icon-pause{display:none}
 .abi-reel__media.is-playing .abi-reel__icon-play{display:none}
 .abi-reel__media.is-playing .abi-reel__icon-pause{display:block}
-/* When playing, the button shrinks + fades so it doesn't block the picture.
-   Hover or touch brings it back to full visibility for an obvious pause control. */
-.abi-reel__media.is-playing .abi-reel__play{
-  width:54px;height:54px;
-  background:rgba(255,255,255,.55);
-  opacity:.85;
-}
+/* v2.9 play-hide-only — button vanishes immediately on play.
+   When the video stops or pauses, .is-playing is removed and the
+   default styles re-appear. No other side effects. */
+.abi-reel__media.is-playing .abi-reel__play,
 .abi-reel__media.is-playing .abi-reel__play:hover{
-  background:#fff;opacity:1;
-  transform:translate(-50%,-50%) scale(1.06);
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translate(-50%,-50%) scale(.5)!important;
+  transition:opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
 }
-/* Phones don't have hover — keep the playing-state button at a comfortable size */
 @media (hover:none){
   .abi-reel__media.is-playing .abi-reel__play{
-    width:60px;height:60px;background:rgba(255,255,255,.78);opacity:.92;
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
   }
 }
 
