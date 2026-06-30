@@ -150,9 +150,8 @@ def header(p):
 def mobile_hero(p):
     lang = p["lang"]; es = lang == "es"
     H_ = D.HERO[lang]
-    is_bx = p["campus"]["slug"] == "bronx"
-    kicker = H_["kicker_bx"] if is_bx else H_["kicker_man"]
     cta_label = "Reserve Your Spot" if not es else "Reserva Tu Lugar"
+    # v3.1 — campus kicker removed per spec
     return (
         '<section class="lf-mhero" aria-label="American Barber Institute %s clinic floor">\n'
         '  <img class="lf-mhero__bg" src="/assets/img/lf-hero-mobile.jpg"'
@@ -160,13 +159,12 @@ def mobile_hero(p):
         ' fetchpriority="high" width="1080" height="1609">\n'
         '  <div class="lf-mhero__scrim"></div>\n'
         '  <div class="lf-mhero__copy">\n'
-        '    <p class="lf-mhero__kicker">%s</p>\n'
         '    <p class="lf-mhero__h1" role="heading" aria-level="1">%s <span>%s</span> <em>%s</em></p>\n'
         '    <a class="lf-btn lf-btn--primary lf-btn--lg lf-mhero__cta" href="#reserve">%s</a>\n'
         '  </div>\n'
         '</section>\n'
     ) % (h(p["campus"]["name_en"]), h(p["campus"]["name_en"]),
-         h(kicker), h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
+         h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
 
 
 # ── HERO ─────────────────────────────────────────────────────────────
@@ -174,7 +172,6 @@ def hero(p):
     lang = p["lang"]; es = lang == "es"
     H_ = D.HERO[lang]
     is_bx = p["campus"]["slug"] == "bronx"
-    kicker = H_["kicker_bx"] if is_bx else H_["kicker_man"]
     sub    = H_["sub_bx"]    if is_bx else H_["sub_man"]
     feats = "".join(
         '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 18), h(t))
@@ -197,11 +194,11 @@ def hero(p):
         '  <div class="lf-cd__grid">%s</div>\n'
         '</div>'
     ) % (NEXT_ISO, h(cd["label"]), h(cd["sub"]), cells)
+    # v3.1 — campus kicker removed per spec
     return (
         '<section class="lf-hero">\n'
         '  <div class="lf-wrap lf-hero__in">\n'
         '    <div class="lf-hero__copy lf-rv">\n'
-        '      <p class="lf-hero__kicker">%s</p>\n'
         '      <h1 class="lf-h1">%s <span class="lf-h1__b">%s</span> '
         '<span class="lf-h1__script">%s</span></h1>\n'
         '      <p class="lf-hero__sub">%s</p>\n'
@@ -211,7 +208,7 @@ def hero(p):
         '    %s\n'
         '  </div>\n'
         '</section>\n'
-    ) % (h(kicker), h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]),
+    ) % (h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]),
          sub, feats, countdown, lead_form(p))
 
 
