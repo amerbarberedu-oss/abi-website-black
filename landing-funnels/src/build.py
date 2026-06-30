@@ -218,7 +218,6 @@ def lead_form(p):
     # Campus dropdown is locked to the page's own campus — no cross-campus options.
     loc_opts = "".join('<option>%s</option>' % h(o)
                        for o in D.LOC_OPTS_BY_CAMPUS[(p["campus"]["slug"], lang)])
-    fmt_opts  = "".join('<option>%s</option>' % h(o) for o in f["fmt_opts"])
     lang_opts = "".join('<option>%s</option>' % h(o) for o in f["lang_opts"])
     return (
         '<div class="lf-hero__form lf-rv">\n'
@@ -236,8 +235,6 @@ def lead_form(p):
         '<input type="email" name="email" required placeholder="%(email)s" autocomplete="email"></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(loc_label)s</label>'
         '<select name="campus_pref" required>%(loc_opts)s</select></div>\n'
-        '  <div class="lf-form__row"><label class="lf-form__label">%(fmt_label)s</label>'
-        '<select name="format" required>%(fmt_opts)s</select></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(lang_label)s</label>'
         '<select name="preferred_language" required>%(lang_opts)s</select></div>\n'
         '  <div class="lf-form__row"><label class="lf-form__label">%(msg_label)s</label>'
@@ -260,7 +257,6 @@ def lead_form(p):
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
         "loc_label": h(f["loc_label"]), "loc_opts": loc_opts,
-        "fmt_label": h(f["fmt_label"]), "fmt_opts": fmt_opts,
         "lang_label": h(f["lang_label"]), "lang_opts": lang_opts,
         "msg_label": h(f["msg_label"]), "msg_ph": h(f["msg_ph"]),
         "submit": h(f["submit"]), "trust": h(f["trust"]),
