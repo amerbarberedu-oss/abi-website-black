@@ -321,6 +321,8 @@ _REVIEWS_EN_MANHATTAN = [
      "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
     {"name": "Zyee Fin", "role": "Current student — Manhattan",
      "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
+    {"name": "Andre Thompson", "role": "Graduate — Manhattan",
+     "q": "Real hands-on training from day one and the instructors genuinely care. The job placement support after graduation actually helped me get started in a shop. Highly recommend ABI to anyone serious about barbering."},
 ]
 _REVIEWS_ES_MANHATTAN = [
     {"name": "Jerrick Matthews", "role": "Estudiante actual — Manhattan",
@@ -329,6 +331,8 @@ _REVIEWS_ES_MANHATTAN = [
      "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
     {"name": "Zyee Fin", "role": "Estudiante actual — Manhattan",
      "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
+    {"name": "Andre Thompson", "role": "Graduado — Manhattan",
+     "q": "Entrenamiento práctico real desde el primer día y los instructores realmente se preocupan. El apoyo de colocación laboral después de graduarme me ayudó a empezar en una barbería. Muy recomendada para cualquiera serio sobre la barbería."},
 ]
 _REVIEWS_EN_BRONX = [
     {"name": "Jerrick Matthews", "role": "Current student — Bronx",
@@ -337,6 +341,8 @@ _REVIEWS_EN_BRONX = [
      "q": "I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills."},
     {"name": "Zyee Fin", "role": "Current student — Bronx",
      "q": "I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field."},
+    {"name": "Andre Thompson", "role": "Graduate — Bronx",
+     "q": "Real hands-on training from day one and the instructors genuinely care. The job placement support after graduation actually helped me get started in a shop. Highly recommend ABI to anyone serious about barbering."},
 ]
 _REVIEWS_ES_BRONX = [
     {"name": "Jerrick Matthews", "role": "Estudiante actual — Bronx",
@@ -345,6 +351,8 @@ _REVIEWS_ES_BRONX = [
      "q": "Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas."},
     {"name": "Zyee Fin", "role": "Estudiante actual — Bronx",
      "q": "Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo."},
+    {"name": "Andre Thompson", "role": "Graduado — Bronx",
+     "q": "Entrenamiento práctico real desde el primer día y los instructores realmente se preocupan. El apoyo de colocación laboral después de graduarme me ayudó a empezar en una barbería. Muy recomendada para cualquiera serio sobre la barbería."},
 ]
 REVIEWS_BY_CAMPUS = {
     "manhattan": {"en": _REVIEWS_EN_MANHATTAN, "es": _REVIEWS_ES_MANHATTAN},

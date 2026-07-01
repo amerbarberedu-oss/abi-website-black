@@ -347,8 +347,8 @@ body.lf-page--brnx-es {
 }
 .lf-hdr__right { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; justify-content: flex-end; }
 /* v3.5 — multiple campus phones side by side in header (Manhattan = 2, Bronx = 1) */
-/* v3.7 — desktop header: spread the 2 Manhattan phones farther apart */
-.lf-hdr__phones { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
+/* v3.9 — desktop header: spread the 2 Manhattan phones much farther apart */
+.lf-hdr__phones { display: flex; align-items: center; gap: clamp(2.5rem, 6vw, 5rem); flex-wrap: wrap; }
 .lf-phone {
   display: inline-flex; align-items: center; gap: .45rem;
   padding: .5rem .85rem; background: var(--lf-accent-soft);
