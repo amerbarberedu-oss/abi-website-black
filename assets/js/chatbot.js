@@ -6,25 +6,75 @@
   if (window.__abiBotLoaded) return;
   window.__abiBotLoaded = true;
 
-  var ES = (document.documentElement.lang || "en").slice(0, 2) === "es";
+  // v4.0 — richer Spanish detection: HTML lang OR URL path contains /es or /spanish
+  var ES = (document.documentElement.lang || "en").slice(0, 2) === "es"
+        || /(^|\/)(es|spanish)(\/|$)/i.test(location.pathname);
 
-  // ── ABI knowledge (kept in sync with the site) ───────────────────────────
+  // ── ABI knowledge base — comprehensive, kept in sync with the site ────────
   var FACTS = [
-    "American Barber Institute (ABI) is New York City's dedicated barber school, established in 1996, with 30+ years of experience and 10,000+ graduates.",
-    "ABI is licensed by the New York State Department of Education (NYSED / BPSS).",
-    "Program: the 500-Hour Master Barber Program. Total hours: 500. New classes begin the first Monday of every month.",
-    "Tuition: Morning $5,600; Afternoon $4,600; Weekend $4,600. A $100 non-refundable registration fee is included; a $500 down payment is required to enroll.",
-    "Schedules: Morning Mon–Fri 8:00 AM–2:00 PM (~4 months); Afternoon Mon–Fri 2:00 PM–8:00 PM (~4 months); Weekend Sat–Sun 9:00 AM–7:00 PM (~6–7 months).",
-    "Payment plans are available — weekly payments from $150/week. Financial assistance: ACCES-VR, Post-9/11 GI Bill® and VA benefits are accepted.",
-    "Campuses: Manhattan — 48 West 39th Street, New York, NY 10018, (212) 290-2289. Bronx — 121 Westchester Square, Bronx, NY 10461, (718) 676-0640. En Español: (212) 290-0278. Email: admission@abi.edu.",
-    "Entrance requirements: at least 17 years old; High School Diploma or GED (or pass the ATB exam at ABI); Social Security card; valid photo ID; proof of address; $500 down payment.",
-    "Every ABI instructor is a former ABI graduate. Hands-on training with real clients begins within the first few weeks. Job-placement assistance is provided.",
-    "Skills taught: classic tapers, low/mid/high fades, high-top fades, pompadours, caesars, flat tops, afro cuts, razor lineups, hot-towel shaves, beard trims, shaves, facial massage, shampoos and blowouts — plus prep for the NY State Barber Board Exam."
+    // Identity + credentials
+    "American Barber Institute (ABI) is New York City's dedicated barber school, established in 1996 — 30+ years of experience and 10,000+ graduates.",
+    "ABI is licensed by the New York State Department of Education (NYSED / BPSS). It is a state-approved barber training program with full NY State Board Exam preparation.",
+    "ABI has an aggregate 4.6/5 rating across 100+ Google reviews.",
+
+    // Programs
+    "Primary program: 500-Hour Master Barber Program, offered at both Manhattan and Bronx campuses. New classes begin the first Monday of every month.",
+    "Program length: full-time ~4 months (17 weeks at 30 hrs/week). Weekend track ~6-7 months (27 weeks at 18 hrs/week).",
+    "Additional programs (Manhattan only): 50-Hour Barber Refresher for licensed barbers returning to the trade, and a 3-Hour Contagious Diseases Course required for NY State license renewal.",
+
+    // Tuition + payment plans (per plan)
+    "Tuition Plan A — Morning: $5,600 total. $500 down + 17 weekly payments of $300. Schedule Mon-Fri 8:00 AM - 2:00 PM.",
+    "Tuition Plan B — Afternoon: $4,600 total. $500 down + 16 weekly payments of $250 + a final $100. Schedule Mon-Fri 2:00 PM - 8:00 PM.",
+    "Tuition Plan C — Weekend: $4,600 total. Weekly payments from $150/week. Schedule Sat-Sun 9:00 AM - 7:00 PM.",
+    "Every plan includes a $100 non-refundable registration fee inside the down payment. Books and tools are extra.",
+
+    // Financial aid
+    "Financial aid accepted: ACCES-VR (New York State — covers tuition, tools, and books for qualifying residents with disabilities), Post-9/11 GI Bill(R), VA educational benefits. NYS Department of Labor grants may also apply.",
+    "Weekly payment plans from $150/week let students pay while they study.",
+
+    // Curriculum + skills
+    "Core skills taught: classic tapers; low, mid, high, and high-top fades; pompadours; caesars; flat tops; afro cuts; razor lineups; hot-towel shaves; beard trims and shaping; scissor-over-comb and clipper-over-comb techniques; scalp/facial massage; shampoos and blowouts.",
+    "Additional training: artificial hair and hair coloring (semi-permanent and temporary); wigs and hairpieces; hair replacement techniques.",
+    "Business & career modules: client consultation skills, barbershop operations, building clientele, job placement prep, and full NY State Board Exam preparation.",
+    "Sanitation & law modules: sanitation and sterilization procedures, barber history, New York State barbering laws, shop management.",
+
+    // Hands-on training + clinic
+    "Hands-on training with real clients starts within the first few weeks — students work in a supervised on-campus barber clinic from early in the program.",
+    "Students refine skills in real-world conditions from day one with a diverse clientele.",
+
+    // Instructors
+    "Every ABI instructor is a former ABI graduate — the school hires from within so instructors know the exact path students are on.",
+    "Lead instructor King David has 30+ years of professional barbering experience.",
+
+    // Career + earnings
+    "Career earnings for barbers (industry estimates, not guaranteed): Year 1 entry-level $35,000-$45,000. Years 2-3 established $50,000-$70,000. Year 3+ booth renter or shop owner $75,000-$100,000+.",
+    "Job-placement assistance is provided on graduation — every student meets with the job placement office to find work after passing the state board exam.",
+
+    // Enrollment requirements
+    "Entrance requirements: minimum age 17; High School Diploma or GED OR pass ABI's Ability-To-Benefit (ATB) entrance exam; Social Security card; valid photo ID; proof of address; and $500 down payment to enroll.",
+    "Online barber school is NOT allowed in New York — the state requires in-person, hands-on training hours.",
+
+    // Campuses + contact
+    "Manhattan campus: 48 West 39th Street, New York, NY 10018. Phone (English): (212) 290-2289. Phone (Spanish): (212) 290-0278. Email: admission@abi.edu.",
+    "Bronx campus: 121 Westchester Square, Bronx, NY 10461. Phone: (718) 676-0640.",
+    "Both campuses offer bilingual English/Spanish instruction.",
+    "Campus hours: Monday-Friday 8:00 AM - 8:00 PM. Saturday & Sunday 9:00 AM - 7:00 PM.",
+
+    // Outcomes
+    "Program prepares students for the New York State Master Barber license including full NY State Board Exam preparation.",
+    "Career paths after ABI: traditional barbershop employee, freelance/mobile barber, booth renter, or shop/business owner.",
+
+    // How to enroll
+    "To enroll: fill out the contact form on this site, OR call (212) 290-2289 (Manhattan English), (212) 290-0278 (Manhattan Spanish), or (718) 676-0640 (Bronx). Then bring $500 down + required documents to begin the next monthly cohort."
   ];
-  var SYS = "You are the friendly admissions assistant for the American Barber Institute (ABI), a barber school in New York City. " +
-    "Answer ONLY using the facts below. Be warm, concise (2–4 sentences), and encourage the visitor to enroll, book a tour, or call admissions. " +
-    "If asked something not covered, invite them to call (212) 290-2289 or email admission@abi.edu. " +
-    (ES ? "Reply in Spanish. " : "") + "FACTS:\n" + FACTS.join("\n");
+  var SYS = "You are the friendly, professional admissions assistant for the American Barber Institute (ABI) — New York City's dedicated barber school since 1996. " +
+    "Your job: answer prospective-student questions accurately using ONLY the FACTS below, and gently encourage them to enroll, call admissions, or fill out the contact form. " +
+    "Style: warm, conversational, 2-4 sentences, feel like a real human admissions counselor. Never invent details. " +
+    "If a question isn't covered by the FACTS, say honestly that you're not sure and invite them to call (212) 290-2289 (English) / (212) 290-0278 (Spanish) or email admission@abi.edu. " +
+    (ES
+      ? "IMPORTANT: The visitor is on the Spanish site — reply entirely in natural, friendly Spanish. Use 'tú' (informal you). "
+      : "Reply in English by default. If the visitor writes in Spanish, switch to Spanish for that reply. ") +
+    "FACTS:\n" + FACTS.join("\n");
 
   // Local keyword fallback answers (used if the AI endpoint is unreachable)
   var KB = [

@@ -27,7 +27,7 @@ import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
 CSS_V = "39"
-JS_V  = "10"
+JS_V  = "11"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {
