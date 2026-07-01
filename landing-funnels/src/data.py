@@ -511,6 +511,40 @@ THREE_STEPS = {
     ],
 }
 
+# ─── Career Earnings section (directly below 3 Easy Steps) ───────────
+# Content lifted from the main marketing site's `sec--earnings` block so
+# the landing pages tell the same career-outcome story.
+EARNINGS_HEAD = {
+    "en": ("Career Earnings", "Barber Career Earnings"),
+    "es": ("Ingresos Profesionales", "Ingresos como Barbero"),
+}
+EARNINGS_TIERS = {
+    "en": [
+        ("YEAR 1 · Entry-Level",  "$35,000–$45,000",
+         "Starting out in a shop, building your clientele and refining your technique."),
+        ("YEARS 2–3 · Established", "$50,000–$70,000",
+         "Loyal clientele, faster service and higher earnings as your reputation grows."),
+        ("YEAR 3+ · Booth Renter / Shop Owner", "$75,000–$100,000+",
+         "Full control of your schedule and earnings — the path to true entrepreneurship."),
+    ],
+    "es": [
+        ("AÑO 1 · Nivel Inicial", "$35,000–$45,000",
+         "Empezando en una barbería, construyendo tu clientela y refinando tu técnica."),
+        ("AÑOS 2–3 · Establecido", "$50,000–$70,000",
+         "Clientela leal, servicio más rápido y mayores ingresos a medida que crece tu reputación."),
+        ("AÑO 3+ · Alquiler de Silla / Dueño", "$75,000–$100,000+",
+         "Control total de tu horario e ingresos — el camino al verdadero emprendimiento."),
+    ],
+}
+EARNINGS_NOTE = {
+    "en": ("Earnings figures are estimates only and are not guaranteed. "
+           "Actual income will vary based on individual effort, hours worked, "
+           "location and market conditions."),
+    "es": ("Los ingresos son estimaciones y no están garantizados. "
+           "El ingreso real varía según el esfuerzo individual, las horas trabajadas, "
+           "la ubicación y las condiciones del mercado."),
+}
+
 
 # ─── Promo topbar — phone chips per campus ───────────────────────────
 # Manhattan shows 2 chips (EN + ES). Bronx shows 1 chip.

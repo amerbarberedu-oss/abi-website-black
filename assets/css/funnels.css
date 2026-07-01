@@ -97,10 +97,11 @@
   padding-inline: .4rem;
 }
 @media (min-width: 760px) {
+  /* v3.7 — spread the 3 cards more evenly across the width */
   .lf-steps {
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.6rem, 3.2vw, 2.6rem);
-    padding-inline: 1rem;
+    gap: clamp(2rem, 4.2vw, 3.6rem);
+    padding-inline: 1.2rem;
   }
 }
 .lf-step {
@@ -346,7 +347,8 @@ body.lf-page--brnx-es {
 }
 .lf-hdr__right { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; justify-content: flex-end; }
 /* v3.5 — multiple campus phones side by side in header (Manhattan = 2, Bronx = 1) */
-.lf-hdr__phones { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+/* v3.7 — desktop header: spread the 2 Manhattan phones farther apart */
+.lf-hdr__phones { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
 .lf-phone {
   display: inline-flex; align-items: center; gap: .45rem;
   padding: .5rem .85rem; background: var(--lf-accent-soft);
@@ -1132,10 +1134,13 @@ body.lf-page--brnx-es {
     gap: .65rem;
     text-align: center;
   }
+  /* v3.7 — mobile promo shrinks-to-fit so 'Start your barber journey today...'
+     stays on one line without clipping on the narrowest phones */
   .lf-topbar__promo {
-    font-size: .82rem;
-    letter-spacing: .04em;
-    line-height: 1.3;
+    font-size: clamp(.52rem, 2.9vw, .82rem);
+    letter-spacing: .03em;
+    line-height: 1.25;
+    white-space: nowrap;
   }
   /* v2.11 — Manhattan shows EN | ES side-by-side (no wrap), Bronx single chip */
   .lf-topbar__chips {
@@ -1625,4 +1630,69 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
   .lf-contact__row { grid-template-columns: 1fr; gap: .25rem; }
   .lf-contact__label { padding-top: 0; }
   .lf-contact__phone a { font-size: 1rem; }
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   v3.7 — Career Earnings section (ports main-site sec--earnings)
+   Renders directly below the 3 Easy Steps section.
+   ═════════════════════════════════════════════════════════════════════ */
+.lf-section--earn { padding: 3rem 0 3.4rem; }
+.lf-earn {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin: 1.4rem auto 0;
+  max-width: 1160px;
+  padding-inline: .4rem;
+}
+@media (min-width: 760px) {
+  .lf-earn {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.8rem, 3.8vw, 2.8rem);
+    padding-inline: 1rem;
+  }
+}
+.lf-earn__card {
+  background: #fff;
+  border: 1px solid var(--lf-line);
+  border-radius: var(--lf-r-md);
+  padding: 1.4rem 1.2rem 1.3rem;
+  box-shadow: var(--lf-shadow-sm);
+  text-align: left;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.lf-earn__card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--lf-shadow-md);
+}
+.lf-earn__yr {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lf-accent);
+  margin-bottom: .55rem;
+}
+.lf-earn__amt {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 3.4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--lf-ink);
+  margin-bottom: .55rem;
+}
+.lf-earn__desc {
+  margin: 0;
+  font-size: .93rem;
+  line-height: 1.5;
+  color: var(--lf-muted);
+}
+.lf-earn__note {
+  margin: 1.4rem auto 0;
+  max-width: 900px;
+  padding-inline: 1rem;
+  color: var(--lf-muted);
+  font-size: .8rem;
+  text-align: center;
+  line-height: 1.5;
 }

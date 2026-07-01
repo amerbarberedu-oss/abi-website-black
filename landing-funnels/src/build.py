@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "35"
+CSS_V = "36"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -337,6 +337,25 @@ def section_three_steps(p):
 
 
 # ── SKILLS & TECHNIQUES ──────────────────────────────────────────────
+def section_earnings(p):
+    """Career Earnings — 3 tier cards. Ports the main site's sec--earnings block."""
+    eb, ti = D.EARNINGS_HEAD[p["lang"]]
+    cards = "".join(
+        '<div class="lf-earn__card lf-rv">'
+        '<div class="lf-earn__yr">%s</div>'
+        '<div class="lf-earn__amt">%s</div>'
+        '<p class="lf-earn__desc">%s</p>'
+        '</div>'
+        % (h(yr), h(amt), h(desc))
+        for yr, amt, desc in D.EARNINGS_TIERS[p["lang"]]
+    )
+    note = D.EARNINGS_NOTE[p["lang"]]
+    return ('<section class="lf-section lf-section--alt lf-section--earn"><div class="lf-wrap">%s'
+            '<div class="lf-earn">%s</div>'
+            '<p class="lf-earn__note lf-rv">%s</p></div></section>\n'
+            % (section_head(eb, ti), cards, h(note)))
+
+
 def section_techniques(p):
     eb, ti = D.TECH_HEAD[p["lang"]]
     chips = "".join('<span class="lf-tech">%s%s</span>' % (svg("check", 15), h(t))
@@ -839,6 +858,7 @@ def build_page(p):
         section_stats(p),
         section_about(p),
         section_three_steps(p),
+        section_earnings(p),
         section_techniques(p),
         section_tuition(p),
         section_requirements(p),
