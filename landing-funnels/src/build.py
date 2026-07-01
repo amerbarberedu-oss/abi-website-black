@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "33"
+CSS_V = "34"
 JS_V  = "10"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -156,14 +156,22 @@ def header(p):
 
 
 # ── MOBILE HERO (image-led, mobile-only — hidden on desktop via CSS) ─
+MHERO_BG_BY_PAGE = {
+    ("manhattan", "en"): "lf-hero-mobile-manhattan-en.jpg",
+    ("manhattan", "es"): "lf-hero-mobile-manhattan-es.jpg",
+    ("bronx",     "en"): "lf-hero-mobile-bronx-en.jpg",
+    ("bronx",     "es"): "lf-hero-mobile-bronx-es.jpg",
+}
+
 def mobile_hero(p):
     lang = p["lang"]; es = lang == "es"
     H_ = D.HERO[lang]
     cta_label = "Reserve Your Spot" if not es else "Reserva Tu Lugar"
-    # v3.1 — campus kicker removed per spec
+    bg_file = MHERO_BG_BY_PAGE[(p["campus"]["slug"], lang)]
+    # v3.6 — per-page mobile hero image (4 distinct color palettes)
     return (
         '<section class="lf-mhero" aria-label="American Barber Institute %s clinic floor">\n'
-        '  <img class="lf-mhero__bg" src="/assets/img/lf-hero-mobile.jpg"'
+        '  <img class="lf-mhero__bg" src="/assets/img/' + bg_file + '"'
         ' alt="ABI barber students training on the clinic floor at the %s" loading="eager"'
         ' fetchpriority="high" width="1080" height="1609">\n'
         '  <div class="lf-mhero__scrim"></div>\n'

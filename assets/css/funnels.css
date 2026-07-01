@@ -86,14 +86,23 @@
 }
 .lf-tech svg { flex: 0 0 auto; }
 
-/* ===== 3 Easy Steps section ===== */
+/* ===== 3 Easy Steps section — v3.6: evenly spread with generous spacing =====
+   1 column mobile → 3 columns tablet+ → wider gap on desktop for breathing room */
 .lf-steps {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.1rem;
+  margin: 1.4rem auto 0;
+  max-width: 1160px;
+  padding-inline: .4rem;
 }
-@media (min-width: 760px) { .lf-steps { grid-template-columns: repeat(3, 1fr); gap: 1.4rem; } }
+@media (min-width: 760px) {
+  .lf-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.6rem, 3.2vw, 2.6rem);
+    padding-inline: 1rem;
+  }
+}
 .lf-step {
   background: #fff;
   border: 1px solid var(--lf-line);
@@ -503,21 +512,9 @@ body.lf-page--brnx-es {
 .lf-pill__icon svg { width: 22px; height: 22px; }
 .lf-pill__txt { font-weight: 600; color: var(--lf-ink); font-size: .96rem; }
 
-/* ───── steps ("Hands-On Training") ───── */
-.lf-steps { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-@media (min-width: 720px) { .lf-steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .lf-steps { grid-template-columns: repeat(4, 1fr); } }
-.lf-step {
-  background: #fff; border: 1px solid var(--lf-line); border-radius: var(--lf-r-md);
-  padding: 1.4rem; box-shadow: var(--lf-shadow-sm);
-  position: relative;
-}
-.lf-step__n {
-  font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700;
-  color: var(--lf-accent); line-height: 1; margin-bottom: .5rem;
-}
-.lf-step h3 { margin: 0 0 .4rem; color: var(--lf-ink); }
-.lf-step p { margin: 0; color: var(--lf-muted); font-size: .93rem; }
+/* v3.6 — removed duplicate .lf-steps + .lf-step block ("Hands-On Training",
+   a legacy section no longer emitted by build.py). Its 4-column definition
+   was overriding the 3-Easy-Steps 3-column layout on ≥1024px screens. */
 
 /* ───── earnings tiers ───── */
 .lf-earn { display: grid; grid-template-columns: 1fr; gap: 1rem; }
@@ -1115,7 +1112,16 @@ body.lf-page--brnx-es {
    =================================================================== */
 
 /* ─ Topbar: promo + phone chips ─ */
-.lf-topbar__promo { margin: 0; }
+/* v3.6 — promo strip stays on ONE line at every width, in EN + ES */
+.lf-topbar__promo {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  font-size: clamp(.62rem, 2.6vw, .92rem);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
 .lf-topbar__chips { display: none; }
 
 @media (max-width: 768px) {
