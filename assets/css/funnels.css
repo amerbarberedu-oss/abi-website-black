@@ -389,11 +389,11 @@ body.lf-page--brnx-es {
 .lf-hero {
   position: relative; overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(8,10,16,.78) 0%, rgba(8,10,16,.46) 55%, rgba(8,10,16,.55) 100%),
+    linear-gradient(180deg, rgba(8,10,16,.60) 0%, rgba(8,10,16,.32) 55%, rgba(8,10,16,.42) 100%),
     url('../img/lf-hero.jpg');
   background-size: cover; background-position: center 30%;
   color: #fff;
-  padding: 3.6rem 0 2.4rem;
+  padding: 3.4rem 0;
 }
 .lf-hero__in {
   display: grid; grid-template-columns: 1fr; gap: 2rem;
@@ -556,15 +556,18 @@ body.lf-page--brnx-es {
 @media (min-width: 1024px) { .lf-showcase { grid-template-columns: repeat(3, 1fr); } }
 .lf-clip {
   position: relative;
-  background: #0a1020; border-radius: var(--lf-r-md); overflow: hidden;
+  background: #141a2e; border-radius: var(--lf-r-md); overflow: hidden;
   aspect-ratio: 16 / 11;
   box-shadow: var(--lf-shadow-sm);
 }
-.lf-clip video { width: 100%; height: 100%; object-fit: cover; background: #1a1f2e; }
+.lf-clip video {
+  width: 100%; height: 100%; object-fit: cover; background: #1a1f2e;
+  filter: brightness(1.04) saturate(1.03);
+}
 .lf-clip__cap {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: .6rem .9rem;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.45));
   color: #fff; font-weight: 600; font-size: .9rem;
 }
 
@@ -584,12 +587,13 @@ body.lf-page--brnx-es {
   position: relative;
   aspect-ratio: 9 / 16;
   border-radius: var(--lf-r-md); overflow: hidden;
-  background: #0a1020; box-shadow: 0 14px 40px rgba(0,0,0,.18);
+  background: #141a2e; box-shadow: 0 14px 40px rgba(0,0,0,.18);
   max-width: 360px; margin: 0 auto;
 }
 .lf-reel__media video {
   width: 100%; height: 100%; object-fit: contain;
   background: #1a1f2e;
+  filter: brightness(1.04) saturate(1.02);
 }
 .lf-reel__copy {
   margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid var(--lf-line); text-align: center;
