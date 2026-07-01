@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "39"
+CSS_V = "40"
 JS_V  = "11"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -445,7 +445,7 @@ PLAY_BTN = ('<button class="lf-reel__play" type="button" aria-label="Play video"
 
 def _reel_media(vid, poster, label):
     return ('<div class="lf-reel__media"><video class="lf-reel__video" muted loop playsinline'
-            ' preload="none" src="/assets/videos/%s" poster="/assets/img/%s"'
+            ' preload="metadata" src="/assets/videos/%s" poster="/assets/img/%s"'
             ' aria-label="%s"></video>%s</div>' % (h(vid), h(poster), h(label), PLAY_BTN))
 
 
@@ -506,7 +506,7 @@ def section_videos(p):
 def section_gallery(p):
     eb, ti = D.GALLERY_HEAD[p["lang"]]
     items = "".join(
-        '<img loading="lazy" src="/assets/img/%s" alt="ABI clinic floor photo %d" width="800" height="600">'
+        '<img decoding="async" fetchpriority="low" src="/assets/img/%s" alt="ABI clinic floor photo %d" width="800" height="600">'
         % (h(g), i + 1) for i, g in enumerate(D.GALLERY)
     )
     return ('<section class="lf-section lf-section--alt"><div class="lf-wrap">%s'
@@ -783,6 +783,8 @@ def page_head(p):
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'
 '<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
+'<link rel="preload" href="/assets/img/%(mhero_bg)s" as="image" media="(max-width:768px)" fetchpriority="high">\n'
+'<link rel="preload" href="/assets/img/lf-hero.jpg" as="image" media="(min-width:769px)">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
@@ -792,6 +794,7 @@ def page_head(p):
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
         "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
         "site": SITE, "oglocale": "es_ES" if es else "en_US", "cssv": CSS_V,
+        "mhero_bg": MHERO_BG_BY_PAGE[(p["campus"]["slug"], p["lang"])],
         "ld_scripts": "".join(
             '<script type="application/ld+json">%s</script>\n' % json.dumps(b, ensure_ascii=False)
             for b in ld_blocks
