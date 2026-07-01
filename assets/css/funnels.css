@@ -1382,15 +1382,18 @@ body.lf-page--brnx-es {
     object-fit: cover;
     object-position: center 30%;
     z-index: 0;
+    /* v3.6 — brighten the source image so faces + jackets read clearly on mobile */
+    filter: brightness(1.18) contrast(1.06) saturate(1.06);
   }
-  /* Dark gradient scrim — readable text against any image content */
+  /* v3.6 — lighter gradient scrim (was .25 → .55 → .85; now much softer)
+     Only the bottom band still darkens enough to keep the H1 + CTA readable */
   .lf-mhero__scrim {
     position: absolute; inset: 0;
     background:
       linear-gradient(180deg,
-        rgba(10, 16, 32, .25) 0%,
-        rgba(10, 16, 32, .55) 55%,
-        rgba(10, 16, 32, .85) 100%);
+        rgba(10, 16, 32, .00) 0%,
+        rgba(10, 16, 32, .10) 45%,
+        rgba(10, 16, 32, .55) 100%);
     z-index: 1;
   }
   .lf-mhero__copy {
