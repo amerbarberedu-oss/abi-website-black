@@ -1212,7 +1212,8 @@ body.lf-page--brnx-es {
   flex-basis: 100%;
   font-weight: 800;
   letter-spacing: .04em;
-  color: var(--lf-accent-dark);
+  /* v3.8 — match the screenshot: both lines in the same gold */
+  color: #8a6500;
   text-transform: uppercase;
   font-size: clamp(.85rem, 3.4vw, 1.1rem);
   line-height: 1.2;

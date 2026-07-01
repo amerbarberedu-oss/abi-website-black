@@ -2478,3 +2478,54 @@ video{background-color:#1a1f2e}
     letter-spacing:-.005em;
   }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   v3.8 — Site-wide "Limited Seats Available / Enrollment Now Open" banner
+   Same visual as the landing-funnel .lf-seats block. Renders directly
+   below the main header (<header class="hdr">) on every marketing page.
+   ═════════════════════════════════════════════════════════════════════ */
+.site-seats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: .65rem;
+  row-gap: .2rem;
+  padding: .85rem 1rem;
+  background: #fff7d6;
+  border-bottom: 1px solid #f0e3a8;
+  text-align: center;
+}
+.site-seats__dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #e23d3d;
+  box-shadow: 0 0 0 5px rgba(226, 61, 61, .20);
+  animation: site-seats-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes site-seats-pulse {
+  0%, 100% { box-shadow: 0 0 0 5px rgba(226, 61, 61, .20); }
+  50%      { box-shadow: 0 0 0 10px rgba(226, 61, 61, .06); }
+}
+.site-seats__kicker {
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: #8a6500;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  line-height: 1.15;
+}
+.site-seats__lead {
+  flex-basis: 100%;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: #8a6500;
+  text-transform: uppercase;
+  font-size: clamp(.85rem, 3.4vw, 1.1rem);
+  line-height: 1.2;
+}
+@media (max-width: 520px) {
+  .site-seats { padding: .8rem .6rem; column-gap: .5rem; }
+  .site-seats__dot { width: 10px; height: 10px; }
+}
