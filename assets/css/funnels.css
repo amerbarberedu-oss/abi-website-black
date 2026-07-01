@@ -1171,19 +1171,19 @@ body.lf-page--brnx-es {
   .lf-topbar__chip svg { opacity: .9; }
 }
 
-/* ─ Limited Seats banner (right under header) — v3.2: strict 2-line layout
+/* v3.9 — "Limited Seats" as two text lines (no boxed banner).
    Line 1: 🔴 LIMITED SEATS AVAILABLE (gold, large, with pulsing dot)
-   Line 2: ENROLLMENT NOW OPEN (navy, slightly smaller)                   */
+   Line 2: ENROLLMENT NOW OPEN (gold, slightly smaller)                   */
 .lf-seats {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   column-gap: .65rem;
-  row-gap: .2rem;
-  padding: .85rem 1rem;
-  background: #fff7d6;
-  border-bottom: 1px solid #f0e3a8;
+  row-gap: .15rem;
+  padding: .9rem 1rem .8rem;
+  background: transparent;
+  border: 0;
   text-align: center;
 }
 .lf-seats__dot {

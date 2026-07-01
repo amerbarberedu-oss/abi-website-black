@@ -2484,16 +2484,17 @@ video{background-color:#1a1f2e}
    Same visual as the landing-funnel .lf-seats block. Renders directly
    below the main header (<header class="hdr">) on every marketing page.
    ═════════════════════════════════════════════════════════════════════ */
+/* v3.9 — two text lines, no boxed banner background */
 .site-seats {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   column-gap: .65rem;
-  row-gap: .2rem;
-  padding: .85rem 1rem;
-  background: #fff7d6;
-  border-bottom: 1px solid #f0e3a8;
+  row-gap: .15rem;
+  padding: .9rem 1rem .8rem;
+  background: transparent;
+  border: 0;
   text-align: center;
 }
 .site-seats__dot {
