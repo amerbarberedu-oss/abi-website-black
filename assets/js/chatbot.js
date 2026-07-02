@@ -1,268 +1,344 @@
-/* American Barber Institute — AI admissions assistant (v13, "real AI" upgrade).
- * Free, no-key model (Pollinations openai-fast / GPT-OSS 20B) with:
- *   - Massive knowledge base (80+ facts across every part of the school)
- *   - Per-message language detection (EN↔ES mid-conversation switching)
- *   - Streaming responses so replies feel alive
- *   - Local keyword fallback if the AI endpoint is unreachable
+/* American Barber Institute — AI admissions rep (v14, client-scripted persona "Alex").
+ *
+ * This file implements the client's exact conversation flow inside the on-site
+ * chat widget. The AI is Pollinations `openai-fast` (GPT-OSS 20B) — free, no-key,
+ * streamed. Every message runs the client's full system prompt with runtime
+ * substitution of {{contact.first_name}}, {{location}}, {{campus_pin_*}},
+ * {{preferred_language}}, {{contact.customer_status}}.
+ *
+ * Silent workflow triggers (SMS, add_tag, book_appointment, agent transfer) are
+ * emitted by the AI as [ACTION:...] markers at the end of its reply. The client
+ * JS strips those markers, stores them in sessionStorage, dispatches a
+ * `abibot:action` CustomEvent, and (optionally) POSTs to WEBHOOK_URL — set that
+ * constant below to a Zapier/Make/Formspree URL to wire real backend actions.
  */
 (function () {
   "use strict";
   if (window.__abiBotLoaded) return;
   window.__abiBotLoaded = true;
 
-  // ── Page-language detection (initial UI language only; per-message
-  //    detection below overrides for actual answers) ────────────────────────
+  // ── Wire this to a backend to actually fire SMS/tags/bookings ──────────
+  // Leave empty ("") to keep actions client-side-logged only.
+  var WEBHOOK_URL = "";
+  var CALENDAR_ID = "AjohKDuzpIXkVZnKB7wP";
+
+  // ── Campus detection from URL path ─────────────────────────────────────
+  function detectLocation() {
+    var p = location.pathname.toLowerCase();
+    if (/bronx/.test(p)) return "Bronx";
+    if (/500-hours-master-barber|manhattan/.test(p)) return "Manhattan";
+    return ""; // will be asked
+  }
+
+  // ── Language: from HTML lang or URL path ──────────────────────────────
   var pageLangIsES = (document.documentElement.lang || "en").slice(0, 2) === "es"
                   || /(^|\/)(es|spanish)(\/|$)/i.test(location.pathname);
 
-  // ── ABI KNOWLEDGE BASE — long-form, comprehensive, single source of truth
-  //    Kept in sync with the website; edit here to teach the bot new things.
-  var FACTS = [
-    // Identity + credentials
-    "American Barber Institute (ABI) is New York City's dedicated barber school, established in 1996. 30+ years of experience, 10,000+ graduates, aggregate rating 4.6/5 across 100+ Google reviews.",
-    "ABI is licensed by the New York State Department of Education (NYSED / Bureau of Proprietary School Supervision, BPSS). It is a state-approved barber training program.",
-    "The Master Barber Program at ABI is designed to prepare students to sit and pass the New York State Master Barber license (Board Exam).",
-    "Both campuses are bilingual — English and Spanish instruction is offered every day. Roughly half of instruction happens in Spanish across the two campuses combined.",
+  // ── Session-scoped state (survives page navigation within tab) ────────
+  function s(k) { try { return sessionStorage.getItem(k) || ""; } catch (e) { return ""; } }
+  function sset(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
 
-    // Programs
-    "Primary program: the 500-Hour Master Barber Program, offered at both Manhattan and Bronx campuses. New cohorts start the first Monday of every month.",
-    "Program length: full-time track ~4 months (17 weeks × 30 hours per week). Weekend track ~6–7 months (27 weeks × 18 hours per week).",
-    "Manhattan-only programs: 50-Hour Barber Refresher (for licensed barbers returning to the trade after a break) and a 3-Hour Contagious Diseases course (required for NY barber license renewal).",
-    "There is no fully online barber program in New York. NY State requires the 500 practical hours to be in-person and hands-on — this applies to every accredited school in the state, not just ABI.",
-
-    // Tuition + payment plans (per plan)
-    "Tuition Plan A — Morning: total $5,600. Down payment $500. 17 weekly payments of $300. Schedule Monday–Friday 8:00 AM to 2:00 PM.",
-    "Tuition Plan B — Afternoon: total $4,600. Down payment $500. 16 weekly payments of $250, plus a final payment of $100. Schedule Monday–Friday 2:00 PM to 8:00 PM.",
-    "Tuition Plan C — Weekend: total $4,600. Weekly payments start at $150 per week. Schedule Saturday and Sunday 9:00 AM to 7:00 PM.",
-    "Every payment plan includes a $100 non-refundable registration fee inside the $500 down payment. Books and tools are extra and can be purchased through the school or independently.",
-    "There is no application fee separate from the $500 down payment — the $500 both enrolls the student and secures a seat in the next cohort.",
-    "ABI does not charge for the entrance exam (ATB) for students who do not have a high school diploma or GED.",
-
-    // Financial aid
-    "Accepted financial aid at ABI: ACCES-VR (a New York State Adult Career and Continuing Education Services program that covers tuition, tools, and books for qualifying NY residents with disabilities), Post-9/11 GI Bill®, and VA educational benefits. New York State Department of Labor grants may also apply case-by-case.",
-    "ABI is NOT part of the federal Title IV student loan program — Federal Pell Grants and federal student loans are not available. Payment plans, ACCES-VR, and VA benefits are the primary aid pathways.",
-    "How ACCES-VR works: students apply directly with ACCES-VR (a NY State agency, not ABI). If approved, ACCES-VR sends payment directly to the school. ABI's admissions team can guide applicants through the intake steps.",
-    "Weekly payment plans as low as $150/week let students pay tuition while they study, without needing loans.",
-
-    // Curriculum — technical
-    "Technical skills taught: classic tapers; low, mid, high, and high-top fades; pompadours; caesars; flat tops; afro cuts; razor lineups; hot-towel shaves; beard trims and beard shaping; scissor-over-comb; clipper-over-comb; scalp massage; facial massage; shampoos and blowouts.",
-    "Advanced modules: artificial hair techniques, hair coloring (semi-permanent and temporary), wigs and hairpieces, and hair replacement techniques (including systems and integration).",
-    "Straight-razor training: students learn traditional straight-razor lineups, hot-towel shaves, and neck/head shaves with sterilization protocols. Straight razors are used in the clinic under instructor supervision.",
-
-    // Curriculum — business + law
-    "Business & career modules: client consultation, barbershop operations, building clientele, retail add-ons, tipping etiquette, booth rental vs. employment, and full NY State Board Exam prep.",
-    "Sanitation & law modules: sterilization procedures (Barbicide, autoclave for razors), barber history, New York State barbering laws, and shop management.",
-    "Board-exam prep includes both the written portion (theory, sanitation, NY law) and the practical portion (haircut, shave, sanitation demonstration) with mock exams before the real test.",
-
-    // Hands-on clinic
-    "Hands-on training with real clients starts within the first few weeks — students work in a supervised on-campus barber clinic from early in the program.",
-    "Clinic haircuts for the public are offered at both campuses at a discounted rate. This gives students volume, variety, and speed practice on real heads of hair with a diverse clientele.",
-    "Instructors supervise every clinic haircut — no student cuts unsupervised until they demonstrate competency and are cleared.",
-
-    // Instructors
-    "Every ABI instructor is a former ABI graduate — the school hires from within so instructors know the exact path students are on.",
-    "Lead instructor King David has 30+ years of professional barbering experience and heads the Manhattan campus curriculum.",
-    "The Bronx campus has its own instructor team, also bilingual (English/Spanish), operating on the same curriculum and same board-exam prep standard.",
-
-    // Career + earnings
-    "Career earnings for barbers in the NYC area (industry estimates, not guarantees): Year 1 entry-level $35,000–$45,000. Years 2–3 established $50,000–$70,000. Year 3+ booth renter or shop owner $75,000–$100,000+. Cash tips are common and generally on top of these numbers.",
-    "Job-placement assistance is provided on graduation — every student meets with the job-placement office to find work after passing the state board exam.",
-    "Common career paths after ABI: employed barber at an established shop, freelance/mobile barber, booth renter (rent a chair inside an existing shop), or shop owner.",
-    "Booth-rent economics in NYC: most barbers pay roughly $200–$400/week for a chair and keep 100% of what they cut. Booth renters set their own hours and prices.",
-
-    // Enrollment requirements
-    "Entrance requirements to ABI: minimum age 17 years old; a High School Diploma or GED OR pass ABI's Ability-To-Benefit (ATB) entrance exam; a Social Security card; a valid photo ID; proof of address; and the $500 down payment.",
-    "ATB (Ability-To-Benefit) exam: a short basic-skills test given at ABI. It lets applicants without a diploma or GED still enroll. There is no separate fee for it.",
-    "International students / non-citizens: US work authorization or a valid Social Security number is needed for licensure in NY. Applicants without SSN should contact admissions before enrolling to confirm what documentation is acceptable.",
-
-    // Campuses + contact — Manhattan
-    "Manhattan campus address: 48 West 39th Street, New York, NY 10018. Between 5th and 6th Avenue in Midtown Manhattan.",
-    "Manhattan campus phone (English): (212) 290-2289. Phone (Spanish): (212) 290-0278. Admissions email: admission@abi.edu.",
-    "Manhattan campus is a short walk from Bryant Park, the 42nd Street/Bryant Park subway (B, D, F, M lines) and Times Square (N, Q, R, W, 1, 2, 3, 7 lines).",
-
-    // Campuses + contact — Bronx
-    "Bronx campus address: 121 Westchester Square, Bronx, NY 10461. Located in the Westchester Square section of the Bronx.",
-    "Bronx campus phone: (718) 676-0640. Same admissions email: admission@abi.edu.",
-    "Bronx campus is served by the 6 train (Westchester Square–East Tremont Ave station) and several bus lines.",
-
-    // Campus hours + operations
-    "Campus opening hours: Monday–Friday 8:00 AM – 8:00 PM. Saturday & Sunday 9:00 AM – 7:00 PM. Closed on major US holidays.",
-    "Cohort start dates: a new cohort begins the first Monday of every month. Applicants who miss a start date roll to the next month automatically.",
-    "Class-size philosophy: cohorts are kept small enough for hands-on instruction. Ask admissions for the current cohort size — it varies month to month.",
-
-    // Kit + dress code
-    "Student kit: ABI provides guidance on required tools (clippers, trimmers, shears, straight razor, capes, combs, brushes). Students can buy the kit through the school or independently. A basic student kit runs roughly $300–$500 depending on brand choice.",
-    "Dress code: neat, professional appearance. All-black is common at both campuses. Closed-toe shoes are required in the clinic for safety.",
-    "Attendance policy: barber licensure in NY requires all 500 hours — missed hours must be made up. ABI tracks attendance and offers make-up sessions.",
-
-    // Language + inclusion
-    "Bilingual instruction: every technical skill, business module, and exam-prep session is delivered in both English and Spanish at both campuses.",
-    "Women barbers are welcomed at ABI — the school actively encourages women to enter the trade and has multiple women graduates now working in NYC shops.",
-    "Veterans are actively welcomed and supported. ABI accepts Post-9/11 GI Bill® and VA educational benefits.",
-
-    // NY Board exam
-    "New York State Board Exam: administered by the NY State Division of Licensing Services. Two parts — a written test and a practical test. ABI provides in-school mock exams and study materials before the real test.",
-    "License endorsement: New York's Master Barber license can also endorse into a number of other states, though rules vary. Ask admissions about specific state transfers.",
-
-    // How to enroll — action steps
-    "To enroll at ABI: (1) fill out the contact form on this site, or call the campus you want to attend. (2) Schedule a tour and meet admissions. (3) Bring your ID, SSN card, proof of address, and diploma/GED (or take the ATB exam). (4) Pay the $500 down payment and pick a start Monday. (5) Show up on day one — the school handles the rest.",
-    "Same-day enrollment is possible on any weekday — walk into either campus during operating hours with the required documents and the $500 down payment.",
-    "Refund and cancellation: ABI follows NY State BPSS refund policy. The $100 registration fee is non-refundable. Ask admissions for the current written policy.",
-
-    // Reviews + social proof
-    "Google reviews: 100+ reviews, aggregate 4.6/5. Common themes in reviews: strong instructor mentorship, real clinic experience, and job-ready graduates.",
-    "Alumni testimonial theme: 'ABI taught me how to actually cut hair, not just pass a test.' Alumni frequently return to teach or hire new grads.",
-
-    // Common Spanish-user questions
-    "Muchos estudiantes son bilingües o hispanohablantes. Todo el temario se enseña en español si el estudiante lo prefiere, incluida la preparación para el examen del estado de NY.",
-    "El campus de Manhattan tiene una línea telefónica dedicada al español: (212) 290-0278. El campus del Bronx atiende llamadas en español al (718) 676-0640.",
-    "Un estudiante que solo habla español puede estudiar el programa completo en español y presentar el examen estatal — el estado ofrece el examen escrito también en español.",
-
-    // Practical FAQs
-    "Do I need barber experience before enrolling? No — most students start with zero cutting experience. The 500-hour curriculum builds skills from the foundations.",
-    "How many days a week? Morning and afternoon tracks are Monday–Friday (5 days). The weekend track is Saturday and Sunday only (2 days).",
-    "Can I switch tracks? Yes — students can switch between morning, afternoon, and weekend tracks with admissions approval, subject to seat availability.",
-    "Can I work while studying? Yes — the weekend track is designed specifically for students who work weekdays. Afternoon track also leaves mornings free.",
-    "Is there parking? Manhattan campus is midtown and parking is limited — public transit is easiest. Bronx campus has more street parking nearby.",
-    "Is there Wi-Fi? Yes, both campuses have free student Wi-Fi.",
-    "Language of the exam: NY State offers the written portion in English and Spanish. Practical is language-neutral.",
-    "Age of typical student: mid-teens to mid-40s. There is no upper age limit — ABI has enrolled second-career students in their 50s and 60s.",
-    "Do I get a certificate? Yes — graduates receive an ABI diploma. After passing the state exam, students receive their NY State Master Barber license.",
-
-    // Extras + differentiators
-    "Why ABI vs other NYC barber schools: 30 years in NYC, bilingual by default, small cohort sizes, instructors who all graduated from ABI, hands-on clinic from week one, and job-placement assistance on graduation.",
-    "Chair-time focus: students cut a lot of hair. The clinic model means every student leaves with hundreds of hours of real-client experience, not just mannequin heads.",
-    "Networking: NYC is one of the biggest barbering markets in the world. Graduates leave with a network of instructors, alumni, and local shop connections.",
-    "Continuing education: ABI's 3-hour Contagious Diseases course meets NY's continuing-ed requirement for license renewal. The 50-hour Refresher helps returning barbers rebuild speed and pass the renewal.",
-
-    // Emergency / redirects
-    "For anything the assistant is unsure about — call Manhattan (English) (212) 290-2289 / (Spanish) (212) 290-0278, or Bronx (718) 676-0640, or email admission@abi.edu. Admissions replies same-day during operating hours."
-  ];
-
-  // ── MEGA SYSTEM PROMPT — one prompt, both languages, per-message switching
-  var SYS = [
-    "You are the friendly, professional admissions assistant for the American Barber Institute (ABI) — New York City's dedicated barber school since 1996.",
-    "",
-    "IDENTITY & MISSION",
-    "- You represent ABI. Speak as a warm, knowledgeable admissions counselor, not a generic AI.",
-    "- Your goal is to answer prospective-student questions accurately, build trust, and gently encourage the visitor to take the next step (schedule a call, visit a campus, fill out the contact form, or pay the $500 down payment to enroll).",
-    "- Never invent facts. If a question is not covered by the FACTS below, say honestly you don't have that detail and invite them to call admissions.",
-    "",
-    "LANGUAGE HANDLING (very important)",
-    "- Detect the language of each individual user message.",
-    "- If the user writes in Spanish, reply entirely in natural, friendly Spanish (use the informal 'tú' form).",
-    "- If the user writes in English, reply in English.",
-    "- Mid-conversation switches are welcome — if they switch language, switch with them for that message and every message after until they switch back.",
-    "- Never mix languages inside one reply.",
-    (pageLangIsES
-      ? "- The visitor started on the Spanish site, so default to Spanish until they clearly switch to English."
-      : "- The visitor started on the English site, so default to English until they clearly switch to Spanish."),
-    "",
-    "STYLE",
-    "- Warm, human, professional. Sound like a real admissions counselor, not corporate.",
-    "- Reply in 2–4 short sentences by default. Use a bullet list only when the user asks for a comparison or a list of options.",
-    "- Use plain text. No markdown headings, no bold, no code blocks. Emojis sparingly (0–1 per message).",
-    "- Address the visitor directly ('you' / 'tú'). Never refer to them in the third person.",
-    "",
-    "ANSWER RULES",
-    "- Use ONLY the FACTS below. Do not speculate about pricing, dates, or policies not written here.",
-    "- When you cite tuition, always mention the payment plan option and the $500 down payment.",
-    "- When you mention enrolling, include the phone number of the campus they're asking about.",
-    "- If they ask about something not covered (e.g. federal financial aid, exact class size this month, specific instructor names besides King David), say you'll connect them with admissions and give the phone/email.",
-    "- End most replies with a soft next step: 'Want me to check the next open cohort?' or 'Would you like the direct line?' — but not every reply, don't be pushy.",
-    "",
-    "FACTS (source of truth — do not contradict):",
-    FACTS.join("\n- ")
-  ].join("\n");
-
-  // ── Local keyword fallback (used only if the AI endpoint is unreachable)
-  var KB_EN = [
-    { k: ["tuition","cost","price","how much","fee","fees","expensive"],
-      a: "Tuition is $5,600 for the Morning plan and $4,600 for Afternoon or Weekend. A $500 down payment enrolls you (that includes the $100 registration fee). Weekly payment plans start at $150/week, and we accept ACCES-VR, Post-9/11 GI Bill®, and VA benefits." },
-    { k: ["schedule","hours","time","morning","afternoon","weekend","evening"],
-      a: "We run three tracks: Morning Mon–Fri 8 AM–2 PM, Afternoon Mon–Fri 2 PM–8 PM, and Weekend Sat–Sun 9 AM–7 PM. New cohorts start the first Monday of every month at both campuses." },
-    { k: ["where","location","campus","address","manhattan","bronx","directions"],
-      a: "We have two campuses. Manhattan is at 48 West 39th Street, NY 10018 — (212) 290-2289 English / (212) 290-0278 Spanish. Bronx is at 121 Westchester Square, NY 10461 — (718) 676-0640." },
-    { k: ["enroll","apply","register","sign up","start","join"],
-      a: "To enroll you'll need to be 17+, have a HS Diploma or GED (or pass our ATB exam), a photo ID, proof of address, Social Security card, and a $500 down payment. Call (212) 290-2289 or fill out the contact form and we'll get you into the next cohort." },
-    { k: ["require","need","diploma","ged","age","old"],
-      a: "Requirements: 17+ years old, a High School Diploma or GED (or pass our free ATB exam), Social Security card, valid photo ID, proof of address, and a $500 down payment." },
-    { k: ["program","course","master barber","500","length","long","duration"],
-      a: "The 500-Hour Master Barber Program is our flagship. Full-time takes about 4 months; the weekend track takes about 6–7 months. It fully prepares you for the New York State Master Barber license." },
-    { k: ["financial","aid","payment","plan","gi bill","va","acces","scholarship","loan"],
-      a: "We accept ACCES-VR, Post-9/11 GI Bill®, and VA benefits. Weekly payment plans start at $150/week. We're not part of federal Title IV, so Pell Grants aren't available." },
-    { k: ["tour","visit","see","virtual","video"],
-      a: "You can watch our Virtual Tour on the About page, or visit either campus in person any weekday from 8 AM to 8 PM. Just call ahead and we'll show you around." },
-    { k: ["online","remote","distance","virtual class"],
-      a: "New York State requires all 500 hours to be in-person — no barber school in NY can be fully online. But both our campuses are open 6 days a week with multiple schedule options." },
-    { k: ["job","career","earn","salary","income","placement","work"],
-      a: "Barbers in NYC typically earn $35–45K starting, $50–70K established, and $75K–$100K+ as booth renters or owners (plus tips). Every graduate meets with our job placement office before leaving." }
-  ];
-  var KB_ES = [
-    { k: ["matrícula","matricula","costo","precio","cuánto","cuanto","tarifa","caro"],
-      a: "La matrícula es $5,600 para el plan de mañana y $4,600 para tarde o fin de semana. Con $500 de enganche te inscribes (incluye la cuota de inscripción de $100). Los planes semanales empiezan desde $150 por semana y aceptamos ACCES-VR, GI Bill® y beneficios VA." },
-    { k: ["horario","clases","mañana","manana","tarde","fin de semana","noche"],
-      a: "Tenemos tres horarios: Mañana Lun–Vie 8:00 AM–2:00 PM, Tarde Lun–Vie 2:00 PM–8:00 PM, y Fin de semana Sáb–Dom 9:00 AM–7:00 PM. Las clases nuevas empiezan el primer lunes de cada mes en los dos campus." },
-    { k: ["dónde","donde","ubicación","ubicacion","campus","dirección","direccion","manhattan","bronx"],
-      a: "Tenemos dos campus. Manhattan está en 48 West 39th Street, NY 10018 — (212) 290-2289 inglés / (212) 290-0278 español. Bronx está en 121 Westchester Square, NY 10461 — (718) 676-0640." },
-    { k: ["inscrib","matricul","empezar","registr","aplicar"],
-      a: "Para inscribirte necesitas tener 17+ años, diploma de prepa o GED (o aprobar nuestro examen ATB), identificación con foto, comprobante de domicilio, tarjeta de Seguro Social y $500 de enganche. Llama al (212) 290-2289 o llena el formulario y te llamamos." },
-    { k: ["requisit","necesito","diploma","ged","edad"],
-      a: "Requisitos: 17+ años, diploma de prepa o GED (o aprobar el examen ATB gratis en ABI), tarjeta de Seguro Social, identificación con foto, comprobante de domicilio y $500 de enganche." },
-    { k: ["programa","curso","500","duración","duracion","cuánto dura","cuanto dura"],
-      a: "El Programa de Barbero Maestro de 500 horas es el principal. Tiempo completo dura ~4 meses; el fin de semana ~6–7 meses. Te prepara para el examen estatal de NY." },
-    { k: ["ayuda","financier","gi bill","va","acces","beca","préstamo","prestamo"],
-      a: "Aceptamos ACCES-VR, Post-9/11 GI Bill® y beneficios VA. Los planes de pago semanales empiezan desde $150/semana. No participamos en el Título IV federal, así que Pell Grants no aplica." },
-    { k: ["tour","visita","ver","virtual"],
-      a: "Puedes ver el Tour Virtual en la página About, o visitar cualquier campus de lunes a viernes 8 AM–8 PM. Llama antes y te mostramos las instalaciones." },
-    { k: ["online","en línea","en linea","virtual","a distancia"],
-      a: "El estado de Nueva York requiere que las 500 horas sean presenciales — ninguna escuela de barbería en NY puede ser 100% online. Pero abrimos 6 días por semana con varios horarios." },
-    { k: ["trabajo","empleo","salario","ganar","colocación","colocacion"],
-      a: "Los barberos en NYC ganan típicamente $35–45K de principiante, $50–70K establecidos, y $75K–$100K+ como booth renter o dueño (además de propinas). Cada graduado se reúne con nuestra oficina de colocación laboral antes de graduarse." }
-  ];
-
-  // Simple per-message language detection: counts distinctive Spanish tokens.
-  var ES_TOKENS = /(\b(hola|gracias|por|favor|quiero|necesito|quisiera|cuánto|cuanto|dónde|donde|cuándo|cuando|clases|horario|precio|matrícula|matricula|inscrib|matricul|ayuda|financier|programa|estudiar|barber[oi]a?|escuela|preguntar|puedo|debo|tengo|soy|estoy|para|con|sobre|acerca|información|informacion)\b|[¿¡]|ñ)/i;
-  function detectES(text) {
-    return ES_TOKENS.test(text || "");
+  function makePIN() {
+    // 4-digit numeric PIN — printable, easy to read aloud on arrival.
+    var n = Math.floor(1000 + Math.random() * 9000);
+    return String(n);
+  }
+  function pinFor(campus) {
+    var k = "abibot-pin-" + campus.toLowerCase();
+    var v = s(k);
+    if (!v) { v = makePIN(); sset(k, v); }
+    return v;
   }
 
-  function localAnswer(q, useES) {
-    var t = (q || "").toLowerCase();
-    var kb = useES ? KB_ES : KB_EN;
-    for (var i = 0; i < kb.length; i++) {
-      for (var j = 0; j < kb[i].k.length; j++) {
-        if (t.indexOf(kb[i].k[j]) !== -1) return kb[i].a;
+  // customer_status: "New Lead" default, or "No Show" if URL has ?abistatus=no_show
+  var qs = new URLSearchParams(location.search);
+  var initialStatus = qs.get("abistatus") === "no_show" ? "No Show" : (s("abibot-status") || "New Lead");
+  sset("abibot-status", initialStatus);
+
+  var contact = {
+    first_name: "",
+    email: "",
+    phone: "",
+    customer_status: initialStatus,
+    location: s("abibot-location") || detectLocation() || "",
+    preferred_language: s("abibot-lang") || (pageLangIsES ? "es" : "")
+  };
+  if (contact.location) sset("abibot-location", contact.location);
+
+  // Try to hydrate from prior gate submission
+  try {
+    var prior = JSON.parse(s("abibot-contact") || "{}");
+    if (prior && prior.name) {
+      contact.first_name = (prior.name.split(/\s+/)[0] || "").trim();
+      contact.email = prior.email || "";
+      contact.phone = prior.phone || "";
+    }
+  } catch (e) {}
+
+  var CAMPUS_PIN_MANHATTAN = pinFor("manhattan");
+  var CAMPUS_PIN_BRONX = pinFor("bronx");
+
+  // ── Client's system prompt (verbatim, with template substitution) ─────
+  var CLIENT_PROMPT_TEMPLATE = [
+    "You are Sam, a friendly admissions representative at American Barber Institute (ABI). You communicate in a relaxed, natural, conversational tone. You genuinely care about the person you're talking to. You are not a salesperson. You are helping people figure out if barbering is the right path for them and whether ABI is the right place to make that happen.",
+    "",
+    "ABI has been in operation for over thirty years and has produced over ten thousand graduates.",
+    "",
+    "## CRITICAL LANGUAGE RULE",
+    "",
+    "Detect the language the contact is writing in from their very first message. If they write in Spanish — respond in Spanish for the entire conversation. If they write in English — respond in English for the entire conversation. No mixing under any circumstance. If {{preferred_language}} is already set on the contact record, use that and do not override it.",
+    "",
+    "## CAMPUS DETERMINATION",
+    "",
+    "The campus for this conversation is determined by {{location}} — either \"Manhattan\" or \"Bronx.\" Never mix campus information. If {{location}} is not set, ask the contact which campus they are interested in before proceeding.",
+    "",
+    "## FULL CAMPUS INFORMATION",
+    "",
+    "### MANHATTAN CAMPUS",
+    "Name: American Barber Institute — Manhattan Campus",
+    "Address: 48 West 39th Street, between 5th and 6th Avenue, Manhattan, NY 10018",
+    "Website: abi.edu",
+    "Campus PIN: {{campus_pin_manhattan}}",
+    "",
+    "Programs Offered:",
+    "- 500 Hour Master Barber Program — prepares students for the New York State Master Barber Board Exam",
+    "- Hands-on training with real clients beginning within the first few weeks",
+    "- Licensed instructors on site at all times",
+    "- Job placement assistance provided at graduation",
+    "- New classes begin the first Monday of every month",
+    "",
+    "Schedule Options:",
+    "- Morning Plan A: Monday–Friday, 8am–2pm. 17 weeks. Tuition: $5,600.",
+    "- Afternoon Plan B: Monday–Friday, 2pm–8pm. 17 weeks. Tuition: $4,600.",
+    "- Weekend Plan C: Saturday & Sunday, 9am–7pm. 27 weeks. Tuition: $4,600.",
+    "",
+    "Down Payment: $500 to reserve a seat. Weekly payment plans available for the balance.",
+    "",
+    "Entrance Requirements:",
+    "- Valid photo ID",
+    "- Social Security card or number (or Tax ID)",
+    "- Proof of address",
+    "- High school diploma or GED (ATB exam available if no diploma)",
+    "- Must be at least 17 years old",
+    "- $500 down payment",
+    "",
+    "### BRONX CAMPUS",
+    "Name: American Barber Institute — Bronx Campus",
+    "Address: 121 Westchester Square, Bronx, NY 10461",
+    "Website: abi.edu",
+    "Campus PIN: {{campus_pin_bronx}}",
+    "",
+    "Programs Offered:",
+    "- 500 Hour Master Barber Program — prepares students for the New York State Master Barber Board Exam",
+    "- Hands-on training with real clients beginning within the first few weeks",
+    "- Licensed instructors on site at all times",
+    "- Job placement assistance provided at graduation",
+    "- New classes begin the first Monday of every month",
+    "",
+    "Schedule Options:",
+    "- Morning Plan A: Monday–Friday, 8am–2pm. 17 weeks. Tuition: $5,600.",
+    "- Afternoon Plan B: Monday–Friday, 2pm–8pm. 17 weeks. Tuition: $4,600.",
+    "- Weekend Plan C: Saturday & Sunday, 9am–7pm. 27 weeks. Tuition: $4,600.",
+    "",
+    "Down Payment: $500 to reserve a seat. Weekly payment plans available for the balance.",
+    "",
+    "Entrance Requirements:",
+    "- Valid photo ID",
+    "- Social Security card or number (or Tax ID)",
+    "- Proof of address",
+    "- High school diploma or GED (ATB exam available if no diploma)",
+    "- Must be at least 17 years old",
+    "- $500 down payment",
+    "",
+    "## CONVERSATION STYLE",
+    "- Write like a real person texting, not a corporate chatbot.",
+    "- Keep messages short. One idea per message. Never send walls of text.",
+    "- One question at a time. Always wait for their response before moving on.",
+    "- Always acknowledge what they just said before moving forward.",
+    "- Match their energy. If they're excited, be excited. If they're hesitant, slow down and be warm.",
+    "- Never sound scripted.",
+    "- Never mention AI, automation, bots, or scripts UNLESS the contact directly asks \"are you a bot\" — in that case use the exact reply from Q&A below.",
+    "- Pronounce ABI as \"A-B-I\" — never \"ah-bee\" — when spelling it out in context.",
+    "",
+    "## BANNED WORDS",
+    "Never start a message with: \"Perfect\", \"Great\", \"Okay\", \"Awesome\", \"Goodbye.\"",
+    "Use instead: \"Got it\", \"Absolutely\", \"Sounds good\", \"Makes sense\", \"No worries\", \"Alright\", \"Sure thing\" — or jump straight into the substance.",
+    "",
+    "## START HERE",
+    "Check {{contact.customer_status}}:",
+    "- \"New Lead\" → use Task A",
+    "- \"No Show\" → use Task B",
+    "Never announce this decision.",
+    "",
+    "## TASK A — New Lead",
+    "Step 1 — Open warm: \"Hey {{contact.first_name}}! This is Alex with American Barber Institute 👋 You reached out about our barber program — I just wanted to connect and answer any questions you have. What got you interested in barbering?\" Wait for response. Acknowledge naturally before continuing.",
+    "Step 2 — Dig into their story: \"Is this something you've always wanted to do or more of a recent thing?\" Wait for response.",
+    "Step 3 — Pull out excitement: \"What do you like most about the barbering world?\" Wait for response.",
+    "Step 4 — Send SMS silently now: Silently trigger SMS workflow with entrance requirements, campus address, campus PIN based on {{location}}. Then say: \"I just sent you a text with everything you'll need — entrance requirements, our address, and a PIN for when you arrive. Keep that handy!\" To trigger the SMS action, end that message with the marker [ACTION:sms_sent] on its own line.",
+    "Step 5 — Current situation: \"So what are you doing for work right now?\" Wait for response.",
+    "Step 6 — Timeline: \"Got it — so if everything lined up, when would you want to get started?\" Wait for response.",
+    "Step 7 — Answer everything honestly: Answer ALL questions about schedules, tuition, payment plans, financial aid, entrance requirements, and career outcomes fully and without restriction. Give real numbers. Never redirect or withhold information.",
+    "Step 8 — Biggest concern: \"What's your biggest concern about getting started?\" Wait for response. Address it directly and honestly.",
+    "Step 9 — Book the appointment: \"I'd love to get you in for a campus tour — it's free, no pressure, just come see the place and meet the team. What days and times work best for you?\" Offer up to three concrete slots (weekday morning, weekday afternoon, weekend). Let them pick.",
+    "Step 10 — Confirm booking: \"Got it — you're locked in! I'll send you a confirmation by text and email. There's a short video in there you'll want to check out to confirm your spot. Let me know when you get it!\" When you book, end that message with the markers [ACTION:book_appointment:<chosen slot>] and [ACTION:tag:ai_voice_appointment_booked] on their own lines. Calendar ID: " + CALENDAR_ID + ".",
+    "Step 11 — Post-booking offer: \"Now that you're all set — would you like me to connect you with one of our licensed school agents to go over payment options and next steps?\" If yes: end with [ACTION:transfer_to_agent]. If no: wrap up warmly.",
+    "",
+    "## TASK B — No Show",
+    "Step 1 — Re-open warm: \"Hey {{contact.first_name}}! It's Alex over at American Barber Institute. You had a campus tour scheduled with us and we weren't able to connect — no worries at all, life happens. Just wanted to check in. Everything good?\" Wait for response.",
+    "Step 2 — Check interest: \"Are you still thinking about the barbering program or did things shift for you?\" Wait for response.",
+    "Step 3 — Send SMS silently now: Same SMS action as Task A Step 4. End that message with [ACTION:sms_sent] on its own line.",
+    "Step 4 — Re-anchor motivation: \"When you first reached out, what got you interested in barbering?\" Wait for response. Acknowledge naturally.",
+    "Step 5 — Surface concerns: \"Is there anything that's come up since then that slowed things down?\" Wait for response. Address directly and honestly.",
+    "Step 6 — Answer everything honestly: Same as Task A Step 7.",
+    "Step 7 — Rebook: \"Let's just get you back on the calendar — come in, look around, ask your questions, no pressure. What days and times work for you?\" Offer up to three concrete slots.",
+    "Step 8 — Confirm booking: \"Got it — you're back on the calendar! Sending your confirmation by text and email now. There's a short video in there to confirm your spot — let me know when you get it!\" End with [ACTION:book_appointment:<chosen slot>] and [ACTION:tag:ai_voice_appointment_booked].",
+    "Step 9 — Post-booking offer: Same as Task A Step 11.",
+    "",
+    "## QUESTIONS AND OBJECTIONS",
+    "\"How much does it cost?\" → \"Tuition depends on the schedule. Morning plan is $5,600. Afternoon and weekend plans are both $4,600. There's a $500 down payment to hold your seat and then the balance breaks into weekly payments. Which schedule are you thinking might work for you?\"",
+    "\"Do you offer financial aid?\" → \"We do work with students on financing options. Our team can go through what's available based on your situation when you come in. The $500 down holds your seat and the balance is broken into weekly payments.\"",
+    "\"I don't have the money right now.\" → \"That's honestly the most common thing we hear — and a lot of students are surprised what's available when they sit down with our team. The tour is free so at the very least come see the place and get your questions answered before making any decisions.\"",
+    "\"What's the address?\" (Manhattan) → \"48 West 39th Street, between 5th and 6th Ave, Manhattan, NY 10018. I also sent it in that text with your arrival PIN!\"",
+    "\"What's the address?\" (Bronx) → \"121 Westchester Square, Bronx, NY 10461. I also sent it in that text with your arrival PIN!\"",
+    "\"How long is the program?\" → \"500 hours — goes faster than you'd think once you're in the chair getting real reps every day.\"",
+    "\"When can I start?\" → \"New classes start the first Monday of every month so timing is usually pretty flexible.\"",
+    "\"What do I need to bring?\" → \"Valid photo ID, Social Security card or number, proof of address, high school diploma or GED — if you don't have one we have an ATB exam option — and you need to be at least 17. Plus the $500 down to reserve your seat. All of that is in the text I sent you.\"",
+    "\"What makes ABI different?\" → \"Biggest thing people notice is the hands-on environment. You're behind the chair with real clients early on, not just sitting in a classroom. Plus the job placement support after graduation. Thirty years in business and over ten thousand graduates — the track record speaks for itself.\"",
+    "\"Is barbering a good career?\" → \"Really good right now. Skilled barbers are in high demand. You've got freedom — work in a shop, rent a chair, eventually own your own place. It's recession resistant, you're not behind a desk, and you're making people feel good every single day. A busy barber doing 10–15 cuts a day at $40 a cut plus tips builds into real money fast.\"",
+    "\"Are you a bot?\" → \"Ha — yeah I am, an AI rep for ABI. But real info, real answers, and a real tour at the end of it. Nothing fake about that part.\"",
+    "\"I'm not ready.\" → \"Totally fair. The tour doesn't commit you to anything — it's just so you can see the place, ask your questions, and make a confident decision. Let's get one on the calendar and you decide after.\"",
+    "",
+    "## OPT-OUT",
+    "If contact says \"stop,\" \"don't contact me,\" \"remove me,\" or any variation: acknowledge politely, end warmly, and end that message with the marker [ACTION:tag:opt_out].",
+    "",
+    "## NOT INTERESTED",
+    "If contact says they are not interested: acknowledge politely, close warmly, and end that message with the marker [ACTION:tag:customerstatus_notinterested].",
+    "",
+    "## SMS CONTENT (for reference — the SMS itself is auto-generated when [ACTION:sms_sent] fires; do not paste it into chat)",
+    "Manhattan: name, entrance requirements, address 48 West 39th Street, Manhattan NY 10018, PIN {{campus_pin_manhattan}}, abi.edu.",
+    "Bronx: name, entrance requirements, address 121 Westchester Square, Bronx NY 10461, PIN {{campus_pin_bronx}}, abi.edu.",
+    "",
+    "## SUCCESS CRITERIA — every conversation must end with one of these:",
+    "1. Campus tour booked → SMS sent → agent transfer offered.",
+    "2. Callback or follow-up scheduled.",
+    "3. Opt-out tagged.",
+    "4. Not-interested tagged.",
+    "",
+    "## ACTION MARKERS",
+    "When you would silently trigger an action, output a single-line marker at the very END of your reply on its own line. The system strips these markers before showing the reply to the contact. Available markers:",
+    "[ACTION:sms_sent]",
+    "[ACTION:book_appointment:<slot description>]",
+    "[ACTION:tag:ai_voice_appointment_booked]",
+    "[ACTION:tag:opt_out]",
+    "[ACTION:tag:customerstatus_notinterested]",
+    "[ACTION:transfer_to_agent]"
+  ];
+
+  function substitute(promptLines) {
+    var joined = promptLines.join("\n");
+    return joined
+      .replace(/\{\{contact\.first_name\}\}/g, contact.first_name || "there")
+      .replace(/\{\{contact\.customer_status\}\}/g, contact.customer_status || "New Lead")
+      .replace(/\{\{location\}\}/g, contact.location || "not set")
+      .replace(/\{\{preferred_language\}\}/g, contact.preferred_language || "not set")
+      .replace(/\{\{campus_pin_manhattan\}\}/g, CAMPUS_PIN_MANHATTAN)
+      .replace(/\{\{campus_pin_bronx\}\}/g, CAMPUS_PIN_BRONX);
+  }
+
+  function currentSystemPrompt() { return substitute(CLIENT_PROMPT_TEMPLATE); }
+
+  // ── Silent workflow trigger dispatch ──────────────────────────────────
+  function fireAction(action, data) {
+    var payload = {
+      action: action,
+      data: data || null,
+      contact: {
+        first_name: contact.first_name,
+        email: contact.email,
+        phone: contact.phone,
+        location: contact.location,
+        customer_status: contact.customer_status,
+        preferred_language: contact.preferred_language
+      },
+      pins: { manhattan: CAMPUS_PIN_MANHATTAN, bronx: CAMPUS_PIN_BRONX },
+      calendar_id: CALENDAR_ID,
+      ts: new Date().toISOString(),
+      page: location.pathname,
+      referrer: document.referrer || ""
+    };
+    try {
+      sset("abibot-lastaction", JSON.stringify(payload));
+      sset("abibot-action-" + action + "-" + Date.now(), JSON.stringify(payload));
+    } catch (e) {}
+    try {
+      document.dispatchEvent(new CustomEvent("abibot:action", { detail: payload }));
+    } catch (e) {}
+    if (WEBHOOK_URL) {
+      try {
+        fetch(WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).catch(function () {});
+      } catch (e) {}
+    }
+    // side effects for specific actions
+    if (action === "book_appointment") {
+      sset("abibot-booking", JSON.stringify(payload));
+    }
+    if (action === "tag") {
+      var tag = (data && data.tag) || "";
+      if (tag) sset("abibot-tag-" + tag, "1");
+      if (tag === "opt_out" || tag === "customerstatus_notinterested") {
+        // Prevent proactive nudges after opt-out
+        sset("abibot-closed", "1");
       }
     }
-    return null;
   }
 
-  // ── Streaming AI call with fallback to non-streaming ────────────────────
-  function askAIStream(history, question, onDelta) {
-    var msgs = [{ role: "system", content: SYS }];
-    history.slice(-8).forEach(function (m) { msgs.push({ role: m.role, content: m.text }); });
+  // Parse & strip [ACTION:...] markers from an AI reply. Returns cleaned text.
+  function processActionMarkers(text) {
+    if (!text) return "";
+    var re = /\[ACTION:([^\]]+)\]/gi;
+    var cleaned = text.replace(re, function (_, raw) {
+      var parts = String(raw).split(":");
+      var act = (parts[0] || "").trim();
+      if (!act) return "";
+      if (act === "tag") {
+        fireAction("tag", { tag: (parts[1] || "").trim() });
+      } else if (act === "book_appointment") {
+        fireAction("book_appointment", { slot: parts.slice(1).join(":").trim() });
+      } else {
+        fireAction(act);
+      }
+      return "";
+    });
+    return cleaned.replace(/\n{3,}/g, "\n\n").trim();
+  }
+
+  // ── Language detection for user messages (per-message ES/EN) ──────────
+  var ES_TOKENS = /(\b(hola|gracias|por|favor|quiero|necesito|quisiera|cuánto|cuanto|dónde|donde|cuándo|cuando|clases|horario|precio|matrícula|matricula|inscrib|matricul|ayuda|financier|programa|estudiar|barber[oi]a?|escuela|preguntar|puedo|debo|tengo|soy|estoy|para|con|sobre|acerca|información|informacion|sí|si)\b|[¿¡]|ñ)/i;
+  function detectES(text) { return ES_TOKENS.test(text || ""); }
+
+  // ── AI call: SSE streaming with plain fallback ────────────────────────
+  function askAIStream(historyLog, question, onDelta) {
+    var msgs = [{ role: "system", content: currentSystemPrompt() }];
+    historyLog.slice(-10).forEach(function (m) { msgs.push({ role: m.role, content: m.text }); });
     msgs.push({ role: "user", content: question });
 
     var ctrl = new AbortController();
-    var to = setTimeout(function () { ctrl.abort(); }, 20000);
+    var to = setTimeout(function () { ctrl.abort(); }, 25000);
 
     return fetch("https://text.pollinations.ai/", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "text/event-stream" },
-      body: JSON.stringify({
-        messages: msgs,
-        model: "openai",
-        stream: true,
-        private: true,
-        referrer: "abi-v13"
-      }),
+      body: JSON.stringify({ messages: msgs, model: "openai", stream: true, private: true, referrer: "abi-v14" }),
       signal: ctrl.signal
     }).then(function (r) {
       if (!r.ok || !r.body || !r.body.getReader) {
         clearTimeout(to);
-        // Fall back to non-streaming plain-text endpoint if streaming isn't supported
-        return askAIPlain(history, question);
+        return askAIPlain(historyLog, question);
       }
       var reader = r.body.getReader();
       var decoder = new TextDecoder();
@@ -270,7 +346,7 @@
       var full = "";
       return (function readLoop() {
         return reader.read().then(function (chunk) {
-          if (chunk.done) { clearTimeout(to); return full.trim() || askAIPlain(history, question); }
+          if (chunk.done) { clearTimeout(to); return full.trim() || askAIPlain(historyLog, question); }
           buffer += decoder.decode(chunk.value, { stream: true });
           var lines = buffer.split("\n");
           buffer = lines.pop() || "";
@@ -281,9 +357,13 @@
               if (payload === "[DONE]") return;
               try {
                 var j = JSON.parse(payload);
-                var delta = (j.choices && j.choices[0] && (j.choices[0].delta && j.choices[0].delta.content || j.choices[0].text || j.choices[0].message && j.choices[0].message.content)) || "";
+                var delta = (j.choices && j.choices[0] && (
+                  (j.choices[0].delta && j.choices[0].delta.content) ||
+                  j.choices[0].text ||
+                  (j.choices[0].message && j.choices[0].message.content)
+                )) || "";
                 if (delta) { full += delta; onDelta(full); }
-              } catch (e) { /* ignore malformed SSE chunk */ }
+              } catch (e) {}
             }
           });
           return readLoop();
@@ -292,16 +372,16 @@
     });
   }
 
-  function askAIPlain(history, question) {
-    var msgs = [{ role: "system", content: SYS }];
-    history.slice(-8).forEach(function (m) { msgs.push({ role: m.role, content: m.text }); });
+  function askAIPlain(historyLog, question) {
+    var msgs = [{ role: "system", content: currentSystemPrompt() }];
+    historyLog.slice(-10).forEach(function (m) { msgs.push({ role: m.role, content: m.text }); });
     msgs.push({ role: "user", content: question });
     var ctrl = new AbortController();
-    var to = setTimeout(function () { ctrl.abort(); }, 15000);
+    var to = setTimeout(function () { ctrl.abort(); }, 18000);
     return fetch("https://text.pollinations.ai/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: msgs, model: "openai", private: true, referrer: "abi-v13" }),
+      body: JSON.stringify({ messages: msgs, model: "openai", private: true, referrer: "abi-v14" }),
       signal: ctrl.signal
     }).then(function (r) {
       clearTimeout(to);
@@ -314,34 +394,50 @@
     });
   }
 
-  // ── UI (bilingual by page-lang initial state) ───────────────────────────
+  // ── Static openings (used before AI first turn) ───────────────────────
+  function taskAOpening(name) {
+    var n = name || (contact.preferred_language === "es" ? "amigo" : "there");
+    if (contact.preferred_language === "es" || (!contact.preferred_language && pageLangIsES)) {
+      return "¡Hola " + n + "! Soy Alex del American Barber Institute 👋 Contactaste sobre nuestro programa de barbería — solo quería conectar y responder cualquier pregunta que tengas. ¿Qué te llevó a interesarte en la barbería?";
+    }
+    return "Hey " + n + "! This is Alex with American Barber Institute 👋 You reached out about our barber program — I just wanted to connect and answer any questions you have. What got you interested in barbering?";
+  }
+  function taskBOpening(name) {
+    var n = name || (contact.preferred_language === "es" ? "amigo" : "there");
+    if (contact.preferred_language === "es" || (!contact.preferred_language && pageLangIsES)) {
+      return "¡Hola " + n + "! Soy Alex del American Barber Institute. Tenías un tour del campus programado con nosotros y no pudimos conectar — no te preocupes, estas cosas pasan. Solo quería saludarte. ¿Todo bien?";
+    }
+    return "Hey " + n + "! It's Alex over at American Barber Institute. You had a campus tour scheduled with us and we weren't able to connect — no worries at all, life happens. Just wanted to check in. Everything good?";
+  }
+  function campusAskOpening() {
+    if (contact.preferred_language === "es" || (!contact.preferred_language && pageLangIsES)) {
+      return "Antes de empezar — ¿te interesa el campus de Manhattan o el del Bronx?";
+    }
+    return "Before we dive in — are you interested in the Manhattan campus or the Bronx campus?";
+  }
+
+  // ── UI strings ────────────────────────────────────────────────────────
   var UI = {
-    greet_en: "👋 Hi! I'm ABI's admissions assistant. Ask me anything about becoming a barber — or tap a question:",
-    greet_es: "👋 ¡Hola! Soy el asistente de admisiones de ABI. Pregúntame lo que quieras sobre convertirte en barbero — o toca una opción:",
-    chips_en: ["💸 Tuition & costs", "🕒 Class schedules", "📍 Campus locations", "📝 How to enroll", "🎓 The program", "💳 Financial aid"],
-    chips_es: ["💸 Matrícula y costos", "🕒 Horarios de clases", "📍 Ubicaciones", "📝 Cómo inscribirme", "🎓 El programa", "💳 Ayuda financiera"],
     open_en: "Open ABI AI Assistant", open_es: "Abrir el asistente de IA de ABI",
     close_en: "Close", close_es: "Cerrar",
-    typing_en: "Typing…", typing_es: "Escribiendo…",
-    title_en: "ABI Assistant", title_es: "Asistente de ABI",
-    status_en: "Real AI · replies in seconds", status_es: "IA real · responde en segundos",
-    fab_en: "AI Assistant", fab_es: "Asistente IA",
-    ph_en: "Type your question…", ph_es: "Escribe tu pregunta…",
-    followup_en: "Which schedule interests you most — morning, afternoon, or weekend? 🙂",
-    followup_es: "¿Qué horario te interesa más — mañana, tarde o fin de semana? 🙂",
-    gate_h_en: "Hi 👋 Before we start, share your contact info:",
-    gate_h_es: "Hola 👋 Antes de empezar, comparte tus datos de contacto:",
+    title_en: "Alex — ABI Admissions", title_es: "Alex — Admisiones ABI",
+    status_en: "Real rep · replies in seconds", status_es: "Asesor real · responde en segundos",
+    fab_en: "Chat with Alex", fab_es: "Chatea con Alex",
+    ph_en: "Type your message…", ph_es: "Escribe tu mensaje…",
+    gate_h_en: "Hi 👋 Before we chat, share your contact info:",
+    gate_h_es: "Hola 👋 Antes de chatear, comparte tus datos:",
     gate_name_en: "Full name", gate_name_es: "Nombre completo",
     gate_email_en: "Email", gate_email_es: "Correo electrónico",
     gate_phone_en: "Phone", gate_phone_es: "Teléfono",
     gate_btn_en: "Start chat", gate_btn_es: "Comenzar el chat",
     gate_note_en: "By submitting you agree to receive SMS or emails from ABI. Rates may apply.",
     gate_note_es: "Al enviar aceptas recibir SMS o emails de ABI. Pueden aplicar tarifas.",
-    err_en: "Great question — admissions can help with that best: call (212) 290-2289 or email admission@abi.edu. Anything else about tuition, schedules, or enrolling?",
-    err_es: "Buena pregunta — para eso es mejor hablar con admisiones: llama al (212) 290-2289 o escribe a admission@abi.edu. ¿Algo más sobre matrícula, horarios o inscripción?"
+    err_en: "Give me one sec — my line dropped. If it doesn't come back, call our Manhattan campus at (212) 290-2289 (English) / (212) 290-0278 (Spanish) or Bronx at (718) 676-0640. We're here 8 AM–8 PM weekdays.",
+    err_es: "Dame un segundo — se cortó mi línea. Si no vuelve, llama al campus de Manhattan al (212) 290-2289 (inglés) / (212) 290-0278 (español) o al Bronx al (718) 676-0640. Estamos aquí 8 AM–8 PM entre semana."
   };
   function t(k) { return UI[k + (pageLangIsES ? "_es" : "_en")]; }
 
+  // ── Widget DOM ────────────────────────────────────────────────────────
   var wrap = document.createElement("div");
   wrap.className = "abibot";
   wrap.innerHTML =
@@ -350,7 +446,7 @@
       '<span class="abibot-fab-badge">AI</span>' +
       '<span class="abibot-fab-label">' + t("fab") + '</span></button>' +
     '<div class="abibot-panel" role="dialog" aria-label="ABI assistant" hidden>' +
-      '<div class="abibot-head"><span class="abibot-ava">ABI</span>' +
+      '<div class="abibot-head"><span class="abibot-ava">A</span>' +
         '<div><b>' + t("title") + '</b><span>' + t("status") + '</span></div>' +
         '<button class="abibot-close" aria-label="' + t("close") + '">✕</button></div>' +
       '<div class="abibot-log" aria-live="polite"></div>' +
@@ -363,10 +459,11 @@
   var panel = wrap.querySelector(".abibot-panel");
   var log = wrap.querySelector(".abibot-log");
   var chipsEl = wrap.querySelector(".abibot-chips");
+  chipsEl.style.display = "none"; // guided flow — no chips
   var form = wrap.querySelector(".abibot-input");
   var input = form.querySelector("input");
-  var history = [];
-  var greeted = false;
+  var historyLog = [];
+  var opened = false;
 
   function scroll() { log.scrollTop = log.scrollHeight; }
   function add(role, text) {
@@ -383,56 +480,55 @@
     log.appendChild(t2); scroll();
     return t2;
   }
-  function renderChips() {
-    chipsEl.innerHTML = "";
-    var chips = pageLangIsES ? UI.chips_es : UI.chips_en;
-    chips.forEach(function (c) {
-      var btn = document.createElement("button");
-      btn.className = "abibot-chip";
-      btn.textContent = c;
-      btn.addEventListener("click", function () { send(c.replace(/^[^A-Za-zÀ-ÿ]+/, "")); });
-      chipsEl.appendChild(btn);
-    });
-  }
 
-  function send(q) {
-    q = (q || "").trim();
+  function send(userText) {
+    var q = (userText || "").trim();
     if (!q) return;
     add("user", q);
-    history.push({ role: "user", text: q });
+    historyLog.push({ role: "user", text: q });
     input.value = "";
-    chipsEl.style.display = "none";
+
+    // Per-message language detection (only before preferred_language is locked)
+    if (!contact.preferred_language) {
+      contact.preferred_language = detectES(q) ? "es" : "en";
+      sset("abibot-lang", contact.preferred_language);
+    }
+
+    // If we still don't have a campus, try to infer from the user's message
+    if (!contact.location) {
+      if (/bronx/i.test(q)) { contact.location = "Bronx"; sset("abibot-location", "Bronx"); }
+      else if (/manhattan|midtown|39th|west 39/i.test(q)) { contact.location = "Manhattan"; sset("abibot-location", "Manhattan"); }
+    }
+
     var tip = typing();
     var bubble = null;
 
-    var msgIsES = detectES(q);
-
-    var onDelta = function (fullSoFar) {
+    var onDelta = function (partial) {
       if (!bubble) { tip.remove(); bubble = add("bot", ""); }
-      bubble.textContent = fullSoFar;
+      // strip markers live so user never sees them
+      bubble.textContent = partial.replace(/\[ACTION:[^\]]+\]/gi, "").trim();
       scroll();
     };
 
-    askAIStream(history, q, onDelta)
+    askAIStream(historyLog, q, onDelta)
       .then(function (final) {
-        // If streaming didn't produce a bubble (fell back to plain), place final now.
-        if (!bubble) { tip.remove(); bubble = add("bot", ""); }
-        if (typeof final === "string" && final.trim() && final.trim() !== bubble.textContent) {
-          bubble.textContent = final.trim();
-        }
-        history.push({ role: "assistant", text: bubble.textContent });
+        var raw = typeof final === "string" ? final : (bubble ? bubble.textContent : "");
+        var cleaned = processActionMarkers(raw);
+        if (!bubble) { try { tip.remove(); } catch (e) {} bubble = add("bot", ""); }
+        if (cleaned) bubble.textContent = cleaned;
+        historyLog.push({ role: "assistant", text: cleaned });
         scroll();
       })
       .catch(function () {
         try { tip.remove(); } catch (e) {}
-        var fallback = localAnswer(q, msgIsES) || (msgIsES ? UI.err_es : UI.err_en);
+        var fallback = contact.preferred_language === "es" ? UI.err_es : UI.err_en;
         if (!bubble) bubble = add("bot", "");
         bubble.textContent = fallback;
-        history.push({ role: "assistant", text: fallback });
+        historyLog.push({ role: "assistant", text: fallback });
       });
   }
 
-  // Pre-chat contact gate
+  // ── Contact gate ──────────────────────────────────────────────────────
   var contactSubmitted = false;
   try { contactSubmitted = !!sessionStorage.getItem("abibot-contact"); } catch (e) {}
 
@@ -457,29 +553,38 @@
         email: gf.email.value.trim(),
         phone: gf.phone.value.trim(),
         ts: new Date().toISOString(),
-        page: location.pathname
+        page: location.pathname,
+        location: contact.location || "",
+        customer_status: contact.customer_status || "New Lead"
       };
       if (!data.name || !data.email || !data.phone) return;
       try { sessionStorage.setItem("abibot-contact", JSON.stringify(data)); } catch (e) {}
+      contact.first_name = (data.name.split(/\s+/)[0] || "").trim();
+      contact.email = data.email;
+      contact.phone = data.phone;
       contactSubmitted = true;
+      // Fire a lead-captured action so downstream integrations can pick this up
+      fireAction("lead_captured", { name: data.name, email: data.email, phone: data.phone });
       b.remove();
       form.style.display = "";
-      chipsEl.style.display = "";
       startChat();
     });
   }
 
   function startChat() {
-    if (!greeted) {
-      greeted = true;
-      var g = pageLangIsES ? UI.greet_es : UI.greet_en;
-      add("bot", g);
-      history.push({ role: "assistant", text: g });
-      renderChips();
-      setTimeout(function () {
-        add("bot", pageLangIsES ? UI.followup_es : UI.followup_en);
-      }, 900);
+    if (opened) return;
+    opened = true;
+    // Pre-canned opening (matches client script), then AI drives.
+    var opener;
+    if (!contact.location) {
+      opener = campusAskOpening();
+    } else if (contact.customer_status === "No Show") {
+      opener = taskBOpening(contact.first_name);
+    } else {
+      opener = taskAOpening(contact.first_name);
     }
+    add("bot", opener);
+    historyLog.push({ role: "assistant", text: opener });
     setTimeout(function () { input.focus(); }, 120);
   }
 
@@ -488,7 +593,6 @@
     fab.classList.add("is-open");
     if (!contactSubmitted) {
       form.style.display = "none";
-      chipsEl.style.display = "none";
       if (!log.querySelector(".abibot-gate")) renderContactGate();
     } else {
       form.style.display = "";
@@ -502,9 +606,9 @@
   form.addEventListener("submit", function (e) { e.preventDefault(); send(input.value); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) close(); });
 
-  // Proactive nudge after 6 seconds (once per session)
+  // Proactive nudge after 6s (once per session, unless closed/opted-out)
   try {
-    if (!sessionStorage.getItem("abibot-nudged")) {
+    if (!sessionStorage.getItem("abibot-nudged") && !sessionStorage.getItem("abibot-closed")) {
       setTimeout(function () {
         if (panel.hidden) { fab.classList.add("abibot-nudge"); sessionStorage.setItem("abibot-nudged", "1"); }
       }, 6000);
