@@ -402,6 +402,11 @@ body.lf-page--brnx-es {
 @media (min-width: 980px) {
   .lf-hero__in { grid-template-columns: 1.15fr .85fr; gap: 3rem; }
 }
+/* Mobile: contact form first, then trust list + countdown */
+@media (max-width: 979px) {
+  .lf-hero__form { order: 1; }
+  .lf-hero__copy { order: 2; }
+}
 .lf-hero h1 { color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); }
 .lf-hero__sub { color: #e8eaf2; font-size: clamp(1rem, 1.5vw, 1.18rem); margin: 1.1rem 0 1.4rem; max-width: 36rem; }
 .lf-hero__sub b { color: #fff; }
@@ -1454,34 +1459,9 @@ body.lf-page--brnx-es {
     line-height: 1;
     text-shadow: 0 2px 16px rgba(0, 0, 0, .55);
   }
-  /* CTA blends as a text link with arrow, no button box.
-     The sticky bottom bar + form below already carry the action weight. */
-  .lf-mhero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    width: auto;
-    margin-top: .35rem;
-    padding: 0;
-    background: transparent;
-    color: #fff;
-    border: 0;
-    box-shadow: none;
-    border-bottom: 2px solid var(--lf-accent);
-    border-radius: 0;
-    font-family: 'Oswald', 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: .95rem;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
-  }
-  .lf-mhero__cta:hover { filter: brightness(1); transform: none; }
-  .lf-mhero__cta::after {
-    content: "→";
-    color: var(--lf-accent);
-    font-weight: 800;
-  }
+  /* "Reserve Your Spot" CTA is hidden on mobile — hero form directly below
+     and the sticky bottom bar already carry the action weight. */
+  .lf-mhero__cta { display: none; }
   /* The mobile photo hero (lf-mhero) already shows the kicker + H1.
      Hide them in the dark .lf-hero block to remove the visible duplicate.
      Sub headline also hidden — message already conveyed in the hero photo. */
