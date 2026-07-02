@@ -355,6 +355,17 @@ html.js .rv.in{opacity:1;transform:none}
      copy to start around 65–70% down the image = ~100vw from the top. */
   .hero-in{padding-top:0!important}
   .hero-copy{padding-top:100vw!important}
+  /* Mobile order: photo+H1 → sub → FORM → trust list → countdown.
+     .hero-copy becomes display:contents so its children join the hero-in
+     flex flow and the formcard can slot in between them. The 100vw photo
+     spacer moves to the H1 since a contents box has no padding. */
+  .hero-in{display:flex;flex-direction:column;gap:0}
+  .hero-copy{display:contents}
+  .hero-h1{order:1;padding-top:100vw}
+  .hero-sub{order:2;margin-top:.9rem}
+  .hero-in .formcard{order:3;margin-top:1.4rem}
+  .hero-copy .features{order:4;margin-top:1.8rem}
+  .hero-copy .hero-cd{order:5;margin-top:1.4rem}
 }
 @media (max-width:840px){
   .topbar{font-size:.68rem;letter-spacing:.1em}
