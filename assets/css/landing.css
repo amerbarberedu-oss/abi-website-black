@@ -2541,3 +2541,78 @@ video{background-color:#1a1f2e}
   .site-seats { padding: .8rem .6rem; column-gap: .5rem; }
   .site-seats__dot { width: 10px; height: 10px; }
 }
+
+/* ═══════════ v125 — EXACT client-reference mobile header (home pages, body.mhx-on) ═══════════
+   Order: white rounded card (logo · EN|ES · MN|BX · menu) → blue headline band →
+   3 phone pills (EN / HAIRCUT / ES) → star seats strip. Blue palette. Desktop untouched. */
+.mhx{display:none}
+.loc-toggle{display:none;align-items:center;border:1.6px solid var(--blue,#1b2fd9);border-radius:999px;overflow:hidden;font-weight:800;font-size:.78rem;line-height:1;flex-shrink:0}
+.loc-toggle a{padding:.4rem .62rem;color:var(--blue,#1b2fd9);text-decoration:none;min-height:auto;transition:background .2s ease,color .2s ease}
+.loc-toggle a+a{border-left:1.6px solid var(--blue,#1b2fd9)}
+.loc-toggle a.is-active,.loc-toggle a:hover{background:var(--blue,#1b2fd9);color:#fff}
+
+@media (max-width:768px){
+  body.mhx-on .topbar{display:none!important}
+  body.mhx-on .site-seats{display:none}
+  body.mhx-on .header-cta{display:none!important}
+
+  /* header row → white rounded card on blue band */
+  body.mhx-on .hdr{background:var(--blue,#1b2fd9);border-bottom:0;padding:.55rem .55rem .35rem}
+  body.mhx-on .hdr-in{width:100%;margin:0;background:#fff;border:2px solid var(--blue-dark,#1322a8);border-radius:16px;padding:.45rem .55rem;gap:.4rem;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+  body.mhx-on .brand-plate{background:transparent;box-shadow:none;border:0;border-radius:0;padding:.1rem 0}
+  body.mhx-on .lang-toggle{margin-left:auto}
+  body.mhx-on .loc-toggle{display:inline-flex;margin-left:.4rem;order:3}
+  body.mhx-on .hamburger{margin-left:.3rem!important}
+  body.mhx-on .nav-drawer{border-radius:0 0 14px 14px}
+
+  /* block under the card */
+  body.mhx-on .mhx{display:block;background:var(--blue,#1b2fd9);padding:.85rem .8rem 0;color:#fff}
+  .mhx-promo{text-align:center;font-weight:800;font-size:1.04rem;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;padding:.15rem .2rem .9rem}
+  .mhx-promo b{color:#ffd35c;font-weight:900}
+  .mhx-phones{display:grid;grid-template-columns:1fr;gap:10px;max-width:420px;margin:0 auto;padding-bottom:1.05rem}
+  .mhx-phone{display:flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:.55rem 1rem;border:2px solid rgba(255,255,255,.75);border-radius:999px;background:rgba(0,0,0,.18);color:#fff;font-weight:800;font-size:1.04rem;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s}
+  .mhx-phone:hover{background:rgba(0,0,0,.36);transform:translateY(-1px);color:#fff}
+  .mhx-phone svg{flex-shrink:0}
+  .mhx-tag{display:inline-grid;place-items:center;min-width:34px;height:25px;padding:0 .42rem;border:1.6px solid currentColor;border-radius:7px;font-size:.72rem;font-weight:900;letter-spacing:.06em}
+  .mhx-num{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .mhx-hc{display:flex;flex-direction:column;align-items:flex-start;line-height:1.18;text-align:left}
+  .mhx-hc i{font-style:normal;font-size:.7rem;font-weight:900;letter-spacing:.16em;color:#ffd35c}
+  .mhx-seats{display:flex;align-items:center;justify-content:center;gap:.7rem;background:var(--bg,#faf8f2);margin:0 -0.8rem;padding:.85rem 1rem;text-align:left}
+  .mhx-star{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#10131a;color:#ffd35c;border:2px solid #8a6500;flex-shrink:0}
+  .mhx-seats-t{display:flex;flex-direction:column;line-height:1.25}
+  .mhx-seats-t b{font-weight:900;letter-spacing:.05em;color:#10131a;text-transform:uppercase;font-size:1.02rem}
+  .mhx-seats-t i{font-style:normal;font-weight:800;letter-spacing:.04em;color:#8a6500;text-transform:uppercase;font-size:.84rem}
+}
+/* 3-in-a-row pills on wider mobile / small tablets, like the reference image */
+@media (min-width:600px) and (max-width:768px){
+  .mhx-phones{grid-template-columns:repeat(3,1fr);max-width:none}
+  .mhx-phone{font-size:.9rem;padding:.5rem .6rem;gap:.45rem}
+}
+/* compact card on narrow phones so logo + EN|ES + MN|BX + menu fit one row
+   (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
+@media (max-width:430px){
+  body.mhx-on .brand-plate .logo-img{height:36px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.7rem!important}
+  body.mhx-on .lang-toggle a{padding:.34rem .46rem!important}
+  body.mhx-on .loc-toggle a{padding:.34rem .46rem!important}
+  body.mhx-on .hamburger{width:38px;margin-left:.15rem!important}
+  body.mhx-on .hdr-in{padding:.4rem .45rem;gap:.3rem}
+  .mhx-promo{font-size:.95rem;letter-spacing:.07em}
+}
+@media (max-width:360px){
+  body.mhx-on .brand-plate .logo-img{height:30px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.62rem!important}
+  body.mhx-on .lang-toggle a{padding:.3rem .34rem!important}
+  body.mhx-on .loc-toggle a{padding:.3rem .34rem!important}
+  body.mhx-on .loc-toggle{margin-left:.2rem}
+  body.mhx-on .hamburger{width:30px;padding:.25rem;margin-left:.05rem!important}
+  body.mhx-on .hamburger span{width:20px}
+  body.mhx-on .hdr-in{padding:.35rem .35rem;gap:.2rem}
+  body.mhx-on .hdr{padding:.45rem .4rem .3rem}
+}
+@media (max-width:330px){
+  body.mhx-on .brand-plate .logo-img{height:26px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.58rem!important}
+  body.mhx-on .lang-toggle a{padding:.28rem .3rem!important}
+  body.mhx-on .loc-toggle a{padding:.28rem .3rem!important}
+}
