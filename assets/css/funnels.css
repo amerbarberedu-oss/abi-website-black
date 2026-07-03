@@ -1743,3 +1743,6 @@ p,li,dd,figcaption,.lf-hero__sub,.lf-feature span,.lf-videos__sub{text-wrap:pret
   .lfx-phonerow .lfx-phone{font-size:.7rem;padding:.4rem .45rem}
   .lfx-phonerow .lfx-phone__flag{display:none}
 }
+/* v45.1 — wallet chip second line: flexible payment plans */
+.lf-feature__sub{display:block;font-style:normal;font-weight:800;font-size:.86em;letter-spacing:.02em;margin-top:.2rem;color:var(--lf-accent-dark)}
+.lf-hero .lf-feature__sub,.lf-mhero .lf-feature__sub{color:inherit;opacity:.92}

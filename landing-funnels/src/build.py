@@ -181,10 +181,15 @@ def hero(p):
     H_ = D.HERO[lang]
     is_bx = p["campus"]["slug"] == "bronx"
     sub    = H_["sub_bx"]    if is_bx else H_["sub_man"]
-    feats = "".join(
-        '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 18), h(t))
-        for t, ic in D.FEATURES[lang]
-    )
+    def _feat(t, ic):
+        # "main|subline" renders the subline as a second emphasized row
+        if "|" in t:
+            main, sub_ = t.split("|", 1)
+            return ('<span class="lf-feature lf-feature--multi">%s<span>%s'
+                    '<i class="lf-feature__sub">%s</i></span></span>'
+                    % (svg(ic, 18), h(main), h(sub_)))
+        return '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 18), h(t))
+    feats = "".join(_feat(t, ic) for t, ic in D.FEATURES[lang])
     cd = D.COUNTDOWN[lang]
     cells = "".join(
         '<div class="lf-cd__cell"><b data-cd-%s>0</b><span>%s</span></div>' % (k, h(lbl))
