@@ -2767,3 +2767,15 @@ body.mhx-on .cta-band{padding-block:clamp(2rem,3.6vw,3.2rem)!important}
   body.mhx-on .hx-in{padding-bottom:1.1rem}
   body.mhx-on .abi-reel{margin:.85rem auto}
 }
+
+/* ═══════════ v140 — close remaining seams (Life at ABI, Tuition, duo/zero sections…) ═══════════ */
+body.mhx-on .duo-sec{padding-block:clamp(1.5rem,3vw,3rem)!important}
+body.mhx-on .stats{padding-block:1.4rem!important}
+@media (max-width:768px){
+  body.mhx-on .sec{padding-block:1.3rem!important}
+  body.mhx-on .duo-sec{padding-block:1.3rem!important}
+  body.mhx-on .abi-reel__frame{padding:1rem;gap:1rem}
+  body.mhx-on .abi-reel{margin:.6rem auto}
+  body.mhx-on .hx-in{padding-bottom:.8rem}
+  body.mhx-on .ftr{padding-top:1.8rem}
+}
