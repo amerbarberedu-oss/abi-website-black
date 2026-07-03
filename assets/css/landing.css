@@ -2756,3 +2756,14 @@ video{background-color:#1a1f2e}
   .hx-cells{grid-template-columns:repeat(4,1fr)}
   .hx-in .formcard{margin-top:1.6rem}
 }
+
+/* ═══════════ v139 — tighter vertical rhythm on home pages (client: reduce big gaps) ═══════════ */
+body.mhx-on .hx{padding:0!important}
+body.mhx-on .hx-in{padding-bottom:1.4rem}
+body.mhx-on .abi-reel{margin:1rem auto;padding:0!important}
+body.mhx-on .sec{padding-block:clamp(1.8rem,3.4vw,3rem)!important}
+body.mhx-on .cta-band{padding-block:clamp(2rem,3.6vw,3.2rem)!important}
+@media (max-width:768px){
+  body.mhx-on .hx-in{padding-bottom:1.1rem}
+  body.mhx-on .abi-reel{margin:.85rem auto}
+}
