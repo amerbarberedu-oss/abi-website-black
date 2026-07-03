@@ -169,4 +169,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://abi-website-black.vercel.app/es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://abi-website-black.vercel.app/"/>
   </url>
+  <url>
+    <loc>https://abi-website-black.vercel.app/bronx</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

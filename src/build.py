@@ -70,7 +70,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=144">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=145">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -95,7 +95,7 @@ TEMPLATE = """<!DOCTYPE html>
     </a>
     <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><span class="nav-drop"><a href="{root}jobs.html" class="nav-drop-trigger">Jobs ▾</a><span class="nav-drop-menu"><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a></span></span><span class="nav-drop"><a href="{root}faq.html" class="nav-drop-trigger">FAQs ▾</a><span class="nav-drop-menu"><a href="{root}faq.html">FAQs</a><a href="{root}schedules.html">Schedules</a></span></span><a href="{root}contact.html">Contact</a></nav>
     {langtoggle}
-    <div class="loc-toggle" role="group" aria-label="Campus"><a class="is-active" aria-current="true">MN</a><a href="/programs/500-hour-master-barber-bronx">BX</a></div>
+    <div class="loc-toggle" role="group" aria-label="Campus"><a class="is-active" aria-current="true" href="/manhattan">MN</a><a href="/bronx">BX</a></div>
     <a class="header-cta" href="{root}contact.html">Become a Barber</a>
     <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
@@ -782,7 +782,7 @@ def build():
             written.append(out)
     # sitemap — adds priority/changefreq hints and xhtml:link hreflang annotations
     # so Google indexes the EN ↔ ES home variants as one logical URL.
-    written += ['index.html', 'es/index.html']
+    written += ['index.html', 'es/index.html', 'bronx.html']
     import datetime
     _today = datetime.date.today().isoformat()
     def _pri(o):

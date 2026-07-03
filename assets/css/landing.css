@@ -2815,3 +2815,26 @@ body.mhx-on .stats{padding-block:1.4rem!important}
   body.mhx-on .mainnav{gap:.8rem!important}
   body.mhx-on .mainnav a{font-size:.85rem}
 }
+
+/* ═══════════ v145 — /bronx GOLDEN THEME (body.bx-gold) — blue → gold everywhere ═══════════ */
+body.bx-gold{--blue:#c9971f;--blue-dark:#9c7414;--blue-light:#fbf3dd}
+body.bx-gold .hx{background:#0e0b05!important}
+body.bx-gold .hx-grad{background:radial-gradient(115% 95% at 6% 100%,rgba(14,11,4,.96) 0%,rgba(14,11,4,.68) 40%,rgba(14,11,4,0) 70%),linear-gradient(180deg,rgba(14,11,4,.12) 0%,rgba(14,11,4,.06) 40%,rgba(14,11,4,.5) 66%,rgba(14,11,4,.94) 88%,#0e0b05 100%)}
+body.bx-gold .hx-l2,body.bx-gold .hx-next-date{color:#e3b34e}
+body.bx-gold .hx-script::after{background:#e3b34e}
+body.bx-gold .hx-sub b{color:#ecc25f}
+body.bx-gold .hx-chip,body.bx-gold .hx-next{background:rgba(22,17,6,.78);border-color:rgba(224,187,98,.38)}
+body.bx-gold .hx-chip svg{color:#e0bb62}
+body.bx-gold .hx-chip--fin i{color:#d9c9a1}
+body.bx-gold .hx-cell{background:rgba(14,11,4,.55)}
+body.bx-gold .mhx-promo b{color:#241a04}
+body.bx-gold .cta-band{background:linear-gradient(120deg,#161003 0%,#40300b 100%)!important}
+@media (max-width:768px){
+  body.bx-gold .hx-bg{background-color:#0e0b05}
+  body.bx-gold .hx-grad{background:radial-gradient(130% 90% at 15% 100%,rgba(14,11,4,.94) 0%,rgba(14,11,4,.6) 45%,rgba(14,11,4,0) 75%),linear-gradient(180deg,rgba(16,12,4,.05) 0%,rgba(16,12,4,.02) 34%,rgba(16,12,4,.55) 62%,rgba(16,12,4,.94) 86%,#0e0b05 100%)}
+}
+body.bx-gold .lang-toggle a.is-active,body.bx-gold .lang-toggle a:hover{background:var(--blue)!important;color:#fff}
+body.bx-gold .lang-toggle{border-color:var(--blue)!important}
+body.bx-gold .lang-toggle a{color:var(--blue)}
+body.bx-gold .lang-toggle a.is-active{color:#fff}
+body.bx-gold .hdr-in > .lang-toggle a+a,body.bx-gold .lang-toggle a+a{border-left-color:var(--blue)!important}
