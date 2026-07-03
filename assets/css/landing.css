@@ -2840,3 +2840,10 @@ body.bx-gold .lang-toggle a.is-active{color:#fff}
 body.bx-gold .hdr-in > .lang-toggle a+a,body.bx-gold .lang-toggle a+a{border-left-color:var(--blue)!important}
 body.bx-gold .hdr-in > .lang-toggle a{color:var(--blue)!important}
 body.bx-gold .hdr-in > .lang-toggle a.is-active{background:var(--blue)!important;color:#fff!important}
+
+/* ═══════════ v147 — GHL form: force visible (don't depend on iframe-resizer handshake).
+   form_embed.js parks the iframe at -9999px until a postMessage handshake; when that
+   handshake is slow/blocked the form never appears. Our !important overrides its inline styles. */
+.ghl-form-wrap{min-height:940px}
+.ghl-form-wrap .ep-iFrameContainer,.ghl-form-wrap .ep-wrapper{height:auto!important;min-height:940px}
+.ghl-form-wrap iframe{position:static!important;left:0!important;top:0!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;display:block!important;width:100%!important;min-height:940px}
