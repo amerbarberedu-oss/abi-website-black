@@ -2560,11 +2560,11 @@ video{background-color:#1a1f2e}
   body.mhx-on .hdr{background:var(--blue,#1b2fd9);border-bottom:0;padding:.5rem .45rem .35rem}
   body.mhx-on .hdr-in{width:100%;margin:0;background:#fff;border:2px solid var(--blue-dark,#1322a8);border-radius:16px;padding:.55rem .5rem;gap:.3rem;box-shadow:0 6px 18px rgba(0,0,0,.22)}
   body.mhx-on .brand-plate{background:transparent;box-shadow:none;border:0;border-radius:0;padding:.1rem 0}
-  body.mhx-on .brand-plate .logo-img{height:44px!important}
+  body.mhx-on .brand-plate .logo-img{height:48px!important}
   body.mhx-on .lang-toggle{margin-left:auto}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.8rem!important}
-  body.mhx-on .lang-toggle a{padding:.5rem .6rem!important}
-  body.mhx-on .loc-toggle a{padding:.5rem .6rem!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.86rem!important}
+  body.mhx-on .lang-toggle a{padding:.54rem .66rem!important}
+  body.mhx-on .loc-toggle a{padding:.54rem .66rem!important}
   body.mhx-on .loc-toggle{display:inline-flex;margin-left:.75rem;order:3}
   body.mhx-on .hamburger{margin-left:.35rem!important}
   body.mhx-on .nav-drawer{border-radius:0 0 14px 14px}
@@ -2623,25 +2623,26 @@ video{background-color:#1a1f2e}
 /* compact card on narrow phones so logo + EN|ES + MN|BX + menu fit one row
    (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
 @media (max-width:430px){
-  body.mhx-on .brand-plate .logo-img{height:38px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.74rem!important}
-  body.mhx-on .lang-toggle a{padding:.42rem .5rem!important}
-  body.mhx-on .loc-toggle a{padding:.42rem .5rem!important}
+  body.mhx-on .brand-plate .logo-img{height:40px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.78rem!important}
+  body.mhx-on .lang-toggle a{padding:.46rem .52rem!important}
+  body.mhx-on .loc-toggle a{padding:.46rem .52rem!important}
   body.mhx-on .loc-toggle{margin-left:.6rem}
   body.mhx-on .hamburger{width:40px;margin-left:.2rem!important}
   body.mhx-on .hdr-in{padding:.5rem .45rem;gap:.25rem}
   .mhx-promo{font-size:.84rem;letter-spacing:.06em}
 }
 @media (max-width:400px){
-  body.mhx-on .lang-toggle a{padding:.42rem .44rem!important}
-  body.mhx-on .loc-toggle a{padding:.42rem .44rem!important}
-  body.mhx-on .loc-toggle{margin-left:.5rem}
+  body.mhx-on .lang-toggle a{padding:.44rem .4rem!important}
+  body.mhx-on .loc-toggle a{padding:.44rem .4rem!important}
+  body.mhx-on .loc-toggle{margin-left:.45rem}
+  body.mhx-on .hdr-in{gap:.2rem}
 }
 @media (max-width:360px){
-  body.mhx-on .brand-plate .logo-img{height:33px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.66rem!important}
-  body.mhx-on .lang-toggle a{padding:.36rem .42rem!important}
-  body.mhx-on .loc-toggle a{padding:.36rem .42rem!important}
+  body.mhx-on .brand-plate .logo-img{height:36px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.7rem!important}
+  body.mhx-on .lang-toggle a{padding:.38rem .42rem!important}
+  body.mhx-on .loc-toggle a{padding:.38rem .42rem!important}
   body.mhx-on .loc-toggle{margin-left:.45rem}
   body.mhx-on .hamburger{width:34px;padding:.25rem;margin-left:.1rem!important}
   body.mhx-on .hamburger span{width:22px}
@@ -2649,9 +2650,9 @@ video{background-color:#1a1f2e}
   body.mhx-on .hdr{padding:.45rem .4rem .3rem}
 }
 @media (max-width:330px){
-  body.mhx-on .brand-plate .logo-img{height:28px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.6rem!important}
-  body.mhx-on .lang-toggle a{padding:.32rem .36rem!important}
-  body.mhx-on .loc-toggle a{padding:.32rem .36rem!important}
+  body.mhx-on .brand-plate .logo-img{height:31px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.64rem!important}
+  body.mhx-on .lang-toggle a{padding:.34rem .36rem!important}
+  body.mhx-on .loc-toggle a{padding:.34rem .36rem!important}
   body.mhx-on .loc-toggle{margin-left:.35rem}
 }
