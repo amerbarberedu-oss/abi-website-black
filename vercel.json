@@ -86,7 +86,7 @@
   "rewrites": [
     {
       "source": "/manhattan",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/500-hours-master-barber-program-landing-page",
