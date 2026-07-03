@@ -2831,3 +2831,10 @@ p,li,dd,figcaption,blockquote,
 /* keep number+unit phrases on one line: "4 months.", "$150 per week*", dates */
 .hx-sub b,.mhx-promo b,.hx-next-date,.mhx-num{white-space:nowrap}
 td,th{text-wrap:pretty}
+
+/* ═══════════ v143 — typography consistency, broadened coverage ═══════════ */
+span,small,a,button,legend,label{text-wrap:pretty}
+.card p,.card-meta span,.step p,.step h3,.plan p,.plan h3,.why-item p,.why-item h3,
+.tuition p,.tuition h3,.amt small,.glance div span,.glance div b,.kicker,
+.duo p,.duo li,.prose p,.skill-tags li,.crumbs{text-wrap:pretty}
+.section-head h2,.section-head p,.page-hero h1,.page-hero p{text-wrap:balance}
