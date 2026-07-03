@@ -1685,3 +1685,61 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 /* v44 — typography consistency: balanced headings, no orphan last words */
 h1,h2,h3,h4,.lf-hero__h1,.lf-videos__title,.lf-form__title{text-wrap:balance}
 p,li,dd,figcaption,.lf-hero__sub,.lf-feature span,.lf-videos__sub{text-wrap:pretty}
+
+/* ═══════════ v45 — LANDING HEADER (main-site pattern) ═══════════
+   Desktop 3 rows: [logo · phones · EN|ES] sticky / accent promo / seats.
+   Mobile 4 rows:  [logo · EN|ES] sticky / promo / phones row / seats. */
+.lfx-bar{position:sticky;top:0;z-index:90;background:#fff;box-shadow:0 4px 16px rgba(15,30,80,.12)}
+.lfx-bar__in{display:flex;align-items:center;gap:1rem;width:100%;padding:.7rem 1.3rem}
+.lfx-logo{flex-shrink:0;display:inline-flex}
+.lfx-logo img{height:58px;width:auto;display:block}
+.lfx-phones{display:flex;align-items:center;gap:.7rem}
+.lfx-phones--bar{flex:1;justify-content:center;min-width:0}
+.lfx-phone{display:inline-flex;align-items:center;gap:.45rem;border:1.8px solid var(--lf-accent);border-radius:999px;padding:.5rem .95rem;color:var(--lf-ink,#10131a);font-weight:800;font-size:.95rem;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+.lfx-phone svg{color:var(--lf-accent);flex-shrink:0}
+.lfx-phone:hover{background:var(--lf-accent);color:var(--lf-on-accent);transform:translateY(-1px)}
+.lfx-phone:hover svg{color:var(--lf-on-accent)}
+.lfx-phone__flag{display:inline-grid;place-items:center;min-width:30px;height:21px;padding:0 .35rem;border:1.6px solid var(--lf-accent);border-radius:6px;font-size:.66rem;font-weight:900;letter-spacing:.05em;color:var(--lf-accent)}
+.lfx-phone:hover .lfx-phone__flag{border-color:var(--lf-on-accent);color:var(--lf-on-accent)}
+.lfx-phone__num{font-variant-numeric:tabular-nums}
+.lfx-lang{flex-shrink:0;margin-left:auto}
+.lfx-promo{background:var(--lf-accent);color:var(--lf-on-accent);text-align:center;font-weight:800;font-size:clamp(.92rem,1.6vw,1.25rem);letter-spacing:.1em;text-transform:uppercase;line-height:1.45;padding:.85rem 1rem}
+.lfx-promo b{font-weight:900;color:var(--lf-accent-soft)}
+.lfx-phonerow{display:none}
+.lfx-seats{display:flex;align-items:center;justify-content:center;gap:.75rem;background:var(--lf-accent-soft);padding:.8rem 1rem}
+.lfx-star{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#10131a;color:var(--lf-accent);border:2px solid var(--lf-accent-dark);flex-shrink:0}
+.lfx-seats-t{display:flex;flex-direction:column;line-height:1.3;text-align:left}
+.lfx-seats-t b{font-weight:900;letter-spacing:.05em;color:#10131a;text-transform:uppercase;font-size:1.05rem}
+.lfx-seats-t i{font-style:normal;font-weight:800;letter-spacing:.04em;color:var(--lf-accent-dark);text-transform:uppercase;font-size:.85rem}
+/* narrow desktop: keep row 1 comfortable */
+@media (min-width:769px) and (max-width:1080px){
+  .lfx-logo img{height:46px}
+  .lfx-phone{font-size:.84rem;padding:.44rem .7rem}
+  .lfx-bar__in{gap:.7rem;padding:.6rem .9rem}
+}
+/* MOBILE — 4 rows: phones move OUT of the bar into their own accent row */
+@media (max-width:768px){
+  .lfx-phones--bar{display:none}
+  .lfx-bar__in{padding:.55rem .7rem;gap:.6rem}
+  .lfx-logo img{height:46px}
+  .lfx-promo{font-size:.88rem;letter-spacing:.07em;padding:.75rem .8rem .55rem}
+  .lfx-phonerow{display:flex;justify-content:center;align-items:center;gap:.5rem;background:var(--lf-accent);padding:.2rem .8rem .95rem}
+  .lfx-phonerow .lfx-phone{border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:.85rem;padding:.5rem .8rem}
+  .lfx-phonerow .lfx-phone svg{color:var(--lf-on-accent)}
+  .lfx-phonerow .lfx-phone__flag{border-color:currentColor;color:var(--lf-on-accent)}
+  .lfx-seats{padding:.7rem .8rem}
+  .lfx-star{width:34px;height:34px}
+  .lfx-seats-t b{font-size:.95rem}
+  .lfx-seats-t i{font-size:.78rem}
+}
+@media (max-width:400px){
+  .lfx-logo img{height:40px}
+  .lfx-phonerow{gap:.4rem}
+  .lfx-phonerow .lfx-phone{font-size:.76rem;padding:.45rem .55rem;gap:.3rem}
+  .lfx-phonerow .lfx-phone svg{width:12px;height:12px}
+  .lfx-phonerow .lfx-phone__flag{min-width:24px;height:18px;font-size:.58rem}
+}
+@media (max-width:340px){
+  .lfx-phonerow .lfx-phone{font-size:.7rem;padding:.4rem .45rem}
+  .lfx-phonerow .lfx-phone__flag{display:none}
+}

@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "44"
+CSS_V = "45"
 JS_V  = "14"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -95,62 +95,53 @@ LOGO_ALT = ("American Barber Institute — "
 # Each campus logo already contains the street address baked into the
 # artwork, so we don't render a duplicate text address line in the header.
 def header(p):
+    """v45 — main-site header pattern, split by breakpoint:
+    DESKTOP (3 rows): [logo · phones · EN|ES]  /  promo strip  /  seats banner
+    MOBILE  (4 rows): [logo · EN|ES]  /  promo strip  /  phones row  /  seats banner
+    Row 1 is the only sticky row. Accent colors come from each page's theme class."""
     es = p["lang"] == "es"
-    addr = p["campus"]["addr_short_es" if es else "addr_short_en"]
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
-    logo_src = LOGO_SRC
-    campus_slug = p["campus"]["slug"]
-    campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[campus_slug]
-    # Topbar phone chips (campus-aware: 2 for Manhattan, 1 for Bronx)
-    chips = "".join(
-        '<a class="lf-topbar__chip" href="tel:%s">%s<b>%s</b> <span>%s</span></a>' % (
-            h(ph["tel"]), svg("phone", 14), h(ph["label"]), h(ph["display"])
+    campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
+    pills = "".join(
+        '<a class="lfx-phone" href="tel:%s">%s<b class="lfx-phone__flag">%s</b>'
+        '<span class="lfx-phone__num">%s</span></a>' % (
+            h(ph["tel"]), svg("phone", 15), h(ph["label"]), h(ph["display"])
         )
         for ph in campus_phones
     )
-    # Header phones (desktop): same 2 chips for Manhattan, 1 for Bronx —
-    # so both Manhattan numbers (EN + ES) are visible above the fold on desktop.
-    phones_html = "".join(
-        '<a class="lf-phone" href="tel:%s">%s<b class="lf-phone__flag">%s</b>'
-        '<span class="lf-phone__num">%s</span></a>' % (
-            h(ph["tel"]), svg("phone", 16), h(ph["label"]), h(ph["display"])
-        )
-        for ph in campus_phones
-    )
+    promo = h(p["promo_strip"])
+    for price in ("$150 per week*", "$150 por semana*"):
+        promo = promo.replace(price, "<b>%s</b>" % price)
     seats_kicker, seats_lead = D.SEATS_BANNER[p["lang"]]
+    star_svg = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+                '<path d="M12 2l2.9 6.26L21.8 9.3l-5 4.72 1.24 6.8L12 17.5l-6.04 3.32L7.2 14 2.2 9.3l6.9-1.04z"/></svg>')
     return (
-        '<div class="lf-topbar">\n'
-        '  <p class="lf-topbar__promo">%s</p>\n'
-        '  <div class="lf-topbar__chips">%s</div>\n'
-        '</div>\n'
-        '<header class="lf-hdr"><div class="lf-hdr__in">\n'
-        '  <a class="lf-brand" href="#reserve" aria-label="American Barber Institute — %s">\n'
-        '    <img class="lf-brand__logo lf-brand__logo--final" src="%s"'
-        ' alt="%s" width="%d" height="%d" fetchpriority="high">\n'
+        '<header class="lfx-bar"><div class="lfx-bar__in">\n'
+        '  <a class="lfx-logo" href="#reserve" aria-label="American Barber Institute">\n'
+        '    <img src="%s" alt="%s" width="%d" height="%d" fetchpriority="high">\n'
         '  </a>\n'
-        '  <div class="lf-hdr__right">\n'
-        '    <div class="lf-hdr__phones">%s</div>\n'
-        '    <div class="lf-lang" role="group" aria-label="%s">\n'
-        '      <a class="%s" href="%s"%s>EN</a>\n'
-        '      <a class="%s" href="%s"%s>ES</a>\n'
-        '    </div>\n'
+        '  <div class="lfx-phones lfx-phones--bar">%s</div>\n'
+        '  <div class="lf-lang lfx-lang" role="group" aria-label="%s">\n'
+        '    <a class="%s" href="%s"%s>EN</a>\n'
+        '    <a class="%s" href="%s"%s>ES</a>\n'
         '  </div>\n'
         '</div></header>\n'
-        '<div class="lf-seats" role="status">\n'
-        '  <span class="lf-seats__dot" aria-hidden="true"></span>\n'
-        '  <span class="lf-seats__kicker">%s</span>\n'
-        '  <span class="lf-seats__lead">%s</span>\n'
+        '<div class="lfx-promo">%s</div>\n'
+        '<div class="lfx-phonerow">%s</div>\n'
+        '<div class="lfx-seats" role="status">\n'
+        '  <span class="lfx-star" aria-hidden="true">%s</span>\n'
+        '  <span class="lfx-seats-t"><b>%s</b><i>%s</i></span>\n'
         '</div>\n'
     ) % (
-        h(p["promo_strip"]),
-        chips,
-        h(addr),
-        h(logo_src), h(LOGO_ALT), LOGO_W, LOGO_H,
-        phones_html,
+        h(LOGO_SRC), h(LOGO_ALT), LOGO_W, LOGO_H,
+        pills,
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
         "is-active" if es else "", h(es_href), ' aria-current="true"' if es else "",
+        promo,
+        pills,
+        star_svg,
         h(seats_kicker), h(seats_lead),
     )
 
