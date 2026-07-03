@@ -2779,3 +2779,39 @@ body.mhx-on .stats{padding-block:1.4rem!important}
   body.mhx-on .hx-in{padding-bottom:.8rem}
   body.mhx-on .ftr{padding-top:1.8rem}
 }
+
+/* ═══════════ v141 — ROW 1: flat full-width bar (no rounded card, no border), enlarged, one line always ═══════════ */
+@media (max-width:768px){
+  body.mhx-on .hdr{background:#fff;padding:0;border-bottom:0}
+  body.mhx-on .hdr-in{background:#fff;border:0!important;border-radius:0!important;box-shadow:0 3px 12px rgba(0,0,0,.14);padding:.6rem .7rem;width:100%;flex-wrap:nowrap}
+  body.mhx-on .brand-plate .logo-img{height:54px!important}
+  body.mhx-on .nav-drawer{border-radius:0}
+}
+@media (max-width:430px){
+  body.mhx-on .brand-plate .logo-img{height:44px!important}
+  body.mhx-on .hdr-in{padding:.55rem .55rem}
+}
+@media (max-width:400px){
+  body.mhx-on .hdr{padding:0}
+  body.mhx-on .hdr-in{padding:.5rem .45rem;gap:.18rem}
+}
+@media (max-width:360px){
+  body.mhx-on .brand-plate .logo-img{height:39px!important}
+  body.mhx-on .hdr-in{padding:.45rem .4rem}
+}
+@media (max-width:330px){
+  body.mhx-on .brand-plate .logo-img{height:33px!important}
+}
+@media (min-width:769px){
+  body.mhx-on .hdr{background:#fff;padding:0}
+  body.mhx-on .hdr-in{width:100%;max-width:none;margin:0;background:#fff;border:0!important;border-radius:0!important;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:.75rem 1.4rem;flex-wrap:nowrap}
+  body.mhx-on .brand-plate .logo-img{height:58px!important}
+  body.mhx-on .mainnav,body.mhx-on .mainnav a{white-space:nowrap}
+}
+@media (min-width:1200px){
+  body.mhx-on .brand-plate .logo-img{height:64px!important}
+}
+@media (min-width:1200px) and (max-width:1459px){
+  body.mhx-on .mainnav{gap:.8rem!important}
+  body.mhx-on .mainnav a{font-size:.85rem}
+}
