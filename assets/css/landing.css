@@ -2556,25 +2556,29 @@ video{background-color:#1a1f2e}
   body.mhx-on .site-seats{display:none}
   body.mhx-on .header-cta{display:none!important}
 
-  /* header row → white rounded card on blue band */
-  body.mhx-on .hdr{background:var(--blue,#1b2fd9);border-bottom:0;padding:.55rem .55rem .35rem}
-  body.mhx-on .hdr-in{width:100%;margin:0;background:#fff;border:2px solid var(--blue-dark,#1322a8);border-radius:16px;padding:.45rem .55rem;gap:.4rem;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+  /* header row → white rounded card on blue band (bigger logo + toggles, finger-safe spacing) */
+  body.mhx-on .hdr{background:var(--blue,#1b2fd9);border-bottom:0;padding:.5rem .45rem .35rem}
+  body.mhx-on .hdr-in{width:100%;margin:0;background:#fff;border:2px solid var(--blue-dark,#1322a8);border-radius:16px;padding:.55rem .5rem;gap:.3rem;box-shadow:0 6px 18px rgba(0,0,0,.22)}
   body.mhx-on .brand-plate{background:transparent;box-shadow:none;border:0;border-radius:0;padding:.1rem 0}
+  body.mhx-on .brand-plate .logo-img{height:44px!important}
   body.mhx-on .lang-toggle{margin-left:auto}
-  body.mhx-on .loc-toggle{display:inline-flex;margin-left:.4rem;order:3}
-  body.mhx-on .hamburger{margin-left:.3rem!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.8rem!important}
+  body.mhx-on .lang-toggle a{padding:.5rem .6rem!important}
+  body.mhx-on .loc-toggle a{padding:.5rem .6rem!important}
+  body.mhx-on .loc-toggle{display:inline-flex;margin-left:.75rem;order:3}
+  body.mhx-on .hamburger{margin-left:.35rem!important}
   body.mhx-on .nav-drawer{border-radius:0 0 14px 14px}
 
   /* block under the card */
-  body.mhx-on .mhx{display:block;background:var(--blue,#1b2fd9);padding:.85rem .8rem 0;color:#fff}
-  .mhx-promo{text-align:center;font-weight:800;font-size:1.04rem;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;padding:.15rem .2rem .9rem}
+  body.mhx-on .mhx{display:block;background:var(--blue,#1b2fd9);padding:.6rem .75rem 0;color:#fff}
+  .mhx-promo{text-align:center;font-weight:800;font-size:.9rem;letter-spacing:.07em;text-transform:uppercase;line-height:1.45;padding:.1rem .2rem .65rem}
   .mhx-promo b{color:#ffd35c;font-weight:900}
   /* three pills in ONE row on every mobile width — row 1 = number, row 2 = icon + word */
-  .mhx-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 auto;padding-bottom:1.05rem}
-  .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:50px;padding:.48rem .15rem;border:1.6px solid rgba(255,255,255,.85);border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.24));box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
+  .mhx-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:520px;margin:0 auto;padding-bottom:.85rem}
+  .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:45px;padding:.4rem .12rem;border:1.6px solid rgba(255,255,255,.85);border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.24));box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
   .mhx-phone:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.18);color:#fff}
-  .mhx-num{text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0;font-size:.76rem;line-height:1.2}
-  .mhx-lab{display:inline-flex;align-items:center;gap:4px;font-size:.56rem;font-weight:900;letter-spacing:.13em;color:#ffd35c;line-height:1;text-transform:uppercase}
+  .mhx-num{text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0;font-size:.72rem;line-height:1.2}
+  .mhx-lab{display:inline-flex;align-items:center;gap:4px;font-size:.54rem;font-weight:900;letter-spacing:.12em;color:#ffd35c;line-height:1;text-transform:uppercase}
   .mhx-lab svg{width:10px;height:10px;flex-shrink:0}
   .mhx-seats{display:flex;align-items:center;justify-content:center;gap:.7rem;background:var(--bg,#faf8f2);margin:0 -0.8rem;padding:.85rem 1rem;text-align:left}
   .mhx-star{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#10131a;color:#ffd35c;border:2px solid #8a6500;flex-shrink:0}
@@ -2592,8 +2596,8 @@ video{background-color:#1a1f2e}
 }
 /* big phones (Pro Max / Plus / large Android) — slightly larger */
 @media (min-width:412px) and (max-width:599px){
-  .mhx-num{font-size:.82rem}
-  .mhx-lab{font-size:.6rem}
+  .mhx-num{font-size:.76rem}
+  .mhx-lab{font-size:.56rem}
   .mhx-lab svg{width:11px;height:11px}
 }
 /* ultra-narrow (320px-class): keep one row */
@@ -2619,28 +2623,35 @@ video{background-color:#1a1f2e}
 /* compact card on narrow phones so logo + EN|ES + MN|BX + menu fit one row
    (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
 @media (max-width:430px){
-  body.mhx-on .brand-plate .logo-img{height:36px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.7rem!important}
-  body.mhx-on .lang-toggle a{padding:.34rem .46rem!important}
-  body.mhx-on .loc-toggle a{padding:.34rem .46rem!important}
-  body.mhx-on .hamburger{width:38px;margin-left:.15rem!important}
-  body.mhx-on .hdr-in{padding:.4rem .45rem;gap:.3rem}
-  .mhx-promo{font-size:.95rem;letter-spacing:.07em}
+  body.mhx-on .brand-plate .logo-img{height:38px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.74rem!important}
+  body.mhx-on .lang-toggle a{padding:.42rem .5rem!important}
+  body.mhx-on .loc-toggle a{padding:.42rem .5rem!important}
+  body.mhx-on .loc-toggle{margin-left:.6rem}
+  body.mhx-on .hamburger{width:40px;margin-left:.2rem!important}
+  body.mhx-on .hdr-in{padding:.5rem .45rem;gap:.25rem}
+  .mhx-promo{font-size:.84rem;letter-spacing:.06em}
+}
+@media (max-width:400px){
+  body.mhx-on .lang-toggle a{padding:.42rem .44rem!important}
+  body.mhx-on .loc-toggle a{padding:.42rem .44rem!important}
+  body.mhx-on .loc-toggle{margin-left:.5rem}
 }
 @media (max-width:360px){
-  body.mhx-on .brand-plate .logo-img{height:30px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.62rem!important}
-  body.mhx-on .lang-toggle a{padding:.3rem .34rem!important}
-  body.mhx-on .loc-toggle a{padding:.3rem .34rem!important}
-  body.mhx-on .loc-toggle{margin-left:.2rem}
-  body.mhx-on .hamburger{width:30px;padding:.25rem;margin-left:.05rem!important}
-  body.mhx-on .hamburger span{width:20px}
-  body.mhx-on .hdr-in{padding:.35rem .35rem;gap:.2rem}
+  body.mhx-on .brand-plate .logo-img{height:33px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.66rem!important}
+  body.mhx-on .lang-toggle a{padding:.36rem .42rem!important}
+  body.mhx-on .loc-toggle a{padding:.36rem .42rem!important}
+  body.mhx-on .loc-toggle{margin-left:.45rem}
+  body.mhx-on .hamburger{width:34px;padding:.25rem;margin-left:.1rem!important}
+  body.mhx-on .hamburger span{width:22px}
+  body.mhx-on .hdr-in{padding:.42rem .4rem;gap:.2rem}
   body.mhx-on .hdr{padding:.45rem .4rem .3rem}
 }
 @media (max-width:330px){
-  body.mhx-on .brand-plate .logo-img{height:26px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.58rem!important}
-  body.mhx-on .lang-toggle a{padding:.28rem .3rem!important}
-  body.mhx-on .loc-toggle a{padding:.28rem .3rem!important}
+  body.mhx-on .brand-plate .logo-img{height:28px!important}
+  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.6rem!important}
+  body.mhx-on .lang-toggle a{padding:.32rem .36rem!important}
+  body.mhx-on .loc-toggle a{padding:.32rem .36rem!important}
+  body.mhx-on .loc-toggle{margin-left:.35rem}
 }
