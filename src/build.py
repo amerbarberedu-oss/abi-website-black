@@ -70,14 +70,14 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=124">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=140">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 {schema}
 </head>
-<body style="--page-bg:url('/assets/img/{pagebg}')">
+<body class="mhx-on" style="--page-bg:url('/assets/img/{pagebg}')">
 <div class="abi-deco" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
@@ -95,11 +95,21 @@ TEMPLATE = """<!DOCTYPE html>
     </a>
     <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><span class="nav-drop"><a href="{root}jobs.html" class="nav-drop-trigger">Jobs ▾</a><span class="nav-drop-menu"><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a></span></span><span class="nav-drop"><a href="{root}faq.html" class="nav-drop-trigger">FAQs ▾</a><span class="nav-drop-menu"><a href="{root}faq.html">FAQs</a><a href="{root}schedules.html">Schedules</a></span></span><a href="{root}contact.html">Contact</a></nav>
     {langtoggle}
+    <div class="loc-toggle" role="group" aria-label="Campus"><a class="is-active" aria-current="true">MN</a><a href="/programs/500-hour-master-barber-bronx">BX</a></div>
     <a class="header-cta" href="{root}contact.html">Become a Barber</a>
     <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
   <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}schedules.html">Schedules</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
+<div class="mhx">
+  <div class="mhx-promo">START YOUR BARBER JOURNEY TODAY FOR ONLY <b>$150 PER WEEK*</b></div>
+  <div class="mhx-phones">
+    <a class="mhx-phone" href="tel:+12122902289"><span class="mhx-num">(212) 290-2289</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>ENGLISH</span></a>
+    <a class="mhx-phone" href="tel:+18563161551"><span class="mhx-num">(856) 316-1551</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>HAIRCUT</span></a>
+    <a class="mhx-phone" href="tel:+12122900278"><span class="mhx-num">(212) 290-0278</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>SPANISH</span></a>
+  </div>
+  <div class="mhx-seats"><span class="mhx-star" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L21.8 9.3l-5 4.72 1.24 6.8L12 17.5l-6.04 3.32L7.2 14 2.2 9.3l6.9-1.04z"/></svg></span><span class="mhx-seats-t"><b>LIMITED SEATS AVAILABLE</b><i>ENROLLMENT NOW OPEN</i></span></div>
+</div>
 
 <main id="main">
 {body}
