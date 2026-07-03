@@ -838,9 +838,15 @@ def mobile_cta_bar(p):
 def page_tail():
     return (
         '<script src="/assets/js/funnels.js?v=%s" defer></script>\n'
-        '<script src="/assets/js/chatbot.js?v=%s" defer></script>\n'
+        '<!-- GHL chat widget (VIBE AI). Alex chatbot preserved in /assets/js/chatbot.js '
+        '— to restore Alex: delete this block and re-add the chatbot.js script tag. -->\n'
+        '<div data-chat-widget data-widget-id="689f4917512e48b4268bf335" data-location-id="wfpdq6XX5uIZUiLrqCSo"></div>'
+        '<script src="https://widgets.leadconnectorhq.com/loader.js" '
+        'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
+        'data-widget-id="689f4917512e48b4268bf335" defer></script>\n'
+        '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget{bottom:88px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
         '</body>\n</html>\n'
-    ) % (JS_V, JS_V)
+    ) % (JS_V,)
 
 
 # ── ASSEMBLE ─────────────────────────────────────────────────────────
