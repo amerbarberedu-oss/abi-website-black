@@ -2569,16 +2569,13 @@ video{background-color:#1a1f2e}
   body.mhx-on .mhx{display:block;background:var(--blue,#1b2fd9);padding:.85rem .8rem 0;color:#fff}
   .mhx-promo{text-align:center;font-weight:800;font-size:1.04rem;letter-spacing:.09em;text-transform:uppercase;line-height:1.5;padding:.15rem .2rem .9rem}
   .mhx-promo b{color:#ffd35c;font-weight:900}
-  /* three pills in ONE row on every mobile width — inside each: row 1 = number, row 2 = label */
-  .mhx-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 auto;padding-bottom:1.05rem}
-  .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;padding:.42rem .15rem;border:1.6px solid rgba(255,255,255,.75);border-radius:15px;background:rgba(0,0,0,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s}
-  .mhx-phone:hover{background:rgba(0,0,0,.36);transform:translateY(-1px);color:#fff}
-  .mhx-phone svg{display:none}
-  .mhx-num{order:1;text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0;font-size:.76rem;line-height:1.2}
-  .mhx-tag{order:2;border:0;padding:0;min-width:0;height:auto;font-size:.6rem;font-weight:900;letter-spacing:.16em;color:#ffd35c;line-height:1.2;text-transform:uppercase}
-  .mhx-hc{display:contents}
-  .mhx-hc .mhx-num{order:1}
-  .mhx-hc i{order:2;font-style:normal;font-size:.6rem;font-weight:900;letter-spacing:.16em;color:#ffd35c;line-height:1.2}
+  /* three pills in ONE row on every mobile width — row 1 = number, row 2 = icon + word */
+  .mhx-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 auto;padding-bottom:1.05rem}
+  .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:50px;padding:.48rem .15rem;border:1.6px solid rgba(255,255,255,.85);border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.24));box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
+  .mhx-phone:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.18);color:#fff}
+  .mhx-num{text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0;font-size:.76rem;line-height:1.2}
+  .mhx-lab{display:inline-flex;align-items:center;gap:4px;font-size:.56rem;font-weight:900;letter-spacing:.13em;color:#ffd35c;line-height:1;text-transform:uppercase}
+  .mhx-lab svg{width:10px;height:10px;flex-shrink:0}
   .mhx-seats{display:flex;align-items:center;justify-content:center;gap:.7rem;background:var(--bg,#faf8f2);margin:0 -0.8rem;padding:.85rem 1rem;text-align:left}
   .mhx-star{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#10131a;color:#ffd35c;border:2px solid #8a6500;flex-shrink:0}
   .mhx-seats-t{display:flex;flex-direction:column;line-height:1.25}
@@ -2588,22 +2585,27 @@ video{background-color:#1a1f2e}
 /* roomier pills on wider mobile / small tablets */
 @media (min-width:600px) and (max-width:768px){
   .mhx-phones{gap:10px}
-  .mhx-phone{min-height:54px}
+  .mhx-phone{min-height:56px}
   .mhx-num{font-size:.92rem}
-  .mhx-tag,.mhx-hc i{font-size:.66rem}
+  .mhx-lab{font-size:.64rem}
+  .mhx-lab svg{width:12px;height:12px}
 }
-/* big phones (Pro Max / Plus / large Android) — slightly larger number */
+/* big phones (Pro Max / Plus / large Android) — slightly larger */
 @media (min-width:412px) and (max-width:599px){
   .mhx-num{font-size:.82rem}
-  .mhx-tag,.mhx-hc i{font-size:.62rem}
+  .mhx-lab{font-size:.6rem}
+  .mhx-lab svg{width:11px;height:11px}
 }
 /* ultra-narrow (320px-class): keep one row */
 @media (max-width:350px){
   .mhx-phones{gap:4px}
-  .mhx-phone{padding:.36rem .1rem;border-radius:12px;min-height:44px}
+  .mhx-phone{padding:.4rem .08rem;border-radius:12px;min-height:46px}
   .mhx-num{font-size:.67rem}
-  .mhx-tag,.mhx-hc i{font-size:.52rem;letter-spacing:.12em}
+  .mhx-lab{font-size:.49rem;letter-spacing:.1em;gap:3px}
+  .mhx-lab svg{width:9px;height:9px}
 }
+/* red status dot removed site-wide per client */
+.site-seats__dot{display:none!important}
 /* compact card on narrow phones so logo + EN|ES + MN|BX + menu fit one row
    (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
 @media (max-width:430px){
