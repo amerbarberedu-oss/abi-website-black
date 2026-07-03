@@ -1682,10 +1682,6 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
   line-height: 1.5;
 }
 
-/* v44 — typography consistency: balanced headings, no orphan last words */
-h1,h2,h3,h4,.lf-hero__h1,.lf-videos__title,.lf-form__title{text-wrap:balance}
-p,li,dd,figcaption,.lf-hero__sub,.lf-feature span,.lf-videos__sub{text-wrap:pretty}
-
 /* ═══════════ v45 — LANDING HEADER (main-site pattern) ═══════════
    Desktop 3 rows: [logo · phones · EN|ES] sticky / accent promo / seats.
    Mobile 4 rows:  [logo · EN|ES] sticky / promo / phones row / seats. */
