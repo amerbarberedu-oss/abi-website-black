@@ -2606,6 +2606,16 @@ video{background-color:#1a1f2e}
 }
 /* red status dot removed site-wide per client */
 .site-seats__dot{display:none!important}
+/* kill ANY decoration that could render as a dot inside the phone boxes —
+   no pseudo-elements, no injected children besides number + label, no animations */
+.mhx-phone{overflow:hidden;position:relative}
+.mhx-phone::before,.mhx-phone::after,
+.mhx-num::before,.mhx-num::after,
+.mhx-lab::before,.mhx-lab::after,
+.mhx-phones::before,.mhx-phones::after{content:none!important;display:none!important;background:none!important;box-shadow:none!important;animation:none!important}
+.mhx-phone>*:not(.mhx-num):not(.mhx-lab){display:none!important}
+.mhx-num>*:not(svg),.mhx-num{animation:none!important}
+.mhx-phone .glare,.mhx-phone .abi-tilt__glare{display:none!important}
 /* compact card on narrow phones so logo + EN|ES + MN|BX + menu fit one row
    (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
 @media (max-width:430px){
