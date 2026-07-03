@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "46"
+CSS_V = "47"
 JS_V  = "14"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -234,38 +234,24 @@ def lead_form(p):
     lang_opts = "".join('<option>%s</option>' % h(o) for o in f["lang_opts"])
     return (
         '<div class="lf-hero__form lf-rv">\n'
-        '<form class="lf-form" id="reserve" method="POST" action="https://formspree.io/f/xrgpkebw">\n'
-        '  <input type="hidden" name="_subject" value="ABI Landing — %(id)s">\n'
-        '  <input type="hidden" name="campus" value="%(campus)s">\n'
-        '  <input type="hidden" name="language" value="%(lang)s">\n'
+        '<div class="lf-form lf-form--ghl" id="reserve">\n'
         '  <h3 class="lf-form__h">%(h)s</h3>\n'
         '  <p class="lf-form__sub">%(sub)s</p>\n'
-        '  <div class="lf-form__row lf-form__row--2">'
-        '<input type="text" name="first_name" required placeholder="%(first)s" autocomplete="given-name">'
-        '<input type="text" name="last_name" required placeholder="%(last)s" autocomplete="family-name"></div>\n'
-        '  <div class="lf-form__row lf-form__row--2">'
-        '<input type="tel" name="phone" required placeholder="%(phone)s" autocomplete="tel">'
-        '<input type="email" name="email" required placeholder="%(email)s" autocomplete="email"></div>\n'
-        '  <div class="lf-form__row"><label class="lf-form__label">%(loc_label)s</label>'
-        '<select name="campus_pref" required>%(loc_opts)s</select></div>\n'
-        '  <div class="lf-form__row"><label class="lf-form__label">%(lang_label)s</label>'
-        '<select name="preferred_language" required>%(lang_opts)s</select></div>\n'
-        '  <div class="lf-form__row"><label class="lf-form__label">%(msg_label)s</label>'
-        '<textarea name="message" rows="4" placeholder="%(msg_ph)s"></textarea></div>\n'
-        '  <div class="lf-consent">\n'
-        '    <label class="lf-consent__row">'
-        '<input type="checkbox" name="consent_call" required>'
-        '<span>%(consent_call)s</span></label>\n'
-        '    <label class="lf-consent__row">'
-        '<input type="checkbox" name="consent_sms" required>'
-        '<span>%(consent_sms)s</span></label>\n'
-        '  </div>\n'
-        '  <button type="submit" class="lf-btn lf-btn--primary lf-btn--lg lf-form__submit">%(submit)s</button>\n'
-        '  <p class="lf-form__trust">✓ %(trust)s</p>\n'
-        '  <p class="lf-form__fine">%(consent)s</p>\n'
-        '</form></div>'
+        '  <div class="ghl-form-wrap">'
+        '<iframe src="https://api.leadconnectorhq.com/widget/form/%(ghl_id)s" '
+        'style="width:100%%;height:%(ghl_h)spx;border:none;border-radius:3px" '
+        'id="inline-%(ghl_id)s" data-layout="{\'id\':\'INLINE\'}" data-trigger-type="alwaysShow" '
+        'data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" '
+        'data-deactivation-type="neverDeactivate" data-deactivation-value="" '
+        'data-form-name="%(ghl_name)s" data-height="%(ghl_h)s" data-layout-iframe-id="inline-%(ghl_id)s" '
+        'data-form-id="%(ghl_id)s" title="%(ghl_name)s"></iframe></div>\n'
+        '<script src="https://link.msgsndr.com/js/form_embed.js" defer></script>\n'
+        '</div>'
     ) % {
         "id": p["id"], "campus": p["campus"]["slug"], "lang": lang,
+        "ghl_id": "H4C1nJmpLO3cNx4OrlK2" if lang == "es" else "3ghObGjHiLN3LgKBfKGG",
+        "ghl_h": 780 if lang == "es" else 919,
+        "ghl_name": "01.GET TRAINED WITH ABI FORM - ABI.com - ESP" if lang == "es" else "01.GET TRAINED WITH ABI FORM - ABI.com",
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
