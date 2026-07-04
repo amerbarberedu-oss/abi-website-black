@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "48"
+CSS_V = "47"
 JS_V  = "14"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -237,7 +237,7 @@ def lead_form(p):
         '<div class="lf-form lf-form--ghl" id="reserve">\n'
         '  <h3 class="lf-form__h">%(h)s</h3>\n'
         '  <p class="lf-form__sub">%(sub)s</p>\n'
-        '  <div class="ghl-form-wrap" style="--ghl-h:%(ghl_h)spx">'
+        '  <div class="ghl-form-wrap">'
         '<iframe src="https://api.leadconnectorhq.com/widget/form/%(ghl_id)s" '
         'style="width:100%%;height:%(ghl_h)spx;border:none;border-radius:3px" '
         'id="inline-%(ghl_id)s" data-layout="{\'id\':\'INLINE\'}" data-trigger-type="alwaysShow" '
@@ -249,9 +249,9 @@ def lead_form(p):
         '</div>'
     ) % {
         "id": p["id"], "campus": p["campus"]["slug"], "lang": lang,
-        "ghl_id": "v1SNzWsAZZVodCsnsDbe" if p["campus"]["slug"] == "bronx" else "2FvHzLvYji1iSmNmCP46",
-        "ghl_h": 950 if p["campus"]["slug"] == "bronx" else 720,
-        "ghl_name": "02.GET TRAINED WITH ABI FORM - Bronx" if p["campus"]["slug"] == "bronx" else "02.GET TRAINED WITH ABI FORM - Manhattan",
+        "ghl_id": "H4C1nJmpLO3cNx4OrlK2" if lang == "es" else "3ghObGjHiLN3LgKBfKGG",
+        "ghl_h": 780 if lang == "es" else 919,
+        "ghl_name": "01.GET TRAINED WITH ABI FORM - ABI.com - ESP" if lang == "es" else "01.GET TRAINED WITH ABI FORM - ABI.com",
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
@@ -769,6 +769,7 @@ def page_head(p):
 '<link rel="preload" href="/assets/img/lf-hero.jpg" as="image" media="(min-width:769px)">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
+'<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
 '</head>\n<body class="lf-page %(theme)s">\n'
     ) % {
