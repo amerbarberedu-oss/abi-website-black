@@ -1751,4 +1751,4 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 
 /* ═══════════ v48 — chat widget: proper placement, no overlap ═══════════ */
 chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;z-index:9999!important}
-@media(max-width:768px){chat-widget{bottom:80px!important;right:12px!important}}
+@media(max-width:768px){chat-widget{bottom:100px!important;right:12px!important}}

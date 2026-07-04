@@ -560,9 +560,11 @@ TOPBAR_PHONES_BY_CAMPUS = {
     "manhattan": [
         {"label": "EN", "display": "(212) 290-2289", "tel": "+12122902289"},
         {"label": "ES", "display": "(212) 290-0278", "tel": "+12122900278"},
+        {"label": "Haircut", "display": "(856) 316-1551", "tel": "+18563161551"},
     ],
     "bronx": [
         {"label": "Bronx", "display": "(718) 676-0640", "tel": "+17186760640"},
+        {"label": "Haircut", "display": "(856) 316-1551", "tel": "+18563161551"},
     ],
 }
 
@@ -615,12 +617,12 @@ CONTACT_LABELS = {
         "bronx_tag": "Bronx",
     },
 }
-# Manhattan campus → two phone numbers (EN line + ES line)
+# Manhattan campus → EN + ES admissions lines
 CONTACT_PHONES_MANHATTAN = [
     {"label_key": "en_tag", "display": "(212) 290-2289", "tel": "+12122902289"},
     {"label_key": "es_tag", "display": "(212) 290-0278", "tel": "+12122900278"},
 ]
-# Bronx campus → one phone number only
+# Bronx campus → one admissions number only
 CONTACT_PHONES_BRONX = [
     {"label_key": "bronx_tag", "display": "(718) 676-0640", "tel": "+17186760640"},
 ]
