@@ -898,8 +898,7 @@ def build():
         if o == 'es/index.html': return SITE_URL + '/es'
         u = f'{SITE_URL}/{o}'.replace('/index.html', '').replace('.html', '')
         return u
-    url_blocks = []
-    for o in written:
+    def _entry(o):
         loc = _abs(o)
         pri, cf = _pri(o)
         block = [
@@ -915,13 +914,33 @@ def build():
             block.append(f'    <xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}/es"/>')
             block.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}/"/>')
         block.append('  </url>')
-        url_blocks.append('\n'.join(block))
-    urls = '\n'.join(url_blocks)
+        return '\n'.join(block)
+    # Yoast-style split: a styled sitemap index (sitemap.xml) pointing to
+    # page/post/programs sub-sitemaps, each rendered human-readable via
+    # /sitemap.xsl (cosmetic only — crawlers read the raw XML).
+    _XML_HEAD = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+                 '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n')
+    posts = sorted(o for o in written if o.startswith('blog/') and o != 'blog/index.html')
+    progs = sorted(o for o in written if o.startswith('programs/') and o != 'programs/index.html')
+    pages = [o for o in written if o not in posts and o not in progs]
+    pages.sort(key=lambda o: (-float(_pri(o)[0]), o))   # home first, then by priority/name
+    def _write_urlset(fname, items):
+        urls = '\n'.join(_entry(o) for o in items)
+        open(os.path.join(ROOT, fname), 'w').write(
+            _XML_HEAD +
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+            '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+            f'{urls}\n</urlset>\n')
+    _write_urlset('page-sitemap.xml', pages)
+    _write_urlset('post-sitemap.xml', posts)
+    _write_urlset('programs-sitemap.xml', progs)
+    subs = ''.join(
+        f'  <sitemap>\n    <loc>{SITE_URL}/{n}</loc>\n    <lastmod>{_today}</lastmod>\n  </sitemap>\n'
+        for n in ('page-sitemap.xml', 'post-sitemap.xml', 'programs-sitemap.xml'))
     open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
-        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
-        f'{urls}\n</urlset>\n')
+        _XML_HEAD +
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f'{subs}</sitemapindex>\n')
     # robots.txt — explicitly invite AI / answer-engine crawlers so ABI can be
     # cited confidently by ChatGPT, Claude, Perplexity, Google AI Overviews, etc.
     open(os.path.join(ROOT, 'robots.txt'), 'w').write(

@@ -25,7 +25,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import data as D
 
-SITE = "https://abi-landing-funnels.vercel.app"
+SITE = "https://abi-website-black.vercel.app"
 CSS_V = "48"
 JS_V  = "14"
 
