@@ -2861,4 +2861,4 @@ body.bx-gold .phone-pill:hover{box-shadow:0 6px 18px rgba(180,140,30,.3)}
 
 /* ═══════════ v148 — chat widget: proper placement, no overlap ═══════════ */
 chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;z-index:9999!important}
-@media(max-width:768px){chat-widget{bottom:100px!important;right:12px!important}}
+@media(max-width:768px){chat-widget{bottom:140px!important;right:12px!important}}
