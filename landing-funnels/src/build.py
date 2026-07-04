@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://abi-landing-funnels.vercel.app"
-CSS_V = "47"
+CSS_V = "48"
 JS_V  = "14"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -148,10 +148,10 @@ def header(p):
 
 # ── MOBILE HERO (image-led, mobile-only — hidden on desktop via CSS) ─
 MHERO_BG_BY_PAGE = {
-    ("manhattan", "en"): "lf-hero-mobile-manhattan-en.jpg",
-    ("manhattan", "es"): "lf-hero-mobile-manhattan-es.jpg",
-    ("bronx",     "en"): "lf-hero-mobile-bronx-en.jpg",
-    ("bronx",     "es"): "lf-hero-mobile-bronx-es.jpg",
+    ("manhattan", "en"): "hero-barber-clinic-2.jpg",
+    ("manhattan", "es"): "hero-barber-clinic-2.jpg",
+    ("bronx",     "en"): "hero-barber-clinic-2.jpg",
+    ("bronx",     "es"): "hero-barber-clinic-2.jpg",
 }
 
 def mobile_hero(p):
@@ -766,7 +766,7 @@ def page_head(p):
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'
 '<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/%(mhero_bg)s" as="image" media="(max-width:768px)" fetchpriority="high">\n'
-'<link rel="preload" href="/assets/img/lf-hero.jpg" as="image" media="(min-width:769px)">\n'
+'<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" media="(min-width:769px)">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
@@ -830,7 +830,7 @@ def page_tail():
         '<script src="https://widgets.leadconnectorhq.com/loader.js" '
         'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
         'data-widget-id="689f4917512e48b4268bf335" defer></script>\n'
-        '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget{bottom:88px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
+        '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget{bottom:80px!important;right:12px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
         '</body>\n</html>\n'
     ) % (JS_V,)
 

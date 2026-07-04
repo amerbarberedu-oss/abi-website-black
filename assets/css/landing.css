@@ -247,7 +247,7 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 /* steps (splash) */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2rem}
 .step{border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;background:#fff}
-.step-num{font-size:2rem;font-weight:800;color:var(--blue);opacity:.35}
+.step-num{font-size:2rem;font-weight:800;color:var(--blue);opacity:1}
 .step b{display:block;margin:.5rem 0 .3rem;font-size:1.05rem}
 .step p{font-size:.92rem;color:var(--ink-soft)}
 
@@ -2841,9 +2841,24 @@ body.bx-gold .hdr-in > .lang-toggle a+a,body.bx-gold .lang-toggle a+a{border-lef
 body.bx-gold .hdr-in > .lang-toggle a{color:var(--blue)!important}
 body.bx-gold .hdr-in > .lang-toggle a.is-active{background:var(--blue)!important;color:#fff!important}
 
+/* ═══════════ v148 — bx-gold: theme Zero-to-Pro section + hardcoded hover shadows ═══════════ */
+body.bx-gold .zero-sec{background:linear-gradient(180deg,#fdf8ed 0%,#f5ecd5 100%)}
+body.bx-gold .zero-sec .eyebrow{color:#b8860b}
+body.bx-gold .zero-title,body.bx-gold .zero-h{color:#5c4a1e}
+body.bx-gold .zero-step{background:linear-gradient(160deg,#fff 0%,#fdf5e1 100%);border-color:#e8d5a0}
+body.bx-gold .zero-step:hover{box-shadow:0 24px 50px rgba(180,140,30,.22);border-color:#c9971f}
+body.bx-gold .zero-num{background:linear-gradient(150deg,#e8c84a,#c9971f);box-shadow:0 10px 22px rgba(156,116,20,.34)}
+body.bx-gold .zero-step p{color:#5c4a1e}
+body.bx-gold .btn:hover{box-shadow:0 12px 28px rgba(180,140,30,.35)}
+body.bx-gold .phone-pill:hover{box-shadow:0 6px 18px rgba(180,140,30,.3)}
+
 /* ═══════════ v147 — GHL form: force visible (don't depend on iframe-resizer handshake).
    form_embed.js parks the iframe at -9999px until a postMessage handshake; when that
    handshake is slow/blocked the form never appears. Our !important overrides its inline styles. */
 .ghl-form-wrap{min-height:940px}
 .ghl-form-wrap .ep-iFrameContainer,.ghl-form-wrap .ep-wrapper{height:auto!important;min-height:940px}
 .ghl-form-wrap iframe{position:static!important;left:0!important;top:0!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;display:block!important;width:100%!important;min-height:940px}
+
+/* ═══════════ v148 — chat widget: proper placement, no overlap ═══════════ */
+chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;z-index:9999!important}
+@media(max-width:768px){chat-widget{bottom:80px!important;right:12px!important}}
