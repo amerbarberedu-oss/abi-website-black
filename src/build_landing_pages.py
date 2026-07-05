@@ -404,21 +404,11 @@ LOC_ES = {
 }
 
 PAGES = []
-# home page only — program-landing / splash / location funnel pages removed per client request
-PAGES.append({"type":"splash","lang":"en","path":"index.html",
- "url":"/","alt":"/es",
- "title":"American Barber Institute | Barber School NYC",
- "desc":"NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes every month.",
- "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
- "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
- "hero_img":"home-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
-PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
- "url":"/es","alt":"/",
- "title":"Escuela de Barbería en NYC | American Barber Institute",
- "desc":"La única escuela dedicada de barbería en NYC. Licenciada por el Estado de NY. Programa de 500 horas, ayuda financiera, GI Bill® y colocación laboral.",
- "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
- "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
- "hero_img":"home-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
+# NOTE: index.html and es/index.html are hand-crafted at repo root (MHX design,
+# multi-phone bar, promo strip). They are NOT regenerated here — the splash
+# templates below are older and would overwrite the current design.
+# If the source templates are ever re-synced with the hand-crafted output,
+# un-comment the two PAGES.append blocks that used to be here.
 # location pages (EN + ES)
 for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
