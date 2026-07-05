@@ -219,11 +219,16 @@
       on(host, 'mouseleave', function () { if (window.matchMedia('(hover:hover)').matches) v.pause(); });
       on(v, 'play',  syncPlaying);
       on(v, 'pause', syncPlaying);
-      /* off-screen pause */
+      /* autoplay muted when in view, pause when off-screen (so clips visibly play) */
       if (typeof IntersectionObserver !== 'undefined') {
         new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (!en.isIntersecting && !v.paused) v.pause(); });
-        }, { threshold: 0 }).observe(host);
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { v.muted = true; v.play().catch(function () {}); }
+            else if (!v.paused) { v.pause(); }
+          });
+        }, { threshold: 0.35 }).observe(host);
+      } else {
+        v.muted = true; v.play().catch(function () {});
       }
     });
 

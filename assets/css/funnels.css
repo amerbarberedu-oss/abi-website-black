@@ -1384,9 +1384,10 @@ body.lf-page--brnx-es {
     display: block;
     position: relative;
     width: 100%;
-    /* Use real photo height capped at 75vh so the form stays in reach */
-    aspect-ratio: 1080 / 1280;
-    max-height: 75vh;
+    /* taller hero so the photo stays prominent and the copy begins ~75% down */
+    height: 82vh;
+    min-height: 580px;
+    max-height: none;
     overflow: hidden;
     background: #0a1020;
     isolation: isolate;
