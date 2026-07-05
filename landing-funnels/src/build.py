@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "50"
+CSS_V = "52"
 JS_V  = "15"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -607,11 +607,9 @@ def footer(p):
         h(ft["h"]), h(ft["sub"]),
         svg("pin", 14), h(addr), h(p["phone"][2]), h(p["phone"][1]),
         socials, h(ft["fine"]),
-        ('<a href="/privacy-and-policy">Pol&iacute;tica de Privacidad</a> &middot; '
-         '<a href="/privacy-and-policy" data-abi-privacy-choices>No vender ni compartir mi informaci&oacute;n personal</a>'
+        ('<a href="/privacy-and-policy">Pol&iacute;tica de Privacidad</a>'
          if p["lang"] == "es" else
-         '<a href="/privacy-and-policy">Privacy Policy</a> &middot; '
-         '<a href="/privacy-and-policy" data-abi-privacy-choices>Do Not Sell or Share My Personal Information</a>'),
+         '<a href="/privacy-and-policy">Privacy Policy</a>'),
     )
 
 
@@ -780,7 +778,7 @@ def page_head(p):
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
-'<script src="/assets/js/analytics.js?v=2" defer></script>\n'
+'<script src="/assets/js/analytics.js?v=3" defer></script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
@@ -837,7 +835,7 @@ def page_tail():
         '<script src="/assets/js/funnels.js?v=%s" defer></script>\n'
         '<!-- GHL chat widget (VIBE AI). Alex chatbot preserved in /assets/js/chatbot.js '
         '— to restore Alex: delete this block and re-add the chatbot.js script tag. -->\n'
-        '<div data-chat-widget data-widget-id="689f4917512e48b4268bf335" data-location-id="wfpdq6XX5uIZUiLrqCSo"></div>'
+        ''
         '<script src="https://widgets.leadconnectorhq.com/loader.js" '
         'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
         'data-widget-id="689f4917512e48b4268bf335" defer></script>\n'

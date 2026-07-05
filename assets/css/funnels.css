@@ -388,10 +388,8 @@ body.lf-page--brnx-es {
 /* ───── hero ───── */
 .lf-hero {
   position: relative; overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(8,10,16,.60) 0%, rgba(8,10,16,.32) 55%, rgba(8,10,16,.42) 100%),
-    url('../img/hero-barber-clinic-2.jpg');
-  background-size: cover; background-position: center 30%;
+  /* The photo now lives in .lf-mhero above; this band holds the form + details on a clean dark surface. */
+  background: #0a1226;
   color: #fff;
   padding: 3.4rem 0;
 }
@@ -1375,100 +1373,133 @@ body.lf-page--brnx-es {
   .lf-hdr__right .lf-phone { display: none; }
 }
 
-/* ───── Mobile-only image hero (lf-mhero) ───── */
-/* Hidden on desktop; full-bleed image with overlaid copy on mobile. */
-.lf-mhero { display: none; }
+/* ───── Image hero (lf-mhero) — photo-first on ALL breakpoints ───── */
+/* Full-bleed image with the headline overlaid at 75% of the image; the lead
+   form + supporting details sit in the .lf-hero band directly below. */
+.lf-mhero {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 76vh;
+  min-height: 600px;
+  max-height: 860px;
+  overflow: hidden;
+  background: #0a1020;
+  isolation: isolate;
+}
+.lf-mhero__bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  z-index: 0;
+  filter: brightness(1.12) contrast(1.05) saturate(1.05);
+}
+.lf-mhero__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(10, 16, 32, .00) 0%,
+      rgba(10, 16, 32, .08) 45%,
+      rgba(10, 16, 32, .60) 100%);
+  z-index: 1;
+}
+.lf-mhero__copy {
+  position: absolute;
+  /* Copy begins at 75% of the hero image height (image occupies the top 75%). */
+  left: 0; right: 0; top: 75%; bottom: auto;
+  z-index: 2;
+  color: #fff;
+  text-align: left;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.2rem clamp(1.2rem, 5vw, 3.2rem) 1.4rem;
+}
+.lf-mhero__kicker {
+  display: block;
+  margin: 0 0 .55rem;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  font-size: clamp(.72rem, 1vw, .92rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
+}
+.lf-mhero__h1 {
+  font-family: 'Oswald', 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.6vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -.01em;
+  margin: 0 0 1.1rem;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .55);
+}
+.lf-mhero__h1 span {
+  display: block;
+  color: var(--lf-accent);
+  font-weight: 600;
+}
+.lf-mhero__h1 em {
+  display: inline-block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: .82em;
+  margin-top: .25em;
+  color: var(--lf-accent);
+  border-bottom: 3px solid var(--lf-accent);
+  padding-bottom: 2px;
+  line-height: 1;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, .55);
+}
+/* Hero CTA is hidden — the lead form sits directly below the photo on every breakpoint. */
+.lf-mhero__cta { display: none; }
+
+/* The photo hero carries the headline — hide the duplicate in the .lf-hero band. */
+.lf-hero__kicker,
+.lf-hero .lf-h1,
+.lf-hero__sub { display: none; }
 
 @media (max-width: 768px) {
+  /* Mobile hero mirrors the abi.edu homepage hero (.hx) EXACTLY: the image is a
+     top band sized by aspect ratio (height = 66.2vw, `top center / cover`), a
+     gradient fades it into the dark section, and the headline begins at ~75% of
+     the image band (content padding-top = 49.6vw). This matches the homepage. */
   .lf-mhero {
-    display: block;
-    position: relative;
-    width: 100%;
-    /* taller hero so the photo stays prominent and the copy begins ~75% down */
-    height: 82vh;
-    min-height: 580px;
+    height: auto;
+    min-height: 66.2vw;
     max-height: none;
-    overflow: hidden;
-    background: #0a1020;
-    isolation: isolate;
+    background: #0a1226;
   }
   .lf-mhero__bg {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    z-index: 0;
-    /* v3.6 — brighten the source image so faces + jackets read clearly on mobile */
-    filter: brightness(1.18) contrast(1.06) saturate(1.06);
+    top: 0; bottom: auto;
+    height: 66.2vw;
+    object-position: top center;
+    filter: none;
   }
-  /* v3.6 — lighter gradient scrim (was .25 → .55 → .85; now much softer)
-     Only the bottom band still darkens enough to keep the H1 + CTA readable */
   .lf-mhero__scrim {
-    position: absolute; inset: 0;
+    top: 0; bottom: auto;
+    height: 66.4vw;
     background:
-      linear-gradient(180deg,
-        rgba(10, 16, 32, .00) 0%,
-        rgba(10, 16, 32, .10) 45%,
-        rgba(10, 16, 32, .55) 100%);
-    z-index: 1;
+      radial-gradient(130% 90% at 15% 100%, rgba(5,8,17,.94) 0%, rgba(5,8,17,.6) 45%, rgba(5,8,17,0) 75%),
+      linear-gradient(180deg, rgba(6,9,18,.05) 0%, rgba(6,9,18,.02) 34%, rgba(6,9,18,.55) 62%, rgba(6,9,18,.94) 86%, #0a1226 100%);
   }
   .lf-mhero__copy {
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    padding: 1.4rem 1.2rem 1.6rem;
-    z-index: 2;
-    color: #fff;
-    text-align: left;
+    position: relative;
+    top: auto; bottom: auto; left: auto; right: auto;
+    max-width: none;
+    margin: 0;
+    /* headline begins at ~75% of the image band, exactly like the homepage */
+    padding: 49.6vw 1.2rem 1.4rem;
   }
-  .lf-mhero__kicker {
-    display: block;
-    margin: 0 0 .55rem;
-    padding: 0;
-    background: transparent;
-    color: #fff;
-    font-size: .72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
-  }
-  .lf-mhero__h1 {
-    font-family: 'Oswald', 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 7.5vw, 2.4rem);
-    line-height: 1.05;
-    letter-spacing: -.01em;
-    margin: 0 0 1rem;
-    color: #fff;
-    text-shadow: 0 2px 24px rgba(0, 0, 0, .55);
-  }
-  .lf-mhero__h1 span {
-    display: block;
-    color: var(--lf-accent);
-    font-weight: 600;
-  }
-  .lf-mhero__h1 em {
-    display: inline-block;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: .82em;
-    margin-top: .25em;
-    color: var(--lf-accent);
-    border-bottom: 3px solid var(--lf-accent);
-    padding-bottom: 2px;
-    line-height: 1;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, .55);
-  }
-  /* "Reserve Your Spot" CTA is hidden on mobile — hero form directly below
-     and the sticky bottom bar already carry the action weight. */
+  .lf-mhero__kicker { font-size: .72rem; }
+  .lf-mhero__h1 { font-size: clamp(1.8rem, 7.5vw, 2.4rem); }
+  /* CTA hidden on mobile — hero form directly below + sticky bottom bar carry the action. */
   .lf-mhero__cta { display: none; }
-  /* The mobile photo hero (lf-mhero) already shows the kicker + H1.
-     Hide them in the dark .lf-hero block to remove the visible duplicate.
-     Sub headline also hidden — message already conveyed in the hero photo. */
-  .lf-hero__kicker,
-  .lf-hero .lf-h1,
-  .lf-hero__sub { display: none; }
   /* Leave room at the bottom for the sticky 3-CTA bar */
   body.lf-page { padding-bottom: 78px; }
 }
@@ -1691,7 +1722,7 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 .lfx-logo{flex-shrink:0;display:inline-flex}
 .lfx-logo img{height:58px;width:auto;display:block}
 .lfx-phones{display:flex;align-items:center;gap:.7rem}
-.lfx-phones--bar{flex:1;justify-content:center;min-width:0}
+.lfx-phones--bar{flex:1;justify-content:space-evenly;min-width:0}
 .lfx-phone{display:inline-flex;align-items:center;gap:.45rem;border:1.8px solid var(--lf-accent);border-radius:999px;padding:.5rem .95rem;color:var(--lf-ink,#10131a);font-weight:800;font-size:.95rem;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s,transform .2s}
 .lfx-phone svg{color:var(--lf-accent);flex-shrink:0}
 .lfx-phone:hover{background:var(--lf-accent);color:var(--lf-on-accent);transform:translateY(-1px)}
@@ -1720,8 +1751,9 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
   .lfx-bar__in{padding:.55rem .7rem;gap:.6rem}
   .lfx-logo img{height:46px}
   .lfx-promo{font-size:.88rem;letter-spacing:.07em;padding:.75rem .8rem .55rem}
-  .lfx-phonerow{display:flex;justify-content:center;align-items:center;gap:.4rem;background:var(--lf-accent);padding:.2rem .5rem .9rem;flex-wrap:nowrap;max-width:100%}
-  .lfx-phonerow .lfx-phone{border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:clamp(.62rem,2.9vw,.85rem);padding:.45rem .55rem;gap:.3rem;min-width:0}
+  .lfx-phonerow{display:flex;justify-content:center;align-items:stretch;gap:.4rem;background:var(--lf-accent);padding:.2rem .5rem .9rem;flex-wrap:nowrap;max-width:100%}
+  /* each phone stretches to an equal share so 2 or 3 numbers fill the row evenly (no empty "third slot") */
+  .lfx-phonerow .lfx-phone{flex:1 1 0;justify-content:center;border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:clamp(.62rem,2.9vw,.85rem);padding:.45rem .55rem;gap:.3rem;min-width:0}
   .lfx-phonerow .lfx-phone svg{color:var(--lf-on-accent);width:13px;height:13px}
   /* mobile: drop the EN/ES/Haircut/Bronx labels so the numbers fit the row */
   .lfx-phonerow .lfx-phone__flag{display:none}
