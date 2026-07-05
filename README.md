@@ -5,7 +5,6 @@ complete marketing website: a fast, zero-framework static site generated from Py
 served on Vercel, in English and Spanish.
 
 - **Live site:** https://abi-website-black.vercel.app
-- **Repository:** https://github.com/kazi-reprime/abi-website
 
 ---
 
