@@ -1352,7 +1352,7 @@ def sec_brandband(p, s, pre):
             '<div class="abi-reel__frame">'
             '<div class="abi-reel__media" data-abi-reel>'
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
-            'src="https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/video-321-whDxhvZ2Qj8xK5QOb3V2j0Q5qt30Sb.mp4" '
+            'src="https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4" '
             'poster="/assets/img/video-321-poster.jpg" '
             'aria-label="ABI student testimonial video"></video>'
             + play_btn +
@@ -1365,7 +1365,7 @@ def sec_brandband(p, s, pre):
             '</div>'
             '<div class="abi-reel__media" data-abi-reel>'
             '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
-            'src="https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/Video-124-zZKO7J0AA7GTeEGtLx5O1GsGAjowBd.mp4" '
+            'src="https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/Video-124.mp4" '
             'poster="/assets/img/video-124-poster.jpg" '
             'aria-label="ABI student testimonial video — second voice"></video>'
             + play_btn +

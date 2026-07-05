@@ -295,9 +295,9 @@ STUDENT_VOICES = {
 # 3 real testimonial clips — Video-321, Video-124, Video-325 (a.k.a. student-voice-3).
 # Videos hosted on Vercel Blob CDN; posters remain in /assets/img/.
 STUDENT_VOICES_VIDEOS = [
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/video-321-whDxhvZ2Qj8xK5QOb3V2j0Q5qt30Sb.mp4", "video-321-poster.jpg"),
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/Video-124-zZKO7J0AA7GTeEGtLx5O1GsGAjowBd.mp4", "video-124-poster.jpg"),
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/student-voice-3-3uA84oAwUQQG6g2VGtSmICKvE9i7hB.mp4", "student-voice-3-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4", "video-321-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/Video-124.mp4", "video-124-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/student-voice-3.mp4", "student-voice-3-poster.jpg"),
 ]
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
@@ -308,9 +308,9 @@ BRONX_EXTRA = {
            "sub": "Tres estudiantes del Bronx comparten el trabajo, la práctica y la confianza que construyeron."},
 }
 BRONX_EXTRA_VIDEOS = [
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/video-321-whDxhvZ2Qj8xK5QOb3V2j0Q5qt30Sb.mp4", "video-321-poster.jpg"),
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/Video-124-zZKO7J0AA7GTeEGtLx5O1GsGAjowBd.mp4", "video-124-poster.jpg"),
-    ("https://9hqbi5ahv464vylt.public.blob.vercel-storage.com/videos/video-321-whDxhvZ2Qj8xK5QOb3V2j0Q5qt30Sb.mp4", "video-321-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4", "video-321-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/Video-124.mp4", "video-124-poster.jpg"),
+    ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4", "video-321-poster.jpg"),
 ]
 
 # ─── Reviews (split per campus; same content for now, swap real Bronx
