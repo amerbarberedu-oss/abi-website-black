@@ -1,59 +1,67 @@
 /* ============================================================
-   ABI — Analytics & Ads integration
+   ABI — Analytics loader
    ------------------------------------------------------------
-   TO ACTIVATE: replace the two placeholder IDs below with your
-   real GA4 Measurement ID and Meta (Facebook) Pixel ID.
-     • GA4:   Admin → Data Streams → Web → "Measurement ID"  (G-XXXXXXXXXX)
-     • Meta:  Events Manager → Data Sources → your Pixel → ID  (15-16 digits)
-   Until real IDs are set, NO external tracking loads (no failed
-   requests) — but conversion events are still wired and will start
-   flowing the moment you add the IDs. Google Ads conversions: link
-   your Google Ads account to GA4 and import these events as goals.
+   ONE dependency: Google Tag Manager container GTM-NKLLGPC.
+   Everything else (GA4 G-J6BNX36TS3, Meta Pixel 580471737041846,
+   Microsoft Clarity k5fxn2irko, CallRail company 169987046,
+   ClickCease, Google Ads AW-949292069 when configured) is managed
+   inside the GTM web UI at tagmanager.google.com — never touch
+   this file to add/remove/tweak tags.
+
+   This file only:
+     1. Boots the GTM container on every page.
+     2. Pushes semantic custom events into dataLayer that the
+        GTM tags listen for:
+          - "phone_click"    → GA4 phone-click conversion
+          - "generate_lead"  → GA4 lead conversion
+        (Trigger names inside GTM: "CE - phone_click", "CE - generate_lead")
    ============================================================ */
 (function () {
-  var GA4_ID = "G-XXXXXXXXXX";   // ← replace with your GA4 Measurement ID
-  var META_PIXEL_ID = "";        // ← replace with your Meta Pixel ID (digits only)
+  var GTM_ID = "GTM-NKLLGPC";
 
-  // dataLayer + gtag shim (always available so events queue safely)
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { window.dataLayer.push(arguments); }
-  window.gtag = window.gtag || gtag;
+  // ---- GTM install (Google's official snippet, inlined) ----
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l !== "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", GTM_ID);
 
-  var gaLive = GA4_ID && GA4_ID.indexOf("XXXX") === -1;
-  var pxLive = !!META_PIXEL_ID;
-
-  // ---- Google Analytics 4 (gtag.js) ----
-  if (gaLive) {
-    var s = document.createElement("script");
-    s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
-    document.head.appendChild(s);
-    gtag("js", new Date());
-    gtag("config", GA4_ID, { anonymize_ip: true });
+  // ---- Custom events wired to existing GTM triggers ----
+  function push(event, extra) {
+    window.dataLayer.push(Object.assign({ event: event }, extra || {}));
   }
 
-  // ---- Meta (Facebook) Pixel ----
-  if (pxLive) {
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
-      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];
-      t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
-    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-    window.fbq("init", META_PIXEL_ID);
-    window.fbq("track", "PageView");
-  }
+  document.addEventListener(
+    "click",
+    function (e) {
+      var a = e.target.closest && e.target.closest("a");
+      if (!a) return;
+      var href = a.getAttribute("href") || "";
+      if (href.indexOf("tel:") === 0) {
+        push("phone_click", { phone_number: href.slice(4) });
+      } else if (href.indexOf("mailto:") === 0) {
+        push("email_click", { email: href.slice(7) });
+      }
+    },
+    true
+  );
 
-  // ---- Conversion event tracking (fires regardless; flows once IDs set) ----
-  function track(name, params) {
-    try { window.gtag("event", name, params || {}); } catch (e) {}
-    try { if (window.fbq) window.fbq("track", name === "lead" ? "Lead" : name === "call" ? "Contact" : "CustomizeProduct"); } catch (e) {}
-  }
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest("a,button"); if (!a) return;
-    var href = a.getAttribute("href") || "", txt = (a.textContent || "").trim().slice(0, 48);
-    if (href.indexOf("tel:") === 0) track("call", { phone: href.replace("tel:", "") });
-    else if (href.indexOf("mailto:") === 0) track("email_click");
-    else if (/apply|reserve|enroll|get (my|info)|start barber|become a barber|request a call/i.test(txt)) track("lead", { cta: txt });
-  }, true);
-  document.addEventListener("submit", function () { track("lead", { source: "form" }); }, true);
+  // Any native <form> submit counts as a lead. GHL iframe forms
+  // won't reach this listener — those need a GHL webhook / thank-you
+  // page dataLayer push to be measured.
+  document.addEventListener(
+    "submit",
+    function (e) {
+      var form = e.target;
+      var id = (form && form.id) || "";
+      var name = (form && form.getAttribute("name")) || "";
+      push("generate_lead", { form_id: id, form_name: name, source: "native_form" });
+    },
+    true
+  );
 })();
