@@ -426,8 +426,9 @@ PLAY_BTN = ('<button class="lf-reel__play" type="button" aria-label="Play video"
             '</button>')
 
 def _reel_media(vid, poster, label):
+    # vid is now a full URL (Vercel Blob CDN); poster remains a filename under /assets/img/.
     return ('<div class="lf-reel__media"><video class="lf-reel__video" muted loop playsinline'
-            ' preload="metadata" src="/assets/videos/%s" poster="/assets/img/%s"'
+            ' preload="metadata" src="%s" poster="/assets/img/%s"'
             ' aria-label="%s"></video>%s</div>' % (h(vid), h(poster), h(label), PLAY_BTN))
 
 
@@ -725,7 +726,7 @@ def page_head(p):
          "description": "Student of the American Barber Institute (ABI) sharing their experience at the " + campus_name + ".",
          "thumbnailUrl": SITE + "/assets/img/" + ps,
          "uploadDate": "2024-09-01",
-         "contentUrl": SITE + "/assets/videos/" + vid,
+         "contentUrl": vid,
          "publisher": {"@type": "Organization", "name": "American Barber Institute",
                        "logo": {"@type": "ImageObject", "url": SITE + LOGO_SRC}}}
         for i, (vid, ps) in enumerate(student_voices_videos)
