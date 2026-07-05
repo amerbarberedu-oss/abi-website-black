@@ -1719,10 +1719,11 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
   .lfx-bar__in{padding:.55rem .7rem;gap:.6rem}
   .lfx-logo img{height:46px}
   .lfx-promo{font-size:.88rem;letter-spacing:.07em;padding:.75rem .8rem .55rem}
-  .lfx-phonerow{display:flex;justify-content:center;align-items:center;gap:.5rem;background:var(--lf-accent);padding:.2rem .8rem .95rem}
-  .lfx-phonerow .lfx-phone{border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:.85rem;padding:.5rem .8rem}
-  .lfx-phonerow .lfx-phone svg{color:var(--lf-on-accent)}
-  .lfx-phonerow .lfx-phone__flag{border-color:currentColor;color:var(--lf-on-accent)}
+  .lfx-phonerow{display:flex;justify-content:center;align-items:center;gap:.4rem;background:var(--lf-accent);padding:.2rem .5rem .9rem;flex-wrap:nowrap;max-width:100%}
+  .lfx-phonerow .lfx-phone{border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:clamp(.62rem,2.9vw,.85rem);padding:.45rem .55rem;gap:.3rem;min-width:0}
+  .lfx-phonerow .lfx-phone svg{color:var(--lf-on-accent);width:13px;height:13px}
+  /* mobile: drop the EN/ES/Haircut/Bronx labels so the numbers fit the row */
+  .lfx-phonerow .lfx-phone__flag{display:none}
   .lfx-seats{padding:.7rem .8rem}
   .lfx-star{width:34px;height:34px}
   .lfx-seats-t b{font-size:.95rem}
@@ -1730,14 +1731,12 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 }
 @media (max-width:400px){
   .lfx-logo img{height:40px}
-  .lfx-phonerow{gap:.4rem}
-  .lfx-phonerow .lfx-phone{font-size:.76rem;padding:.45rem .55rem;gap:.3rem}
+  .lfx-phonerow{gap:.32rem;padding-left:.4rem;padding-right:.4rem}
+  .lfx-phonerow .lfx-phone{padding:.42rem .45rem;gap:.26rem}
   .lfx-phonerow .lfx-phone svg{width:12px;height:12px}
-  .lfx-phonerow .lfx-phone__flag{min-width:24px;height:18px;font-size:.58rem}
 }
 @media (max-width:340px){
-  .lfx-phonerow .lfx-phone{font-size:.7rem;padding:.4rem .45rem}
-  .lfx-phonerow .lfx-phone__flag{display:none}
+  .lfx-phonerow .lfx-phone{padding:.38rem .4rem;gap:.22rem}
 }
 /* v45.1 — wallet chip second line: flexible payment plans */
 .lf-feature__sub{display:block;font-style:normal;font-weight:800;font-size:.86em;letter-spacing:.02em;margin-top:.2rem;color:var(--lf-accent-dark)}
