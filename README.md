@@ -4,7 +4,7 @@ New York's only dedicated barber school (est. 1996). This repository contains th
 complete marketing website: a fast, zero-framework static site generated from Python,
 served on Vercel, in English and Spanish.
 
-- **Live site:** https://abi-website-black.vercel.app
+- **Canonical domain:** https://www.abi.edu (pending DNS cutover) · **Staging:** https://abi-website-black-lime.vercel.app
 
 ---
 
@@ -152,24 +152,22 @@ See **AUDIT-REPORT.md** for the full technical-SEO / accessibility / conversion 
 
 ## 7. Analytics & Ads
 
-`assets/js/analytics.js` is a consent-light loader wired site-wide for:
+`assets/js/analytics.js` is a **single consent-aware loader** that boots one
+container — **Google Tag Manager `GTM-NKLLGPC`**. GA4 (`G-J6BNX36TS3`), Meta
+Pixel, Microsoft Clarity, CallRail, ClickCease and Google Ads (`AW-949292069`)
+are all managed **inside the GTM web UI** — do not add/remove those tags in code.
 
-- **Google Analytics 4** (basis for **Google Ads** conversion import), and
-- **Meta (Facebook) Pixel** (for **Meta Ads** conversions / retargeting).
+What the file does:
+- Sets **Google Consent Mode v2** defaults before GTM loads (EEA/UK denied-by-default,
+  US granted with opt-out), and injects an accessible **cookie-consent banner**.
+- Pushes semantic events into `dataLayer` for GTM triggers: `generate_lead`
+  (form submits), `phone_click` (`tel:` taps), `email_click` (`mailto:`).
+- Captures GoHighLevel iframe leads via a `postMessage` listener **and** the
+  `/thank-you` & `/gracias` pages (GHL forms redirect there on submit).
 
-It fires conversion events automatically — `lead` on form submits and enroll/apply
-clicks, `call` on `tel:` taps. **Tracking only activates once real IDs are entered** (no
-stray requests before then).
-
-**To turn it on:** open `assets/js/analytics.js` and set:
-
-```js
-var GA4_ID = "G-XXXXXXXXXX";   // GA4 → Admin → Data Streams → Web → Measurement ID
-var META_PIXEL_ID = "";         // Meta Events Manager → your Pixel → ID (digits only)
-```
-
-Then rebuild & deploy. For Google Ads, link the GA4 property and import the `lead`/`call`
-events as conversions; for Meta Ads, the Pixel's `Lead`/`Contact` events appear in Events Manager.
+**To wire conversions:** in GTM create triggers `CE - generate_lead` and
+`CE - phone_click`, map them to GA4 / Google Ads / Meta, and publish. No code
+change is needed to add or edit tags.
 
 ---
 
