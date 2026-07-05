@@ -25,7 +25,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import data as D
 
-SITE = "https://abi-website-black.vercel.app"
+SITE = "https://www.abi.edu"
 CSS_V = "48"
 JS_V  = "14"
 
@@ -601,11 +601,17 @@ def footer(p):
         '  <p class="lf-footer__addr">%s%s · <a href="tel:%s">%s</a></p>\n'
         '  <div class="lf-footer__socials">%s</div>\n'
         '  <p class="lf-footer__fine">%s</p>\n'
+        '  <p class="lf-footer__fine lf-footer__priv">%s</p>\n'
         '</div></footer>\n'
     ) % (
         h(ft["h"]), h(ft["sub"]),
         svg("pin", 14), h(addr), h(p["phone"][2]), h(p["phone"][1]),
         socials, h(ft["fine"]),
+        ('<a href="/privacy-and-policy">Pol&iacute;tica de Privacidad</a> &middot; '
+         '<a href="/privacy-and-policy" data-abi-privacy-choices>No vender ni compartir mi informaci&oacute;n personal</a>'
+         if p["lang"] == "es" else
+         '<a href="/privacy-and-policy">Privacy Policy</a> &middot; '
+         '<a href="/privacy-and-policy" data-abi-privacy-choices>Do Not Sell or Share My Personal Information</a>'),
     )
 
 
@@ -774,11 +780,13 @@ def page_head(p):
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
+'<script src="/assets/js/analytics.js?v=2" defer></script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
+'<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
         "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
-        "site": SITE, "oglocale": "es_ES" if es else "en_US", "cssv": CSS_V,
+        "site": SITE, "oglocale": "es_US" if es else "en_US", "cssv": CSS_V,
         "mhero_bg": MHERO_BG_BY_PAGE[(p["campus"]["slug"], p["lang"])],
         "ld_scripts": "".join(
             '<script type="application/ld+json">%s</script>\n' % json.dumps(b, ensure_ascii=False)

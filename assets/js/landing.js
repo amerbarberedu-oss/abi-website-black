@@ -119,8 +119,8 @@
         form.style.display = 'none';
         var ok = form.parentElement.querySelector('.form-success');
         if (ok) ok.classList.add('show');
-        try { if (window.gtag) gtag('event', 'generate_lead'); } catch (e) {}
-        try { if (window.fbq) fbq('track', 'Lead'); } catch (e) {}
+        // GTM-based tracking: push to dataLayer (GTM tags handle GA4/Ads/Meta).
+        try { (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', source: 'native_form' }); } catch (e) {}
       }).catch(function () {
         btn.disabled = false;
         btn.textContent = LANG === 'es' ? 'ENVIAR' : 'SUBMIT';

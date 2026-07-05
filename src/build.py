@@ -7,7 +7,7 @@ import json, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src', 'pages')
-SITE_URL = 'https://abi-website-black.vercel.app'
+SITE_URL = 'https://www.abi.edu'
 
 # ── Next class date (first Monday of upcoming month), computed at build time ──
 def _next_first_monday():
@@ -72,12 +72,13 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/landing.css?v=148">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
-<script src="{root}assets/js/analytics.js?v=1" defer></script>
+<script src="{root}assets/js/analytics.js?v=2" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 {schema}
 </head>
 <body class="mhx-on" style="--page-bg:url('/assets/img/{pagebg}')">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <div class="abi-deco" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
@@ -192,6 +193,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="foot-legal">
     <div class="wrap">
       <div>© <span id="yr"></span> American Barber Institute (ABI). All rights reserved.</div>
+      <div class="foot-legal-links"><a href="/privacy-and-policy">Privacy Policy</a> · <a href="/privacy-and-policy" data-abi-privacy-choices>Do Not Sell or Share My Personal Information</a></div>
       <div>GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA). Info: <a href="https://www.benefits.va.gov/gibill" rel="noopener">benefits.va.gov/gibill</a></div>
     </div>
   </div>
@@ -344,8 +346,6 @@ ORG_SCHEMA = {
     "accreditedBy": {"@type": "Organization", "name": "New York State Department of Education",
                      "url": "https://www.nysed.gov/"},
     "memberOf": {"@type": "Organization", "name": "American Association of Cosmetology Schools"},
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.6",
-                        "reviewCount": "100", "bestRating": "5", "worstRating": "1"},
     "priceRange": "$$",
     "paymentAccepted": ["Cash", "Credit Card", "Financial Aid", "GI Bill", "ACCES-VR"],
     "currenciesAccepted": "USD"
@@ -404,7 +404,7 @@ def article_schema(title, url, slug=None, body=None, date="2024-02-01"):
         "isPartOf": {"@type": "Blog", "name": "American Barber Institute Blog",
                      "url": SITE_URL + "/blog/"},
         "datePublished": date,
-        "dateModified": date,
+        "dateModified": "2026-07-05",
         "image": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/og-cover.jpg",
                   "width": 1200, "height": 630},
         "author": {
@@ -944,7 +944,7 @@ def build():
     # robots.txt — explicitly invite AI / answer-engine crawlers so ABI can be
     # cited confidently by ChatGPT, Claude, Perplexity, Google AI Overviews, etc.
     open(os.path.join(ROOT, 'robots.txt'), 'w').write(
-        'User-agent: *\nAllow: /\n\n'
+        'User-agent: *\nAllow: /\nDisallow: /src/\nDisallow: /docs/\nDisallow: /_archive/\n\n'
         # OpenAI
         'User-agent: GPTBot\nAllow: /\n\n'
         'User-agent: OAI-SearchBot\nAllow: /\n\n'
@@ -970,8 +970,6 @@ def build():
         'User-agent: Bingbot\nAllow: /\n\n'
         # DuckAssist
         'User-agent: DuckAssistBot\nAllow: /\n\n'
-        # Disallow non-indexable internals
-        'User-agent: *\nDisallow: /src/\nDisallow: /docs/\nDisallow: /_archive/\n\n'
         f'Sitemap: {SITE_URL}/sitemap.xml\n')
     print(f'built {len(written)} pages + sitemap.xml + robots.txt')
 

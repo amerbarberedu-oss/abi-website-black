@@ -6,3 +6,7 @@ screenshot
 *.pptx
 *.pdf
 .DS_Store
+landing-funnels/src
+**/__pycache__
+.env
+.env.*

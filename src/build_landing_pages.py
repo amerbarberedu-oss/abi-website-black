@@ -6,7 +6,7 @@ Run: python3 build.py   → writes pages next to this script.
 import os, json, datetime, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://abi-website-black.vercel.app"
+SITE = "https://www.abi.edu"
 
 # Rewrite internal links foo.html → /foo so they match canonical clean URLs
 # (Vercel cleanUrls:true otherwise 308-redirects every .html link).
@@ -575,11 +575,12 @@ def head(p, s, pre):
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="%sassets/css/landing.css?v=123">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
-<script src="/assets/js/analytics.js?v=1" defer></script>
+<script src="/assets/js/analytics.js?v=2" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
 %s
 </head>
 <body class="page-%s">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <div class="abi-deco" aria-hidden="true"></div>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
              p["title"], p["desc"], SITE, p["url"],
              ("es_ES" if p["lang"] == "es" else "en_US"), SITE,

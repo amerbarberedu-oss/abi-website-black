@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /src/
+Disallow: /docs/
+Disallow: /_archive/
 
 User-agent: GPTBot
 Allow: /
@@ -52,9 +55,4 @@ Allow: /
 User-agent: DuckAssistBot
 Allow: /
 
-User-agent: *
-Disallow: /src/
-Disallow: /docs/
-Disallow: /_archive/
-
-Sitemap: https://abi-website-black.vercel.app/sitemap.xml
+Sitemap: https://www.abi.edu/sitemap.xml

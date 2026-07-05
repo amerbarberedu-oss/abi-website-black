@@ -683,7 +683,7 @@ body.lf-page--brnx-es {
 .lf-review__role { color: var(--lf-soft-ink); font-size: .8rem; }
 
 /* ───── gallery — v3.4: lifted EXACTLY from main marketing site's `.gal`
-   pattern (https://abi-website-black.vercel.app/). 4-up on desktop,
+   pattern (https://www.abi.edu/). 4-up on desktop,
    2-up on mobile (≤840px). Images are 4:3, scale gently on hover.   ───── */
 .lf-gallery {
   display: grid;
@@ -1118,7 +1118,7 @@ body.lf-page--brnx-es {
 }
 
 /* ===================================================================
-   MOBILE PARITY PASS — match abi-website-black.vercel.app mobile design
+   MOBILE PARITY PASS — match www.abi.edu mobile design
    Affects only screens ≤ 768px. Desktop layout unchanged.
    =================================================================== */
 
