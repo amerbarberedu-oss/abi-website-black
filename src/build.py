@@ -557,6 +557,11 @@ PAGES = [
      "$3 Student Haircuts — Manhattan & Bronx | American Barber Institute",
      "Great cuts for $3 at ABI. Student barbers supervised by licensed instructors at our Manhattan and Bronx locations. Fades, tapers, beard trims and more.",
      "en", []),
+    # Hidden SEO page (not in nav) — targets "$7 / cheap haircut NYC" intent
+    ("7-dollar-haircut-nyc.html", "7-dollar-haircut-nyc.html",
+     "$7 Haircuts in NYC — Manhattan & Bronx | American Barber Institute",
+     "Get a $7 haircut, fade, lineup or beard trim from supervised student barbers at the American Barber Institute in Midtown Manhattan (48 W 39th St) and the Bronx (121 Westchester Sq). Walk-ins welcome 7 days a week.",
+     "en", []),
     ("faq.html", "faq.html",
      "Frequently Asked Questions | American Barber Institute",
      "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
