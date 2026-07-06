@@ -4,7 +4,41 @@ New York's only dedicated barber school (est. 1996). This repository contains th
 complete marketing website: a fast, zero-framework static site generated from Python,
 served on Vercel, in English and Spanish.
 
-- **Canonical domain:** https://www.abi.edu (pending DNS cutover) · **Staging:** https://abi-website-black-lime.vercel.app
+- **Canonical domain:** https://www.abi.edu (**LIVE** since 2026-07-05) · **Staging:** https://abi-website-black-lime.vercel.app
+- **Current release:** 0.2.0 (2026-07-07) — see [`CHANGELOG.md`](CHANGELOG.md)
+
+---
+
+## 0. Recent changes at a glance (0.2.0)
+
+Everything on the site now routes by campus context — a Manhattan visitor sees
+the Manhattan location + Manhattan Google reviews, a Bronx visitor sees the
+Bronx equivalents.
+
+- Two new campus-specific programs pages: `/programs/manhattan` and
+  `/programs/bronx` (each showing only that campus's offerings) + full ES
+  twins. The 50-Hour Barber Refresher is Manhattan-only and is hidden from
+  the Bronx page automatically.
+- `assets/js/campus.js` (v2) rewrites the "Programs" nav link at load time
+  to the campus the visitor is currently in, and re-routes the MN ↔ BX
+  toggle to the other campus's programs page when a visitor is on a
+  Programs page.
+- Homepage `/` now has a "Find Us" section with the Manhattan Google map;
+  `/bronx` already had the same for the Bronx campus.
+- Every "See on Google" CTA goes to the correct campus's Google Business
+  Profile — Manhattan short URL `maps.app.goo.gl/42UjD6bFQ65NEt1E7`, Bronx
+  short URL `maps.app.goo.gl/9TJJh8ehUjSZ8kcaA`.
+- Homepage mobile hero reorders so the contact form appears immediately
+  after the "500 Hour" tagline, before the chips and countdown.
+- Phone chip rows (`.mhx-phones`) and landing hero chips (`.lf-features`)
+  now use a fill-evenly flex/grid layout — no more empty slots when there
+  are 2 chips instead of 3, and no more crammed 3-column grid on mobile
+  landings.
+- **Preview-first workflow:** all changes ship first to a
+  `preview/*` branch (Vercel preview URL) for client approval, then merge
+  to `main`, which auto-deploys prod.
+
+Full detail in [`CHANGELOG.md`](CHANGELOG.md).
 
 ---
 

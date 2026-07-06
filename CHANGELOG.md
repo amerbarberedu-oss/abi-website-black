@@ -6,7 +6,70 @@ the **0.x** range throughout the upgrade cycle; the move to **1.0.0** happens on
 when the client approves the official production release.
 
 ## [Unreleased]
-_Work in progress toward 0.2.0._
+
+## [0.2.0] — 2026-07-07
+
+Campus-context release: every location, map, review CTA and Programs nav link
+now routes to the correct campus (Manhattan vs Bronx). Homepage mobile hero
+promotes the contact form. Landing pages match the website's chip alignment.
+
+### Added
+- **Campus-specific Programs pages** — new `programs/manhattan.html`
+  (Master Barber + 50-Hour Refresher + Contagious Diseases) and
+  `programs/bronx.html` (Master Barber + Contagious Diseases only). Full ES
+  twins under `/es/programs/manhattan` and `/es/programs/bronx`. Listed in
+  sitemap; reachable from the general programs index.
+- **Campus-aware Programs nav** — `assets/js/campus.js` v2 rewrites every
+  `Programs` nav link at load time to the campus the visitor is in
+  (Manhattan by default; Bronx if the visitor is on a Bronx page or has
+  previously toggled BX). Toggling MN ↔ BX while viewing a Programs page
+  navigates directly to the other campus's Programs page (not back to the
+  campus home).
+- **Homepage "Find Us" section** — mirrors the Bronx page: embedded Google
+  map of the Manhattan campus at 48 West 39th Street plus a "See campus on
+  Google" CTA linking to the Manhattan Business Profile. Same section
+  translated on `/es/`.
+- **Per-campus Google Business Profile routing** — every location CTA on
+  Manhattan-context pages links to `maps.app.goo.gl/42UjD6bFQ65NEt1E7`;
+  every location CTA on Bronx-context pages links to
+  `maps.app.goo.gl/9TJJh8ehUjSZ8kcaA`.
+- **Hidden `$7 haircut` SEO page** — `/7-dollar-haircut-nyc` + ES twin
+  (unique content targeting "$7 / cheap haircut NYC"). Crawlable via the
+  sitemap; not linked in navigation.
+
+### Changed
+- **Homepage mobile order** — the GHL contact form appears immediately
+  after the "500 Hour" hero (H1 + tagline), before the feature chips and
+  countdown. Priority on mobile: contact box > image > text.
+- **Phone-chip spacing** — `.mhx-phones` switched from a fixed 3-column
+  grid to a flex row that auto-fills whatever number of chips are present
+  (1, 2 or 3). Two chips fill evenly; three chips fill evenly; no empty
+  slot ever shows.
+- **Landing hero chip alignment** — `.lf-features` uses a 3-column uniform
+  grid on desktop (matches website `.hx-chips`) and a stacked full-width
+  flex column on mobile. The "Financial Assistance — ACCES-VR, VA"
+  multi-line chip now uses the same bold + smaller-italic structure as
+  the website's `.hx-chip--fin`.
+- **Bronx page review badge** — replaced the misleading "4.6★ / 100+
+  Google reviews" (that number belongs to the Manhattan listing) with a
+  Bronx-focused CTA linking to the Bronx Business Profile.
+
+### Fixed
+- `/es/manhattan` was returning 404 — added a rewrite to `/es/` so it
+  mirrors `/manhattan` → `/`.
+- Mobile hero reorder selector bug — `.hx-in > .hx-h1` required a direct
+  DOM child, but `.hx-h1` is a grandchild through `.hx-copy`
+  (`display:contents`). Switched to `.hx-copy > .hx-h1` so the CSS
+  `order` values actually apply.
+- Landing chips crammed into a 3-column grid on 375px viewports because
+  the desktop `display:grid` rule cascaded into mobile. Mobile now
+  explicitly resets to `display:flex; grid-template-columns:none;`.
+
+### Workflow
+- **Preview-first deploy rule** — every future change first ships to a
+  preview branch (Vercel preview URL) for client approval, then merges to
+  `main`, which auto-deploys prod. Direct pushes to `main` are avoided.
+- `landing.css` v151; `funnels.css` v56; `campus.js` v2.
 
 ## [0.1.0] — 2026-06-18
 Baseline for the production upgrade cycle — the full current site, handover-ready.

@@ -474,6 +474,10 @@
       "destination": "/"
     },
     {
+      "source": "/es/manhattan",
+      "destination": "/es/"
+    },
+    {
       "source": "/home",
       "destination": "/"
     },
