@@ -556,18 +556,16 @@ EARNINGS_NOTE = {
 
 
 # ─── Promo topbar — phone chips per campus ───────────────────────────
-# Every landing page shows 3 chips with Haircut ALWAYS in the middle;
-# the label (English / Haircut / Spanish) sits BELOW each number.
+# Landing pages: NO haircut number. Manhattan = 2 chips (English + Spanish),
+# Bronx = 1 chip. The row auto-fills 1/2 chips (flex:1 1 0) with no empty slot;
+# labels sit BELOW each number.
 TOPBAR_PHONES_BY_CAMPUS = {
     "manhattan": [
         {"label": "English", "display": "(212) 290-2289", "tel": "+12122902289"},
-        {"label": "Haircut", "display": "(856) 316-1551", "tel": "+18563161551"},
         {"label": "Spanish", "display": "(212) 290-0278", "tel": "+12122900278"},
     ],
     "bronx": [
-        {"label": "English", "display": "(718) 676-0640", "tel": "+17186760640"},
-        {"label": "Haircut", "display": "(856) 316-1551", "tel": "+18563161551"},
-        {"label": "Spanish", "display": "(212) 290-0278", "tel": "+12122900278"},
+        {"label": "Call Us", "display": "(718) 676-0640", "tel": "+17186760640"},
     ],
 }
 

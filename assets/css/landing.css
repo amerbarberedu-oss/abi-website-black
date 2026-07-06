@@ -2612,6 +2612,8 @@ video{background-color:#1a1f2e}
 .site-seats__dot{display:none!important}
 /* kill ANY decoration that could render as a dot inside the phone boxes —
    no pseudo-elements, no injected children besides number + label, no animations */
+/* Haircut page (body.no-mhx-phones): hide the multi-number header row — the haircut number is already in the page body */
+body.no-mhx-phones .mhx-phones{display:none!important}
 .mhx-phone{overflow:hidden;position:relative}
 .mhx-phone::before,.mhx-phone::after,
 .mhx-num::before,.mhx-num::after,

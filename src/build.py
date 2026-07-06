@@ -70,14 +70,14 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=148">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=149">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=3" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 {schema}
 </head>
-<body class="mhx-on" style="--page-bg:url('/assets/img/{pagebg}')">
+<body class="mhx-on{mhxclass}" style="--page-bg:url('/assets/img/{pagebg}')">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <div class="abi-deco" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
@@ -922,6 +922,7 @@ def build():
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
             pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
+            mhxclass=(' no-mhx-phones' if out.replace('es/', '') == 'haircuts.html' else ''),
             root=root, body=body, schema=schema_tags, langtoggle=langtoggle,
             hreflang_block=hreflang_block,
             nav_main=nav_main, nav_drawer=nav_drawer,
