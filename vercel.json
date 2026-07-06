@@ -286,6 +286,76 @@
       "source": "/resources/:path+",
       "destination": "/resources",
       "permanent": true
+    },
+    {
+      "source": "/es/courses/500-hour-master-barber",
+      "destination": "/es/programs/500-hour-master-barber",
+      "permanent": true
+    },
+    {
+      "source": "/es/courses/540-hour-master-barber-bronx",
+      "destination": "/es/programs/500-hour-master-barber-bronx",
+      "permanent": true
+    },
+    {
+      "source": "/es/courses/50-hour-barber-refresher",
+      "destination": "/es/programs/50-hour-barber-refresher",
+      "permanent": true
+    },
+    {
+      "source": "/es/courses/3-hour-contagious-diseases",
+      "destination": "/es/programs/contagious-diseases",
+      "permanent": true
+    },
+    {
+      "source": "/es/courses/:path+",
+      "destination": "/es/programs",
+      "permanent": true
+    },
+    {
+      "source": "/es/about/:path+",
+      "destination": "/es/about",
+      "permanent": true
+    },
+    {
+      "source": "/es/resources/:path+",
+      "destination": "/es/resources",
+      "permanent": true
+    },
+    {
+      "source": "/spanish",
+      "destination": "/es",
+      "permanent": true
+    },
+    {
+      "source": "/spanish/:path*",
+      "destination": "/es",
+      "permanent": true
+    },
+    {
+      "source": "/7-dollars-haircut",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/7-dollar-haircut",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/3-dollars-haircut",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/3-dollar-haircut",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/acces-vr-program",
+      "destination": "/access-vr-program",
+      "permanent": true
     }
   ],
   "rewrites": [
