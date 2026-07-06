@@ -290,7 +290,9 @@ def section_about(p):
     # Keep only campus name + address + phone in the side card.
     map_q = quote("American Barber Institute, " + p["campus"]["addr_full_en"])
     map_src = "https://www.google.com/maps?q=%s&amp;z=16&amp;output=embed" % map_q
-    reviews_href = "https://www.google.com/maps/search/?api=1&amp;query=%s" % map_q
+    # Use the client-provided Google listing short URL so the CTA lands on THIS campus's
+    # real Google Business Profile (with real reviews), not a generic Maps search.
+    reviews_href = p["campus"]["google_listing_url"]
     reviews_label = "Ver nuestras reseñas de Google →" if p["lang"] == "es" else "Read our Google reviews →"
     return (
         '<section class="lf-section lf-section--alt"><div class="lf-wrap">%s\n'
