@@ -800,7 +800,7 @@ SCISSORS_I = '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x
 def mobile_cta_bar(p):
     es = p["lang"] == "es"
     tel = p["phone"][2]            # +1XXXXXXXXXX
-    sms_target = "+19295888448"    # Text Us -> GHL AI number (auto-replies live)
+    sms_target = "+19295888448?&body=Hi%2C%20how%20are%20you%3F"  # Text Us -> GHL AI, prefilled body
     labels = {
         "call":  "Llamar" if es else "Call Now",
         "text":  "Mensaje" if es else "Text Us",
