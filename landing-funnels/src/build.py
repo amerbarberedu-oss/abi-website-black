@@ -26,7 +26,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "52"
+CSS_V = "53"
 JS_V  = "15"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -104,9 +104,10 @@ def header(p):
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
     campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
     pills = "".join(
-        '<a class="lfx-phone" href="tel:%s">%s<b class="lfx-phone__flag">%s</b>'
-        '<span class="lfx-phone__num">%s</span></a>' % (
-            h(ph["tel"]), svg("phone", 15), h(ph["label"]), h(ph["display"])
+        '<a class="lfx-phone" href="tel:%s">'
+        '<span class="lfx-phone__num">%s</span>'
+        '<span class="lfx-phone__lab">%s%s</span></a>' % (
+            h(ph["tel"]), h(ph["display"]), svg("phone", 12), h(ph["label"])
         )
         for ph in campus_phones
     )
@@ -839,6 +840,7 @@ def page_tail():
         '<script src="https://widgets.leadconnectorhq.com/loader.js" '
         'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
         'data-widget-id="689f4917512e48b4268bf335"></script>\n'
+        '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget,.lc_text-widget--bubble{bottom:150px!important;right:12px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
         '</body>\n</html>\n'
     ) % (JS_V,)
 

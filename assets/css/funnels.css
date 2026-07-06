@@ -1723,13 +1723,14 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 .lfx-logo img{height:58px;width:auto;display:block}
 .lfx-phones{display:flex;align-items:center;gap:.7rem}
 .lfx-phones--bar{flex:1;justify-content:space-evenly;min-width:0}
-.lfx-phone{display:inline-flex;align-items:center;gap:.45rem;border:1.8px solid var(--lf-accent);border-radius:999px;padding:.5rem .95rem;color:var(--lf-ink,#10131a);font-weight:800;font-size:.95rem;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+.lfx-phone{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:.14rem;border:1.8px solid var(--lf-accent);border-radius:14px;padding:.42rem .9rem;color:var(--lf-ink,#10131a);font-weight:800;font-size:.95rem;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s,transform .2s}
 .lfx-phone svg{color:var(--lf-accent);flex-shrink:0}
 .lfx-phone:hover{background:var(--lf-accent);color:var(--lf-on-accent);transform:translateY(-1px)}
 .lfx-phone:hover svg{color:var(--lf-on-accent)}
-.lfx-phone__flag{display:inline-grid;place-items:center;min-width:30px;height:21px;padding:0 .35rem;border:1.6px solid var(--lf-accent);border-radius:6px;font-size:.66rem;font-weight:900;letter-spacing:.05em;color:var(--lf-accent)}
-.lfx-phone:hover .lfx-phone__flag{border-color:var(--lf-on-accent);color:var(--lf-on-accent)}
-.lfx-phone__num{font-variant-numeric:tabular-nums}
+.lfx-phone__num{font-variant-numeric:tabular-nums;font-size:.95rem;line-height:1.15}
+.lfx-phone__lab{display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--lf-accent);line-height:1}
+.lfx-phone__lab svg{width:11px;height:11px}
+.lfx-phone:hover .lfx-phone__lab{color:var(--lf-on-accent)}
 .lfx-lang{flex-shrink:0;margin-left:auto}
 .lfx-promo{background:var(--lf-accent);color:var(--lf-on-accent);text-align:center;font-weight:800;font-size:clamp(.92rem,1.6vw,1.25rem);letter-spacing:.1em;text-transform:uppercase;line-height:1.45;padding:.85rem 1rem}
 .lfx-promo b{font-weight:900;color:var(--lf-accent-soft)}
@@ -1753,10 +1754,11 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
   .lfx-promo{font-size:.88rem;letter-spacing:.07em;padding:.75rem .8rem .55rem}
   .lfx-phonerow{display:flex;justify-content:center;align-items:stretch;gap:.4rem;background:var(--lf-accent);padding:.2rem .5rem .9rem;flex-wrap:nowrap;max-width:100%}
   /* each phone stretches to an equal share so 2 or 3 numbers fill the row evenly (no empty "third slot") */
-  .lfx-phonerow .lfx-phone{flex:1 1 0;justify-content:center;border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);font-size:clamp(.62rem,2.9vw,.85rem);padding:.45rem .55rem;gap:.3rem;min-width:0}
-  .lfx-phonerow .lfx-phone svg{color:var(--lf-on-accent);width:13px;height:13px}
-  /* mobile: drop the EN/ES/Haircut/Bronx labels so the numbers fit the row */
-  .lfx-phonerow .lfx-phone__flag{display:none}
+  .lfx-phonerow .lfx-phone{flex:1 1 0;justify-content:center;border:2px solid color-mix(in srgb,var(--lf-on-accent) 72%,transparent);color:var(--lf-on-accent);background:rgba(0,0,0,.16);padding:.4rem .35rem;gap:.16rem;min-width:0}
+  /* mobile: number on top, label (English / Haircut / Spanish) stays visible BELOW it */
+  .lfx-phonerow .lfx-phone__num{font-size:clamp(.6rem,2.7vw,.82rem)}
+  .lfx-phonerow .lfx-phone__lab{color:var(--lf-on-accent);font-size:clamp(.48rem,2.1vw,.6rem);gap:.14rem}
+  .lfx-phonerow .lfx-phone__lab svg{width:9px;height:9px;color:var(--lf-on-accent)}
   .lfx-seats{padding:.7rem .8rem}
   .lfx-star{width:34px;height:34px}
   .lfx-seats-t b{font-size:.95rem}
