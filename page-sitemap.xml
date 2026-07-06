@@ -423,6 +423,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.abi.edu/es/programs/bronx</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.abi.edu/es/programs/contagious-diseases</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -430,6 +436,12 @@
   </url>
   <url>
     <loc>https://www.abi.edu/es/programs</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.abi.edu/es/programs/manhattan</loc>
     <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

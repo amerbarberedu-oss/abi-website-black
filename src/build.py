@@ -70,7 +70,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=32">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=149">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=150">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=3" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
@@ -590,6 +590,14 @@ PAGES = [
      "Barber Programs in NYC | American Barber Institute",
      "ABI's NYS-licensed barber programs at our Manhattan & Bronx campuses: 500-Hour Master Barber, 50-Hour Barber Refresher (Manhattan campus only) and the 3-Hour Contagious Diseases course.",
      "en", []),
+    ("programs/manhattan.html", "programs-manhattan.html",
+     "Manhattan Campus Programs | American Barber Institute",
+     "Every program at ABI's Midtown Manhattan campus (48 West 39th Street): 500-Hour Master Barber, 50-Hour Barber Refresher (Manhattan only) and 3-Hour Contagious Diseases — NYSED-approved with weekly payment plans.",
+     "en", []),
+    ("programs/bronx.html", "programs-bronx.html",
+     "Bronx Campus Programs | American Barber Institute",
+     "Every program at ABI's Bronx campus (121 Westchester Square, by the 6 train): 500-Hour Master Barber and 3-Hour Contagious Diseases — NYSED-approved with weekly payment plans.",
+     "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
      "500-Hour Master Barber Program — Manhattan | ABI NYC",
      "Become a licensed Master Barber in 4 months at our Manhattan campus. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans.",
@@ -762,6 +770,8 @@ PAGE_BG = {
     'faq.html': 'gallery/cut-09.jpg', 'contact.html': 'gallery/shop-04.jpg', 'partners.html': 'gallery/grp-04.jpg',
     'resources.html': 'gallery/team-05.jpg', 'haircuts.html': 'gallery/cut-01.jpg',
     'programs/index.html': 'gallery/cut-13.jpg',
+    'programs/manhattan.html': 'gallery/cut-22.jpg',
+    'programs/bronx.html': 'gallery/grp-05.jpg',
     'programs/500-hour-master-barber.html': 'gallery/cut-22.jpg',
     'programs/500-hour-master-barber-bronx.html': 'gallery/grp-05.jpg',
     'programs/50-hour-barber-refresher.html': 'gallery/cut-18.jpg',

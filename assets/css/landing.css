@@ -2573,9 +2573,9 @@ video{background-color:#1a1f2e}
   body.mhx-on .mhx{display:block;background:var(--blue,#1b2fd9);padding:.6rem .75rem 0;color:#fff}
   .mhx-promo{text-align:center;font-weight:800;font-size:.9rem;letter-spacing:.07em;text-transform:uppercase;line-height:1.45;padding:.1rem .2rem .65rem}
   .mhx-promo b{color:#ffd35c;font-weight:900}
-  /* three pills in ONE row on every mobile width — row 1 = number, row 2 = icon + word */
-  .mhx-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:520px;margin:0 auto;padding-bottom:.85rem}
-  .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:45px;padding:.4rem .12rem;border:1.6px solid rgba(255,255,255,.85);border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.24));box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
+  /* phone pills in ONE row on every mobile width — flex adapts to 1/2/3 chips with no empty slot */
+  .mhx-phones{display:flex;flex-wrap:nowrap;justify-content:center;align-items:stretch;gap:6px;max-width:520px;margin:0 auto;padding-bottom:.85rem}
+  .mhx-phone{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:45px;padding:.4rem .12rem;border:1.6px solid rgba(255,255,255,.85);border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.24));box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
   .mhx-phone:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.18);color:#fff}
   .mhx-num{text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0;font-size:.72rem;line-height:1.2}
   .mhx-lab{display:inline-flex;align-items:center;gap:4px;font-size:.54rem;font-weight:900;letter-spacing:.12em;color:#ffd35c;line-height:1;text-transform:uppercase}
@@ -2684,8 +2684,8 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   body.mhx-on .mhx-seats{position:relative;z-index:2}
   body.mhx-on .mhx-promo{text-align:center;font-weight:800;font-size:clamp(1.1rem,2vw,1.6rem);letter-spacing:.12em;text-transform:uppercase;line-height:1.4;padding:.2rem .5rem 1.15rem;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.25)}
   body.mhx-on .mhx-promo b{color:#ffd35c;font-weight:900}
-  body.mhx-on .mhx-phones{display:grid;grid-template-columns:repeat(3,minmax(230px,330px));justify-content:center;gap:clamp(16px,2.4vw,30px);padding-bottom:1.35rem}
-  body.mhx-on .mhx-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:70px;padding:.7rem .8rem;border:2px solid rgba(255,255,255,.85);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(0,0,0,.26));box-shadow:0 4px 14px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.2);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
+  body.mhx-on .mhx-phones{display:flex;flex-wrap:nowrap;justify-content:center;align-items:stretch;max-width:100%;gap:clamp(16px,2.4vw,30px);padding-bottom:1.35rem}
+  body.mhx-on .mhx-phone{flex:1 1 230px;max-width:330px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:70px;padding:.7rem .8rem;border:2px solid rgba(255,255,255,.85);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(0,0,0,.26));box-shadow:0 4px 14px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.2);color:#fff;font-weight:800;white-space:nowrap;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
   body.mhx-on .mhx-phone:hover{transform:translateY(-3px);background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.2));box-shadow:0 10px 24px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.2);color:#fff}
   body.mhx-on .mhx-num{font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.2;font-variant-numeric:tabular-nums}
   body.mhx-on .mhx-lab{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:900;letter-spacing:.18em;color:#ffd35c;line-height:1;text-transform:uppercase}
@@ -2756,7 +2756,13 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .hx-chips{grid-template-columns:1fr;gap:.6rem;max-width:none}
   .hx-next{grid-template-columns:1fr;row-gap:.9rem;max-width:none;margin-top:1rem}
   .hx-cells{grid-template-columns:repeat(4,1fr)}
-  .hx-in .formcard{margin-top:1.6rem}
+  /* v150 — CONTACT BOX PRIORITY on mobile: promote formcard right after the 500-hour headline+sub, before chips/countdown */
+  .hx-copy{display:contents}
+  .hx-in > .hx-h1{order:1}
+  .hx-in > .hx-sub{order:2;margin-bottom:.3rem}
+  .hx-in > .formcard{order:3;margin-top:1rem;margin-bottom:.4rem;scroll-margin-top:72px}
+  .hx-in > .hx-chips{order:4;margin-top:1.2rem}
+  .hx-in > .hx-next{order:5}
 }
 
 /* ═══════════ v139 — tighter vertical rhythm on home pages (client: reduce big gaps) ═══════════ */
