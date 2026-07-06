@@ -356,6 +356,116 @@
       "source": "/acces-vr-program",
       "destination": "/access-vr-program",
       "permanent": true
+    },
+    {
+      "source": "/jobs/:path+",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/job-opportunities",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/license-transfer",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/license/:path+",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/licensing",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/licensing/:path+",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/programs/200-hour-barber-fundamentals-program",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/programs/scalp-micro-pigmentation-fundamentals",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/programs/scalp-micro-pigmentation-fundamentals.html",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/vesid-program",
+      "destination": "/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/vesid-program/:path+",
+      "destination": "/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/veterans/:path+",
+      "destination": "/veterans",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/mission-statement",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/reviews",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/free-haircut-form",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/registration-form",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/shop-registration-thank-you",
+      "destination": "/shop-registration",
+      "permanent": true
+    },
+    {
+      "source": "/cc",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/splash-page-florida",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/american-barber-school-in-coral-springs-florida",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
