@@ -2756,13 +2756,14 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .hx-chips{grid-template-columns:1fr;gap:.6rem;max-width:none}
   .hx-next{grid-template-columns:1fr;row-gap:.9rem;max-width:none;margin-top:1rem}
   .hx-cells{grid-template-columns:repeat(4,1fr)}
-  /* v150 — CONTACT BOX PRIORITY on mobile: promote formcard right after the 500-hour headline+sub, before chips/countdown */
+  /* v151 — CONTACT BOX PRIORITY on mobile: promote formcard right after the 500-hour headline+sub, before chips/countdown.
+     Use .hx-copy > * selectors because .hx-copy is display:contents (H1/sub/chips/next are DOM grandchildren of .hx-in, but become flex items of .hx-in for layout purposes). */
   .hx-copy{display:contents}
-  .hx-in > .hx-h1{order:1}
-  .hx-in > .hx-sub{order:2;margin-bottom:.3rem}
-  .hx-in > .formcard{order:3;margin-top:1rem;margin-bottom:.4rem;scroll-margin-top:72px}
-  .hx-in > .hx-chips{order:4;margin-top:1.2rem}
-  .hx-in > .hx-next{order:5}
+  .hx-copy > .hx-h1{order:1;margin-bottom:.4rem}
+  .hx-copy > .hx-sub{order:2;margin:.2rem 0 .3rem;max-width:none}
+  .hx-in > .formcard{order:3;margin:1rem 0 .4rem;scroll-margin-top:72px}
+  .hx-copy > .hx-chips{order:4;margin-top:1.2rem}
+  .hx-copy > .hx-next{order:5;margin-top:.9rem}
 }
 
 /* ═══════════ v139 — tighter vertical rhythm on home pages (client: reduce big gaps) ═══════════ */

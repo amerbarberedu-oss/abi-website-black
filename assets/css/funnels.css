@@ -1293,12 +1293,16 @@ body.lf-page--brnx-es {
   .lf-hero__sub { color: rgba(255,255,255,.86); }
   .lf-hero__sub b { color: #fff; }
 
-  /* Feature chips: dark pill cards with circular icon background */
+  /* Feature chips: dark pill cards with circular icon background — mobile stacks 1-col
+     (reset display back to flex so the desktop grid rule doesn't leak into mobile) */
   .lf-features {
+    display: flex;
+    grid-template-columns: none;
     flex-direction: column;
     gap: .55rem;
     align-items: stretch;
     margin: .2rem 0 1.2rem;
+    max-width: none;
   }
   .lf-feature {
     display: flex;
