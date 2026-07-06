@@ -91,16 +91,16 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 <header class="hdr">
   <div class="hdr-in">
-    <a class="logo brand-plate" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
+    <a class="logo brand-plate" href="{home_href}" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><span class="nav-drop"><a href="{root}jobs.html" class="nav-drop-trigger">Jobs ▾</a><span class="nav-drop-menu"><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a></span></span><span class="nav-drop"><a href="{root}faq.html" class="nav-drop-trigger">FAQs ▾</a><span class="nav-drop-menu"><a href="{root}faq.html">FAQs</a><a href="{root}schedules.html">Schedules</a></span></span><a href="{root}contact.html">Contact</a></nav>
+    {nav_main}
     {langtoggle}
     <div class="loc-toggle" role="group" aria-label="Campus"><a class="is-active" aria-current="true" href="/manhattan">MN</a><a href="/bronx">BX</a></div>
-    <a class="header-cta" href="{root}contact.html">Become a Barber</a>
+    <a class="header-cta" href="{cta_href}">{cta_label}</a>
     <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}instructors.html">Instructors</a><a href="{root}partners.html">Partners</a><a href="{root}gallery.html">Gallery</a><a href="{root}haircuts.html">Haircuts</a><a href="{root}blog/index.html">Blog</a><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a><a href="{root}faq.html">FAQs</a><a href="{root}schedules.html">Schedules</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  {nav_drawer}
 </header>
 <div class="mhx">
   <div class="mhx-promo">START YOUR BARBER JOURNEY TODAY FOR ONLY <b>$150 PER WEEK*</b></div>
@@ -721,6 +721,18 @@ if os.path.exists(_blog_manifest):
             "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
                                   slug=_p['slug'], body=_body)]))
 
+# ---- Spanish mirror: auto-register an es/ twin for every indexable EN page ----
+# The twin's source partial is es-<partial> (produced by translators). Until that
+# file exists, build() prints "missing partial — skipped", so registering these is
+# completely safe (no EN impact, no empty ES pages) until Spanish content lands.
+# Spanish <title>/description are read from ES_TITLE/ES_DESC comments inside each
+# es- partial at build time; the EN strings below are only a fallback.
+_ES_SKIP = {'404.html'}
+_es_twins = [("es/" + _o, "es-" + _pt, _t, _d, "es", _sch)
+             for (_o, _pt, _t, _d, _lg, _sch) in list(PAGES)
+             if _lg == 'en' and _o not in _ES_SKIP]
+PAGES.extend(_es_twins)
+
 FAQ_SCHEMA_PLACEHOLDER = "FAQ_SCHEMA"
 
 def faq_schema_from(body):
@@ -753,6 +765,49 @@ PAGE_BG = {
 }
 _DEFAULT_BG = 'gallery/cut-05.jpg'
 
+def _shell_nav(b, root, lang):
+    """Return (mainnav, drawer) with every href prefixed by base `b` (already
+    root-resolved). For ES pages b = root+'es/' so nav stays inside the Spanish
+    mirror; the EN markup is byte-identical to the pre-i18n hardcoded nav."""
+    if lang == 'es':
+        mainnav = ('<nav class="mainnav" aria-label="Principal">'
+          f'<a href="{b}index.html">Inicio</a><a href="{b}about.html">Nosotros</a>'
+          f'<a href="{b}programs/index.html">Programas</a><a href="{b}instructors.html">Instructores</a>'
+          f'<a href="{b}partners.html">Aliados</a><a href="{b}gallery.html">Galería</a>'
+          f'<a href="{b}haircuts.html">Cortes</a><a href="{b}blog/index.html">Blog</a>'
+          f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Empleo ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Empleo</a><a href="{b}resources.html">Recursos</a></span></span>'
+          f'<span class="nav-drop"><a href="{b}faq.html" class="nav-drop-trigger">Preguntas ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}schedules.html">Horarios</a></span></span>'
+          f'<a href="{b}contact.html">Contacto</a></nav>')
+        drawer = ('<nav class="nav-drawer"><div class="container">'
+          f'<a href="{b}index.html">Inicio</a><a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
+          f'<a href="{b}instructors.html">Instructores</a><a href="{b}partners.html">Aliados</a><a href="{b}gallery.html">Galería</a>'
+          f'<a href="{b}haircuts.html">Cortes</a><a href="{b}blog/index.html">Blog</a><a href="{b}jobs.html">Empleo</a>'
+          f'<a href="{b}resources.html">Recursos</a><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}schedules.html">Horarios</a>'
+          f'<a href="{b}contact.html">Contacto</a><a href="{root}index.html"><b>English</b></a></div></nav>')
+    else:
+        mainnav = ('<nav class="mainnav" aria-label="Main">'
+          f'<a href="{b}index.html">Home</a><a href="{b}about.html">About</a>'
+          f'<a href="{b}programs/index.html">Programs</a><a href="{b}instructors.html">Instructors</a>'
+          f'<a href="{b}partners.html">Partners</a><a href="{b}gallery.html">Gallery</a>'
+          f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}blog/index.html">Blog</a>'
+          f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Jobs ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Jobs</a><a href="{b}resources.html">Resources</a></span></span>'
+          f'<span class="nav-drop"><a href="{b}faq.html" class="nav-drop-trigger">FAQs ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}faq.html">FAQs</a><a href="{b}schedules.html">Schedules</a></span></span>'
+          f'<a href="{b}contact.html">Contact</a></nav>')
+        drawer = ('<nav class="nav-drawer"><div class="container">'
+          f'<a href="{b}index.html">Home</a><a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
+          f'<a href="{b}instructors.html">Instructors</a><a href="{b}partners.html">Partners</a><a href="{b}gallery.html">Gallery</a>'
+          f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}blog/index.html">Blog</a><a href="{b}jobs.html">Jobs</a>'
+          f'<a href="{b}resources.html">Resources</a><a href="{b}faq.html">FAQs</a><a href="{b}schedules.html">Schedules</a>'
+          f'<a href="{b}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>')
+    return mainnav, drawer
+
+# outputs that have a Spanish twin (filled from PAGES at build time)
+ES_TWINS = {o[3:] for (o, *_rest) in PAGES if o.startswith('es/')}
+
 def build():
     written = []
     for out, partial, title, desc, lang, schemas in PAGES:
@@ -761,6 +816,14 @@ def build():
             print(f'  !! missing partial {partial} — skipped')
             continue
         body = open(path, encoding='utf-8').read()
+        # Spanish twins carry their translated <title>/meta in ES_TITLE/ES_DESC
+        # comments so translators own the meta; extract + strip them here.
+        if lang == 'es':
+            _mt = re.search(r'<!--\s*ES_TITLE:\s*(.*?)\s*-->', body)
+            _md = re.search(r'<!--\s*ES_DESC:\s*(.*?)\s*-->', body)
+            if _mt: title = _mt.group(1)
+            if _md: desc = _md.group(1)
+            body = re.sub(r'<!--\s*ES_(?:TITLE|DESC):.*?-->\s*', '', body)
         # Inject a small named-author byline at the top of each blog post (E-E-A-T).
         # The same human author + role is already referenced in the BlogPosting schema.
         if out.startswith('blog/') and out != 'blog/index.html':
@@ -813,36 +876,42 @@ def build():
         schema_tags = '\n'.join(
             f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>'
             for s in resolved)
-        # One-click EN/ES toggle beside the logo. Full Spanish exists for the
-        # home/splash; other EN pages send Spanish visitors to the Spanish home.
+        # Language-aware header: on ES pages the nav/logo/CTA point inside /es/,
+        # and the EN/ES toggle maps to the exact twin page (mirrored slug).
         if out.startswith('es/'):
+            navbase = root + 'es/'
+            home_href = root + 'es/index.html'
+            cta_href = root + 'es/contact.html'
+            cta_label = 'Conviértete en Barbero'
             langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
                           '<a href="%s%s">EN</a><a class="is-active" aria-current="true" href="%s%s">ES</a></div>'
                           % (root, out[3:], root, out))
         else:
+            navbase = root
+            home_href = root + 'index.html'
+            cta_href = root + 'contact.html'
+            cta_label = 'Become a Barber'
+            es_twin = ('es/' + out) if out in ES_TWINS else 'es/index.html'
             langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
-                          '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%ses/index.html">ES</a></div>'
-                          % (root, out, root))
-        # hreflang reciprocity: every EN page declares itself as en + x-default;
-        # the home page additionally declares the ES alternate (and vice-versa).
-        # Only the home page has a Spanish counterpart today.
-        _en_home = SITE_URL + "/"
-        _es_home = SITE_URL + "/es/"
-        if out in ('index.html',):
+                          '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%s%s">ES</a></div>'
+                          % (root, out, root, es_twin))
+        nav_main, nav_drawer = _shell_nav(navbase, root, lang)
+        # hreflang: pair every page with its twin (mirrored slug) reciprocally.
+        def _u(o):
+            if o == 'index.html': return SITE_URL + '/'
+            if o == 'es/index.html': return SITE_URL + '/es'
+            uu = o[:-5] if o.endswith('.html') else o
+            uu = uu[:-6] if uu.endswith('/index') else uu
+            return SITE_URL + '/' + uu
+        if out.startswith('es/') or out in ES_TWINS:
+            en_url = _u(out[3:]) if out.startswith('es/') else _u(out)
+            es_url = _u(out) if out.startswith('es/') else _u('es/' + out)
             hreflang_block = (
-                f'<link rel="alternate" hreflang="en" href="{_en_home}">\n'
-                f'<link rel="alternate" hreflang="en-US" href="{_en_home}">\n'
-                f'<link rel="alternate" hreflang="es" href="{_es_home}">\n'
-                f'<link rel="alternate" hreflang="es-US" href="{_es_home}">\n'
-                f'<link rel="alternate" hreflang="x-default" href="{_en_home}">'
-            )
-        elif out.startswith('es/'):
-            hreflang_block = (
-                f'<link rel="alternate" hreflang="es" href="{_es_home}">\n'
-                f'<link rel="alternate" hreflang="es-US" href="{_es_home}">\n'
-                f'<link rel="alternate" hreflang="en" href="{_en_home}">\n'
-                f'<link rel="alternate" hreflang="en-US" href="{_en_home}">\n'
-                f'<link rel="alternate" hreflang="x-default" href="{_en_home}">'
+                f'<link rel="alternate" hreflang="en" href="{en_url}">\n'
+                f'<link rel="alternate" hreflang="en-US" href="{en_url}">\n'
+                f'<link rel="alternate" hreflang="es" href="{es_url}">\n'
+                f'<link rel="alternate" hreflang="es-US" href="{es_url}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
             )
         else:
             hreflang_block = (
@@ -855,6 +924,8 @@ def build():
             pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
             root=root, body=body, schema=schema_tags, langtoggle=langtoggle,
             hreflang_block=hreflang_block,
+            nav_main=nav_main, nav_drawer=nav_drawer,
+            home_href=home_href, cta_href=cta_href, cta_label=cta_label,
             lp=root + 'programs/index.html',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')

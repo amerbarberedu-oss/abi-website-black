@@ -286,11 +286,6 @@
       "source": "/resources/:path+",
       "destination": "/resources",
       "permanent": true
-    },
-    {
-      "source": "/es/:path+",
-      "destination": "/es",
-      "permanent": true
     }
   ],
   "rewrites": [
