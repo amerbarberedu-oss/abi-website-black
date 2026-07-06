@@ -273,22 +273,22 @@
       "permanent": true
     },
     {
-      "source": "/courses/:path*",
+      "source": "/courses/:path+",
       "destination": "/programs",
       "permanent": true
     },
     {
-      "source": "/about/:path*",
+      "source": "/about/:path+",
       "destination": "/about",
       "permanent": true
     },
     {
-      "source": "/resources/:path*",
+      "source": "/resources/:path+",
       "destination": "/resources",
       "permanent": true
     },
     {
-      "source": "/es/:path*",
+      "source": "/es/:path+",
       "destination": "/es",
       "permanent": true
     }
