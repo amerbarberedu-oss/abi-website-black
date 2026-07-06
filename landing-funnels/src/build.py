@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "54"
+CSS_V = "55"
 JS_V  = "15"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -187,10 +187,10 @@ def hero(p):
         # "main|subline" renders the subline as a second emphasized row
         if "|" in t:
             main, sub_ = t.split("|", 1)
-            return ('<span class="lf-feature lf-feature--multi">%s<span>%s'
+            return ('<span class="lf-feature lf-feature--multi">%s<span><b>%s</b>'
                     '<i class="lf-feature__sub">%s</i></span></span>'
-                    % (svg(ic, 18), h(main), h(sub_)))
-        return '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 18), h(t))
+                    % (svg(ic, 20), h(main), h(sub_)))
+        return '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 20), h(t))
     feats = "".join(_feat(t, ic) for t, ic in D.FEATURES[lang])
     cd = D.COUNTDOWN[lang]
     cells = "".join(
