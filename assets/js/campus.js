@@ -37,8 +37,13 @@ var PHONE_SVG='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" strok
 var SCISSORS_SVG='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>';
 
 function isBronxPage(){return document.body.classList.contains("bx-gold")}
+function isProgramsPage(){var p=location.pathname;return /\/programs\//.test(p)||/\/programs$/.test(p);}
+function isBronxProgramsPage(){var p=location.pathname;return /\/programs\/bronx(\.html)?$/.test(p)||/\/500-hour-master-barber-bronx/.test(p);}
+function isManhattanProgramsPage(){var p=location.pathname;return /\/programs\/manhattan(\.html)?$/.test(p)||(/\/programs\/500-hour-master-barber(\.html)?$/.test(p))||/\/50-hour-barber-refresher/.test(p);}
 function getCampus(){
   if(isBronxPage()) return "bronx";
+  if(isBronxProgramsPage()) return "bronx";
+  if(isManhattanProgramsPage()) return "manhattan";
   try{return localStorage.getItem("abi-campus")||"manhattan";}catch(e){return "manhattan";}
 }
 function setCampus(c){try{localStorage.setItem("abi-campus",c);}catch(e){}}
@@ -47,11 +52,41 @@ function applyBronx(){
   document.body.classList.add("bx-gold");
   updateLocToggle("bronx");
   swapPhones(BX_PHONES);
+  rewriteProgramsLinks("bronx");
 }
 function applyManhattan(){
   document.body.classList.remove("bx-gold");
   updateLocToggle("manhattan");
   swapPhones(MN_PHONES);
+  rewriteProgramsLinks("manhattan");
+}
+
+// Rewrite any "Programs" nav link (points at the general /programs/ or /programs/index.html)
+// to the campus-specific programs page. Handles EN + ES paths, absolute + relative hrefs.
+// Runs on every campus switch AND on init, so a Manhattan-context visitor always sees the
+// Manhattan programs page, and Bronx-context sees the Bronx programs page.
+function rewriteProgramsLinks(campus){
+  var target=campus==="bronx"?"bronx.html":"manhattan.html";
+  // Selectors: any anchor whose text is "Programs"/"Programas" OR whose href points at the
+  // general programs index. Skip anchors already pointing at a specific /programs/* sub-page
+  // (like /programs/500-hour-master-barber) so we don't stomp on those.
+  var links=document.querySelectorAll('a[href]');
+  links.forEach(function(a){
+    var href=a.getAttribute("href")||"";
+    var raw=href.split("?")[0].split("#")[0];
+    // Match paths ending in /programs, /programs/, /programs/index.html
+    // (both root-absolute and relative forms)
+    if(/(^|\/)programs\/?(index\.html)?$/.test(raw)){
+      // ES vs EN
+      var isEs=/\/es\/programs/.test(raw)||/^es\/programs/.test(raw)||document.documentElement.lang==="es"||/\/es\//.test(location.pathname);
+      var base=raw.replace(/(index\.html)?$/, "").replace(/\/$/, "");
+      var newHref=base+"/"+target;
+      // If original was root-absolute or contains full path, preserve leading slash
+      if(href.charAt(0)==="/"&&newHref.charAt(0)!=="/") newHref="/"+newHref;
+      a.setAttribute("href", newHref);
+      a.setAttribute("data-abi-programs-rewritten", campus);
+    }
+  });
 }
 
 function updateLocToggle(campus){
@@ -114,29 +149,44 @@ function swapPhones(data){
 }
 
 function init(){
+  // Programs pages are campus-specific: visiting one sets that campus preference.
+  if(isBronxProgramsPage()){setCampus("bronx");}
+  else if(isManhattanProgramsPage()){setCampus("manhattan");}
+
   if(isBronxPage()){
     setCampus("bronx");
+    rewriteProgramsLinks("bronx");
     return;
   }
   var campus=getCampus();
   if(campus==="bronx") applyBronx();
+  else rewriteProgramsLinks("manhattan");
 
   document.addEventListener("click",function(e){
     var a=e.target.closest(".loc-toggle a");
     if(!a) return;
     e.preventDefault();
     var txt=a.textContent.trim();
+    // If we're on a programs page, toggling campus takes the user to the OTHER campus's
+    // programs page — not the campus home. This is what "Manhattan/Bronx programs stay
+    // synced to campus toggle" means.
+    var here=location.pathname;
+    var esPrefix=/\/es\//.test(here)?"/es":"";
     if(txt==="BX"){
       setCampus("bronx");
-      if(a.href&&a.href.indexOf("/bronx")!==-1){
+      if(isProgramsPage()){
+        window.location.href=esPrefix+"/programs/bronx.html";
+      }else if(a.href&&a.href.indexOf("/bronx")!==-1){
         window.location.href=a.href;
       }else{
         applyBronx();
       }
     }else if(txt==="MN"){
       setCampus("manhattan");
-      if(window.location.pathname==="/bronx"||window.location.pathname==="/bronx.html"){
-        window.location.href="/";
+      if(isProgramsPage()){
+        window.location.href=esPrefix+"/programs/manhattan.html";
+      }else if(here==="/bronx"||here==="/bronx.html"||here==="/es/bronx"||here==="/es/bronx.html"){
+        window.location.href=esPrefix+"/";
       }else{
         applyManhattan();
       }
