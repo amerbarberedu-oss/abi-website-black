@@ -800,7 +800,7 @@ SCISSORS_I = '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x
 def mobile_cta_bar(p):
     es = p["lang"] == "es"
     tel = p["phone"][2]            # +1XXXXXXXXXX
-    sms_target = tel               # SMS goes to same campus number
+    sms_target = "+19295888448"    # Text Us -> GHL AI number (auto-replies live)
     labels = {
         "call":  "Llamar" if es else "Call Now",
         "text":  "Mensaje" if es else "Text Us",
@@ -838,7 +838,7 @@ def page_tail():
         ''
         '<script src="https://widgets.leadconnectorhq.com/loader.js" '
         'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
-        'data-widget-id="689f4917512e48b4268bf335" defer></script>\n'
+        'data-widget-id="689f4917512e48b4268bf335"></script>\n'
         '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget,.lc_text-widget--bubble{bottom:140px!important;right:12px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
         '</body>\n</html>\n'
     ) % (JS_V,)
