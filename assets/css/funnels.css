@@ -1038,6 +1038,10 @@ body.lf-page--brnx-es {
 .lf-about__addr, .lf-about__phone { margin: 0 0 .5rem; display: flex; align-items: flex-start; gap: .4rem; color: var(--lf-muted); font-size: .95rem; }
 .lf-about__addr svg { flex: 0 0 auto; color: var(--lf-accent); margin-top: 2px; }
 .lf-about__phone a { color: var(--lf-accent-dark); font-weight: 700; display: inline-flex; gap: .35rem; align-items: center; }
+.lf-map { margin-top: .9rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,.12); aspect-ratio: 16 / 10; background: #eaeef5; }
+.lf-map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.lf-map-reviews { display: inline-flex; align-items: center; gap: .3rem; margin-top: .6rem; font-weight: 800; font-size: .9rem; color: var(--lf-accent-dark); text-decoration: none; }
+.lf-map-reviews:hover { text-decoration: underline; }
 .lf-about__details { list-style: none; padding: .9rem 0 0; margin: .9rem 0 0; border-top: 1px solid var(--lf-line); display: grid; gap: .4rem; }
 .lf-about__details li { color: var(--lf-muted); font-size: .9rem; }
 .lf-about__details b { color: var(--lf-ink); }

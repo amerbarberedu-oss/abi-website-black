@@ -19,6 +19,7 @@ import sys
 import json
 import datetime
 from html import escape as h
+from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -26,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "53"
+CSS_V = "54"
 JS_V  = "15"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -287,6 +288,10 @@ def section_about(p):
     name = p["campus"]["name_es" if p["lang"] == "es" else "name_en"]
     # Duration / Tuition / Schedules <ul> removed per content spec.
     # Keep only campus name + address + phone in the side card.
+    map_q = quote("American Barber Institute, " + p["campus"]["addr_full_en"])
+    map_src = "https://www.google.com/maps?q=%s&amp;z=16&amp;output=embed" % map_q
+    reviews_href = "https://www.google.com/maps/search/?api=1&amp;query=%s" % map_q
+    reviews_label = "Ver nuestras reseñas de Google →" if p["lang"] == "es" else "Read our Google reviews →"
     return (
         '<section class="lf-section lf-section--alt"><div class="lf-wrap">%s\n'
         '  <div class="lf-about">\n'
@@ -295,12 +300,15 @@ def section_about(p):
         '      <h3 class="lf-h3">%s</h3>\n'
         '      <p class="lf-about__addr">%s%s</p>\n'
         '      <p class="lf-about__phone"><a href="tel:%s">%s %s</a></p>\n'
+        '      <div class="lf-map"><iframe title="%s" src="%s" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>\n'
+        '      <a class="lf-map-reviews" href="%s" target="_blank" rel="noopener">★ %s</a>\n'
         '    </aside>\n'
         '  </div>\n'
         '</div></section>\n'
     ) % (section_head(eb, ti), body, h(name),
          svg("pin", 14), h(addr),
-         h(p["phone"][2]), svg("phone", 14), h(p["phone"][1]))
+         h(p["phone"][2]), svg("phone", 14), h(p["phone"][1]),
+         h(name) + " map", map_src, reviews_href, reviews_label)
 
 
 # ── 3 EASY STEPS (right after About) ─────────────────────────────────
