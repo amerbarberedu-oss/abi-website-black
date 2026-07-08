@@ -28,6 +28,10 @@
   "use strict";
 
   var GTM_ID = "GTM-NKLLGPC";
+  // Direct GA4 config for this domain's OWN stream (abi.edu).
+  // The GTM container's GA4 tag also sends to this stream, but the direct
+  // config here acts as a safety net and ensures page-view accuracy.
+  var GA4_MEASUREMENT_ID = "G-J6BNX36TS3";
 
   var w = window,
     d = document;
@@ -35,6 +39,10 @@
   function gtag() {
     w.dataLayer.push(arguments);
   }
+
+  // ---- Direct GA4 config for the abi.edu stream ----
+  gtag("js", new Date());
+  gtag("config", GA4_MEASUREMENT_ID, { send_page_view: true });
 
   // ---- Consent Mode v2 : granted by default (no banner) ----
   // security_storage/functionality_storage stay granted (essential).
