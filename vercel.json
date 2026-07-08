@@ -204,7 +204,7 @@
     },
     {
       "source": "/jobs/shop-registration",
-      "destination": "/jobs",
+      "destination": "/shop-registration",
       "permanent": true
     },
     {
