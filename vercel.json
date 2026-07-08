@@ -307,6 +307,15 @@
       "destination": "/es/programs/contagious-diseases",
       "permanent": true
     },
+    { "source": "/es/about/instructors",             "destination": "/es/instructors",               "permanent": true },
+    { "source": "/es/about/skills-and-techniques",   "destination": "/es/skills-and-techniques",     "permanent": true },
+    { "source": "/es/about/how-to-get-started",      "destination": "/es/how-to-get-started",        "permanent": true },
+    { "source": "/es/about/virtual-tour",            "destination": "/es/virtual-tour",              "permanent": true },
+    { "source": "/es/faqs",                          "destination": "/es/faq",                       "permanent": true },
+    { "source": "/es/resources/veterans",            "destination": "/es/veterans",                  "permanent": true },
+    { "source": "/es/resources/acces-vr",            "destination": "/es/access-vr-program",         "permanent": true },
+    { "source": "/es/jobs/job-opportunities",        "destination": "/es/jobs",                      "permanent": true },
+    { "source": "/es/jobs/shop-registration",        "destination": "/es/shop-registration",         "permanent": true },
     {
       "source": "/es/courses/:path+",
       "destination": "/es/programs",
@@ -329,7 +338,17 @@
     },
     {
       "source": "/spanish/:path*",
+      "destination": "/es/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/espanol",
       "destination": "/es",
+      "permanent": true
+    },
+    {
+      "source": "/espanol/:path*",
+      "destination": "/es/:path*",
       "permanent": true
     },
     {
