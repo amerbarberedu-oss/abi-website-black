@@ -790,7 +790,7 @@ def page_head(p):
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
-'<script src="/assets/js/analytics.js?v=3" defer></script>\n'
+'<script src="/assets/js/analytics.js?v=4" defer></script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
