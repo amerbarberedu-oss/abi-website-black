@@ -778,8 +778,8 @@ def page_head(p):
 '<meta name="robots" content="index, follow, max-image-preview:large">\n'
 '<meta name="theme-color" content="#1b3bd9">\n'
 '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n'
-'<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">\n'
+'<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n'
+'<link rel="manifest" href="/site.webmanifest">\n'
 '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'
@@ -791,6 +791,7 @@ def page_head(p):
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
 '<script src="/assets/js/analytics.js?v=6" defer></script>\n'
+'<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
