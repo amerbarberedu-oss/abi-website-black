@@ -1,13 +1,13 @@
 /* ============================================================
-   ABI — Analytics loader   (v3)
+   ABI — Analytics loader   (v4)
    ------------------------------------------------------------
    ONE dependency: Google Tag Manager container GTM-NKLLGPC.
-   Meta Pixel (580471737041846), Microsoft Clarity (k5fxn2irko),
-   CallRail (169987046), ClickCease, and Google Ads (AW-949292069)
-   are all configured INSIDE the GTM web UI — never add/remove those
-   tags here. Google Analytics (GA4) has been removed per client
-   decision (Jul 2026): the direct GA4 config was deleted from this
-   file, and the GA4/UA tags are removed from the GTM container.
+   GA4 (G-J6BNX36TS3), Meta Pixel (580471737041846), Microsoft
+   Clarity (k5fxn2irko), CallRail (169987046), ClickCease, and
+   Google Ads (AW-949292069) are all configured INSIDE the GTM
+   web UI — never add/remove those tags here.
+   No direct GA4 config in this file; GTM is the single source
+   for GA4 page views to avoid double-counting.
 
    What this file does:
      1. Sets Google Consent Mode v2 to GRANTED by default (all
