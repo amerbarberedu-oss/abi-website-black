@@ -187,9 +187,13 @@ See **AUDIT-REPORT.md** for the full technical-SEO / accessibility / conversion 
 ## 7. Analytics & Ads
 
 `assets/js/analytics.js` is a **single consent-aware loader** that boots one
-container — **Google Tag Manager `GTM-NKLLGPC`**. GA4 (`G-J6BNX36TS3`), Meta
-Pixel, Microsoft Clarity, CallRail, ClickCease and Google Ads (`AW-949292069`)
-are all managed **inside the GTM web UI** — do not add/remove those tags in code.
+container — **Google Tag Manager `GTM-NKLLGPC`**. Meta Pixel, Microsoft Clarity,
+CallRail, ClickCease and Google Ads (`AW-949292069`) are managed **inside the GTM
+web UI** — do not add/remove those tags in code.
+
+**Google Analytics (GA4) has been removed** per client decision (Jul 2026): there
+is no GA4/gtag config in code, and the GA4 (and legacy UA-72481509-1) tags are to
+be deleted in the GTM dashboard. Do not re-add GA.
 
 What the file does:
 - Sets **Google Consent Mode v2** defaults before GTM loads (EEA/UK denied-by-default,
