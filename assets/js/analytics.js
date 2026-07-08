@@ -2,10 +2,12 @@
    ABI — Analytics loader   (v3)
    ------------------------------------------------------------
    ONE dependency: Google Tag Manager container GTM-NKLLGPC.
-   GA4 (G-J6BNX36TS3), Meta Pixel (580471737041846), Microsoft
-   Clarity (k5fxn2irko), CallRail (169987046), ClickCease, and
-   Google Ads (AW-949292069) are all configured INSIDE the GTM
-   web UI — never add/remove those tags here.
+   Meta Pixel (580471737041846), Microsoft Clarity (k5fxn2irko),
+   CallRail (169987046), ClickCease, and Google Ads (AW-949292069)
+   are all configured INSIDE the GTM web UI — never add/remove those
+   tags here. Google Analytics (GA4) has been removed per client
+   decision (Jul 2026): the direct GA4 config was deleted from this
+   file, and the GA4/UA tags are removed from the GTM container.
 
    What this file does:
      1. Sets Google Consent Mode v2 to GRANTED by default (all
@@ -13,9 +15,9 @@
         decision (Jul 2026) there is NO cookie-consent banner.
      2. Boots the GTM container.
      3. Pushes semantic events into dataLayer for GTM triggers:
-          - "phone_click"    (tel: taps)          → GA4/Ads call conv.
+          - "phone_click"    (tel: taps)          → Ads call conv.
           - "email_click"    (mailto: taps)
-          - "generate_lead"  (form submissions)   → GA4/Ads/Meta lead
+          - "generate_lead"  (form submissions)   → Ads/Meta lead
         GHL forms are cross-origin iframes, so leads are captured via
         (a) a GHL postMessage listener (best-effort) and (b) the
         thank-you page (reliable — requires the GHL form redirect to
@@ -28,10 +30,6 @@
   "use strict";
 
   var GTM_ID = "GTM-NKLLGPC";
-  // Direct GA4 config for this domain's OWN stream (abi.edu).
-  // The GTM container's GA4 tag also sends to this stream, but the direct
-  // config here acts as a safety net and ensures page-view accuracy.
-  var GA4_MEASUREMENT_ID = "G-J6BNX36TS3";
 
   var w = window,
     d = document;
@@ -39,10 +37,6 @@
   function gtag() {
     w.dataLayer.push(arguments);
   }
-
-  // ---- Direct GA4 config for the abi.edu stream ----
-  gtag("js", new Date());
-  gtag("config", GA4_MEASUREMENT_ID, { send_page_view: true });
 
   // ---- Consent Mode v2 : granted by default (no banner) ----
   // security_storage/functionality_storage stay granted (essential).
