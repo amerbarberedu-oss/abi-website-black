@@ -791,6 +791,8 @@ def page_head(p):
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
 '<script src="/assets/js/analytics.js?v=6" defer></script>\n'
+'<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>\n'
+'<script defer src="/_vercel/insights/script.js"></script>\n'
 '</head>\n<body class="lf-page %(theme)s">\n'
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
