@@ -76,7 +76,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/landing.css?v=151">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
-<script src="{root}assets/js/analytics.js?v=4" defer></script>
+<script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 {schema}

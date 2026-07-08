@@ -576,7 +576,7 @@ def head(p, s, pre):
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="%sassets/css/landing.css?v=123">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
-<script src="/assets/js/analytics.js?v=4" defer></script>
+<script src="/assets/js/analytics.js?v=6" defer></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
 %s
 </head>

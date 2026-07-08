@@ -1,27 +1,29 @@
 /* ============================================================
-   ABI — Analytics loader   (v4)
+   ABI — Analytics loader   (v5)
    ------------------------------------------------------------
-   ONE dependency: Google Tag Manager container GTM-NKLLGPC.
-   Meta Pixel (580471737041846), Microsoft Clarity (k5fxn2irko),
-   CallRail (169987046), ClickCease, and Google Ads (AW-949292069)
-   are configured INSIDE the GTM web UI — never add/remove those
-   tags here.
+   Two independent measurement systems, both booted from here:
 
-   Google Analytics (GA4, G-J6BNX36TS3) is being REMOVED per client
-   decision (Jul 2026). There is no direct GA4 config in this file;
-   the remaining GA4 (and legacy UA-72481509-1) tags must be
-   deleted/paused in the GTM dashboard. Do NOT re-add a GA4 tag in
-   GTM or a gtag config here — GA is intentionally off.
+   1. Google Analytics 4 — installed DIRECTLY in this file via
+      gtag.js on a clean property (G-MZLV3ZK545). This is the SINGLE
+      source of truth for GA4. Do NOT also add a GA4 tag in GTM, or
+      page views will double-count.
+
+   2. Google Tag Manager container GTM-NKLLGPC — carries ONLY:
+      Meta Pixel (580471737041846), Microsoft Clarity (k5fxn2irko),
+      CallRail (169987046), ClickCease, and Google Ads (AW-949292069).
+      Those are configured inside the GTM web UI — never add/remove
+      them here, and never add GA4 to the container.
 
    What this file does:
      1. Sets Google Consent Mode v2 to GRANTED by default (all
-        regions) so any consent-gated GTM tags fire. Per client
+        regions) so consent-gated GA4/GTM tags fire. Per client
         decision (Jul 2026) there is NO cookie-consent banner.
-     2. Boots the GTM container.
-     3. Pushes semantic events into dataLayer for GTM triggers:
-          - "phone_click"    (tel: taps)          → Ads call conv.
-          - "email_click"    (mailto: taps)
-          - "generate_lead"  (form submissions)   → Ads/Meta lead
+     2. Loads GA4 (gtag.js) and boots the GTM container.
+     3. Pushes semantic events to BOTH GA4 (gtag event) and the
+        dataLayer (GTM triggers):
+          - "phone_click"    (tel: taps)          → GA4 + Ads call conv.
+          - "email_click"    (mailto: taps)       → GA4
+          - "generate_lead"  (form submissions)   → GA4 + Ads/Meta lead
         GHL forms are cross-origin iframes, so leads are captured via
         (a) a GHL postMessage listener (best-effort) and (b) the
         thank-you page (reliable — requires the GHL form redirect to
@@ -34,6 +36,9 @@
   "use strict";
 
   var GTM_ID = "GTM-NKLLGPC";
+  // Direct GA4 install (clean property, abi.edu). Single source of truth
+  // for GA4 — must NOT be duplicated as a tag inside GTM (double-count).
+  var GA4_ID = "G-MZLV3ZK545";
 
   var w = window,
     d = document;
@@ -44,12 +49,24 @@
 
   // ---- Consent Mode v2 : granted by default (no banner) ----
   // security_storage/functionality_storage stay granted (essential).
+  // Must run BEFORE GA4/GTM load so consent-gated tags respect it.
   gtag("consent", "default", {
     ad_storage: "granted",
     ad_user_data: "granted",
     ad_personalization: "granted",
     analytics_storage: "granted"
   });
+
+  // ---- GA4 install (gtag.js, loaded directly — not via GTM) ----
+  (function () {
+    var s = d.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+    var f = d.getElementsByTagName("script")[0];
+    f.parentNode.insertBefore(s, f);
+  })();
+  gtag("js", new Date());
+  gtag("config", GA4_ID, { send_page_view: true });
 
   // ---- GTM install (Google's official snippet, inlined) ----
   (function (w, d, s, l, i) {
@@ -64,7 +81,9 @@
   })(window, document, "script", "dataLayer", GTM_ID);
 
   // ---- semantic click events ----
+  // Fire to BOTH: GA4 (gtag event) and dataLayer (GTM → Meta/Ads triggers).
   function push(event, extra) {
+    gtag("event", event, extra || {});
     w.dataLayer.push(assign({ event: event }, extra || {}));
   }
   d.addEventListener(
