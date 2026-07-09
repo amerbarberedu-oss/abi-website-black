@@ -2661,6 +2661,48 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   body.mhx-on .loc-toggle{margin-left:.35rem}
 }
 
+/* ═══════════ RESPONSIVE SAFETY: hamburger must NEVER be clipped ═══════════
+   All header flex children can shrink EXCEPT the hamburger button.
+   Guarantees the menu icon stays visible on every device width, DPI, and
+   font-scale combination — from Galaxy Fold (280px) to large tablets. */
+.hdr-in > * { min-width: 0; }
+.hdr-right, .hamburger { flex-shrink: 0 !important; min-width: 34px !important; }
+/* Toggles CAN shrink on extremely narrow viewports */
+.lang-toggle, .loc-toggle { flex-shrink: 1; }
+/* Ensure header containers never clip their children */
+.hdr, .hdr-in { overflow: visible !important; }
+
+/* Ultra-narrow: ≤320px (Galaxy Fold, very small Android) */
+@media (max-width:320px){
+  body.mhx-on .brand-plate .logo-img { height: 28px !important; }
+  body.mhx-on .lang-toggle, body.mhx-on .loc-toggle { font-size: .62rem !important; }
+  body.mhx-on .lang-toggle a { padding: .32rem .28rem !important; }
+  body.mhx-on .loc-toggle a { padding: .32rem .28rem !important; }
+  body.mhx-on .loc-toggle { margin-left: .2rem; }
+  body.mhx-on .hamburger { width: 32px !important; margin-left: 0 !important; }
+  body.mhx-on .hamburger span { width: 20px; }
+  body.mhx-on .hdr-in { gap: .1rem !important; padding: .38rem .3rem !important; }
+  body.mhx-on .hdr { padding: .38rem .2rem .25rem !important; }
+}
+/* Extreme: ≤280px (Galaxy Fold folded) */
+@media (max-width:280px){
+  body.mhx-on .brand-plate .logo-img { height: 24px !important; }
+  body.mhx-on .lang-toggle a, body.mhx-on .loc-toggle a { padding: .28rem .22rem !important; font-size: .58rem !important; }
+  body.mhx-on .hdr-in { gap: .06rem !important; padding: .32rem .2rem !important; }
+}
+
+/* Non-mhx-on pages: same protection */
+@media (max-width:320px){
+  .brand-plate .logo-img { height: 30px !important; }
+  .hdr-in { gap: .2rem !important; }
+  .lang-toggle a { padding: .3rem .3rem !important; font-size: .68rem !important; }
+}
+@media (max-width:280px){
+  .brand-plate .logo-img { height: 24px !important; }
+  .hdr-in { gap: .08rem !important; padding: .3rem .2rem !important; }
+  .lang-toggle a { padding: .26rem .24rem !important; font-size: .6rem !important; }
+}
+
 /* ═══════════ v133 — DESKTOP header mirrors the approved mobile design (body.mhx-on) ═══════════
    Row 1: white card — logo · menu · EN|ES · MN|BX (Become a Barber removed)
    Row 2: blue band promo (single line) · Row 3: 3 phone pills · Row 4: star seats strip */
