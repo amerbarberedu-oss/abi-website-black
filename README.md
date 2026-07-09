@@ -9,36 +9,33 @@ served on Vercel, in English and Spanish.
 
 ---
 
-## 0. Recent changes at a glance (0.2.0)
+## 0. Recent changes at a glance
 
-Everything on the site now routes by campus context — a Manhattan visitor sees
-the Manhattan location + Manhattan Google reviews, a Bronx visitor sees the
-Bronx equivalents.
+### 0.3.0 (2026-07-09) — Responsive, i18n & Role Split
 
-- Two new campus-specific programs pages: `/programs/manhattan` and
-  `/programs/bronx` (each showing only that campus's offerings) + full ES
-  twins. The 50-Hour Barber Refresher is Manhattan-only and is hidden from
-  the Bronx page automatically.
-- `assets/js/campus.js` (v2) rewrites the "Programs" nav link at load time
-  to the campus the visitor is currently in, and re-routes the MN ↔ BX
-  toggle to the other campus's programs page when a visitor is on a
-  Programs page.
-- Homepage `/` now has a "Find Us" section with the Manhattan Google map;
-  `/bronx` already had the same for the Bronx campus.
-- Every "See on Google" CTA goes to the correct campus's Google Business
-  Profile — Manhattan short URL `maps.app.goo.gl/42UjD6bFQ65NEt1E7`, Bronx
-  short URL `maps.app.goo.gl/9TJJh8ehUjSZ8kcaA`.
-- Homepage mobile hero reorders so the contact form appears immediately
-  after the "500 Hour" tagline, before the chips and countdown.
-- Phone chip rows (`.mhx-phones`) and landing hero chips (`.lf-features`)
-  now use a fill-evenly flex/grid layout — no more empty slots when there
-  are 2 chips instead of 3, and no more crammed 3-column grid on mobile
-  landings.
-- **Preview-first workflow:** all changes ship first to a
-  `preview/*` branch (Vercel preview URL) for client approval, then merge
-  to `main`, which auto-deploys prod.
+**Developer roles defined:**
+- **Kazi** — Frontend, UI/UX, HTML/CSS/JS, SEO, build scripts
+- **Arhum Abdullah** — GA4, GTM, Google Ads, Meta Pixel, Clarity, CallRail, ClickCease, Vercel Analytics, consent mode, CSP analytics domains
+
+> ⚠️ **Do NOT modify** `assets/js/analytics.js`, GTM/GA4/Ads/Pixel config, or CSP analytics domains without Arhum's sign-off.
+
+**What changed:**
+- **Mobile responsiveness overhaul** — bulletproof hamburger menu that never clips on any device (Android, iOS, tablet, desktop-mode-on-mobile). Uses `min()` clamping and viewport-relative sizing.
+- **Full Spanish translation** — all 55 `/es/` pages: header, footer, CTAs, mobile bar, countdown, Google reviews, form labels. Zero English text remains on Spanish pages.
+- **Spanish page fixes** — absolute image/asset paths (`/assets/img/...`), proper program links, contact form immediately after hero text on mobile.
+- **Google rating** — standardized to 4.1 (actual rating) across all pages and structured data.
+- **2-card grid** — program pages with only 2 cards now center properly (no empty column).
+- **Image brightness** — lightened gallery/team images for better readability.
+
+### 0.2.0 (2026-07-07) — Campus Context Routing
+
+- Campus-specific programs pages: `/programs/manhattan` and `/programs/bronx` + ES twins.
+- `campus.js` rewrites Programs nav links per campus context.
+- Homepage "Find Us" with Google map; campus-specific Google Business Profile links.
+- Mobile hero reorder: contact form immediately after tagline.
 
 Full detail in [`CHANGELOG.md`](CHANGELOG.md).
+
 
 ---
 
@@ -259,6 +256,26 @@ A condensed log of the major work delivered:
 9. **Final cleanup & restructure** — removed unused assets and archive-only generator
    scripts, moved the build tooling under `src/`, untracked editor/Vercel metadata,
    and documented the whole project here.
+
+---
+
+## 11. Live URLs
+
+### Main Website
+| Page | URL |
+|---|---|
+| **Homepage (English)** | https://www.abi.edu/ |
+| **Homepage (Spanish)** | https://www.abi.edu/es/ |
+| **Bronx (English)** | https://www.abi.edu/bronx |
+| **Bronx (Spanish)** | https://www.abi.edu/es/bronx |
+
+### Landing Pages
+| Landing Page | URL |
+|---|---|
+| **500-Hour Master Barber (Manhattan EN)** | https://www.abi.edu/500-hours-master-barber-program-landing-page/ |
+| **500-Hour Master Barber (Manhattan ES)** | https://www.abi.edu/500-hours-master-barber-program-landing-page/spanish/ |
+| **Master Barber Program (Bronx EN)** | https://www.abi.edu/master-barber-program-bronx/ |
+| **Master Barber Program (Bronx ES)** | https://www.abi.edu/master-barber-program-bronx/spanish/ |
 
 ---
 
