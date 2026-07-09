@@ -17,6 +17,8 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
+/* Lighten all content images slightly (client request) — excludes logo */
+.gallery img,.duo-card img,.sec img,.hx-bg,.hero-bg,article img,.card img,.team-card img,.photo img,.fade-card img,.abi-reel video{filter:brightness(1.08) contrast(.97)}
 a{color:inherit;text-decoration:none}
 .container{width:min(1240px,92%);margin-inline:auto}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border:none;cursor:pointer;border-radius:10px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;font-family:inherit}
@@ -2802,8 +2804,8 @@ body.no-mhx-phones .mhx-phones{display:none!important}
      Use .hx-copy > * selectors because .hx-copy is display:contents (H1/sub/chips/next are DOM grandchildren of .hx-in, but become flex items of .hx-in for layout purposes). */
   .hx-copy{display:contents}
   .hx-copy > .hx-h1{order:1;margin-bottom:.4rem}
-  .hx-copy > .hx-sub{order:2;margin:.2rem 0 .3rem;max-width:none}
-  .hx-in > .formcard{order:3;margin:1rem 0 .4rem;scroll-margin-top:72px}
+  .hx-copy > .hx-sub{order:2;margin:.2rem 0 .15rem;max-width:none}
+  .hx-in > .formcard{order:3;margin:.3rem 0 .4rem;scroll-margin-top:72px}
   .hx-copy > .hx-chips{order:4;margin-top:1.2rem}
   .hx-copy > .hx-next{order:5;margin-top:.9rem}
 }
