@@ -251,11 +251,12 @@ def lead_form(p):
         '</div>'
     ) % {
         "id": p["id"], "campus": p["campus"]["slug"], "lang": lang,
-        # GHL form IDs are per-campus, not per-language (each form is bilingual).
-        # Manhattan = 500-hours master barber landing; Bronx = master-barber-program-bronx.
-        "ghl_id": "v1SNzWsAZZVodCsnsDbe" if p["campus"]["slug"] == "bronx" else "2FvHzLvYji1iSmNmCP46",
-        "ghl_h": 950 if p["campus"]["slug"] == "bronx" else 890,
-        "ghl_name": "02.GET TRAINED WITH ABI FORM - Bronx" if p["campus"]["slug"] == "bronx" else "02.GET TRAINED WITH ABI FORM -  Manhattan ",
+        # GHL form IDs are per-language (unified form for all campuses).
+        # EN = 01.GET TRAINED WITH ABI FORM - edu
+        # ES = 01.GET TRAINED WITH ABI FORM - edu - ESP
+        "ghl_id": "jqLpg40sM8C7RFT7Iq2Z" if lang == "es" else "WZjNHh9wcd1FTnlj0eCR",
+        "ghl_h": 856 if lang == "es" else 937,
+        "ghl_name": "01.GET TRAINED WITH ABI FORM - edu - ESP" if lang == "es" else "01.GET TRAINED WITH ABI FORM - edu ",
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
