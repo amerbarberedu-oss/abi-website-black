@@ -7,6 +7,20 @@ served on Vercel, in English and Spanish.
 - **Canonical domain:** https://www.abi.edu
 - **Current version:** 0.4.0 (2026-07-11)
 
+## Ownership
+
+| | Details |
+|---|---|
+| **Owner** | Alex — American Barber Institute |
+| **GitHub Account** | [amerbarberedu-oss](https://github.com/amerbarberedu-oss) |
+| **Vercel Account** | amerbarberedu-oss-projects |
+| **Domain** | abi.edu / www.abi.edu |
+| **Repository** | amerbarberedu-oss/abi-website-black |
+
+> This entire website, repository, domain, and Vercel deployment belongs to
+> **Alex / American Barber Institute**. All code, assets, and configurations
+> are owned by the ABI organization.
+
 ---
 
 ## 0. Recent Changes
@@ -32,14 +46,17 @@ served on Vercel, in English and Spanish.
 
 ---
 
-## 1. Developer Roles — STRICTLY ENFORCED
+## 1. Team & Developer Roles — STRICTLY ENFORCED
 
-| Developer | Focus |
-|---|---|
-| **Kazi** | Frontend, UI/UX, HTML/CSS/JS, SEO, build scripts |
-| **Arhum Abdullah** | GA4, GTM, Google Ads, Meta Pixel, Clarity, CallRail, ClickCease, Vercel Analytics, consent mode, CSP analytics domains |
+| Role | Person | Responsibilities |
+|---|---|---|
+| **Owner** | Alex (American Barber Institute) | Business owner. All assets, accounts, and domain belong to Alex. |
+| **Developer** | Kazi | Frontend, UI/UX, HTML/CSS/JS, SEO, build scripts |
+| **Developer** | Arhum Abdullah | GA4, GTM, Google Ads, Meta Pixel, Clarity, CallRail, ClickCease, Vercel Analytics, consent mode, CSP analytics domains |
 
 > ⚠️ **Do NOT modify** `assets/js/analytics.js`, GTM/GA4/Ads/Pixel config, or CSP analytics domains without Arhum's sign-off.
+>
+> All deployments, GitHub pushes, and Vercel deploys go through **Alex's accounts only** (`amerbarberedu-oss`).
 
 ---
 
