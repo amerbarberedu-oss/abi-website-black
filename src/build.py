@@ -74,7 +74,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=33">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=151">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=152">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -89,7 +89,7 @@ TEMPLATE = """<!DOCTYPE html>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="topbar">
-  <div class="tb-promo">Start your barber journey today for only $150 per week*</div>
+  <div class="tb-promo">{tb_promo}</div>
   <div class="tb-calls">
     <a class="tb-call" href="tel:+12122902289"><b class="tb-flag">EN</b><span class="tb-label">Call Admissions</span><span class="tb-num">(212) 290-2289</span></a>
     <a class="tb-call" href="tel:+12122900278"><b class="tb-flag">ES</b><span class="tb-label">En Español</span><span class="tb-num">(212) 290-0278</span></a>
@@ -109,13 +109,13 @@ TEMPLATE = """<!DOCTYPE html>
   {nav_drawer}
 </header>
 <div class="mhx">
-  <div class="mhx-promo">START YOUR BARBER JOURNEY TODAY FOR ONLY <b>$150 PER WEEK*</b></div>
+  <div class="mhx-promo">{mhx_promo}</div>
   <div class="mhx-phones">
     <a class="mhx-phone" href="tel:+12122902289"><span class="mhx-num">(212) 290-2289</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>ENGLISH</span></a>
     <a class="mhx-phone" href="tel:+18563161551"><span class="mhx-num">(856) 316-1551</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>HAIRCUT</span></a>
     <a class="mhx-phone" href="tel:+12122900278"><span class="mhx-num">(212) 290-0278</span><span class="mhx-lab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>SPANISH</span></a>
   </div>
-  <div class="mhx-seats"><span class="mhx-star" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L21.8 9.3l-5 4.72 1.24 6.8L12 17.5l-6.04 3.32L7.2 14 2.2 9.3l6.9-1.04z"/></svg></span><span class="mhx-seats-t"><b>LIMITED SEATS AVAILABLE</b><i>ENROLLMENT NOW OPEN</i></span></div>
+  <div class="mhx-seats"><span class="mhx-star" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L21.8 9.3l-5 4.72 1.24 6.8L12 17.5l-6.04 3.32L7.2 14 2.2 9.3l6.9-1.04z"/></svg></span><span class="mhx-seats-t"><b>{seats_b}</b><i>{seats_i}</i></span></div>
 </div>
 
 <main id="main">
@@ -124,12 +124,12 @@ TEMPLATE = """<!DOCTYPE html>
 
 <section class="cta-band">
   <div class="wrap">
-    <p class="kicker" style="justify-content:center">Classes begin the first Monday of each month</p>
-    <h2>Ready to Become a Licensed Barber?</h2>
-    <p>Next class starts <span data-start-date>soon</span>. Seats fill fast — start your barber school enrollment, request a call, or speak with admissions in English or Spanish.</p>
+    <p class="kicker" style="justify-content:center">{cta_kicker}</p>
+    <h2>{cta_h2}</h2>
+    <p>{cta_body}</p>
     <div class="hero-ctas">
-      <a class="btn btn-gold btn-lg" href="{root}contact.html">Start Barber School</a>
-      <a class="btn btn-ghost btn-lg" href="{root}contact.html">Speak With Admissions</a>
+      <a class="btn btn-gold btn-lg" href="{root}contact.html">{cta_btn1}</a>
+      <a class="btn btn-ghost btn-lg" href="{root}contact.html">{cta_btn2}</a>
     </div>
   </div>
 </section>
@@ -137,11 +137,11 @@ TEMPLATE = """<!DOCTYPE html>
 <footer class="site">
   <div class="foot-cta">
     <div class="wrap">
-      <h3>Start Barber School Today</h3>
-      <p>Your new career is one phone call away. Talk to admissions in English or Spanish.</p>
+      <h3>{foot_cta_h}</h3>
+      <p>{foot_cta_p}</p>
       <div class="foot-cta-btns">
-        <a class="btn btn-gold btn-lg" href="{root}contact.html">Request a Call</a>
-        <a class="btn btn-blue btn-lg" href="{root}contact.html">Apply Now</a>
+        <a class="btn btn-gold btn-lg" href="{root}contact.html">{foot_btn1}</a>
+        <a class="btn btn-blue btn-lg" href="{root}contact.html">{foot_btn2}</a>
         
       </div>
     </div>
@@ -225,7 +225,7 @@ TEMPLATE = """<!DOCTYPE html>
     <span>Apply Now</span>
   </a>
   <div class="call-sheet" hidden role="menu" aria-label="Choose a language to call">
-    <p class="call-sheet-h">Call us — choose a language</p>
+    <p class="call-sheet-h">{cs_heading}</p>
     <a href="tel:+12122902289" role="menuitem"><span class="cs-lang">English</span><span class="cs-num">(212) 290-2289</span></a>
     <a href="tel:+12122900278" role="menuitem"><span class="cs-lang">Español</span><span class="cs-num">(212) 290-0278</span></a>
   </div>
@@ -237,7 +237,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=32" defer></script>
 <script src="{root}assets/js/landing.js?v=32" defer></script>
 <script src="{root}assets/js/upgrade.js?v=2" defer></script>
-<script src="{root}assets/js/campus.js?v=2" defer></script>
+<script src="{root}assets/js/campus.js?v=3" defer></script>
 <!-- GHL chat widget (VIBE AI). Alex chatbot preserved in /assets/js/chatbot.js — to restore Alex: delete this block and re-add the chatbot.js script tag. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="689f4917512e48b4268bf335"></script>
 <script>(function(){{var t=setInterval(function(){{var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){{clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){{.lc_text-widget,.lc_text-widget--bubble{{bottom:150px!important;right:12px!important}}}}";w.shadowRoot.appendChild(s);}}}},400);setTimeout(function(){{clearInterval(t)}},15000);}})();</script>
@@ -917,6 +917,35 @@ def build():
                           '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%s%s">ES</a></div>'
                           % (root, out, root, es_twin))
         nav_main, nav_drawer = _shell_nav(navbase, root, lang)
+        # ── i18n text for template sections ──
+        if lang == 'es':
+            i18n = dict(
+                tb_promo='Comienza tu carrera de barbero hoy por solo $150 por semana*',
+                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b>$150 POR SEMANA*</b>',
+                seats_b='CUPOS LIMITADOS DISPONIBLES', seats_i='INSCRIPCIONES ABIERTAS',
+                cta_kicker='Las clases comienzan el primer lunes de cada mes',
+                cta_h2='¿Listo Para Ser Barbero Licenciado?',
+                cta_body='La próxima clase comienza <span data-start-date>pronto</span>. Los cupos se llenan rápido — inscríbete hoy, solicita una llamada o habla con admisiones en inglés o español.',
+                cta_btn1='Empezar Escuela de Barbería', cta_btn2='Hablar con Admisiones',
+                foot_cta_h='Empieza la Escuela de Barbería Hoy',
+                foot_cta_p='Tu nueva carrera está a una llamada de distancia. Habla con admisiones en inglés o español.',
+                foot_btn1='Solicitar una Llamada', foot_btn2='Aplicar Ahora',
+                cs_heading='Llámanos — elige un idioma',
+            )
+        else:
+            i18n = dict(
+                tb_promo='Start your barber journey today for only $150 per week*',
+                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b>$150 PER WEEK*</b>',
+                seats_b='LIMITED SEATS AVAILABLE', seats_i='ENROLLMENT NOW OPEN',
+                cta_kicker='Classes begin the first Monday of each month',
+                cta_h2='Ready to Become a Licensed Barber?',
+                cta_body='Next class starts <span data-start-date>soon</span>. Seats fill fast — start your barber school enrollment, request a call, or speak with admissions in English or Spanish.',
+                cta_btn1='Start Barber School', cta_btn2='Speak With Admissions',
+                foot_cta_h='Start Barber School Today',
+                foot_cta_p='Your new career is one phone call away. Talk to admissions in English or Spanish.',
+                foot_btn1='Request a Call', foot_btn2='Apply Now',
+                cs_heading='Call us — choose a language',
+            )
         # hreflang: pair every page with its twin (mirrored slug) reciprocally.
         def _u(o):
             if o == 'index.html': return SITE_URL + '/'
@@ -950,7 +979,8 @@ def build():
             home_href=home_href, cta_href=cta_href, cta_label=cta_label,
             lp=root + 'programs/index.html',
             en_cur='aria-current="true"' if lang == 'en' else '',
-            es_cur='aria-current="true"' if lang == 'es' else '')
+            es_cur='aria-current="true"' if lang == 'es' else '',
+            **i18n)
         # Bake real next-class date + countdown defaults so they never render
         # as "0"/empty without JS (JS still enhances them to a live countdown).
         html = (html
