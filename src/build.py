@@ -946,8 +946,8 @@ def build():
         # ── i18n text for template sections ──
         if lang == 'es':
             i18n = dict(
-                tb_promo='Comienza tu carrera de barbero hoy por solo $150 por semana*',
-                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b>$150 POR SEMANA*</b>',
+                tb_promo='Comienza tu carrera de barbero hoy por solo <span class="tb-price">$150 por semana*</span>',
+                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b class="tb-price">$150 POR SEMANA*</b>',
                 seats_b='CUPOS LIMITADOS DISPONIBLES', seats_i='INSCRIPCIONES ABIERTAS',
                 cta_kicker='Las clases comienzan el primer lunes de cada mes',
                 cta_h2='¿Listo Para Ser Barbero Licenciado?',
@@ -960,8 +960,8 @@ def build():
             )
         else:
             i18n = dict(
-                tb_promo='Start your barber journey today for only $150 per week*',
-                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b>$150 PER WEEK*</b>',
+                tb_promo='Start your barber journey today for only <span class="tb-price">$150 per week*</span>',
+                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b class="tb-price">$150 PER WEEK*</b>',
                 seats_b='LIMITED SEATS AVAILABLE', seats_i='ENROLLMENT NOW OPEN',
                 cta_kicker='Classes begin the first Monday of each month',
                 cta_h2='Ready to Become a Licensed Barber?',
