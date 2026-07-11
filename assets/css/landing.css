@@ -249,6 +249,9 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 /* steps (splash) */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2rem}
 .step{border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;background:#fff}
+/* FIX: style.css .step::before creates a CSS counter number (01, 02, 03) via counter-increment.
+   landing.css uses .step-num badge instead. Both displaying causes duplicate numbers.
+   Hide the ::before counter — the .step-num badge at line ~1932 is the intended design. */
 .step::before{display:none!important}
 .step b{display:block;margin:.5rem 0 .3rem;font-size:1.05rem}
 .step p{font-size:.92rem;color:var(--ink-soft)}
