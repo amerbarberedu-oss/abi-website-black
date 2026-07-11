@@ -83,7 +83,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 {schema}
 </head>
-<body class="mhx-on{mhxclass}" style="--page-bg:url('/assets/img/{pagebg}')">
+<body class="mhx-on{mhxclass}{bodyclass}" style="--page-bg:url('/assets/img/{pagebg}')">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <div class="abi-deco" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
@@ -102,7 +102,7 @@ TEMPLATE = """<!DOCTYPE html>
     </a>
     {nav_main}
     {langtoggle}
-    <div class="loc-toggle" role="group" aria-label="Campus"><a class="is-active" aria-current="true" href="/manhattan">MN</a><a href="/bronx">BX</a></div>
+    {loc_toggle}
     <a class="header-cta" href="{cta_href}">{cta_label}</a>
     <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
@@ -541,8 +541,32 @@ BLOG_AUTHORS = {
     "exploring-the-benefits-of-enrolling-in-the-ameri": ("David Ayeoribe", "Lead Senior Instructor & Director"),
 }
 
+
+# Pages whose partials carry their own footer + scripts (full-page layout).
+# The build strips the template's <main>…footer…scripts and uses the partial body directly.
+FULL_PAGE_OUTS = {'index.html', 'bronx.html'}
+
 PAGES = [
     # (output, partial, title, description, lang, extra_schema)
+    # ── Full-page layouts (own footer/scripts) ──────────────────
+    ("index.html", "index.html",
+     "American Barber Institute — 500 Hour Barber Program NYC",
+     "New York's only dedicated barber school — 500-hour Master Barber program in Midtown Manhattan. Licensed by NYSED. Day, evening and weekend classes. Get licensed in as little as 4 months.",
+     "en", []),
+    ("bronx.html", "index.html",
+     "American Barber Institute — Bronx Campus | 500 Hour Barber Program",
+     "ABI Bronx campus at 121 Westchester Square — 500-hour Master Barber program. Licensed by NYSED. Day, evening and weekend classes. Get licensed in as little as 4 months.",
+     "en", []),
+    # ── Thank-you / confirmation ─────────────────────────────────
+    ("thank-you.html", "thank-you.html",
+     "Thank You — American Barber Institute",
+     "Thank you for contacting ABI. An admissions advisor will reach out to you shortly.",
+     "en", []),
+    ("gracias.html", "es-thank-you.html",
+     "Gracias — American Barber Institute",
+     "Gracias por contactar a ABI. Un asesor de admisiones se comunicará contigo pronto.",
+     "es", []),
+    # ── Standard pages ───────────────────────────────────────────
     ("about.html", "about.html",
      "About Us | American Barber Institute NYC",
      "Inside ABI: our Midtown Manhattan campus, NYS-licensed curriculum, instructors who are all ABI grads, and a mission to build lifetime barber careers.",
@@ -746,7 +770,7 @@ if os.path.exists(_blog_manifest):
 # completely safe (no EN impact, no empty ES pages) until Spanish content lands.
 # Spanish <title>/description are read from ES_TITLE/ES_DESC comments inside each
 # es- partial at build time; the EN strings below are only a fallback.
-_ES_SKIP = {'404.html'}
+_ES_SKIP = {'404.html', 'thank-you.html', 'gracias.html'}
 _es_twins = [("es/" + _o, "es-" + _pt, _t, _d, "es", _sch)
              for (_o, _pt, _t, _d, _lg, _sch) in list(PAGES)
              if _lg == 'en' and _o not in _ES_SKIP]
@@ -970,6 +994,19 @@ def build():
                 f'<link rel="alternate" hreflang="en" href="{canonical}">\n'
                 f'<link rel="alternate" hreflang="x-default" href="{canonical}">'
             )
+        # ── Campus toggle (Manhattan / Bronx) ──
+        _bare = out.replace('es/', '')
+        _is_bronx = _bare in ('bronx.html',)
+        _es_prefix = '/es' if out.startswith('es/') else ''
+        _mn_active = '' if _is_bronx else ' class="is-active" aria-current="true"'
+        _bx_active = ' class="is-active" aria-current="true"' if _is_bronx else ''
+        _loc_label = 'Sede' if lang == 'es' else 'Campus'
+        loc_toggle = (
+            f'<div class="loc-toggle" role="group" aria-label="{_loc_label}">'
+            f'<a{_mn_active} href="{_es_prefix}/manhattan">Manhattan</a>'
+            f'<a{_bx_active} href="{_es_prefix}/bronx">Bronx</a></div>'
+        )
+        bodyclass = ' bx-gold' if _is_bronx else ''
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
@@ -982,7 +1019,17 @@ def build():
             lp=root + 'programs/index.html',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '',
+            loc_toggle=loc_toggle, bodyclass=bodyclass,
             **i18n)
+        # ── Full-page partials (homepage / bronx) ──
+        # These carry their own footer + scripts, so we strip the template's
+        # <main>…cta-band…footer…mobile-cta…scripts and inject the partial body.
+        _bare = out.replace('es/', '')
+        if _bare in FULL_PAGE_OUTS:
+            _cut_start = html.find('<main id="main">')
+            _cut_end = html.find('</body>')
+            if _cut_start > 0 and _cut_end > _cut_start:
+                html = html[:_cut_start] + '\n' + body + '\n' + html[_cut_end:]
         # Bake real next-class date + countdown defaults so they never render
         # as "0"/empty without JS (JS still enhances them to a live countdown).
         html = (html
