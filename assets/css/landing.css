@@ -2973,6 +2973,31 @@ body.bx-gold .zero-step:hover{box-shadow:0 24px 50px rgba(180,140,30,.22);border
 body.bx-gold .zero-num{background:linear-gradient(150deg,#e8c84a,#c9971f);box-shadow:0 10px 22px rgba(156,116,20,.34)}
 body.bx-gold .zero-step p{color:#5c4a1e}
 body.bx-gold .btn:hover{box-shadow:0 12px 28px rgba(180,140,30,.35)}
+
+/* ═══════════ v149 — bx-gold: hardcoded blue → gold for ALL remaining elements ═══════════ */
+body.bx-gold .btn-gold{background:linear-gradient(135deg,#e8c84a,#c9971f)!important}
+body.bx-gold .btn-gold:hover{background:linear-gradient(135deg,#c9971f,#9c7414)!important}
+body.bx-gold .startpill b,body.bx-gold .startpill .dot{color:#c9971f}
+body.bx-gold .home-banner .eyebrow{color:#c9971f!important}
+body.bx-gold .home-banner .prose li::before{color:#c9971f}
+body.bx-gold .duo-card--a::after{background:linear-gradient(90deg,#c9971f,#e8c84a,#c9971f);background-size:200% 100%;animation:duoBar 8s linear infinite}
+body.bx-gold .duo-h{background:linear-gradient(95deg,#c9971f,#b8860b,#c9971f);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.bx-gold .duo-list li::before{background:linear-gradient(135deg,#c9971f,#e8c84a);box-shadow:0 3px 9px rgba(201,151,31,.42)}
+body.bx-gold .welcome-card{background:linear-gradient(160deg,#f5ecd5 0%,#c9971f 100%);color:#3a2a0a}
+body.bx-gold .welcome-quote{color:#9c7414}
+body.bx-gold .welcome-aside .welcome-mono{background:linear-gradient(150deg,#e8c84a,#c9971f);box-shadow:0 10px 22px rgba(201,151,31,.34)}
+body.bx-gold .welcome-sig-role{background:linear-gradient(135deg,#f5ecd5 0%,#c9971f 100%)}
+body.bx-gold .res-card:hover{box-shadow:0 20px 44px rgba(201,151,31,.22);border-top-color:#c9971f}
+body.bx-gold .res-card h3{background:linear-gradient(150deg,#e8c84a,#c9971f)}
+body.bx-gold .res-tag{color:#c9971f;background:#fdf5e1;border-color:#e8d5a0}
+body.bx-gold .res-cta{background:linear-gradient(135deg,#c9971f 0%,#5c4a1e 100%)}
+body.bx-gold .res-state--hl{background:linear-gradient(135deg,#e8c84a,#c9971f)!important;border-left-color:#5c4a1e!important}
+body.bx-gold .tdot-blue{background:#c9971f}
+body.bx-gold .foot-cta{background:linear-gradient(160deg,#1a1400 0%,#40300b 100%)}
+body.bx-gold .site.ftr .foot-cta,body.bx-gold footer.site .foot-cta{background:linear-gradient(160deg,#1a1400 0%,#40300b 100%)}
+body.bx-gold .formcard-ico{background:var(--blue)}
+body.bx-gold .desk-cta{background:var(--blue)}
+body.bx-gold .desk-cta:hover{background:var(--blue-dark)}
 body.bx-gold .phone-pill:hover{box-shadow:0 6px 18px rgba(180,140,30,.3)}
 
 /* ═══════════ v147 — GHL form: force visible (don't depend on iframe-resizer handshake).

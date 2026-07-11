@@ -49,9 +49,10 @@ function getCampus(){
 function setCampus(c){try{localStorage.setItem("abi-campus",c);}catch(e){}}
 
 // Smooth crossfade overlay for campus switch
-function withFade(applyFn){
+function withFade(applyFn,campus){
+  var bg=campus==="bronx"?"#1a1400":"#0c1020";
   var ov=document.createElement("div");
-  ov.style.cssText="position:fixed;inset:0;z-index:9999;background:#0c1020;opacity:0;pointer-events:none;transition:opacity .28s ease";
+  ov.style.cssText="position:fixed;inset:0;z-index:9999;background:"+bg+";opacity:0;pointer-events:none;transition:opacity .28s ease";
   document.body.appendChild(ov);
   // Force reflow then fade in
   ov.offsetWidth;
@@ -78,8 +79,8 @@ function _applyManhattan(){
   swapPhones(MN_PHONES);
   rewriteProgramsLinks("manhattan");
 }
-function applyBronx(){ withFade(_applyBronx); }
-function applyManhattan(){ withFade(_applyManhattan); }
+function applyBronx(){ withFade(_applyBronx,"bronx"); }
+function applyManhattan(){ withFade(_applyManhattan,"manhattan"); }
 
 // Rewrite any "Programs" nav link (points at the general /programs/ or /programs/index.html)
 // to the campus-specific programs page. Handles EN + ES paths, absolute + relative hrefs.
@@ -114,8 +115,9 @@ function updateLocToggle(campus){
   if(!toggle) return;
   var links=toggle.querySelectorAll("a");
   links.forEach(function(a){
-    var isMN=a.textContent.trim()==="MN";
-    var isBX=a.textContent.trim()==="BX";
+    var t=a.textContent.trim().toLowerCase();
+    var isMN=(t==="mn"||t==="manhattan");
+    var isBX=(t==="bx"||t==="bronx");
     if((campus==="manhattan"&&isMN)||(campus==="bronx"&&isBX)){
       a.classList.add("is-active");
       a.setAttribute("aria-current","true");
@@ -186,13 +188,13 @@ function init(){
     var a=e.target.closest(".loc-toggle a");
     if(!a) return;
     e.preventDefault();
-    var txt=a.textContent.trim();
+    var txt=a.textContent.trim().toLowerCase();
     // If we're on a programs page, toggling campus takes the user to the OTHER campus's
     // programs page — not the campus home. This is what "Manhattan/Bronx programs stay
     // synced to campus toggle" means.
     var here=location.pathname;
     var esPrefix=/\/es\//.test(here)?"/es":"";
-    if(txt==="BX"){
+    if(txt==="bronx"||txt==="bx"){
       setCampus("bronx");
       if(isProgramsPage()){
         window.location.href=esPrefix+"/programs/bronx.html";
@@ -201,7 +203,7 @@ function init(){
       }else{
         applyBronx();
       }
-    }else if(txt==="MN"){
+    }else if(txt==="manhattan"||txt==="mn"){
       setCampus("manhattan");
       if(isProgramsPage()){
         window.location.href=esPrefix+"/programs/manhattan.html";

@@ -46,6 +46,7 @@ class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
         # Fallback
         return super().do_GET()
 
+socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("", PORT), CleanURLHandler) as httpd:
     print(f"Serving at http://localhost:{PORT} (clean URLs + Vercel aliases enabled)")
     httpd.serve_forever()
