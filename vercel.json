@@ -307,15 +307,51 @@
       "destination": "/es/programs/contagious-diseases",
       "permanent": true
     },
-    { "source": "/es/about/instructors",             "destination": "/es/instructors",               "permanent": true },
-    { "source": "/es/about/skills-and-techniques",   "destination": "/es/skills-and-techniques",     "permanent": true },
-    { "source": "/es/about/how-to-get-started",      "destination": "/es/how-to-get-started",        "permanent": true },
-    { "source": "/es/about/virtual-tour",            "destination": "/es/virtual-tour",              "permanent": true },
-    { "source": "/es/faqs",                          "destination": "/es/faq",                       "permanent": true },
-    { "source": "/es/resources/veterans",            "destination": "/es/veterans",                  "permanent": true },
-    { "source": "/es/resources/acces-vr",            "destination": "/es/access-vr-program",         "permanent": true },
-    { "source": "/es/jobs/job-opportunities",        "destination": "/es/jobs",                      "permanent": true },
-    { "source": "/es/jobs/shop-registration",        "destination": "/es/shop-registration",         "permanent": true },
+    {
+      "source": "/es/about/instructors",
+      "destination": "/es/instructors",
+      "permanent": true
+    },
+    {
+      "source": "/es/about/skills-and-techniques",
+      "destination": "/es/skills-and-techniques",
+      "permanent": true
+    },
+    {
+      "source": "/es/about/how-to-get-started",
+      "destination": "/es/how-to-get-started",
+      "permanent": true
+    },
+    {
+      "source": "/es/about/virtual-tour",
+      "destination": "/es/virtual-tour",
+      "permanent": true
+    },
+    {
+      "source": "/es/faqs",
+      "destination": "/es/faq",
+      "permanent": true
+    },
+    {
+      "source": "/es/resources/veterans",
+      "destination": "/es/veterans",
+      "permanent": true
+    },
+    {
+      "source": "/es/resources/acces-vr",
+      "destination": "/es/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/es/jobs/job-opportunities",
+      "destination": "/es/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/es/jobs/shop-registration",
+      "destination": "/es/shop-registration",
+      "permanent": true
+    },
     {
       "source": "/es/courses/:path+",
       "destination": "/es/programs",
@@ -552,7 +588,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data: blob: https://*.leadconnectorhq.com https://*.msgsndr.com https://i.ytimg.com https://*.ytimg.com https://yblpnhzepaptitujzrwx.supabase.co https://assets-lilac-five.vercel.app https://*.public.blob.vercel-storage.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://www.google.com.pk https://*.facebook.com https://*.facebook.net https://www.clarity.ms https://*.bing.com; media-src 'self' blob: https://*.leadconnectorhq.com https://*.msgsndr.com https://yblpnhzepaptitujzrwx.supabase.co https://assets-lilac-five.vercel.app https://*.public.blob.vercel-storage.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.bunny.net https://stcdn.leadconnectorhq.com https://widgets.leadconnectorhq.com; font-src 'self' data: https://fonts.gstatic.com https://fonts.bunny.net; script-src 'self' 'unsafe-inline' https://link.msgsndr.com https://widgets.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://services.leadconnectorhq.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://*.facebook.net https://www.clarity.ms https://*.clarity.ms https://www.clickcease.com https://*.clickcease.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cdn.callrail.com https://*.callrail.com; frame-src https://www.googletagmanager.com https://api.leadconnectorhq.com https://*.leadconnectorhq.com https://*.msgsndr.com https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com https://td.doubleclick.net https://bid.g.doubleclick.net https://*.jotform.com; connect-src 'self' https://*.leadconnectorhq.com https://*.msgsndr.com wss://*.leadconnectorhq.com wss://*.msgsndr.com https://formspree.io https://text.pollinations.ai https://*.pollinations.ai https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://*.facebook.com https://*.clarity.ms https://*.clickcease.com https://*.callrail.com https://*.a.run.app https://*.on.aws https://*.jotform.com https://*.doubleclick.net; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; img-src 'self' data: blob: https://*.leadconnectorhq.com https://*.msgsndr.com https://i.ytimg.com https://*.ytimg.com https://yblpnhzepaptitujzrwx.supabase.co https://assets-lilac-five.vercel.app https://*.public.blob.vercel-storage.com https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://www.google.com.pk https://*.google.co.in https://*.google.co.uk https://*.google.de https://*.google.fr https://*.google.ca https://*.google.com.br https://*.google.com.au https://pagead2.googlesyndication.com https://www.googleadservices.com https://*.facebook.com https://*.facebook.net https://www.clarity.ms https://*.bing.com; media-src 'self' blob: https://*.leadconnectorhq.com https://*.msgsndr.com https://yblpnhzepaptitujzrwx.supabase.co https://assets-lilac-five.vercel.app https://*.public.blob.vercel-storage.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.bunny.net https://stcdn.leadconnectorhq.com https://widgets.leadconnectorhq.com; font-src 'self' data: https://fonts.gstatic.com https://fonts.bunny.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://link.msgsndr.com https://widgets.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://services.leadconnectorhq.com https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://*.facebook.net https://www.clarity.ms https://*.clarity.ms https://www.clickcease.com https://*.clickcease.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cdn.callrail.com https://*.callrail.com; frame-src https://www.googletagmanager.com https://api.leadconnectorhq.com https://*.leadconnectorhq.com https://*.msgsndr.com https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com https://td.doubleclick.net https://bid.g.doubleclick.net https://*.jotform.com; connect-src 'self' https://*.leadconnectorhq.com https://*.msgsndr.com wss://*.leadconnectorhq.com wss://*.msgsndr.com https://formspree.io https://text.pollinations.ai https://*.pollinations.ai https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://*.facebook.com https://*.clarity.ms https://*.clickcease.com https://*.callrail.com https://*.a.run.app https://*.on.aws https://*.jotform.com https://*.doubleclick.net; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests"
         }
       ]
     }
