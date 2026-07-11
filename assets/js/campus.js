@@ -157,11 +157,15 @@ function init(){
 
   if(isBronxPage()){
     setCampus("bronx");
+    swapPhones(BX_PHONES);
     rewriteProgramsLinks("bronx");
   } else {
     var campus=getCampus();
     if(campus==="bronx") _applyBronx();
-    else rewriteProgramsLinks("manhattan");
+    else {
+      swapPhones(MN_PHONES);
+      rewriteProgramsLinks("manhattan");
+    }
   }
 
   document.addEventListener("click",function(e){
