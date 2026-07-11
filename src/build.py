@@ -787,42 +787,44 @@ PAGE_BG = {
 _DEFAULT_BG = 'gallery/cut-05.jpg'
 
 def _shell_nav(b, root, lang):
-    """Return (mainnav, drawer) with every href prefixed by base `b` (already
-    root-resolved). For ES pages b = root+'es/' so nav stays inside the Spanish
-    mirror; the EN markup is byte-identical to the pre-i18n hardcoded nav."""
+    """Return (mainnav, drawer) matching the homepage nav layout:
+    No Home link, Partners+Resources+Schedules inside Jobs ▾ dropdown,
+    Blog inside FAQs ▾ dropdown."""
     if lang == 'es':
         mainnav = ('<nav class="mainnav" aria-label="Principal">'
-          f'<a href="{b}index.html">Inicio</a><a href="{b}about.html">Nosotros</a>'
+          f'<a href="{b}about.html">Nosotros</a>'
           f'<a href="{b}programs/index.html">Programas</a><a href="{b}instructors.html">Instructores</a>'
-          f'<a href="{b}partners.html">Aliados</a><a href="{b}gallery.html">Galería</a>'
-          f'<a href="{b}haircuts.html">Cortes</a><a href="{b}blog/index.html">Blog</a>'
+          f'<a href="{b}gallery.html">Galería</a>'
+          f'<a href="{b}haircuts.html">Cortes</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Empleo ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Empleo</a><a href="{b}resources.html">Recursos</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Empleo</a><a href="{b}resources.html">Recursos</a><a href="{b}schedules.html">Horarios</a><a href="{b}partners.html">Aliados</a></span></span>'
           f'<span class="nav-drop"><a href="{b}faq.html" class="nav-drop-trigger">Preguntas ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}schedules.html">Horarios</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}blog/index.html">Blog</a></span></span>'
           f'<a href="{b}contact.html">Contacto</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
-          f'<a href="{b}index.html">Inicio</a><a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
-          f'<a href="{b}instructors.html">Instructores</a><a href="{b}partners.html">Aliados</a><a href="{b}gallery.html">Galería</a>'
-          f'<a href="{b}haircuts.html">Cortes</a><a href="{b}blog/index.html">Blog</a><a href="{b}jobs.html">Empleo</a>'
-          f'<a href="{b}resources.html">Recursos</a><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}schedules.html">Horarios</a>'
+          f'<a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
+          f'<a href="{b}instructors.html">Instructores</a><a href="{b}gallery.html">Galería</a>'
+          f'<a href="{b}haircuts.html">Cortes</a><a href="{b}jobs.html">Empleo</a>'
+          f'<a href="{b}resources.html">Recursos</a><a href="{b}schedules.html">Horarios</a><a href="{b}partners.html">Aliados</a>'
+          f'<a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}blog/index.html">Blog</a>'
           f'<a href="{b}contact.html">Contacto</a><a href="{root}index.html"><b>English</b></a></div></nav>')
     else:
         mainnav = ('<nav class="mainnav" aria-label="Main">'
-          f'<a href="{b}index.html">Home</a><a href="{b}about.html">About</a>'
+          f'<a href="{b}about.html">About</a>'
           f'<a href="{b}programs/index.html">Programs</a><a href="{b}instructors.html">Instructors</a>'
-          f'<a href="{b}partners.html">Partners</a><a href="{b}gallery.html">Gallery</a>'
-          f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}blog/index.html">Blog</a>'
+          f'<a href="{b}gallery.html">Gallery</a>'
+          f'<a href="{b}haircuts.html">Haircuts</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Jobs ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Jobs</a><a href="{b}resources.html">Resources</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}jobs.html">Jobs</a><a href="{b}resources.html">Resources</a><a href="{b}schedules.html">Schedules</a><a href="{b}partners.html">Partners</a></span></span>'
           f'<span class="nav-drop"><a href="{b}faq.html" class="nav-drop-trigger">FAQs ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}faq.html">FAQs</a><a href="{b}schedules.html">Schedules</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}faq.html">FAQs</a><a href="{b}blog/index.html">Blog</a></span></span>'
           f'<a href="{b}contact.html">Contact</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
-          f'<a href="{b}index.html">Home</a><a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
-          f'<a href="{b}instructors.html">Instructors</a><a href="{b}partners.html">Partners</a><a href="{b}gallery.html">Gallery</a>'
-          f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}blog/index.html">Blog</a><a href="{b}jobs.html">Jobs</a>'
-          f'<a href="{b}resources.html">Resources</a><a href="{b}faq.html">FAQs</a><a href="{b}schedules.html">Schedules</a>'
+          f'<a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
+          f'<a href="{b}instructors.html">Instructors</a><a href="{b}gallery.html">Gallery</a>'
+          f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}jobs.html">Jobs</a>'
+          f'<a href="{b}resources.html">Resources</a><a href="{b}schedules.html">Schedules</a><a href="{b}partners.html">Partners</a>'
+          f'<a href="{b}faq.html">FAQs</a><a href="{b}blog/index.html">Blog</a>'
           f'<a href="{b}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>')
     return mainnav, drawer
 
