@@ -72,6 +72,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="{root}assets/css/landing.css?v=152" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=33">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/landing.css?v=152">
@@ -551,11 +552,11 @@ PAGES = [
     # ── Full-page layouts (own footer/scripts) ──────────────────
     ("index.html", "index.html",
      "American Barber Institute — 500 Hour Barber Program NYC",
-     "New York's only dedicated barber school — 500-hour Master Barber program in Midtown Manhattan. Licensed by NYSED. Day, evening and weekend classes. Get licensed in as little as 4 months.",
+     "NYC's only dedicated barber school — 500-hour Master Barber program in Midtown Manhattan. Licensed by NYSED. Day, evening and weekend classes.",
      "en", []),
     ("bronx.html", "index.html",
      "American Barber Institute — Bronx Campus | 500 Hour Barber Program",
-     "ABI Bronx campus at 121 Westchester Square — 500-hour Master Barber program. Licensed by NYSED. Day, evening and weekend classes. Get licensed in as little as 4 months.",
+     "ABI Bronx campus at 121 Westchester Square — 500-hour Master Barber program. NYSED-licensed. Day, evening and weekend classes.",
      "en", []),
     # ── Thank-you / confirmation ─────────────────────────────────
     ("thank-you.html", "thank-you.html",
@@ -565,6 +566,15 @@ PAGES = [
     ("gracias.html", "es-thank-you.html",
      "Gracias — American Barber Institute",
      "Gracias por contactar a ABI. Un asesor de admisiones se comunicará contigo pronto.",
+     "es", []),
+    # ── Explicit ES full-page pages (different titles from EN) ────
+    ("es/index.html", "es-index.html",
+     "Instituto Americano de Barbería — Programa de Barbero 500 Horas NYC",
+     "La única escuela de barbería dedicada en Nueva York — programa de 500 horas. Licenciada por NYSED. Clases diurnas, nocturnas y de fin de semana.",
+     "es", []),
+    ("es/bronx.html", "es-index.html",
+     "Instituto Americano de Barbería — Campus Bronx | Programa de 500 Horas",
+     "Campus ABI en el Bronx, 121 Westchester Square — programa de barbero de 500 horas. Licenciada por NYSED. Clases diurnas, nocturnas y de fin de semana.",
      "es", []),
     # ── Standard pages ───────────────────────────────────────────
     ("about.html", "about.html",
@@ -618,15 +628,15 @@ PAGES = [
      "en", []),
     ("programs/index.html", "programs-index.html",
      "Barber Programs in NYC | American Barber Institute",
-     "ABI's NYS-licensed barber programs at our Manhattan & Bronx campuses: 500-Hour Master Barber, 50-Hour Barber Refresher (Manhattan campus only) and the 3-Hour Contagious Diseases course.",
+     "ABI's NYS-licensed barber programs at Manhattan & Bronx: 500-Hour Master Barber, 50-Hour Refresher, and Contagious Diseases course.",
      "en", []),
     ("programs/manhattan.html", "programs-manhattan.html",
      "Manhattan Campus Programs | American Barber Institute",
-     "Every program at ABI's Midtown Manhattan campus (48 West 39th Street): 500-Hour Master Barber, 50-Hour Barber Refresher (Manhattan only) and 3-Hour Contagious Diseases — NYSED-approved with weekly payment plans.",
+     "ABI Midtown Manhattan programs: 500-Hour Master Barber, 50-Hour Refresher, Contagious Diseases — NYSED-approved with payment plans.",
      "en", []),
     ("programs/bronx.html", "programs-bronx.html",
      "Bronx Campus Programs | American Barber Institute",
-     "Every program at ABI's Bronx campus (121 Westchester Square, by the 6 train): 500-Hour Master Barber and 3-Hour Contagious Diseases — NYSED-approved with weekly payment plans.",
+     "ABI Bronx programs at 121 Westchester Square: 500-Hour Master Barber and Contagious Diseases — NYSED-approved with payment plans.",
      "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
      "500-Hour Master Barber Program — Manhattan | ABI NYC",
@@ -635,7 +645,7 @@ PAGES = [
         "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/500-hour-master-barber-bronx.html", "program-500-bronx.html",
      "500-Hour Master Barber Program — Bronx | ABI NYC",
-     "Become a licensed Master Barber at ABI's Bronx campus. 500-hour hands-on training, flexible schedules, payment plans, job placement and bilingual instruction.",
+     "Become a licensed Master Barber at ABI's Bronx campus. 500-hour hands-on training, flexible schedules, payment plans, job placement and bilingual class.",
      "en", [course_schema("500 Hour Master Barber Program — Bronx",
         "Four-month NYS-licensed master barber training at the Bronx campus with bilingual instruction, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/50-hour-barber-refresher.html", "program-50.html",
@@ -662,14 +672,21 @@ PAGES = [
     ("how-to-get-started.html", "page-how-to-get-started.html",
      "How to Get Started | Enroll at American Barber Institute",
      "Enroll at ABI in 4 steps: book a tour, bring your documents, pick a schedule and start on the first Monday of the month. Manhattan & Bronx campuses.",
-     "en", []),
+     "en", [{"@context":"https://schema.org","@type":"HowTo","name":"How to Enroll at American Barber Institute",
+             "description":"Enroll at ABI in 4 simple steps — from booking a campus tour to starting your first class.",
+             "step":[
+               {"@type":"HowToStep","position":1,"name":"Book a Campus Tour","text":"Schedule a tour of our Manhattan or Bronx campus to see the facilities and meet instructors."},
+               {"@type":"HowToStep","position":2,"name":"Bring Your Documents","text":"Bring a valid photo ID, proof of high school diploma or GED, and Social Security card."},
+               {"@type":"HowToStep","position":3,"name":"Choose Your Schedule","text":"Pick from morning, afternoon, evening or weekend class schedules that fit your life."},
+               {"@type":"HowToStep","position":4,"name":"Start on the First Monday","text":"Classes begin the first Monday of each month. Complete enrollment and start your barber career."}
+             ]}]),
     ("va-approved-job-training-program.html", "page-va-approved-job-training-program.html",
      "VA-Approved Barber Job Training Program in NYC | ABI",
-     "ABI's 500-Hour Master Barber Program is VA-approved under Title 38 USC § 3676 — hands-on training, veteran support and job placement in Manhattan & the Bronx.",
+     "ABI's 500-Hour Master Barber Program is VA-approved under Title 38 USC § 3676 — hands-on training, veteran support and job placement in NYC.",
      "en", []),
     ("access-vr-program.html", "page-access-vr-program.html",
      "ACCES-VR Barber Training Program in NYC | ABI",
-     "ACCES-VR can cover tuition, tools and books for New Yorkers with documented disabilities at American Barber Institute. Eligibility, services and how to apply.",
+     "ACCES-VR can cover tuition, tools and books for New Yorkers with documented disabilities at ABI. Eligibility, services and how to apply.",
      "en", []),
     ("veterans.html", "page-veterans.html",
      "Veterans Barber Training NYC | GI Bill® Accepted | ABI",
@@ -685,7 +702,7 @@ PAGES = [
      "en", []),
     ("skills-and-techniques.html", "page-skills-and-techniques.html",
      "Skills & Techniques Barber Students Learn | ABI NYC",
-     "What ABI students master in 4 months: fades, tapers, shears, razor lineups, shaves, sanitation, barber theory and NY State Board exam prep — on real clients.",
+     "What ABI students master in 4 months: fades, tapers, shears, razor lineups, shaves, sanitation, barber theory and NY State Board exam prep.",
      "en", []),
     ("shop-registration.html", "page-shop-registration.html",
      "Shop Registration — Hire ABI Graduates | ABI NYC",
@@ -717,7 +734,7 @@ PAGES = [
      "en", []),
     ("barber-school-mount-vernon-ny.html", "loc-barber-school-mount-vernon-ny.html",
      "Barber School Mount Vernon NY - Westchester Barber Courses",
-     "Become a Master Barber in just four months. Fade and shaving classes, NYS board exam prep and job placement — minutes from Mount Vernon at our Bronx campus.",
+     "Become a Master Barber in four months. Fade and shaving classes, NYS board exam prep and job placement — minutes from Mount Vernon at ABI Bronx.",
      "en", []),
     ("barber-school-port-chester-ny.html", "loc-barber-school-port-chester-ny.html",
      "Barber School Port Chester NY - Westchester Barber School",
@@ -770,7 +787,9 @@ if os.path.exists(_blog_manifest):
 # completely safe (no EN impact, no empty ES pages) until Spanish content lands.
 # Spanish <title>/description are read from ES_TITLE/ES_DESC comments inside each
 # es- partial at build time; the EN strings below are only a fallback.
-_ES_SKIP = {'404.html', 'thank-you.html', 'gracias.html'}
+_ES_SKIP = {'404.html', 'thank-you.html', 'gracias.html', 'index.html', 'bronx.html'}
+# Capture explicit ES entries BEFORE auto-twins, so build() knows not to override their titles
+_EXPLICIT_ES_PAGES = [(o, pt, t, d, l, s) for (o, pt, t, d, l, s) in PAGES if l == 'es']
 _es_twins = [("es/" + _o, "es-" + _pt, _t, _d, "es", _sch)
              for (_o, _pt, _t, _d, _lg, _sch) in list(PAGES)
              if _lg == 'en' and _o not in _ES_SKIP]
@@ -868,8 +887,11 @@ def build():
         if lang == 'es':
             _mt = re.search(r'<!--\s*ES_TITLE:\s*(.*?)\s*-->', body)
             _md = re.search(r'<!--\s*ES_DESC:\s*(.*?)\s*-->', body)
-            if _mt: title = _mt.group(1)
-            if _md: desc = _md.group(1)
+            # Auto-twins (generated from EN) get ES_TITLE/DESC from partial.
+            # Explicit ES entries in PAGES keep their own title/desc.
+            _is_explicit = any(o == out and l == 'es' for o, _, _, _, l, _ in _EXPLICIT_ES_PAGES)
+            if _mt and not _is_explicit: title = _mt.group(1)
+            if _md and not _is_explicit: desc = _md.group(1)
             body = re.sub(r'<!--\s*ES_(?:TITLE|DESC):.*?-->\s*', '', body)
         # Inject a small named-author byline at the top of each blog post (E-E-A-T).
         # The same human author + role is already referenced in the BlogPosting schema.
