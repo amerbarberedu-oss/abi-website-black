@@ -129,41 +129,21 @@ function updateLocToggle(campus){
 }
 
 function swapPhones(data){
-  var tb=document.querySelector(".tb-calls");
-  if(tb){
-    tb.innerHTML=data.topbar.map(function(p){
-      return '<a class="tb-call" href="tel:'+p.tel+'"><b class="tb-flag">'+p.flag+'</b><span class="tb-label">'+p.label+'</span><span class="tb-num">'+p.num+'</span></a>';
-    }).join("");
-  }
+  // ── Data-attribute approach: swap ALL [data-campus-phone] elements ──
+  var campus=(data===BX_PHONES)?"bx":"mn";
+  document.querySelectorAll("[data-campus-phone]").forEach(function(el){
+    var href=el.getAttribute("data-"+campus+"-href");
+    var num=el.getAttribute("data-"+campus+"-num");
+    if(href) el.href=href;
+    if(num){
+      // Update visible number text: find .tb-num, .mhx-num, .cs-num, or direct textContent
+      var numEl=el.querySelector(".tb-num,.mhx-num,.cs-num");
+      if(numEl) numEl.textContent=num;
+      else if(!el.querySelector("span")&&!el.querySelector("b")) el.textContent=num;
+    }
+  });
 
-  var mhx=document.querySelector(".mhx-phones");
-  if(mhx){
-    mhx.innerHTML=data.mhx.map(function(p){
-      var svg=p.icon==="scissors"?SCISSORS_SVG:PHONE_SVG;
-      return '<a class="mhx-phone" href="tel:'+p.tel+'"><span class="mhx-num">'+p.num+'</span><span class="mhx-lab">'+svg+p.lab+'</span></a>';
-    }).join("\n");
-  }
-
-  var ftrVisit=document.querySelector(".ftr-grid");
-  if(ftrVisit){
-    var divs=ftrVisit.querySelectorAll("div");
-    divs.forEach(function(d){
-      var h4=d.querySelector("h4");
-      if(h4&&h4.textContent.trim()==="Visit Us"){
-        var phoneLinks=d.querySelectorAll('a[href^="tel:"]');
-        phoneLinks.forEach(function(a){a.remove();});
-        var emailLink=d.querySelector('a[href^="mailto:"]');
-        data.footer.forEach(function(p){
-          var a=document.createElement("a");
-          a.href="tel:"+p.tel;
-          a.textContent=p.text;
-          if(emailLink) d.insertBefore(a,emailLink);
-          else d.appendChild(a);
-        });
-      }
-    });
-  }
-
+  // ── Mobile bottom bar ──
   var mbarCall=document.querySelector(".mbar-call");
   var mbarText=document.querySelector(".mbar-text");
   if(mbarCall) mbarCall.href="tel:"+data.mbar.call;

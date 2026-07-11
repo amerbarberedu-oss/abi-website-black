@@ -249,7 +249,7 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 /* steps (splash) */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2rem}
 .step{border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;background:#fff}
-.step-num{font-size:2rem;font-weight:800;color:var(--blue);opacity:1}
+.step::before{display:none!important}
 .step b{display:block;margin:.5rem 0 .3rem;font-size:1.05rem}
 .step p{font-size:.92rem;color:var(--ink-soft)}
 
@@ -2417,6 +2417,25 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .hdr-in > .header-cta{order:4}
 .hdr-in > .hdr-right{order:5}
 
+/* ── bx-gold: lang-toggle glassmorphism → gold ── */
+body.bx-gold .hdr-in > .lang-toggle{
+  border-color:rgba(201,151,31,.4)!important;
+  box-shadow:0 4px 16px rgba(180,140,30,.15),inset 0 1px 0 rgba(255,255,255,.6);
+}
+body.bx-gold .hdr-in > .lang-toggle:hover{
+  border-color:rgba(201,151,31,.7)!important;
+  box-shadow:0 6px 22px rgba(180,140,30,.25),inset 0 1px 0 rgba(255,255,255,.7);
+}
+body.bx-gold .hdr-in > .lang-toggle a{
+  color:#9c7414!important;
+}
+body.bx-gold .hdr-in > .lang-toggle a.is-active,
+body.bx-gold .hdr-in > .lang-toggle a:hover{
+  background:linear-gradient(135deg,#c9971f,#e3b34e)!important;color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+body.bx-gold .hdr-in > .lang-toggle a+a{border-left-color:rgba(201,151,31,.3)}
+
 @media (max-width:1199px){
   /* on tablet/mobile, nav becomes hamburger drawer; keep EN|ES + hamburger visible */
   .hdr-in > .lang-toggle{margin-left:auto}
@@ -3018,6 +3037,77 @@ body.bx-gold .foot-cta{background:linear-gradient(160deg,#1a1400 0%,#40300b 100%
 body.bx-gold .site.ftr .foot-cta,body.bx-gold footer.site .foot-cta{background:linear-gradient(160deg,#1a1400 0%,#40300b 100%)}
 body.bx-gold .formcard-ico{background:var(--blue)}
 body.bx-gold .desk-cta{background:var(--blue)}
+
+/* ═══════════ v152 — bx-gold: COMPLETE pass — every hardcoded blue → gold ═══════════ */
+
+/* ── Step badges (3 Easy Steps section) ── */
+body.bx-gold .step-num{background:linear-gradient(135deg,#c9971f,#e8c84a)!important}
+
+/* ── Price callout (haircuts page) ── */
+body.bx-gold .price-callout{background:linear-gradient(135deg,#fdf5e1,#f5ecd5);border-color:rgba(201,151,31,.22)}
+
+/* ── Style chips ── */
+body.bx-gold .style-chip{background:linear-gradient(145deg,#fff,#fdf5e1);border-color:rgba(201,151,31,.2)}
+body.bx-gold .style-chip:hover{box-shadow:0 12px 26px rgba(201,151,31,.18)}
+body.bx-gold .style-chip::before{background:#c9971f}
+
+/* ── Instructor cards ── */
+body.bx-gold .inst-card:hover .inst-photo{box-shadow:0 8px 22px rgba(201,151,31,.3)}
+
+/* ── Comparison table rows ── */
+body.bx-gold .cmp tbody tr:hover{background:rgba(201,151,31,.06)}
+
+/* ── Generic cards & features ── */
+body.bx-gold .card,body.bx-gold .feature{border-color:rgba(201,151,31,.18)!important}
+body.bx-gold .card:hover,body.bx-gold .feature:hover{box-shadow:0 16px 36px rgba(201,151,31,.18)!important}
+
+/* ── Campus cards ── */
+body.bx-gold .campus-card{border-color:rgba(201,151,31,.22);box-shadow:0 6px 22px rgba(201,151,31,.12)}
+body.bx-gold .campus-card:hover{box-shadow:0 14px 34px rgba(201,151,31,.24);border-color:rgba(201,151,31,.5)}
+
+/* ── Date cards (schedule page) ── */
+body.bx-gold .date-card{background:linear-gradient(145deg,#ffffff,#fdf5e1);border-color:rgba(201,151,31,.2)}
+body.bx-gold .date-row{border-bottom-color:rgba(201,151,31,.2)}
+body.bx-gold .hol-row{border-bottom-color:rgba(201,151,31,.2)}
+
+/* ── Schedule cards ── */
+body.bx-gold .sched-card{background:linear-gradient(150deg,#ffffff,#fdf5e1);border-color:rgba(201,151,31,.22)}
+body.bx-gold .sched-card:hover{box-shadow:0 20px 44px rgba(201,151,31,.22)}
+body.bx-gold .sched-card--feature{border-color:#c9971f;box-shadow:0 14px 38px rgba(201,151,31,.24)}
+body.bx-gold .sched-list li{border-bottom-color:rgba(201,151,31,.2)}
+
+/* ── Gallery hover rings ── */
+body.bx-gold .gallery-grid.gal-people a::after{box-shadow:inset 0 0 0 0 rgba(201,151,31,0)}
+body.bx-gold .gallery-grid.gal-people a:hover::after{box-shadow:inset 0 0 0 3px rgba(201,151,31,.7)}
+body.bx-gold .gallery-grid.gal-color a::after{box-shadow:inset 0 0 0 0 rgba(201,151,31,0)}
+body.bx-gold .gallery-grid.gal-color a:hover::after{box-shadow:inset 0 0 0 3px rgba(201,151,31,.75),0 0 24px rgba(201,151,31,.3)}
+
+/* ── Duo cards ── */
+body.bx-gold .duo-card--a{box-shadow:0 20px 46px rgba(201,151,31,.16),inset 0 1px 0 #fff}
+body.bx-gold .duo-card--a:hover{box-shadow:0 32px 64px rgba(201,151,31,.26)}
+
+/* ── Virtual tour buttons ── */
+body.bx-gold .vs-btn:hover{background:#c9971f}
+body.bx-gold .vs-btn.vs-muted:hover{background:#c9971f}
+
+/* ── ABIBot chatbot ── */
+body.bx-gold .abibot-fab{background:linear-gradient(135deg,#c9971f,#e8c84a)}
+body.bx-gold .abibot-fab:hover{box-shadow:0 14px 38px rgba(201,151,31,.55)}
+body.bx-gold .abibot-head{background:linear-gradient(135deg,#c9971f,#e8c84a)}
+body.bx-gold .abibot-bot{border-color:rgba(201,151,31,.15)}
+body.bx-gold .abibot-user{background:linear-gradient(135deg,#c9971f,#e8c84a)}
+body.bx-gold .abibot-chips{background:#fdf8ee;border-top-color:rgba(201,151,31,.15)}
+body.bx-gold .abibot-chip{border-color:rgba(201,151,31,.35);color:#c9971f}
+body.bx-gold .abibot-input{border-top-color:rgba(201,151,31,.15)}
+body.bx-gold .abibot-input input{border-color:rgba(201,151,31,.25)}
+body.bx-gold .abibot-input button{background:linear-gradient(135deg,#c9971f,#e8c84a)}
+
+/* ── Transition smoothness for ALL color-affected properties ── */
+.step-num,.price-callout,.style-chip,.inst-photo,.campus-card,.date-card,
+.sched-card,.duo-card--a,.vs-btn,.abibot-fab,.card,.feature{
+  transition:background .5s ease,border-color .5s ease,box-shadow .5s ease,color .45s ease;
+}
+.gallery-grid a::after{transition:box-shadow .4s ease}
 body.bx-gold .desk-cta:hover{background:var(--blue-dark)}
 body.bx-gold .phone-pill:hover{box-shadow:0 6px 18px rgba(180,140,30,.3)}
 
