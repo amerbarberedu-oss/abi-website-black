@@ -178,11 +178,11 @@ function init(){
   if(isBronxPage()){
     setCampus("bronx");
     rewriteProgramsLinks("bronx");
-    return;
+  } else {
+    var campus=getCampus();
+    if(campus==="bronx") _applyBronx();
+    else rewriteProgramsLinks("manhattan");
   }
-  var campus=getCampus();
-  if(campus==="bronx") _applyBronx();
-  else rewriteProgramsLinks("manhattan");
 
   document.addEventListener("click",function(e){
     var a=e.target.closest(".loc-toggle a");
