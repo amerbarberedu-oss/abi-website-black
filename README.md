@@ -166,15 +166,14 @@ When modifying CSS/JS files, bump the version number:
 
 | Remote | Repo | Purpose |
 |---|---|---|
-| `client` | amerbarberedu-oss/abi-website-black | Production (Vercel deploys from here) |
-| `origin` | kazi-reprime/abi-website-black | Personal backup |
+| `origin` | amerbarberedu-oss/abi-website-black | Production (Vercel auto-deploys from main) |
 
 ```bash
 # Always fetch latest before making changes
-git fetch client && git merge client/main
+git fetch origin && git merge origin/main
 
-# Push to production first, then backup
-git push client main && git push origin main
+# Push to production
+git push origin main
 ```
 
 ### Experiments
