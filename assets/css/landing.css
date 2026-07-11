@@ -2457,6 +2457,25 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
 .hdr-in > .header-cta{order:4}
 .hdr-in > .hdr-right{order:5}
 
+/* ── bx-gold: loc-toggle glassmorphism → gold ── */
+body.bx-gold .hdr-in > .loc-toggle{
+  border-color:rgba(201,151,31,.4)!important;
+  box-shadow:0 4px 16px rgba(180,140,30,.15),inset 0 1px 0 rgba(255,255,255,.6);
+}
+body.bx-gold .hdr-in > .loc-toggle:hover{
+  border-color:rgba(201,151,31,.7)!important;
+  box-shadow:0 6px 22px rgba(180,140,30,.25),inset 0 1px 0 rgba(255,255,255,.7);
+}
+body.bx-gold .hdr-in > .loc-toggle a{
+  color:#9c7414!important;
+}
+body.bx-gold .hdr-in > .loc-toggle a.is-active,
+body.bx-gold .hdr-in > .loc-toggle a:hover{
+  background:linear-gradient(135deg,#c9971f,#e3b34e)!important;color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+body.bx-gold .hdr-in > .loc-toggle a+a{border-left-color:rgba(201,151,31,.3)}
+
 @media (max-width:1199px){
   /* Mobile: Logo → [EN|ES] → [Manhattan|Bronx] → ☰ */
   .hdr-in > .lang-toggle{margin-left:auto;order:2}
