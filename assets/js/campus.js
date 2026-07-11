@@ -48,18 +48,38 @@ function getCampus(){
 }
 function setCampus(c){try{localStorage.setItem("abi-campus",c);}catch(e){}}
 
-function applyBronx(){
+// Smooth crossfade overlay for campus switch
+function withFade(applyFn){
+  var ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;z-index:9999;background:#0c1020;opacity:0;pointer-events:none;transition:opacity .28s ease";
+  document.body.appendChild(ov);
+  // Force reflow then fade in
+  ov.offsetWidth;
+  ov.style.opacity="1";
+  setTimeout(function(){
+    applyFn();
+    // Fade out
+    ov.style.opacity="0";
+    ov.addEventListener("transitionend",function(){ov.remove();});
+    // Safety cleanup
+    setTimeout(function(){if(ov.parentNode) ov.remove();},600);
+  },300);
+}
+
+function _applyBronx(){
   document.body.classList.add("bx-gold");
   updateLocToggle("bronx");
   swapPhones(BX_PHONES);
   rewriteProgramsLinks("bronx");
 }
-function applyManhattan(){
+function _applyManhattan(){
   document.body.classList.remove("bx-gold");
   updateLocToggle("manhattan");
   swapPhones(MN_PHONES);
   rewriteProgramsLinks("manhattan");
 }
+function applyBronx(){ withFade(_applyBronx); }
+function applyManhattan(){ withFade(_applyManhattan); }
 
 // Rewrite any "Programs" nav link (points at the general /programs/ or /programs/index.html)
 // to the campus-specific programs page. Handles EN + ES paths, absolute + relative hrefs.
@@ -159,7 +179,7 @@ function init(){
     return;
   }
   var campus=getCampus();
-  if(campus==="bronx") applyBronx();
+  if(campus==="bronx") _applyBronx();
   else rewriteProgramsLinks("manhattan");
 
   document.addEventListener("click",function(e){

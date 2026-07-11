@@ -2385,24 +2385,33 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
    ============================================================ */
 .hdr-in > .lang-toggle{
   display:inline-flex!important;flex-shrink:0;order:3;
-  background:#ffffff!important;
-  border:2px solid #1b2fd9!important;
+  background:rgba(255,255,255,.72)!important;
+  backdrop-filter:blur(14px) saturate(1.6)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.6)!important;
+  border:1.5px solid rgba(27,47,217,.35)!important;
   border-radius:999px!important;
   font-size:.84rem!important;font-weight:800!important;
   overflow:hidden!important;
   margin-left:.5rem;
+  box-shadow:0 4px 16px rgba(27,47,217,.12),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:box-shadow .3s ease,border-color .3s ease;
+}
+.hdr-in > .lang-toggle:hover{
+  border-color:rgba(27,47,217,.6)!important;
+  box-shadow:0 6px 22px rgba(27,47,217,.2),inset 0 1px 0 rgba(255,255,255,.7);
 }
 .hdr-in > .lang-toggle a{
   color:#1b2fd9!important;
   padding:.42rem .7rem!important;
   text-decoration:none!important;
-  transition:background .2s,color .2s!important;
+  transition:background .25s ease,color .25s ease,transform .15s ease!important;
 }
 .hdr-in > .lang-toggle a.is-active,
 .hdr-in > .lang-toggle a:hover{
-  background:#1b2fd9!important;color:#fff!important;
+  background:linear-gradient(135deg,#1b2fd9,#3a4ff0)!important;color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.2);
 }
-.hdr-in > .lang-toggle a+a{border-left:2px solid #1b2fd9}
+.hdr-in > .lang-toggle a+a{border-left:1.5px solid rgba(27,47,217,.25)}
 .hdr-in > .header-cta{order:4}
 .hdr-in > .hdr-right{order:5}
 
@@ -2415,6 +2424,67 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   .hdr-in > .lang-toggle a{padding:.34rem .54rem!important}
 }
 
+/* ═══════════ EXPERIMENT — loc-toggle (Manhattan|Bronx) glassmorphism, matching lang-toggle ═══════════ */
+.hdr-in > .loc-toggle{
+  display:inline-flex!important;flex-shrink:0;order:3;
+  background:rgba(255,255,255,.72)!important;
+  backdrop-filter:blur(14px) saturate(1.6)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.6)!important;
+  border:1.5px solid rgba(27,47,217,.35)!important;
+  border-radius:999px!important;
+  font-size:.84rem!important;font-weight:800!important;
+  overflow:hidden!important;
+  margin-left:.4rem;
+  box-shadow:0 4px 16px rgba(27,47,217,.12),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:box-shadow .3s ease,border-color .3s ease;
+}
+.hdr-in > .loc-toggle:hover{
+  border-color:rgba(27,47,217,.6)!important;
+  box-shadow:0 6px 22px rgba(27,47,217,.2),inset 0 1px 0 rgba(255,255,255,.7);
+}
+.hdr-in > .loc-toggle a{
+  color:#1b2fd9!important;
+  padding:.42rem .7rem!important;
+  text-decoration:none!important;
+  transition:background .25s ease,color .25s ease,transform .15s ease!important;
+}
+.hdr-in > .loc-toggle a.is-active,
+.hdr-in > .loc-toggle a:hover{
+  background:linear-gradient(135deg,#1b2fd9,#3a4ff0)!important;color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.2);
+}
+.hdr-in > .loc-toggle a+a{border-left:1.5px solid rgba(27,47,217,.25)}
+.hdr-in > .header-cta{order:4}
+.hdr-in > .hdr-right{order:5}
+
+@media (max-width:1199px){
+  /* Mobile: Logo → [EN|ES] → [Manhattan|Bronx] → ☰ */
+  .hdr-in > .lang-toggle{margin-left:auto;order:2}
+  .hdr-in > .loc-toggle{margin-left:.3rem;order:3}
+  .hdr-in > .header-cta{display:none!important}
+  .hdr-in > .hdr-right{order:4;margin-left:.3rem}
+  .hdr-in > .hdr-right .hamburger{display:flex!important}
+}
+@media (max-width:768px){
+  .hdr-in > .lang-toggle{font-size:.76rem!important}
+  .hdr-in > .lang-toggle a{padding:.36rem .56rem!important}
+  .hdr-in > .loc-toggle{font-size:.76rem!important}
+  .hdr-in > .loc-toggle a{padding:.36rem .56rem!important}
+}
+@media (max-width:560px){
+  .hdr-in > .lang-toggle{font-size:.68rem!important}
+  .hdr-in > .lang-toggle a{padding:.3rem .42rem!important}
+  .hdr-in > .loc-toggle{font-size:.68rem!important}
+  .hdr-in > .loc-toggle a{padding:.3rem .42rem!important}
+}
+@media (max-width:420px){
+  .hdr-in > .lang-toggle{font-size:.6rem!important}
+  .hdr-in > .lang-toggle a{padding:.26rem .34rem!important}
+  .hdr-in > .loc-toggle{font-size:.6rem!important}
+  .hdr-in > .loc-toggle a{padding:.26rem .34rem!important}
+  .hdr-in > .hdr-right .hamburger{width:36px;margin-left:0!important}
+  .hdr-in > .hdr-right .hamburger span{width:20px}
+}
 /* FAQs nav dropdown (FAQs → FAQs / Schedules) */
 .nav-drop{position:relative;display:inline-block}
 .nav-drop-trigger{cursor:pointer}
@@ -2548,9 +2618,9 @@ video{background-color:#1a1f2e}
    Order: white rounded card (logo · EN|ES · MN|BX · menu) → blue headline band →
    3 phone pills (EN / HAIRCUT / ES) → star seats strip. Blue palette. Desktop untouched. */
 .mhx{display:none}
-.loc-toggle{display:none;align-items:center;border:1.6px solid var(--blue,#1b2fd9);border-radius:999px;overflow:hidden;font-weight:800;font-size:.78rem;line-height:1;flex-shrink:0}
+.loc-toggle{display:inline-flex;align-items:center;background:#fff;border:2px solid var(--blue,#1b2fd9);border-radius:999px;overflow:hidden;font-weight:800;font-size:.78rem;line-height:1;flex-shrink:0}
 .loc-toggle a{padding:.4rem .62rem;color:var(--blue,#1b2fd9);text-decoration:none;min-height:auto;transition:background .2s ease,color .2s ease}
-.loc-toggle a+a{border-left:1.6px solid var(--blue,#1b2fd9)}
+.loc-toggle a+a{border-left:2px solid var(--blue,#1b2fd9)}
 .loc-toggle a.is-active,.loc-toggle a:hover{background:var(--blue,#1b2fd9);color:#fff}
 
 @media (max-width:768px){
@@ -2751,7 +2821,7 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 .hx{position:relative;background:#0a1020!important;color:#fff;overflow:hidden}
 .hx-bg{position:absolute;top:0;left:0;right:0;height:66.2vw;background:url('/assets/img/hero-barber-clinic-2.jpg') top center/cover no-repeat}
 .hx-grad{position:absolute;top:0;left:0;right:0;height:66.4vw;background:radial-gradient(115% 95% at 6% 100%,rgba(5,8,17,.96) 0%,rgba(5,8,17,.68) 40%,rgba(5,8,17,0) 70%),linear-gradient(180deg,rgba(5,8,17,.12) 0%,rgba(5,8,17,.06) 40%,rgba(5,8,17,.5) 66%,rgba(5,8,17,.94) 88%,#0a1020 100%)}
-.hx-in{position:relative;width:min(1400px,94%);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(330px,368px);gap:2.4rem;padding:49.6vw 0 2.8rem;align-items:start}
+.hx-in{position:relative;width:min(1400px,94%);margin-inline:auto;display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;padding:49.6vw 0 2.8rem;align-items:start}
 .hx-h1{margin:0;line-height:1;text-transform:uppercase;font-weight:800;letter-spacing:-.01em}
 .hx-l1{display:block;font-size:clamp(2.5rem,4.6vw,4.4rem);color:#fff;text-shadow:0 3px 24px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.6)}
 .hx-l2{display:block;font-size:clamp(2.5rem,4.6vw,4.4rem);color:#4d78ff;text-shadow:0 3px 24px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.55)}
@@ -2908,10 +2978,44 @@ body.bx-gold .phone-pill:hover{box-shadow:0 6px 18px rgba(180,140,30,.3)}
 /* ═══════════ v147 — GHL form: force visible (don't depend on iframe-resizer handshake).
    form_embed.js parks the iframe at -9999px until a postMessage handshake; when that
    handshake is slow/blocked the form never appears. Our !important overrides its inline styles. */
-.ghl-form-wrap{min-height:940px}
-.ghl-form-wrap .ep-iFrameContainer,.ghl-form-wrap .ep-wrapper{height:auto!important;min-height:940px}
-.ghl-form-wrap iframe{position:static!important;left:0!important;top:0!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;display:block!important;width:100%!important;min-height:940px}
+.ghl-form-wrap iframe{position:static!important;left:0!important;top:0!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;display:block!important;width:100%!important}
 
 /* ═══════════ v148 — chat widget: proper placement, no overlap ═══════════ */
 chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;z-index:9999!important}
 @media(max-width:768px){chat-widget{bottom:140px!important;right:12px!important}}
+
+/* ═══════════ EXPERIMENT — compact hero form: let GHL auto-size, kill forced min-heights ═══════════ */
+.hx-in .formcard{padding:.8rem .9rem .9rem!important}
+.hx-in .formcard-head{margin-bottom:.5rem!important;gap:.5rem!important}
+.hx-in .formcard-ico{width:32px!important;height:32px!important}
+.hx-in .formcard-ico svg{width:16px!important;height:16px!important}
+.hx-in .formcard-title{font-size:1rem!important}
+.hx-in .formcard-sub{font-size:.76rem!important;margin-top:.05rem!important}
+.hx-in .formcard .ghl-form-wrap{min-height:0!important}
+.hx-in .formcard .ghl-form-wrap .ep-iFrameContainer,
+.hx-in .formcard .ghl-form-wrap .ep-wrapper{min-height:0!important;height:auto!important}
+.hx-in .formcard .ghl-form-wrap iframe{min-height:0!important}
+
+/* ═══════════ EXPERIMENT — mobile header: force Logo + EN|ES + Manhattan|Bronx + ☰ ═══════════ */
+@media (max-width:1199px){
+  header.hdr .hdr-in .mainnav{display:none!important}
+  header.hdr .hdr-in .hamburger{display:flex!important;margin-left:0}
+  header.hdr .hdr-in .hdr-right{display:flex!important;order:4;margin-left:.2rem;flex-shrink:0}
+  header.hdr .hdr-in .header-cta{display:none!important}
+  header.hdr .hdr-in .lang-toggle{margin-left:auto!important;order:2}
+  header.hdr .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem}
+}
+@media (max-width:560px){
+  header.hdr .hdr-in .lang-toggle{font-size:.68rem!important}
+  header.hdr .hdr-in .lang-toggle a{padding:.3rem .42rem!important}
+  header.hdr .hdr-in .loc-toggle{font-size:.68rem!important}
+  header.hdr .hdr-in .loc-toggle a{padding:.3rem .42rem!important}
+}
+@media (max-width:420px){
+  header.hdr .hdr-in .lang-toggle{font-size:.6rem!important}
+  header.hdr .hdr-in .lang-toggle a{padding:.26rem .32rem!important}
+  header.hdr .hdr-in .loc-toggle{font-size:.6rem!important}
+  header.hdr .hdr-in .loc-toggle a{padding:.26rem .32rem!important}
+  header.hdr .hdr-in .hamburger{width:34px!important}
+  header.hdr .hdr-in .hamburger span{width:20px}
+}
