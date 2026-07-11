@@ -574,7 +574,8 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=123">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=152">
+<link rel="stylesheet" href="%sassets/css/funnels.css?v=2">
 <link rel="stylesheet" href="%sassets/css/upgrade.css?v=2">
 <script src="/assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -588,7 +589,7 @@ def head(p, s, pre):
              p["title"], p["desc"], SITE, p["url"],
              ("es_ES" if p["lang"] == "es" else "en_US"), SITE,
              p["title"], p["desc"], SITE,
-             pre, pre, jsonld, p["type"])
+             pre, pre, pre, jsonld, p["type"])
 
 def header(p, s, pre):
     lang = p["lang"]
@@ -647,44 +648,29 @@ def header(p, s, pre):
     # urgency line (ABI blue) + campus bar (both addresses, two clickable campus buttons)
     if lang == "es":
         u1, u2 = "Cupos Limitados Disponibles", "Inscripción Abierta Ahora"
-        c_man, c_bx, c_ns = "Campus de Manhattan", "Campus del Bronx", "Próximo inicio: Julio"
     else:
         u1, u2 = "Limited Seats Available", "Enrollment Now Open"
-        c_man, c_bx, c_ns = "Manhattan Campus", "Bronx Campus", "Next Start: July"
-    campusbar = (
-        '<div class="campusbar"><div class="campusbar-in">'
-        '<a class="campus-card" href="%(pre)scontact.html#manhattan">'
-          '<span class="campus-info"><span class="campus-name">%(man)s</span>'
-          '<span class="campus-addr">48 West 39th Street, New York, NY 10018</span>'
-          '<span class="campus-next">%(ns)s</span></span></a>'
-        '<a class="campus-card" href="%(pre)scontact.html#bronx">'
-          '<span class="campus-info"><span class="campus-name">%(bx)s</span>'
-          '<span class="campus-addr">121 Westchester Square, Bronx, NY 10461</span>'
-          '<span class="campus-next">%(ns)s</span></span></a>'
-        '</div></div>'
-    ) % {"pre": pre, "man": c_man, "bx": c_bx, "ns": c_ns}
+    # EN/ES number pills shown side-by-side
+    tbcalls = "".join(
+        '<a class="tb-call" href="tel:%s"><b class="tb-flag">%s</b><span class="tb-num">%s</span></a>'
+        % (tel, ("EN" if i == 0 else "ES"), disp) for i, (lbl, disp, tel) in enumerate(s["en_es_phones"]))
     return ("""
-<div class="topbar">
-  <div class="tb-promo">%s</div>
-  <div class="tb-calls">%s</div>
-</div>
-<header class="hdr">
+<header class="hdr lfx-hdr">
   <div class="hdr-in">
     <a class="logo brand-plate" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
+      <img class="logo-img" src="/assets/img/logo-final.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
-    <nav class="mainnav" aria-label="Main">%s</nav>
+    <span class="lfx-promo-inline">%s</span>
+    <span class="lfx-promo--mob">%s</span>
+    <div class="phone-number-row">%s</div>
     %s
-    <a class="header-cta" href="#reserve">Become a Barber</a>
-    <div class="hdr-right"><button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
-  <nav class="nav-drawer"><div class="container">%s</div></nav>
 </header>
 <div class="urgency">
   <div class="urgency-flame">%s</div>
   <div class="urgency-sub">%s</div>
 </div>
-""") % (s["topbar"], tbcalls, home, items, lt, drawer, u1, u2)
+""") % (home, s["topbar"], s["topbar"], tbcalls, lt, u1, u2)
 
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
