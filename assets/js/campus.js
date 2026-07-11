@@ -129,21 +129,39 @@ function updateLocToggle(campus){
 }
 
 function swapPhones(data){
-  // ── Data-attribute approach: swap ALL [data-campus-phone] elements ──
-  var campus=(data===BX_PHONES)?"bx":"mn";
+  var isBx=(data===BX_PHONES);
+  var campus=isBx?"bx":"mn";
+
+  // ── 1. Show/hide Manhattan-only elements (ES phone links) ──
+  document.querySelectorAll("[data-mn-only]").forEach(function(el){
+    el.style.display=isBx?"none":"";
+  });
+
+  // ── 2. Swap href + visible number text on campus phone links ──
   document.querySelectorAll("[data-campus-phone]").forEach(function(el){
     var href=el.getAttribute("data-"+campus+"-href");
     var num=el.getAttribute("data-"+campus+"-num");
     if(href) el.href=href;
     if(num){
-      // Update visible number text: find .tb-num, .mhx-num, .cs-num, or direct textContent
       var numEl=el.querySelector(".tb-num,.mhx-num,.cs-num");
       if(numEl) numEl.textContent=num;
       else if(!el.querySelector("span")&&!el.querySelector("b")) el.textContent=num;
     }
+
+    // ── 3. Update topbar flags (EN ↔ BX) ──
+    var flag=el.getAttribute("data-"+campus+"-flag");
+    if(flag){var flagEl=el.querySelector(".tb-flag"); if(flagEl) flagEl.textContent=flag;}
+
+    // ── 4. Update MHX labels (ENGLISH ↔ BRONX) ──
+    var lab=el.getAttribute("data-"+campus+"-lab");
+    if(lab){var labEl=el.querySelector(".mhx-lab-text"); if(labEl) labEl.textContent=lab;}
+
+    // ── 5. Update call sheet language label (English ↔ Bronx) ──
+    var csLang=el.getAttribute("data-"+campus+"-cs-lang");
+    if(csLang){var csEl=el.querySelector(".cs-lang"); if(csEl) csEl.textContent=csLang;}
   });
 
-  // ── Mobile bottom bar ──
+  // ── 6. Mobile bottom bar ──
   var mbarCall=document.querySelector(".mbar-call");
   var mbarText=document.querySelector(".mbar-text");
   if(mbarCall) mbarCall.href="tel:"+data.mbar.call;
