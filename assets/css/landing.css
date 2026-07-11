@@ -61,7 +61,7 @@ a{color:inherit;text-decoration:none}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:1}
 .hero-particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .hero-in{z-index:2}
-/* Real animated ABI logo (abi-logo.gif) — interactive/alive */
+/* Animated ABI logo (logo-final.gif) — interactive/alive */
 .logo-img{height:48px;width:auto;display:block;transition:transform .25s ease,filter .25s ease}
 .logo{display:inline-flex;align-items:center}
 .logo:hover .logo-img{transform:scale(1.04);filter:drop-shadow(0 4px 14px rgba(27,63,217,.4))}

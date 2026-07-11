@@ -4,278 +4,222 @@ New York's only dedicated barber school (est. 1996). This repository contains th
 complete marketing website: a fast, zero-framework static site generated from Python,
 served on Vercel, in English and Spanish.
 
-- **Canonical domain:** https://www.abi.edu (**LIVE** since 2026-07-05) · **Staging:** https://abi-website-black-lime.vercel.app
-- **Current release:** 0.2.0 (2026-07-07) — see [`CHANGELOG.md`](CHANGELOG.md)
+- **Canonical domain:** https://www.abi.edu
+- **Current version:** 0.4.0 (2026-07-11)
 
 ---
 
-## 0. Recent changes at a glance
+## 0. Recent Changes
+
+### 0.4.0 (2026-07-11) — Campus Phone System, Gold Theme, Cleanup
+
+- **Campus-specific phone numbers** — Manhattan shows 2 numbers (EN + ES) + haircut; Bronx shows 1 number + haircut. Dynamic switching via `data-campus-phone` attributes across topbar, MHX bar, footer, and call sheet.
+- **Gold theme** — 109 `body.bx-gold` CSS override rules for Bronx campus, smooth crossfade transitions.
+- **SEO/AEO audit** — 17/17 checks passing, structured data, meta descriptions ≤155 chars.
+- **Code cleanup** — removed dead SVG constants, unused image assets (2.5MB), stale CSS comments. Comprehensive JSDoc comments on all `campus.js` functions.
+- **Landing funnel CSS sync** — all cache-bust versions unified (landing.css v153, funnels.css v59, campus.js v5).
 
 ### 0.3.0 (2026-07-09) — Responsive, i18n & Role Split
 
-**Developer roles defined:**
-- **Kazi** — Frontend, UI/UX, HTML/CSS/JS, SEO, build scripts
-- **Arhum Abdullah** — GA4, GTM, Google Ads, Meta Pixel, Clarity, CallRail, ClickCease, Vercel Analytics, consent mode, CSP analytics domains
-
-> ⚠️ **Do NOT modify** `assets/js/analytics.js`, GTM/GA4/Ads/Pixel config, or CSP analytics domains without Arhum's sign-off.
-
-**What changed:**
-- **Mobile responsiveness overhaul** — bulletproof hamburger menu that never clips on any device (Android, iOS, tablet, desktop-mode-on-mobile). Uses `min()` clamping and viewport-relative sizing.
-- **Full Spanish translation** — all 55 `/es/` pages: header, footer, CTAs, mobile bar, countdown, Google reviews, form labels. Zero English text remains on Spanish pages.
-- **Spanish page fixes** — absolute image/asset paths (`/assets/img/...`), proper program links, contact form immediately after hero text on mobile.
-- **Google rating** — standardized to 4.1 (actual rating) across all pages and structured data.
-- **2-card grid** — program pages with only 2 cards now center properly (no empty column).
-- **Image brightness** — lightened gallery/team images for better readability.
+- Mobile responsiveness overhaul — bulletproof hamburger menu using `min()` clamping.
+- Full Spanish translation — all `/es/` pages.
+- Google rating standardized to 4.1.
 
 ### 0.2.0 (2026-07-07) — Campus Context Routing
 
-- Campus-specific programs pages: `/programs/manhattan` and `/programs/bronx` + ES twins.
+- Campus-specific programs pages: `/programs/manhattan` and `/programs/bronx`.
 - `campus.js` rewrites Programs nav links per campus context.
-- Homepage "Find Us" with Google map; campus-specific Google Business Profile links.
-- Mobile hero reorder: contact form immediately after tagline.
-
-Full detail in [`CHANGELOG.md`](CHANGELOG.md).
-
 
 ---
 
-## 1. What this is
+## 1. Developer Roles — STRICTLY ENFORCED
 
-A fully static website — plain HTML, CSS and vanilla JavaScript — produced by two small
-Python generators. There is **no runtime framework, no build toolchain, no Node
-dependency**: the generators stamp content partials into a shared template and write
-finished `.html` files to the repository root, which Vercel serves directly.
+| Developer | Focus |
+|---|---|
+| **Kazi** | Frontend, UI/UX, HTML/CSS/JS, SEO, build scripts |
+| **Arhum Abdullah** | GA4, GTM, Google Ads, Meta Pixel, Clarity, CallRail, ClickCease, Vercel Analytics, consent mode, CSP analytics domains |
 
-Why this approach:
-
-- **Fast** — no hydration, tiny payloads, instant loads.
-- **Cheap & durable** — static files on a CDN; nothing to break at runtime.
-- **Easy to edit** — content lives in readable HTML partials; one command rebuilds the site.
+> ⚠️ **Do NOT modify** `assets/js/analytics.js`, GTM/GA4/Ads/Pixel config, or CSP analytics domains without Arhum's sign-off.
 
 ---
 
-## 2. Repository structure
+## 2. Architecture
+
+A fully static website — plain HTML, CSS and vanilla JavaScript — produced by Python
+generators. **No runtime framework, no build toolchain, no Node dependency.**
 
 ```
 abi-website/
-├── README.md                  ← this file
-├── AUDIT-REPORT.md            ← multi-method audit findings + analytics activation guide
-├── vercel.json                ← Vercel routing (clean URLs, security headers)
-├── robots.txt                 ← crawler directives
-├── sitemap.xml                ← generated sitemap (with lastmod)
-├── llms.txt                   ← guidance for AI search engines / LLMs
+├── README.md
+├── CHANGELOG.md
+├── vercel.json              ← Vercel routing (clean URLs, security headers, redirects)
+├── robots.txt               ← crawler directives
+├── sitemap.xml              ← generated sitemap (with lastmod)
+├── llms.txt                 ← guidance for AI search engines / LLMs
 │
-│   ── Generated, served at the site root (DO NOT hand-edit; rebuilt by the generators) ──
-├── index.html                 ← English splash landing (home, "/")
-├── classic-home.html          ← full long-form English home page
-├── about.html  instructors.html  admissions.html  schedule.html  tuition.html
-├── haircuts.html  jobs.html  partners.html  resources.html  gallery.html
-├── faq.html  contact.html  veterans.html  access-vr.html  privacy.html  404.html
-├── programs/                  ← program detail pages (500h, 200h, 50h, SMP, CD, license transfer) + index
-├── jobs/                      ← job-opportunities board (347 shops) + shop-registration
-├── blog/                      ← 9 articles + blog index
-├── es/                        ← Spanish splash, home, and landing pages
-├── splash-page-1/ splash-page-2/                       ← campaign splash variants
-├── 500-hours-master-barber-program-landing-page/       ← ad landing pages
-├── master-barber-program-bronx/
+│   ── Built HTML pages (DO NOT hand-edit; rebuilt by generators) ──
+├── index.html               ← English homepage ("/")
+├── bronx.html               ← Bronx campus homepage
+├── about.html  contact.html  faq.html  instructors.html  ...
+├── programs/                ← program pages (manhattan, bronx, 500h, 50h, etc.)
+├── blog/                    ← blog articles + index
+├── es/                      ← Spanish mirror (all pages)
+├── barber-school-*.html     ← location-specific landing pages
+├── thank-you.html           ← form submission confirmation
+│
+├── landing-funnels/         ← ad campaign landing pages
+│   ├── 500-hours-master-barber-program-landing-page/
+│   ├── master-barber-program-bronx/
+│   └── src/build.py         ← landing funnel generator
 │
 ├── assets/
-│   ├── css/   style.css · brand.css · landing.css · effects.css   (cache-busted with ?v=NN)
-│   ├── js/    main.js · landing.js · effects.js · analytics.js
-│   └── img/   photos, logo, favicon, instructors/, partners/
+│   ├── css/
+│   │   ├── style.css        ← base styles
+│   │   ├── brand.css        ← theme tokens
+│   │   ├── landing.css      ← components + gold theme overrides (v153)
+│   │   ├── effects.css      ← motion/animations
+│   │   ├── upgrade.css      ← upgrade layer
+│   │   └── funnels.css      ← landing funnel styles (v59)
+│   ├── js/
+│   │   ├── main.js          ← countdown, nav, core interactivity
+│   │   ├── campus.js        ← Manhattan ↔ Bronx switcher (v5)
+│   │   ├── landing.js       ← homepage-specific JS
+│   │   ├── effects.js       ← scroll-reveal, 3D tilt
+│   │   ├── upgrade.js       ← upgrade layer
+│   │   ├── video-sound.js   ← video hover sound
+│   │   └── analytics.js     ← ⚠️ ARHUM ONLY — consent + GTM loader
+│   └── img/                 ← photos, logo, favicon, gallery/
 │
-└── src/                       ← SOURCE — everything that builds the site (never served)
-    ├── build.py               ← builds the main site pages from src/pages/*.html
-    ├── build_landing_pages.py ← builds the EN/ES splash, landing & campaign pages
-    ├── deploy_vercel.py        ← deploys to Vercel via REST (no CLI needed)
-    ├── blog_manifest.json      ← list of blog posts consumed by build.py
-    └── pages/                  ← content partials (one file per page; edit these)
+├── src/                     ← SOURCE (never served)
+│   ├── build.py             ← main site generator (115 pages)
+│   ├── build_landing_pages.py ← landing page generator
+│   ├── serve.py             ← local dev server (localhost:8000)
+│   ├── blog_manifest.json   ← blog post registry
+│   └── pages/               ← content partials (edit these)
+│       ├── index.html       ← homepage content
+│       ├── es-index.html    ← Spanish homepage content
+│       ├── thank-you.html   ← thank-you page content
+│       └── ...
+│
+└── .agents/
+    └── PROJECT_STATE.md     ← multi-agent handover state
 ```
-
-**Golden rule:** edit content in `src/pages/*.html` (and the templates in
-`src/build.py` / `src/build_landing_pages.py`), then **rebuild**. Never hand-edit the
-generated `.html` files at the root — they are overwritten on every build.
 
 ---
 
-## 3. Build & deploy
+## 3. Campus System
+
+The site supports two campuses with dynamic switching:
+
+| | Manhattan (Default) | Bronx (Gold Theme) |
+|---|---|---|
+| **Admissions EN** | (212) 290-2289 | (718) 676-0640 |
+| **Admissions ES** | (212) 290-0278 | — |
+| **Haircut** | (856) 316-1551 | (856) 316-1551 |
+| **Theme** | Blue | Gold (`body.bx-gold`) |
+| **CSS toggle** | `.loc-toggle` pill | `.loc-toggle` pill |
+
+**How it works:**
+- `campus.js` reads campus from `localStorage("abi-campus")` or page class.
+- Phone links use `data-campus-phone` + `data-mn-*` / `data-bx-*` attributes.
+- Manhattan-only elements (ES phone) use `data-mn-only` → hidden on Bronx.
+- Programs nav links rewrite to `/programs/manhattan.html` or `/programs/bronx.html`.
+
+---
+
+## 4. Build & Deploy
 
 ### Build locally
 
 ```bash
-python3 src/build.py                 # main pages → repo root
-python3 src/build_landing_pages.py   # splash / landing / es pages
+python3 src/build.py                 # → 115 pages + sitemap.xml + robots.txt
+python3 src/build_landing_pages.py   # → landing funnel pages
 ```
 
-`build.py` prints e.g. `built 46 pages + sitemap.xml + robots.txt`;
-`build_landing_pages.py` prints `10 pages generated.`
-
-### Deploy to production (Vercel)
+### Local dev server
 
 ```bash
-VERCEL_TOKEN=*** python3 src/deploy_vercel.py
+python3 src/serve.py                 # → localhost:8000
 ```
 
-This uploads every tracked file except source/docs (`src/`, `*.md`, `.claude/`), creates
-a **production** deployment, and aliases it to `abi-website-black.vercel.app`. Routing,
-clean URLs and security headers are defined in `vercel.json`.
+### Deploy to production
 
-### Typical workflow
+```bash
+# Push to GitHub (Vercel auto-deploys from main)
+git push client main
 
-1. Edit a partial in `src/pages/` (or a template/CSS).
-2. If you changed CSS, bump the cache version (e.g. `landing.css?v=48` → `?v=49`) in both generators.
-3. `python3 src/build.py && python3 src/build_landing_pages.py`
-4. Commit, push to `main`, deploy with `deploy_vercel.py`.
+# If auto-deploy doesn't update the domain, manually promote:
+vercel promote <deployment-id> --scope amerbarberedu-oss-projects --token $VERCEL_TOKEN
+```
 
----
+### Cache busting
 
-## 4. Pages & content
-
-| Area | Pages |
-|---|---|
-| **Home** | `index.html` (splash), `classic-home.html` (full home) |
-| **Programs** | 500-Hour Master Barber, 200-Hour Fundamentals, 50-Hour Refresher, Scalp Micro-Pigmentation, 3-Hour Contagious Diseases, License Transfer, + index |
-| **Admissions** | Admissions & requirements, Schedule, **interactive Tuition & Payment Calculator** |
-| **People** | Instructors (Manhattan + Bronx teams, real photos) |
-| **Careers** | Job Placement, **Job Opportunities board (347 NYC shops, searchable)**, Shop Registration |
-| **Funding** | Veterans / GI Bill®, ACCES-VR |
-| **Public** | $3 Student Haircuts menu, Gallery (lightbox), Partners |
-| **Content** | Blog (9 articles), FAQ, Resources, Contact, Privacy, 404 |
-| **Spanish** | Full Spanish splash + home + landing pages under `/es/` |
-
-**Contact model — two language lines only:**
-English **(212) 290-2289** · Spanish **(212) 290-0278**. (Header shows both as call
-buttons; footer lists both. No third call button.)
-
-**Campuses:** Manhattan — 48 West 39th Street, NY 10018 · Bronx — 121 Westchester Square, NY 10461.
+When modifying CSS/JS files, bump the version number:
+- `landing.css?v=153` — in `src/build.py`, `src/build_landing_pages.py`, and `landing-funnels/*/index.html`
+- `campus.js?v=5` — in `src/build.py`, `src/pages/index.html`, `src/pages/es-index.html`
+- `funnels.css?v=59` — in `landing-funnels/*/index.html` and `landing-funnels/src/build.py` (`CSS_V`)
+- `analytics.js?v=6` — **Arhum only** (abi.edu = v6, .com = v7)
 
 ---
 
-## 5. Design system
+## 5. Git Workflow
 
-- **Themes:** five selectable color themes (Blue, Midnight, Classic, Emerald, Noir) via the
-  top-bar dots; the choice is remembered in `localStorage` and applied before paint to avoid flashes.
-- **Typography:** Oswald (display), Poppins/Inter (body) from Google Fonts.
-- **CSS files:** `style.css` (base), `brand.css` (theme tokens), `landing.css` (components +
-  revision packs), `effects.css` (motion). All linked with a `?v=NN` cache-buster bumped on change.
-- **Effects:** tasteful 3-D card tilt, scroll-reveal, gallery/video hover polish, animated
-  logo and countdown — all gated behind `prefers-reduced-motion`.
-- **Social icons:** branded square tiles (Facebook, Instagram, X, YouTube, Pinterest) with
-  per-brand hover color, lift and glow.
-- **Responsive:** verified clean at 390 px (mobile) and 1280 px (desktop) — no overflow.
+| Remote | Repo | Purpose |
+|---|---|---|
+| `client` | amerbarberedu-oss/abi-website-black | Production (Vercel deploys from here) |
+| `origin` | kazi-reprime/abi-website-black | Personal backup |
+
+```bash
+# Always fetch latest before making changes
+git fetch client && git merge client/main
+
+# Push to production first, then backup
+git push client main && git push origin main
+```
+
+### Experiments
+- Create `experiment/feature-name` branch — NEVER commit experiments to `main`
+- Only merge when explicitly approved
+- Delete branch after merge
 
 ---
 
-## 6. SEO / AEO (answer-engine optimization)
+## 6. SEO / AEO
 
-- Unique, length-optimized `<title>` (≤60c) and meta description (≤160c) per page.
-- **Structured data (JSON-LD):** TradeSchool / LocalBusiness with rating, Course, Person
-  (instructors), BreadcrumbList, FAQPage.
+- Unique `<title>` (≤60c) and `<meta description>` (≤155c) per page.
+- **Structured data (JSON-LD):** TradeSchool, Course, Person, BreadcrumbList, FAQPage, HowTo.
 - Open Graph + Twitter cards, canonical URLs, `hreflang` EN/ES.
-- `sitemap.xml` with `lastmod`, `robots.txt`, and **`llms.txt`** so AI search engines can
-  read a clean summary of the school.
-- Real values (counters, next class date) are baked into the HTML at build time, not
-  JS-only, so crawlers see them.
-
-See **AUDIT-REPORT.md** for the full technical-SEO / accessibility / conversion audit.
+- `sitemap.xml` with `lastmod`, `robots.txt`, `llms.txt`.
 
 ---
 
 ## 7. Analytics & Ads
 
-`assets/js/analytics.js` is a **single consent-aware loader** that boots one
-container — **Google Tag Manager `GTM-NKLLGPC`**. Meta Pixel, Microsoft Clarity,
-CallRail, ClickCease and Google Ads (`AW-949292069`) are managed **inside the GTM
-web UI** — do not add/remove those tags in code.
-
-**Google Analytics (GA4) has been removed** per client decision (Jul 2026): there
-is no GA4/gtag config in code, and the GA4 (and legacy UA-72481509-1) tags are to
-be deleted in the GTM dashboard. Do not re-add GA.
-
-What the file does:
-- Sets **Google Consent Mode v2** defaults before GTM loads (EEA/UK denied-by-default,
-  US granted with opt-out), and injects an accessible **cookie-consent banner**.
-- Pushes semantic events into `dataLayer` for GTM triggers: `generate_lead`
-  (form submits), `phone_click` (`tel:` taps), `email_click` (`mailto:`).
-- Captures GoHighLevel iframe leads via a `postMessage` listener **and** the
-  `/thank-you` & `/gracias` pages (GHL forms redirect there on submit).
-
-**To wire conversions:** in GTM create triggers `CE - generate_lead` and
-`CE - phone_click`, map them to GA4 / Google Ads / Meta, and publish. No code
-change is needed to add or edit tags.
+`assets/js/analytics.js` boots **Google Tag Manager `GTM-NKLLGPC`** with consent-aware
+loading. Meta Pixel, Clarity, CallRail, ClickCease, and Google Ads are managed
+**inside GTM** — do not add/remove tags in code.
 
 ---
 
-## 8. Interactivity (vanilla JS)
-
-- **Countdown + next-class date** to the first Monday of next month (`main.js`, values pre-baked).
-- **Tuition & Payment Calculator** (`tuition.html`) — live totals, down payment and weekly
-  plan per program/schedule, plus a program comparison table.
-- **Job board search** — instant client-side filter over 347 shops.
-- **Gallery lightbox**, **theme switcher**, **mobile nav drawer**, **call sheet**, **back-to-top**.
-
----
-
-## 9. Maintenance notes
-
-- **Content edits:** change `src/pages/*.html`, then rebuild. The root `.html` files are build output.
-- **Blog:** posts are content partials `src/pages/blog-*.html` listed in
-  `src/blog_manifest.json`; `build.py` assembles `blog/` and the blog index. To add a post,
-  add a partial and a manifest entry, then rebuild.
-- **Gallery:** curated images live in `assets/img/`; the grid markup is in
-  `src/pages/gallery.html`.
-- **Images:** keep paths root-absolute (`/assets/img/...`) so they resolve on clean-URL routes.
-- **Secrets:** never commit API tokens. The Vercel token is passed via the `VERCEL_TOKEN`
-  environment variable at deploy time only.
-
----
-
-## 10. Project history (what was built)
-
-A condensed log of the major work delivered:
-
-1. **Foundation & content** — full site generated from the reference school content:
-   home, programs, admissions, instructors, schedule, haircuts, jobs, resources, FAQ,
-   contact, veterans, ACCES-VR, privacy, blog, gallery, Spanish edition.
-2. **Brand & UI** — exact logo, one-line school name, five color themes, glassmorphism,
-   per-page background photography, animated logo, refined CTAs.
-3. **Conversion & SEO/AEO** — JSON-LD, OG/Twitter, hreflang, sitemap/robots/llms.txt,
-   length-optimized titles & descriptions, trust strip, countdown, testimonials.
-4. **Accessibility & QA** — contrast fixes, alt text, heading order, focus states, a
-   repeatable headless mobile/desktop sweep (390 px & 1280 px) for overflow/404/console errors.
-5. **New sections & pages** — Partners, Job Opportunities board (347 shops) + Shop
-   Registration, instructor photos, interactive Tuition Calculator + comparison table.
-6. **Client mobile-reference content** — "Everything You Need to Succeed" badge grid,
-   "Barber Career Earnings" tiers, job-placement stats + shop chips, hero urgency/schedule
-   strip, reserve-form campus/language fields, "Stop Waiting" final CTA — added in the
-   site's own design, responsive on mobile and desktop.
-7. **Analytics & Ads** — GA4 + Meta Pixel scaffolding with conversion events (see §7).
-8. **Audit** — multi-method technical-SEO / accessibility / conversion audit with fixes
-   (`AUDIT-REPORT.md`); fixed a real bug where the instructors meta description was
-   truncated by unescaped quotes.
-9. **Final cleanup & restructure** — removed unused assets and archive-only generator
-   scripts, moved the build tooling under `src/`, untracked editor/Vercel metadata,
-   and documented the whole project here.
-
----
-
-## 11. Live URLs
+## 8. Live URLs
 
 ### Main Website
 | Page | URL |
 |---|---|
-| **Homepage (English)** | https://www.abi.edu/ |
-| **Homepage (Spanish)** | https://www.abi.edu/es/ |
-| **Bronx (English)** | https://www.abi.edu/bronx |
-| **Bronx (Spanish)** | https://www.abi.edu/es/bronx |
+| **Homepage (EN)** | https://www.abi.edu/ |
+| **Homepage (ES)** | https://www.abi.edu/es/ |
+| **Bronx (EN)** | https://www.abi.edu/bronx |
+| **Bronx (ES)** | https://www.abi.edu/es/bronx |
+| **Programs** | https://www.abi.edu/programs |
+| **Contact** | https://www.abi.edu/contact |
 
-### Landing Pages
-| Landing Page | URL |
+### Landing Funnels
+| Funnel | URL |
 |---|---|
-| **500-Hour Master Barber (Manhattan EN)** | https://www.abi.edu/500-hours-master-barber-program-landing-page/ |
-| **500-Hour Master Barber (Manhattan ES)** | https://www.abi.edu/500-hours-master-barber-program-landing-page/spanish/ |
-| **Master Barber Program (Bronx EN)** | https://www.abi.edu/master-barber-program-bronx/ |
-| **Master Barber Program (Bronx ES)** | https://www.abi.edu/master-barber-program-bronx/spanish/ |
+| **500hr Master Barber (EN)** | https://www.abi.edu/landing-funnels/500-hours-master-barber-program-landing-page/ |
+| **500hr Master Barber (ES)** | https://www.abi.edu/landing-funnels/500-hours-master-barber-program-landing-page/spanish/ |
+| **Master Barber Bronx (EN)** | https://www.abi.edu/landing-funnels/master-barber-program-bronx/ |
+| **Master Barber Bronx (ES)** | https://www.abi.edu/landing-funnels/master-barber-program-bronx/spanish/ |
 
 ---
 
