@@ -214,10 +214,10 @@ def hero(p):
     )
 
     countdown = (
-        '      <div class="hx-next lf-cd" data-countdown data-target="%s">\n'
+        '      <div class="hx-next" data-countdown data-target="%s">\n'
         '        <div class="hx-next-l">\n'
-        '          <span class="hx-next-label lf-cd__label">%s</span>\n'
-        '          <span class="hx-next-date lf-cd__date" data-next-start></span>\n'
+        '          <span class="hx-next-label">%s</span>\n'
+        '          <span class="hx-next-date" data-next-start></span>\n'
         '          <span class="hx-next-sub">%s</span>\n'
         '        </div>\n'
         '        <div class="hx-cells">\n'

@@ -47,7 +47,7 @@
     var target = resolveTarget(el);
     var dEl = qs('[data-cd-d]', el), hEl = qs('[data-cd-h]', el);
     var mEl = qs('[data-cd-m]', el), sEl = qs('[data-cd-s]', el);
-    var dateEl = qs('.lf-cd__date', el);
+    var dateEl = qs('.lf-cd__date, .hx-next-date', el);
     if (dateEl && !dateEl.textContent.trim()) {
       var lang = document.documentElement.lang || 'en';
       try {
@@ -194,7 +194,7 @@
 
   /* ───── INIT ───── */
   function init() {
-    qsa('.lf-cd[data-target]').forEach(startCountdown);
+    qsa('.lf-cd[data-target], .hx-next[data-target]').forEach(startCountdown);
     qsa('.lf-reel__media').forEach(initReel);
     initReveal();
 

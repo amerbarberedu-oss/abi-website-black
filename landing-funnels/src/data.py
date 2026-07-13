@@ -91,8 +91,8 @@ HERO = {
     "en": {
         "kicker_man": "Manhattan Campus • New classes the first Monday of each month",
         "kicker_bx":  "Bronx Campus • New classes the first Monday of each month",
-        "h1_a": "500 Hours.",
-        "h1_b": "Barber Program.",
+        "h1_a": "500 Hour",
+        "h1_b": "Barber Operator",
         "h1_script": "Start Today.",
         "sub_man": "Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Manhattan campus.",
         "sub_bx":  "Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Bronx campus.",
@@ -100,8 +100,8 @@ HERO = {
     "es": {
         "kicker_man": "Sede de Manhattan • Nuevas clases el primer lunes de cada mes",
         "kicker_bx":  "Sede del Bronx • Nuevas clases el primer lunes de cada mes",
-        "h1_a": "500 Horas.",
-        "h1_b": "Programa de Barbero.",
+        "h1_a": "500 Horas",
+        "h1_b": "Operador de Barbero",
         "h1_script": "Empieza Hoy.",
         "sub_man": "Conviértete en Barbero licenciado en tan solo <b>4 meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede de Manhattan.",
         "sub_bx":  "Conviértete en Barbero licenciado en tan solo <b>4 meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede del Bronx.",
