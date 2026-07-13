@@ -1886,46 +1886,39 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
 .ghl-form-wrap:has(iframe[data-form-id="2FvHzLvYji1iSmNmCP46"]){min-height:734px}
 .ghl-form-wrap:has(iframe[data-form-id="v1SNzWsAZZVodCsnsDbe"]){min-height:794px}
 
-/* Reset Bronx landing page hero to default blue theme */
-body.bx-gold .hx {
-  background: #fff !important;
+/* ── Grayscale (Colorless) overrides for Hero & Contact Box ── */
+.hx-l2,
+.hx-next-date,
+.hx-sub b {
+  color: var(--ink, #0a1020) !important;
 }
-body.bx-gold .hx-bg {
-  background: url('/assets/img/hero-barber-clinic-2.jpg') top center/cover no-repeat !important;
-  background-color: #fff !important;
+.hx-script::after {
+  background: var(--ink, #0a1020) !important;
 }
-body.bx-gold .hx-grad {
-  background: transparent !important;
+.hx-chip svg {
+  color: var(--ink, #0a1020) !important;
 }
-body.bx-gold .hx-l2,
-body.bx-gold .hx-next-date {
-  color: #1b3bd9 !important;
+.hx-chip--fin i {
+  color: #475467 !important;
 }
-body.bx-gold .hx-script::after {
-  background: #4d78ff !important;
+.formcard-ico {
+  background: var(--ink, #0a1020) !important;
 }
-body.bx-gold .hx-sub b {
-  color: #1b3bd9 !important;
+.hx-cell b {
+  color: var(--ink, #0a1020) !important;
 }
-body.bx-gold .hx-chip,
-body.bx-gold .hx-next {
-  background: #fff !important;
-  border-color: #d7deee !important;
-  color: #2a3252 !important;
+.hx-cell span {
+  color: #475467 !important;
 }
-body.bx-gold .hx-chip svg {
-  color: #1b3bd9 !important;
+.hx-cell {
+  background: #f8f9fa !important;
+  border-color: #d1d5db !important;
 }
-body.bx-gold .hx-chip--fin i {
-  color: #1b3bd9 !important;
+.hx-next {
+  border-color: #d1d5db !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
-body.bx-gold .hx-cell {
-  background: #f5f7fc !important;
-  border-color: #d7deee !important;
-}
-body.bx-gold .hx-cell b {
-  color: #0a1226 !important;
-}
-body.bx-gold .formcard-ico {
-  background: #1b3bd9 !important;
+.hx-chip {
+  border-color: #d1d5db !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
