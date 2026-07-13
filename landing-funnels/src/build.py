@@ -167,19 +167,7 @@ def hero(p):
     is_bx = p["campus"]["slug"] == "bronx"
     sub    = H_["sub_bx"]    if is_bx else H_["sub_man"]
 
-    # 1. Seats Banner
-    site_seats = (
-        '<div class="site-seats" role="status">'
-        '<span class="site-seats__dot" aria-hidden="true"></span>'
-        '<span class="site-seats__kicker">%s</span>'
-        '<span class="site-seats__lead">%s</span>'
-        '</div>'
-    ) % (
-        "CUPOS LIMITADOS DISPONIBLES" if es else "LIMITED SEATS AVAILABLE",
-        "INSCRIPCIONES ABIERTAS" if es else "ENROLLMENT NOW OPEN"
-    )
-
-    # 2. Headline Parts
+    # 1. Headline Parts
     h1_a = H_["h1_a"]
     h1_b = H_["h1_b"]
     h1_script = H_["h1_script"]
@@ -278,7 +266,6 @@ def hero(p):
 
     # 6. Entire Section Output (.hx markup)
     return (
-        '%s\n'
         '<section class="hx" id="main">\n'
         '  <div class="hx-bg" aria-hidden="true"></div>\n'
         '  <div class="hx-grad" aria-hidden="true"></div>\n'
@@ -294,7 +281,7 @@ def hero(p):
         '    %s\n'
         '  </div>\n'
         '</section>'
-    ) % (site_seats, h(h1_a), h(h1_b), h(h1_script), sub, chips, countdown, formcard)
+    ) % (h(h1_a), h(h1_b), h(h1_script), sub, chips, countdown, formcard)
 
 
 def lead_form(p):
