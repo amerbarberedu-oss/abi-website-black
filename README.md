@@ -5,7 +5,7 @@ complete marketing website: a fast, zero-framework static site generated from Py
 served on Vercel, in English and Spanish.
 
 - **Canonical domain:** https://www.abi.edu
-- **Current version:** 0.4.0 (2026-07-11)
+- **Current version:** 0.5.0 (2026-07-14)
 
 ## Ownership
 
@@ -24,6 +24,16 @@ served on Vercel, in English and Spanish.
 ---
 
 ## 0. Recent Changes
+
+### 0.5.0 (2026-07-14) — GHL Form Migration, Mobile Navbar & Android Gesture Clearances
+
+- **GoHighLevel Form Migration** — Replaced all legacy campus GHL form embeds across English pages (index, contact, jobs, Manhattan/Bronx campaigns) with the new two-column English form ID (`3ghObGjHiLN3LgKBfKGG`) and Spanish equivalents with the Spanish form ID (`WZjNHh9wcd1FTnlj0eCR`).
+- **Animated Form Skeletons** — Integrated pulsing SVG-animated form skeleton placeholders inside `.ghl-form-wrap` to cover up the blank white spacing while the external GHL scripts render the frames.
+- **Android & S25 Ultra Gesture Bar safety** — Increased bottom padding on mobile sticky bars (`.mobile-cta` and `.lf-mcta`) to `calc(18px + env(safe-area-inset-bottom, 0px))` to prevent Android system home/back buttons or gestural lines from clipping/overlapping the CTA controls. Increased body margin-bottom to clear the bars.
+- **Compact Mobile Language Switcher** — Shrunk the mobile `EN` | `ES` switcher text and padding sizes under `430px` viewport widths (`.66rem` font-size) so that the full campus location names ("Manhattan" and "Bronx") fit cleanly on narrow mobile nav headers without line wraps. Enforced `white-space: nowrap` on CTA buttons to prevent text breaking.
+- **Campaign Spacing & Switcher Themes** — Closed vertical padding gaps between the form and Student Voices carousel. Rewrote language toggles to dynamically color-match the active campus colors (gold/orange on Bronx, blue on Manhattan).
+- **CTA Scroll Anchors** — Fixed self-referencing "Apply Now" CTA buttons to anchor-scroll to `#reserve` forms.
+- **Cache-Bust versions** — Bumped CSS query version strings to force update delivery (`style.css?v=34`, `landing.css?v=158`, `funnels.css?v=64`).
 
 ### 0.4.0 (2026-07-11) — Campus Phone System, Gold Theme, Cleanup
 
@@ -93,10 +103,10 @@ abi-website/
 │   ├── css/
 │   │   ├── style.css        ← base styles
 │   │   ├── brand.css        ← theme tokens
-│   │   ├── landing.css      ← components + gold theme overrides (v153)
+│   │   ├── landing.css      ← components + gold theme overrides (v158)
 │   │   ├── effects.css      ← motion/animations
 │   │   ├── upgrade.css      ← upgrade layer
-│   │   └── funnels.css      ← landing funnel styles (v59)
+│   │   └── funnels.css      ← landing funnel styles (v64)
 │   ├── js/
 │   │   ├── main.js          ← countdown, nav, core interactivity
 │   │   ├── campus.js        ← Manhattan ↔ Bronx switcher (v5)
@@ -172,9 +182,10 @@ vercel promote <deployment-id> --scope amerbarberedu-oss-projects --token $VERCE
 ### Cache busting
 
 When modifying CSS/JS files, bump the version number:
-- `landing.css?v=153` — in `src/build.py`, `src/build_landing_pages.py`, and `landing-funnels/*/index.html`
+- `landing.css?v=158` — in `src/build.py`, `landing-funnels/src/build.py`, and generated HTML files.
+- `style.css?v=34` — in `src/build.py` and generated HTML files.
 - `campus.js?v=5` — in `src/build.py`, `src/pages/index.html`, `src/pages/es-index.html`
-- `funnels.css?v=59` — in `landing-funnels/*/index.html` and `landing-funnels/src/build.py` (`CSS_V`)
+- `funnels.css?v=64` — in generated HTML files and `landing-funnels/src/build.py` (`CSS_V`)
 - `analytics.js?v=6` — **Arhum only** (abi.edu = v6, .com = v7)
 
 ---
