@@ -954,7 +954,7 @@ def build():
             cta_href = root + 'es/contact.html'
             cta_label = 'Conviértete en Barbero'
             langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
-                          '<a href="%s%s">EN</a><a class="is-active" aria-current="true" href="%s%s">ES</a></div>'
+                          '<a href="%s%s">English</a><a class="is-active" aria-current="true" href="%s%s">Español</a></div>'
                           % (root, out[3:], root, out))
         else:
             navbase = root
@@ -963,7 +963,7 @@ def build():
             cta_label = 'Become a Barber'
             es_twin = ('es/' + out) if out in ES_TWINS else 'es/index.html'
             langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
-                          '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%s%s">ES</a></div>'
+                          '<a class="is-active" aria-current="true" href="%s%s">English</a><a href="%s%s">Español</a></div>'
                           % (root, out, root, es_twin))
         nav_main, nav_drawer = _shell_nav(navbase, root, lang)
         # ── i18n text for template sections ──

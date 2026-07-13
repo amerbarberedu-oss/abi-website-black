@@ -125,8 +125,8 @@ def header(p):
         '  </a>\n'
         '  <div class="lfx-phones lfx-phones--bar">%s</div>\n'
         '  <div class="lf-lang lfx-lang" role="group" aria-label="%s">\n'
-        '    <a class="%s" href="%s"%s>EN</a>\n'
-        '    <a class="%s" href="%s"%s>ES</a>\n'
+        '    <a class="%s" href="%s"%s>English</a>\n'
+        '    <a class="%s" href="%s"%s>Español</a>\n'
         '  </div>\n'
         '</div></header>\n'
         '<div class="lfx-promo">%s</div>\n'
@@ -255,7 +255,7 @@ def lead_form(p):
         # EN = 01.GET TRAINED WITH ABI FORM - edu
         # ES = 01.GET TRAINED WITH ABI FORM - edu - ESP
         "ghl_id": "jqLpg40sM8C7RFT7Iq2Z" if lang == "es" else "WZjNHh9wcd1FTnlj0eCR",
-        "ghl_h": 856 if lang == "es" else 937,
+        "ghl_h": 740 if lang == "es" else 820,
         "ghl_name": "01.GET TRAINED WITH ABI FORM - edu - ESP" if lang == "es" else "01.GET TRAINED WITH ABI FORM - edu ",
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
@@ -779,8 +779,8 @@ def page_head(p):
 '<meta name="robots" content="index, follow, max-image-preview:large">\n'
 '<meta name="theme-color" content="#1b3bd9">\n'
 '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n'
-'<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">\n'
+'<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n'
+'<link rel="manifest" href="/site.webmanifest">\n'
 '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'

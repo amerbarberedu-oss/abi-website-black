@@ -642,9 +642,9 @@ def header(p, s, pre):
             drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
     drawer += ('<a href="%s"><b>%s</b></a>' % (alt_href, "English" if lang == "es" else "Español"))
     if lang == "es":
-        lt = '<div class="lang-toggle" role="group" aria-label="Idioma"><a href="%s">EN</a><a class="is-active" aria-current="true">ES</a></div>' % alt_href
+        lt = '<div class="lang-toggle" role="group" aria-label="Idioma"><a href="%s">English</a><a class="is-active" aria-current="true">Español</a></div>' % alt_href
     else:
-        lt = '<div class="lang-toggle" role="group" aria-label="Language"><a class="is-active" aria-current="true">EN</a><a href="%s">ES</a></div>' % alt_href
+        lt = '<div class="lang-toggle" role="group" aria-label="Language"><a class="is-active" aria-current="true">English</a><a href="%s">Español</a></div>' % alt_href
     # urgency line (ABI blue) + campus bar (both addresses, two clickable campus buttons)
     if lang == "es":
         u1, u2 = "Cupos Limitados Disponibles", "Inscripción Abierta Ahora"
