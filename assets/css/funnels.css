@@ -365,19 +365,19 @@ body.lf-page--brnx-es {
 .lf-phone:hover .lf-phone__flag { background: rgba(255,255,255,.22); }
 .lf-lang {
   display: inline-flex; align-items: center;
-  background: rgba(255,255,255,.72); border: 1.5px solid rgba(27,47,217,.35); border-radius: var(--lf-r-pill);
+  background: rgba(255,255,255,.72); border: 1.5px solid var(--lf-accent); border-radius: var(--lf-r-pill);
   font-size: .82rem; font-weight: 800; overflow: hidden;
   backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6);
-  box-shadow: 0 4px 16px rgba(27,47,217,.12), inset 0 1px 0 rgba(255,255,255,.6);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.6);
   transition: box-shadow .3s ease, border-color .3s ease;
 }
-.lf-lang:hover { border-color: rgba(27,47,217,.6); box-shadow: 0 6px 22px rgba(27,47,217,.2), inset 0 1px 0 rgba(255,255,255,.7); }
+.lf-lang:hover { border-color: var(--lf-accent-dark); box-shadow: 0 6px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.7); }
 .lf-lang a {
   padding: .42rem .7rem; color: var(--lf-accent-dark); transition: background .25s ease, color .25s ease;
 }
-.lf-lang a + a { border-left: 1.5px solid rgba(27,47,217,.25); }
+.lf-lang a + a { border-left: 1.5px solid rgba(0,0,0,.1); }
 .lf-lang a.is-active,
-.lf-lang a:hover { background: linear-gradient(135deg,#1b2fd9,#3a4ff0); color: var(--lf-on-accent); text-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.lf-lang a:hover { background: linear-gradient(135deg, var(--lf-accent), var(--lf-accent-dark)); color: var(--lf-on-accent); text-shadow: 0 1px 3px rgba(0,0,0,.2); }
 
 @media (max-width: 720px) {
   .lf-brand__addr { display: none; }
