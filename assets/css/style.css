@@ -570,7 +570,7 @@ footer.site a:hover { color: var(--gold-bright); }
 /* ---------- Mobile sticky CTA ---------- */
 .mobile-cta {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; display: none;
-  gap: 8px; padding: 9px 11px calc(9px + env(safe-area-inset-bottom));
+  gap: 8px; padding: 9px 11px calc(18px + env(safe-area-inset-bottom, 0px));
   background: #0d1017; border-top: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 -10px 30px rgba(0,0,0,.5);
 }
@@ -585,7 +585,7 @@ footer.site a:hover { color: var(--gold-bright); }
 .mobile-cta .text { background: var(--blue); color: #fff; }
 .mobile-cta .apply { background: var(--gold); color: var(--on-accent); }
 @media (max-width: 340px) { .mobile-cta a, .mobile-cta button { gap: 4px; font-size: .56rem; } .mobile-cta svg { width: 13px; height: 13px; } }
-@media (max-width: 1080px) { .mobile-cta { display: flex; } body { padding-bottom: 72px; } }
+@media (max-width: 1080px) { .mobile-cta { display: flex; } body { padding-bottom: 82px; } }
 
 /* ---------- Utilities ---------- */
 .center { text-align: center; }

@@ -1563,7 +1563,7 @@ body.lf-page--brnx-es {
   /* CTA hidden on mobile — hero form directly below + sticky bottom bar carry the action. */
   .lf-mhero__cta { display: none; }
   /* Leave room at the bottom for the sticky 3-CTA bar */
-  body.lf-page { padding-bottom: 78px; }
+  body.lf-page { padding-bottom: 88px; }
 }
 
 /* ───── Mobile-only sticky 3-CTA footer bar ───── */
@@ -1577,7 +1577,7 @@ body.lf-page--brnx-es {
     position: fixed;
     left: 0; right: 0; bottom: 0;
     z-index: 60;
-    padding: .65rem .7rem calc(.65rem + env(safe-area-inset-bottom, 0px));
+    padding: .65rem .7rem calc(18px + env(safe-area-inset-bottom, 0px));
     background: #0c1424;
     border-top: 1px solid rgba(255, 255, 255, .08);
     box-shadow: 0 -8px 24px rgba(0, 0, 0, .25);
@@ -1597,6 +1597,7 @@ body.lf-page--brnx-es {
     color: #fff;
     border: 1px solid transparent;
     transition: transform .12s ease, filter .15s ease;
+    white-space: nowrap !important;
   }
   .lf-mcta__btn:active { transform: scale(.97); }
   .lf-mcta__btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
