@@ -8,11 +8,11 @@
 - **Developers:** Kazi (Frontend), Arhum Abdullah (Analytics/GTM)
 
 ## Last Updated
-- **Date:** 2026-07-11 (July 11, 2026)
+- **Date:** 2026-07-14 (July 14, 2026)
 - **Agent:** Antigravity
-- **Branch:** `main`
-- **Latest Commit:** `5b8c86d`
-- **Status:** ✅ DEPLOYED TO PRODUCTION (abi.edu)
+- **Branch:** `preview/mass-rollout-2026-07-14`
+- **Latest Commit:** `1e8dad9`
+- **Status:** ✅ COMMITTED & DEPLOYED TO PREVIEW
 
 ## Deployment
 - **Git Remote:** `origin` → amerbarberedu-oss/abi-website-black (Alex's GitHub)
@@ -25,9 +25,9 @@
 - **Rollback point:** `2d34130` (pre v0.4.0)
 
 ## Current Versions
-- `landing.css?v=153`
+- `landing.css?v=154`
 - `campus.js?v=5`
-- `funnels.css?v=59`
+- `funnels.css?v=60`
 - `analytics.js?v=6` — NOT MODIFIED (Arhum's domain)
 
 ## What's Deployed
