@@ -1453,10 +1453,11 @@ body.lf-page--brnx-es {
 .lf-mhero__scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg,
-      rgba(10, 16, 32, .00) 0%,
-      rgba(10, 16, 32, .03) 45%,
-      rgba(10, 16, 32, .38) 100%);
+    linear-gradient(90deg,
+      rgba(10, 16, 32, .55) 0%,
+      rgba(10, 16, 32, .32) 30%,
+      rgba(10, 16, 32, .10) 55%,
+      rgba(10, 16, 32, 0) 75%);
   z-index: 1;
 }
 .lf-mhero__copy {
@@ -1540,8 +1541,7 @@ body.lf-page--brnx-es {
     top: 0; bottom: auto;
     height: 66.4vw;
     background:
-      radial-gradient(130% 90% at 15% 100%, rgba(5,8,17,.62) 0%, rgba(5,8,17,.3) 45%, rgba(5,8,17,0) 75%),
-      linear-gradient(180deg, rgba(6,9,18,0) 0%, rgba(6,9,18,0) 34%, rgba(6,9,18,.25) 62%, rgba(6,9,18,.55) 86%, rgba(10,18,38,.65) 100%);
+      linear-gradient(180deg, rgba(6,9,18,0) 0%, rgba(6,9,18,0) 60%, rgba(6,9,18,.10) 80%, rgba(6,9,18,.20) 100%);
   }
   .lf-mhero__copy {
     position: relative;
@@ -1848,3 +1848,18 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 /* ═══════════ v48 — chat widget: proper placement, no overlap ═══════════ */
 chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;z-index:9999!important}
 @media(max-width:768px){chat-widget{bottom:140px!important;right:12px!important}}
+
+
+/* ── mobile: swap long language labels for EN/ES via data-short. Client
+      2026-07-14: full words break the mobile navbar on landing pages. ── */
+@media (max-width: 768px) {
+  .lf-lang a[data-short],
+  .lfx-lang a[data-short],
+  .seg-lang .seg-lab[data-short]{font-size:0!important;letter-spacing:0!important}
+  .lf-lang a[data-short]::before,
+  .lfx-lang a[data-short]::before,
+  .seg-lang .seg-lab[data-short]::before{
+    content:attr(data-short);
+    font-size:.78rem;letter-spacing:.06em;font-weight:600;
+  }
+}
