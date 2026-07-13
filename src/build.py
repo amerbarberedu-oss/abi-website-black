@@ -1030,8 +1030,8 @@ def build():
         _loc_label = 'Sede' if lang == 'es' else 'Campus'
         loc_toggle = (
             f'<div class="loc-toggle" role="group" aria-label="{_loc_label}">'
-            f'<a{_mn_active} href="{_es_prefix}/manhattan">Manhattan</a>'
-            f'<a{_bx_active} href="{_es_prefix}/bronx">Bronx</a></div>'
+            f'<a{_mn_active} href="{_es_prefix}/manhattan" data-short="MN">Manhattan</a>'
+            f'<a{_bx_active} href="{_es_prefix}/bronx" data-short="BX">Bronx</a></div>'
         )
         bodyclass = ' bx-gold' if _is_bronx else ''
         html = TEMPLATE.format(
