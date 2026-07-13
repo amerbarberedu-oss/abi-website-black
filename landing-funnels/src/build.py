@@ -298,7 +298,7 @@ def lead_form(p):
         '  <p class="lf-form__sub">%(sub)s</p>\n'
         '  <div class="ghl-form-wrap">'
         '<iframe src="https://api.leadconnectorhq.com/widget/form/%(ghl_id)s" '
-        'style="width:100%%;height:100%%;border:none;border-radius:3px" '
+        'style="width:100%%;height:540px;border:none;border-radius:3px" '
         'id="inline-%(ghl_id)s" data-layout="{\'id\':\'INLINE\'}" data-trigger-type="alwaysShow" '
         'data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" '
         'data-deactivation-type="neverDeactivate" data-deactivation-value="" '
