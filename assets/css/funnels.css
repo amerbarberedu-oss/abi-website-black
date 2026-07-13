@@ -1915,3 +1915,12 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   border-color: #d1d5db !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
+
+/* Reduce vertical gap between the contact box ending and the next section */
+.lf-page .hx-in {
+  padding-bottom: 0.8rem !important;
+}
+.lf-page main > .lf-section:first-of-type {
+  padding-top: 1.2rem !important;
+}
+
