@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=156" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=157" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=34">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=156">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=157">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -1030,8 +1030,8 @@ def build():
         _loc_label = 'Sede' if lang == 'es' else 'Campus'
         loc_toggle = (
             f'<div class="loc-toggle" role="group" aria-label="{_loc_label}">'
-            f'<a{_mn_active} href="{_es_prefix}/manhattan" data-short="MN">Manhattan</a>'
-            f'<a{_bx_active} href="{_es_prefix}/bronx" data-short="BX">Bronx</a></div>'
+            f'<a{_mn_active} href="{_es_prefix}/manhattan">Manhattan</a>'
+            f'<a{_bx_active} href="{_es_prefix}/bronx">Bronx</a></div>'
         )
         bodyclass = ' bx-gold' if _is_bronx else ''
         html = TEMPLATE.format(
