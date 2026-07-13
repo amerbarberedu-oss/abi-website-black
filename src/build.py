@@ -836,6 +836,7 @@ def _shell_nav(b, root, lang):
     Blog inside FAQs ▾ dropdown."""
     if lang == 'es':
         mainnav = ('<nav class="mainnav" aria-label="Principal">'
+          f'<a href="{b}index.html">Inicio</a>'
           f'<a href="{b}about.html">Nosotros</a>'
           f'<a href="{b}programs/index.html">Programas</a><a href="{b}instructors.html">Instructores</a>'
           f'<a href="{b}gallery.html">Galería</a>'
@@ -846,6 +847,7 @@ def _shell_nav(b, root, lang):
           f'<span class="nav-drop-menu"><a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}blog/index.html">Blog</a></span></span>'
           f'<a href="{b}contact.html">Contacto</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
+          f'<a href="{b}index.html">Inicio</a>'
           f'<a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
           f'<a href="{b}instructors.html">Instructores</a><a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a><a href="{b}jobs.html">Empleo</a>'
@@ -854,6 +856,7 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}contact.html">Contacto</a><a href="{root}index.html"><b>English</b></a></div></nav>')
     else:
         mainnav = ('<nav class="mainnav" aria-label="Main">'
+          f'<a href="{b}index.html">Home</a>'
           f'<a href="{b}about.html">About</a>'
           f'<a href="{b}programs/index.html">Programs</a><a href="{b}instructors.html">Instructors</a>'
           f'<a href="{b}gallery.html">Gallery</a>'
@@ -864,6 +867,7 @@ def _shell_nav(b, root, lang):
           f'<span class="nav-drop-menu"><a href="{b}faq.html">FAQs</a><a href="{b}blog/index.html">Blog</a></span></span>'
           f'<a href="{b}contact.html">Contact</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
+          f'<a href="{b}index.html">Home</a>'
           f'<a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
           f'<a href="{b}instructors.html">Instructors</a><a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}jobs.html">Jobs</a>'
