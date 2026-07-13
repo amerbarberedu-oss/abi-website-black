@@ -226,12 +226,12 @@ def hero(p):
         '      </div>'
     ) % (NEXT_ISO, cd_label, cd_sub, cells)
 
-    # 5. Formcard / Lead Form (using GHL forms specific to each campus)
+    # 5. Formcard / Lead Form (using GHL forms)
     formcard_title = "Reserva Tu Lugar Hoy" if es else "Reserve Your Spot Today"
     formcard_sub = "Completa el formulario y un asesor de admisiones te contactará." if es else "Fill out the form and an Admissions Advisor will contact you."
-    ghl_id = "2FvHzLvYji1iSmNmCP46" if p["campus"]["slug"] == "manhattan" else "v1SNzWsAZZVodCsnsDbe"
-    ghl_h = 734 if p["campus"]["slug"] == "manhattan" else 794
-    ghl_name = "02.GET TRAINED WITH ABI FORM -  Manhattan " if p["campus"]["slug"] == "manhattan" else "02.GET TRAINED WITH ABI FORM - Bronx"
+    ghl_id = "WZjNHh9wcd1FTnlj0eCR" if es else "3ghObGjHiLN3LgKBfKGG"
+    ghl_h = 757
+    ghl_name = "01.GET TRAINED WITH ABI FORM - Spanish" if es else "01.GET TRAINED WITH ABI FORM - ABI.com"
 
     formcard = (
         '    <div class="formcard" id="reserve">\n'
@@ -308,14 +308,11 @@ def lead_form(p):
         '</div>'
     ) % {
         "id": p["id"], "campus": p["campus"]["slug"], "lang": lang,
-        # GHL form IDs are per-language (unified form for all campuses).
-        # EN = 01.GET TRAINED WITH ABI FORM - edu
-        # ES = 01.GET TRAINED WITH ABI FORM - edu - ESP
-        # Client 2026-07-14: campus-specific GHL forms — Manhattan or Bronx,
-        # same form for EN + ES (no separate ESP variant anymore).
-        "ghl_id": "2FvHzLvYji1iSmNmCP46" if p["campus"]["slug"] == "manhattan" else "v1SNzWsAZZVodCsnsDbe",
-        "ghl_h": 734 if p["campus"]["slug"] == "manhattan" else 794,
-        "ghl_name": "02.GET TRAINED WITH ABI FORM -  Manhattan " if p["campus"]["slug"] == "manhattan" else "02.GET TRAINED WITH ABI FORM - Bronx",
+        # GHL form IDs are per-language (unified form).
+        # Client 2026-07-14: unified new forms for English vs Spanish.
+        "ghl_id": "WZjNHh9wcd1FTnlj0eCR" if es else "3ghObGjHiLN3LgKBfKGG",
+        "ghl_h": 757,
+        "ghl_name": "01.GET TRAINED WITH ABI FORM - Spanish" if es else "01.GET TRAINED WITH ABI FORM - ABI.com",
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
