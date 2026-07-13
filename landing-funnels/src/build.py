@@ -245,7 +245,7 @@ def hero(p):
         '      <div class="ghl-form-wrap">\n'
         '        <iframe\n'
         '          src="https://api.leadconnectorhq.com/widget/form/%s"\n'
-        '          style="width:100%%;height:100%%;border:none;border-radius:3px"\n'
+        '          style="width:100%%;height:540px;border:none;border-radius:3px"\n'
         '          id="inline-%s"\n'
         '          data-layout="{\'id\':\'INLINE\'}"\n'
         '          data-trigger-type="alwaysShow"\n'

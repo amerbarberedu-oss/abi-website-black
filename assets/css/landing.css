@@ -3168,10 +3168,6 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
       per client's exact embed code, so the wrapper needs an explicit height
       to give them something to fill. Heights match each form's data-height. ── */
 .ghl-form-wrap{width:100%}
-.ghl-form-wrap:has(iframe[data-form-id="3ghObGjHiLN3LgKBfKGG"]){min-height:757px}
-.ghl-form-wrap:has(iframe[data-form-id="WZjNHh9wcd1FTnlj0eCR"]){min-height:820px}
-.ghl-form-wrap:has(iframe[data-form-id="2FvHzLvYji1iSmNmCP46"]){min-height:734px}
-.ghl-form-wrap:has(iframe[data-form-id="v1SNzWsAZZVodCsnsDbe"]){min-height:794px}
 
 /* ── Grayscale (Colorless) overrides for Hero & Contact Box ── */
 .hx-l2,
