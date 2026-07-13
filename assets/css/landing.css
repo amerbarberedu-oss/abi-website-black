@@ -2741,8 +2741,9 @@ body.no-mhx-phones .mhx-phones{display:none!important}
    (!important needed: legacy .logo-img / .hdr-in > .lang-toggle rules use it too) */
 @media (max-width:430px){
   body.mhx-on .brand-plate .logo-img{height:42px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.8rem!important}
-  body.mhx-on .lang-toggle a{padding:.48rem .54rem!important}
+  body.mhx-on .lang-toggle{font-size:.66rem!important}
+  body.mhx-on .lang-toggle a{padding:.36rem .45rem!important}
+  body.mhx-on .loc-toggle{font-size:.8rem!important}
   body.mhx-on .loc-toggle a{padding:.48rem .54rem!important}
   body.mhx-on .loc-toggle{margin-left:.6rem}
   body.mhx-on .hamburger{width:40px;margin-left:.2rem!important}
@@ -2750,7 +2751,7 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .mhx-promo{font-size:.84rem;letter-spacing:.06em}
 }
 @media (max-width:400px){
-  body.mhx-on .lang-toggle a{padding:.46rem .38rem!important}
+  body.mhx-on .lang-toggle a{padding:.34rem .32rem!important}
   body.mhx-on .loc-toggle a{padding:.46rem .38rem!important}
   body.mhx-on .loc-toggle{margin-left:.4rem}
   body.mhx-on .hdr-in{gap:.18rem;padding:.5rem .4rem}
@@ -2759,8 +2760,9 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 }
 @media (max-width:360px){
   body.mhx-on .brand-plate .logo-img{height:37px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.72rem!important}
-  body.mhx-on .lang-toggle a{padding:.4rem .38rem!important}
+  body.mhx-on .lang-toggle{font-size:.62rem!important}
+  body.mhx-on .lang-toggle a{padding:.3rem .32rem!important}
+  body.mhx-on .loc-toggle{font-size:.72rem!important}
   body.mhx-on .loc-toggle a{padding:.4rem .38rem!important}
   body.mhx-on .loc-toggle{margin-left:.45rem}
   body.mhx-on .hamburger{width:34px;padding:.25rem;margin-left:.1rem!important}
@@ -2770,8 +2772,9 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 }
 @media (max-width:330px){
   body.mhx-on .brand-plate .logo-img{height:32px!important}
-  body.mhx-on .lang-toggle,body.mhx-on .loc-toggle{font-size:.66rem!important}
-  body.mhx-on .lang-toggle a{padding:.36rem .34rem!important}
+  body.mhx-on .lang-toggle{font-size:.56rem!important}
+  body.mhx-on .lang-toggle a{padding:.26rem .28rem!important}
+  body.mhx-on .loc-toggle{font-size:.66rem!important}
   body.mhx-on .loc-toggle a{padding:.36rem .34rem!important}
   body.mhx-on .loc-toggle{margin-left:.35rem}
 }
@@ -2790,8 +2793,9 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 /* Ultra-narrow: ≤320px (Galaxy Fold, very small Android) */
 @media (max-width:320px){
   body.mhx-on .brand-plate .logo-img { height: 28px !important; }
-  body.mhx-on .lang-toggle, body.mhx-on .loc-toggle { font-size: .62rem !important; }
-  body.mhx-on .lang-toggle a { padding: .32rem .28rem !important; }
+  body.mhx-on .lang-toggle { font-size: .52rem !important; }
+  body.mhx-on .lang-toggle a { padding: .24rem .22rem !important; }
+  body.mhx-on .loc-toggle { font-size: .62rem !important; }
   body.mhx-on .loc-toggle a { padding: .32rem .28rem !important; }
   body.mhx-on .loc-toggle { margin-left: .2rem; }
   body.mhx-on .hamburger { width: 32px !important; margin-left: 0 !important; }
@@ -2802,7 +2806,8 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 /* Extreme: ≤280px (Galaxy Fold folded) */
 @media (max-width:280px){
   body.mhx-on .brand-plate .logo-img { height: 24px !important; }
-  body.mhx-on .lang-toggle a, body.mhx-on .loc-toggle a { padding: .28rem .22rem !important; font-size: .58rem !important; }
+  body.mhx-on .lang-toggle a { padding: .22rem .18rem !important; font-size: .48rem !important; }
+  body.mhx-on .loc-toggle a { padding: .28rem .22rem !important; font-size: .58rem !important; }
   body.mhx-on .hdr-in { gap: .06rem !important; padding: .32rem .2rem !important; }
 }
 
