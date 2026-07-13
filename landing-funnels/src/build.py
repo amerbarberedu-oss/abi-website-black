@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "59"
+CSS_V = "60"
 JS_V  = "15"
 
 # ── inline SVG icon library ─────────────────────────────────────────
