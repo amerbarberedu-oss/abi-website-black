@@ -157,24 +157,7 @@ MHERO_BG_BY_PAGE = {
 }
 
 def mobile_hero(p):
-    lang = p["lang"]; es = lang == "es"
-    H_ = D.HERO[lang]
-    cta_label = "Reserve Your Spot" if not es else "Reserva Tu Lugar"
-    bg_file = MHERO_BG_BY_PAGE[(p["campus"]["slug"], lang)]
-    # v3.6 — per-page mobile hero image (4 distinct color palettes)
-    return (
-        '<section class="lf-mhero" aria-label="American Barber Institute %s clinic floor">\n'
-        '  <img class="lf-mhero__bg" src="/assets/img/' + bg_file + '"'
-        ' alt="ABI barber students training on the clinic floor at the %s" loading="eager"'
-        ' fetchpriority="high" width="1080" height="1609">\n'
-        '  <div class="lf-mhero__scrim"></div>\n'
-        '  <div class="lf-mhero__copy">\n'
-        '    <p class="lf-mhero__h1" role="heading" aria-level="1">%s <span>%s</span> <em>%s</em></p>\n'
-        '    <a class="lf-btn lf-btn--primary lf-btn--lg lf-mhero__cta" href="#reserve">%s</a>\n'
-        '  </div>\n'
-        '</section>\n'
-    ) % (h(p["campus"]["name_en"]), h(p["campus"]["name_en"]),
-         h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]), h(cta_label))
+    return ""
 
 
 # ── HERO ─────────────────────────────────────────────────────────────
@@ -183,48 +166,135 @@ def hero(p):
     H_ = D.HERO[lang]
     is_bx = p["campus"]["slug"] == "bronx"
     sub    = H_["sub_bx"]    if is_bx else H_["sub_man"]
-    def _feat(t, ic):
-        # "main|subline" renders the subline as a second emphasized row
+
+    # 1. Seats Banner
+    site_seats = (
+        '<div class="site-seats" role="status">'
+        '<span class="site-seats__dot" aria-hidden="true"></span>'
+        '<span class="site-seats__kicker">%s</span>'
+        '<span class="site-seats__lead">%s</span>'
+        '</div>'
+    ) % (
+        "CUPOS LIMITADOS DISPONIBLES" if es else "LIMITED SEATS AVAILABLE",
+        "INSCRIPCIONES ABIERTAS" if es else "ENROLLMENT NOW OPEN"
+    )
+
+    # 2. Headline Parts
+    h1_a = H_["h1_a"]
+    h1_b = H_["h1_b"]
+    h1_script = H_["h1_script"]
+
+    # 3. Features Chips
+    if es:
+        features_list = [
+            ("Licenciada por NYSED (BPSS)", "shield"),
+            ("Horarios de día, tarde y fin de semana", "calendar"),
+            ("Entrenamiento práctico en nuestra clínica profesional de barbería", "scissors"),
+            ("Asistencia Financiera — ACCES-VR, VA|Planes de pago flexibles y opciones", "wallet"),
+            ("Apoyo profesional · Asistencia de empleo", "briefcase"),
+            ("Campus moderno en el corazón de la ciudad de Nueva York y el Bronx", "store")
+        ]
+    else:
+        features_list = [
+            ("Licensed by NYSED (BPSS)", "shield"),
+            ("Day, evening, weekend schedules", "calendar"),
+            ("Hands-on training in our professional Barber clinic", "scissors"),
+            ("Financial Assistance — ACCES-VR, VA|Flexible payment plans options", "wallet"),
+            ("Career support · Job placement assistance", "briefcase"),
+            ("Modern campus in the heart of New York City and Bronx", "store")
+        ]
+
+    def _feat_chip(t, ic):
         if "|" in t:
             main, sub_ = t.split("|", 1)
-            return ('<span class="lf-feature lf-feature--multi">%s<span><b>%s</b>'
-                    '<i class="lf-feature__sub">%s</i></span></span>'
-                    % (svg(ic, 20), h(main), h(sub_)))
-        return '<span class="lf-feature">%s<span>%s</span></span>' % (svg(ic, 20), h(t))
-    feats = "".join(_feat(t, ic) for t, ic in D.FEATURES[lang])
-    cd = D.COUNTDOWN[lang]
+            cls_fin = " hx-chip--fin"
+            content = "<b>%s</b><i>%s</i>" % (h(main), h(sub_))
+        else:
+            cls_fin = ""
+            content = h(t)
+        return '<div class="hx-chip%s">%s<span>%s</span></div>' % (cls_fin, svg(ic, 20), content)
+
+    chips = "".join(_feat_chip(t, ic) for t, ic in features_list)
+
+    # 4. Countdown Timer (using hx-next for styling and lf-cd for script tracking)
+    cd_label = "Próxima Fecha de Inicio:" if es else "Next Starting Date:"
+    cd_sub = "Las clases nuevas comienzan el primer lunes de cada mes." if es else "New classes begin the first Monday of each month."
+    cd_labels = ("Días", "Horas", "Min", "Seg") if es else ("Days", "Hours", "Min", "Sec")
     cells = "".join(
-        '<div class="lf-cd__cell"><b data-cd-%s>0</b><span>%s</span></div>' % (k, h(lbl))
-        for k, lbl in zip("dhms", cd["cells"])
+        '<div class="hx-cell"><b data-cd-%s>0</b><span>%s</span></div>' % (k, lbl)
+        for k, lbl in zip("dhms", cd_labels)
     )
-    # 2-line countdown:
-    #   Line 1: <icon> NEXT STARTING DATE: MONDAY, JULY 6, 2026
-    #   Line 2: <icon> NEW CLASSES BEGIN THE FIRST MONDAY OF EACH MONTH.
+
     countdown = (
-        '<div class="lf-cd" data-target="%s">\n'
-        '  <p class="lf-cd__line lf-cd__line--date">'
-        '<span class="lf-cd__label">%s</span> '
-        '<span class="lf-cd__date"></span></p>\n'
-        '  <p class="lf-cd__line lf-cd__line--sub">%s</p>\n'
-        '  <div class="lf-cd__grid">%s</div>\n'
-        '</div>'
-    ) % (NEXT_ISO, h(cd["label"]), h(cd["sub"]), cells)
-    # v3.1 — campus kicker removed per spec
+        '      <div class="hx-next lf-cd" data-countdown data-target="%s">\n'
+        '        <div class="hx-next-l">\n'
+        '          <span class="hx-next-label lf-cd__label">%s</span>\n'
+        '          <span class="hx-next-date lf-cd__date" data-next-start></span>\n'
+        '          <span class="hx-next-sub">%s</span>\n'
+        '        </div>\n'
+        '        <div class="hx-cells">\n'
+        '          %s\n'
+        '        </div>\n'
+        '      </div>'
+    ) % (NEXT_ISO, cd_label, cd_sub, cells)
+
+    # 5. Formcard / Lead Form (using GHL forms specific to each campus)
+    formcard_title = "Reserva Tu Lugar Hoy" if es else "Reserve Your Spot Today"
+    formcard_sub = "Completa el formulario y un asesor de admisiones te contactará." if es else "Fill out the form and an Admissions Advisor will contact you."
+    ghl_id = "2FvHzLvYji1iSmNmCP46" if p["campus"]["slug"] == "manhattan" else "v1SNzWsAZZVodCsnsDbe"
+    ghl_h = 734 if p["campus"]["slug"] == "manhattan" else 794
+    ghl_name = "02.GET TRAINED WITH ABI FORM -  Manhattan " if p["campus"]["slug"] == "manhattan" else "02.GET TRAINED WITH ABI FORM - Bronx"
+
+    formcard = (
+        '    <div class="formcard" id="reserve">\n'
+        '      <div class="formcard-head">\n'
+        '        <div class="formcard-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div>\n'
+        '        <div>\n'
+        '          <div class="formcard-title">%s</div>\n'
+        '          <div class="formcard-sub">%s</div>\n'
+        '        </div>\n'
+        '      </div>\n'
+        '      <div class="ghl-form-wrap">\n'
+        '        <iframe\n'
+        '          src="https://api.leadconnectorhq.com/widget/form/%s"\n'
+        '          style="width:100%%;height:100%%;border:none;border-radius:3px"\n'
+        '          id="inline-%s"\n'
+        '          data-layout="{\'id\':\'INLINE\'}"\n'
+        '          data-trigger-type="alwaysShow"\n'
+        '          data-trigger-value=""\n'
+        '          data-activation-type="alwaysActivated"\n'
+        '          data-activation-value=""\n'
+        '          data-deactivation-type="neverDeactivate"\n'
+        '          data-deactivation-value=""\n'
+        '          data-form-name="%s"\n'
+        '          data-height="%d"\n'
+        '          data-layout-iframe-id="inline-%s"\n'
+        '          data-form-id="%s"\n'
+        '          title="%s"></iframe>\n'
+        '      </div>\n'
+        '      <script src="https://link.msgsndr.com/js/form_embed.js"></script>\n'
+        '    </div>'
+    ) % (formcard_title, formcard_sub, ghl_id, ghl_id, ghl_name, ghl_h, ghl_id, ghl_id, ghl_name)
+
+    # 6. Entire Section Output (.hx markup)
     return (
-        '<section class="lf-hero">\n'
-        '  <div class="lf-wrap lf-hero__in">\n'
-        '    <div class="lf-hero__copy lf-rv">\n'
-        '      <h1 class="lf-h1">%s <span class="lf-h1__b">%s</span> '
-        '<span class="lf-h1__script">%s</span></h1>\n'
-        '      <p class="lf-hero__sub">%s</p>\n'
-        '      <div class="lf-features">%s</div>\n'
+        '%s\n'
+        '<section class="hx" id="main">\n'
+        '  <div class="hx-bg" aria-hidden="true"></div>\n'
+        '  <div class="hx-grad" aria-hidden="true"></div>\n'
+        '  <div class="hx-in">\n'
+        '    <div class="hx-copy">\n'
+        '      <h1 class="hx-h1"><span class="hx-l1">%s</span><span class="hx-l2">%s</span><span class="hx-script">%s</span></h1>\n'
+        '      <p class="hx-sub">%s</p>\n'
+        '      <div class="hx-chips">\n'
+        '        %s\n'
+        '      </div>\n'
         '      %s\n'
         '    </div>\n'
         '    %s\n'
         '  </div>\n'
-        '</section>\n'
-    ) % (h(H_["h1_a"]), h(H_["h1_b"]), h(H_["h1_script"]),
-         sub, feats, countdown, lead_form(p))
+        '</section>'
+    ) % (site_seats, h(h1_a), h(h1_b), h(h1_script), sub, chips, countdown, formcard)
 
 
 def lead_form(p):
@@ -787,9 +857,10 @@ def page_head(p):
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'
 '<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
-'<link rel="preload" href="/assets/img/%(mhero_bg)s" as="image" media="(max-width:768px)" fetchpriority="high">\n'
-'<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" media="(min-width:769px)">\n'
+'<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
+'<link rel="preload" href="/assets/css/landing.css?v=154" as="style">\n'
+'<link rel="stylesheet" href="/assets/css/landing.css?v=154">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
@@ -802,7 +873,6 @@ def page_head(p):
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
         "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
         "site": SITE, "oglocale": "es_US" if es else "en_US", "cssv": CSS_V,
-        "mhero_bg": MHERO_BG_BY_PAGE[(p["campus"]["slug"], p["lang"])],
         "ld_scripts": "".join(
             '<script type="application/ld+json">%s</script>\n' % json.dumps(b, ensure_ascii=False)
             for b in ld_blocks

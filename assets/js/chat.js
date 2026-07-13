@@ -124,10 +124,6 @@
   }
 
   function build() {
-    var st = document.createElement("style");
-    st.id = "abichat-css";
-    st.textContent = CSS;
-    document.head.appendChild(st);
 
     var bd = document.createElement("div");
     bd.className = "abichat-bd";
@@ -191,6 +187,13 @@
   }
 
   function init() {
+    if (!document.getElementById("abichat-css")) {
+      var st = document.createElement("style");
+      st.id = "abichat-css";
+      st.textContent = CSS;
+      document.head.appendChild(st);
+    }
+
     buildRail();   // desktop channel rail (shown via CSS only >=1081px)
 
     var triggers = document.querySelectorAll(".mobile-cta a.text, a.mbar-text, .lf-mcta__btn--text");
