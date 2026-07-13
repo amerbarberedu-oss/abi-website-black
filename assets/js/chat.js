@@ -98,6 +98,19 @@
     '.abichat-chev svg{width:18px;height:18px;display:block}' +
     '.abichat-ft{display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 16px 16px;font-size:12.5px;color:#7a828b}' +
     '.abichat-ft svg{width:15px;height:15px;flex:0 0 auto;color:#f4a01a}' +
+    /* desktop left-side channel rail */
+    '.abichat-rail{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147482000;display:none;flex-direction:column;gap:8px}' +
+    '@media (min-width:1081px){.abichat-rail{display:flex}}' +
+    '.abichat-rail a{display:flex;align-items:center;text-decoration:none;color:#fff;border-radius:0 10px 10px 0;overflow:hidden;box-shadow:2px 3px 12px rgba(0,0,0,.28);transition:transform .16s ease;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}' +
+    '.abichat-rail a:hover{transform:translateX(3px)}' +
+    '.abichat-rail-ic{width:46px;height:46px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}' +
+    '.abichat-rail-ic svg{width:24px;height:24px;display:block}' +
+    '.abichat-rail-lb{max-width:0;white-space:nowrap;overflow:hidden;font-size:13px;font-weight:700;transition:max-width .22s ease,padding .22s ease}' +
+    '.abichat-rail a:hover .abichat-rail-lb,.abichat-rail a:focus .abichat-rail-lb{max-width:170px;padding-right:16px;padding-left:2px}' +
+    '.abichat-rail--sms{background:#25d366}' +
+    '.abichat-rail--ig{background:linear-gradient(45deg,#feda75,#fa7e1e 30%,#d62976 55%,#962fbf 80%,#4f5bd5)}' +
+    '.abichat-rail--wa{background:#25d366}' +
+    '.abichat-rail--fb{background:linear-gradient(135deg,#0a7cff,#00b2ff)}' +
     '@media (min-width:560px){.abichat{bottom:auto;top:50%;transform:translateY(-46%) scale(.98)}.abichat.is-open{transform:translateY(-50%)}}' +
     '@media (prefers-reduced-motion:reduce){.abichat,.abichat-bd{transition:none}}';
 
@@ -154,7 +167,32 @@
     } catch (e) {}
   }
 
+  // Desktop-only vertical rail of the 4 channels on the left edge (>=1081px).
+  function buildRail() {
+    var items = [
+      { cls: "sms", ic: IC.sms, href: smsHref,       ext: false, ch: "sms",       lb: (es ? "Texto" : "Text Us"), al: T.sms_t },
+      { cls: "ig",  ic: IC.ig,  href: CFG.instagram, ext: true,  ch: "instagram", lb: "Instagram",                al: T.ig_t },
+      { cls: "wa",  ic: IC.wa,  href: CFG.whatsapp,  ext: true,  ch: "whatsapp",  lb: "WhatsApp",                 al: T.wa_t },
+      { cls: "fb",  ic: IC.fb,  href: CFG.messenger, ext: true,  ch: "messenger", lb: "Messenger",                al: T.fb_t }
+    ];
+    var rail = document.createElement("div");
+    rail.className = "abichat-rail";
+    rail.setAttribute("aria-label", es ? "Contáctanos" : "Contact us");
+    rail.innerHTML = items.map(function (it) {
+      return '<a class="abichat-rail--' + it.cls + '" href="' + it.href + '" data-ch="' + it.ch + '"' +
+        (it.ext ? ' target="_blank" rel="noopener"' : '') + ' aria-label="' + it.al + '">' +
+        '<span class="abichat-rail-ic">' + it.ic + '</span>' +
+        '<span class="abichat-rail-lb">' + it.lb + '</span></a>';
+    }).join("");
+    document.body.appendChild(rail);
+    Array.prototype.forEach.call(rail.querySelectorAll("a"), function (a) {
+      a.addEventListener("click", function () { track("channel", a.getAttribute("data-ch")); });
+    });
+  }
+
   function init() {
+    buildRail();   // desktop channel rail (shown via CSS only >=1081px)
+
     var triggers = document.querySelectorAll(".mobile-cta a.text, a.mbar-text, .lf-mcta__btn--text");
     if (!triggers.length) return;
 
