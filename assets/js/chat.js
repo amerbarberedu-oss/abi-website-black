@@ -19,6 +19,7 @@
     smsNumber: "+19295888448",           // Text Us (SMS)
     smsBody: "Hi! I would like more information about your barber programs.",
     instagram: "https://ig.me/m/americanbarberinstitute", // IG direct message
+    whatsapp: "https://wa.me/19295888448",                // WhatsApp chat
     messenger: "https://m.me/Abi.Education",               // FB Messenger
     avatar: "/apple-touch-icon.png"      // round avatar in the panel header
   };
@@ -36,6 +37,7 @@
     reply: "Normalmente respondemos en pocos minutos.",
     sms_t: "Envíanos un mensaje (SMS)", sms_s: "Texto a tu teléfono",
     ig_t: "Instagram", ig_s: "Escríbenos por Instagram",
+    wa_t: "WhatsApp", wa_s: "Chatea con nosotros por WhatsApp",
     fb_t: "Facebook Messenger", fb_s: "Escríbenos por Messenger"
   } : {
     chat: "Chat",
@@ -47,6 +49,7 @@
     reply: "We typically reply within a few minutes.",
     sms_t: "Text Us (SMS)", sms_s: "Text us on your phone",
     ig_t: "Instagram", ig_s: "Message us on Instagram",
+    wa_t: "WhatsApp", wa_s: "Chat with us on WhatsApp",
     fb_t: "Facebook Messenger", fb_s: "Message us on Messenger"
   };
 
@@ -56,6 +59,7 @@
   var IC = {
     sms: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
     ig: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="#fff" stroke="none"/></svg>',
+    wa: '<svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M17.5 14.4c-.3-.15-1.73-.85-2-.95-.27-.1-.46-.15-.65.15-.19.28-.74.94-.9 1.13-.17.19-.33.21-.62.07-.29-.15-1.23-.46-2.35-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.44.13-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.08-.15-.65-1.56-.89-2.13-.23-.55-.47-.48-.65-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38 0 1.4 1.03 2.76 1.17 2.95.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.11.55-.08 1.69-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12.05 21.5a9.5 9.5 0 0 1-4.85-1.33l-.34-.2-3.6.94.96-3.51-.23-.36a9.44 9.44 0 0 1-1.45-5.03c0-5.23 4.26-9.48 9.5-9.48 2.54 0 4.92 1 6.71 2.79a9.4 9.4 0 0 1 2.78 6.7c0 5.22-4.26 9.48-9.5 9.48z"/></svg>',
     fb: '<svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.1-2.6-2.7-5 2.7 5.4-5.7L13.5 11l4.9-2.7-5.4 5.8z"/></svg>',
     chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
     x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
@@ -85,6 +89,7 @@
     '.abichat-ic svg{width:26px;height:26px;display:block}' +
     '.abichat-ic--sms{background:#25d366}' +
     '.abichat-ic--ig{background:linear-gradient(45deg,#feda75,#fa7e1e 30%,#d62976 55%,#962fbf 80%,#4f5bd5)}' +
+    '.abichat-ic--wa{background:#25d366}' +
     '.abichat-ic--fb{background:linear-gradient(45deg,#0a7cff,#0af 60%,#8ad4ff)}' +
     '.abichat-ot{flex:1 1 auto;min-width:0}' +
     '.abichat-ot b{display:block;font-weight:700;font-size:15.5px;color:#14171a;line-height:1.25}' +
@@ -132,6 +137,7 @@
         '<p class="abichat-s">' + T.sub + '</p>' +
         opt("sms", IC.sms, T.sms_t, T.sms_s, smsHref, false, "sms") +
         opt("ig", IC.ig, T.ig_t, T.ig_s, CFG.instagram, true, "instagram") +
+        opt("wa", IC.wa, T.wa_t, T.wa_s, CFG.whatsapp, true, "whatsapp") +
         opt("fb", IC.fb, T.fb_t, T.fb_s, CFG.messenger, true, "messenger") +
       '</div>' +
       '<div class="abichat-ft">' + IC.shield + '<span>' + T.reply + '</span></div>';
