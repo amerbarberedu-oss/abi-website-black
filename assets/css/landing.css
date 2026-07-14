@@ -2384,6 +2384,19 @@ section{padding-block:clamp(2.6rem,5vw,4.6rem)}
   .hdr-in > .lang-toggle a{padding:.4rem .68rem!important}
 }
 
+/* Spanish nav labels ("Instructores", "Preguntas ▾", "Contacto"...) run
+   longer than English and still overflow into the logo / language switcher
+   under the v13.0 shrink above -- clamp further just for /es/ pages, up to
+   the width where it fits without any help (verified clean at 1560px+). */
+@media (min-width:1200px) and (max-width:1560px){
+  html[lang="es"] .mainnav a,
+  html[lang="es"] header.hdr nav.mainnav>a,
+  html[lang="es"] header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:8.3px!important;letter-spacing:0!important;padding:.32rem .1rem!important;
+  }
+  html[lang="es"] header.hdr nav.mainnav{gap:5px!important}
+}
+
 /* ============================================================
    v12.9 — Header order: logo → nav → EN|ES → Become-a-Barber → hamburger
    .lang-toggle is now a top-level flex child of .hdr-in (no wrapper)
