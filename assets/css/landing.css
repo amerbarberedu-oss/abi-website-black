@@ -3008,7 +3008,13 @@ body.mhx-on .stats{padding-block:1.4rem!important}
   body.mhx-on .brand-plate .logo-img{height:64px!important}
 }
 @media (min-width:1200px) and (max-width:1459px){
-  body.mhx-on .mainnav{gap:.8rem!important}
+  /* v141's gap:.8rem (higher specificity than v13.0's .mainnav clamp) was
+     silently re-overflowing the nav into the logo/language switcher at
+     1200-1275px and again at 1400-1459px -- shrunk to the largest value
+     that clears the switcher with margin at both ends (verified at
+     1200/1250/1275/1300/1400/1459px). font-size below has no !important
+     so v13.0's own clamp already wins here; left as-is. */
+  body.mhx-on .mainnav{gap:3px!important}
   body.mhx-on .mainnav a{font-size:.85rem}
 }
 
