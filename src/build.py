@@ -1079,7 +1079,9 @@ def build():
             written.append(out)
     # sitemap — adds priority/changefreq hints and xhtml:link hreflang annotations
     # so Google indexes the EN ↔ ES home variants as one logical URL.
-    written += ['index.html', 'es/index.html', 'bronx.html']
+    for _extra in ('index.html', 'es/index.html', 'bronx.html'):
+        if _extra not in written:
+            written.append(_extra)
     import datetime
     _today = datetime.date.today().isoformat()
     def _pri(o):
