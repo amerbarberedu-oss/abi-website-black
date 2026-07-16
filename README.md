@@ -25,6 +25,15 @@ served on Vercel, in English and Spanish.
 
 ## 0. Recent Changes
 
+### 0.5.1 (2026-07-16) — GHL Form Re-mapping (per-campus lead forms)
+
+- **GoHighLevel Form Re-mapping** — Split the lead forms so each surface has its own GHL form (all redirect to `/thank-you`, so `generate_lead` still fires reliably via `analytics.js`):
+  - Main site EN (index, contact, jobs, bronx) → `WZjNHh9wcd1FTnlj0eCR` ("edu")
+  - Main site ES (`es/*`) → `jqLpg40sM8C7RFT7Iq2Z` ("edu - ESP")
+  - Manhattan funnel EN → `2FvHzLvYji1iSmNmCP46`; ES → `WXaur2ngXql4GTamJQOx`
+  - Bronx funnel EN → `v1SNzWsAZZVodCsnsDbe`; ES → `z2ZXZPbcGx7u1XrAl6Zu`
+  - Funnel IDs are driven by `landing-funnels/src/build.py` (`_GHL_FORMS`, keyed by campus+language).
+
 ### 0.5.0 (2026-07-14) — GHL Form Migration, Mobile Navbar & Android Gesture Clearances
 
 - **GoHighLevel Form Migration** — Replaced all legacy campus GHL form embeds across English pages (index, contact, jobs, Manhattan/Bronx campaigns) with the new two-column English form ID (`3ghObGjHiLN3LgKBfKGG`) and Spanish equivalents with the Spanish form ID (`WZjNHh9wcd1FTnlj0eCR`).

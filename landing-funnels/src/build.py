@@ -229,9 +229,15 @@ def hero(p):
     # 5. Formcard / Lead Form (using GHL forms)
     formcard_title = "Reserva Tu Lugar Hoy" if es else "Reserve Your Spot Today"
     formcard_sub = "Completa el formulario y un asesor de admisiones te contactará." if es else "Fill out the form and an Admissions Advisor will contact you."
-    ghl_id = "WZjNHh9wcd1FTnlj0eCR" if es else "3ghObGjHiLN3LgKBfKGG"
+    # GHL form IDs are campus + language specific (client 2026-07-16).
+    _GHL_FORMS = {
+        ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
+        ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
+        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
+        ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
+    }
+    ghl_id, ghl_name = _GHL_FORMS[(p["campus"]["slug"], lang)]
     ghl_h = 757
-    ghl_name = "01.GET TRAINED WITH ABI FORM - Spanish" if es else "01.GET TRAINED WITH ABI FORM - ABI.com"
 
     formcard = (
         '    <div class="formcard" id="reserve">\n'
@@ -287,6 +293,13 @@ def hero(p):
 def lead_form(p):
     lang = p["lang"]
     f = D.FORM[lang]
+    # Campus + language specific GHL form (client 2026-07-16).
+    _ghl_id, _ghl_name = {
+        ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
+        ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
+        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
+        ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
+    }[(p["campus"]["slug"], lang)]
     # Campus dropdown is locked to the page's own campus — no cross-campus options.
     loc_opts = "".join('<option>%s</option>' % h(o)
                        for o in D.LOC_OPTS_BY_CAMPUS[(p["campus"]["slug"], lang)])
@@ -308,11 +321,9 @@ def lead_form(p):
         '</div>'
     ) % {
         "id": p["id"], "campus": p["campus"]["slug"], "lang": lang,
-        # GHL form IDs are per-language (unified form).
-        # Client 2026-07-14: unified new forms for English vs Spanish.
-        "ghl_id": "WZjNHh9wcd1FTnlj0eCR" if es else "3ghObGjHiLN3LgKBfKGG",
+        "ghl_id": _ghl_id,
         "ghl_h": 757,
-        "ghl_name": "01.GET TRAINED WITH ABI FORM - Spanish" if es else "01.GET TRAINED WITH ABI FORM - ABI.com",
+        "ghl_name": _ghl_name,
         "h": h(f["h"]), "sub": h(f["sub"]),
         "first": h(f["first"]), "last": h(f["last"]),
         "phone": h(f["phone"]), "email": h(f["email"]),
