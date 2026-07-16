@@ -563,37 +563,37 @@
       "permanent": true
     },
     {
-      "source": "/Animation/beauty_gazette_1.htm",
+      "source": "/Animation/beauty_gazette_1",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/HairGallery/hair_cutting_gallery.html",
+      "source": "/HairGallery/hair_cutting_gallery",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/HairGallery/hair_styling_gallery.html",
+      "source": "/HairGallery/hair_styling_gallery",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/abi_FAQ.htm",
+      "source": "/abi_FAQ",
       "destination": "/faq",
       "permanent": true
     },
     {
-      "source": "/abi_checklist.htm",
+      "source": "/abi_checklist",
       "destination": "/ny-barber-licensing-checklist",
       "permanent": true
     },
     {
-      "source": "/abi_promo_video.htm",
+      "source": "/abi_promo_video",
       "destination": "/virtual-tour",
       "permanent": true
     },
     {
-      "source": "/about_us.html",
+      "source": "/about_us",
       "destination": "/about",
       "permanent": true
     },
@@ -603,7 +603,7 @@
       "permanent": true
     },
     {
-      "source": "/admission.html",
+      "source": "/admission",
       "destination": "/contact",
       "permanent": true
     },
@@ -663,7 +663,7 @@
       "permanent": true
     },
     {
-      "source": "/barbers_gazette.htm",
+      "source": "/barbers_gazette",
       "destination": "/blog",
       "permanent": true
     },
@@ -673,12 +673,12 @@
       "permanent": true
     },
     {
-      "source": "/certification.html",
+      "source": "/certification",
       "destination": "/programs",
       "permanent": true
     },
     {
-      "source": "/classes.html",
+      "source": "/classes",
       "destination": "/programs",
       "permanent": true
     },
@@ -698,7 +698,7 @@
       "permanent": true
     },
     {
-      "source": "/cutting_edge_news.html",
+      "source": "/cutting_edge_news",
       "destination": "/blog",
       "permanent": true
     },
@@ -883,7 +883,7 @@
       "permanent": true
     },
     {
-      "source": "/media/html/free-hair-cut.html",
+      "source": "/media/html/free-hair-cut",
       "destination": "/haircuts",
       "permanent": true
     },
@@ -1143,7 +1143,7 @@
       "permanent": true
     },
     {
-      "source": "/module_for_print.html",
+      "source": "/module_for_print",
       "destination": "/",
       "permanent": true
     },
@@ -1158,12 +1158,12 @@
       "permanent": true
     },
     {
-      "source": "/plugins/system/jcemediabox/themes/standard/popup.html",
+      "source": "/plugins/system/jcemediabox/themes/standard/popup",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/plugins/system/jcemediabox/themes/standard/tooltip.html",
+      "source": "/plugins/system/jcemediabox/themes/standard/tooltip",
       "destination": "/",
       "permanent": true
     },
@@ -1253,7 +1253,7 @@
       "permanent": true
     },
     {
-      "source": "/site_map.html",
+      "source": "/site_map",
       "destination": "/",
       "permanent": true
     },
@@ -1263,7 +1263,7 @@
       "permanent": true
     },
     {
-      "source": "/subpage/classes.html",
+      "source": "/subpage/classes",
       "destination": "/",
       "permanent": true
     },
