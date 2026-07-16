@@ -521,6 +521,46 @@
       "source": "/american-barber-school-in-coral-springs-florida",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/admissions/financial-aid",
+      "destination": "/financial-aid",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/how-to-get-started",
+      "destination": "/how-to-get-started",
+      "permanent": true
+    },
+    {
+      "source": "/es/admissions/financial-aid",
+      "destination": "/es/financial-aid",
+      "permanent": true
+    },
+    {
+      "source": "/es/admissions/how-to-get-started",
+      "destination": "/es/how-to-get-started",
+      "permanent": true
+    },
+    {
+      "source": "/faq/access-vr",
+      "destination": "/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/faq/veteran",
+      "destination": "/veterans",
+      "permanent": true
+    },
+    {
+      "source": "/es/faq/access-vr",
+      "destination": "/es/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/es/faq/veteran",
+      "destination": "/es/veterans",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -551,6 +591,10 @@
     {
       "source": "/master-barber-program-bronx/spanish",
       "destination": "/landing-funnels/master-barber-program-bronx/spanish"
+    },
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/api/legacy-redirect"
     }
   ],
   "headers": [
