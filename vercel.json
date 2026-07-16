@@ -209,12 +209,12 @@
     },
     {
       "source": "/splash-page-1",
-      "destination": "/",
+      "destination": "/500-hours-master-barber-program-landing-page",
       "permanent": true
     },
     {
       "source": "/splash-page-2",
-      "destination": "/",
+      "destination": "/master-barber-program-bronx",
       "permanent": true
     },
     {
