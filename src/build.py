@@ -1267,6 +1267,36 @@ def build():
             print(f'  !! missing partial {partial} — skipped')
             continue
         body = open(path, encoding='utf-8').read()
+        # bronx.html / es/bronx.html reuse the homepage partial verbatim (only the
+        # nav-toggle state + bx-gold theme differ elsewhere in this loop), which left
+        # the Google-reviews widget and "Find Us" map showing Manhattan's rating/link/
+        # address on the Bronx page. Swap those specific pieces to the real Bronx data
+        # (4.9★/253 reviews, maps.app.goo.gl/9TJJh8ehUjSZ8kcaA, 121 Westchester Square)
+        # — verified live against Google's own listing 2026-07-17.
+        if out in ('bronx.html', 'es/bronx.html'):
+            body = (body
+                    .replace('g-score">4.1<', 'g-score">4.9<')
+                    .replace('https://maps.app.goo.gl/42UjD6bFQ65NEt1E7',
+                             'https://maps.app.goo.gl/9TJJh8ehUjSZ8kcaA'))
+            if lang == 'es':
+                body = (body
+                        .replace('<h2>Nuestra Sede de Manhattan</h2>', '<h2>Nuestra Sede del Bronx</h2>')
+                        .replace('48 West 39th Street, Nueva York, NY 10018 — a pocas cuadras de Bryant Park, Times Square y Penn Station.',
+                                 '121 Westchester Square, Bronx, NY 10461.')
+                        .replace('Mapa de American Barber Institute — Manhattan, 48 West 39th Street',
+                                 'Mapa de American Barber Institute — Bronx, 121 Westchester Square')
+                        .replace('Ver la sede de Manhattan en Google', 'Ver la sede del Bronx en Google'))
+            else:
+                body = (body
+                        .replace('<h2>Our Manhattan Campus</h2>', '<h2>Our Bronx Campus</h2>')
+                        .replace('48 West 39th Street, New York, NY 10018 — a few blocks from Bryant Park, Times Square and Penn Station.',
+                                 '121 Westchester Square, Bronx, NY 10461.')
+                        .replace('Map to American Barber Institute — Manhattan, 48 West 39th Street',
+                                 'Map to American Barber Institute — Bronx, 121 Westchester Square')
+                        .replace('See the Manhattan campus on Google', 'See the Bronx campus on Google'))
+            body = body.replace(
+                'https://www.google.com/maps?q=American%20Barber%20Institute%2C%2048%20West%2039th%20Street%2C%20New%20York%2C%20NY%2010018&z=16&output=embed',
+                'https://www.google.com/maps?q=American%20Barber%20Institute%2C%20121%20Westchester%20Square%2C%20Bronx%2C%20NY%2010461&z=16&output=embed')
         # Spanish twins carry their translated <title>/meta in ES_TITLE/ES_DESC
         # comments so translators own the meta; extract + strip them here.
         if lang == 'es':
