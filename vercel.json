@@ -561,6 +561,731 @@
       "source": "/es/faq/veteran",
       "destination": "/es/veterans",
       "permanent": true
+    },
+    {
+      "source": "/Animation/beauty_gazette_1.htm",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/HairGallery/hair_cutting_gallery.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/HairGallery/hair_styling_gallery.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/abi_FAQ.htm",
+      "destination": "/faq",
+      "permanent": true
+    },
+    {
+      "source": "/abi_checklist.htm",
+      "destination": "/ny-barber-licensing-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/abi_promo_video.htm",
+      "destination": "/virtual-tour",
+      "permanent": true
+    },
+    {
+      "source": "/about_us.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/access-vr/requirements",
+      "destination": "/access-vr-program",
+      "permanent": true
+    },
+    {
+      "source": "/admission.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/basic-requirements",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/discontinuance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/frequently-asked-questions",
+      "destination": "/faq",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/handicap-access-compliance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/leave-of-absence",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/permit-to-leave",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/readmittance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/requirements-checklist",
+      "destination": "/ny-barber-licensing-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/termination-by-school",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/admissions/uniform-and-appearance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/alfa.abi.edu",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/barbers_gazette.htm",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/bayoaksdermatology.com",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/certification.html",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/classes.html",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/component/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/component/mailto",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/component/users",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cutting_edge_news.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/ecms-1.0",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/nggallery/page/1",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/nggallery/page/12",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/nggallery/page/13",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/nggallery/page/2",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/nggallery/page/3",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/graduates",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/graduates/certificate-of-completion",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/home/abi-goals-aims-objectives-and-philosophy",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/about-abi",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/barber-gazette",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/home/basic-requirements",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/beauty-gazette",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/home/education",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/home/faqs",
+      "destination": "/faq",
+      "permanent": true
+    },
+    {
+      "source": "/home/free-hair-cut-coupon",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/home/grad-rates-jobs",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/home/how-to-get-started",
+      "destination": "/how-to-get-started",
+      "permanent": true
+    },
+    {
+      "source": "/home/mission-statement",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/pioneer-in-the-classroom",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/school-mission-statement",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/services-price-list",
+      "destination": "/tuition-and-funding",
+      "permanent": true
+    },
+    {
+      "source": "/home/shop-compliance",
+      "destination": "/shop-registration",
+      "permanent": true
+    },
+    {
+      "source": "/home/state-of-the-industry",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/home/the-practical-area",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/home/veteran-faqs",
+      "destination": "/veterans",
+      "permanent": true
+    },
+    {
+      "source": "/home/videos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/component/users",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index/potential-student",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/jobss",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/jobss/job-placement-list",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/jobss/job-placement-office",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/media/flash/barber_pole_and_chair.swf",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/media/flash/hiv_course_banner_1.swf",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/media/flash/ps_form_banner_1.swf",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/media/html/free-hair-cut.html",
+      "destination": "/haircuts",
+      "permanent": true
+    },
+    {
+      "source": "/members",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/109-namel-blake/photos/photo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/114-malik-morris/photos/photo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/118-shayni/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/1617-kevin/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/166-slavik/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/169-geraldea/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/170-headyassistant7/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/171-shaun-jordan/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/173-brian-ayala/photos/photo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/173-brian-ayala/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/176-valdomiris/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/177-latoya-tan/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/1775-edujava/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/179-vontain-davis/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/180-jayne-delancey/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/181-winston-mosman/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/183-edwardmync/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/184-matthewgoto/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/185-denis/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/187-kilagundo/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/188-exdwardhal/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/190-darius-davie/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/192-bolian/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/193-alonzo-howard/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/195-robertet/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/1956-mike-hudson/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/196-james-parker/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/2061-apufij/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/2277-roberto-maculan/profile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/78-joez/videos/video/12-how-to-cut-black-men-hair",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/78-joez/videos/video/16-how-to-shave-with-a-straight-razor-barbershop-shave",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/78-joez/videos/video/6-nyc-barber-license",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_113_8",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_131_9",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_156_10",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_1_11",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_50_12",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_76_6",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_77_2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/album_prop_85_4",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/events",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/groups",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/photos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/register",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/register/activation",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/register/registerProfile",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/register/registerSucess",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/search/advancesearch",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/search/browse",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members/videos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/module_for_print.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/npcalc",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/phpThumb/phpThumb.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/plugins/system/jcemediabox/themes/standard/popup.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/plugins/system/jcemediabox/themes/standard/tooltip.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/policies",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/barber-practical-examination-instruction",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/discontinuance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/handicap-access-compliance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/leave-of-absence",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/licensing-approvals",
+      "destination": "/programs",
+      "permanent": true
+    },
+    {
+      "source": "/policies/permit-to-leave",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/readmittance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/standard-occupation-codes",
+      "destination": "/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/policies/termination-by-school",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/policies/uniform-and-appearance",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/potential_student_form.php",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/restricted-barbering-florida",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/schedule/holiday-calendar",
+      "destination": "/schedules",
+      "permanent": true
+    },
+    {
+      "source": "/schedule/school-hours-of-operation",
+      "destination": "/schedules",
+      "permanent": true
+    },
+    {
+      "source": "/schedule/specially-designed-schedule",
+      "destination": "/schedules",
+      "permanent": true
+    },
+    {
+      "source": "/schedule/starting-dates",
+      "destination": "/schedules",
+      "permanent": true
+    },
+    {
+      "source": "/site_map.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/site_map.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/subpage/classes.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/templates/yoo_avenue/images/background/bg.webp",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/uncategorized",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/web-stats",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-login.php",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
