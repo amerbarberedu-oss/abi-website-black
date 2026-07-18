@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=162" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=164" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=34">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=162">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=164">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -99,7 +99,7 @@ TEMPLATE = """<!DOCTYPE html>
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo brand-plate" href="{home_href}" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <img class="logo-img" src="{root}assets/img/logo-final.gif" alt="American Barber Institute — 48 West 39th Street, New York, NY 10018 & 121 Westchester Square, Bronx, NY 10461" width="385" height="99" fetchpriority="high">
+      <img class="logo-img" src="{root}assets/img/{logo_src}" alt="{logo_alt}" width="1215" height="727" fetchpriority="high">
     </a>
     {nav_main}
     {langtoggle}
@@ -1457,6 +1457,10 @@ def build():
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '',
             loc_toggle=loc_toggle, bodyclass=bodyclass,
+            logo_src=('logo-bronx.gif' if _is_bronx else 'logo-manhattan.gif'),
+            logo_alt=('American Barber Institute — 121 Westchester Square, Bronx, NY 10461'
+                      if _is_bronx else
+                      'American Barber Institute — 48 West 39th Street, New York, NY 10018'),
             **i18n)
         # ── Full-page partials (homepage / bronx) ──
         # These carry their own footer + scripts, so we strip the template's

@@ -3009,7 +3009,7 @@ body.mhx-on .stats{padding-block:1.4rem!important}
   body.mhx-on .mainnav,body.mhx-on .mainnav a{white-space:nowrap}
 }
 @media (min-width:1200px){
-  body.mhx-on .brand-plate .logo-img{height:64px!important}
+  body.mhx-on .brand-plate .logo-img{height:90px!important}
 }
 @media (min-width:1200px) and (max-width:1459px){
   /* v141's gap:.8rem (higher specificity than v13.0's .mainnav clamp) was
@@ -3253,4 +3253,112 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   background-size: 100% 100% !important;
 }
 
+/* ═══════════ v163 — Larger, more legible desktop nav + EN|ES / MN|BX pills ═══════════
+   Client request (2026-07-18): enlarge the main navigation and the language /
+   campus toggle pills for readability, and nudge the two pills toward the right.
+   The one-row header is packed tight (the v141 note earlier warns the nav already
+   overflows into the logo/switcher), so a bigger nav only fits if the extra glyph
+   width is bought back elsewhere. We reclaim it by cutting the uppercase tracking
+   (.06em → ~.01em) and the inter-item gap right down, which frees enough room to
+   run the larger type across the WHOLE inline-nav range (≥1200px, below which the
+   nav collapses into the hamburger anyway). Spanish nav words are longer, so it
+   gets a hair less type size + tighter gap to stay clear of the logo.
+   Verified by screenshot — EN/Bronx at 1200/1280/1366/1440/1600, ES at 1200/1280/
+   1366/1440/1600. */
+
+/* Shared structural reclaim (both languages): a slightly smaller logo plus
+   tighter header padding / inter-element gaps free ~90px of row width so the
+   menu and pills can actually grow without hitting the logo. Client-approved
+   logo trim. */
+@media (min-width:1360px){
+  body.mhx-on .hdr-in{gap:.5rem!important;padding-left:.85rem!important;padding-right:.85rem!important}
+}
+
+/* Logo is the original GIF (3.9:1). Trim it a little on desktop (client-approved)
+   so the enlarged menu has room; the GIF keeps its aspect from height alone.
+   Keep it from flex-shrinking so a tight row doesn't squash it. */
+body.mhx-on .hdr-in > .brand-plate,
+body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
+
+/* ---- English + Bronx (shorter nav). Enlarge from 1360px up — narrower than that
+   the GIF + full menu + pills overflow the single row (verified). ---- */
+@media (min-width:1360px){
+  html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{height:100px!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1rem!important;letter-spacing:.004em!important}
+  html:not([lang="es"]) body.mhx-on .mainnav,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.3rem!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .loc-toggle{font-size:.96rem!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle a,
+  html:not([lang="es"]) body.mhx-on .lang-toggle a,
+  html:not([lang="es"]) body.mhx-on .loc-toggle a{padding:.5rem .7rem!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .loc-toggle{transform:translateX(6px)}
+}
+/* Larger still once the viewport can spare it */
+@media (min-width:1560px){
+  html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{height:116px!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1.08rem!important}
+  html:not([lang="es"]) body.mhx-on .mainnav,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.45rem!important}
+}
+/* Extra-wide monitors */
+@media (min-width:1800px){
+  html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{height:132px!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1.16rem!important}
+  html:not([lang="es"]) body.mhx-on .mainnav,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.7rem!important}
+}
+
+/* ---- Spanish (longer nav): a bit smaller to stay clear ---- */
+@media (min-width:1440px){
+  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:96px!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1rem!important;letter-spacing:0!important}
+  html[lang="es"] body.mhx-on .mainnav,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.18rem!important}
+  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
+  html[lang="es"] body.mhx-on .lang-toggle,
+  html[lang="es"] body.mhx-on .loc-toggle{font-size:.96rem!important}
+  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle a,
+  html[lang="es"] body.mhx-on .lang-toggle a,
+  html[lang="es"] body.mhx-on .loc-toggle a{padding:.5rem .7rem!important}
+  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
+  html[lang="es"] body.mhx-on .loc-toggle{transform:translateX(6px)}
+}
+@media (min-width:1560px){
+  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:112px!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1.06rem!important}
+  html[lang="es"] body.mhx-on .mainnav,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.3rem!important}
+}
+@media (min-width:1800px){
+  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:128px!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:1.14rem!important}
+  html[lang="es"] body.mhx-on .mainnav,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.55rem!important}
+}
+
+/* ═══════════ Home-page hero — raise headline + form to the barber's elbow ═══════════
+   Client request (2026-07-18): on the HOME page only, lift the "500 HOUR / Start
+   Today" headline and the Reserve-Your-Spot form up so their tops sit at the
+   barber's elbow instead of dropping to the bottom of the photo. Desktop only.
+   Scoped to body.mhx-on: the homepage carries that class and is the only mhx-on
+   page with the .hx hero; landing-funnel pages use body.lf-page (no mhx-on) and
+   are unaffected. Mobile (≤768px) keeps the original layout. */
+@media (min-width:769px){
+  body.mhx-on .hx-in{padding-top:46vw!important}
+}
 
