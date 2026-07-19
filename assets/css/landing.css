@@ -2948,7 +2948,7 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .hx-copy{display:flex;flex-direction:column}
   .hx-copy > .hx-next{margin-top:auto}
 }
-/* MOBILE: full-width photo on top → headline → copy → chips → countdown → contact box */
+/* MOBILE: full-width photo on top → headline → copy → contact box → countdown → chips */
 @media (max-width:768px){
   .hx-bg{height:66.2vw;background:url('/assets/img/hero-barber-clinic-2.jpg') top center/cover no-repeat;background-color:#fff;-webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 72%,transparent 100%)}
   .hx-grad{height:66.4vw;background:transparent}
@@ -2965,8 +2965,8 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .hx-copy > .hx-h1{order:1;margin-bottom:.4rem}
   .hx-copy > .hx-sub{order:2;margin:.2rem 0 .15rem;max-width:none}
   .hx-in > .formcard{order:3;margin:.3rem 0 .4rem;scroll-margin-top:72px}
-  .hx-copy > .hx-chips{order:4;margin-top:1.2rem}
-  .hx-copy > .hx-next{order:5;margin-top:.9rem}
+  .hx-copy > .hx-next{order:4;margin-top:.9rem}
+  .hx-copy > .hx-chips{order:5;margin-top:1.2rem}
 }
 
 /* ═══════════ v139 — tighter vertical rhythm on home pages (client: reduce big gaps) ═══════════ */
