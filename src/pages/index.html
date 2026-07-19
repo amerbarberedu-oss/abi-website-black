@@ -9,6 +9,8 @@
    Result: bottoms aligned, no empty gap above the counter, and the form keeps its
    natural size (no shrink, no scroll). Scoped to this page; hidden on mobile. */
 @media (min-width:769px){
+  /* Nudge the whole hero row (heading + form) down a little on desktop. */
+  .hx-in{padding-top:calc(66.2vw * 0.86 + 2rem)}
   .hx-proof{
     display:flex; flex:1 1 auto; align-items:center; justify-content:space-around;
     gap:1rem; margin:.9rem 0 0; min-height:64px;
