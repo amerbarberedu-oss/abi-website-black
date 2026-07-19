@@ -3371,9 +3371,9 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
    page with the .hx hero; landing-funnel pages use body.lf-page (no mhx-on) and
    are unaffected. Mobile (≤768px) keeps the original layout. */
 @media (min-width:769px){
-  /* Client request (2026-07-20): nudge the headline + form down a little
-     from the previous 46vw so they sit slightly lower on the photo. */
-  body.mhx-on .hx-in{padding-top:50vw!important}
+  /* Client request (2026-07-20): lower the headline + form further down the
+     photo (46vw -> 50vw -> 58vw), sitting well below the barber's elbow. */
+  body.mhx-on .hx-in{padding-top:58vw!important}
 }
 
 /* ═══════════ v164 — center the inline nav, pin EN|ES / MN|BX pills to the far right ═══════════
