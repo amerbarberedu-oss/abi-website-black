@@ -2510,6 +2510,12 @@ body.bx-gold .hdr-in > .lang-toggle a+a{border-left-color:rgba(201,151,31,.3)}
 .hdr-in > .header-cta{order:4}
 .hdr-in > .hdr-right{order:5}
 
+/* Desktop: nudge the EN|ES + Manhattan|Bronx pills toward the right edge */
+@media (min-width:1200px){
+  .hdr-in > .lang-toggle,
+  .hdr-in > .loc-toggle{transform:translateX(1.4rem)}
+}
+
 /* ── bx-gold: loc-toggle glassmorphism → gold ── */
 body.bx-gold .hdr-in > .loc-toggle{
   border-color:rgba(201,151,31,.4)!important;
@@ -2935,6 +2941,12 @@ body.no-mhx-phones .mhx-phones{display:none!important}
   .hx-in .form-consent-block .form-consent-row{font-size:.66rem;line-height:1.35;gap:.5rem}
   .hx-in .form-consent{font-size:.6rem;margin-top:.5rem}
   .hx-in .btn-submit{padding:.62rem 1rem;font-size:.95rem}
+  /* Bottom-align the "Next Starting Date" card with the form card:
+     stretch the left column and push the countdown to the bottom. */
+  .hx-in{align-items:stretch}
+  .hx-in > .formcard{align-self:start}
+  .hx-copy{display:flex;flex-direction:column}
+  .hx-copy > .hx-next{margin-top:auto}
 }
 /* MOBILE: full-width photo on top → headline → copy → chips → countdown → contact box */
 @media (max-width:768px){
@@ -3360,5 +3372,69 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
    are unaffected. Mobile (≤768px) keeps the original layout. */
 @media (min-width:769px){
   body.mhx-on .hx-in{padding-top:46vw!important}
+}
+
+/* ═══════════ v164 — center the inline nav, pin EN|ES / MN|BX pills to the far right ═══════════
+   Client request (2026-07-19): put the main menu in the horizontal center of the
+   header and push the language + campus pills to the extreme right edge.
+   Technique: two auto left-margins (one on the nav, one on the first pill) split
+   the row's free space evenly — that centers the menu between the logo and the
+   pill group while flushing the pill group hard against the right padding. Scoped
+   to the inline-nav range (≥1200px); below that the menu collapses to the hamburger.
+   The small translateX nudge from v163 is zeroed so the pills sit clean on the edge. */
+@media (min-width:1200px){
+  body.mhx-on header.hdr nav.mainnav{margin-left:auto!important;margin-right:0!important}
+  html body.mhx-on .hdr-in > .lang-toggle{margin-left:auto!important;transform:none!important}
+  html body.mhx-on .hdr-in > .loc-toggle{transform:none!important}
+}
+
+/* ═══════════ v165 — fix the desktop nav overlap; scale nav/logo/pills to fit ═══════════
+   Client (2026-07-19): the inline desktop nav overlapped the logo on the left and
+   the EN|ES pill on the right on common mid-width screens (~1360–1680px).
+   Two root causes, found by measuring the rendered rects:
+     1. The nav carried justify-content:center (legacy). When the menu is wider than
+        the slot it's given, centering spills the overflow onto BOTH sides — the
+        first links ride over the logo, the last links ride under the pills.
+     2. The header row is full-width (line 3019), and the v163 logo (100–116px) +
+        address + 9-item menu + BOTH pill groups are genuinely wider than the row in
+        that band, so the menu is forced narrower than its content.
+   Fix: (a) justify-content:flex-start so any overflow can only ever go right, never
+   over the logo; (b) pack the nav right after the logo and let the pills' own
+   margin-left:auto pool the leftover space harmlessly between the menu and the
+   pills; (c) graduated logo / nav / pill sizes per width band, each sized so the
+   whole row fits with slack (verified by headless screenshot at 1200/1280/1360/
+   1440/1560/1680/1920). Wider screens get a bigger nav AND a bigger logo; the row
+   only gets tight below ~1440, where the type steps down just enough to clear.
+   English only — Spanish is separately tuned (its longer labels) and left as-is. */
+
+/* Continuous scaling: logo, nav type and gap all grow smoothly with viewport width
+   so the size at any width is the largest that still fits the single row — no
+   per-band cliffs (fixed bands overflowed at their low edge and were clean mid-band).
+   The slopes are tuned so the growing logo never outpaces the room the nav needs:
+   the logo eats ~0.34px of width per 1px of viewport, leaving the rest for the nav,
+   which grows a touch slower. Verified fitting (headless screenshot + measured rects)
+   at 1200/1280/1360/1440/1500/1560/1680/1920. English only; Spanish untouched. */
+@media (min-width:1200px){
+  html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{
+    height:clamp(56px, calc(56px + (100vw - 1200px) * 0.088), 108px)!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:clamp(.72rem, calc(.72rem + (100vw - 1200px) * 0.0101), 1.18rem)!important;
+    letter-spacing:.01em!important}
+  html:not([lang="es"]) body.mhx-on .mainnav,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:clamp(.28rem,.5vw,.6rem)!important}
+  /* Modest, stable pills so they don't eat the nav's room at tight widths. */
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .hdr-in > .loc-toggle{font-size:clamp(.82rem,.55vw,.96rem)!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle a,
+  html:not([lang="es"]) body.mhx-on .hdr-in > .loc-toggle a{padding:.44rem .6rem!important}
+}
+/* Below 1700px the row is tight: left-align the menu and pack it right after the
+   logo (v164's margin-left:auto centering is what rides the overflow onto the logo).
+   The pills keep their own margin-left:auto, so leftover space pools harmlessly
+   between the menu and the pills. At >=1700 the row has room, so keep v164 centering. */
+@media (min-width:1200px) and (max-width:1699.98px){
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{
+    justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
 }
 
