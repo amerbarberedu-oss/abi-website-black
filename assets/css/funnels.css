@@ -1811,6 +1811,15 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__num{font-size:1.22rem}
 .lf-page--mhtn-en .lfx-phones--bar .lfx-phone__lab,
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__lab{font-size:.66rem}
+/* Manhattan ES funnel (client 2026-07-20): the Spanish hero headline
+   "OPERADOR DE BARBERO" wraps to a 2nd line at the English size, making the
+   whole left column (chips + countdown) sit lower than the English page.
+   Size it down just enough to keep it on one line, matching the English
+   line count and vertical rhythm. Desktop only; mobile keeps its own sizing. */
+@media (min-width:769px){
+  .lf-page--mhtn-es .hx-h1 .hx-l1,
+  .lf-page--mhtn-es .hx-h1 .hx-l2{font-size:clamp(2rem,3.55vw,3.5rem)}
+}
 /* full-width promo strip below the sticky bar (client 2026-07-14: was
    rendering as unstyled body text because this rule was missing on edu) */
 .lfx-promo{background:var(--lf-accent);color:var(--lf-on-accent);text-align:center;font-weight:800;font-size:clamp(.92rem,1.6vw,1.25rem);letter-spacing:.1em;text-transform:uppercase;line-height:1.45;padding:.85rem 1rem}
