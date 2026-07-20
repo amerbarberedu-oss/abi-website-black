@@ -1811,6 +1811,17 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__num{font-size:1.22rem}
 .lf-page--mhtn-en .lfx-phones--bar .lfx-phone__lab,
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__lab{font-size:.66rem}
+/* Bronx landing page (client 2026-07-21): same treatment for the (718) number
+   — center the header phone between the logo and language toggle and enlarge
+   it. Scoped to the Bronx theme class; desktop header only (.lfx-phones--bar). */
+.lf-page--brnx-en .lfx-phones--bar,
+.lf-page--brnx-es .lfx-phones--bar{margin-left:auto}
+.lf-page--brnx-en .lfx-phones--bar .lfx-phone,
+.lf-page--brnx-es .lfx-phones--bar .lfx-phone{font-size:1.12rem;padding:.5rem 1.1rem}
+.lf-page--brnx-en .lfx-phones--bar .lfx-phone__num,
+.lf-page--brnx-es .lfx-phones--bar .lfx-phone__num{font-size:1.22rem}
+.lf-page--brnx-en .lfx-phones--bar .lfx-phone__lab,
+.lf-page--brnx-es .lfx-phones--bar .lfx-phone__lab{font-size:.66rem}
 /* Manhattan ES funnel (client 2026-07-20): the Spanish hero headline
    "OPERADOR DE BARBERO" wraps to a 2nd line at the English size, making the
    whole left column (chips + countdown) sit lower than the English page.
