@@ -3190,6 +3190,20 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   header.hdr .hdr-in .lang-toggle{margin-left:auto!important;order:2}
   header.hdr .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem}
 }
+/* v170 — the desktop nav switches on at 1200px, but the enlarged logo + full
+   English nav don't comfortably fit until ~1245px, leaving a cramped band where
+   "Contact" collides with the language pill (worse under browser zoom, which lands
+   many laptops right here). Keep the clean hamburger layout through that band; the
+   full inline nav returns at 1260px where it has room. */
+@media (min-width:1200px) and (max-width:1259.98px){
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav,
+  html:not([lang="es"]) body.mhx-on .hdr-in .mainnav{display:none!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in .hamburger{display:flex!important;margin-left:0}
+  html:not([lang="es"]) body.mhx-on .hdr-in .hdr-right{display:flex!important;order:4;margin-left:.2rem;flex-shrink:0}
+  html:not([lang="es"]) body.mhx-on .hdr-in .header-cta{display:none!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in .lang-toggle{margin-left:auto!important;order:2;transform:none!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem;transform:none!important}
+}
 @media (max-width:560px){
   header.hdr .hdr-in .lang-toggle{font-size:.68rem!important}
   header.hdr .hdr-in .lang-toggle a{padding:.3rem .42rem!important}
