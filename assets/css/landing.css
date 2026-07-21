@@ -3488,3 +3488,60 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
     justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
 }
 
+/* ═══════════════════════ Thank-you / Gracias confirmation page ═══════════════════════
+   The .ty-* markup previously had NO styles — bare logo/checkmark/text. This is a
+   clean centered card: animated success check, heading, "what happens next" steps,
+   and branded buttons. Scoped entirely to .ty-* classes (only on thank-you/gracias). */
+.ty-card{
+  max-width:720px;margin:clamp(2rem,5vw,4.25rem) auto;
+  padding:clamp(2rem,4.5vw,3.25rem) clamp(1.25rem,4vw,2.75rem);
+  background:#fff;border:1px solid #ebedf4;border-radius:26px;
+  box-shadow:0 24px 60px rgba(16,19,26,.14),0 2px 8px rgba(16,19,26,.05);
+  text-align:center;display:flex;flex-direction:column;align-items:center}
+.ty-logo{height:50px;width:auto;margin-bottom:1.3rem}
+.ty-check{
+  width:86px;height:86px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#22c55e,#15a34a);
+  box-shadow:0 14px 32px rgba(21,163,74,.42),inset 0 2px 0 rgba(255,255,255,.35);
+  animation:tyPop .55s cubic-bezier(.18,.89,.32,1.28) both}
+.ty-check svg{width:44px;height:44px;fill:none;stroke:#fff;stroke-width:3.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:32;stroke-dashoffset:32;animation:tyDraw .45s .4s ease forwards}
+@keyframes tyPop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tyDraw{to{stroke-dashoffset:0}}
+.ty-title{margin:1.4rem 0 0;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.15;
+  font-weight:800;letter-spacing:-.02em;color:var(--ink,#10131a)}
+.ty-lede{margin:.8rem 0 0;max-width:48ch;font-size:clamp(1rem,1.4vw,1.12rem);
+  line-height:1.6;color:#565e70}
+.ty-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;width:100%;
+  margin:2.1rem 0 .25rem}
+.ty-step{background:#f7f8fb;border:1px solid #eef0f6;border-radius:16px;
+  padding:1.15rem .9rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.ty-step-n{width:30px;height:30px;border-radius:50%;background:#1b2fd9!important;background-image:none!important;
+  color:#fff!important;font-weight:800;font-size:.95rem;display:grid;place-items:center;margin-bottom:.2rem}
+.ty-step b{font-size:.98rem;color:var(--ink,#10131a);font-weight:800;line-height:1.25}
+.ty-step span{font-size:.84rem;color:#6b7280;line-height:1.4}
+.ty-actions{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.7rem}
+.ty-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.7rem;
+  border-radius:999px;font-weight:800;font-size:1rem;text-decoration:none;white-space:nowrap;
+  transition:transform .18s,box-shadow .18s,filter .18s,background .18s,color .18s}
+.ty-btn svg{width:18px;height:18px}
+.ty-btn--primary{background:var(--blue,#1b2fd9);color:#fff;box-shadow:0 10px 22px rgba(27,47,217,.32)}
+.ty-btn--primary:hover{filter:brightness(1.08);transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(27,47,217,.42);color:#fff}
+.ty-btn--ghost{background:#fff;color:var(--blue,#1b2fd9);border:2px solid var(--blue,#1b2fd9)}
+.ty-btn--ghost:hover{background:var(--blue,#1b2fd9);color:#fff;transform:translateY(-2px)}
+.ty-note{margin:1.45rem 0 0;font-size:.94rem;color:#7a8194}
+.ty-note a{color:var(--blue,#1b2fd9);font-weight:700;text-decoration:none}
+.ty-note a:hover{text-decoration:underline}
+@media (max-width:560px){
+  .ty-steps{grid-template-columns:1fr;gap:.6rem}
+  .ty-step{flex-direction:row;text-align:left;align-items:center;gap:.75rem;padding:.85rem 1rem}
+  .ty-step-n{flex:0 0 auto;margin-bottom:0}
+  .ty-btn{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .ty-check{animation:none}
+  .ty-check svg{animation:none;stroke-dashoffset:0}
+}
+

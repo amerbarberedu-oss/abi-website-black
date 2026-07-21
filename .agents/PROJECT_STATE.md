@@ -25,7 +25,7 @@
 - **Rollback point:** `2d34130` (pre v0.4.0)
 
 ## Current Versions
-- `landing.css?v=173`
+- `landing.css?v=174`
 - `campus.js?v=5`
 - `funnels.css?v=60`
 - `analytics.js?v=6` — NOT MODIFIED (Arhum's domain)
