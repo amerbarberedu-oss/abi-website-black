@@ -3190,29 +3190,44 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   header.hdr .hdr-in .lang-toggle{margin-left:auto!important;order:2}
   header.hdr .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem}
 }
-/* v171 — the desktop nav switches on at 1200px, but the full inline menu only has
-   real room once the enlarged-logo layout kicks in: 1360px for English, 1440px for
-   the longer Spanish nav. Below that, cramming the whole menu overlaps "Contact" /
-   the last item with the language pill (this bites 1920x1080 @150% Windows scaling,
-   whose browser viewport is only ~1265px). Keep the clean hamburger layout through
-   the whole cramped range; the full inline nav returns only where it fits. */
+/* v172 — keep the FULL inline menu visible from 1200px up, but shrink the logo,
+   nav text, gaps and toggles so the whole row fits with a real gap instead of
+   "Contact"/last item sliding under the language pill. The enlarged-logo layout
+   only kicks in at 1360px (EN) / 1440px (ES); below that we compact everything.
+   Tuned to fit a ~1265px viewport (1920x1080 @150% Windows scaling) with clearance. */
 @media (min-width:1200px) and (max-width:1359.98px){
-  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav,
-  html:not([lang="es"]) body.mhx-on .hdr-in .mainnav{display:none!important}
-  html:not([lang="es"]) body.mhx-on .hdr-in .hamburger{display:flex!important;margin-left:0}
-  html:not([lang="es"]) body.mhx-on .hdr-in .hdr-right{display:flex!important;order:4;margin-left:.2rem;flex-shrink:0}
-  html:not([lang="es"]) body.mhx-on .hdr-in .header-cta{display:none!important}
-  html:not([lang="es"]) body.mhx-on .hdr-in .lang-toggle{margin-left:auto!important;order:2;transform:none!important}
-  html:not([lang="es"]) body.mhx-on .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem;transform:none!important}
+  html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{height:44px!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:.8rem!important;letter-spacing:0!important;padding-left:.08rem!important;padding-right:.08rem!important}
+  html:not([lang="es"]) body.mhx-on .mainnav,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.5rem!important}
+  html:not([lang="es"]) body.mhx-on .mainnav{margin-right:.55rem!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in{gap:.5rem!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .lang-toggle,
+  html:not([lang="es"]) body.mhx-on .loc-toggle{font-size:.74rem!important;transform:none!important}
+  html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle a,
+  html:not([lang="es"]) body.mhx-on .lang-toggle a,
+  html:not([lang="es"]) body.mhx-on .loc-toggle a{padding:.4rem .52rem!important}
+  html:not([lang="es"]) body.mhx-on .loc-toggle{margin-left:.5rem!important}
 }
 @media (min-width:1200px) and (max-width:1439.98px){
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav,
-  html[lang="es"] body.mhx-on .hdr-in .mainnav{display:none!important}
-  html[lang="es"] body.mhx-on .hdr-in .hamburger{display:flex!important;margin-left:0}
-  html[lang="es"] body.mhx-on .hdr-in .hdr-right{display:flex!important;order:4;margin-left:.2rem;flex-shrink:0}
-  html[lang="es"] body.mhx-on .hdr-in .header-cta{display:none!important}
-  html[lang="es"] body.mhx-on .hdr-in .lang-toggle{margin-left:auto!important;order:2;transform:none!important}
-  html[lang="es"] body.mhx-on .hdr-in .loc-toggle{display:inline-flex!important;order:3;margin-left:.3rem;transform:none!important}
+  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:42px!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    font-size:.74rem!important;letter-spacing:0!important;padding-left:.06rem!important;padding-right:.06rem!important}
+  html[lang="es"] body.mhx-on .mainnav,
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.34rem!important}
+  html[lang="es"] body.mhx-on .mainnav{margin-right:.5rem!important}
+  html[lang="es"] body.mhx-on .hdr-in{gap:.44rem!important}
+  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
+  html[lang="es"] body.mhx-on .lang-toggle,
+  html[lang="es"] body.mhx-on .loc-toggle{font-size:.72rem!important;transform:none!important}
+  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle a,
+  html[lang="es"] body.mhx-on .lang-toggle a,
+  html[lang="es"] body.mhx-on .loc-toggle a{padding:.38rem .48rem!important}
+  html[lang="es"] body.mhx-on .loc-toggle{margin-left:.45rem!important}
 }
 @media (max-width:560px){
   header.hdr .hdr-in .lang-toggle{font-size:.68rem!important}
