@@ -3199,10 +3199,10 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   html:not([lang="es"]) body.mhx-on .brand-plate .logo-img{height:44px!important}
   html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
   html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
-    font-size:.8rem!important;letter-spacing:0!important;padding-left:.08rem!important;padding-right:.08rem!important}
+    font-size:.72rem!important;letter-spacing:0!important;padding-left:.06rem!important;padding-right:.06rem!important}
   html:not([lang="es"]) body.mhx-on .mainnav,
-  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.5rem!important}
-  html:not([lang="es"]) body.mhx-on .mainnav{margin-right:.55rem!important}
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.42rem!important;justify-content:flex-start!important;flex:0 1 auto!important}
+  html:not([lang="es"]) body.mhx-on .mainnav{margin-right:2.5rem!important}
   html:not([lang="es"]) body.mhx-on .hdr-in{gap:.5rem!important}
   html:not([lang="es"]) body.mhx-on .hdr-in > .lang-toggle,
   html:not([lang="es"]) body.mhx-on .lang-toggle,
@@ -3218,8 +3218,8 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
   html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
     font-size:.74rem!important;letter-spacing:0!important;padding-left:.06rem!important;padding-right:.06rem!important}
   html[lang="es"] body.mhx-on .mainnav,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.34rem!important}
-  html[lang="es"] body.mhx-on .mainnav{margin-right:.5rem!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.34rem!important;justify-content:flex-start!important}
+  html[lang="es"] body.mhx-on .mainnav{margin-right:1.5rem!important}
   html[lang="es"] body.mhx-on .hdr-in{gap:.44rem!important}
   html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
   html[lang="es"] body.mhx-on .lang-toggle,
