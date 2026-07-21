@@ -191,7 +191,7 @@ vercel promote <deployment-id> --scope amerbarberedu-oss-projects --token $VERCE
 ### Cache busting
 
 When modifying CSS/JS files, bump the version number:
-- `landing.css?v=170` — in `src/build.py`, `landing-funnels/src/build.py`, and generated HTML files.
+- `landing.css?v=171` — in `src/build.py`, `landing-funnels/src/build.py`, and generated HTML files.
 - `style.css?v=34` — in `src/build.py` and generated HTML files.
 - `campus.js?v=5` — in `src/build.py`, `src/pages/index.html`, `src/pages/es-index.html`
 - `funnels.css?v=64` — in generated HTML files and `landing-funnels/src/build.py` (`CSS_V`)
