@@ -2896,6 +2896,15 @@ body.no-mhx-phones .mhx-phones{display:none!important}
 @media (min-width:1200px){
   body.mhx-on .brand-plate .logo-img{height:60px!important}
 }
+/* v169 — guarantee "Contact" (last main-nav link) never touches the language toggle.
+   At ≥1360px the enlarged logo + full nav fill the row, so the toggle's margin-left:auto
+   collapses to 0 and only the small flex gap separates Contact from EN|ES. Chrome renders
+   the nav text a few px wider than Safari and eats that gap → the "T" hid under English.
+   A fixed margin on this flex item does NOT collapse when the row fills, unlike the gap.
+   Adds space only, so Safari (already clearing) can't regress. */
+@media (min-width:769px){
+  html:not([lang="es"]) body.mhx-on .mainnav{margin-right:clamp(.9rem,1.8vw,1.6rem)!important}
+}
 
 
 /* ═══════════ v136 — HERO REBUILT FROM SCRATCH (reference flyer, blue palette) ═══════════
