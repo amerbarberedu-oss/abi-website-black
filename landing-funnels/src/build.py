@@ -28,7 +28,7 @@ import data as D
 
 SITE = "https://www.abi.edu"
 CSS_V = "68"
-JS_V  = "16"
+JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {

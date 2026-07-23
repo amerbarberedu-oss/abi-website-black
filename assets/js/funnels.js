@@ -216,9 +216,16 @@
         if (pb && (e.target === pb || pb.contains(e.target))) return;
         toggle();
       });
-      /* desktop hover-preview */
+      /* desktop hover-preview. On leave, resume muted playback rather than
+       * pausing: the in-view IntersectionObserver below only fires on
+       * intersection CHANGES, so a pause here used to freeze the clip
+       * permanently until it was scrolled out of view and back. */
       on(host, 'mouseenter', function () { if (window.matchMedia('(hover:hover)').matches) v.play().catch(function () {}); });
-      on(host, 'mouseleave', function () { if (window.matchMedia('(hover:hover)').matches) v.pause(); });
+      on(host, 'mouseleave', function () {
+        if (!window.matchMedia('(hover:hover)').matches) return;
+        v.muted = true;
+        v.play().catch(function () {});
+      });
       on(v, 'play',  syncPlaying);
       on(v, 'pause', syncPlaying);
       /* autoplay muted when in view, pause when off-screen (so clips visibly play) */
