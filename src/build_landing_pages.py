@@ -1274,28 +1274,17 @@ def sec_zero(p, s):
             '<div class="rv zero-head"><span class="eyebrow">%s</span><h2 class="zero-title">%s</h2><p class="lead">%s</p></div>'
             '<div class="zero-grid">%s</div></div></section>' % (eb, h2, pp, cells))
 
-def sec_includes(p, s):
-    es = p["lang"] == "es"
-    items = (["Programa de barbería aprobado por el estado","Preparación completa para el Examen de la Junta Estatal de NY","Experiencia práctica real en las primeras semanas","Mentoría de profesionales experimentados","Servicios de colocación laboral al graduarte","Acceso a ambos campus de Manhattan y el Bronx"]
-             if es else
-             ["State-approved barber training program","Full preparation for the NY State Board Exam","Real hands-on experience within the first few weeks","Mentorship from seasoned professionals","Job placement services upon graduation","Access to both Manhattan & Bronx campuses"])
-    lis = "".join("<li>%s</li>" % x for x in items)
-    eb = "Lo que recibes" if es else "What you get"
-    h2 = "Lo que incluye cada programa" if es else "What's included in every program"
-    # v16.0 — clean light-blue/white banner, no background photo.
-    return '<section class="home-banner home-banner--alt" style="background:linear-gradient(135deg,#eaf2ff 0%%,#dfeaff 55%%,#ffffff 100%%);color:#0a1020"><div class="container home-banner__in"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose"><ul>%s</ul></div></div></section>' % (eb, h2, lis)
-
 # ── ported from the 10-site DNA: AI-logo brand video + showcase B-roll (live CDN pull) ──
-CDN = "https://assets-lilac-five.vercel.app/"
+CDN = "https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/"
 
-# real barbershop B-roll clips (served from the live CDN) with bilingual captions
+# real barbershop B-roll clips (served from the live Vercel Blob storage) with bilingual captions
 SHOWCASE_CLIPS = [
-    ("barbershop-interior-busy-atmosphere", "Inside our NYC clinic floor", "Dentro de nuestra clínica en NYC"),
-    ("barber-cutting-hair-clippers",        "Clipper work, up close",       "Trabajo de máquina, de cerca"),
-    ("group-in-blue-smocks-instructor",     "Learning with our instructors","Aprendiendo con instructores"),
-    ("barber-grooms-beard-straight-razor",  "Straight-razor technique",     "Técnica de navaja"),
-    ("five-men-in-barbershop",              "The ABI community",            "La comunidad ABI"),
-    ("students-interacting-in-workshop",    "Hands-on from day one",        "Práctica desde el primer día"),
+    ("floor/floor-01", "Inside our NYC clinic floor", "Dentro de nuestra clínica en NYC"),
+    ("floor/floor-02", "Clipper work, up close",       "Trabajo de máquina, de cerca"),
+    ("floor/floor-03", "Learning with our instructors", "Aprendiendo con instructores"),
+    ("floor/floor-04", "Straight-razor technique",     "Técnica de navaja"),
+    ("floor/floor-05", "The ABI community",            "La comunidad ABI"),
+    ("floor/floor-06", "Hands-on from day one",        "Práctica desde el primer día"),
 ]
 
 def sec_brandband(p, s, pre):
@@ -1308,54 +1297,52 @@ def sec_brandband(p, s, pre):
            if es else
            "Hover the player to hear an ABI student share their experience — direct, unscripted, unfiltered.")
     points = (["Entrenamiento práctico desde la primera semana",
-               "Clientes reales en nuestra clínica de barbería en el campus",
-               "Mentores con décadas detrás de la silla",
-               "Preparación completa para el Examen del Estado de NY",
-               "Horarios flexibles — mañana, tarde y fin de semana",
-               "Ayuda financiera: ACCES-VR, GI Bill y VA",
-               "Tarifa semanal desde $150 — planes de pago",
-               "Asistencia de colocación laboral al graduarte",
-               "Dos campus en NYC — Manhattan y Bronx"]
+               "Horarios flexibles de día, noche y fin de semana",
+               "Instructores expertos con licencias activas",
+               "Preparación completa para el examen de licencia de NY"]
               if es else
-              ["Hands-on training from week one",
-               "Real clients in our on-campus barber clinic",
-               "Mentors with decades behind the chair",
-               "Full prep for the NY State Board Exam",
-               "Flexible schedules — morning, afternoon, weekend",
-               "Financial aid — ACCES-VR, GI Bill® and VA",
-               "Weekly tuition from $150 — flexible payment plans",
-               "Job-placement assistance on graduation",
-               "Two NYC campuses — Manhattan and the Bronx"])
-    bullets = "".join('<li><span class="abi-reel__bullet-mark" aria-hidden="true"></span><span>%s</span></li>' % p_ for p_ in points)
-    # v16.0 — twin portrait testimonial videos flanking the copy block.
-    # Desktop layout: video | copy | video. Mobile: video, copy, video (natural DOM order).
-    # v16.6 — Each testimonial video gets:
-    #   • center play/pause button (Instagram/TikTok pattern)
-    #   • click anywhere on the video toggles play/pause and unmutes on first play
-    #   • the corner mute toggle is injected automatically by video-sound.js
-    PLAY_ICON = ('<svg class="abi-reel__icon-play" viewBox="0 0 24 24" aria-hidden="true">'
-                 '<path d="M8 5v14l11-7z"/></svg>')
-    PAUSE_ICON = ('<svg class="abi-reel__icon-pause" viewBox="0 0 24 24" aria-hidden="true">'
-                  '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>')
-    play_btn = ('<button class="abi-reel__play" type="button" aria-label="Play video">'
-                + PLAY_ICON + PAUSE_ICON + '</button>')
-    return ('<section class="abi-reel" data-reveal>'
-            '<div class="abi-reel__frame">'
-            '<div class="abi-reel__media" data-abi-reel>'
-            '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
+              ["Hands-on training starting in week one",
+               "Flexible day, evening & weekend schedules",
+               "Master licensed instructors in class daily",
+               "Complete NY State board exam preparation"])
+    lis = "".join("<li>%s</li>" % pt for pt in points)
+    play_btn = '<button class="abi-brandband__play" aria-label="Play testimonial video"><span>&#9654;</span></button>'
+    return ('<section class="abi-section abi-brandband"><div class="abi-section__inner">'
+            '<div class="abi-brandband__grid">'
+            '<div class="abi-brandband__text" data-reveal><p class="abi-eyebrow">%s</p>'
+            '<h2 class="abi-h2">%s</h2><p class="abi-lead">%s</p>'
+            '<ul class="abi-brandband__list">%s</ul></div>'
+            '<div class="abi-brandband__media" data-reveal data-reveal-d="2">'
+            '<video class="abi-brandband__video" muted playsinline loop '
             'src="https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4" '
             'poster="/assets/img/video-321-poster.jpg" '
             'aria-label="ABI student testimonial video"></video>'
             + play_btn +
-            '</div>'
-            '<div class="abi-reel__copy">'
-            '<p class="abi-reel__kicker">%s</p>'
-            '<h2 class="abi-reel__title">%s</h2>'
-            '<p class="abi-reel__sub">%s</p>'
-            '<ul class="abi-reel__points">%s</ul>'
-            '</div>'
-            '<div class="abi-reel__media" data-abi-reel>'
-            '<video class="abi-reel__video" muted loop playsinline preload="metadata" '
+            '</div></div></div></section>') % (eb, h, sub, lis)
+
+def sec_videos(p, s, pre):
+    es = p["lang"] == "es"
+    eb = "Video Historias" if es else "Video Stories"
+    h = "Escucha de nuestros estudiantes" if es else "Hear from our students"
+    sub = ("Conoce las historias reales de graduados que convirtieron su pasión por la barbería en una carrera exitosa."
+           if es else
+           "Hear real stories from graduates who turned their passion for barbering into a thriving career.")
+    bullets = (["Aprende técnicas modernas de desvanecido y navaja",
+                "Construye tu clientela mientras estudias",
+                "Gradúate con confianza y habilidades listas para trabajar"]
+               if es else
+               ["Master modern fade & straight razor techniques",
+                "Build your personal client roster while in school",
+                "Graduate job-ready with career placement support"])
+    bullets_html = "".join("<li>%s</li>" % b for b in bullets)
+    play_btn = '<button class="abi-brandband__play" aria-label="Play student video"><span>&#9654;</span></button>'
+    return ('<section class="abi-section"><div class="abi-section__inner">'
+            '<div class="abi-brandband__grid abi-brandband__grid--rev">'
+            '<div class="abi-brandband__text" data-reveal><p class="abi-eyebrow">%s</p>'
+            '<h2 class="abi-h2">%s</h2><p class="abi-lead">%s</p>'
+            '<ul class="abi-brandband__list">%s</ul></div>'
+            '<div class="abi-brandband__media" data-reveal data-reveal-d="2">'
+            '<video class="abi-brandband__video" muted playsinline loop '
             'src="https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/Video-124.mp4" '
             'poster="/assets/img/video-124-poster.jpg" '
             'aria-label="ABI student testimonial video — second voice"></video>'
