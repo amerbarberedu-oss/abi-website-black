@@ -72,16 +72,16 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=174" as="style">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=34">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=174">
-<link rel="stylesheet" href="{root}assets/css/upgrade.css?v=2">
+<link rel="preload" href="{root}assets/css/landing.css?v=300" as="style">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=300">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=300">
+<link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=300">
 {schema}
 </head>
 <body class="mhx-on{mhxclass}{bodyclass}" style="--page-bg:url('/assets/img/{pagebg}')">
@@ -234,16 +234,16 @@ TEMPLATE = """<!DOCTYPE html>
 <script>(function(){{var b=document.querySelector('[data-call-toggle]'),s=document.querySelector('.call-sheet');if(!b||!s)return;function close(){{s.hidden=true;b.setAttribute('aria-expanded','false');}}b.addEventListener('click',function(e){{e.stopPropagation();var open=s.hidden;s.hidden=!open;b.setAttribute('aria-expanded',String(open));}});document.addEventListener('click',function(e){{if(!s.hidden&&!s.contains(e.target)&&e.target!==b)close();}});document.addEventListener('keydown',function(e){{if(e.key==='Escape')close();}});s.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',close);}});}})();</script>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=33" defer></script>
-<script src="{root}assets/js/effects.js?v=33" defer></script>
-<script src="{root}assets/js/landing.js?v=33" defer></script>
-<script src="{root}assets/js/upgrade.js?v=2" defer></script>
-<script src="{root}assets/js/campus.js?v=5" defer></script>
+<script src="{root}assets/js/main.js?v=300" defer></script>
+<script src="{root}assets/js/effects.js?v=300" defer></script>
+<script src="{root}assets/js/landing.js?v=300" defer></script>
+<script src="{root}assets/js/upgrade.js?v=300" defer></script>
+<script src="{root}assets/js/campus.js?v=300" defer></script>
 <!-- GHL chat widget (VIBE AI). Alex chatbot preserved in /assets/js/chatbot.js — to restore Alex: delete this block and re-add the chatbot.js script tag. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a627d266f3b01a586d50e87"></script>
 <script>(function(){{var t=setInterval(function(){{var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){{clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){{.lc_text-widget,.lc_text-widget--bubble{{bottom:150px!important;right:12px!important}}}}";w.shadowRoot.appendChild(s);}}}},400);setTimeout(function(){{clearInterval(t)}},15000);}})();</script>
-<script src="{root}assets/js/video-sound.js?v=3" defer></script>
-<script src="/assets/js/chat.js?v=3" defer></script>
+<script src="{root}assets/js/video-sound.js?v=300" defer></script>
+<script src="/assets/js/chat.js?v=300" defer></script>
 </body>
 </html>
 """
