@@ -235,7 +235,7 @@ TEMPLATE = """<!DOCTYPE html>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 <script src="{root}assets/js/main.js?v=33" defer></script>
-<script src="{root}assets/js/effects.js?v=32" defer></script>
+<script src="{root}assets/js/effects.js?v=33" defer></script>
 <script src="{root}assets/js/landing.js?v=33" defer></script>
 <script src="{root}assets/js/upgrade.js?v=2" defer></script>
 <script src="{root}assets/js/campus.js?v=5" defer></script>
