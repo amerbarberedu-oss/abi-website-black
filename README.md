@@ -5,7 +5,7 @@ complete marketing website: a fast, zero-framework static site generated from Py
 served on Vercel, in English and Spanish.
 
 - **Canonical domain:** https://www.abi.edu
-- **Current version:** 0.5.0 (2026-07-14)
+- **Current version:** 0.3.0 (2026-07-24) — see [CHANGELOG.md](CHANGELOG.md); the version here previously read "0.5.0", which never matched this repo's VERSION file or changelog and appears to have been copied from another site's README
 
 ## Ownership
 

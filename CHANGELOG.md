@@ -7,6 +7,69 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-07-24
+
+Everything shipped since 0.2.0 (2026-07-07), consolidating three parallel
+workstreams: Kazi (site engineering, SEO, media recovery), Arhum Abdullah
+(analytics, chat, header/hero design), and joint production fixes.
+
+### Added
+- **Original AI Brand Film restored** (2026-07-24) — the AI-generated logo
+  animation + 5 AI showcase clips were lost with their external asset host;
+  recovered from the restored `kazi-reprime/ABI-10-Websites` repo and now
+  committed same-origin at `assets/videos/ai/` so no third-party host can
+  take them down again. Gallery EN + ES.
+- **Google-reviews badge on campus Programs pages** (2026-07-17) —
+  `programs/manhattan`, `programs/bronx` + ES twins now show the same
+  visual rating widget as the homepage, with real per-campus data.
+- **Local SEO neighborhoods** (2026-07-17) — `ORG_SCHEMA["areaServed"]`
+  expanded 8 → 379 places (Queens/Brooklyn/SI/Manhattan/Bronx/Suffolk/
+  Westchester/Yonkers) + "Areas We Serve" section on contact pages.
+  Nassau place names still pending from client.
+- **Licensing splash-page content** (2026-07-16) — Gary's originally-drafted
+  2023 copy finally implemented on the unlicensed-practice page (EN + ES).
+- **Multi-channel chat** (Arhum, 2026-07-12→13) — mobile "Text Us" panel +
+  desktop left channel rail (WhatsApp/Instagram/Text/Messenger).
+- **Vercel Web Analytics** (Arhum, 2026-07-09), clean GA4 reinstall on a new
+  property after the old direct config was removed.
+
+### Fixed
+- **Bronx page showed Manhattan's Google rating, map and listing link**
+  (2026-07-17) — `bronx.html`/`es/bronx.html` reuse the homepage partial;
+  the campus swap in `src/build.py` now also corrects the reviews badge and
+  the whole "Find Us" section.
+- **Ambient videos froze after one cursor pass** (2026-07-24) —
+  `video-sound.js` paused every non-reel clip on `mouseleave` while the
+  IntersectionObserver autoplay layer only fires on intersection changes;
+  clips now keep playing muted while visible. Gallery floor reels autoplay
+  on scroll (Arhum's `effects.js` observer, same day).
+- **Google rating truth-sync** (2026-07-24) — Manhattan rating moved on
+  Google to **4.2 (433 reviews)**; every badge, body mention and JSON-LD
+  aggregateRating now carries live-verified per-campus values
+  (Bronx 4.9/253), replacing stale 4.1/"100+"/4.6 figures.
+- **Asset version alignment** (2026-07-24) — hand-crafted pages and
+  landing-funnels referenced older `?v=` values than template pages for the
+  same files (e.g. `video-sound.js?v=4` vs `?v=301`); all references now
+  aligned to each file's highest version so returning visitors can't be
+  served stale cached JS/CSS.
+- Redirect/wildcard audit (2026-07-16): prototype-pollution guard in
+  `api/legacy-redirect.js`, `/splash-page-1`/`-2` now reach their real
+  targets. reCAPTCHA Enterprise CSP allowances for form/chat captcha
+  (2026-07-24). Numerous header/nav collapse fixes at mid-width
+  breakpoints (Arhum, 2026-07-19→22).
+
+### Changed
+- Campus-specific header logos (Manhattan vs Bronx artwork; Arhum,
+  2026-07-20→23), thank-you page redesign (EN + ES), haircuts copy
+  standardized to walk-in messaging, gallery media served from the
+  `abi-videos` Vercel Blob store.
+
+### Infrastructure
+- **`abi-master-archive` Blob store** (2026-07-24) — disaster-recovery
+  archive of every ABI asset from all known sources (1,002 files, 756 MB,
+  `manifest.json` at root). Nothing live references it; it exists so no
+  asset can ever be permanently lost again.
+
 ## [0.2.0] — 2026-07-07
 
 Campus-context release: every location, map, review CTA and Programs nav link

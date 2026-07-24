@@ -1275,7 +1275,9 @@ def build():
         # — verified live against Google's own listing 2026-07-17.
         if out in ('bronx.html', 'es/bronx.html'):
             body = (body
-                    .replace('g-score">4.1<', 'g-score">4.9<')
+                    .replace('g-score">4.2<', 'g-score">4.9<')
+                    .replace('Based on 433 Google reviews', 'Based on 253 Google reviews')
+                    .replace('Basado en 433 reseñas de Google', 'Basado en 253 reseñas de Google')
                     .replace('https://maps.app.goo.gl/42UjD6bFQ65NEt1E7',
                              'https://maps.app.goo.gl/9TJJh8ehUjSZ8kcaA'))
             if lang == 'es':
