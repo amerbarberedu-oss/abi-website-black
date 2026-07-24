@@ -870,7 +870,7 @@ def page_head(p):
 '</head>\n<body class="lf-page %(theme)s">\n'
 '<!-- GHL chat widget (VIBE AI). Alex chatbot preserved in /assets/js/chatbot.js — to restore Alex: delete this block and re-add the chatbot.js script tag. -->\n'
 '<div data-chat-widget data-widget-id="6a6359f1b92307bb1e2abd87" data-location-id="wfpdq6XX5uIZUiLrqCSo"></div>\n'
-'<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a6359f1b92307bb1e2abd87"></script>\n'
+'<script async src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a6359f1b92307bb1e2abd87"></script>\n'
 '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget,.lc_text-widget--bubble{bottom:150px!important;right:12px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
