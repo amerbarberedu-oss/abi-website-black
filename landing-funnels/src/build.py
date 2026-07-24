@@ -743,8 +743,13 @@ def page_head(p):
              "opens": "09:00", "closes": "19:00"},
         ],
         "aggregateRating": {
-            "@type": "AggregateRating", "ratingValue": "4.6",
-            "reviewCount": "100", "bestRating": "5", "worstRating": "1"
+            # Real per-campus Google rating, verified 2026-07-24 against the
+            # live listings (Manhattan 4.2/433, Bronx 4.9/253) — replaces a
+            # stale hardcoded 4.6/100 that matched neither campus.
+            "@type": "AggregateRating",
+            "ratingValue": "4.9" if p["campus"]["slug"] == "bronx" else "4.2",
+            "reviewCount": "253" if p["campus"]["slug"] == "bronx" else "433",
+            "bestRating": "5", "worstRating": "1"
         },
         "review": [
             {"@type": "Review",
@@ -854,8 +859,8 @@ def page_head(p):
 '<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
-'<link rel="preload" href="/assets/css/landing.css?v=174" as="style">\n'
-'<link rel="stylesheet" href="/assets/css/landing.css?v=174">\n'
+'<link rel="preload" href="/assets/css/landing.css?v=300" as="style">\n'
+'<link rel="stylesheet" href="/assets/css/landing.css?v=300">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
@@ -922,7 +927,7 @@ def page_tail():
         'data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" '
         'data-widget-id="6a627d266f3b01a586d50e87"></script>\n'
         '<script>(function(){var t=setInterval(function(){var w=document.querySelector("chat-widget");if(w&&w.shadowRoot){clearInterval(t);var s=document.createElement("style");s.textContent="@media(max-width:768px){.lc_text-widget,.lc_text-widget--bubble{bottom:150px!important;right:12px!important}}";w.shadowRoot.appendChild(s);}},400);setTimeout(function(){clearInterval(t)},15000);})();</script>\n'
-        '<script src="/assets/js/chat.js?v=3" defer></script>\n'
+        '<script src="/assets/js/chat.js?v=300" defer></script>\n'
         '</body>\n</html>\n'
     ) % (JS_V,)
 
