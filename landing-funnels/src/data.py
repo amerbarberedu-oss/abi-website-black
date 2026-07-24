@@ -252,13 +252,13 @@ TUITION_NOTE = {
 
 # ─── Entrance requirements (verbatim) ────────────────────────────────
 REQUIREMENTS = {
-    "en": ["Social Security Card",
+    "en": ["Social Security Card or Tax ID Number",
            "High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
            "Must be at least 17 years of age",
            "Proof of residential address",
            "Valid photo ID or Driver's License",
            "$500 down payment"],
-    "es": ["Tarjeta de Seguro Social",
+    "es": ["Tarjeta de Seguro Social o Número de Identificación Fiscal (Tax ID)",
            "Diploma de Escuela Secundaria (HSD) o GED — o aprobar el examen de admisión ATB en ABI",
            "Tener al menos 17 años de edad",
            "Comprobante de domicilio",
