@@ -177,9 +177,9 @@
 /* chatbot.css uses `var(--blue)` which is defined on the marketing site
    but not in the funnels — provide both the variable + an explicit
    gradient so the FAB always renders the brand blue. */
-:root { --blue: #1b3bd9; --blue-deep: #0f2aa5; }
+:root { --blue: #1b2fd9; --blue-deep: #1322a8; }
 .abibot-fab {
-  background: linear-gradient(135deg, #1b3bd9, #3a4ff0) !important;
+  background: linear-gradient(135deg, #1b2fd9, #3a4ff0) !important;
   color: #fff !important;
   box-shadow: 0 12px 32px rgba(27, 47, 217, .50) !important;
 }
@@ -211,11 +211,11 @@ body.lf-page {
   /* universal "What You Get" sky-blue secondary accent */
   --lf-sky:        #5fb8ff;
   --lf-sky-soft:   #eaf4ff;
-  --lf-sky-deep:   #1b3bd9;
+  --lf-sky-deep:   #1b2fd9;
 
   /* theme accent — overridden by .lf-page--* below */
-  --lf-accent:      #1b3bd9;
-  --lf-accent-dark: #0f2aa5;
+  --lf-accent:      #1b2fd9;
+  --lf-accent-dark: #1322a8;
   --lf-accent-soft: #e7ecff;
   --lf-on-accent:   #ffffff;
 
@@ -231,31 +231,13 @@ body.lf-page {
   --lf-r-pill: 999px;
 }
 
-/* Manhattan EN — deep gold (premium / established) */
-body.lf-page--mhtn-en {
-  --lf-accent: #c89c2a;
-  --lf-accent-dark: #9d7918;
-  --lf-accent-soft: #fbf3dd;
-  --lf-on-accent: #1a1205;
-}
-/* Manhattan ES — emerald green (start / GO signal) */
-body.lf-page--mhtn-es {
-  --lf-accent: #0e8f62;
-  --lf-accent-dark: #0a6e4b;
-  --lf-accent-soft: #e8f7f1;
-  --lf-on-accent: #ffffff;
-}
-/* Bronx EN — vivid orange (energy / urgency) */
-body.lf-page--brnx-en {
-  --lf-accent: #e85d3a;
-  --lf-accent-dark: #bf4623;
-  --lf-accent-soft: #fdeee6;
-  --lf-on-accent: #ffffff;
-}
-/* Bronx ES — royal blue (trust / calm) */
+/* All campuses/languages — unified to the main-site brand blue #1b2fd9 */
+body.lf-page--mhtn-en,
+body.lf-page--mhtn-es,
+body.lf-page--brnx-en,
 body.lf-page--brnx-es {
-  --lf-accent: #1b3bd9;
-  --lf-accent-dark: #0f2aa5;
+  --lf-accent: #1b2fd9;
+  --lf-accent-dark: #1322a8;
   --lf-accent-soft: #e7ecff;
   --lf-on-accent: #ffffff;
 }
@@ -1606,7 +1588,7 @@ body.lf-page--brnx-es {
     border-color: rgba(255, 255, 255, .22);
   }
   .lf-mcta__btn--text {
-    background: #1b3bd9;
+    background: #1b2fd9;
   }
   .lf-mcta__btn--apply {
     background: #d4a83b;

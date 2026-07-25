@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "68"
+CSS_V = "69"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -849,7 +849,7 @@ def page_head(p):
 '<meta name="twitter:description" content="%(desc)s">\n'
 '<meta name="twitter:image" content="%(site)s/assets/img/lf-og-cover.jpg">\n'
 '<meta name="robots" content="index, follow, max-image-preview:large">\n'
-'<meta name="theme-color" content="#1b3bd9">\n'
+'<meta name="theme-color" content="#101316">\n'
 '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n'
 '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n'
 '<link rel="manifest" href="/site.webmanifest">\n'
@@ -859,8 +859,8 @@ def page_head(p):
 '<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
-'<link rel="preload" href="/assets/css/landing.css?v=300" as="style">\n'
-'<link rel="stylesheet" href="/assets/css/landing.css?v=300">\n'
+'<link rel="preload" href="/assets/css/landing.css?v=301" as="style">\n'
+'<link rel="stylesheet" href="/assets/css/landing.css?v=301">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
