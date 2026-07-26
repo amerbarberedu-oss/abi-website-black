@@ -104,6 +104,8 @@ def header(p):
     en_href = "/" + p["path"] if not es else "/" + p["alt"]
     es_href = "/" + p["alt"] if not es else "/" + p["path"]
     campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
+    # Campus-specific header logo (matches the main site: build.py logo_src).
+    logo_src = "/assets/img/logo-bronx.gif" if p["campus"]["slug"] == "bronx" else "/assets/img/logo-manhattan.gif"
     pills = "".join(
         '<a class="lfx-phone" href="tel:%s">'
         '<span class="lfx-phone__num">%s</span>'
@@ -136,7 +138,7 @@ def header(p):
         '  <span class="lfx-seats-t"><b>%s</b><i>%s</i></span>\n'
         '</div>\n'
     ) % (
-        h(LOGO_SRC), h(LOGO_ALT), LOGO_W, LOGO_H,
+        h(logo_src), h(LOGO_ALT), LOGO_W, LOGO_H,
         pills,
         "Idioma" if es else "Language",
         "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
@@ -856,7 +858,7 @@ def page_head(p):
 '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
 '<link rel="preconnect" href="https://text.pollinations.ai" crossorigin>\n'
-'<link rel="preload" href="/assets/img/logo-final.gif" as="image" fetchpriority="high">\n'
+'<link rel="preload" href="%(logo_src)s" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
 '<link rel="preload" href="/assets/css/landing.css?v=301" as="style">\n'
@@ -875,6 +877,7 @@ def page_head(p):
 '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKLLGPC" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>\n'
     ) % {
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
+        "logo_src": ("/assets/img/logo-bronx.gif" if p["campus"]["slug"] == "bronx" else "/assets/img/logo-manhattan.gif"),
         "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
         "site": SITE, "oglocale": "es_US" if es else "en_US", "cssv": CSS_V,
         "ld_scripts": "".join(
