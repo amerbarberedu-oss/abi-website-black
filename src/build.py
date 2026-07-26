@@ -1446,7 +1446,7 @@ def build():
             f'<a{_mn_active} href="{_es_prefix}/manhattan">Manhattan</a>'
             f'<a{_bx_active} href="{_es_prefix}/bronx">Bronx</a></div>'
         )
-        bodyclass = ' bx-gold' if _is_bronx else ''
+        bodyclass = ''  # Bronx uses the unified brand blue (bx-gold theme retired)
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
