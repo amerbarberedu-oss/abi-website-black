@@ -22,7 +22,7 @@ var MN_PHONES={mbar:{call:"+12122902289",text:"+12122902289"}};
 var BX_PHONES={mbar:{call:"+17186760640",text:"+17186760640"}};
 
 /* ── Page detection helpers ── */
-function isBronxPage(){return document.body.classList.contains("bx-gold")}
+function isBronxPage(){return /^\/(es\/)?bronx(\.html)?$/.test(location.pathname);}
 function isProgramsPage(){var p=location.pathname;return /\/programs\//.test(p)||/\/programs$/.test(p);}
 function isBronxProgramsPage(){var p=location.pathname;return /\/programs\/bronx(\.html)?$/.test(p)||/\/500-hour-master-barber-bronx/.test(p);}
 function isManhattanProgramsPage(){var p=location.pathname;return /\/programs\/manhattan(\.html)?$/.test(p)||(/\/programs\/500-hour-master-barber(\.html)?$/.test(p))||/\/50-hour-barber-refresher/.test(p);}
@@ -37,7 +37,7 @@ function setCampus(c){try{localStorage.setItem("abi-campus",c);}catch(e){}}
 
 /* ── Smooth crossfade overlay for campus transitions ── */
 function withFade(applyFn,campus){
-  var bg=campus==="bronx"?"#1a1400":"#0c1020";
+  var bg="#0c1020";
   var ov=document.createElement("div");
   ov.style.cssText="position:fixed;inset:0;z-index:9999;background:"+bg+";opacity:0;pointer-events:none;transition:opacity .28s ease";
   document.body.appendChild(ov);
@@ -53,7 +53,6 @@ function withFade(applyFn,campus){
 
 /* ── Apply campus theme + phones + nav links ── */
 function _applyBronx(){
-  document.body.classList.add("bx-gold");
   updateLocToggle("bronx");
   swapPhones(BX_PHONES);
   rewriteProgramsLinks("bronx");

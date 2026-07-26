@@ -242,7 +242,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
 <script src="{root}assets/js/landing.js?v=300" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
-<script src="{root}assets/js/campus.js?v=300" defer></script>
+<script src="{root}assets/js/campus.js?v=301" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>
