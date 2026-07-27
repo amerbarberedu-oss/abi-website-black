@@ -3387,20 +3387,20 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
    Spanish labels are longer and need the room. */
 @media (min-width:1200px){
   html[lang="es"] body.mhx-on .brand-plate .logo-img{
-    height:clamp(42px, calc(42px + (100vw - 1200px) * 0.045), 84px)!important}
+    height:clamp(46px, calc(46px + (100vw - 1200px) * 0.08), 98px)!important}
   html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
   html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
-    font-size:clamp(.74rem, calc(.74rem + (100vw - 1200px) * 0.0058), .94rem)!important;
+    font-size:clamp(.7rem, calc(.7rem + (100vw - 1200px) * 0.009), 1.08rem)!important;
     letter-spacing:0!important}
   html[lang="es"] body.mhx-on .mainnav,
   html[lang="es"] body.mhx-on header.hdr nav.mainnav{
-    gap:clamp(.2rem, calc(.2rem + (100vw - 1200px) * 0.00025), .4rem)!important}
+    gap:clamp(.18rem, calc(.18rem + (100vw - 1200px) * 0.0004), .5rem)!important}
   html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
   html[lang="es"] body.mhx-on .lang-toggle,
-  html[lang="es"] body.mhx-on .loc-toggle{font-size:clamp(.72rem,.5vw,.9rem)!important;transform:none!important}
+  html[lang="es"] body.mhx-on .loc-toggle{font-size:clamp(.78rem,.5vw,.94rem)!important;transform:none!important}
   html[lang="es"] body.mhx-on .hdr-in > .lang-toggle a,
   html[lang="es"] body.mhx-on .lang-toggle a,
-  html[lang="es"] body.mhx-on .loc-toggle a{padding:.42rem .58rem!important}
+  html[lang="es"] body.mhx-on .loc-toggle a{padding:.44rem .6rem!important}
 }
 /* Spanish stays packed left at every desktop width (no centering hand-back
    like English gets at >=1700px) — its longer labels need the room and
