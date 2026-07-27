@@ -3488,6 +3488,15 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
     justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
 }
 
+/* Spanish carried the same v164 centering with no v165-equivalent fix, so its
+   longer labels + wide logo overlap the same way English did before v165 —
+   worse now that Programs is a dropdown too. Same fix: pack left after the
+   logo instead of centering, so any overflow goes right, never over the logo. */
+@media (min-width:1200px) and (max-width:1800px){
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{
+    justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
+}
+
 /* ═══════════════════════ Thank-you / Gracias confirmation page ═══════════════════════
    The .ty-* markup previously had NO styles — bare logo/checkmark/text. This is a
    clean centered card: animated success check, heading, "what happens next" steps,
