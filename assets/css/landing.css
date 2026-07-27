@@ -3377,38 +3377,37 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{gap:.7rem!important}
 }
 
-/* ---- Spanish (longer nav): a bit smaller to stay clear ---- */
-@media (min-width:1440px){
-  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:96px!important}
+/* ---- Spanish (longer nav): continuous scaling instead of fixed bands ----
+   The old fixed 1440/1560/1800 bands jumped straight to a bigger logo + font
+   at 1440px, sized for the OLD centered layout where overflow split across
+   both sides. Once packed left (see the flex-start rule above), that same
+   jump spilled ~270px past the language pill instead. Smooth scaling (same
+   technique as the English fix below) avoids any single breakpoint having to
+   absorb a big discontinuous jump. Smaller ceiling than English throughout —
+   Spanish labels are longer and need the room. */
+@media (min-width:1200px){
+  html[lang="es"] body.mhx-on .brand-plate .logo-img{
+    height:clamp(46px, calc(46px + (100vw - 1200px) * 0.08), 98px)!important}
   html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
   html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
-    font-size:1rem!important;letter-spacing:0!important}
+    font-size:clamp(.7rem, calc(.7rem + (100vw - 1200px) * 0.009), 1.08rem)!important;
+    letter-spacing:0!important}
   html[lang="es"] body.mhx-on .mainnav,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.18rem!important}
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{
+    gap:clamp(.18rem, calc(.18rem + (100vw - 1200px) * 0.0004), .5rem)!important}
   html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
   html[lang="es"] body.mhx-on .lang-toggle,
-  html[lang="es"] body.mhx-on .loc-toggle{font-size:.96rem!important}
+  html[lang="es"] body.mhx-on .loc-toggle{font-size:clamp(.78rem,.5vw,.94rem)!important;transform:none!important}
   html[lang="es"] body.mhx-on .hdr-in > .lang-toggle a,
   html[lang="es"] body.mhx-on .lang-toggle a,
-  html[lang="es"] body.mhx-on .loc-toggle a{padding:.5rem .7rem!important}
-  html[lang="es"] body.mhx-on .hdr-in > .lang-toggle,
-  html[lang="es"] body.mhx-on .loc-toggle{transform:translateX(6px)}
+  html[lang="es"] body.mhx-on .loc-toggle a{padding:.44rem .6rem!important}
 }
-@media (min-width:1560px){
-  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:112px!important}
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
-    font-size:1.06rem!important}
-  html[lang="es"] body.mhx-on .mainnav,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.3rem!important}
-}
-@media (min-width:1800px){
-  html[lang="es"] body.mhx-on .brand-plate .logo-img{height:128px!important}
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav>a,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
-    font-size:1.14rem!important}
-  html[lang="es"] body.mhx-on .mainnav,
-  html[lang="es"] body.mhx-on header.hdr nav.mainnav{gap:.55rem!important}
+/* Spanish stays packed left at every desktop width (no centering hand-back
+   like English gets at >=1700px) — its longer labels need the room and
+   there's no width where re-centering is safely clear of both sides. */
+@media (min-width:1200px){
+  html[lang="es"] body.mhx-on header.hdr nav.mainnav{
+    justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
 }
 
 /* ═══════════ Home-page hero — raise headline + form to the barber's elbow ═══════════
@@ -3487,6 +3486,7 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav{
     justify-content:flex-start!important;margin-left:1rem!important;margin-right:0!important}
 }
+
 
 /* ═══════════════════════ Thank-you / Gracias confirmation page ═══════════════════════
    The .ty-* markup previously had NO styles — bare logo/checkmark/text. This is a

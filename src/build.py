@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=301" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=304" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=300">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=301">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=304">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -1219,7 +1219,9 @@ def _shell_nav(b, root, lang):
         mainnav = ('<nav class="mainnav" aria-label="Principal">'
           f'<a href="{b}index.html">Inicio</a>'
           f'<a href="{b}about.html">Nosotros</a>'
-          f'<a href="{b}programs/index.html">Programas</a><a href="{b}instructors.html">Instructores</a>'
+          f'<span class="nav-drop"><a href="{b}programs/index.html" class="nav-drop-trigger">Programas ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">Todos los Programas</a><a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a></span></span>'
+          f'<a href="{b}instructors.html">Instructores</a>'
           f'<a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Empleo ▾</a>'
@@ -1230,6 +1232,7 @@ def _shell_nav(b, root, lang):
         drawer = ('<nav class="nav-drawer"><div class="container">'
           f'<a href="{b}index.html">Inicio</a>'
           f'<a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
+          f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a>'
           f'<a href="{b}instructors.html">Instructores</a><a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a><a href="{b}jobs.html">Empleo</a>'
           f'<a href="{b}resources.html">Recursos</a><a href="{b}schedules.html">Horarios</a><a href="{b}partners.html">Aliados</a>'
@@ -1239,7 +1242,9 @@ def _shell_nav(b, root, lang):
         mainnav = ('<nav class="mainnav" aria-label="Main">'
           f'<a href="{b}index.html">Home</a>'
           f'<a href="{b}about.html">About</a>'
-          f'<a href="{b}programs/index.html">Programs</a><a href="{b}instructors.html">Instructors</a>'
+          f'<span class="nav-drop"><a href="{b}programs/index.html" class="nav-drop-trigger">Programs ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">All Programs</a><a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a></span></span>'
+          f'<a href="{b}instructors.html">Instructors</a>'
           f'<a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Jobs ▾</a>'
@@ -1250,6 +1255,7 @@ def _shell_nav(b, root, lang):
         drawer = ('<nav class="nav-drawer"><div class="container">'
           f'<a href="{b}index.html">Home</a>'
           f'<a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
+          f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a>'
           f'<a href="{b}instructors.html">Instructors</a><a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}jobs.html">Jobs</a>'
           f'<a href="{b}resources.html">Resources</a><a href="{b}schedules.html">Schedules</a><a href="{b}partners.html">Partners</a>'
