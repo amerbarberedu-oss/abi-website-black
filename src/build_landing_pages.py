@@ -85,7 +85,7 @@ def icon(name, size=22):
 # ───────────────────────── shared strings ─────────────────────────
 S = {
  "en": {
-  "topbar": "Start your barber journey today for only $150 per week*",
+  "topbar": "Start your barber journey today for only $160 per week*",
   "limited": "Limited Seats — Enrollment Open", "reserve": "Reserve Your Spot Today",
   "next_start": "Next Start:", "call": "Request a Call",
   "form_sub": "Fill out the form and an Admissions Advisor will contact you.",
@@ -116,15 +116,15 @@ S = {
     {"name":"Plan A — Morning","sched":"Mon–Fri · 8:00 AM – 2:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
      "price":"$5,600","terms":"$500 down (incl. $100 registration) + 17 weekly payments of $300","pop":False},
     {"name":"Plan B — Afternoon","sched":"Mon–Fri · 2:00 PM – 8:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
-     "price":"$4,600","terms":"$500 down (incl. $100 registration) + 16 weekly payments of $250 + final $100","pop":True},
+     "price":"$3,600","terms":"$200 down (incl. $100 registration) + 17 weekly payments of $200","pop":True},
     {"name":"Plan C — Weekend","sched":"Sat & Sun · 9:00 AM – 7:00 PM","hours":"18 hrs/week · 27 weeks (~6–7 months)",
-     "price":"$4,600","terms":"$550 down (incl. $100 registration) + 27 weekly payments of $150","pop":False}],
+     "price":"$4,600","terms":"$200 down (incl. $100 registration) + 27 weekly payments of $160 + final payment","pop":False}],
   "pop_tag": "Most Popular", "plan_cta": "Let's Do It",
   "plans_note": "Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
   "req_eb": "Admissions", "req_h": "Entrance Requirements",
   "reqs": ["Social Security Card","High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
            "Must be at least 17 years of age","Proof of residential address",
-           "Valid photo ID or Driver's License","$500 down payment"],
+           "Valid photo ID or Driver's License","Down payment from $200"],
   "testi_eb": "Student Stories", "testi_h": "What Our Students Say",
   "testi_sub": "Real reviews from our Google profile.",
   "testi": [
@@ -152,7 +152,7 @@ S = {
   "en_es_phones": [("English","(212) 290-2289","+12122902289"),("Spanish","(212) 290-0278","+12122900278")],
  },
  "es": {
-  "topbar": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
+  "topbar": "Comienza tu carrera de barbero hoy por solo $160 por semana*",
   "limited": "Cupos Limitados — Inscripción Abierta", "reserve": "Reserva Tu Lugar Hoy",
   "next_start": "Próximo Inicio:", "call": "Solicitar Llamada",
   "form_sub": "Completa el formulario y un asesor de admisiones te contactará.",
@@ -183,9 +183,9 @@ S = {
     {"name":"Plan A — Mañanas","sched":"Lun–Vie · 8:00 AM – 2:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
      "price":"$5,600","terms":"$500 de pago inicial (incluye $100 de inscripción) + 17 pagos semanales de $300","pop":False},
     {"name":"Plan B — Tardes","sched":"Lun–Vie · 2:00 PM – 8:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
-     "price":"$4,600","terms":"$500 de pago inicial (incluye $100 de inscripción) + 16 pagos semanales de $250 + pago final de $100","pop":True},
+     "price":"$3,600","terms":"$200 de pago inicial (incluye $100 de inscripción) + 17 pagos semanales de $200","pop":True},
     {"name":"Plan C — Fines de Semana","sched":"Sáb y Dom · 9:00 AM – 7:00 PM","hours":"18 hrs/semana · 27 semanas (~6–7 meses)",
-     "price":"$4,600","terms":"$550 de pago inicial (incluye $100 de inscripción) + 27 pagos semanales de $150","pop":False}],
+     "price":"$4,600","terms":"$200 de pago inicial (incluye $100 de inscripción) + 27 pagos semanales de $160 + pago final","pop":False}],
   "pop_tag": "Más Popular", "plan_cta": "¡Hagámoslo!",
   "plans_note": "Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI o con otros proveedores. Asistencia financiera ACCES-VR disponible. Beneficios de Post-9/11 GI Bill® y VA aceptados.",
   "req_eb": "Admisiones", "req_h": "Requisitos de Admisión",
@@ -414,13 +414,13 @@ for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
      "url":"/"+L["slug"],"alt":"/es/"+L["slug"],"title":L["title"],"desc":L["desc"],
      "campus":L["campus"],"h1a":L["h1"],"h1b":"","script":"Start Today.",
-     "sub":L["intro"][0],"loc":L,"hero_img":"home-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+     "sub":L["intro"][0],"loc":L,"hero_img":"home-hero.jpg","dur":"~4 Months","tui":"$3,600"})
     E = LOC_ES[L["slug"]]
     LE = dict(L); LE.update(E)
     PAGES.append({"type":"location","lang":"es","path":"es/"+L["slug"]+"/index.html",
      "url":"/es/"+L["slug"],"alt":"/"+L["slug"],"title":E["title"],"desc":E["desc"],
      "campus":L["campus"],"h1a":E["h1"],"h1b":"","script":"Empieza Hoy.",
-     "sub":E["intro"][0],"loc":LE,"hero_img":"home-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
+     "sub":E["intro"][0],"loc":LE,"hero_img":"home-hero.jpg","dur":"~4 Meses","tui":"$3,600"})
 
 # ── GLOBAL HERO OVERRIDE: exact mockup content on every landing page ──
 for _p in PAGES:
@@ -956,7 +956,7 @@ def sec_location(p, s):
 FAQS = {
  "en": [
   ("How much does barber school cost in New York?",
-   "At ABI, the 500-hour Master Barber program starts at $4,600 (afternoon or weekend plans) or $5,600 (morning plan) — $500–$550 down and weekly payments of $150–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
+   "At ABI, the 500-hour Master Barber program starts at $3,600 (afternoon), $4,600 (weekend) or $5,600 (morning) — $200–$500 down and weekly payments of $160–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
   ("How long is barber school in New York?",
    "New York State requires 500 hours of training. Full-time at ABI takes about 4 months (17 weeks at 30 hours per week); the weekend schedule takes about 6–7 months (27 weeks)."),
   ("How many hours per week will I be in school?",
@@ -974,7 +974,7 @@ FAQS = {
  ],
  "es": [
   ("¿Cuánto cuesta la escuela de barbería en Nueva York?",
-   "En ABI, el programa de Barbero Maestro de 500 horas comienza desde $4,600 (planes de tarde o fin de semana) o $5,600 (plan de mañana) — $500–$550 de pago inicial y pagos semanales de $150–$300 mientras estudias. Libros y herramientas aparte. Se acepta ACCES-VR, Post-9/11 GI Bill® y beneficios de VA."),
+   "En ABI, el programa de Barbero Maestro de 500 horas comienza desde $3,600 (tarde), $4,600 (fin de semana) o $5,600 (mañana) — $200–$500 de pago inicial y pagos semanales de $160–$300 mientras estudias. Libros y herramientas aparte. Se acepta ACCES-VR, Post-9/11 GI Bill® y beneficios de VA."),
   ("¿Cuánto dura la escuela de barbería en Nueva York?",
    "El Estado de Nueva York exige 500 horas de entrenamiento. A tiempo completo en ABI toma unos 4 meses (17 semanas a 30 horas por semana); el horario de fin de semana toma de 6 a 7 meses (27 semanas)."),
   ("¿Cuántas horas por semana estaré en la escuela?",
@@ -1146,7 +1146,7 @@ def footer(p, s, pre):
       <a href="mailto:admission@abi.edu">admission@abi.edu</a>
     </div>
   </div>
-  <div class="ftr-legal">© American Barber Institute (ABI). All rights reserved. · %s · *$150/week refers to Plan C weekly payments.</div>
+  <div class="ftr-legal">© American Barber Institute (ABI). All rights reserved. · %s · *$200 down &amp; $200 weekly refers to Plan B (afternoon schedule).</div>
 </div></footer>
 <div class="mbar">
   <a class="mbar-call" href="tel:%s"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg> <span>%s</span></a>

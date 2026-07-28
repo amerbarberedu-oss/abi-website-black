@@ -7,6 +7,30 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Changed
+- **New approved tuition pricing, site-wide** (2026-07-29) — Afternoon drops
+  $4,600 → **$3,600** ($200 down + 17 × $200, was $500 down + 16 × $250 + $100);
+  Weekend stays $4,600 but on **$200 down + 27 × $160 + a final payment** (was
+  $550 down + 27 × $150); Morning unchanged at $5,600 ($500 down + 17 × $300)
+  and now **includes a professional tool kit**. Lowest advertised price is
+  therefore $4,600 → $3,600 and the lowest weekly $150 → $160, so every
+  "from $4,600" / "from $150 a week" claim was updated: program pages, homepage
+  and Bronx plan grids, about, FAQ (incl. FAQPage JSON-LD), programs index and
+  both campus pages, the licensing and Pennsylvania pages, SEO meta
+  descriptions in `src/build.py`, and all four landing funnels plus
+  `landing-funnels/src/data.py`. EN + ES.
+- **Tuition cards rebuilt to the approved layout** (`landing.css` v16.3) —
+  Plan A/B/C tag, down payment as the headline figure, a Weekly payments /
+  Tuition / Total cost table and the payment formula. (Per-card
+  "tool kit included" / "tools not included" notes were dropped before release;
+  the tool policy is still stated in the section intro.) Extends `.tuition`
+  rather than replacing it, so the dark
+  surface, hover lift and reveal animation are untouched. New sub-elements are
+  `.tuition`-scoped to outrank `.tuition ul` / `.tuition li`; the plan label is
+  `.tuition-tag` because `.plan-tag` was already taken by the funnel cards.
+- The orphaned `*$150/week refers to Plan C weekly payments` footnote now
+  describes the current banner claim (Plan B, $200 down & $200 weekly).
+
 ### Added
 - **"Ways to Pay for Your Training" row on the Programs page** (2026-07-28) —
   companion to the `Programs ▾` dropdown from PR #14, which surfaced

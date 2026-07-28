@@ -115,7 +115,7 @@ def header(p):
         for ph in campus_phones
     )
     promo = h(p["promo_strip"])
-    for price in ("$150 per week*", "$150 por semana*"):
+    for price in ("$160 per week*", "$160 por semana*"):
         promo = promo.replace(price, "<b>%s</b>" % price)
     seats_kicker, seats_lead = D.SEATS_BANNER[p["lang"]]
     star_svg = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'

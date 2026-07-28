@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=305" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=307" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=300">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=305">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=307">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -1044,7 +1044,7 @@ PAGES = [
     # sitemap.xml, and interlinked among themselves only.
     ("financial-aid.html", "page-financial-aid.html",
      "Financial Aid for Barber School NYC | ACCES-VR & GI Bill®",
-     "Barber school financial assistance in NYC: ACCES-VR funding, GI Bill® for veterans and weekly payment plans from $150 at American Barber Institute.",
+     "Barber school financial assistance in NYC: ACCES-VR funding, GI Bill® for veterans and weekly payment plans from $160 at American Barber Institute.",
      "en", []),
     ("how-to-get-started.html", "page-how-to-get-started.html",
      "How to Get Started | Enroll at American Barber Institute",
@@ -1092,7 +1092,7 @@ PAGES = [
      "en", ["FAQ_SCHEMA"]),
     ("barber-school-queens-ny.html", "loc-barber-school-queens-ny.html",
      "Barber School Queens, NY - American Barber Institute",
-     "American Barber Institute is just 30 minutes from Queens. NYS-licensed since 1996 — 500-hour Master Barber training with payment plans from $150/week.",
+     "American Barber Institute is just 30 minutes from Queens. NYS-licensed since 1996 — 500-hour Master Barber training with payment plans from $160/week.",
      "en", []),
     ("barber-school-brooklyn-new-york.html", "loc-barber-school-brooklyn-new-york.html",
      "Barber School Brooklyn, NY - American Barber Institute",
@@ -1108,7 +1108,7 @@ PAGES = [
      "en", []),
     ("barber-school-long-island-ny.html", "loc-barber-school-long-island-ny.html",
      "Barber School Long Island, NY - American Barber Institute",
-     "ABI's Manhattan campus is minutes from Penn Station — an easy LIRR ride from Long Island. 500-hour Master Barber training with plans from $150/week.",
+     "ABI's Manhattan campus is minutes from Penn Station — an easy LIRR ride from Long Island. 500-hour Master Barber training with plans from $160/week.",
      "en", []),
     ("barber-school-staten-island-ny.html", "loc-barber-school-staten-island-ny.html",
      "Barber School Staten Island, NY - American Barber Institute",
@@ -1132,7 +1132,7 @@ PAGES = [
      "en", []),
     ("barber-school-bronx-new-york.html", "loc-barber-school-bronx-new-york.html",
      "Barber School Bronx, NY - American Barber Institute",
-     "ABI's Bronx campus at 121 Westchester Square offers full barber training, NYS licensing exam prep and job placement — payment plans from $150/week.",
+     "ABI's Bronx campus at 121 Westchester Square offers full barber training, NYS licensing exam prep and job placement — payment plans from $160/week.",
      "en", []),
     ("best-barber-school-in-bronx.html", "loc-best-barber-school-in-bronx.html",
      "Bronx Barber School - Best Barber School in Bronx",
@@ -1392,8 +1392,8 @@ def build():
         # ── i18n text for template sections ──
         if lang == 'es':
             i18n = dict(
-                tb_promo='Comienza tu carrera de barbero hoy por solo <span class="tb-price">$150 por semana*</span>',
-                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b class="tb-price">$150 POR SEMANA*</b>',
+                tb_promo='Comienza tu carrera de barbero hoy por solo <span class="tb-price">$200 de enganche y $200 semanales</span>',
+                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b class="tb-price">$200 DE ENGANCHE Y $200 SEMANALES</b>',
                 seats_b='CUPOS LIMITADOS DISPONIBLES', seats_i='INSCRIPCIONES ABIERTAS',
                 cta_kicker='Las clases comienzan el primer lunes de cada mes',
                 cta_h2='¿Listo Para Ser Barbero Licenciado?',
@@ -1406,8 +1406,8 @@ def build():
             )
         else:
             i18n = dict(
-                tb_promo='Start your barber journey today for only <span class="tb-price">$150 per week*</span>',
-                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b class="tb-price">$150 PER WEEK*</b>',
+                tb_promo='Start your barber journey today for only <span class="tb-price">$200 down payment &amp; $200 weekly</span>',
+                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b class="tb-price">$200 DOWN PAYMENT &amp; $200 WEEKLY</b>',
                 seats_b='LIMITED SEATS AVAILABLE', seats_i='ENROLLMENT NOW OPEN',
                 cta_kicker='Classes begin the first Monday of each month',
                 cta_h2='Ready to Become a Licensed Barber?',
