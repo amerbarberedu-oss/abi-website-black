@@ -7,6 +7,30 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Added
+- **"Ways to Pay for Your Training" row on the Programs page** (2026-07-28) —
+  companion to the `Programs ▾` dropdown from PR #14, which surfaced
+  `/veterans` and `/access-vr-program` in the nav but left the programs index
+  untouched. Two `res-card--link` cards now link to both pages, reusing the
+  copy already written for `how-to-get-started`. EN + ES.
+
+### Changed
+- The "Not sure which program fits?" paragraph on `programs/index` pointed both
+  its "Veterans GI Bill®" and "ACCESS-VR" links at `/resources`; they now go to
+  the two dedicated pages. EN + ES.
+
+### Fixed
+- **English header nav overlapping the language switcher ≥1200px**
+  (`landing.css` v16.2, cache-buster → v305) — the `▾` added to the Programs
+  trigger in PR #14 widened the English row by 6–15px, and the continuous
+  scaling was tuned to fit with as little as 0.2px of slack, so CONTACT sat
+  under the EN|ES pill at 1200/1240/1360/1400/1440px (+8.6/+1.9/+3.8/+14.6/
+  +6.9px measured). PR #14's follow-ups re-tuned the *Spanish* nav; this is the
+  English side. Per-item `letter-spacing` and inline padding are now zeroed
+  between 1200–1560px — the flex `gap` already separates the items. Verified at
+  nine widths from 1200–1560px, all clear by ≥12px; Spanish re-checked
+  unchanged at 1200–1920px.
+
 ## [0.3.0] — 2026-07-24
 
 Everything shipped since 0.2.0 (2026-07-07), consolidating three parallel

@@ -3545,3 +3545,23 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   .ty-check svg{animation:none;stroke-dashoffset:0}
 }
 
+
+/* ============================================================================
+   v16.2 — English nav vs. language switcher after the Programs ▾ dropdown.
+   PR #14 turned Programs into a dropdown, so its trigger carries a " ▾" like
+   Jobs and FAQs. That glyph adds 6–15px to the English row, and the continuous
+   scaling above had been tuned to fit with as little as 0.2px of slack, so
+   CONTACT slid under the EN|ES pill at 1200/1240/1360/1400/1440px (measured:
+   +8.6/+1.9/+3.8/+14.6/+6.9px of overlap). PR #14's follow-up commits re-tuned
+   the SPANISH nav; this is the English side, still outstanding.
+   Reclaim the space from per-item letter-spacing and inline padding — the flex
+   gap already separates the items, so both are redundant — in the tight band
+   only. Above ~1560px the row has room and keeps the original spacing.
+   English only; Spanish has its own tiers earlier in this file.
+   Verified by measuring CONTACT's right edge against the switcher's left edge
+   at 1200/1240/1280/1320/1360/1400/1440/1500/1560px — all clear by ≥12px. */
+@media (min-width:1200px) and (max-width:1560px){
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>a,
+  html:not([lang="es"]) body.mhx-on header.hdr nav.mainnav>.nav-drop>.nav-drop-trigger{
+    letter-spacing:0!important;padding-inline:0!important}
+}
