@@ -449,6 +449,11 @@ def section_tuition(p):
     eb, ti = D.TUITION_HEAD[p["lang"]]
     note = D.TUITION_NOTE[p["lang"]]
     popular = "Más Popular" if p["lang"] == "es" else "Most Popular"
+    LBL = ({"down": "de pago inicial", "weekly": "Pagos semanales",
+            "tuition": "Colegiatura", "total": "Costo total"}
+           if p["lang"] == "es" else
+           {"down": "down payment", "weekly": "Weekly payments",
+            "tuition": "Tuition", "total": "Total cost"})
     cards = ""
     for pl in D.TUITION[p["lang"]]:
         cls = "lf-plan lf-rv" + (" lf-plan--feature" if pl["feature"] else "")
@@ -457,11 +462,20 @@ def section_tuition(p):
             '<div class="%s">%s<div class="lf-plan__name">%s</div>'
             '<div class="lf-plan__sched">%s</div>'
             '<div class="lf-plan__hours">%s</div>'
-            '<div class="lf-plan__price">%s</div>'
-            '<div class="lf-plan__terms">%s</div>'
+            '<div class="lf-plan__price">%s <span class="lf-plan__per">%s</span></div>'
+            '<ul class="lf-plan__rows">'
+            '<li><span>%s</span><b>%s</b></li>'
+            '<li><span>%s</span><b>%s</b></li>'
+            '<li class="lf-row-total"><span>%s</span><b>%s</b></li>'
+            '</ul>'
+            '<div class="lf-plan__calc">%s</div>'
             '<a class="lf-btn lf-btn--primary lf-plan__cta" href="#reserve">%s</a></div>'
             % (cls, badge, h(pl["name"]), h(pl["sched"]), h(pl["hours"]),
-               h(pl["price"]), h(pl["terms"]),
+               h(pl["down"]), h(LBL["down"]),
+               h(LBL["weekly"]), h(pl["weekly"]),
+               h(LBL["tuition"]), h(pl["tuition"]),
+               h(LBL["total"]), h(pl["total"]),
+               h(pl["calc"]),
                "¡Hagámoslo!" if p["lang"] == "es" else "Let's Do It")
         )
     return ('<section class="lf-section"><div class="lf-wrap">%s'

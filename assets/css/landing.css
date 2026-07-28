@@ -3609,3 +3609,28 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   .tuition .plan-rows li{font-size:.88rem}
   .tuition .plan-calc{font-size:.79rem}
 }
+
+/* ============================================================================
+   v16.4 — Homepage/Bronx .plan cards adopt the same breakdown as the program
+   pages' .tuition cards: down payment as the headline, then a Weekly payments /
+   Tuition / Total cost table and the payment formula. Light-surface twin of the
+   v16.3 rules (those are .tuition-scoped and dark-themed).
+   ========================================================================== */
+.plan .plan-price small{
+  display:inline;margin-left:.25rem;font-size:.95rem;font-weight:600;color:var(--ink-soft)}
+.plan .plan-rows{
+  list-style:none;display:grid;gap:.55rem;margin:.9rem 0 0;padding:.9rem 0 0;
+  border-top:1px solid var(--line)}
+.plan .plan-rows li{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-size:.9rem;color:var(--ink-soft)}
+.plan .plan-rows li::before{content:none}
+.plan .plan-rows b{color:var(--ink);font-weight:700;white-space:nowrap}
+.plan .plan-rows .row-total{
+  margin-top:.2rem;padding-top:.6rem;border-top:1px solid var(--line);
+  font-weight:700;color:var(--ink)}
+.plan .plan-rows .row-total b{font-size:1.05rem}
+.plan .plan-calc{
+  margin:.85rem 0 1.2rem;font-size:.82rem;line-height:1.45;
+  color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.plan .plan-calc b{color:var(--ink);font-weight:700}

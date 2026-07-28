@@ -8,6 +8,19 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **One pricing card layout across all three surfaces** (2026-07-29,
+  `landing.css` v16.4 → v308, `funnels.css` → v70) — the breakdown introduced
+  on the program pages (down payment as the headline, then a Weekly payments /
+  Tuition / Total cost table and the payment formula) now also drives the
+  homepage/Bronx `.plan` grid and the four landing funnels' `.lf-plan` cards,
+  which previously led with the total and a one-line terms sentence. The two
+  new rule sets are light-surface twins of the dark v16.3 ones and are scoped
+  `.plan …` / `.lf-plan__…` so they don't collide. Both funnel builders
+  (`landing-funnels/src/build.py` and the older `src/build_landing_pages.py`)
+  and `data.py` now carry `down`/`weekly`/`tuition`/`total`/`calc` fields
+  instead of `price`/`terms`, so a rebuild reproduces the new layout.
+- The weekend plan's CTA is now the same blue as the other two (`btn-gold`,
+  which brand.css maps to #1b2fd9) instead of the outlined `btn-ghost`.
 - **New approved tuition pricing, site-wide** (2026-07-29) — Afternoon drops
   $4,600 → **$3,600** ($200 down + 17 × $200, was $500 down + 16 × $250 + $100);
   Weekend stays $4,600 but on **$200 down + 27 × $160 + a final payment** (was

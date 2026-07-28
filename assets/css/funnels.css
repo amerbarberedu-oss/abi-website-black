@@ -1948,3 +1948,17 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
 }
 
 
+
+/* --- v70: funnel plan cards match the site's tuition breakdown ------------- */
+.lf-plan__rows { list-style: none; display: grid; gap: .5rem; margin: .85rem 0 0;
+  padding: .85rem 0 0; border-top: 1px solid var(--lf-line, #e3e6ee); }
+.lf-plan__rows li { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; font-size: .9rem; color: var(--lf-muted); }
+.lf-plan__rows li::before { content: none; }
+.lf-plan__rows b { color: var(--lf-ink); font-weight: 700; white-space: nowrap; }
+.lf-plan__rows .lf-row-total { margin-top: .2rem; padding-top: .55rem;
+  border-top: 1px solid var(--lf-line, #e3e6ee); font-weight: 700; color: var(--lf-ink); }
+.lf-plan__rows .lf-row-total b { font-size: 1.05rem; }
+.lf-plan__calc { margin: .8rem 0 1rem; font-size: .82rem; line-height: 1.45;
+  color: var(--lf-muted); font-variant-numeric: tabular-nums; }
+.lf-plan__calc b { color: var(--lf-ink); font-weight: 700; }

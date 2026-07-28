@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=307" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=308" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=300">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=307">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=308">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
