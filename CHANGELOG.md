@@ -21,9 +21,10 @@ when the client approves the official production release.
   `landing-funnels/src/data.py`. EN + ES.
 - **Tuition cards rebuilt to the approved layout** (`landing.css` v16.3) —
   Plan A/B/C tag, down payment as the headline figure, a Weekly payments /
-  Tuition / Total cost table and the payment formula. (Per-card
-  "tool kit included" / "tools not included" notes were dropped before release;
-  the tool policy is still stated in the section intro.) Extends `.tuition`
+  Tuition / Total cost table and the payment formula. (The approved sheet's
+  per-plan tool-kit notes were dropped before release, so tools are not
+  mentioned per plan and the section intro keeps its original wording:
+  tools, books and supplies are purchased separately.) Extends `.tuition`
   rather than replacing it, so the dark
   surface, hover lift and reveal animation are untouched. New sub-elements are
   `.tuition`-scoped to outrank `.tuition ul` / `.tuition li`; the plan label is
