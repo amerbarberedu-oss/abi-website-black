@@ -21,6 +21,19 @@ when the client approves the official production release.
   instead of `price`/`terms`, so a rebuild reproduces the new layout.
 - The weekend plan's CTA is now the same blue as the other two (`btn-gold`,
   which brand.css maps to #1b2fd9) instead of the outlined `btn-ghost`.
+- **Per-plan CTA copy on every pricing surface** — the homepage/Bronx grid and
+  the four funnels replace a single "Let's Do It" / "¡Hagámoslo!" on all three
+  cards with "Enroll in morning / afternoon / weekend" (and the Spanish
+  equivalents), matching the program pages. Both funnel builders and `data.py`
+  now carry a per-plan `cta` field, so a rebuild keeps the wording.
+- **Promo banner now quotes Plan C** — "$200 down payment & **$160** weekly"
+  (was $200 weekly) across the site banner and the funnel header strip, EN + ES.
+  $200 down with $160 weekly is exactly the weekend plan, so the disclaimer was
+  repointed from Plan B (afternoon) to Plan C (weekend) to match; the earlier
+  $200/$200 wording paired Plan B's figures instead.
+- The built funnel pages were stale against `landing-funnels/src/data.py` — the
+  header strip still read "$160 per week*" and the English disclaimer still
+  referenced Plan C's weekly payment. Both re-synced.
 - **New approved tuition pricing, site-wide** (2026-07-29) — Afternoon drops
   $4,600 → **$3,600** ($200 down + 17 × $200, was $500 down + 16 × $250 + $100);
   Weekend stays $4,600 but on **$200 down + 27 × $160 + a final payment** (was

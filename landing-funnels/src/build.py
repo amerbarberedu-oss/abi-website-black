@@ -476,7 +476,7 @@ def section_tuition(p):
                h(LBL["tuition"]), h(pl["tuition"]),
                h(LBL["total"]), h(pl["total"]),
                h(pl["calc"]),
-               "¡Hagámoslo!" if p["lang"] == "es" else "Let's Do It")
+               h(pl["cta"]))
         )
     return ('<section class="lf-section"><div class="lf-wrap">%s'
             '<div class="lf-tuition">%s</div>'

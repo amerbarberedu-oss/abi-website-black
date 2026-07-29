@@ -1392,8 +1392,8 @@ def build():
         # ── i18n text for template sections ──
         if lang == 'es':
             i18n = dict(
-                tb_promo='Comienza tu carrera de barbero hoy por solo <span class="tb-price">$200 de enganche y $200 semanales</span>',
-                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b class="tb-price">$200 DE ENGANCHE Y $200 SEMANALES</b>',
+                tb_promo='Comienza tu carrera de barbero hoy por solo <span class="tb-price">$200 de enganche y $160 semanales</span>',
+                mhx_promo='COMIENZA TU CARRERA DE BARBERO HOY POR SOLO <b class="tb-price">$200 DE ENGANCHE Y $160 SEMANALES</b>',
                 seats_b='CUPOS LIMITADOS DISPONIBLES', seats_i='INSCRIPCIONES ABIERTAS',
                 cta_kicker='Las clases comienzan el primer lunes de cada mes',
                 cta_h2='¿Listo Para Ser Barbero Licenciado?',
@@ -1406,8 +1406,8 @@ def build():
             )
         else:
             i18n = dict(
-                tb_promo='Start your barber journey today for only <span class="tb-price">$200 down payment &amp; $200 weekly</span>',
-                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b class="tb-price">$200 DOWN PAYMENT &amp; $200 WEEKLY</b>',
+                tb_promo='Start your barber journey today for only <span class="tb-price">$200 down payment &amp; $160 weekly</span>',
+                mhx_promo='START YOUR BARBER JOURNEY TODAY FOR ONLY <b class="tb-price">$200 DOWN PAYMENT &amp; $160 WEEKLY</b>',
                 seats_b='LIMITED SEATS AVAILABLE', seats_i='ENROLLMENT NOW OPEN',
                 cta_kicker='Classes begin the first Monday of each month',
                 cta_h2='Ready to Become a Licensed Barber?',

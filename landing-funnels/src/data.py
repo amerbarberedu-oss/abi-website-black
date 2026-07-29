@@ -47,7 +47,7 @@ PAGES = [
         "theme_class": "lf-page--mhtn-en",
         "title": "500-Hour Master Barber Program — Manhattan | American Barber Institute",
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Manhattan campus (48 West 39th Street). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
-        "promo_strip": "Start your barber journey today for only $200 down payment & $200 weekly",
+        "promo_strip": "Start your barber journey today for only $200 down payment & $160 weekly",
         "cta_primary": "Reserve Your Spot Today",
     },
     {
@@ -58,7 +58,7 @@ PAGES = [
         "theme_class": "lf-page--mhtn-es",
         "title": "Programa Maestro Barbero de 500 Horas — Manhattan | American Barber Institute",
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede de Manhattan de ABI (48 West 39th Street). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
-        "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $200 semanales",
+        "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $160 semanales",
         "cta_primary": "Reserva Tu Lugar Hoy",
     },
     {
@@ -69,7 +69,7 @@ PAGES = [
         "theme_class": "lf-page--brnx-en",
         "title": "500-Hour Master Barber Program — Bronx | American Barber Institute",
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Bronx campus (121 Westchester Square). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
-        "promo_strip": "Start your barber journey today for only $200 down payment & $200 weekly",
+        "promo_strip": "Start your barber journey today for only $200 down payment & $160 weekly",
         "cta_primary": "Reserve Your Spot Today",
     },
     {
@@ -80,7 +80,7 @@ PAGES = [
         "theme_class": "lf-page--brnx-es",
         "title": "Programa Maestro Barbero de 500 Horas — Bronx | American Barber Institute",
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede del Bronx de ABI (121 Westchester Square). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
-        "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $200 semanales",
+        "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $160 semanales",
         "cta_primary": "Reserva Tu Lugar Hoy",
     },
 ]
@@ -221,24 +221,24 @@ TUITION = {
     "en": [
         {"name": "Plan A — Morning", "sched": "Mon–Fri · 8:00 AM – 2:00 PM",
          "hours": "30 hrs/week · 17 weeks (~4 months)", "feature": False,
-         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600"},
+         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600", "cta": "Enroll in morning"},
         {"name": "Plan B — Afternoon", "sched": "Mon–Fri · 2:00 PM – 8:00 PM",
          "hours": "30 hrs/week · 17 weeks (~4 months)", "feature": True,
-         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600"},
+         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600", "cta": "Enroll in afternoon"},
         {"name": "Plan C — Weekend", "sched": "Sat & Sun · 9:00 AM – 7:00 PM",
          "hours": "18 hrs/week · 27 weeks (~6–7 months)", "feature": False,
-         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + final payment = $4,600"},
+         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + final payment = $4,600", "cta": "Enroll in weekend"},
     ],
     "es": [
         {"name": "Plan A — Mañanas", "sched": "Lun–Vie · 8:00 AM – 2:00 PM",
          "hours": "30 hrs/semana · 17 semanas (~4 meses)", "feature": False,
-         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600"},
+         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600", "cta": "Inscríbete en la mañana"},
         {"name": "Plan B — Tardes", "sched": "Lun–Vie · 2:00 PM – 8:00 PM",
          "hours": "30 hrs/semana · 17 semanas (~4 meses)", "feature": True,
-         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600"},
+         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600", "cta": "Inscríbete en la tarde"},
         {"name": "Plan C — Fines de Semana", "sched": "Sáb y Dom · 9:00 AM – 7:00 PM",
          "hours": "18 hrs/semana · 27 semanas (~6–7 meses)", "feature": False,
-         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + pago final = $4,600"},
+         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + pago final = $4,600", "cta": "Inscríbete el fin de semana"},
     ],
 }
 TUITION_HEAD = {
@@ -487,12 +487,12 @@ FOOTER = {
     "en": {
         "h": "American Barber Institute",
         "sub": "New York's only dedicated barber school — changing lives for over 30 years.",
-        "fine": "© American Barber Institute. Approved by NYSED · Licensed by BPSS · Since 1996. *$200 down & $200 weekly refers to Plan B (afternoon schedule).",
+        "fine": "© American Barber Institute. Approved by NYSED · Licensed by BPSS · Since 1996. *$200 down & $160 weekly refers to Plan C (weekend schedule).",
     },
     "es": {
         "h": "American Barber Institute",
         "sub": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años.",
-        "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$200 de enganche y $200 semanales se refiere al Plan C.",
+        "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$200 de enganche y $160 semanales se refiere al Plan C.",
     },
 }
 
