@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "69"
+CSS_V = "71"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -93,6 +93,30 @@ LOGO_ALT = ("American Barber Institute — "
             "121 Westchester Square, Bronx, NY 10461")
 
 # ── HEADER (slim — campus-branded logo + phone + EN/ES) ─────────────
+# ── i18n (v46) ───────────────────────────────────────────────────────
+# Languages are data-driven: a page joins the set by declaring an "alts"
+# mapping of lang -> path. English is the explicit fallback for any key a
+# language omits, so a partially-translated language degrades to English
+# rather than raising.
+LANG_ORDER  = ("en", "es", "ru")
+LANG_LABELS = {"en": "English", "es": "Espa\u00f1ol", "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"}
+LANG_ARIA   = {"en": "Language", "es": "Idioma", "ru": "\u042f\u0437\u044b\u043a"}
+HREFLANG    = {"en": ("en", "en-US"), "es": ("es", "es-US"), "ru": ("ru",)}
+OG_LOCALE   = {"en": "en_US", "es": "es_US", "ru": "ru_RU"}
+
+def tr(p, mapping):
+    """String for this page's language, falling back to English."""
+    return mapping.get(p["lang"], mapping["en"])
+
+def cf(p, base):
+    """Campus field for this page's language, e.g. cf(p, "addr_full")."""
+    c = p["campus"]
+    return c.get("%s_%s" % (base, p["lang"]), c["%s_en" % base])
+
+def page_alts(p):
+    return p.get("alts") or {p["lang"]: p["path"]}
+
+
 # Each campus logo already contains the street address baked into the
 # artwork, so we don't render a duplicate text address line in the header.
 def header(p):
@@ -100,9 +124,14 @@ def header(p):
     DESKTOP (3 rows): [logo · phones · EN|ES]  /  promo strip  /  seats banner
     MOBILE  (4 rows): [logo · EN|ES]  /  promo strip  /  phones row  /  seats banner
     Row 1 is the only sticky row. Accent colors come from each page's theme class."""
-    es = p["lang"] == "es"
-    en_href = "/" + p["path"] if not es else "/" + p["alt"]
-    es_href = "/" + p["alt"] if not es else "/" + p["path"]
+    alts = page_alts(p)
+    lang_pills = "".join(
+        '    <a class="%s" href="%s"%s>%s</a>\n' % (
+            "is-active" if code == p["lang"] else "",
+            h("/" + alts[code]),
+            ' aria-current="true"' if code == p["lang"] else "",
+            LANG_LABELS[code])
+        for code in LANG_ORDER if code in alts)
     campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
     # Campus-specific header logo (matches the main site: build.py logo_src).
     logo_src = "/assets/img/logo-bronx.gif" if p["campus"]["slug"] == "bronx" else "/assets/img/logo-manhattan.gif"
@@ -115,8 +144,9 @@ def header(p):
         for ph in campus_phones
     )
     promo = h(p["promo_strip"])
-    for price in ("$160 per week*", "$160 por semana*"):
-        promo = promo.replace(price, "<b>%s</b>" % price)
+    _bold = h(p.get("promo_bold", ""))
+    if _bold and _bold in promo:
+        promo = promo.replace(_bold, "<b>%s</b>" % _bold)
     seats_kicker, seats_lead = D.SEATS_BANNER[p["lang"]]
     star_svg = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
                 '<path d="M12 2l2.9 6.26L21.8 9.3l-5 4.72 1.24 6.8L12 17.5l-6.04 3.32L7.2 14 2.2 9.3l6.9-1.04z"/></svg>')
@@ -127,8 +157,7 @@ def header(p):
         '  </a>\n'
         '  <div class="lfx-phones lfx-phones--bar">%s</div>\n'
         '  <div class="lf-lang lfx-lang" role="group" aria-label="%s">\n'
-        '    <a class="%s" href="%s"%s>English</a>\n'
-        '    <a class="%s" href="%s"%s>Español</a>\n'
+        '%s'
         '  </div>\n'
         '</div></header>\n'
         '<div class="lfx-promo">%s</div>\n'
@@ -140,9 +169,8 @@ def header(p):
     ) % (
         h(logo_src), h(LOGO_ALT), LOGO_W, LOGO_H,
         pills,
-        "Idioma" if es else "Language",
-        "is-active" if not es else "", h(en_href), ' aria-current="true"' if not es else "",
-        "is-active" if es else "", h(es_href), ' aria-current="true"' if es else "",
+        tr(p, LANG_ARIA),
+        lang_pills,
         promo,
         pills,
         star_svg,
@@ -154,6 +182,7 @@ def header(p):
 MHERO_BG_BY_PAGE = {
     ("manhattan", "en"): "hero-barber-clinic-2.jpg",
     ("manhattan", "es"): "hero-barber-clinic-2.jpg",
+    ("manhattan", "ru"): "hero-barber-clinic-2.jpg",
     ("bronx",     "en"): "hero-barber-clinic-2.jpg",
     ("bronx",     "es"): "hero-barber-clinic-2.jpg",
 }
@@ -164,7 +193,7 @@ def mobile_hero(p):
 
 # ── HERO ─────────────────────────────────────────────────────────────
 def hero(p):
-    lang = p["lang"]; es = lang == "es"
+    lang = p["lang"]
     H_ = D.HERO[lang]
     is_bx = p["campus"]["slug"] == "bronx"
     sub    = H_["sub_bx"]    if is_bx else H_["sub_man"]
@@ -175,24 +204,7 @@ def hero(p):
     h1_script = H_["h1_script"]
 
     # 3. Features Chips
-    if es:
-        features_list = [
-            ("Licenciada por NYSED (BPSS)", "shield"),
-            ("Horarios de día, tarde y fin de semana", "calendar"),
-            ("Entrenamiento práctico en nuestra clínica profesional de barbería", "scissors"),
-            ("Asistencia Financiera — ACCES-VR, VA|Planes de pago flexibles y opciones", "wallet"),
-            ("Apoyo profesional · Asistencia de empleo", "briefcase"),
-            ("Campus moderno en el corazón de la ciudad de Nueva York y el Bronx", "store")
-        ]
-    else:
-        features_list = [
-            ("Licensed by NYSED (BPSS)", "shield"),
-            ("Day, evening, weekend schedules", "calendar"),
-            ("Hands-on training in our professional Barber clinic", "scissors"),
-            ("Financial Assistance — ACCES-VR, VA|Flexible payment plans options", "wallet"),
-            ("Career support · Job placement assistance", "briefcase"),
-            ("Modern campus in the heart of New York City and Bronx", "store")
-        ]
+    features_list = tr(p, D.HERO_FEATURES)
 
     def _feat_chip(t, ic):
         if "|" in t:
@@ -207,9 +219,9 @@ def hero(p):
     chips = "".join(_feat_chip(t, ic) for t, ic in features_list)
 
     # 4. Countdown Timer (using hx-next for styling and lf-cd for script tracking)
-    cd_label = "Próxima Fecha de Inicio:" if es else "Next Starting Date:"
-    cd_sub = "Las clases nuevas comienzan el primer lunes de cada mes." if es else "New classes begin the first Monday of each month."
-    cd_labels = ("Días", "Horas", "Min", "Seg") if es else ("Days", "Hours", "Min", "Sec")
+    cd_label = tr(p, D.CD_LABEL)
+    cd_sub = tr(p, D.CD_SUB)
+    cd_labels = tr(p, D.CD_UNITS)
     cells = "".join(
         '<div class="hx-cell"><b data-cd-%s>0</b><span>%s</span></div>' % (k, lbl)
         for k, lbl in zip("dhms", cd_labels)
@@ -229,12 +241,13 @@ def hero(p):
     ) % (NEXT_ISO, cd_label, cd_sub, cells)
 
     # 5. Formcard / Lead Form (using GHL forms)
-    formcard_title = "Reserva Tu Lugar Hoy" if es else "Reserve Your Spot Today"
-    formcard_sub = "Completa el formulario y un asesor de admisiones te contactará." if es else "Fill out the form and an Admissions Advisor will contact you."
+    formcard_title = tr(p, D.FORMCARD_TITLE)
+    formcard_sub = tr(p, D.FORMCARD_SUB)
     # GHL form IDs are campus + language specific (client 2026-07-16).
     _GHL_FORMS = {
         ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
+        ("manhattan", "ru"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
         ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
     }
@@ -299,6 +312,7 @@ def lead_form(p):
     _ghl_id, _ghl_name = {
         ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
+        ("manhattan", "ru"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
         ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
     }[(p["campus"]["slug"], lang)]
@@ -354,8 +368,8 @@ def section_about(p):
     eb, ti = D.ABOUT_HEAD[p["lang"]]
     paras = D.ABOUT[(p["campus"]["slug"], p["lang"])]
     body = "".join('<p>%s</p>' % h(x) for x in paras)
-    addr = p["campus"]["addr_full_es" if p["lang"] == "es" else "addr_full_en"]
-    name = p["campus"]["name_es" if p["lang"] == "es" else "name_en"]
+    addr = cf(p, "addr_full")
+    name = cf(p, "name")
     # Duration / Tuition / Schedules <ul> removed per content spec.
     # Keep only campus name + address + phone in the side card.
     map_q = quote("American Barber Institute, " + p["campus"]["addr_full_en"])
@@ -363,7 +377,7 @@ def section_about(p):
     # Use the client-provided Google listing short URL so the CTA lands on THIS campus's
     # real Google Business Profile (with real reviews), not a generic Maps search.
     reviews_href = p["campus"]["google_listing_url"]
-    reviews_label = "Ver nuestras reseñas de Google →" if p["lang"] == "es" else "Read our Google reviews →"
+    reviews_label = tr(p, D.REVIEWS_LINK)
     return (
         '<section class="lf-section lf-section--alt"><div class="lf-wrap">%s\n'
         '  <div class="lf-about">\n'
@@ -448,12 +462,8 @@ def section_modules(p):
 def section_tuition(p):
     eb, ti = D.TUITION_HEAD[p["lang"]]
     note = D.TUITION_NOTE[p["lang"]]
-    popular = "Más Popular" if p["lang"] == "es" else "Most Popular"
-    LBL = ({"down": "de pago inicial", "weekly": "Pagos semanales",
-            "tuition": "Colegiatura", "total": "Costo total"}
-           if p["lang"] == "es" else
-           {"down": "down payment", "weekly": "Weekly payments",
-            "tuition": "Tuition", "total": "Total cost"})
+    popular = tr(p, D.POPULAR_BADGE)
+    LBL = tr(p, D.TUITION_LABELS)
     cards = ""
     for pl in D.TUITION[p["lang"]]:
         cls = "lf-plan lf-rv" + (" lf-plan--feature" if pl["feature"] else "")
@@ -499,8 +509,8 @@ def section_showcase(p):
     eb, ti = D.SHOWCASE_HEAD[p["lang"]]
     lead = D.SHOWCASE_LEAD[p["lang"]]
     cards = ""
-    for i, (slug, en_cap, es_cap) in enumerate(D.SHOWCASE_CLIPS, 1):
-        cap = es_cap if p["lang"] == "es" else en_cap
+    for i, (slug, caps) in enumerate(D.SHOWCASE_CLIPS, 1):
+        cap = tr(p, caps)
         cards += (
             '<div class="lf-clip lf-rv">'
             '<video class="lf-clip__video" muted playsinline loop preload="none"'
@@ -509,7 +519,7 @@ def section_showcase(p):
             '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
             '</button><div class="lf-clip__cap">%s</div></div>'
             % (i, D.SHOWCASE_CDN_BASE, slug,
-               "Reproducir" if p["lang"] == "es" else "Play", h(cap))
+               tr(p, D.PLAY_LABEL), h(cap))
         )
     return ('<section class="lf-section"><div class="lf-wrap">%s'
             '<div class="lf-showcase">%s</div></div></section>\n'
@@ -567,8 +577,8 @@ def section_bronx_extra(p):
 def section_videos(p):
     eb, ti = D.YT_HEAD[p["lang"]]
     cards = ""
-    for vid, en_cap, es_cap in D.YT_CLIPS:
-        cap = es_cap if p["lang"] == "es" else en_cap
+    for vid, caps in D.YT_CLIPS:
+        cap = tr(p, caps)
         cards += (
             '<div class="lf-clip lf-rv">'
             '<a href="https://www.youtube.com/watch?v=%s" target="_blank" rel="noopener">'
@@ -621,8 +631,8 @@ def section_contact(p):
     eb, ti = D.CONTACT_HEAD[lang]
     L = D.CONTACT_LABELS[lang]
     campus_slug = p["campus"]["slug"]
-    addr = p["campus"]["addr_full_es" if lang == "es" else "addr_full_en"]
-    name = p["campus"]["name_es" if lang == "es" else "name_en"]
+    addr = cf(p, "addr_full")
+    name = cf(p, "name")
     lat, lng = p["campus"]["latlng"]
     maps_url = "https://www.google.com/maps/search/?api=1&query=%s,%s" % (lat, lng)
 
@@ -670,7 +680,7 @@ def section_faq(p):
     items = "".join(
         '<details class="lf-rv"><summary>%s</summary><div class="lf-faq__a">%s</div></details>'
         % (h(q), h(a)) for q, a in D.faq(p["lang"], p["phone"][1],
-                                          p["campus"]["name_es" if p["lang"] == "es" else "name_en"])
+                                          cf(p, "name"))
     )
     return ('<section class="lf-section lf-section--alt"><div class="lf-wrap">%s'
             '<div class="lf-faq">%s</div></div></section>\n'
@@ -688,7 +698,7 @@ def footer(p):
         '<a class="lf-soc" href="https://www.youtube.com/channel/UCy_pQUDfk2ldEp6_zyaIMhQ" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.5 12 4.5 12 4.5s-7 0-8.9.6A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.6 8.9.6 8.9.6s7 0 8.9-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.2zM9.8 15.3V8.7L15.9 12z"/></svg></a>'
         '<a class="lf-soc" href="https://www.pinterest.com/alexzholendz/american-barber-institute/" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.3-5.4s-.3-.7-.3-1.6c0-1.5.9-2.6 2-2.6.9 0 1.4.7 1.4 1.5 0 .9-.6 2.3-.9 3.6-.3 1.1.5 2 1.6 2 1.9 0 3.4-2 3.4-4.9 0-2.6-1.9-4.4-4.5-4.4a4.7 4.7 0 0 0-4.9 4.7c0 .9.4 1.9.8 2.5l-.3 1.1c-.1.4-.3.5-.7.3-1.2-.6-2-2.4-2-3.9 0-3.2 2.3-6.1 6.7-6.1 3.5 0 6.2 2.5 6.2 5.8 0 3.5-2.2 6.3-5.2 6.3-1 0-2-.5-2.3-1.1l-.6 2.4c-.2.9-.8 1.9-1.2 2.6A10 10 0 1 0 12 2z"/></svg></a>'
     )
-    addr = p["campus"]["addr_full_es" if p["lang"] == "es" else "addr_full_en"]
+    addr = cf(p, "addr_full")
     return (
         '<footer class="lf-footer"><div class="lf-wrap">\n'
         '  <h3 class="lf-h2">%s</h3>\n'
@@ -702,9 +712,7 @@ def footer(p):
         h(ft["h"]), h(ft["sub"]),
         svg("pin", 14), h(addr), h(p["phone"][2]), h(p["phone"][1]),
         socials, h(ft["fine"]),
-        ('<a href="/privacy-and-policy">Pol&iacute;tica de Privacidad</a>'
-         if p["lang"] == "es" else
-         '<a href="/privacy-and-policy">Privacy Policy</a>'),
+        '<a href="/privacy-and-policy">%s</a>' % tr(p, D.PRIVACY_LABEL),
     )
 
 
@@ -720,12 +728,17 @@ SAME_AS = [
 
 # ── HEAD ─────────────────────────────────────────────────────────────
 def page_head(p):
-    es = p["lang"] == "es"
     canonical = SITE + "/" + p["path"]
-    alt_url   = SITE + "/" + p["alt"]
-    en_url, es_url = (alt_url, canonical) if es else (canonical, alt_url)
+    alts = page_alts(p)
+    alt_urls = {code: SITE + "/" + path for code, path in alts.items()}
+    en_url = alt_urls.get("en", canonical)
+    hreflangs = "".join(
+        '<link rel="alternate" hreflang="%s" href="%s">\n' % (tag, h(alt_urls[code]))
+        for code in LANG_ORDER if code in alt_urls
+        for tag in HREFLANG[code])
+    hreflangs += '<link rel="alternate" hreflang="x-default" href="%s">\n' % h(en_url)
     campus_slug = p["campus"]["slug"]
-    campus_name = p["campus"]["name_es" if es else "name_en"]
+    campus_name = cf(p, "name")
 
     # 1) Primary: TradeSchool + LocalBusiness + EducationalOrganization
     ld_org = {
@@ -788,7 +801,7 @@ def page_head(p):
         "educationalCredentialAwarded": "Eligibility for New York State Master Barber license",
         "occupationalCredentialAwarded": "NY State Master Barber license (after passing State Board Exam)",
         "timeRequired": "PT500H",
-        "inLanguage": ["en", "es"],
+        "inLanguage": sorted(page_alts(p).keys()),
         "hasCourseInstance": [{
             "@type": "CourseInstance",
             "courseMode": "in-person",
@@ -847,11 +860,7 @@ def page_head(p):
 '<title>%(title)s</title>\n'
 '<meta name="description" content="%(desc)s">\n'
 '<link rel="canonical" href="%(canonical)s">\n'
-'<link rel="alternate" hreflang="en" href="%(en_url)s">\n'
-'<link rel="alternate" hreflang="en-US" href="%(en_url)s">\n'
-'<link rel="alternate" hreflang="es" href="%(es_url)s">\n'
-'<link rel="alternate" hreflang="es-US" href="%(es_url)s">\n'
-'<link rel="alternate" hreflang="x-default" href="%(en_url)s">\n'
+'%(hreflangs)s'
 '<meta property="og:title" content="%(title)s">\n'
 '<meta property="og:description" content="%(desc)s">\n'
 '<meta property="og:type" content="website">\n'
@@ -875,8 +884,8 @@ def page_head(p):
 '<link rel="preload" href="%(logo_src)s" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
-'<link rel="preload" href="/assets/css/landing.css?v=304" as="style">\n'
-'<link rel="stylesheet" href="/assets/css/landing.css?v=304">\n'
+'<link rel="preload" href="/assets/css/landing.css?v=308" as="style">\n'
+'<link rel="stylesheet" href="/assets/css/landing.css?v=308">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'
@@ -892,8 +901,8 @@ def page_head(p):
     ) % {
         "lang": p["lang"], "title": h(p["title"]), "desc": h(p["desc"]),
         "logo_src": ("/assets/img/logo-bronx.gif" if p["campus"]["slug"] == "bronx" else "/assets/img/logo-manhattan.gif"),
-        "canonical": h(canonical), "en_url": h(en_url), "es_url": h(es_url),
-        "site": SITE, "oglocale": "es_US" if es else "en_US", "cssv": CSS_V,
+        "canonical": h(canonical), "hreflangs": hreflangs,
+        "site": SITE, "oglocale": tr(p, OG_LOCALE), "cssv": CSS_V,
         "ld_scripts": "".join(
             '<script type="application/ld+json">%s</script>\n' % json.dumps(b, ensure_ascii=False)
             for b in ld_blocks
@@ -906,14 +915,9 @@ CHAT_ICON  = '<path d="M21 12a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3-.4-4.3-1L3 21l1.6-4
 SCISSORS_I = '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>'
 
 def mobile_cta_bar(p):
-    es = p["lang"] == "es"
     tel = p["phone"][2]            # +1XXXXXXXXXX
     sms_target = "+19295888448?&body=Hi%2C%20how%20are%20you%3F"  # Text Us -> GHL AI, prefilled body
-    labels = {
-        "call":  "Llamar" if es else "Call Now",
-        "text":  "Mensaje" if es else "Text Us",
-        "apply": "Aplicar" if es else "Apply Now",
-    }
+    labels = tr(p, D.MCTA_LABELS)
     return (
         '<nav class="lf-mcta" aria-label="%s">\n'
         '  <a class="lf-mcta__btn lf-mcta__btn--call" href="tel:%s">'
@@ -924,7 +928,7 @@ def mobile_cta_bar(p):
         '%s<span>%s</span></a>\n'
         '</nav>\n'
     ) % (
-        "Acciones rápidas" if es else "Quick actions",
+        tr(p, D.QUICK_ACTIONS),
         h(tel),       svg("phone", 16),    h(labels["call"]),
         h(sms_target),
         ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
@@ -949,7 +953,7 @@ def page_tail():
 # ── ASSEMBLE ─────────────────────────────────────────────────────────
 def build_page(p):
     skip_link = ('<a class="lf-skip" href="#content">'
-                 + ('Saltar al contenido' if p["lang"] == "es" else 'Skip to content')
+                 + tr(p, D.SKIP_LABEL)
                  + '</a>\n')
     parts = [
         page_head(p),

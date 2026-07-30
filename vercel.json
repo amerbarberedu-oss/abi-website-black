@@ -1318,6 +1318,10 @@
       "destination": "/landing-funnels/master-barber-program-bronx/spanish"
     },
     {
+      "source": "/master-barber-program-russian",
+      "destination": "/landing-funnels/master-barber-program-russian"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/api/legacy-redirect"
     }

@@ -16,10 +16,13 @@ MANHATTAN = {
     "slug": "manhattan",
     "name_en": "Manhattan Campus",
     "name_es": "Sede de Manhattan",
+    "name_ru": "Кампус Манхэттен",
     "addr_short_en": "48 West 39th Street, New York, NY 10018",
     "addr_short_es": "48 West 39th Street, Nueva York, NY 10018",
     "addr_full_en": "48 West 39th Street, New York, NY 10018",
     "addr_full_es": "48 West 39th Street, Nueva York, NY 10018",
+    "addr_full_ru": "48 West 39th Street, New York, NY 10018",
+    "addr_short_ru": "48 West 39th Street, New York, NY 10018",
     "latlng": (40.7522, -73.9849),
     # Client-provided short URL for the Manhattan Google Business listing
     "google_listing_url": "https://maps.app.goo.gl/42UjD6bFQ65NEt1E7",
@@ -28,10 +31,13 @@ BRONX = {
     "slug": "bronx",
     "name_en": "Bronx Campus",
     "name_es": "Sede del Bronx",
+    "name_ru": "Кампус Бронкс",
     "addr_short_en": "121 Westchester Square, Bronx, NY 10461",
     "addr_short_es": "121 Westchester Square, Bronx, NY 10461",
     "addr_full_en": "121 Westchester Square, Bronx, NY 10461",
     "addr_full_es": "121 Westchester Square, Bronx, NY 10461",
+    "addr_full_ru": "121 Westchester Square, Bronx, NY 10461",
+    "addr_short_ru": "121 Westchester Square, Bronx, NY 10461",
     "latlng": (40.8401, -73.8421),
     # Client-provided short URL for the Bronx Google Business listing
     "google_listing_url": "https://maps.app.goo.gl/9TJJh8ehUjSZ8kcaA",
@@ -43,44 +49,52 @@ PAGES = [
         "id": "mhtn-en", "lang": "en", "campus": MANHATTAN,
         "path": "500-hours-master-barber-program-landing-page",
         "alt":  "500-hours-master-barber-program-landing-page/spanish",
+        "alts": {"en": "500-hours-master-barber-program-landing-page", "es": "500-hours-master-barber-program-landing-page/spanish"},
         "phone": ("EN", "(212) 290-2289", "+12122902289"),
         "theme_class": "lf-page--mhtn-en",
         "title": "500-Hour Master Barber Program — Manhattan | American Barber Institute",
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Manhattan campus (48 West 39th Street). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
         "promo_strip": "Start your barber journey today for only $200 down payment & $160 weekly",
+        "promo_bold": "$200 down payment & $160 weekly",
         "cta_primary": "Reserve Your Spot Today",
     },
     {
         "id": "mhtn-es", "lang": "es", "campus": MANHATTAN,
         "path": "500-hours-master-barber-program-landing-page/spanish",
         "alt":  "500-hours-master-barber-program-landing-page",
+        "alts": {"en": "500-hours-master-barber-program-landing-page", "es": "500-hours-master-barber-program-landing-page/spanish"},
         "phone": ("ES", "(212) 290-0278", "+12122900278"),
         "theme_class": "lf-page--mhtn-es",
         "title": "Programa Maestro Barbero de 500 Horas — Manhattan | American Barber Institute",
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede de Manhattan de ABI (48 West 39th Street). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
         "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $160 semanales",
+        "promo_bold": "$200 de enganche y $160 semanales",
         "cta_primary": "Reserva Tu Lugar Hoy",
     },
     {
         "id": "brnx-en", "lang": "en", "campus": BRONX,
         "path": "master-barber-program-bronx",
         "alt":  "master-barber-program-bronx/spanish",
+        "alts": {"en": "master-barber-program-bronx", "es": "master-barber-program-bronx/spanish"},
         "phone": ("Bronx", "(718) 676-0640", "+17186760640"),
         "theme_class": "lf-page--brnx-en",
         "title": "500-Hour Master Barber Program — Bronx | American Barber Institute",
         "desc":  "Become a licensed Barber in as little as 4 months at ABI's Bronx campus (121 Westchester Square). Hands-on training, full NY State Board Exam prep, weekly payment plans and job placement.",
         "promo_strip": "Start your barber journey today for only $200 down payment & $160 weekly",
+        "promo_bold": "$200 down payment & $160 weekly",
         "cta_primary": "Reserve Your Spot Today",
     },
     {
         "id": "brnx-es", "lang": "es", "campus": BRONX,
         "path": "master-barber-program-bronx/spanish",
         "alt":  "master-barber-program-bronx",
+        "alts": {"en": "master-barber-program-bronx", "es": "master-barber-program-bronx/spanish"},
         "phone": ("Bronx", "(718) 676-0640", "+17186760640"),
         "theme_class": "lf-page--brnx-es",
         "title": "Programa Maestro Barbero de 500 Horas — Bronx | American Barber Institute",
         "desc":  "Conviértete en Barbero licenciado en tan solo 4 meses en la sede del Bronx de ABI (121 Westchester Square). Entrenamiento práctico, preparación completa para el examen del Estado de NY y planes de pago semanales.",
         "promo_strip": "Comienza tu carrera de barbero hoy por solo $200 de enganche y $160 semanales",
+        "promo_bold": "$200 de enganche y $160 semanales",
         "cta_primary": "Reserva Tu Lugar Hoy",
     },
 ]
@@ -263,7 +277,7 @@ REQUIREMENTS = {
            "Tener al menos 17 años de edad",
            "Comprobante de domicilio",
            "Identificación con foto válida o Licencia de Conducir",
-           "$500 de pago inicial"],
+           "Pago inicial desde $200"],
 }
 REQ_HEAD = {
     "en": ("Admissions", "Entrance Requirements"),
@@ -276,12 +290,24 @@ REQ_HEAD = {
 # Posters are indexed (lf-showcase-N.jpg) so the slugs only build the video URL.
 SHOWCASE_CDN_BASE = "https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/floor/"
 SHOWCASE_CLIPS = [
-    ("floor-15", "Inside our NYC clinic floor",  "Dentro de nuestra clínica en NYC"),
-    ("floor-01", "Clipper work, up close",       "Trabajo de máquina, de cerca"),
-    ("floor-05", "Learning with our instructors", "Aprendiendo con instructores"),
-    ("floor-06", "Straight-razor technique",      "Técnica de navaja"),
-    ("floor-12", "The ABI community",             "La comunidad ABI"),
-    ("floor-11", "Hands-on from day one",         "Práctica desde el primer día"),
+    ("floor-15", {"en": "Inside our NYC clinic floor",
+                  "es": "Dentro de nuestra clínica en NYC",
+                  "ru": "Внутри нашей клиники в Нью-Йорке"}),
+    ("floor-01", {"en": "Clipper work, up close",
+                  "es": "Trabajo de máquina, de cerca",
+                  "ru": "Работа машинкой крупным планом"}),
+    ("floor-05", {"en": "Learning with our instructors",
+                  "es": "Aprendiendo con instructores",
+                  "ru": "Учёба с нашими преподавателями"}),
+    ("floor-06", {"en": "Straight-razor technique",
+                  "es": "Técnica de navaja",
+                  "ru": "Техника опасной бритвы"}),
+    ("floor-12", {"en": "The ABI community",
+                  "es": "La comunidad ABI",
+                  "ru": "Сообщество ABI"}),
+    ("floor-11", {"en": "Hands-on from day one",
+                  "es": "Práctica desde el primer día",
+                  "ru": "Практика с первого дня"}),
 ]
 SHOWCASE_HEAD = {
     "en": ("Inside ABI", "See real life at ABI"),
@@ -419,6 +445,25 @@ def faq(lang, phone_disp, campus_name):
             ("¿Cuándo comienzan las clases?",
              "Las clases nuevas comienzan el primer lunes de cada mes en nuestra %s. Llama al %s para reservar tu lugar — las clases se llenan rápido." % (campus_name, phone_disp)),
         ]
+    if lang == "ru":
+        return [
+            ("Сколько стоит школа барберов в Нью-Йорке?",
+             "В ABI программа «Мастер-барбер» на 500 часов начинается от $3,600 (дневная группа), $4,600 (выходные) или $5,600 (утренняя) — первоначальный взнос $200–$500 и еженедельные платежи $160–$300 во время учёбы. Книги и инструменты оплачиваются отдельно. Принимаются средства ACCES-VR, Post-9/11 GI Bill® и льготы VA."),
+            ("Сколько длится обучение в школе барберов в Нью-Йорке?",
+             "Штат Нью-Йорк требует 500 часов обучения. При полной занятости в ABI это около 4 месяцев (17 недель по 30 часов в неделю); группа выходного дня — около 6–7 месяцев (27 недель)."),
+            ("Сколько часов в неделю я буду учиться?",
+             "Студенты полного дня занимаются 30 часов в неделю с понедельника по пятницу — утренняя группа (8:00–14:00) или дневная (14:00–20:00). Студенты выходного дня занимаются 18 часов в неделю по субботам и воскресеньям."),
+            ("Нужен ли аттестат о среднем образовании для поступления?",
+             "Требуется аттестат о среднем образовании или GED — либо вы можете сдать вступительный экзамен Ability-To-Benefit (ATB) в ABI. Вам должно быть не менее 17 лет."),
+            ("Можно ли пройти обучение онлайн?",
+             "Нет. Штат Нью-Йорк требует очных практических часов. В ABI вы работаете с настоящими клиентами в нашей клинике под руководством преподавателей уже с первых недель — не на манекенах."),
+            ("Какую лицензию я получу после программы?",
+             "Программа готовит вас к лицензии мастера-барбера штата Нью-Йорк и включает полную подготовку к экзамену State Board. После сдачи экзамена наш отдел трудоустройства помогает найти работу."),
+            ("Есть ли финансовая помощь?",
+             "Да — ACCES-VR может покрыть обучение, инструменты и книги для жителей Нью-Йорка с документально подтверждённой инвалидностью; принимаются Post-9/11 GI Bill® и льготы VA; возможны гранты Департамента труда штата Нью-Йорк; и каждый план включает еженедельные платежи."),
+            ("Когда начинаются занятия?",
+             "Новые группы начинаются в первый понедельник каждого месяца в нашем кампусе %s. Звоните по номеру %s, чтобы забронировать место — группы заполняются быстро." % (campus_name, phone_disp)),
+        ]
     return [
         ("How much does barber school cost in New York?",
          "At ABI, the 500-hour Master Barber program starts at $3,600 (afternoon), $4,600 (weekend) or $5,600 (morning) — $200–$500 down and weekly payments of $160–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
@@ -492,7 +537,7 @@ FOOTER = {
     "es": {
         "h": "American Barber Institute",
         "sub": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años.",
-        "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$200 de enganche y $160 semanales se refiere al Plan C.",
+        "fine": "© American Barber Institute. Aprobada por NYSED · Licenciada por BPSS · Desde 1996. *$200 de enganche y $160 semanales se refiere al Plan C (horario de fin de semana).",
     },
 }
 
@@ -503,11 +548,19 @@ GALLERY_HEAD = {"en": ("Gallery", "Life At ABI"), "es": ("Galería", "La Vida en
 
 # ─── YouTube clips (verbatim captions from "Watch Us") ───────────────
 YT_CLIPS = [
-    ("uADUtUtChH4", "Train to be a Master Barber at New York's #1 barber school", "Fórmate como Barbero Maestro en la escuela #1 de Nueva York"),
-    ("oM8KfWfeTWA", "Our courses are hands-on, fun and engaging", "Nuestros cursos son prácticos, divertidos y dinámicos"),
-    ("dQw4w9WgXcQ", "Tour our pro New York City barber clinic", "Recorre nuestra clínica profesional en Nueva York"),
+    ("uADUtUtChH4", {"en": "Train to be a Master Barber at New York's #1 barber school",
+                     "es": "Fórmate como Barbero Maestro en la escuela #1 de Nueva York",
+                     "ru": "Учитесь на мастера-барбера в школе №1 в Нью-Йорке"}),
+    ("oM8KfWfeTWA", {"en": "Our courses are hands-on, fun and engaging",
+                     "es": "Nuestros cursos son prácticos, divertidos y dinámicos",
+                     "ru": "Наши курсы — это практика, интерес и вовлечённость"}),
+    ("dQw4w9WgXcQ", {"en": "Tour our pro New York City barber clinic",
+                     "es": "Recorre nuestra clínica profesional en Nueva York",
+                     "ru": "Экскурсия по нашей профессиональной клинике в Нью-Йорке"}),
 ]
-YT_HEAD = {"en": ("Watch Us", "See ABI In Action"), "es": ("Míranos", "Mira a ABI en Acción")}
+YT_HEAD = {"en": ("Watch Us", "See ABI In Action"),
+           "es": ("Míranos", "Mira a ABI en Acción"),
+           "ru": ("Смотрите", "ABI в действии")}
 
 # ─── 3 Easy Steps section (between About and Techniques) ─────────────
 THREE_STEPS_HEAD = {
@@ -580,6 +633,99 @@ TOPBAR_PHONES_BY_CAMPUS = {
 SEATS_BANNER = {
     "en": ("LIMITED SEATS AVAILABLE", "Enrollment Now Open"),
     "es": ("CUPOS LIMITADOS DISPONIBLES", "Inscripciones Abiertas"),
+    "ru": ("ОГРАНИЧЕННОЕ КОЛИЧЕСТВО МЕСТ", "Набор открыт"),
+}
+
+# ─── hero feature chips (v46) ────────────────────────────────────────
+# Moved verbatim out of build.py's inline `if es:` block. NOTE: this wording
+# differs slightly from FEATURES above — this is the copy that actually
+# renders in the hero, so it is kept exactly as it was.
+HERO_FEATURES = {
+    "en": [
+        ("Licensed by NYSED (BPSS)", "shield"),
+        ("Day, evening, weekend schedules", "calendar"),
+        ("Hands-on training in our professional Barber clinic", "scissors"),
+        ("Financial Assistance — ACCES-VR, VA|Flexible payment plans options", "wallet"),
+        ("Career support · Job placement assistance", "briefcase"),
+        ("Modern campus in the heart of New York City and Bronx", "store"),
+    ],
+    "es": [
+        ("Licenciada por NYSED (BPSS)", "shield"),
+        ("Horarios de día, tarde y fin de semana", "calendar"),
+        ("Entrenamiento práctico en nuestra clínica profesional de barbería", "scissors"),
+        ("Asistencia Financiera — ACCES-VR, VA|Planes de pago flexibles y opciones", "wallet"),
+        ("Apoyo profesional · Asistencia de empleo", "briefcase"),
+        ("Campus moderno en el corazón de la ciudad de Nueva York y el Bronx", "store"),
+    ],
+    "ru": [
+        ("Лицензия NYSED (BPSS)", "shield"),
+        ("Утренние, дневные и выходные группы", "calendar"),
+        ("Практика в нашей профессиональной барбер-клинике", "scissors"),
+        ("Финансовая помощь — ACCES-VR, VA|Гибкие планы оплаты", "wallet"),
+        ("Поддержка карьеры · Помощь в трудоустройстве", "briefcase"),
+        ("Современный кампус в центре Нью-Йорка и в Бронксе", "store"),
+    ],
+}
+
+# ─── small UI strings (v46) ──────────────────────────────────────────
+# These used to be inline `"..." if lang == "es" else "..."` ternaries in
+# build.py. Pulled out so a new language is a data change, not a code change.
+POPULAR_BADGE = {
+    "en": "Most Popular", "es": "Más Popular", "ru": "Самый популярный",
+}
+CD_LABEL = {
+    "en": "Next Starting Date:", "es": "Próxima Fecha de Inicio:",
+    "ru": "Ближайшая дата начала:",
+}
+CD_SUB = {
+    "en": "New classes begin the first Monday of each month.",
+    "es": "Las clases nuevas comienzan el primer lunes de cada mes.",
+    "ru": "Новые группы начинаются в первый понедельник каждого месяца.",
+}
+CD_UNITS = {
+    "en": ("Days", "Hours", "Min", "Sec"),
+    "es": ("Días", "Horas", "Min", "Seg"),
+    "ru": ("Дней", "Часов", "Мин", "Сек"),
+}
+FORMCARD_TITLE = {
+    "en": "Reserve Your Spot Today", "es": "Reserva Tu Lugar Hoy",
+    "ru": "Забронируйте место сегодня",
+}
+FORMCARD_SUB = {
+    "en": "Fill out the form and an Admissions Advisor will contact you.",
+    "es": "Completa el formulario y un asesor de admisiones te contactará.",
+    "ru": "Заполните форму, и консультант приёмной комиссии свяжется с вами.",
+}
+QUICK_ACTIONS = {
+    "en": "Quick actions", "es": "Acciones rápidas", "ru": "Быстрые действия",
+}
+TUITION_LABELS = {
+    "en": {"down": "down payment", "weekly": "Weekly payments",
+           "tuition": "Tuition", "total": "Total cost"},
+    "es": {"down": "de pago inicial", "weekly": "Pagos semanales",
+           "tuition": "Colegiatura", "total": "Costo total"},
+    "ru": {"down": "первоначальный взнос", "weekly": "Еженедельные платежи",
+           "tuition": "Стоимость обучения", "total": "Итого"},
+}
+REVIEWS_LINK = {
+    "en": "Read our Google reviews →",
+    "es": "Ver nuestras reseñas de Google →",
+    "ru": "Читать наши отзывы в Google →",
+}
+PLAY_LABEL = {"en": "Play", "es": "Reproducir", "ru": "Смотреть"}
+PRIVACY_LABEL = {
+    "en": "Privacy Policy",
+    "es": "Pol&iacute;tica de Privacidad",
+    "ru": "Политика конфиденциальности",
+}
+SKIP_LABEL = {
+    "en": "Skip to content", "es": "Saltar al contenido",
+    "ru": "Перейти к содержанию",
+}
+MCTA_LABELS = {
+    "en": {"call": "Call Now", "text": "Text Us", "apply": "Apply Now"},
+    "es": {"call": "Llamar", "text": "Mensaje", "apply": "Aplicar"},
+    "ru": {"call": "Позвонить", "text": "Написать", "apply": "Записаться"},
 }
 
 # ─── Contact box (campus-aware) ──────────────────────────────────────
@@ -638,3 +784,230 @@ CONTACT_PHONES_BY_CAMPUS = {
     "manhattan": CONTACT_PHONES_MANHATTAN,
     "bronx":     CONTACT_PHONES_BRONX,
 }
+
+# ═══════════════════════════════════════════════════════════════════════
+# RUSSIAN (v46) — Manhattan landing page at /master-barber-program-russian
+# ═══════════════════════════════════════════════════════════════════════
+# All Russian copy lives in this one block so it can be handed to a native
+# speaker for review in a single pass. Rules applied:
+#   • Prices, plan structure, hours and dates are copied verbatim from the
+#     English data — only the labels around them are translated.
+#   • TCPA consent paragraphs (consent_call / consent_sms / consent) stay in
+#     ENGLISH by decision: they are legally operative and an unreviewed
+#     translation could weaken consent.
+#   • Proper nouns kept as-is: GI Bill®, ACCES-VR, VA, NYSED, BPSS, GED, ATB,
+#     street addresses, campus names in addresses.
+
+HERO["ru"] = {
+    "kicker_man": "Кампус Манхэттен • Новые группы в первый понедельник каждого месяца",
+    "kicker_bx":  "Кампус Бронкс • Новые группы в первый понедельник каждого месяца",
+    "h1_a": "500 часов",
+    "h1_b": "Барбер-оператор",
+    "h1_script": "Начните сегодня.",
+    "sub_man": "Получите лицензию барбера всего за <b>4 месяца</b>. Комплексное практическое обучение и полная подготовка к экзамену State Board штата Нью-Йорк в нашем кампусе на Манхэттене.",
+    "sub_bx":  "Получите лицензию барбера всего за <b>4 месяца</b>. Комплексное практическое обучение и полная подготовка к экзамену State Board штата Нью-Йорк в нашем кампусе в Бронксе.",
+}
+
+FEATURES["ru"] = [
+    ("Лицензия NYSED (BPSS)", "shield"),
+    ("Утренние, дневные и выходные группы", "calendar"),
+    ("Практика в нашей профессиональной барбер-клинике", "scissors"),
+    ("Финансовая помощь — ACCES-VR, VA и другие|Гибкие планы оплаты", "wallet"),
+    ("Поддержка карьеры · Помощь в трудоустройстве", "briefcase"),
+    ("Современный кампус в центре Нью-Йорка", "store"),
+]
+
+COUNTDOWN["ru"] = {
+    "label": "Ближайшая дата начала:",
+    "sub": "Новые группы начинаются в первый понедельник каждого месяца.",
+    "cells": ("ДНЕЙ", "ЧАСОВ", "МИН", "СЕК"),
+}
+
+STATS["ru"] = [
+    ("30+", "Лет работы"),
+    ("10,000+", "Выпускников"),
+    ("100+", "Отзывов в Google"),
+    ("4 мес", "До получения лицензии"),
+]
+
+ABOUT_HEAD["ru"] = ("Обзор", "О программе")
+
+ABOUT[("manhattan", "ru")] = [
+    "Наша программа «Мастер-барбер» — это комплексный учебный план, который готовит студентов к успешной работе в востребованной индустрии барберинга. За четыре месяца студенты осваивают теорию и практические навыки: санитарию, стерилизацию, историю барберинга, законы и управление барбершопом.",
+    "Программа даёт практический опыт работы с самыми разными клиентами, что позволяет оттачивать навыки в реальных условиях. От бритья и массажа лица до фейдов, тейперов, техник clipper over comb и scissor over comb — выпускники уходят с универсальным набором навыков, готовым для любого барбершопа.",
+    "Кроме того, мы готовим студентов к экзамену State Board штата Нью-Йорк, чтобы они были полностью готовы получить лицензию мастера-барбера. По окончании каждый студент может обратиться в наш отдел трудоустройства за помощью в поиске работы.",
+]
+
+TECHNIQUES["ru"] = [
+    "Классические тейперы", "Низкие фейды", "Средние фейды", "Высокие фейды",
+    "High-Top фейды", "Помпадур", "Фохок", "Цезарь", "Бритьё головы",
+    "Афро", "Флэт-топ", "Оформление бритвой", "Классические стрижки",
+    "Стрижка бороды", "Шейп-ап", "Укладка феном", "Ирокез", "Мытьё головы",
+    "Техники бритья", "Массаж лица", "Clipper Over Comb", "Scissor Over Comb",
+]
+TECH_HEAD["ru"] = ("Техники", "Навыки и техники, которыми вы овладеете")
+
+MODULES["ru"] = [
+    ("Теория и наука", ["Санитария и стерилизация", "История барберинга",
+                        "Законы и правила штата Нью-Йорк", "Управление барбершопом",
+                        "Профессиональная этика"]),
+    ("Техники стрижки", ["Фейды (низкий, средний, высокий)", "Тейперы и классические стрижки",
+                         "Clipper Over Comb", "Scissor Over Comb", "Флэт-топ и High-Top фейды"]),
+    ("Укладка и финиш", ["Оформление бритвой и шейп-ап", "Укладка феном и помпадур",
+                         "Афро и ирокез", "Стрижка и моделирование бороды",
+                         "Мытьё головы и кондиционирование"]),
+    ("Бритьё и уход за кожей", ["Бритьё опасной бритвой", "Техники массажа лица",
+                                "Уход с горячим полотенцем", "Анализ кожи и кожи головы",
+                                "Безопасность и гигиена"]),
+    ("Бизнес и карьера", ["Навыки консультации клиента", "Работа барбершопа",
+                          "Наработка клиентской базы", "Подготовка к трудоустройству",
+                          "Подготовка к экзамену State Board"]),
+]
+MODULES_HEAD["ru"] = ("Учебный план", "Модули курса")
+
+TUITION_HEAD["ru"] = ("Стоимость обучения", "Гибкие планы оплаты")
+TUITION_NOTE["ru"] = ("Каждый план включает подготовку к экзамену State Board штата Нью-Йорк, "
+                      "практическое обучение и помощь в трудоустройстве. Дополнительные расходы: "
+                      "книги, инструменты и материалы можно приобрести в ABI или у других поставщиков. "
+                      "Доступна финансовая помощь ACCES-VR. Принимаются Post-9/11 GI Bill® и льготы VA.")
+
+# Prices, schedules and plan maths are identical to the English data.
+TUITION["ru"] = [
+    {"name": "План A — Утро", "sched": "Пн–Пт · 8:00 – 14:00",
+     "hours": "30 часов в неделю · 17 недель (~4 месяца)", "feature": False,
+     "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600",
+     "calc": "$500 + 17 × $300 = $5,600", "cta": "Записаться на утро"},
+    {"name": "План B — День", "sched": "Пн–Пт · 14:00 – 20:00",
+     "hours": "30 часов в неделю · 17 недель (~4 месяца)", "feature": True,
+     "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600",
+     "calc": "$200 + 17 × $200 = $3,600", "cta": "Записаться на день"},
+    {"name": "План C — Выходные", "sched": "Сб и Вс · 9:00 – 19:00",
+     "hours": "18 часов в неделю · 27 недель (~6–7 месяцев)", "feature": False,
+     "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600",
+     "calc": "$200 + 27 × $160 = $4,520 + финальный платёж = $4,600",
+     "cta": "Записаться на выходные"},
+]
+
+REQUIREMENTS["ru"] = [
+    "Карта социального страхования (SSN) или Tax ID",
+    "Аттестат о среднем образовании (HSD) или GED — либо сдача вступительного экзамена ATB в ABI",
+    "Возраст не менее 17 лет",
+    "Подтверждение адреса проживания",
+    "Действительное удостоверение с фото или водительские права",
+    "Первоначальный взнос от $200",
+]
+REQ_HEAD["ru"] = ("Приём", "Требования для поступления")
+
+SHOWCASE_HEAD["ru"] = ("Внутри ABI", "Реальная жизнь в ABI")
+SHOWCASE_LEAD["ru"] = "Настоящие кадры из наших классов и барбер-клиники — практика каждый день."
+
+STUDENT_VOICES["ru"] = {
+    "eyebrow": "Голоса студентов",
+    "title": "Настоящие голоса, настоящие стрижки.",
+    "sub": "Нажмите на плеер, чтобы услышать, как студент ABI делится своим опытом — прямо, без сценария и без прикрас.",
+}
+
+REVIEWS_HEAD["ru"] = ("Истории студентов", "Что говорят наши студенты")
+REVIEWS_LEAD["ru"] = "Настоящие отзывы студентов American Barber Institute."
+
+FAQ_HEAD["ru"] = ("Вопросы и ответы", "Ответы на вопросы о школе барберов")
+GALLERY_HEAD["ru"] = ("Галерея", "Жизнь в ABI")
+
+THREE_STEPS_HEAD["ru"] = ("3 простых шага", "Станьте профессиональным барбером за 3 простых шага")
+THREE_STEPS["ru"] = [
+    ("Начните", "Оставьте свои данные, чтобы начать путь в барберинге."),
+    ("Поговорите с консультантом",
+     "Консультант приёмной комиссии ABI ответит на ваши вопросы, расскажет о программе и подберёт гибкий план оплаты под ваш бюджет."),
+    ("Начните обучение", "Завершите зачисление и начните строить профессиональную карьеру барбера."),
+]
+
+EARNINGS_HEAD["ru"] = ("Доход в профессии", "Заработок барбера")
+EARNINGS_TIERS["ru"] = [
+    ("ГОД 1 · Начальный уровень", "$35,000–$45,000",
+     "Старт в барбершопе: нарабатываете клиентскую базу и оттачиваете технику."),
+    ("ГОДЫ 2–3 · Опытный мастер", "$50,000–$70,000",
+     "Постоянные клиенты, более быстрая работа и рост дохода вместе с репутацией."),
+    ("ГОД 3+ · Аренда кресла / владелец", "$75,000–$100,000+",
+     "Полный контроль над графиком и доходом — путь к собственному делу."),
+]
+EARNINGS_NOTE["ru"] = ("Указанные суммы являются приблизительными оценками и не гарантируются. "
+                       "Фактический доход зависит от личных усилий, количества часов работы, "
+                       "местоположения и ситуации на рынке.")
+
+CONTACT_HEAD["ru"] = ("Контакты", "Посетите наш кампус")
+CONTACT_HOURS["ru"] = [
+    "Понедельник–Пятница · 8:00 – 20:00",
+    "Суббота и Воскресенье · 9:00 – 19:00",
+]
+CONTACT_LABELS["ru"] = {
+    "addr": "Адрес", "phone": "Телефон", "email": "Эл. почта", "hours": "Часы работы",
+    "directions": "Проложить маршрут",
+    "en_tag": "English", "es_tag": "Español", "bronx_tag": "Bronx",
+}
+
+LOC_OPTS_BY_CAMPUS[("manhattan", "ru")] = [
+    "Выберите предпочитаемый кампус",
+    "Кампус Манхэттен — 48 West 39th Street",
+    "Кампус Бронкс — 121 Westchester Square",
+    "Любой / без предпочтений",
+]
+
+FOOTER["ru"] = {
+    "h": "American Barber Institute",
+    "sub": "Единственная в Нью-Йорке школа, посвящённая только барберингу — меняем жизни более 30 лет.",
+    "fine": "© American Barber Institute. Аккредитовано NYSED · Лицензия BPSS · С 1996 года. "
+            "*$200 первоначальный взнос и $160 в неделю относятся к Плану C (выходные).",
+}
+
+# Reviews are real, named Google reviewers. Spanish already translates their
+# wording, so Russian follows that established precedent.
+_REVIEWS_RU_MANHATTAN = [
+    {"name": "Jerrick Matthews", "role": "Студент — Манхэттен",
+     "q": "Уровень знаний и подготовки great! King David — один из лучших преподавателей, он научит вас всему, что нужно знать о барберинге."},
+    {"name": "Carlos Perez", "role": "Студент — Манхэттен",
+     "q": "Я здесь учусь, и King David — просто супер! У него 30 лет опыта, он даёт отличные техники и постоянно оттачивает наши базовые навыки."},
+    {"name": "Zyee Fin", "role": "Студент — Манхэттен",
+     "q": "Сейчас я здесь учусь и доволен прогрессом — многому учусь у преподавателей и однокурсников. Только позитив и желание учиться дальше."},
+    {"name": "Andre Thompson", "role": "Выпускник — Манхэттен",
+     "q": "Настоящая практика с первого дня, и преподавателям правда не всё равно. Помощь с трудоустройством после выпуска действительно помогла мне начать карьеру."},
+]
+REVIEWS_BY_CAMPUS["manhattan"]["ru"] = _REVIEWS_RU_MANHATTAN
+
+FORM["ru"] = {
+    "h": "Забронируйте место сегодня",
+    "sub": "Заполните форму, и консультант приёмной комиссии свяжется с вами.",
+    "first": "Имя", "last": "Фамилия", "phone": "Телефон", "email": "Эл. почта",
+    "loc_label": "В каком кампусе вы хотели бы учиться?",
+    "fmt_label": "Какой формат обучения вы предпочитаете?",
+    "fmt_opts": ["Выберите вариант", "Утро · Пн–Пт 8:00–14:00",
+                 "День · Пн–Пт 14:00–20:00", "Выходные · Сб–Вс 9:00–19:00"],
+    "lang_label": "На каком языке вам удобнее общаться?",
+    "lang_opts": ["Выберите язык", "English", "Spanish / Español", "Russian / Русский", "Другой"],
+    "msg_label": "Сообщение для ABI",
+    "msg_ph": "Расскажите всё, что нам полезно знать — вопросы, накладки по расписанию, потребность в финансовой помощи и т. д.",
+    "submit": "Отправить",
+    "trust": "Бесплатно • Без обязательств • Ответим в течение 24 часов",
+    # NOTE: TCPA consent copy is intentionally left in English — see header.
+    "consent_call": FORM["en"]["consent_call"],
+    "consent_sms": FORM["en"]["consent_sms"],
+    "consent": FORM["en"]["consent"],
+    "thanks": "Спасибо! Представитель приёмной комиссии ABI позвонит вам в течение 24 часов.",
+}
+
+PAGES.append({
+    "id": "mhtn-ru", "lang": "ru", "campus": MANHATTAN,
+    "path": "master-barber-program-russian",
+    "alt":  "500-hours-master-barber-program-landing-page",
+    "alts": {"en": "500-hours-master-barber-program-landing-page",
+             "es": "500-hours-master-barber-program-landing-page/spanish",
+             "ru": "master-barber-program-russian"},
+    # No Russian-language admissions line exists yet, so this uses the
+    # Manhattan English number.
+    "phone": ("EN", "(212) 290-2289", "+12122902289"),
+    "theme_class": "lf-page--mhtn-ru",
+    "title": "Программа «Мастер-барбер» 500 часов — Манхэттен | American Barber Institute",
+    "desc":  "Получите лицензию барбера всего за 4 месяца в кампусе ABI на Манхэттене (48 West 39th Street). Практическое обучение, полная подготовка к экзамену State Board штата Нью-Йорк, еженедельные планы оплаты и помощь в трудоустройстве.",
+    "promo_strip": "Начните карьеру барбера сегодня всего за $200 первоначальный взнос и $160 в неделю",
+    "promo_bold": "$200 первоначальный взнос и $160 в неделю",
+    "cta_primary": "Забронируйте место сегодня",
+})
