@@ -1322,6 +1322,10 @@
       "destination": "/landing-funnels/master-barber-program-russian"
     },
     {
+      "source": "/master-barber-program-albanian",
+      "destination": "/landing-funnels/master-barber-program-albanian"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/api/legacy-redirect"
     }

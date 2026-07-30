@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "71"
+CSS_V = "72"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -98,11 +98,13 @@ LOGO_ALT = ("American Barber Institute — "
 # mapping of lang -> path. English is the explicit fallback for any key a
 # language omits, so a partially-translated language degrades to English
 # rather than raising.
-LANG_ORDER  = ("en", "es", "ru")
-LANG_LABELS = {"en": "English", "es": "Espa\u00f1ol", "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"}
-LANG_ARIA   = {"en": "Language", "es": "Idioma", "ru": "\u042f\u0437\u044b\u043a"}
-HREFLANG    = {"en": ("en", "en-US"), "es": ("es", "es-US"), "ru": ("ru",)}
-OG_LOCALE   = {"en": "en_US", "es": "es_US", "ru": "ru_RU"}
+LANG_ORDER  = ("en", "es", "ru", "sq")
+LANG_LABELS = {"en": "English", "es": "Espa\u00f1ol", "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+               "sq": "Shqip"}
+LANG_ARIA   = {"en": "Language", "es": "Idioma", "ru": "\u042f\u0437\u044b\u043a",
+               "sq": "Gjuha"}
+HREFLANG    = {"en": ("en", "en-US"), "es": ("es", "es-US"), "ru": ("ru",), "sq": ("sq",)}
+OG_LOCALE   = {"en": "en_US", "es": "es_US", "ru": "ru_RU", "sq": "sq_AL"}
 
 def tr(p, mapping):
     """String for this page's language, falling back to English."""
@@ -183,6 +185,7 @@ MHERO_BG_BY_PAGE = {
     ("manhattan", "en"): "hero-barber-clinic-2.jpg",
     ("manhattan", "es"): "hero-barber-clinic-2.jpg",
     ("manhattan", "ru"): "hero-barber-clinic-2.jpg",
+    ("manhattan", "sq"): "hero-barber-clinic-2.jpg",
     ("bronx",     "en"): "hero-barber-clinic-2.jpg",
     ("bronx",     "es"): "hero-barber-clinic-2.jpg",
 }
@@ -248,6 +251,7 @@ def hero(p):
         ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
         ("manhattan", "ru"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
+        ("manhattan", "sq"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
         ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
     }
@@ -313,6 +317,7 @@ def lead_form(p):
         ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
         ("manhattan", "ru"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
+        ("manhattan", "sq"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
         ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
         ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
     }[(p["campus"]["slug"], lang)]

@@ -235,6 +235,7 @@ body.lf-page {
 body.lf-page--mhtn-en,
 body.lf-page--mhtn-es,
 body.lf-page--mhtn-ru,
+body.lf-page--mhtn-sq,
 body.lf-page--brnx-en,
 body.lf-page--brnx-es {
   --lf-accent: #1b2fd9;
@@ -1788,16 +1789,20 @@ a.lf-contact__val:hover { color: var(--lf-accent-dark); }
    Bronx funnel is unaffected. Desktop header only (.lfx-phones--bar). */
 .lf-page--mhtn-en .lfx-phones--bar,
 .lf-page--mhtn-es .lfx-phones--bar,
-.lf-page--mhtn-ru .lfx-phones--bar{margin-left:auto}
+.lf-page--mhtn-ru .lfx-phones--bar,
+.lf-page--mhtn-sq .lfx-phones--bar{margin-left:auto}
 .lf-page--mhtn-en .lfx-phones--bar .lfx-phone,
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone,
-.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone{font-size:1.12rem;padding:.5rem 1.1rem}
+.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone,
+.lf-page--mhtn-sq .lfx-phones--bar .lfx-phone{font-size:1.12rem;padding:.5rem 1.1rem}
 .lf-page--mhtn-en .lfx-phones--bar .lfx-phone__num,
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__num,
-.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone__num{font-size:1.22rem}
+.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone__num,
+.lf-page--mhtn-sq .lfx-phones--bar .lfx-phone__num{font-size:1.22rem}
 .lf-page--mhtn-en .lfx-phones--bar .lfx-phone__lab,
 .lf-page--mhtn-es .lfx-phones--bar .lfx-phone__lab,
-.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone__lab{font-size:.66rem}
+.lf-page--mhtn-ru .lfx-phones--bar .lfx-phone__lab,
+.lf-page--mhtn-sq .lfx-phones--bar .lfx-phone__lab{font-size:.66rem}
 /* Bronx landing page (client 2026-07-21): same treatment for the (718) number
    — center the header phone between the logo and language toggle and enlarge
    it. Scoped to the Bronx theme class; desktop header only (.lfx-phones--bar). */

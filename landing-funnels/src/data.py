@@ -464,6 +464,25 @@ def faq(lang, phone_disp, campus_name):
             ("Когда начинаются занятия?",
              "Новые группы начинаются в первый понедельник каждого месяца в нашем кампусе %s. Звоните по номеру %s, чтобы забронировать место — группы заполняются быстро." % (campus_name, phone_disp)),
         ]
+    if lang == "sq":
+        return [
+            ("Sa kushton shkolla e berberisë në Nju Jork?",
+             "Në ABI, programi Master Berber prej 500 orësh fillon nga $3,600 (pasdite), $4,600 (fundjavë) ose $5,600 (mëngjes) — paradhënie $200–$500 dhe pagesa javore $160–$300 gjatë studimeve. Librat dhe veglat janë veçmas. Pranohen fondet ACCES-VR, Post-9/11 GI Bill® dhe përfitimet e VA."),
+            ("Sa zgjat shkolla e berberisë në Nju Jork?",
+             "Shteti i Nju Jorkut kërkon 500 orë trajnim. Me kohë të plotë në ABI zgjat rreth 4 muaj (17 javë me 30 orë në javë); orari i fundjavës zgjat rreth 6–7 muaj (27 javë)."),
+            ("Sa orë në javë do të jem në shkollë?",
+             "Studentët me kohë të plotë trajnohen 30 orë në javë, nga e hëna në të premte, në seancat e mëngjesit (8:00–14:00) ose të pasdites (14:00–20:00). Studentët e fundjavës trajnohen 18 orë në javë, të shtunave dhe të dielave."),
+            ("A më duhet diplomë e shkollës së mesme për t'u regjistruar?",
+             "Kërkohet diplomë e shkollës së mesme ose GED — ose mund të kalosh provimin pranues Ability-To-Benefit (ATB) në ABI. Duhet të jesh të paktën 17 vjeç."),
+            ("A mund ta ndjek shkollën e berberisë online?",
+             "Jo. Shteti i Nju Jorkut kërkon orë trajnimi praktik me prani fizike. Në ABI praktikon me klientë realë në klinikën tonë të mbikëqyrur që nga javët e para — jo në manekinë."),
+            ("Çfarë license do të marr pas programit?",
+             "Programi të përgatit për licencën e Master Berberit të shtetit të Nju Jorkut, përfshirë përgatitjen e plotë për provimin e Bordit Shtetëror. Zyra jonë e punësimit të ndihmon të gjesh punë pasi ta kalosh."),
+            ("A ofrohet ndihmë financiare?",
+             "Po — ACCES-VR mund të mbulojë tarifat, veglat dhe librat për nju-jorkezët e kualifikuar me aftësi të kufizuara; pranohen Post-9/11 GI Bill® dhe përfitimet e VA; mund të aplikohen grante nga Departamenti i Punës i shtetit të Nju Jorkut; dhe çdo plan përfshin pagesa javore."),
+            ("Kur fillojnë klasat?",
+             "Klasat e reja fillojnë të hënën e parë të çdo muaji në %s. Telefono në %s për të rezervuar vendin tënd — klasat mbushen shpejt." % (campus_name, phone_disp)),
+        ]
     return [
         ("How much does barber school cost in New York?",
          "At ABI, the 500-hour Master Barber program starts at $3,600 (afternoon), $4,600 (weekend) or $5,600 (morning) — $200–$500 down and weekly payments of $160–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
@@ -1010,4 +1029,287 @@ PAGES.append({
     "promo_strip": "Начните карьеру барбера сегодня всего за $200 первоначальный взнос и $160 в неделю",
     "promo_bold": "$200 первоначальный взнос и $160 в неделю",
     "cta_primary": "Забронируйте место сегодня",
+})
+
+# ═══════════════════════════════════════════════════════════════════════
+# ALBANIAN (v47) — Manhattan landing page at /master-barber-program-albanian
+# ═══════════════════════════════════════════════════════════════════════
+# Same rules as the Russian block above:
+#   • Prices, plan structure, hours and dates are copied verbatim from the
+#     English data — only the labels around them are translated.
+#   • TCPA consent paragraphs reference FORM["en"] directly so the legally
+#     operative English wording is reused, not duplicated.
+#   • Proper nouns kept as-is: GI Bill®, ACCES-VR, VA, NYSED, BPSS, GED, ATB,
+#     street addresses, and the industry terms Clipper/Scissor Over Comb.
+
+MANHATTAN["name_sq"] = "Kampusi i Manhattan-it"
+MANHATTAN["addr_full_sq"] = "48 West 39th Street, New York, NY 10018"
+MANHATTAN["addr_short_sq"] = "48 West 39th Street, New York, NY 10018"
+BRONX["name_sq"] = "Kampusi i Bronx-it"
+BRONX["addr_full_sq"] = "121 Westchester Square, Bronx, NY 10461"
+BRONX["addr_short_sq"] = "121 Westchester Square, Bronx, NY 10461"
+
+HERO["sq"] = {
+    "kicker_man": "Kampusi i Manhattan-it • Klasa të reja të hënën e parë të çdo muaji",
+    "kicker_bx":  "Kampusi i Bronx-it • Klasa të reja të hënën e parë të çdo muaji",
+    "h1_a": "500 orë",
+    "h1_b": "Operator Berber",
+    "h1_script": "Fillo sot.",
+    "sub_man": "Bëhu Berber i licencuar për vetëm <b>4 muaj</b>. Trajnim praktik gjithëpërfshirës dhe përgatitje e plotë për provimin e Bordit Shtetëror të Nju Jorkut në kampusin tonë në Manhattan.",
+    "sub_bx":  "Bëhu Berber i licencuar për vetëm <b>4 muaj</b>. Trajnim praktik gjithëpërfshirës dhe përgatitje e plotë për provimin e Bordit Shtetëror të Nju Jorkut në kampusin tonë në Bronx.",
+}
+
+FEATURES["sq"] = [
+    ("I licencuar nga NYSED (BPSS)", "shield"),
+    ("Orare në mëngjes, pasdite dhe fundjavë", "calendar"),
+    ("Trajnim praktik në klinikën tonë profesionale", "scissors"),
+    ("Ndihmë financiare — ACCES-VR, VA e të tjera|Plane pagese fleksibël", "wallet"),
+    ("Mbështetje në karrierë · Ndihmë për punësim", "briefcase"),
+    ("Kampus modern në zemër të Nju Jorkut", "store"),
+]
+
+HERO_FEATURES["sq"] = [
+    ("I licencuar nga NYSED (BPSS)", "shield"),
+    ("Orare në mëngjes, pasdite dhe fundjavë", "calendar"),
+    ("Trajnim praktik në klinikën tonë profesionale të berberisë", "scissors"),
+    ("Ndihmë financiare — ACCES-VR, VA|Plane pagese fleksibël", "wallet"),
+    ("Mbështetje në karrierë · Ndihmë për punësim", "briefcase"),
+    ("Kampus modern në zemër të Nju Jorkut dhe në Bronx", "store"),
+]
+
+COUNTDOWN["sq"] = {
+    "label": "Data e ardhshme e fillimit:",
+    "sub": "Klasat e reja fillojnë të hënën e parë të çdo muaji.",
+    "cells": ("DITË", "ORË", "MIN", "SEK"),
+}
+CD_LABEL["sq"] = "Data e ardhshme e fillimit:"
+CD_SUB["sq"] = "Klasat e reja fillojnë të hënën e parë të çdo muaji."
+CD_UNITS["sq"] = ("Ditë", "Orë", "Min", "Sek")
+
+STATS["sq"] = [
+    ("30+", "Vite në treg"),
+    ("10,000+", "Të diplomuar"),
+    ("100+", "Vlerësime në Google"),
+    ("4 muaj", "Deri te licenca"),
+]
+
+ABOUT_HEAD["sq"] = ("Përmbledhje", "Rreth programit")
+ABOUT[("manhattan", "sq")] = [
+    "Programi ynë Master Berber ofron një kurrikul gjithëpërfshirëse, të projektuar për t'i përgatitur studentët për sukses në industrinë e berberisë. Gjatë katër muajve, studentët thellohen në teori dhe aftësi praktike, duke mbuluar sanitarinë, sterilizimin, historinë e berberisë, ligjet dhe menaxhimin e dyqanit.",
+    "Programi ofron përvojë praktike me një klientelë të larmishme, duke i lejuar studentët të përsosin aftësitë e tyre në kushte reale. Nga rruajtja dhe masazhi i fytyrës deri te teknikat si fade, taper, Clipper Over Comb dhe Scissor Over Comb — të diplomuarit dalin me një grup aftësish të gatshëm për çdo berberhane.",
+    "Gjithashtu i përgatisim studentët për provimin e Bordit Shtetëror të Nju Jorkut, që të jenë plotësisht të gatshëm për licencën e Master Berberit. Pas përfundimit, çdo student mund të takohet me zyrën tonë të punësimit për mbështetje në gjetjen e punës.",
+]
+
+TECHNIQUES["sq"] = [
+    "Taper klasik", "Fade i ulët", "Fade i mesëm", "Fade i lartë", "High-Top Fade",
+    "Pompadour", "Fohawk", "Caesar", "Kokë e rruar", "Afro", "Flat Top",
+    "Vija me brisk", "Prerje klasike", "Rregullim mjekre", "Shape Up",
+    "Tharje me fen", "Mohawk", "Larje flokësh", "Teknika rruajtjeje",
+    "Masazh fytyre", "Clipper Over Comb", "Scissor Over Comb",
+]
+TECH_HEAD["sq"] = ("Teknikat", "Aftësitë dhe teknikat që do të zotëroni")
+
+MODULES["sq"] = [
+    ("Teori dhe shkencë", ["Sanitari dhe sterilizim", "Historia e berberisë",
+                           "Ligjet dhe rregullat e shtetit të Nju Jorkut",
+                           "Menaxhimi i dyqanit", "Etika profesionale"]),
+    ("Teknika prerjeje", ["Fade (i ulët, i mesëm, i lartë)", "Taper dhe prerje klasike",
+                          "Clipper Over Comb", "Scissor Over Comb",
+                          "Flat Top dhe High-Top Fade"]),
+    ("Stilim dhe finalizim", ["Vija me brisk dhe Shape Up", "Tharje me fen dhe Pompadour",
+                              "Stilim Afro dhe Mohawk", "Rregullim dhe dizajn mjekre",
+                              "Larje dhe kondicionim"]),
+    ("Rruajtje dhe kujdes për lëkurën", ["Rruajtje me brisk", "Teknika masazhi fytyre",
+                                          "Trajtime me peshqir të nxehtë",
+                                          "Analizë e lëkurës dhe e kokës",
+                                          "Siguri dhe higjienë"]),
+    ("Biznes dhe karrierë", ["Aftësi konsultimi me klientin", "Funksionimi i berberhanes",
+                             "Ndërtimi i klientelës", "Përgatitje për punësim",
+                             "Përgatitje për provimin e Bordit Shtetëror"]),
+]
+MODULES_HEAD["sq"] = ("Kurrikula", "Modulet e kursit")
+
+TUITION_HEAD["sq"] = ("Tarifa", "Plane pagese fleksibël")
+TUITION_NOTE["sq"] = ("Çdo plan përfshin përgatitjen për provimin e Bordit Shtetëror të Nju Jorkut, "
+                      "trajnim praktik dhe mbështetje për punësim. Kosto shtesë: librat, veglat dhe "
+                      "materialet mund të blihen nga ABI ose nga furnitorë të tjerë. Ofrohet ndihmë "
+                      "financiare ACCES-VR. Pranohen Post-9/11 GI Bill® dhe përfitimet e VA.")
+
+# Prices, schedules and plan maths are identical to the English data.
+TUITION["sq"] = [
+    {"name": "Plani A — Mëngjes", "sched": "Hën–Pre · 8:00 – 14:00",
+     "hours": "30 orë në javë · 17 javë (~4 muaj)", "feature": False,
+     "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600",
+     "calc": "$500 + 17 × $300 = $5,600", "cta": "Regjistrohu për mëngjesin"},
+    {"name": "Plani B — Pasdite", "sched": "Hën–Pre · 14:00 – 20:00",
+     "hours": "30 orë në javë · 17 javë (~4 muaj)", "feature": True,
+     "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600",
+     "calc": "$200 + 17 × $200 = $3,600", "cta": "Regjistrohu për pasditen"},
+    {"name": "Plani C — Fundjavë", "sched": "Sht dhe Die · 9:00 – 19:00",
+     "hours": "18 orë në javë · 27 javë (~6–7 muaj)", "feature": False,
+     "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600",
+     "calc": "$200 + 27 × $160 = $4,520 + pagesa e fundit = $4,600",
+     "cta": "Regjistrohu për fundjavën"},
+]
+TUITION_LABELS["sq"] = {"down": "paradhënie", "weekly": "Pagesa javore",
+                        "tuition": "Tarifa", "total": "Totali"}
+POPULAR_BADGE["sq"] = "Më i popullarizuari"
+
+REQUIREMENTS["sq"] = [
+    "Kartë e Sigurimeve Shoqërore (SSN) ose numër Tax ID",
+    "Diplomë e shkollës së mesme (HSD) ose GED — ose kalimi i provimit pranues ATB në ABI",
+    "Të paktën 17 vjeç",
+    "Vërtetim i adresës së banimit",
+    "Dokument identifikimi me foto ose patentë shoferi",
+    "Paradhënie nga $200",
+]
+REQ_HEAD["sq"] = ("Pranimet", "Kushtet e pranimit")
+
+SHOWCASE_HEAD["sq"] = ("Brenda ABI", "Jeta reale në ABI")
+SHOWCASE_LEAD["sq"] = "Pamje reale nga klasat dhe klinika jonë e berberisë — praktikë çdo ditë."
+
+STUDENT_VOICES["sq"] = {
+    "eyebrow": "Zërat e studentëve",
+    "title": "Zëra realë, prerje reale.",
+    "sub": "Shtyp një video për të dëgjuar një student të ABI që ndan përvojën e tij — drejtpërdrejt, pa skenar dhe pa filtra.",
+}
+
+REVIEWS_HEAD["sq"] = ("Histori studentësh", "Çfarë thonë studentët tanë")
+REVIEWS_LEAD["sq"] = "Vlerësime reale nga studentët e American Barber Institute."
+REVIEWS_LINK["sq"] = "Lexo vlerësimet tona në Google →"
+
+FAQ_HEAD["sq"] = ("Pyetje të shpeshta", "Pyetje për shkollën e berberisë, të përgjigjura")
+GALLERY_HEAD["sq"] = ("Galeria", "Jeta në ABI")
+YT_HEAD["sq"] = ("Na shiko", "ABI në veprim")
+
+THREE_STEPS_HEAD["sq"] = ("3 hapa të thjeshtë", "Bëhu berber profesionist në 3 hapa të thjeshtë")
+THREE_STEPS["sq"] = [
+    ("Fillo", "Dërgo të dhënat e tua për të nisur rrugëtimin në berberi."),
+    ("Fol me një këshilltar",
+     "Një këshilltar pranimesh i ABI do t'u përgjigjet pyetjeve të tua, do të shpjegojë programin dhe do të shqyrtojë planet fleksibël të pagesës që i përshtaten buxhetit tënd."),
+    ("Fillo trajnimin", "Përfundo regjistrimin dhe fillo të ndërtosh karrierën tënde profesionale në berberi."),
+]
+
+EARNINGS_HEAD["sq"] = ("Të ardhurat në karrierë", "Të ardhurat e një berberi")
+EARNINGS_TIERS["sq"] = [
+    ("VITI 1 · Fillestar", "$35,000–$45,000",
+     "Fillimi në një berberhane: ndërton klientelën dhe përsos teknikën."),
+    ("VITET 2–3 · I konsoliduar", "$50,000–$70,000",
+     "Klientelë besnike, shërbim më i shpejtë dhe të ardhura më të larta me rritjen e reputacionit."),
+    ("VITI 3+ · Me karrige me qira / pronar", "$75,000–$100,000+",
+     "Kontroll i plotë mbi orarin dhe të ardhurat — rruga drejt sipërmarrjes."),
+]
+EARNINGS_NOTE["sq"] = ("Shifrat e të ardhurave janë vetëm vlerësime dhe nuk garantohen. Të ardhurat "
+                       "reale ndryshojnë sipas përpjekjes individuale, orëve të punës, vendndodhjes "
+                       "dhe kushteve të tregut.")
+
+CONTACT_HEAD["sq"] = ("Kontakt", "Vizito kampusin tonë")
+CONTACT_HOURS["sq"] = [
+    "E hënë–E premte · 8:00 – 20:00",
+    "E shtunë dhe e diel · 9:00 – 19:00",
+]
+CONTACT_LABELS["sq"] = {
+    "addr": "Adresa", "phone": "Telefoni", "email": "Email", "hours": "Orari",
+    "directions": "Merr drejtimet",
+    "en_tag": "English", "es_tag": "Español", "bronx_tag": "Bronx",
+}
+LOC_OPTS_BY_CAMPUS[("manhattan", "sq")] = [
+    "Zgjidh kampusin që preferon",
+    "Kampusi i Manhattan-it — 48 West 39th Street",
+    "Kampusi i Bronx-it — 121 Westchester Square",
+    "Cilido / nuk kam preferencë",
+]
+
+FOOTER["sq"] = {
+    "h": "American Barber Institute",
+    "sub": "Shkolla e vetme e dedikuar e berberisë në Nju Jork — duke ndryshuar jetë prej mbi 30 vitesh.",
+    "fine": "© American Barber Institute. Miratuar nga NYSED · I licencuar nga BPSS · Që nga viti 1996. "
+            "*$200 paradhënie dhe $160 në javë i referohen Planit C (fundjavë).",
+}
+
+SEATS_BANNER["sq"] = ("VENDE TË KUFIZUARA", "Regjistrimet janë hapur")
+PLAY_LABEL["sq"] = "Luaj"
+SKIP_LABEL["sq"] = "Kalo te përmbajtja"
+PRIVACY_LABEL["sq"] = "Politika e Privatësisë"
+QUICK_ACTIONS["sq"] = "Veprime të shpejta"
+MCTA_LABELS["sq"] = {"call": "Telefono", "text": "Shkruaj", "apply": "Apliko"}
+FORMCARD_TITLE["sq"] = "Rezervo vendin tënd sot"
+FORMCARD_SUB["sq"] = "Plotëso formularin dhe një këshilltar pranimesh do të të kontaktojë."
+
+# Reviews are real, named Google reviewers. ES and RU both translate their
+# wording, so SQ follows that established precedent.
+_REVIEWS_SQ_MANHATTAN = [
+    {"name": "Jerrick Matthews", "role": "Student aktual — Manhattan",
+     "q": "Niveli i njohurive dhe i trajnimit është i shkëlqyer! King David, një nga mësuesit më të mirë, të mëson gjithçka që duhet ditur për berberinë."},
+    {"name": "Carlos Perez", "role": "Student — Manhattan",
+     "q": "Jam student këtu dhe King David ka qenë fantastik!! Ka 30 vjet përvojë, na jep teknika të shkëlqyera dhe vazhdon të përsosë aftësitë tona bazë."},
+    {"name": "Zyee Fin", "role": "Student aktual — Manhattan",
+     "q": "Aktualisht jam i regjistruar këtu dhe jam i kënaqur me përparimin duke mësuar nga mësuesit dhe shokët e klasës. Vetëm pozitivitet dhe dëshirë për të mësuar."},
+    {"name": "Andre Thompson", "role": "I diplomuar — Manhattan",
+     "q": "Trajnim praktik që nga dita e parë dhe instruktorët vërtet kujdesen. Mbështetja për punësim pas diplomimit më ndihmoi realisht të nis karrierën."},
+]
+REVIEWS_BY_CAMPUS["manhattan"]["sq"] = _REVIEWS_SQ_MANHATTAN
+
+FORM["sq"] = {
+    "h": "Rezervo vendin tënd sot",
+    "sub": "Plotëso formularin dhe një këshilltar pranimesh do të të kontaktojë.",
+    "first": "Emri", "last": "Mbiemri", "phone": "Telefoni", "email": "Email",
+    "loc_label": "Në cilin kampus do të preferoje të ndiqje mësimet?",
+    "fmt_label": "Cilin format mësimi preferon?",
+    "fmt_opts": ["Zgjidh një opsion", "Mëngjes · Hën–Pre 8:00–14:00",
+                 "Pasdite · Hën–Pre 14:00–20:00", "Fundjavë · Sht–Die 9:00–19:00"],
+    "lang_label": "Cila është gjuha jote e preferuar e komunikimit?",
+    "lang_opts": ["Zgjidh një gjuhë", "English", "Spanish / Español",
+                  "Albanian / Shqip", "Tjetër"],
+    "msg_label": "Mesazh për ABI",
+    "msg_ph": "Na trego çdo gjë që duhet të dimë — pyetje, përplasje orari, nevojë për ndihmë financiare, etj.",
+    "submit": "Dërgo",
+    "trust": "Falas • Pa detyrim • Përgjigje brenda 24 orësh",
+    # TCPA consent copy is intentionally the English original — see header.
+    "consent_call": FORM["en"]["consent_call"],
+    "consent_sms": FORM["en"]["consent_sms"],
+    "consent": FORM["en"]["consent"],
+    "thanks": "Faleminderit! Një agjent pranimesh i ABI do të të telefonojë brenda 24 orësh.",
+}
+
+# Clip captions
+for _clip, _sq in zip(SHOWCASE_CLIPS, [
+    "Brenda klinikës sonë në Nju Jork",
+    "Puna me makinë, nga afër",
+    "Duke mësuar me instruktorët tanë",
+    "Teknika e briskut",
+    "Komuniteti i ABI",
+    "Praktikë që nga dita e parë",
+]):
+    _clip[1]["sq"] = _sq
+for _clip, _sq in zip(YT_CLIPS, [
+    "Trajnohu si Master Berber në shkollën #1 të berberisë në Nju Jork",
+    "Kurset tona janë praktike, argëtuese dhe tërheqëse",
+    "Vizito klinikën tonë profesionale të berberisë në Nju Jork",
+]):
+    _clip[1]["sq"] = _sq
+
+# The Russian page gains SQ so both non-English pages cross-reference each
+# other — this is what makes the hreflang set complete in both directions.
+for _p in PAGES:
+    if _p["id"] == "mhtn-ru":
+        _p["alts"]["sq"] = "master-barber-program-albanian"
+
+PAGES.append({
+    "id": "mhtn-sq", "lang": "sq", "campus": MANHATTAN,
+    "path": "master-barber-program-albanian",
+    "alt":  "500-hours-master-barber-program-landing-page",
+    "alts": {"en": "500-hours-master-barber-program-landing-page",
+             "es": "500-hours-master-barber-program-landing-page/spanish",
+             "ru": "master-barber-program-russian",
+             "sq": "master-barber-program-albanian"},
+    # No Albanian-language admissions line exists yet, so this uses the
+    # Manhattan English number.
+    "phone": ("EN", "(212) 290-2289", "+12122902289"),
+    "theme_class": "lf-page--mhtn-sq",
+    "title": "Programi Master Berber 500 orë — Manhattan | American Barber Institute",
+    "desc":  "Bëhu Berber i licencuar për vetëm 4 muaj në kampusin e ABI në Manhattan (48 West 39th Street). Trajnim praktik, përgatitje e plotë për provimin e Bordit Shtetëror të Nju Jorkut, plane pagese javore dhe ndihmë për punësim.",
+    "promo_strip": "Nis karrierën tënde si berber sot vetëm me $200 paradhënie dhe $160 në javë",
+    "promo_bold": "$200 paradhënie dhe $160 në javë",
+    "cta_primary": "Rezervo vendin tënd sot",
 })
