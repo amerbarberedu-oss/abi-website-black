@@ -114,13 +114,13 @@ S = {
   "tuition_lead": "Every plan includes NY State Board Exam prep, hands-on training and job placement support. Pay weekly while you attend.",
   "plans": [
     {"name":"Plan A — Morning","sched":"Mon–Fri · 8:00 AM – 2:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
-     "down":"$500","weekly":"17 × $300","tuition":"$5,250","total":"$5,600","calc":"$500 + 17 × $300 = $5,600","cta":"Enroll in morning","pop":False},
+     "down":"$500","weekly":"17 × $300","total":"$5,600","cta":"Enroll in morning","pop":False},
     {"name":"Plan B — Afternoon","sched":"Mon–Fri · 2:00 PM – 8:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
-     "down":"$200","weekly":"17 × $200","tuition":"$3,600","total":"$3,600","calc":"$200 + 17 × $200 = $3,600","cta":"Enroll in afternoon","pop":True},
+     "down":"$200","weekly":"17 × $200","total":"$3,600","cta":"Enroll in afternoon","pop":True},
     {"name":"Plan C — Weekend","sched":"Sat & Sun · 9:00 AM – 7:00 PM","hours":"18 hrs/week · 27 weeks (~6–7 months)",
-     "down":"$200","weekly":"27 × $160","tuition":"$4,600","total":"$4,600","calc":"$200 + 27 × $160 = $4,520 + final payment = $4,600","cta":"Enroll in weekend","pop":False}],
+     "down":"$200","weekly":"27 × $160","total":"$4,600","cta":"Enroll in weekend","pop":False}],
   "pop_tag": "Most Popular",
-  "lbl_down": "down payment", "lbl_weekly": "Weekly payments", "lbl_tuition": "Tuition", "lbl_total": "Total cost",
+  "lbl_down": "down payment", "lbl_weekly": "Weekly payments", "lbl_total": "Total cost",
   "plans_note": "Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
   "req_eb": "Admissions", "req_h": "Entrance Requirements",
   "reqs": ["Social Security Card","High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
@@ -182,13 +182,13 @@ S = {
   "tuition_lead": "Todos los planes incluyen preparación para el examen del Estado de NY, entrenamiento práctico y apoyo para la colocación laboral. Paga semanalmente mientras estudias.",
   "plans": [
     {"name":"Plan A — Mañanas","sched":"Lun–Vie · 8:00 AM – 2:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
-     "down":"$500","weekly":"17 × $300","tuition":"$5,250","total":"$5,600","calc":"$500 + 17 × $300 = $5,600","cta":"Inscríbete en la mañana","pop":False},
+     "down":"$500","weekly":"17 × $300","total":"$5,600","cta":"Inscríbete en la mañana","pop":False},
     {"name":"Plan B — Tardes","sched":"Lun–Vie · 2:00 PM – 8:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
-     "down":"$200","weekly":"17 × $200","tuition":"$3,600","total":"$3,600","calc":"$200 + 17 × $200 = $3,600","cta":"Inscríbete en la tarde","pop":True},
+     "down":"$200","weekly":"17 × $200","total":"$3,600","cta":"Inscríbete en la tarde","pop":True},
     {"name":"Plan C — Fines de Semana","sched":"Sáb y Dom · 9:00 AM – 7:00 PM","hours":"18 hrs/semana · 27 semanas (~6–7 meses)",
-     "down":"$200","weekly":"27 × $160","tuition":"$4,600","total":"$4,600","calc":"$200 + 27 × $160 = $4,520 + pago final = $4,600","cta":"Inscríbete el fin de semana","pop":False}],
+     "down":"$200","weekly":"27 × $160","total":"$4,600","cta":"Inscríbete el fin de semana","pop":False}],
   "pop_tag": "Más Popular",
-  "lbl_down": "de pago inicial", "lbl_weekly": "Pagos semanales", "lbl_tuition": "Colegiatura", "lbl_total": "Costo total",
+  "lbl_down": "de pago inicial", "lbl_weekly": "Pagos semanales", "lbl_total": "Costo total",
   "plans_note": "Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI o con otros proveedores. Asistencia financiera ACCES-VR disponible. Beneficios de Post-9/11 GI Bill® y VA aceptados.",
   "req_eb": "Admisiones", "req_h": "Requisitos de Admisión",
   "reqs": ["Tarjeta de Seguro Social","Diploma de Preparatoria (HSD) o GED — o aprobar el examen ATB de admisión en ABI",
@@ -822,15 +822,14 @@ def sec_tuition(p, s):
   <div class="plan-name">%s</div>
   <div class="plan-sched">%s</div><div class="plan-hours">%s</div>
   <div class="plan-price">%s <small>%s</small></div>
-  <ul class="plan-rows"><li><span>%s</span><b>%s</b></li><li><span>%s</span><b>%s</b></li><li class="row-total"><span>%s</span><b>%s</b></li></ul>
-  <div class="plan-calc">%s</div>
+  <ul class="plan-rows"><li><span>%s</span><b>%s</b></li><li class="row-total"><span>%s</span><b>%s</b></li></ul>
   <a class="btn btn-blue" href="#reserve">%s</a></div>""" % (
             " popular" if pl["pop"] else "",
             '<div class="plan-tag">%s</div>' % s["pop_tag"] if pl["pop"] else "",
             pl["name"], pl["sched"], pl["hours"],
             pl["down"], s["lbl_down"],
-            s["lbl_weekly"], pl["weekly"], s["lbl_tuition"], pl["tuition"],
-            s["lbl_total"], pl["total"], pl["calc"], pl["cta"])
+            s["lbl_weekly"], pl["weekly"],
+            s["lbl_total"], pl["total"], pl["cta"])
     return """
 <section class="sec sec-alt sec-photo sec--tuition"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>

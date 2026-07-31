@@ -7,6 +7,27 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Changed
+- **Pricing cards slimmed to two rows** (2026-07-31) — the **Tuition** row and the
+  payment **formula line** are removed from every plan card, on all three
+  components and in all four languages: the program pages (`.tuition`), the
+  homepage/Bronx grid (`.plan`) and the landing funnels (`.lf-plan`). Cards now
+  read: down payment headline → Weekly payments → Total cost → CTA. The unused
+  `tuition` / `calc` fields were dropped from the funnel data so the source
+  can't drift from what renders, and the dead `.plan-calc` / `.lf-plan__calc`
+  rules were removed (`landing.css` → v309, `funnels.css` `CSS_V` → 73). The
+  spacing the formula line used to provide above the CTA now comes from a
+  bottom margin on the rows list, so the CTAs stay bottom-aligned.
+  - Side effect: this also clears Plan A's long-standing discrepancy, where
+    Tuition read $5,250 against a $5,600 total.
+  - **Known, accepted:** Plan C now shows $200 down + 27 × $160 against a
+    $4,600 total with nothing accounting for the $80 difference — the formula
+    line was the only place carrying the "+ final payment". Client chose to
+    remove it as-is rather than fold that into the weekly row.
+  - Not touched: the per-plan spec table on `about.html`, which is a different
+    pre-existing component (Tuition / Registration fee / Payment schedule /
+    Program length / Total hours) whose only price row is Tuition.
+
 ### Added
 - **Albanian landing page** at `/master-barber-program-albanian` (2026-07-30) —
   the Manhattan funnel in Albanian (`sq`, pill "Shqip"). Same setup as the

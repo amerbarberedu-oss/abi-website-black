@@ -3599,15 +3599,14 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   font-weight:700;color:#fff}
 .tuition .plan-rows .row-total b{font-size:1.06rem}
 
-.tuition .plan-calc{
-  margin:1.1rem 0 1.15rem;font-size:.82rem;line-height:1.45;
-  color:var(--text-on-dark-mute);font-variant-numeric:tabular-nums}
-.tuition .plan-calc b{color:#fff;font-weight:700}
+/* v16.5 — the formula line used to supply the gap above the CTA; with it gone
+   the rows carry that margin. margin-top:auto stays so the CTAs of all three
+   cards stay bottom-aligned when a plan name or schedule wraps. */
+.tuition .plan-rows{margin-bottom:1.15rem}
 .tuition > .btn{margin-top:auto;width:100%}
 
 @media (max-width:560px){
   .tuition .plan-rows li{font-size:.88rem}
-  .tuition .plan-calc{font-size:.79rem}
 }
 
 /* ============================================================================
@@ -3630,7 +3629,5 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
   margin-top:.2rem;padding-top:.6rem;border-top:1px solid var(--line);
   font-weight:700;color:var(--ink)}
 .plan .plan-rows .row-total b{font-size:1.05rem}
-.plan .plan-calc{
-  margin:.85rem 0 1.2rem;font-size:.82rem;line-height:1.45;
-  color:var(--ink-soft);font-variant-numeric:tabular-nums}
-.plan .plan-calc b{color:var(--ink);font-weight:700}
+/* v16.5b — replaces the spacing the removed formula line provided. */
+.plan .plan-rows{margin-bottom:1.2rem}

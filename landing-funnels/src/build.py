@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "72"
+CSS_V = "73"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -480,17 +480,13 @@ def section_tuition(p):
             '<div class="lf-plan__price">%s <span class="lf-plan__per">%s</span></div>'
             '<ul class="lf-plan__rows">'
             '<li><span>%s</span><b>%s</b></li>'
-            '<li><span>%s</span><b>%s</b></li>'
             '<li class="lf-row-total"><span>%s</span><b>%s</b></li>'
             '</ul>'
-            '<div class="lf-plan__calc">%s</div>'
             '<a class="lf-btn lf-btn--primary lf-plan__cta" href="#reserve">%s</a></div>'
             % (cls, badge, h(pl["name"]), h(pl["sched"]), h(pl["hours"]),
                h(pl["down"]), h(LBL["down"]),
                h(LBL["weekly"]), h(pl["weekly"]),
-               h(LBL["tuition"]), h(pl["tuition"]),
                h(LBL["total"]), h(pl["total"]),
-               h(pl["calc"]),
                h(pl["cta"]))
         )
     return ('<section class="lf-section"><div class="lf-wrap">%s'
@@ -889,8 +885,8 @@ def page_head(p):
 '<link rel="preload" href="%(logo_src)s" as="image" fetchpriority="high">\n'
 '<link rel="preload" href="/assets/img/hero-barber-clinic-2.jpg" as="image" fetchpriority="high">\n'
 '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
-'<link rel="preload" href="/assets/css/landing.css?v=308" as="style">\n'
-'<link rel="stylesheet" href="/assets/css/landing.css?v=308">\n'
+'<link rel="preload" href="/assets/css/landing.css?v=309" as="style">\n'
+'<link rel="stylesheet" href="/assets/css/landing.css?v=309">\n'
 '<link rel="stylesheet" href="/assets/css/funnels.css?v=%(cssv)s">\n'
 '<link rel="stylesheet" href="/assets/css/chatbot.css?v=%(cssv)s">\n'
 '%(ld_scripts)s'

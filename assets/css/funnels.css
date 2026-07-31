@@ -1969,6 +1969,5 @@ chat-widget{position:fixed!important;bottom:20px!important;right:20px!important;
 .lf-plan__rows .lf-row-total { margin-top: .2rem; padding-top: .55rem;
   border-top: 1px solid var(--lf-line, #e3e6ee); font-weight: 700; color: var(--lf-ink); }
 .lf-plan__rows .lf-row-total b { font-size: 1.05rem; }
-.lf-plan__calc { margin: .8rem 0 1rem; font-size: .82rem; line-height: 1.45;
-  color: var(--lf-muted); font-variant-numeric: tabular-nums; }
-.lf-plan__calc b { color: var(--lf-ink); font-weight: 700; }
+/* v73 spacing — replaces the gap the removed formula line provided. */
+.lf-plan__rows { margin-bottom: 1rem; }

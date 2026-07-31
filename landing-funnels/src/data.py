@@ -235,24 +235,24 @@ TUITION = {
     "en": [
         {"name": "Plan A — Morning", "sched": "Mon–Fri · 8:00 AM – 2:00 PM",
          "hours": "30 hrs/week · 17 weeks (~4 months)", "feature": False,
-         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600", "cta": "Enroll in morning"},
+         "down": "$500", "weekly": "17 × $300", "total": "$5,600", "cta": "Enroll in morning"},
         {"name": "Plan B — Afternoon", "sched": "Mon–Fri · 2:00 PM – 8:00 PM",
          "hours": "30 hrs/week · 17 weeks (~4 months)", "feature": True,
-         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600", "cta": "Enroll in afternoon"},
+         "down": "$200", "weekly": "17 × $200", "total": "$3,600", "cta": "Enroll in afternoon"},
         {"name": "Plan C — Weekend", "sched": "Sat & Sun · 9:00 AM – 7:00 PM",
          "hours": "18 hrs/week · 27 weeks (~6–7 months)", "feature": False,
-         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + final payment = $4,600", "cta": "Enroll in weekend"},
+         "down": "$200", "weekly": "27 × $160", "total": "$4,600", "cta": "Enroll in weekend"},
     ],
     "es": [
         {"name": "Plan A — Mañanas", "sched": "Lun–Vie · 8:00 AM – 2:00 PM",
          "hours": "30 hrs/semana · 17 semanas (~4 meses)", "feature": False,
-         "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600", "calc": "$500 + 17 × $300 = $5,600", "cta": "Inscríbete en la mañana"},
+         "down": "$500", "weekly": "17 × $300", "total": "$5,600", "cta": "Inscríbete en la mañana"},
         {"name": "Plan B — Tardes", "sched": "Lun–Vie · 2:00 PM – 8:00 PM",
          "hours": "30 hrs/semana · 17 semanas (~4 meses)", "feature": True,
-         "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600", "calc": "$200 + 17 × $200 = $3,600", "cta": "Inscríbete en la tarde"},
+         "down": "$200", "weekly": "17 × $200", "total": "$3,600", "cta": "Inscríbete en la tarde"},
         {"name": "Plan C — Fines de Semana", "sched": "Sáb y Dom · 9:00 AM – 7:00 PM",
          "hours": "18 hrs/semana · 27 semanas (~6–7 meses)", "feature": False,
-         "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600", "calc": "$200 + 27 × $160 = $4,520 + pago final = $4,600", "cta": "Inscríbete el fin de semana"},
+         "down": "$200", "weekly": "27 × $160", "total": "$4,600", "cta": "Inscríbete el fin de semana"},
     ],
 }
 TUITION_HEAD = {
@@ -720,11 +720,11 @@ QUICK_ACTIONS = {
 }
 TUITION_LABELS = {
     "en": {"down": "down payment", "weekly": "Weekly payments",
-           "tuition": "Tuition", "total": "Total cost"},
+           "total": "Total cost"},
     "es": {"down": "de pago inicial", "weekly": "Pagos semanales",
-           "tuition": "Colegiatura", "total": "Costo total"},
+           "total": "Costo total"},
     "ru": {"down": "первоначальный взнос", "weekly": "Еженедельные платежи",
-           "tuition": "Стоимость обучения", "total": "Итого"},
+           "total": "Итого"},
 }
 REVIEWS_LINK = {
     "en": "Read our Google reviews →",
@@ -894,16 +894,13 @@ TUITION_NOTE["ru"] = ("Каждый план включает подготовк
 TUITION["ru"] = [
     {"name": "План A — Утро", "sched": "Пн–Пт · 8:00 – 14:00",
      "hours": "30 часов в неделю · 17 недель (~4 месяца)", "feature": False,
-     "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600",
-     "calc": "$500 + 17 × $300 = $5,600", "cta": "Записаться на утро"},
+     "down": "$500", "weekly": "17 × $300", "total": "$5,600", "cta": "Записаться на утро"},
     {"name": "План B — День", "sched": "Пн–Пт · 14:00 – 20:00",
      "hours": "30 часов в неделю · 17 недель (~4 месяца)", "feature": True,
-     "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600",
-     "calc": "$200 + 17 × $200 = $3,600", "cta": "Записаться на день"},
+     "down": "$200", "weekly": "17 × $200", "total": "$3,600", "cta": "Записаться на день"},
     {"name": "План C — Выходные", "sched": "Сб и Вс · 9:00 – 19:00",
      "hours": "18 часов в неделю · 27 недель (~6–7 месяцев)", "feature": False,
-     "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600",
-     "calc": "$200 + 27 × $160 = $4,520 + финальный платёж = $4,600",
+     "down": "$200", "weekly": "27 × $160", "total": "$4,600",
      "cta": "Записаться на выходные"},
 ]
 
@@ -1139,20 +1136,17 @@ TUITION_NOTE["sq"] = ("Çdo plan përfshin përgatitjen për provimin e Bordit S
 TUITION["sq"] = [
     {"name": "Plani A — Mëngjes", "sched": "Hën–Pre · 8:00 – 14:00",
      "hours": "30 orë në javë · 17 javë (~4 muaj)", "feature": False,
-     "down": "$500", "weekly": "17 × $300", "tuition": "$5,250", "total": "$5,600",
-     "calc": "$500 + 17 × $300 = $5,600", "cta": "Regjistrohu për mëngjesin"},
+     "down": "$500", "weekly": "17 × $300", "total": "$5,600", "cta": "Regjistrohu për mëngjesin"},
     {"name": "Plani B — Pasdite", "sched": "Hën–Pre · 14:00 – 20:00",
      "hours": "30 orë në javë · 17 javë (~4 muaj)", "feature": True,
-     "down": "$200", "weekly": "17 × $200", "tuition": "$3,600", "total": "$3,600",
-     "calc": "$200 + 17 × $200 = $3,600", "cta": "Regjistrohu për pasditen"},
+     "down": "$200", "weekly": "17 × $200", "total": "$3,600", "cta": "Regjistrohu për pasditen"},
     {"name": "Plani C — Fundjavë", "sched": "Sht dhe Die · 9:00 – 19:00",
      "hours": "18 orë në javë · 27 javë (~6–7 muaj)", "feature": False,
-     "down": "$200", "weekly": "27 × $160", "tuition": "$4,600", "total": "$4,600",
-     "calc": "$200 + 27 × $160 = $4,520 + pagesa e fundit = $4,600",
+     "down": "$200", "weekly": "27 × $160", "total": "$4,600",
      "cta": "Regjistrohu për fundjavën"},
 ]
 TUITION_LABELS["sq"] = {"down": "paradhënie", "weekly": "Pagesa javore",
-                        "tuition": "Tarifa", "total": "Totali"}
+                        "total": "Totali"}
 POPULAR_BADGE["sq"] = "Më i popullarizuari"
 
 REQUIREMENTS["sq"] = [
