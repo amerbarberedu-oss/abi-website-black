@@ -7,6 +7,20 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Added
+- **Fourth testimonial video on the Russian landing page** (2026-08-01) — a
+  client-supplied clip now leads the Student Voices row on
+  `/master-barber-program-russian` only. Committed to `assets/videos/` and
+  served same-origin (the other three are on Vercel Blob, but there's no Blob
+  token in the repo); 720×1280, so it matches the 9/16 tile exactly. No poster
+  frame was supplied, so `_reel_media()` now omits the attribute rather than
+  emitting a broken path, and the browser paints the video's first frame.
+  `STUDENT_VOICES_VIDEOS` became language-keyed — `tr()`'s English fallback
+  keeps es/sq and both Bronx pages on the original three. The grid modifier is
+  chosen by count, so the Russian page renders a balanced 2×2
+  (`.lf-reel--quad`, new in `funnels.css`, `CSS_V` → 74) instead of 3 + an
+  orphan. All five other funnel pages rebuild with no content change.
+
 ### Changed
 - **Russian and Albanian funnels now post to their own GHL forms** (2026-08-01) —
   both shipped pointed at the Manhattan English form as a stopgap, so their

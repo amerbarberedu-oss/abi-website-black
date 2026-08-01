@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "73"
+CSS_V = "74"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -538,26 +538,33 @@ PLAY_BTN = ('<button class="lf-reel__play" type="button" aria-label="Play video"
             '</button>')
 
 def _reel_media(vid, poster, label):
-    # vid is now a full URL (Vercel Blob CDN); poster remains a filename under /assets/img/.
+    # vid is either a full URL (Vercel Blob CDN) or a site-root path for files
+    # committed to the repo. poster is a filename under /assets/img/, or None
+    # when no still frame was supplied — then the attribute is omitted entirely
+    # and the browser paints the video's own first frame once metadata loads.
+    poster_attr = ' poster="/assets/img/%s"' % h(poster) if poster else ''
     return ('<div class="lf-reel__media"><video class="lf-reel__video" muted loop playsinline'
-            ' preload="metadata" src="%s" poster="/assets/img/%s"'
-            ' aria-label="%s"></video>%s</div>' % (h(vid), h(poster), h(label), PLAY_BTN))
+            ' preload="metadata" src="%s"%s'
+            ' aria-label="%s"></video>%s</div>' % (h(vid), poster_attr, h(label), PLAY_BTN))
 
 
 def section_student_voices(p):
     sv = D.STUDENT_VOICES[p["lang"]]
+    vids = tr(p, D.STUDENT_VOICES_VIDEOS)
+    # Grid modifier follows the count, so adding a video is a data-only change.
+    mod = "lf-reel--quad" if len(vids) == 4 else "lf-reel--triple"
     media = "".join(_reel_media(v, ps, "ABI student testimonial %d" % i)
-                    for i, (v, ps) in enumerate(D.STUDENT_VOICES_VIDEOS, 1))
+                    for i, (v, ps) in enumerate(vids, 1))
     return (
         '<section class="lf-section lf-section--alt"><div class="lf-wrap">\n'
-        '  <div class="lf-reel lf-reel--triple lf-rv">\n'
+        '  <div class="lf-reel %s lf-rv">\n'
         '    <div class="lf-section__head" style="margin-bottom:1.2rem">'
         '<span class="lf-eyebrow">%s</span><h2 class="lf-h2">%s</h2>'
         '<p class="lf-lead">%s</p></div>\n'
         '    <div class="lf-reel__grid">%s</div>\n'
         '  </div>\n'
         '</div></section>\n'
-    ) % (h(sv["eyebrow"]), h(sv["title"]), h(sv["sub"]), media)
+    ) % (mod, h(sv["eyebrow"]), h(sv["title"]), h(sv["sub"]), media)
 
 
 def section_bronx_extra(p):
@@ -842,19 +849,27 @@ def page_head(p):
         ]
     }
 
-    # 5) VideoObject (one per testimonial) so video clips are AEO-friendly
-    student_voices_videos = D.STUDENT_VOICES_VIDEOS
-    ld_videos = [
-        {"@context": "https://schema.org", "@type": "VideoObject",
-         "name": "ABI Student Testimonial " + str(i + 1),
-         "description": "Student of the American Barber Institute (ABI) sharing their experience at the " + campus_name + ".",
-         "thumbnailUrl": SITE + "/assets/img/" + ps,
-         "uploadDate": "2024-09-01",
-         "contentUrl": vid,
-         "publisher": {"@type": "Organization", "name": "American Barber Institute",
-                       "logo": {"@type": "ImageObject", "url": SITE + LOGO_SRC}}}
-        for i, (vid, ps) in enumerate(student_voices_videos)
-    ]
+    # 5) VideoObject (one per testimonial) so video clips are AEO-friendly.
+    # Must use the same per-language list the section renders, or the schema
+    # describes different videos than the page actually shows.
+    student_voices_videos = tr(p, D.STUDENT_VOICES_VIDEOS)
+    ld_videos = []
+    for i, (vid, ps) in enumerate(student_voices_videos):
+        block = {
+            "@context": "https://schema.org", "@type": "VideoObject",
+            "name": "ABI Student Testimonial " + str(i + 1),
+            "description": "Student of the American Barber Institute (ABI) sharing their experience at the " + campus_name + ".",
+            "uploadDate": "2024-09-01",
+            # contentUrl must be absolute: repo-hosted clips are site-root paths,
+            # Blob-hosted ones are already full URLs.
+            "contentUrl": vid if vid.startswith("http") else SITE + vid,
+            "publisher": {"@type": "Organization", "name": "American Barber Institute",
+                          "logo": {"@type": "ImageObject", "url": SITE + LOGO_SRC}},
+        }
+        # thumbnailUrl is only valid if a poster actually exists.
+        if ps:
+            block["thumbnailUrl"] = SITE + "/assets/img/" + ps
+        ld_videos.append(block)
 
     # Combine into one ordered list; emit each as its own <script>
     ld_blocks = [ld_org, ld_course, ld_faq, ld_bc] + ld_videos

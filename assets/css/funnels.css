@@ -616,6 +616,15 @@ body.lf-page--brnx-es {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.4rem 1.6rem;
   }
+  /* v74 — four testimonials (Russian LP) sit as a balanced 2x2 rather than
+     3 + an orphan. Width is capped so the two 360px-max tiles stay together
+     instead of drifting apart on a wide container. */
+  .lf-reel--quad .lf-reel__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem 1.6rem;
+    max-width: 760px;
+    margin-inline: auto;
+  }
 }
 .lf-reel__media {
   position: relative;

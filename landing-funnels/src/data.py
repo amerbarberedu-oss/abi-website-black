@@ -327,11 +327,21 @@ STUDENT_VOICES = {
 }
 # 3 real testimonial clips — Video-321, Video-124, Video-325 (a.k.a. student-voice-3).
 # Videos hosted on Vercel Blob CDN; posters remain in /assets/img/.
-STUDENT_VOICES_VIDEOS = [
+# Language-keyed so a page can differ — tr() falls back to "en", so es/sq and
+# both Bronx pages keep the default three without needing their own entry.
+# A poster of None renders no poster attribute at all (see _reel_media).
+_STUDENT_VOICES_DEFAULT = [
     ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/video-321.mp4", "video-321-poster.jpg"),
     ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/Video-124.mp4", "video-124-poster.jpg"),
     ("https://vutumew2863lb0bx.public.blob.vercel-storage.com/videos/student-voice-3.mp4", "student-voice-3-poster.jpg"),
 ]
+STUDENT_VOICES_VIDEOS = {
+    "en": _STUDENT_VOICES_DEFAULT,
+    # Russian LP leads with its own testimonial (client 2026-08-01). Served
+    # same-origin from the repo rather than Blob; 720x1280, so it matches the
+    # 9/16 container exactly. No poster frame was supplied.
+    "ru": [("/assets/videos/student-voice-ru.mp4", None)] + _STUDENT_VOICES_DEFAULT,
+}
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
 BRONX_EXTRA = {
