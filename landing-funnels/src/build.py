@@ -27,7 +27,7 @@ sys.path.insert(0, HERE)
 import data as D
 
 SITE = "https://www.abi.edu"
-CSS_V = "74"
+CSS_V = "75"
 JS_V  = "17"
 
 # ── inline SVG icon library ─────────────────────────────────────────
@@ -537,6 +537,11 @@ PLAY_BTN = ('<button class="lf-reel__play" type="button" aria-label="Play video"
             '<svg class="lf-reel__icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'
             '</button>')
 
+# Testimonial-grid layout per video count. Anything else falls back to the
+# 3-up rule, which simply wraps.
+_REEL_MOD = {3: "lf-reel--triple", 4: "lf-reel--quad", 5: "lf-reel--five"}
+
+
 def _reel_media(vid, poster, label):
     # vid is either a full URL (Vercel Blob CDN) or a site-root path for files
     # committed to the repo. poster is a filename under /assets/img/, or None
@@ -552,7 +557,7 @@ def section_student_voices(p):
     sv = D.STUDENT_VOICES[p["lang"]]
     vids = tr(p, D.STUDENT_VOICES_VIDEOS)
     # Grid modifier follows the count, so adding a video is a data-only change.
-    mod = "lf-reel--quad" if len(vids) == 4 else "lf-reel--triple"
+    mod = _REEL_MOD.get(len(vids), "lf-reel--triple")
     media = "".join(_reel_media(v, ps, "ABI student testimonial %d" % i)
                     for i, (v, ps) in enumerate(vids, 1))
     return (

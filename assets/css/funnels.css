@@ -625,6 +625,16 @@ body.lf-page--brnx-es {
     max-width: 760px;
     margin-inline: auto;
   }
+  /* v75 — five testimonials (Russian LP): 3 across, then a centred pair.
+     Six columns with every tile spanning 2 gives the same tile width as the
+     3-up row; pinning the 4th to column 2 leaves one empty column each side
+     of the bottom pair, so it centres instead of hugging the left. */
+  .lf-reel--five .lf-reel__grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.4rem 1.6rem;
+  }
+  .lf-reel--five .lf-reel__media { grid-column: span 2; }
+  .lf-reel--five .lf-reel__media:nth-child(4) { grid-column: 2 / span 2; }
 }
 .lf-reel__media {
   position: relative;

@@ -337,10 +337,13 @@ _STUDENT_VOICES_DEFAULT = [
 ]
 STUDENT_VOICES_VIDEOS = {
     "en": _STUDENT_VOICES_DEFAULT,
-    # Russian LP leads with its own testimonial (client 2026-08-01). Served
-    # same-origin from the repo rather than Blob; 720x1280, so it matches the
-    # 9/16 container exactly. No poster frame was supplied.
-    "ru": [("/assets/videos/student-voice-ru.mp4", None)] + _STUDENT_VOICES_DEFAULT,
+    # Russian LP leads with its own testimonials (client 2026-08-01). Served
+    # same-origin from the repo rather than Blob. -1 is 720x1232 and -2 is
+    # 720x1280 against a 9/16 tile, so -1 letterboxes by ~12px; object-fit is
+    # contain, so neither crops. No poster frames were supplied.
+    # Numbering matches display order.
+    "ru": [("/assets/videos/student-voice-ru-1.mp4", None),
+           ("/assets/videos/student-voice-ru-2.mp4", None)] + _STUDENT_VOICES_DEFAULT,
 }
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
