@@ -7,6 +7,14 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Changed
+- **Language switcher trimmed on the Russian and Albanian pages** (2026-08-01)
+  — each now shows only *English + itself* rather than all four pills. Driven
+  by a new optional `switcher` list per page. `hreflang` deliberately still
+  advertises every translation: the switcher and hreflang both read from
+  `alts`, so trimming that alone would have cost the pages their reciprocal
+  language pairing in search. English, Spanish and both Bronx pages unchanged.
+
 ### Added
 - **A leading testimonial video on the Russian and Albanian landing pages**
   (2026-08-01) — the client supplied two clips, one per page: `student-voice-5`
