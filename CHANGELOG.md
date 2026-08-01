@@ -17,6 +17,13 @@ when the client approves the official production release.
   - Superseded an intermediate state that briefly put *both* clips on the
     Russian page (five videos, `.lf-reel--five`). That rule is retained as part
     of the 3/4/5 count→class system but is currently unused.
+  - **Poster frames** captured from the clips themselves (bright, on-brand
+    barbershop stills at 18s / 8s) and committed as
+    `student-voice-4/-5-poster.jpg`. Without one the tile rendered as a flat
+    dark box against `.lf-reel__media`'s `#141a2e` background — the earlier
+    assumption that the browser would paint the video's own first frame did
+    not hold. Every video on every funnel page now has a poster, and both new
+    VideoObject entries carry a `thumbnailUrl`.
 - **Fourth testimonial video on the Russian landing page** (2026-08-01) — a
   client-supplied clip now leads the Student Voices row on
   `/master-barber-program-russian` only. Committed to `assets/videos/` and

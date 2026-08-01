@@ -341,10 +341,13 @@ STUDENT_VOICES_VIDEOS = {
     # than Blob. One clip per landing page, each leading its own row:
     #   -5  Russian  (720x1280, exact fit against the 9/16 tile)
     #   -4  Albanian (720x1232, letterboxes ~12px)
-    # object-fit is contain, so neither crops. No poster frames were supplied.
+    # object-fit is contain, so neither crops.
     # Names continue the student-voice-N series rather than encoding a language.
-    "ru": [("/assets/videos/student-voice-5.mp4", None)] + _STUDENT_VOICES_DEFAULT,
-    "sq": [("/assets/videos/student-voice-4.mp4", None)] + _STUDENT_VOICES_DEFAULT,
+    # Posters were captured from the clips themselves (frame 18s / 8s, chosen as
+    # bright, on-brand barbershop shots) because without one the tile renders as
+    # a flat dark box against .lf-reel__media's #141a2e background.
+    "ru": [("/assets/videos/student-voice-5.mp4", "student-voice-5-poster.jpg")] + _STUDENT_VOICES_DEFAULT,
+    "sq": [("/assets/videos/student-voice-4.mp4", "student-voice-4-poster.jpg")] + _STUDENT_VOICES_DEFAULT,
 }
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─
