@@ -870,7 +870,7 @@ ABOUT_HEAD["ru"] = ("Обзор", "О программе")
 
 ABOUT[("manhattan", "ru")] = [
     "Наша программа «Мастер-барбер» — это комплексный учебный план, который готовит студентов к успешной работе в востребованной индустрии барберинга. За четыре месяца студенты осваивают теорию и практические навыки: санитарию, стерилизацию, историю барберинга, законы и управление барбершопом.",
-    "Программа даёт практический опыт работы с самыми разными клиентами, что позволяет оттачивать навыки в реальных условиях. От бритья и массажа лица до фейдов, тейперов, техник clipper over comb и scissor over comb — выпускники уходят с универсальным набором навыков, готовым для любого барбершопа.",
+    "Программа даёт практический опыт работы с самыми разными клиентами, что позволяет оттачивать навыки в реальных условиях. От бритья и массажа лица до фейдов, тейперов, стрижки машинкой через расчёску и ножницами через расчёску — выпускники уходят с универсальным набором навыков, готовым для любого барбершопа.",
     "Кроме того, мы готовим студентов к экзамену State Board штата Нью-Йорк, чтобы они были полностью готовы получить лицензию мастера-барбера. По окончании каждый студент может обратиться в наш отдел трудоустройства за помощью в поиске работы.",
 ]
 
@@ -879,7 +879,8 @@ TECHNIQUES["ru"] = [
     "High-Top фейды", "Помпадур", "Фохок", "Цезарь", "Бритьё головы",
     "Афро", "Флэт-топ", "Оформление бритвой", "Классические стрижки",
     "Стрижка бороды", "Шейп-ап", "Укладка феном", "Ирокез", "Мытьё головы",
-    "Техники бритья", "Массаж лица", "Clipper Over Comb", "Scissor Over Comb",
+    "Техники бритья", "Массаж лица", "Машинкой через расчёску",
+    "Ножницами через расчёску",
 ]
 TECH_HEAD["ru"] = ("Техники", "Навыки и техники, которыми вы овладеете")
 
@@ -888,7 +889,8 @@ MODULES["ru"] = [
                         "Законы и правила штата Нью-Йорк", "Управление барбершопом",
                         "Профессиональная этика"]),
     ("Техники стрижки", ["Фейды (низкий, средний, высокий)", "Тейперы и классические стрижки",
-                         "Clipper Over Comb", "Scissor Over Comb", "Флэт-топ и High-Top фейды"]),
+                         "Машинкой через расчёску", "Ножницами через расчёску",
+                          "Флэт-топ и High-Top фейды"]),
     ("Укладка и финиш", ["Оформление бритвой и шейп-ап", "Укладка феном и помпадур",
                          "Афро и ирокез", "Стрижка и моделирование бороды",
                          "Мытьё головы и кондиционирование"]),
@@ -1113,16 +1115,16 @@ STATS["sq"] = [
 ABOUT_HEAD["sq"] = ("Përmbledhje", "Rreth programit")
 ABOUT[("manhattan", "sq")] = [
     "Programi ynë Master Berber ofron një kurrikul gjithëpërfshirëse, të projektuar për t'i përgatitur studentët për sukses në industrinë e berberisë. Gjatë katër muajve, studentët thellohen në teori dhe aftësi praktike, duke mbuluar sanitarinë, sterilizimin, historinë e berberisë, ligjet dhe menaxhimin e dyqanit.",
-    "Programi ofron përvojë praktike me një klientelë të larmishme, duke i lejuar studentët të përsosin aftësitë e tyre në kushte reale. Nga rruajtja dhe masazhi i fytyrës deri te teknikat si fade, taper, Clipper Over Comb dhe Scissor Over Comb — të diplomuarit dalin me një grup aftësish të gatshëm për çdo berberhane.",
+    "Programi ofron përvojë praktike me një klientelë të larmishme, duke i lejuar studentët të përsosin aftësitë e tyre në kushte reale. Nga rruajtja dhe masazhi i fytyrës deri te teknikat si fade, taper, makinë mbi krëhër dhe gërshërë mbi krëhër — të diplomuarit dalin me një grup aftësish të gatshëm për çdo berberhane.",
     "Gjithashtu i përgatisim studentët për provimin e Bordit Shtetëror të Nju Jorkut, që të jenë plotësisht të gatshëm për licencën e Master Berberit. Pas përfundimit, çdo student mund të takohet me zyrën tonë të punësimit për mbështetje në gjetjen e punës.",
 ]
 
 TECHNIQUES["sq"] = [
     "Taper klasik", "Fade i ulët", "Fade i mesëm", "Fade i lartë", "High-Top Fade",
-    "Pompadour", "Fohawk", "Caesar", "Kokë e rruar", "Afro", "Flat Top",
-    "Vija me brisk", "Prerje klasike", "Rregullim mjekre", "Shape Up",
-    "Tharje me fen", "Mohawk", "Larje flokësh", "Teknika rruajtjeje",
-    "Masazh fytyre", "Clipper Over Comb", "Scissor Over Comb",
+    "Pompadur", "Fohawk", "Cezar", "Kokë e rruar", "Afro", "Flat Top",
+    "Vija me brisk", "Prerje klasike", "Rregullim mjekre", "Rregullim vijash",
+    "Tharje me fen", "Mohikan", "Larje flokësh", "Teknika rruajtjeje",
+    "Masazh fytyre", "Makinë mbi krëhër", "Gërshërë mbi krëhër",
 ]
 TECH_HEAD["sq"] = ("Teknikat", "Aftësitë dhe teknikat që do të zotëroni")
 
@@ -1131,10 +1133,10 @@ MODULES["sq"] = [
                            "Ligjet dhe rregullat e shtetit të Nju Jorkut",
                            "Menaxhimi i dyqanit", "Etika profesionale"]),
     ("Teknika prerjeje", ["Fade (i ulët, i mesëm, i lartë)", "Taper dhe prerje klasike",
-                          "Clipper Over Comb", "Scissor Over Comb",
+                          "Makinë mbi krëhër", "Gërshërë mbi krëhër",
                           "Flat Top dhe High-Top Fade"]),
-    ("Stilim dhe finalizim", ["Vija me brisk dhe Shape Up", "Tharje me fen dhe Pompadour",
-                              "Stilim Afro dhe Mohawk", "Rregullim dhe dizajn mjekre",
+    ("Stilim dhe finalizim", ["Vija me brisk dhe rregullim vijash", "Tharje me fen dhe Pompadur",
+                              "Stilim Afro dhe Mohikan", "Rregullim dhe dizajn mjekre",
                               "Larje dhe kondicionim"]),
     ("Rruajtje dhe kujdes për lëkurën", ["Rruajtje me brisk", "Teknika masazhi fytyre",
                                           "Trajtime me peshqir të nxehtë",

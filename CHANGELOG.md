@@ -8,6 +8,16 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **Remaining English barbering terms translated on the Russian and Albanian
+  pages** (2026-08-01) — `Clipper Over Comb` / `Scissor Over Comb` describe an
+  action, so they now read «Машинкой через расчёску» / «Ножницами через
+  расчёску» and *Makinë mbi krëhër* / *Gërshërë mbi krëhër*, in the technique
+  list, the curriculum module and the About prose. Albanian style names also
+  take their local spelling: Pompadour→Pompadur, Caesar→Cezar, Mohawk→Mohikan,
+  Shape Up→Rregullim vijash. Afro, Fohawk, Flat Top and High-Top Fade stay in
+  English — they have no natural Albanian form and barbers search for them as
+  they are. Russian was already fully Cyrillicised apart from the two over-comb
+  terms. English and Spanish untouched.
 - **Language switcher trimmed on the Russian and Albanian pages** (2026-08-01)
   — each now shows only *English + itself* rather than all four pills. Driven
   by a new optional `switcher` list per page. `hreflang` deliberately still
