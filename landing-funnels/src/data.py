@@ -337,13 +337,14 @@ _STUDENT_VOICES_DEFAULT = [
 ]
 STUDENT_VOICES_VIDEOS = {
     "en": _STUDENT_VOICES_DEFAULT,
-    # Russian LP leads with its own testimonials (client 2026-08-01). Served
-    # same-origin from the repo rather than Blob. -1 is 720x1232 and -2 is
-    # 720x1280 against a 9/16 tile, so -1 letterboxes by ~12px; object-fit is
-    # contain, so neither crops. No poster frames were supplied.
-    # Numbering matches display order.
-    "ru": [("/assets/videos/student-voice-ru-1.mp4", None),
-           ("/assets/videos/student-voice-ru-2.mp4", None)] + _STUDENT_VOICES_DEFAULT,
+    # Extra client clips (2026-08-01), served same-origin from the repo rather
+    # than Blob. One clip per landing page, each leading its own row:
+    #   -5  Russian  (720x1280, exact fit against the 9/16 tile)
+    #   -4  Albanian (720x1232, letterboxes ~12px)
+    # object-fit is contain, so neither crops. No poster frames were supplied.
+    # Names continue the student-voice-N series rather than encoding a language.
+    "ru": [("/assets/videos/student-voice-5.mp4", None)] + _STUDENT_VOICES_DEFAULT,
+    "sq": [("/assets/videos/student-voice-4.mp4", None)] + _STUDENT_VOICES_DEFAULT,
 }
 
 # ─── 3 Bronx-only testimonial videos (placeholders until real files) ─

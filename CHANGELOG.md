@@ -8,14 +8,15 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Added
-- **Fifth testimonial video on the Russian landing page** (2026-08-01) — a
-  second client clip now leads the row, ahead of the one added earlier the same
-  day. Both are committed under `assets/videos/` and renamed
-  `student-voice-ru-1/-2` so the numbering matches display order. Desktop shows
-  3 across then a centred pair (`.lf-reel--five`: a six-column grid with each
-  tile spanning 2 and the 4th pinned to column 2, so the bottom row sits
-  symmetrically); mobile still stacks. The grid modifier now comes from a
-  count→class map, so a sixth clip stays a data-only change. `CSS_V` → 75.
+- **A leading testimonial video on the Russian and Albanian landing pages**
+  (2026-08-01) — the client supplied two clips, one per page: `student-voice-5`
+  leads the Russian row, `student-voice-4` the Albanian. Each page shows four
+  videos in the 2×2 `.lf-reel--quad` grid; the other four funnels keep their
+  three. Both files are committed under `assets/videos/` with
+  language-neutral names continuing the `student-voice-N` series.
+  - Superseded an intermediate state that briefly put *both* clips on the
+    Russian page (five videos, `.lf-reel--five`). That rule is retained as part
+    of the 3/4/5 count→class system but is currently unused.
 - **Fourth testimonial video on the Russian landing page** (2026-08-01) — a
   client-supplied clip now leads the Student Voices row on
   `/master-barber-program-russian` only. Committed to `assets/videos/` and
