@@ -247,16 +247,20 @@ def hero(p):
     formcard_title = tr(p, D.FORMCARD_TITLE)
     formcard_sub = tr(p, D.FORMCARD_SUB)
     # GHL form IDs are campus + language specific (client 2026-07-16).
+    # Value is (form id, form name, embed height). Names are copied verbatim from
+    # the client's embed snippets — including their trailing spaces — because the
+    # name is echoed into both data-form-name and the iframe title.
+    # RU + AL got their own dedicated forms 2026-08-01; both are taller (840) than
+    # the original four (757), so the height travels with the form.
     _GHL_FORMS = {
-        ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
-        ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP "),
-        ("manhattan", "ru"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
-        ("manhattan", "sq"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan "),
-        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx"),
-        ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP"),
+        ("manhattan", "en"): ("2FvHzLvYji1iSmNmCP46", "02.GET TRAINED WITH ABI FORM -  Manhattan ", 757),
+        ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP ", 757),
+        ("manhattan", "ru"): ("S6vfeKEBsrhjGG09FlU1", "01.GET TRAINED WITH ABI FORM - ABI.com - RU LP", 840),
+        ("manhattan", "sq"): ("LHuKB7w9PKtK9J0Gpul5", "01.GET TRAINED WITH ABI FORM - ABI.com - AL LP ", 840),
+        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx", 757),
+        ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP", 757),
     }
-    ghl_id, ghl_name = _GHL_FORMS[(p["campus"]["slug"], lang)]
-    ghl_h = 757
+    ghl_id, ghl_name, ghl_h = _GHL_FORMS[(p["campus"]["slug"], lang)]
 
     formcard = (
         '    <div class="formcard" id="reserve">\n'

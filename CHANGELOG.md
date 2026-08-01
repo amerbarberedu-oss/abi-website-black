@@ -8,6 +8,15 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **Russian and Albanian funnels now post to their own GHL forms** (2026-08-01) —
+  both shipped pointed at the Manhattan English form as a stopgap, so their
+  leads were indistinguishable from English submissions. Now
+  `S6vfeKEBsrhjGG09FlU1` (`01.…RU LP`) and `LHuKB7w9PKtK9J0Gpul5`
+  (`01.…AL LP`). Both are taller than the original four, so `_GHL_FORMS` values
+  widened from `(id, name)` to `(id, name, height)` and the hardcoded
+  `ghl_h = 757` is gone — the height now travels with the form (840 for the two
+  new ones, 757 unchanged for the rest). The other four funnel pages rebuild
+  byte-identical.
 - **Pricing cards slimmed to two rows** (2026-07-31) — the **Tuition** row and the
   payment **formula line** are removed from every plan card, on all three
   components and in all four languages: the program pages (`.tuition`), the
