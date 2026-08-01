@@ -1034,6 +1034,9 @@ PAGES.append({
     "alts": {"en": "500-hours-master-barber-program-landing-page",
              "es": "500-hours-master-barber-program-landing-page/spanish",
              "ru": "master-barber-program-russian"},
+    # Header shows English + Russian only (client 2026-08-01). hreflang still
+    # advertises every translation above — see page_switcher() in build.py.
+    "switcher": ["en", "ru"],
     # No Russian-language admissions line exists yet, so this uses the
     # Manhattan English number.
     "phone": ("EN", "(212) 290-2289", "+12122902289"),
@@ -1314,6 +1317,9 @@ PAGES.append({
              "es": "500-hours-master-barber-program-landing-page/spanish",
              "ru": "master-barber-program-russian",
              "sq": "master-barber-program-albanian"},
+    # Header shows English + Albanian only (client 2026-08-01). hreflang still
+    # advertises every translation above — see page_switcher() in build.py.
+    "switcher": ["en", "sq"],
     # No Albanian-language admissions line exists yet, so this uses the
     # Manhattan English number.
     "phone": ("EN", "(212) 290-2289", "+12122902289"),

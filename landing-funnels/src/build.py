@@ -119,6 +119,20 @@ def page_alts(p):
     return p.get("alts") or {p["lang"]: p["path"]}
 
 
+def page_switcher(p):
+    """Language codes shown as pills in the header.
+
+    Deliberately separate from page_alts(): hreflang should advertise every
+    translation of a page so search engines can pair them up, but the visible
+    switcher can be shorter. The RU and SQ landing pages show only English +
+    themselves (client 2026-08-01) while still declaring all four in <head>.
+    Defaults to every language the page has an alt for.
+    """
+    codes = p.get("switcher")
+    alts = page_alts(p)
+    return [c for c in (codes or alts.keys()) if c in alts]
+
+
 # Each campus logo already contains the street address baked into the
 # artwork, so we don't render a duplicate text address line in the header.
 def header(p):
@@ -127,13 +141,14 @@ def header(p):
     MOBILE  (4 rows): [logo · EN|ES]  /  promo strip  /  phones row  /  seats banner
     Row 1 is the only sticky row. Accent colors come from each page's theme class."""
     alts = page_alts(p)
+    shown = page_switcher(p)
     lang_pills = "".join(
         '    <a class="%s" href="%s"%s>%s</a>\n' % (
             "is-active" if code == p["lang"] else "",
             h("/" + alts[code]),
             ' aria-current="true"' if code == p["lang"] else "",
             LANG_LABELS[code])
-        for code in LANG_ORDER if code in alts)
+        for code in LANG_ORDER if code in shown)
     campus_phones = D.TOPBAR_PHONES_BY_CAMPUS[p["campus"]["slug"]]
     # Campus-specific header logo (matches the main site: build.py logo_src).
     logo_src = "/assets/img/logo-bronx.gif" if p["campus"]["slug"] == "bronx" else "/assets/img/logo-manhattan.gif"
