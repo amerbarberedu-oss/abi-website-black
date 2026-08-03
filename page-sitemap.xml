@@ -405,6 +405,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.abi.edu/es/instructors/bronx</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.abi.edu/es/jobs</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -526,6 +532,12 @@
   </url>
   <url>
     <loc>https://www.abi.edu/how-to-get-started</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.abi.edu/instructors/bronx</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

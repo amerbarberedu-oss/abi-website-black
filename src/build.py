@@ -246,7 +246,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
 <script src="{root}assets/js/landing.js?v=300" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
-<script src="{root}assets/js/campus.js?v=303" defer></script>
+<script src="{root}assets/js/campus.js?v=304" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>
@@ -867,6 +867,9 @@ _BARBER_SKILLS = [
     "Hands-on Clinical Training"
 ]
 def _person(name, role, campus, skills=None, years=None, languages=None):
+    # Each instructor's url points at the page they actually appear on — the
+    # Bronx team lives at /instructors/bronx since they were split apart.
+    page = "/instructors/bronx" if campus.startswith("Bronx") else "/instructors"
     p = {
         "@type": "Person",
         "name": name,
@@ -878,7 +881,7 @@ def _person(name, role, campus, skills=None, years=None, languages=None):
                          "address": campus},
         "knowsAbout": skills or _BARBER_SKILLS,
         "knowsLanguage": languages or ["English"],
-        "url": SITE_URL + "/instructors"
+        "url": SITE_URL + page
     }
     if years is not None:
         # ABI standard: every instructor named here is also an ABI graduate.
@@ -891,23 +894,35 @@ def _person(name, role, campus, skills=None, years=None, languages=None):
 
 # Each instructor's bio expanded so AI/search engines surface real expertise,
 # tenure, and specialties — the E-E-A-T signal that was completely missing.
-INSTRUCTORS_SCHEMA = {"@context": "https://schema.org", "@type": "ItemList",
-    "name": "American Barber Institute Instructors", "itemListElement": [
-        {"@type": "ListItem", "position": i + 1, "item": _person(n, r, c, sk, yr, lg)}
-        for i, (n, r, c, sk, yr, lg) in enumerate([
-            ("David Ayeoribe", "Lead Senior Instructor & Director", "Manhattan, NY",
-             _BARBER_SKILLS + ["Barber School Leadership", "Curriculum Design"], 50, ["English"]),
-            ("Harold \"Barkim\" Brown", "Lead Instructor", "Manhattan, NY",
-             _BARBER_SKILLS + ["Celebrity Barbering", "Emmy-Featured Stylist"], 25, ["English"]),
-            ("Barry Brown", "Instructor", "Manhattan, NY", _BARBER_SKILLS, 15, ["English"]),
-            ("Freddie Liciaga", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 18, ["English","Spanish"]),
-            ("Benny Santamaria", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 16, ["English","Spanish"]),
-            ("Richard Cancel", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 14, ["English","Spanish"]),
-            ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx", "Bronx, NY",
-             _BARBER_SKILLS + ["Scalp Micropigmentation", "Hair Art"], 30, ["English","Spanish"]),
-            ("Osvaldy \"Mr. O\" Rodriguez", "Instructor", "Bronx, NY", _BARBER_SKILLS, 12, ["English","Spanish"]),
-            ("Noah Vera", "Bilingual Instructor", "Bronx, NY", _BARBER_SKILLS, 10, ["English","Spanish"]),
-        ])]}
+# Split per campus so each page's ItemList matches the people actually on it;
+# a page listing instructors it doesn't show is a structured-data mismatch.
+_MANHATTAN_INSTRUCTORS = [
+    ("David Ayeoribe", "Lead Senior Instructor & Director", "Manhattan, NY",
+     _BARBER_SKILLS + ["Barber School Leadership", "Curriculum Design"], 50, ["English"]),
+    ("Harold \"Barkim\" Brown", "Lead Instructor", "Manhattan, NY",
+     _BARBER_SKILLS + ["Celebrity Barbering", "Emmy-Featured Stylist"], 25, ["English"]),
+    ("Barry Brown", "Instructor", "Manhattan, NY", _BARBER_SKILLS, 15, ["English"]),
+    ("Freddie Liciaga", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 18, ["English","Spanish"]),
+    ("Benny Santamaria", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 16, ["English","Spanish"]),
+    ("Richard Cancel", "Bilingual Instructor", "Manhattan, NY", _BARBER_SKILLS, 14, ["English","Spanish"]),
+]
+_BRONX_INSTRUCTORS = [
+    ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx", "Bronx, NY",
+     _BARBER_SKILLS + ["Scalp Micropigmentation", "Hair Art"], 30, ["English","Spanish"]),
+    ("Osvaldy \"Mr. O\" Rodriguez", "Instructor", "Bronx, NY", _BARBER_SKILLS, 12, ["English","Spanish"]),
+    ("Noah Vera", "Bilingual Instructor", "Bronx, NY", _BARBER_SKILLS, 10, ["English","Spanish"]),
+]
+
+def _instructor_list(name, people):
+    return {"@context": "https://schema.org", "@type": "ItemList", "name": name,
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "item": _person(n, r, c, sk, yr, lg)}
+                for i, (n, r, c, sk, yr, lg) in enumerate(people)]}
+
+INSTRUCTORS_SCHEMA = _instructor_list(
+    "American Barber Institute Instructors — Manhattan", _MANHATTAN_INSTRUCTORS)
+INSTRUCTORS_BRONX_SCHEMA = _instructor_list(
+    "American Barber Institute Instructors — Bronx", _BRONX_INSTRUCTORS)
 
 # Map each blog post to a named ABI author. AI assistants will now cite
 # "according to <name>, instructor at ABI" instead of the generic "ABI says".
@@ -966,6 +981,10 @@ PAGES = [
      "Our Instructors | Master Barber Teachers in NYC",
      "Meet ABI's master instructors — including King David Ayeoribe and Emmy-featured Harold “Barkim” Brown — with 50+ years of combined barbering experience.",
      "en", [INSTRUCTORS_SCHEMA]),
+    ("instructors/bronx.html", "instructors-bronx.html",
+     "Our Bronx Instructors | ABI Barber School Bronx NY",
+     "Meet the master barbers teaching at ABI's Bronx campus, 121 Westchester Square — led by Truth Quinones, with 40+ years behind the chair. Se habla español.",
+     "en", [INSTRUCTORS_BRONX_SCHEMA]),
     ("jobs.html", "jobs.html",
      "Job Placement & Shop Registration | American Barber Institute",
      "ABI's full-time job placement office helps graduates land their first role. Barbershop owners: register your shop to hire our trained barbers.",

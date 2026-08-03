@@ -26,11 +26,18 @@ function isBronxPage(){return /^\/(es\/)?bronx(\.html)?$/.test(location.pathname
 function isProgramsPage(){var p=location.pathname;return /\/programs\//.test(p)||/\/programs$/.test(p);}
 function isBronxProgramsPage(){var p=location.pathname;return /\/programs\/bronx(\.html)?$/.test(p)||/\/500-hour-master-barber-bronx/.test(p);}
 function isManhattanProgramsPage(){var p=location.pathname;return /\/programs\/manhattan(\.html)?$/.test(p)||(/\/programs\/500-hour-master-barber(\.html)?$/.test(p))||/\/50-hour-barber-refresher/.test(p);}
+/* The instructor teams live on two pages; each one implies its campus, so a
+   visitor who lands on /instructors/bronx from an ad gets Bronx phones and
+   Bronx program links too — same rule the campus-specific program pages use. */
+function isBronxInstructorsPage(){return /\/instructors\/bronx(\.html)?$/.test(location.pathname);}
+function isManhattanInstructorsPage(){return /\/instructors(\.html)?$/.test(location.pathname);}
 
 function getCampus(){
   if(isBronxPage()) return "bronx";
   if(isBronxProgramsPage()) return "bronx";
+  if(isBronxInstructorsPage()) return "bronx";
   if(isManhattanProgramsPage()) return "manhattan";
+  if(isManhattanInstructorsPage()) return "manhattan";
   try{return localStorage.getItem("abi-campus")||"manhattan";}catch(e){return "manhattan";}
 }
 function setCampus(c){try{localStorage.setItem("abi-campus",c);}catch(e){}}
@@ -111,6 +118,16 @@ function rewriteProgramsLinks(campus){
       // cleanUrls, so a stray ".html" would cost a 308 redirect on every click
       a.setAttribute("href", raw.replace(/500-hour-master-barber(-bronx)?(\.html)?$/, mb+(m[3]||"")));
       a.setAttribute("data-abi-programs-rewritten", campus);
+      return;
+    }
+    // /instructors <-> /instructors/bronx. Nav only, for the same reason as above:
+    // the two pages cross-link to each other in their body copy and those links
+    // must keep pointing at the other campus, not fold back on themselves.
+    var mi=raw.match(/(^|\/)instructors(\/bronx)?(\.html)?$/);
+    if(mi && a.closest(".mainnav, .nav-drawer")){
+      var base=raw.replace(/instructors(\/bronx)?(\.html)?$/, "instructors");
+      a.setAttribute("href", base+(campus==="bronx"?"/bronx":"")+(mi[3]||""));
+      a.setAttribute("data-abi-instructors-rewritten", campus);
     }
   });
 }

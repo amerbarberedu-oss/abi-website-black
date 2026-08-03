@@ -7,6 +7,32 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Added
+- **`/instructors/bronx` — a real page for the Bronx team** (2026-08-04) —
+  replaces yesterday's approach of hiding the Bronx block on `/instructors`
+  behind the campus toggle. The team now has its own linkable URL for ads and
+  emails, its own title/description, and its own sitemap entry (EN + ES).
+  - The page leads with **Truth "The Barber Artist" Quinones** in the featured
+    slot — he is ABI Bronx's Founding Director, so he plays the role King David
+    plays on the Manhattan page — with Osvaldy and Noah in the team grid.
+  - `/instructors` is now Manhattan-only. The `[data-campus-only]` attributes
+    came off both pages; the campus toggle **navigates** between the two rather
+    than hiding a section. The hook and its CSS stay in place for future use.
+  - `campus.js` rewrites `/instructors` ⇄ `/instructors/bronx` in the nav by
+    campus, and landing on either page now sets the campus for the whole site
+    — a visitor arriving at `/instructors/bronx` from an ad gets the Bronx
+    phone number and Bronx program links too. Same rule the campus-specific
+    program pages already used.
+  - The two pages cross-link in both the hero and under the team grid. Those
+    body links are deliberately **not** rewritten by campus — only nav links
+    are — or they would fold back on themselves.
+  - `INSTRUCTORS_SCHEMA` split into Manhattan and Bronx `ItemList`s so each
+    page's structured data matches the people actually on it, and each
+    instructor's `url` now points at the page they appear on.
+  - **Not carried over to the Bronx page:** the "What Students Say" quotes (all
+    three name King David, a Manhattan instructor) and the clinic-floor video.
+    Both need Bronx-specific material rather than borrowed Manhattan content.
+
 ### Changed
 - **Thank-you page success tick is brand blue, not green** (2026-08-04) — the
   `.ty-check` circle was the only stock-green element left on the card, sitting
