@@ -28,7 +28,8 @@ served on Vercel, in English and Spanish.
 ### 0.5.1 (2026-07-16) — GHL Form Re-mapping (per-campus lead forms)
 
 - **GoHighLevel Form Re-mapping** — Split the lead forms so each surface has its own GHL form (all redirect to `/thank-you`, so `generate_lead` still fires reliably via `analytics.js`):
-  - Main site EN (index, contact, jobs, bronx) → `WZjNHh9wcd1FTnlj0eCR` ("edu")
+  - Main site EN (index, contact, jobs) → `WZjNHh9wcd1FTnlj0eCR` ("edu")
+    — **`bronx.html` no longer uses this**; see 2026-08-04 below.
   - Main site ES (`es/*`) → `jqLpg40sM8C7RFT7Iq2Z` ("edu - ESP")
   - Manhattan funnel EN → `2FvHzLvYji1iSmNmCP46`; ES → `WXaur2ngXql4GTamJQOx`
   - Bronx funnel EN → `v1SNzWsAZZVodCsnsDbe`; ES → `z2ZXZPbcGx7u1XrAl6Zu`

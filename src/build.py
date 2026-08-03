@@ -1365,6 +1365,17 @@ def build():
             body = body.replace(
                 'https://www.google.com/maps?q=American%20Barber%20Institute%2C%2048%20West%2039th%20Street%2C%20New%20York%2C%20NY%2010018&z=16&output=embed',
                 'https://www.google.com/maps?q=American%20Barber%20Institute%2C%20121%20Westchester%20Square%2C%20Bronx%2C%20NY%2010461&z=16&output=embed')
+        # Bronx leads must land in the Bronx GHL form, not the shared "edu" one the
+        # homepage partial carries (client 2026-08-04). Same form the Bronx landing
+        # funnel already uses, so both Bronx surfaces feed one pipeline.
+        # EN only: the client supplied the English form, and es/bronx.html keeps the
+        # Spanish "edu - ESP" form until they confirm a Spanish Bronx equivalent.
+        if out == 'bronx.html':
+            body = (body
+                    .replace('WZjNHh9wcd1FTnlj0eCR', 'v1SNzWsAZZVodCsnsDbe')
+                    .replace('01.GET TRAINED WITH ABI FORM - edu',
+                             '02.GET TRAINED WITH ABI FORM - Bronx')
+                    .replace('data-height="757"', 'data-height="794"'))
         # Spanish twins carry their translated <title>/meta in ES_TITLE/ES_DESC
         # comments so translators own the meta; extract + strip them here.
         if lang == 'es':

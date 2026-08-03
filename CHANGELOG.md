@@ -7,6 +7,25 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Changed
+- **`/bronx` now posts to the Bronx GHL form** (2026-08-04) —
+  `v1SNzWsAZZVodCsnsDbe` ("02.GET TRAINED WITH ABI FORM - Bronx"), the same
+  form the Bronx landing funnel already used, so both Bronx surfaces feed one
+  pipeline instead of the page dropping its leads into the shared "edu" form.
+  - `bronx.html` is generated from the **homepage** partial, so the swap lives
+    in `build.py` beside the existing Bronx-only overrides (Google rating, map,
+    campus address) rather than in the partial — the homepage itself must keep
+    the "edu" form.
+  - Form name, iframe title and `data-height` (757 → 794) all follow the
+    client's embed snippet.
+  - **Nothing else moved.** Verified across the built site: index/contact/jobs
+    stay on "edu", all `/es/*` stay on "edu - ESP", and the Manhattan, Russian
+    and Albanian funnels are untouched.
+  - `es/bronx.html` deliberately still uses the Spanish "edu - ESP" form. A
+    Spanish Bronx form exists (`z2ZXZPbcGx7u1XrAl6Zu`, used by the Bronx
+    Spanish funnel) but the client specified the English form only — pending
+    their confirmation.
+
 ### Added
 - **Both instructor pages are now in the menu** (2026-08-04) — `Instructors`
   became an `Instructors ▾` dropdown listing *Manhattan Instructors* and
