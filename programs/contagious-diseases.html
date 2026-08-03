@@ -43,15 +43,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="../assets/css/landing.css?v=310" as="style">
+<link rel="preload" href="../assets/css/landing.css?v=311" as="style">
 <link rel="stylesheet" href="../assets/css/style.css?v=300">
 <link rel="stylesheet" href="../assets/css/brand.css?v=300">
-<link rel="stylesheet" href="../assets/css/landing.css?v=310">
+<link rel="stylesheet" href="../assets/css/landing.css?v=311">
 <link rel="stylesheet" href="../assets/css/upgrade.css?v=300">
 <script src="../assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
+<!-- Stamp the saved campus before first paint so [data-campus-only] blocks (e.g. the
+     instructor teams) never flash the wrong campus. campus.js re-syncs this class on
+     load — it also derives the campus from the URL — and on every toggle. -->
+<script>try{if(localStorage.getItem('abi-campus')==='bronx')document.documentElement.classList.add('abi-campus-bronx');}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/effects.css?v=300">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Course", "name": "3 Hours Contagious Diseases Program", "description": "Home-study course on transmission of contagious diseases, sanitation and sterilization required for NY barber licensure.", "provider": {"@type": "TradeSchool", "name": "American Barber Institute", "url": "https://www.abi.edu"}, "offers": {"@type": "Offer", "price": "100", "priceCurrency": "USD", "category": "Tuition"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "onsite", "courseWorkload": "PT3H", "location": {"@type": "Place", "name": "American Barber Institute", "address": "48 West 39th Street, New York, NY 10018"}}, "totalHistoricalEnrollment": null, "timeRequired": "P1W"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.abi.edu/"}, {"@type": "ListItem", "position": 2, "name": "3-Hour Contagious Diseases Home Study", "item": "https://www.abi.edu/programs/contagious-diseases"}]}</script>
@@ -294,7 +298,7 @@
 <script src="../assets/js/effects.js?v=300" defer></script>
 <script src="../assets/js/landing.js?v=300" defer></script>
 <script src="../assets/js/upgrade.js?v=300" defer></script>
-<script src="../assets/js/campus.js?v=302" defer></script>
+<script src="../assets/js/campus.js?v=303" defer></script>
 <script src="../assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>

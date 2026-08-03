@@ -43,15 +43,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="../../assets/css/landing.css?v=310" as="style">
+<link rel="preload" href="../../assets/css/landing.css?v=311" as="style">
 <link rel="stylesheet" href="../../assets/css/style.css?v=300">
 <link rel="stylesheet" href="../../assets/css/brand.css?v=300">
-<link rel="stylesheet" href="../../assets/css/landing.css?v=310">
+<link rel="stylesheet" href="../../assets/css/landing.css?v=311">
 <link rel="stylesheet" href="../../assets/css/upgrade.css?v=300">
 <script src="../../assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
+<!-- Stamp the saved campus before first paint so [data-campus-only] blocks (e.g. the
+     instructor teams) never flash the wrong campus. campus.js re-syncs this class on
+     load — it also derives the campus from the URL — and on every toggle. -->
+<script>try{if(localStorage.getItem('abi-campus')==='bronx')document.documentElement.classList.add('abi-campus-bronx');}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/effects.css?v=300">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Modern-Day Barbering Problems & How to Overcome Them", "name": "Modern-Day Barbering Problems & How to Overcome Them", "inLanguage": "en-US", "isPartOf": {"@type": "Blog", "name": "American Barber Institute Blog", "url": "https://www.abi.edu/blog/"}, "datePublished": "2024-02-01", "dateModified": "2026-07-05", "image": {"@type": "ImageObject", "url": "https://www.abi.edu/assets/img/og-cover.jpg", "width": 1200, "height": 630}, "author": {"@type": "Person", "name": "Harold \"Barkim\" Brown", "jobTitle": "Lead Instructor", "url": "https://www.abi.edu/instructors", "worksFor": {"@type": "EducationalOrganization", "@id": "https://www.abi.edu/#organization", "name": "American Barber Institute"}}, "publisher": {"@type": "EducationalOrganization", "@id": "https://www.abi.edu/#organization", "name": "American Barber Institute", "logo": {"@type": "ImageObject", "url": "https://www.abi.edu/icon.png", "width": 512, "height": 512}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.abi.edu/blog/modern-day-barbering-problem-overcome-them"}, "articleSection": "Barbering Career", "keywords": "barber school NYC, barber career, barbering, American Barber Institute, NY barber license, master barber, career change, vocational training", "about": [{"@type": "Thing", "name": "Barbering"}, {"@type": "Thing", "name": "Career in Barbering"}, {"@type": "EducationalOrganization", "@id": "https://www.abi.edu/#organization"}], "wordCount": 353}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.abi.edu/"}, {"@type": "ListItem", "position": 2, "name": "Problemas de la barbería actual y cómo superarlos", "item": "https://www.abi.edu/es/blog/modern-day-barbering-problem-overcome-them"}]}</script>
@@ -230,7 +234,7 @@
 <script src="../../assets/js/effects.js?v=300" defer></script>
 <script src="../../assets/js/landing.js?v=300" defer></script>
 <script src="../../assets/js/upgrade.js?v=300" defer></script>
-<script src="../../assets/js/campus.js?v=302" defer></script>
+<script src="../../assets/js/campus.js?v=303" defer></script>
 <script src="../../assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>

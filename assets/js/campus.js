@@ -51,14 +51,26 @@ function withFade(applyFn,campus){
   },300);
 }
 
+/**
+ * markCampus — Stamps the active campus on <html> so CSS can scope whole content
+ * blocks to one campus via [data-campus-only]. The <head> inline script sets this
+ * from localStorage before first paint; this keeps it correct once the URL-derived
+ * campus is known and whenever the visitor uses the Manhattan/Bronx toggle.
+ */
+function markCampus(campus){
+  document.documentElement.classList.toggle("abi-campus-bronx", campus === "bronx");
+}
+
 /* ── Apply campus theme + phones + nav links ── */
 function _applyBronx(){
+  markCampus("bronx");
   updateLocToggle("bronx");
   swapPhones(BX_PHONES);
   rewriteProgramsLinks("bronx");
 }
 function _applyManhattan(){
   document.body.classList.remove("bx-gold");
+  markCampus("manhattan");
   updateLocToggle("manhattan");
   swapPhones(MN_PHONES);
   rewriteProgramsLinks("manhattan");

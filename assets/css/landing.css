@@ -3664,3 +3664,20 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
 .card-foot{flex-wrap:wrap;align-items:flex-start;row-gap:14px}
 .card-foot>.price{flex:1 1 auto}
 @media (max-width:380px){.card .link{font-size:.86rem}}
+
+/* v16.7 — About's #schedules now uses the same dark .tuition band as the
+   program pages, which puts it directly after the (also dark) #tour section.
+   Without a seam the two read as one long slab, so give any dark section that
+   follows another one a hairline. Applies generally; About is the only hit today. */
+section.dark + section.dark{border-top:1px solid rgba(255,255,255,.10)}
+
+/* v16.8 — campus-scoped content blocks.
+   [data-campus-only="manhattan"|"bronx"] shows a block only on that campus.
+   Driven by a class on <html> rather than inline styles so there is no flash
+   of the wrong team: a tiny inline script in <head> stamps the class from
+   localStorage before first paint, and campus.js keeps it in sync when the
+   visitor uses the Manhattan/Bronx toggle.
+   Default (no class, and no-JS) = Manhattan, matching campus.js's default. */
+[data-campus-only="bronx"]{display:none}
+html.abi-campus-bronx [data-campus-only="bronx"]{display:revert}
+html.abi-campus-bronx [data-campus-only="manhattan"]{display:none}

@@ -72,15 +72,19 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=310" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=311" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=300">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=310">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=311">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}}catch(e){{}}</script>
+<!-- Stamp the saved campus before first paint so [data-campus-only] blocks (e.g. the
+     instructor teams) never flash the wrong campus. campus.js re-syncs this class on
+     load — it also derives the campus from the URL — and on every toggle. -->
+<script>try{{if(localStorage.getItem('abi-campus')==='bronx')document.documentElement.classList.add('abi-campus-bronx');}}catch(e){{}}</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=300">
 {schema}
 </head>
@@ -242,7 +246,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
 <script src="{root}assets/js/landing.js?v=300" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
-<script src="{root}assets/js/campus.js?v=302" defer></script>
+<script src="{root}assets/js/campus.js?v=303" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>

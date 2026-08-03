@@ -43,15 +43,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="assets/css/landing.css?v=310" as="style">
+<link rel="preload" href="assets/css/landing.css?v=311" as="style">
 <link rel="stylesheet" href="assets/css/style.css?v=300">
 <link rel="stylesheet" href="assets/css/brand.css?v=300">
-<link rel="stylesheet" href="assets/css/landing.css?v=310">
+<link rel="stylesheet" href="assets/css/landing.css?v=311">
 <link rel="stylesheet" href="assets/css/upgrade.css?v=300">
 <script src="assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{localStorage.removeItem('abi-theme');localStorage.removeItem('abi-theme-user');}catch(e){}</script>
+<!-- Stamp the saved campus before first paint so [data-campus-only] blocks (e.g. the
+     instructor teams) never flash the wrong campus. campus.js re-syncs this class on
+     load — it also derives the campus from the URL — and on every toggle. -->
+<script>try{if(localStorage.getItem('abi-campus')==='bronx')document.documentElement.classList.add('abi-campus-bronx');}catch(e){}</script>
 <link rel="stylesheet" href="assets/css/effects.css?v=300">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Enroll at American Barber Institute", "description": "Enroll at ABI in 4 simple steps — from booking a campus tour to starting your first class.", "step": [{"@type": "HowToStep", "position": 1, "name": "Book a Campus Tour", "text": "Schedule a tour of our Manhattan or Bronx campus to see the facilities and meet instructors."}, {"@type": "HowToStep", "position": 2, "name": "Bring Your Documents", "text": "Bring a valid photo ID, proof of high school diploma or GED, and Social Security card."}, {"@type": "HowToStep", "position": 3, "name": "Choose Your Schedule", "text": "Pick from morning, afternoon, evening or weekend class schedules that fit your life."}, {"@type": "HowToStep", "position": 4, "name": "Start on the First Monday", "text": "Classes begin the first Monday of each month. Complete enrollment and start your barber career."}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.abi.edu/"}, {"@type": "ListItem", "position": 2, "name": "How to Get Started", "item": "https://www.abi.edu/how-to-get-started"}]}</script>
@@ -343,7 +347,7 @@
 <script src="assets/js/effects.js?v=300" defer></script>
 <script src="assets/js/landing.js?v=300" defer></script>
 <script src="assets/js/upgrade.js?v=300" defer></script>
-<script src="assets/js/campus.js?v=302" defer></script>
+<script src="assets/js/campus.js?v=303" defer></script>
 <script src="assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>

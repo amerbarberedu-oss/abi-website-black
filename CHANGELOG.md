@@ -8,6 +8,37 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **Instructors are now scoped to the visitor's campus** (2026-08-04) — the
+  Manhattan team shows on the Manhattan campus and the Bronx team on the Bronx
+  campus, instead of both always listing. Driven by a new generic
+  `[data-campus-only="manhattan"|"bronx"]` hook rather than the phone-specific
+  `data-mn-only` toggle, so any block can be campus-scoped from now on.
+  - Visibility comes from a class on `<html>`, not inline styles, and a tiny
+    inline script in `<head>` stamps it from `localStorage` **before first
+    paint** — otherwise a Bronx visitor would see the Manhattan team flash by
+    on every page load. `campus.js` re-syncs the class once the URL-derived
+    campus is known and on every toggle.
+  - Default (and no-JS) is Manhattan, matching `campus.js`'s own default. Both
+    teams stay in the HTML, so nothing is lost for search engines.
+  - King David's featured section is deliberately not scoped — he has taught
+    at every ABI location.
+  - The Bronx section picked up `class="alt"` so whichever team renders keeps
+    the same tint the Manhattan one always had.
+- **About's pricing section now uses the program pages' component**
+  (2026-08-04) — `#schedules` dropped the one-off light `.sched-card` grid for
+  the same dark `.tuition-grid` used on the 500-hour page: identical headline,
+  Plan A/B/C tags, tuition as the headline figure and the same five rows. One
+  pricing component sitewide instead of two that drifted.
+  - This puts a dark section directly after the (also dark) `#tour`, so
+    `section.dark + section.dark` now gets a hairline seam; without it the two
+    read as a single slab.
+  - The `.sched-*` CSS in `landing.css` is now unreferenced. Left in place
+    rather than deleted — harmless, and cheap to reuse.
+- **Thank-you page promises a callback in 30 minutes, not one business day**
+  (2026-08-04) — EN and ES. All funnel forms redirect here, so this covers
+  every lead surface.
+- Cache-bust versions bumped: `landing.css?v=311`, `campus.js?v=303`.
+
 - **Tuition, schedules and funding now lead every program page** (2026-08-03)
   — per client direction, pricing is ABI's strongest selling point and was
   buried third-from-top, below a description and a large photo. The dark
