@@ -8,6 +8,18 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **Thank-you page success tick is brand blue, not green** (2026-08-04) — the
+  `.ty-check` circle was the only stock-green element left on the card, sitting
+  between a blue step badge and a blue primary button. Now
+  `linear-gradient(135deg,#1b2fd9,#1322a8)` with a matching shadow, in line
+  with the one-blue rule the rest of the site follows.
+- **"See Payment Options" removed from the Master Barber closing CTA**
+  (2026-08-04) — per client. Dropped on all four variants (EN/ES ×
+  Manhattan/Bronx) so the twins don't drift; all three buttons pointed at
+  `/contact` anyway, and tuition now leads the page, so the button was
+  answering a question the page already opened with.
+- Cache-bust: `landing.css?v=312`.
+
 - **Instructors are now scoped to the visitor's campus** (2026-08-04) — the
   Manhattan team shows on the Manhattan campus and the Bronx team on the Bronx
   campus, instead of both always listing. Driven by a new generic

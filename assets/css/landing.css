@@ -3507,8 +3507,10 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
 .ty-logo{height:50px;width:auto;margin-bottom:1.3rem}
 .ty-check{
   width:86px;height:86px;border-radius:50%;display:grid;place-items:center;
-  background:linear-gradient(135deg,#22c55e,#15a34a);
-  box-shadow:0 14px 32px rgba(21,163,74,.42),inset 0 2px 0 rgba(255,255,255,.35);
+  /* brand blue, not the stock success green — matches .ty-step-n and .ty-btn--primary
+     on this same card, and the one-blue rule the rest of the site follows */
+  background:linear-gradient(135deg,#1b2fd9,#1322a8);
+  box-shadow:0 14px 32px rgba(27,47,217,.42),inset 0 2px 0 rgba(255,255,255,.35);
   animation:tyPop .55s cubic-bezier(.18,.89,.32,1.28) both}
 .ty-check svg{width:44px;height:44px;fill:none;stroke:#fff;stroke-width:3.2;
   stroke-linecap:round;stroke-linejoin:round;
