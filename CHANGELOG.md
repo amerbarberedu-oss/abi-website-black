@@ -8,6 +8,24 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **English "edu" form embeds refreshed from the client's current snippet**
+  (2026-08-04) — index, contact and jobs. Same form ID
+  (`WZjNHh9wcd1FTnlj0eCR`); what changed is `data-height` 757 → **819** and the
+  trailing space the client's `data-form-name`/`title` carry, kept verbatim as
+  the funnel builder already does for its own form names.
+  - **The iframe's own height now matches the form's** (540px → 819px). It had
+    been pinned at 540px and relied on `form_embed.js` to grow it — which fires
+    on some pages but not reliably, so a 819px form could sit in a 540px box
+    with its submit button out of view. The client's snippet says `height:100%`,
+    but `.ghl-form-wrap` has no height of its own, so `100%` would collapse to
+    zero; using the form's stated height gets the intent without that risk.
+    Verified rendering: home 650×819, contact 485×819, jobs 496×819.
+  - The Bronx swap in `build.py` had to move with it (its match strings were
+    the old name/height) and now carries two asserts, so the build fails loudly
+    instead of silently shipping Manhattan's form name on `/bronx` if the edu
+    embed changes again. Bronx renders 650×794.
+  - Bronx landing funnel height synced 757 → 794 to match the Bronx snippet.
+  - Spanish pages and the Manhattan/Russian/Albanian funnels untouched.
 - **`/bronx` now posts to the Bronx GHL form** (2026-08-04) —
   `v1SNzWsAZZVodCsnsDbe` ("02.GET TRAINED WITH ABI FORM - Bronx"), the same
   form the Bronx landing funnel already used, so both Bronx surfaces feed one

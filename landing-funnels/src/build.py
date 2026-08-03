@@ -272,7 +272,7 @@ def hero(p):
         ("manhattan", "es"): ("WXaur2ngXql4GTamJQOx", "02.GET TRAINED WITH ABI FORM - manhattan - ESP ", 757),
         ("manhattan", "ru"): ("S6vfeKEBsrhjGG09FlU1", "01.GET TRAINED WITH ABI FORM - ABI.com - RU LP", 840),
         ("manhattan", "sq"): ("LHuKB7w9PKtK9J0Gpul5", "01.GET TRAINED WITH ABI FORM - ABI.com - AL LP ", 840),
-        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx", 757),
+        ("bronx",     "en"): ("v1SNzWsAZZVodCsnsDbe", "02.GET TRAINED WITH ABI FORM - Bronx", 794),
         ("bronx",     "es"): ("z2ZXZPbcGx7u1XrAl6Zu", "02.GET TRAINED WITH ABI FORM - bronx - ESP", 757),
     }
     ghl_id, ghl_name, ghl_h = _GHL_FORMS[(p["campus"]["slug"], lang)]

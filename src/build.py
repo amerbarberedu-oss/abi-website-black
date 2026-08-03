@@ -1370,12 +1370,20 @@ def build():
         # funnel already uses, so both Bronx surfaces feed one pipeline.
         # EN only: the client supplied the English form, and es/bronx.html keeps the
         # Spanish "edu - ESP" form until they confirm a Spanish Bronx equivalent.
+        # The closing quote is part of the match on purpose: the edu form's name
+        # carries a trailing space (verbatim from the client's snippet) and the
+        # Bronx one does not, so matching to the quote swallows it.
         if out == 'bronx.html':
             body = (body
                     .replace('WZjNHh9wcd1FTnlj0eCR', 'v1SNzWsAZZVodCsnsDbe')
-                    .replace('01.GET TRAINED WITH ABI FORM - edu',
-                             '02.GET TRAINED WITH ABI FORM - Bronx')
-                    .replace('data-height="757"', 'data-height="794"'))
+                    .replace('01.GET TRAINED WITH ABI FORM - edu "',
+                             '02.GET TRAINED WITH ABI FORM - Bronx"')
+                    .replace('data-height="819"', 'data-height="794"')
+                    .replace('height:819px', 'height:794px'))
+            assert '02.GET TRAINED WITH ABI FORM - Bronx"' in body, \
+                'bronx form-name swap missed — did the edu embed change?'
+            assert 'data-height="794"' in body and 'height:794px' in body, \
+                'bronx form-height swap missed — did the edu embed change?'
         # Spanish twins carry their translated <title>/meta in ES_TITLE/ES_DESC
         # comments so translators own the meta; extract + strip them here.
         if lang == 'es':
