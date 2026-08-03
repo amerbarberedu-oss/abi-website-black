@@ -8,6 +8,18 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Added
+- **Both instructor pages are now in the menu** (2026-08-04) — `Instructors`
+  became an `Instructors ▾` dropdown listing *Manhattan Instructors* and
+  *Bronx Instructors*, with the matching collapsible group in the mobile
+  drawer. EN + ES. (The sitemap already carried both URLs — `build.py`
+  registers every page in `PAGES` automatically, so `/instructors/bronx` and
+  `/es/instructors/bronx` have been in `page-sitemap.xml` since the page was
+  created.)
+  - New `data-campus-lock` opt-out for `campus.js`: these two links name their
+    campus in the label, so rewriting them by campus would make the menu lie.
+    The `Instructors ▾` trigger itself is *not* locked and still follows the
+    selected campus, as does the footer link — matching what the footer's
+    Programs link already did.
 - **`/instructors/bronx` — a real page for the Bronx team** (2026-08-04) —
   replaces yesterday's approach of hiding the Bronx block on `/instructors`
   behind the campus toggle. The team now has its own linkable URL for ads and

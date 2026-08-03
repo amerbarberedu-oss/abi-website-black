@@ -246,7 +246,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
 <script src="{root}assets/js/landing.js?v=300" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
-<script src="{root}assets/js/campus.js?v=304" defer></script>
+<script src="{root}assets/js/campus.js?v=305" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>
@@ -1254,7 +1254,9 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}programs/50-hour-barber-refresher.html">Curso de Actualización</a>'
           f'<a href="{b}programs/contagious-diseases.html">Enfermedades Contagiosas</a>'
           f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCES-VR</a></span></span>'
-          f'<a href="{b}instructors.html">Instructores</a>'
+          f'<span class="nav-drop"><a href="{b}instructors.html" class="nav-drop-trigger">Instructores ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}instructors.html" data-campus-lock>Instructores de Manhattan</a>'
+          f'<a href="{b}instructors/bronx.html" data-campus-lock>Instructores del Bronx</a></span></span>'
           f'<a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Empleo ▾</a>'
@@ -1272,7 +1274,10 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}programs/contagious-diseases.html">Enfermedades Contagiosas</a>'
           f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a>'
           f'<a href="{b}access-vr-program.html">ACCES-VR</a></details>'
-          f'<a href="{b}instructors.html">Instructores</a><a href="{b}gallery.html">Galería</a>'
+          f'<details class="drawer-group"><summary>Instructores</summary>'
+          f'<a href="{b}instructors.html" data-campus-lock>Instructores de Manhattan</a>'
+          f'<a href="{b}instructors/bronx.html" data-campus-lock>Instructores del Bronx</a></details>'
+          f'<a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a><a href="{b}jobs.html">Empleo</a>'
           f'<a href="{b}resources.html">Recursos</a><a href="{b}schedules.html">Horarios</a><a href="{b}partners.html">Aliados</a>'
           f'<a href="{b}faq.html">Preguntas Frecuentes</a><a href="{b}blog/index.html">Blog</a>'
@@ -1287,7 +1292,9 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}programs/50-hour-barber-refresher.html">Barber Refresher Program</a>'
           f'<a href="{b}programs/contagious-diseases.html">Contagious Disease Program</a>'
           f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCES-VR</a></span></span>'
-          f'<a href="{b}instructors.html">Instructors</a>'
+          f'<span class="nav-drop"><a href="{b}instructors.html" class="nav-drop-trigger">Instructors ▾</a>'
+          f'<span class="nav-drop-menu"><a href="{b}instructors.html" data-campus-lock>Manhattan Instructors</a>'
+          f'<a href="{b}instructors/bronx.html" data-campus-lock>Bronx Instructors</a></span></span>'
           f'<a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a>'
           f'<span class="nav-drop"><a href="{b}jobs.html" class="nav-drop-trigger">Jobs ▾</a>'
@@ -1305,7 +1312,10 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}programs/contagious-diseases.html">Contagious Disease Program</a>'
           f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a>'
           f'<a href="{b}access-vr-program.html">ACCES-VR</a></details>'
-          f'<a href="{b}instructors.html">Instructors</a><a href="{b}gallery.html">Gallery</a>'
+          f'<details class="drawer-group"><summary>Instructors</summary>'
+          f'<a href="{b}instructors.html" data-campus-lock>Manhattan Instructors</a>'
+          f'<a href="{b}instructors/bronx.html" data-campus-lock>Bronx Instructors</a></details>'
+          f'<a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}jobs.html">Jobs</a>'
           f'<a href="{b}resources.html">Resources</a><a href="{b}schedules.html">Schedules</a><a href="{b}partners.html">Partners</a>'
           f'<a href="{b}faq.html">FAQs</a><a href="{b}blog/index.html">Blog</a>'

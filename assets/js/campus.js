@@ -99,6 +99,9 @@ function rewriteProgramsLinks(campus){
   var target=campus==="bronx"?"bronx.html":"manhattan.html";
   var mb=campus==="bronx"?"500-hour-master-barber-bronx":"500-hour-master-barber";
   document.querySelectorAll('a[href]').forEach(function(a){
+    // [data-campus-lock] links name their campus in the label ("Bronx
+    // Instructors"), so rewriting them by campus would make the menu lie.
+    if(a.hasAttribute("data-campus-lock")) return;
     var href=a.getAttribute("href")||"";
     var raw=href.split("?")[0].split("#")[0];
     if(/(^|\/)programs\/?(index\.html)?$/.test(raw)){
@@ -120,11 +123,12 @@ function rewriteProgramsLinks(campus){
       a.setAttribute("data-abi-programs-rewritten", campus);
       return;
     }
-    // /instructors <-> /instructors/bronx. Nav only, for the same reason as above:
-    // the two pages cross-link to each other in their body copy and those links
-    // must keep pointing at the other campus, not fold back on themselves.
+    // /instructors <-> /instructors/bronx. Site chrome only (nav + footer, the
+    // same reach the footer's Programs link already has): the two instructor
+    // pages cross-link to each other in their body copy, and those links must
+    // keep pointing at the other campus rather than folding back on themselves.
     var mi=raw.match(/(^|\/)instructors(\/bronx)?(\.html)?$/);
-    if(mi && a.closest(".mainnav, .nav-drawer")){
+    if(mi && a.closest(".mainnav, .nav-drawer, footer.site")){
       var base=raw.replace(/instructors(\/bronx)?(\.html)?$/, "instructors");
       a.setAttribute("href", base+(campus==="bronx"?"/bronx":"")+(mi[3]||""));
       a.setAttribute("data-abi-instructors-rewritten", campus);
