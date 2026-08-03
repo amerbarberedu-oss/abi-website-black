@@ -3631,3 +3631,36 @@ body.mhx-on .hdr-in > .logo{flex:0 0 auto!important}
 .plan .plan-rows .row-total b{font-size:1.05rem}
 /* v16.5b — replaces the spacing the removed formula line provided. */
 .plan .plan-rows{margin-bottom:1.2rem}
+
+/* ============================================================================
+   v16.6 — Pricing-first navigation.
+   (a) The mobile drawer gains a collapsible Programs group so the three
+       programs are one tap away, matching the desktop Programs ▾ dropdown.
+       Built on <details>/<summary> so it needs no JavaScript — and because
+       <summary> is not an <a>, landing.js's close-drawer-on-link-click
+       handler ignores it and the group expands instead of closing the menu.
+   (b) The program-card CTA changed from "View Program" to "View Tuition,
+       Schedules & Funding", which is ~3x wider. .card-foot now wraps so the
+       link drops onto its own row instead of overflowing the card; the link
+       keeps white-space:nowrap (style.css) so it never breaks mid-phrase.
+   ========================================================================== */
+.nav-drawer .drawer-group{border-top:1px solid rgba(15,20,32,.08)}
+.nav-drawer .drawer-group>summary{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  min-height:48px;padding:.95rem .4rem;cursor:pointer;list-style:none;
+  font-size:1.06rem;font-weight:600;color:var(--ink,#0f1420)}
+.nav-drawer .drawer-group>summary::-webkit-details-marker{display:none}
+/* chevron: points down when closed, up when open */
+.nav-drawer .drawer-group>summary::after{
+  content:"";flex:none;width:.5rem;height:.5rem;opacity:.5;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s ease}
+.nav-drawer .drawer-group[open]>summary{color:var(--blue)}
+.nav-drawer .drawer-group[open]>summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+/* sub-links sit indented under the group; they keep the shared .nav-drawer a
+   border-top, which reads as the divider row between each program */
+.nav-drawer .drawer-group>a{padding-left:1.35rem;font-size:1rem;font-weight:500}
+
+.card-foot{flex-wrap:wrap;align-items:flex-start;row-gap:14px}
+.card-foot>.price{flex:1 1 auto}
+@media (max-width:380px){.card .link{font-size:.86rem}}

@@ -69,9 +69,16 @@ function applyManhattan(){ withFade(_applyManhattan,"manhattan"); }
 /**
  * rewriteProgramsLinks — Rewrites /programs/ nav links to campus-specific pages.
  * e.g. /programs/ → /programs/manhattan.html or /programs/bronx.html
+ *
+ * Also swaps the Master Barber program link between its Manhattan and Bronx
+ * pages. The nav now links that program directly (Programs ▾ → Master Barber
+ * Program), so without this a Bronx visitor would land on Manhattan tuition.
+ * The 50-hour Refresher is Manhattan-only and has no Bronx twin, so it is
+ * deliberately left alone.
  */
 function rewriteProgramsLinks(campus){
   var target=campus==="bronx"?"bronx.html":"manhattan.html";
+  var mb=campus==="bronx"?"500-hour-master-barber-bronx":"500-hour-master-barber";
   document.querySelectorAll('a[href]').forEach(function(a){
     var href=a.getAttribute("href")||"";
     var raw=href.split("?")[0].split("#")[0];
@@ -80,6 +87,17 @@ function rewriteProgramsLinks(campus){
       var newHref=base+"/"+target;
       if(href.charAt(0)==="/"&&newHref.charAt(0)!=="/") newHref="/"+newHref;
       a.setAttribute("href", newHref);
+      a.setAttribute("data-abi-programs-rewritten", campus);
+      return;
+    }
+    // /programs/500-hour-master-barber[-bronx][.html] → the selected campus's page.
+    // Nav only: the All Programs page deliberately lists the Manhattan and Bronx
+    // pages side by side in its campus-split, and those must not collapse into one.
+    var m=raw.match(/(^|\/)programs\/500-hour-master-barber(-bronx)?(\.html)?$/);
+    if(m && a.closest(".mainnav, .nav-drawer")){
+      // keep whatever extension style the link already used — vercel.json sets
+      // cleanUrls, so a stray ".html" would cost a 308 redirect on every click
+      a.setAttribute("href", raw.replace(/500-hour-master-barber(-bronx)?(\.html)?$/, mb+(m[3]||"")));
       a.setAttribute("data-abi-programs-rewritten", campus);
     }
   });

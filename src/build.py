@@ -72,10 +72,10 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" href="{root}assets/css/landing.css?v=309" as="style">
+<link rel="preload" href="{root}assets/css/landing.css?v=310" as="style">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=300">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=300">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=309">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=310">
 <link rel="stylesheet" href="{root}assets/css/upgrade.css?v=300">
 <script src="{root}assets/js/analytics.js?v=6" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments);}};</script>
@@ -242,7 +242,7 @@ TEMPLATE = """<!DOCTYPE html>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
 <script src="{root}assets/js/landing.js?v=300" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
-<script src="{root}assets/js/campus.js?v=301" defer></script>
+<script src="{root}assets/js/campus.js?v=302" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
 <script src="/assets/js/chat.js?v=300" defer></script>
 </body>
@@ -259,7 +259,7 @@ ORG_SCHEMA = {
     "logo": {"@type": "ImageObject", "url": SITE_URL + "/icon.png", "width": 512, "height": 512},
     "image": SITE_URL + "/assets/img/og-cover.jpg",
     "foundingDate": "1996",
-    "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCESS-VR options, and job placement.",
+    "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCES-VR options, and job placement.",
     "slogan": "Become a Licensed Barber in 4 Months",
     "telephone": "+1-212-290-2289",
     "email": "admission@abi.edu",
@@ -981,7 +981,7 @@ PAGES = [
      "en", []),
     ("faq.html", "faq.html",
      "Frequently Asked Questions | American Barber Institute",
-     "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
+     "Answers about tuition costs, program length, schedules, age requirements, ACCES-VR, job placement, and why students choose ABI.",
      "en", ["FAQ_SCHEMA"]),
     ("schedules.html", "schedules.html",
      "Class Schedules & Holiday Calendar | American Barber Institute",
@@ -1017,7 +1017,7 @@ PAGES = [
      "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
      "500-Hour Master Barber Program — Manhattan | ABI NYC",
-     "Become a licensed Master Barber in 4 months at our Manhattan campus. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans.",
+     "Become a licensed Master Barber in 4 months at our Manhattan campus. Morning, afternoon or weekend schedules from $3,600 with weekly payment plans.",
      "en", [course_schema("500 Hour Master Barber Program",
         "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 5600)]),
     ("programs/500-hour-master-barber-bronx.html", "program-500-bronx.html",
@@ -1214,13 +1214,23 @@ _DEFAULT_BG = 'gallery/cut-05.jpg'
 def _shell_nav(b, root, lang):
     """Return (mainnav, drawer) matching the homepage nav layout:
     No Home link, Partners+Resources+Schedules inside Jobs ▾ dropdown,
-    Blog inside FAQs ▾ dropdown."""
+    Blog inside FAQs ▾ dropdown.
+
+    Programs ▾ lists the three individual programs alongside All Programs and
+    the two funding routes, so a student reaches a tuition page in one click.
+    The mobile drawer mirrors that exact tree through a <details class="drawer-group">
+    accordion — no JS needed, and because <summary> is not an <a>, the
+    close-on-link-click handler in landing.js leaves it alone."""
     if lang == 'es':
         mainnav = ('<nav class="mainnav" aria-label="Principal">'
           f'<a href="{b}index.html">Inicio</a>'
           f'<a href="{b}about.html">Nosotros</a>'
           f'<span class="nav-drop"><a href="{b}programs/index.html" class="nav-drop-trigger">Programas ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">Todos los Programas</a><a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">Todos los Programas</a>'
+          f'<a href="{b}programs/500-hour-master-barber.html">Programa Maestro Barbero</a>'
+          f'<a href="{b}programs/50-hour-barber-refresher.html">Curso de Actualización</a>'
+          f'<a href="{b}programs/contagious-diseases.html">Enfermedades Contagiosas</a>'
+          f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCES-VR</a></span></span>'
           f'<a href="{b}instructors.html">Instructores</a>'
           f'<a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a>'
@@ -1231,8 +1241,14 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}contact.html">Contacto</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
           f'<a href="{b}index.html">Inicio</a>'
-          f'<a href="{b}about.html">Nosotros</a><a href="{b}programs/index.html">Programas</a>'
-          f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a>'
+          f'<a href="{b}about.html">Nosotros</a>'
+          f'<details class="drawer-group"><summary>Programas</summary>'
+          f'<a href="{b}programs/index.html">Todos los Programas</a>'
+          f'<a href="{b}programs/500-hour-master-barber.html">Programa Maestro Barbero</a>'
+          f'<a href="{b}programs/50-hour-barber-refresher.html">Curso de Actualización</a>'
+          f'<a href="{b}programs/contagious-diseases.html">Enfermedades Contagiosas</a>'
+          f'<a href="{b}veterans.html">Veteranos y GI Bill&reg;</a>'
+          f'<a href="{b}access-vr-program.html">ACCES-VR</a></details>'
           f'<a href="{b}instructors.html">Instructores</a><a href="{b}gallery.html">Galería</a>'
           f'<a href="{b}haircuts.html">Cortes</a><a href="{b}jobs.html">Empleo</a>'
           f'<a href="{b}resources.html">Recursos</a><a href="{b}schedules.html">Horarios</a><a href="{b}partners.html">Aliados</a>'
@@ -1243,7 +1259,11 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}index.html">Home</a>'
           f'<a href="{b}about.html">About</a>'
           f'<span class="nav-drop"><a href="{b}programs/index.html" class="nav-drop-trigger">Programs ▾</a>'
-          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">All Programs</a><a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a></span></span>'
+          f'<span class="nav-drop-menu"><a href="{b}programs/index.html">All Programs</a>'
+          f'<a href="{b}programs/500-hour-master-barber.html">Master Barber Program</a>'
+          f'<a href="{b}programs/50-hour-barber-refresher.html">Barber Refresher Program</a>'
+          f'<a href="{b}programs/contagious-diseases.html">Contagious Disease Program</a>'
+          f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCES-VR</a></span></span>'
           f'<a href="{b}instructors.html">Instructors</a>'
           f'<a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a>'
@@ -1254,8 +1274,14 @@ def _shell_nav(b, root, lang):
           f'<a href="{b}contact.html">Contact</a></nav>')
         drawer = ('<nav class="nav-drawer"><div class="container">'
           f'<a href="{b}index.html">Home</a>'
-          f'<a href="{b}about.html">About</a><a href="{b}programs/index.html">Programs</a>'
-          f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a><a href="{b}access-vr-program.html">ACCESS-VR</a>'
+          f'<a href="{b}about.html">About</a>'
+          f'<details class="drawer-group"><summary>Programs</summary>'
+          f'<a href="{b}programs/index.html">All Programs</a>'
+          f'<a href="{b}programs/500-hour-master-barber.html">Master Barber Program</a>'
+          f'<a href="{b}programs/50-hour-barber-refresher.html">Barber Refresher Program</a>'
+          f'<a href="{b}programs/contagious-diseases.html">Contagious Disease Program</a>'
+          f'<a href="{b}veterans.html">Veterans &amp; GI Bill&reg;</a>'
+          f'<a href="{b}access-vr-program.html">ACCES-VR</a></details>'
           f'<a href="{b}instructors.html">Instructors</a><a href="{b}gallery.html">Gallery</a>'
           f'<a href="{b}haircuts.html">Haircuts</a><a href="{b}jobs.html">Jobs</a>'
           f'<a href="{b}resources.html">Resources</a><a href="{b}schedules.html">Schedules</a><a href="{b}partners.html">Partners</a>'

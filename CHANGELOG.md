@@ -8,6 +8,56 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **Tuition, schedules and funding now lead every program page** (2026-08-03)
+  — per client direction, pricing is ABI's strongest selling point and was
+  buried third-from-top, below a description and a large photo. The dark
+  `.tuition` band moved to position two on all four program pages (EN + ES),
+  directly under the page banner and ahead of the first photograph, so a
+  visitor sees a number before they see marketing. The site already carries no
+  hero photographs (v16.0 removed them), so the banner above it is the flat
+  light-blue gradient, not an image.
+  - Each plan card now answers the five questions students actually ask:
+    **Tuition** as the headline figure (it used to be the down payment),
+    then Down payment, Weekly payment, Payment plan and Program length.
+    Reuses the existing `.tuition` / `.plan-rows` component — no new
+    pricing CSS.
+  - Headlines are honest per program rather than copied: Master Barber
+    "3 Schedules. Flexible Payment Options. One Goal.", Refresher
+    "2 Schedules. Split Payments. One Goal." (it has no weekend class), and
+    Contagious Diseases "One Price. Study at Home. One Goal."
+  - **Contagious Diseases gained a tuition section it never had** — a single
+    $100 home-study card. Its `$100` photo badge was removed so the price
+    isn't stated twice.
+- **Programs menu now reaches a program in one click** (2026-08-03) — the
+  desktop `Programs ▾` dropdown lists Master Barber, Barber Refresher and
+  Contagious Disease alongside All Programs, Veterans & GI Bill® and ACCES-VR.
+  The mobile drawer, previously a flat list, gains a matching collapsible
+  `<details class="drawer-group">` group so both menus expose the identical
+  tree. `<details>` needs no JavaScript, and because `<summary>` is not an
+  `<a>` the close-drawer-on-link-click handler in `landing.js` leaves it alone.
+  - `campus.js` `rewriteProgramsLinks()` now also swaps the Master Barber link
+    between its Manhattan and Bronx pages, so the new direct nav link follows
+    the selected campus. Scoped to `.mainnav`/`.nav-drawer` — the All Programs
+    campus-split deliberately lists both pages side by side.
+- **Program-card CTA renamed to "View Tuition, Schedules & Funding"**
+  (2026-08-03) — "View Program" didn't advertise what was behind it. Red text
+  and blue underline are unchanged. The label is ~3x wider, so `.card-foot`
+  now wraps and the link drops to its own row rather than overflowing the card.
+- **Master Barber card rewritten** (2026-08-03) — meta reads `4 Months ·
+  30 hrs/wk` / `A.M. · P.M. · Weekend`, the description names the Midtown
+  clinic (Bronx card names the Bronx clinic) and states that tuition,
+  schedules and payment plans are included. Image swapped to
+  `gallery/cut-08.jpg`, a sharp landscape shot of a clean fade in progress on
+  a real client. 500 HOURS badge and "From $3,600" unchanged.
+- **`ACCESS-VR` corrected to `ACCES-VR` in the 14 places that still had it**
+  (2026-08-03) — the agency is Adult Career and Continuing Education
+  Services–Vocational Rehabilitation, and the site already used the correct
+  spelling in 111 other places. URLs and filenames unchanged.
+- **500-Hour Master Barber meta description said "from $4,600"** (2026-08-03)
+  — corrected to `$3,600`, which is what the hero chip, the program cards and
+  the afternoon plan have always said.
+- Cache-bust versions bumped: `landing.css?v=310`, `campus.js?v=302`.
+
 - **Remaining English barbering terms translated on the Russian and Albanian
   pages** (2026-08-01) — `Clipper Over Comb` / `Scissor Over Comb` describe an
   action, so they now read «Машинкой через расчёску» / «Ножницами через
