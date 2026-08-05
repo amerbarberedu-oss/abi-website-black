@@ -31,6 +31,7 @@ served on Vercel, in English and Spanish.
   - Main site EN (index, contact, jobs) → `WZjNHh9wcd1FTnlj0eCR` ("edu")
     — **`bronx.html` no longer uses this**; see 2026-08-04 below.
   - Main site ES (`es/*`) → `jqLpg40sM8C7RFT7Iq2Z` ("edu - ESP")
+    — **`es/bronx.html` no longer uses this**; see 2026-08-06 below.
   - Manhattan funnel EN → `2FvHzLvYji1iSmNmCP46`; ES → `WXaur2ngXql4GTamJQOx`
   - Bronx funnel EN → `v1SNzWsAZZVodCsnsDbe`; ES → `z2ZXZPbcGx7u1XrAl6Zu`
   - Funnel IDs are driven by `landing-funnels/src/build.py` (`_GHL_FORMS`, keyed by campus+language).

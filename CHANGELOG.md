@@ -8,6 +8,26 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **`/es/bronx` now posts to the Spanish Bronx GHL form** (2026-08-06) —
+  `z2ZXZPbcGx7u1XrAl6Zu` ("02.GET TRAINED WITH ABI FORM - bronx - ESP"),
+  closing the item left pending on 2026-08-04. Spanish-speaking Bronx leads
+  from the main site were landing in the shared "edu - ESP" form; now both
+  Spanish Bronx surfaces — this page and the Bronx Spanish funnel — feed one
+  pipeline, mirroring English.
+  - Same mechanism as the English swap: `es/bronx.html` is generated from the
+    **Spanish homepage** partial, so the override lives in `build.py` next to
+    the EN one. `/es/` itself must keep "edu - ESP".
+  - Form ID, name, iframe title and `data-height` (820 → 757) come from
+    `landing-funnels/src/build.py` `_GHL_FORMS[("bronx","es")]`, the existing
+    source of truth for the funnel that already uses this form.
+  - The iframe's own height moves with it (540px → 757px), the same fix the
+    English embeds got on 2026-08-04 — a 757px form in a 540px box hides its
+    submit button wherever `form_embed.js` doesn't fire.
+  - Three asserts guard the swap, so the build fails loudly rather than
+    shipping "edu - ESP" on `/es/bronx` if that embed ever changes.
+  - **Nothing else moved.** Verified across the built site: `es/index`,
+    `es/contact` and `es/jobs` stay on "edu - ESP"; EN pages, `/bronx` and the
+    Manhattan/Russian/Albanian funnels are untouched.
 - **English "edu" form embeds refreshed from the client's current snippet**
   (2026-08-04) — index, contact and jobs. Same form ID
   (`WZjNHh9wcd1FTnlj0eCR`); what changed is `data-height` 757 → **819** and the
@@ -42,7 +62,7 @@ when the client approves the official production release.
   - `es/bronx.html` deliberately still uses the Spanish "edu - ESP" form. A
     Spanish Bronx form exists (`z2ZXZPbcGx7u1XrAl6Zu`, used by the Bronx
     Spanish funnel) but the client specified the English form only — pending
-    their confirmation.
+    their confirmation. **Resolved 2026-08-06; see below.**
 
 ### Added
 - **Both instructor pages are now in the menu** (2026-08-04) — `Instructors`

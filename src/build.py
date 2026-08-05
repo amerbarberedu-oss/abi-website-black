@@ -1368,11 +1368,13 @@ def build():
         # Bronx leads must land in the Bronx GHL form, not the shared "edu" one the
         # homepage partial carries (client 2026-08-04). Same form the Bronx landing
         # funnel already uses, so both Bronx surfaces feed one pipeline.
-        # EN only: the client supplied the English form, and es/bronx.html keeps the
-        # Spanish "edu - ESP" form until they confirm a Spanish Bronx equivalent.
-        # The closing quote is part of the match on purpose: the edu form's name
+        # The client confirmed the Spanish half on 2026-08-06, so es/bronx.html now
+        # takes the Spanish Bronx form the same way — the ES homepage partial itself
+        # must keep "edu - ESP".
+        # EN: the closing quote is part of the match on purpose — the edu form's name
         # carries a trailing space (verbatim from the client's snippet) and the
-        # Bronx one does not, so matching to the quote swallows it.
+        # Bronx one does not, so matching to the quote swallows it. The ES pair has
+        # no such trailing space, so a plain substring match is right there.
         if out == 'bronx.html':
             body = (body
                     .replace('WZjNHh9wcd1FTnlj0eCR', 'v1SNzWsAZZVodCsnsDbe')
@@ -1384,6 +1386,24 @@ def build():
                 'bronx form-name swap missed — did the edu embed change?'
             assert 'data-height="794"' in body and 'height:794px' in body, \
                 'bronx form-height swap missed — did the edu embed change?'
+        # The iframe's own height moves with data-height for the same reason the
+        # English embeds stopped relying on form_embed.js (2026-08-04): the ES
+        # partial pins 540px, and a 757px form in a 540px box hides its submit
+        # button wherever the resize script doesn't fire.
+        elif out == 'es/bronx.html':
+            body = (body
+                    .replace('jqLpg40sM8C7RFT7Iq2Z', 'z2ZXZPbcGx7u1XrAl6Zu')
+                    .replace('01.GET TRAINED WITH ABI FORM - edu - ESP',
+                             '02.GET TRAINED WITH ABI FORM - bronx - ESP')
+                    .replace('data-height="820"', 'data-height="757"')
+                    .replace('width:100%;height:540px;border:none',
+                             'width:100%;height:757px;border:none'))
+            assert '02.GET TRAINED WITH ABI FORM - bronx - ESP' in body, \
+                'es/bronx form-name swap missed — did the edu - ESP embed change?'
+            assert 'z2ZXZPbcGx7u1XrAl6Zu' in body and 'jqLpg40sM8C7RFT7Iq2Z' not in body, \
+                'es/bronx form-id swap missed — did the edu - ESP embed change?'
+            assert 'data-height="757"' in body and 'height:757px' in body, \
+                'es/bronx form-height swap missed — did the edu - ESP embed change?'
         # Spanish twins carry their translated <title>/meta in ES_TITLE/ES_DESC
         # comments so translators own the meta; extract + strip them here.
         if lang == 'es':
