@@ -223,6 +223,15 @@ def hero(p):
 
     # 3. Features Chips
     features_list = tr(p, D.HERO_FEATURES)
+    # The wallet chip names VA; the Bronx campus is not VA-approved, so drop it there.
+    if p["campus"]["slug"] == "bronx":
+        _before = list(features_list)
+        features_list = [(t.replace("ACCES-VR, VA y más", "ACCES-VR y más")
+                           .replace("ACCES-VR, VA & more", "ACCES-VR & more")
+                           .replace("ACCES-VR, VA", "ACCES-VR"), ic)
+                         for t, ic in features_list]
+        assert features_list != _before, \
+            "bronx hero chip swap missed — did HERO_FEATURES change?"
 
     def _feat_chip(t, ic):
         if "|" in t:
@@ -485,7 +494,9 @@ def section_modules(p):
 # ── TUITION ──────────────────────────────────────────────────────────
 def section_tuition(p):
     eb, ti = D.TUITION_HEAD[p["lang"]]
-    note = D.TUITION_NOTE[p["lang"]]
+    # Bronx is not VA-approved — its note keeps ACCES-VR and points VA at Manhattan.
+    note = (D.TUITION_NOTE_BRONX if p["campus"]["slug"] == "bronx"
+            else D.TUITION_NOTE)[p["lang"]]
     popular = tr(p, D.POPULAR_BADGE)
     LBL = tr(p, D.TUITION_LABELS)
     cards = ""
@@ -711,8 +722,8 @@ def section_faq(p):
     eb, ti = D.FAQ_HEAD[p["lang"]]
     items = "".join(
         '<details class="lf-rv"><summary>%s</summary><div class="lf-faq__a">%s</div></details>'
-        % (h(q), h(a)) for q, a in D.faq(p["lang"], p["phone"][1],
-                                          cf(p, "name"))
+        % (h(q), h(a)) for q, a in D.faq(p["lang"], p["phone"][1], cf(p, "name"),
+                                          p["campus"]["slug"] == "bronx")
     )
     return ('<section class="lf-section lf-section--alt"><div class="lf-wrap">%s'
             '<div class="lf-faq">%s</div></div></section>\n'
@@ -819,7 +830,9 @@ def page_head(p):
              "reviewBody": r["q"]}
             for r in D.REVIEWS_BY_CAMPUS[campus_slug][p["lang"]]
         ],
-        "paymentAccepted": ["Cash", "Credit Card", "Financial Aid", "GI Bill", "ACCES-VR"],
+        "paymentAccepted": (["Cash", "Credit Card", "Financial Aid", "ACCES-VR"]
+                            if campus_slug == "bronx" else
+                            ["Cash", "Credit Card", "Financial Aid", "GI Bill", "ACCES-VR"]),
     }
 
     # 2) Course
@@ -856,7 +869,8 @@ def page_head(p):
         "mainEntity": [
             {"@type": "Question", "name": q,
              "acceptedAnswer": {"@type": "Answer", "text": a}}
-            for q, a in D.faq(p["lang"], p["phone"][1], campus_name)
+            for q, a in D.faq(p["lang"], p["phone"][1], campus_name,
+                              campus_slug == "bronx")
         ]
     }
 

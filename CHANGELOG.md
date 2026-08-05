@@ -8,6 +8,47 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Changed
+- **The Bronx campus no longer advertises VA / GI Bill® benefits, and no longer
+  offers the 50-Hour Refresher** (2026-08-06) — the client confirmed the Bronx
+  campus is not VA-approved and does not run the refresher course. ACCES-VR
+  funding is real there and stays everywhere it appeared.
+  - Every Bronx surface that claimed "Post-9/11 GI Bill® and VA benefits
+    accepted" now says the opposite, and says where VA *is* accepted: *"VA
+    benefits and the Post-9/11 GI Bill® are not accepted at the Bronx campus —
+    they are accepted at our Manhattan campus."* Spanish twin in kind.
+  - `/bronx` and `/es/bronx` reuse the **Manhattan homepage partial verbatim**,
+    so their VA copy can only change in `build.py`. Six swaps per language —
+    hero chip, reel bullet, feature tile, tuition note and FAQs 01 and 07 —
+    live in `BRONX_VA_SWAPS`, each asserting its source string still exists so
+    a homepage reword fails the build instead of quietly restoring VA copy on a
+    Bronx page.
+  - **Bronx pages drop "Veterans & GI Bill®" and "Barber Refresher Program"
+    from the Programs ▾ menu and the mobile drawer** (`BRONX_OUTS`, seven pages
+    plus Spanish twins). Nothing on a Bronx page routes to the VA page any
+    more — the client's specific complaint. Manhattan keeps both.
+  - `/programs/bronx` and `/programs/500-hour-master-barber-bronx`: funding
+    lines keep ACCES-VR and gain the Manhattan-only sentence. Both also had
+    their ACCES-VR **and** GI Bill links pointing at the generic
+    `resources.html`; the surviving link now goes to `access-vr-program.html`,
+    the same class of bug fixed elsewhere on 2026-07-xx.
+  - `/barber-school-bronx-new-york` and `/best-barber-school-in-bronx`: the
+    50-Hour Refresher card is deleted (+ Spanish). The `res-grid` is
+    `auto-fit`, so two cards fill the row with no orphan gap.
+  - **`/master-barber-program-bronx` funnel** — the generator already branched
+    on `campus["slug"]`, so the same lever now drives the tuition note
+    (`TUITION_NOTE_BRONX`), both funding FAQs (`faq(..., is_bronx=True)`, which
+    asserts its substitutions landed), the hero wallet chip, and
+    `paymentAccepted` in the LocalBusiness JSON-LD. The visible accordion and
+    the FAQPage structured data move together.
+  - `/programs/50-hour-barber-refresher` loses its "Veterans GI Bill®" funding
+    link on the client's separate instruction; ACCES-VR stays.
+  - **Nothing on the Manhattan side moved.** Verified by diff: `index.html`,
+    `programs/manhattan.html`, `programs/500-hour-master-barber.html`,
+    `veterans.html`, `va-approved-job-training-program.html`,
+    `financial-aid.html` and the Manhattan/Russian/Albanian funnels are
+    untouched — VA benefits are real at Manhattan. The site-wide organisation
+    JSON-LD also keeps its GI Bill entries: it describes ABI as a whole and is
+    explicitly scoped to "Midtown Manhattan".
 - **`/es/bronx` now posts to the Spanish Bronx GHL form** (2026-08-06) —
   `z2ZXZPbcGx7u1XrAl6Zu` ("02.GET TRAINED WITH ABI FORM - bronx - ESP"),
   closing the item left pending on 2026-08-04. Spanish-speaking Bronx leads

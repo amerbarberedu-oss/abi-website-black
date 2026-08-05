@@ -1325,6 +1325,75 @@ def _shell_nav(b, root, lang):
 # outputs that have a Spanish twin (filled from PAGES at build time)
 ES_TWINS = {o[3:] for (o, *_rest) in PAGES if o.startswith('es/')}
 
+# ── Bronx is not VA-approved (client 2026-08-06) ──────────────────────
+# ACCES-VR funding is real at 121 Westchester Square, but Post-9/11 GI Bill®
+# and VA benefits are accepted at the Manhattan campus only. Every Bronx
+# surface therefore keeps ACCES-VR, drops the VA/GI Bill® claim, and says
+# where VA *is* accepted. The Bronx campus also does not run the 50-Hour
+# Refresher, so Bronx pages must not link to it either.
+#
+# /bronx and /es/bronx reuse the Manhattan homepage partial verbatim, so their
+# VA copy can only be swapped here. Each swap asserts its source string still
+# exists — if someone rewords the homepage, the build fails loudly instead of
+# quietly leaving "VA benefits accepted" on a Bronx page.
+_BX_VA_EN = ('VA benefits and the Post-9/11 GI Bill® are not accepted at the Bronx '
+             'campus — they are accepted at our Manhattan campus.')
+_BX_VA_EN_FAQ = ('VA benefits and the Post-9/11 GI Bill® are not available at the Bronx '
+                 'campus — they are accepted at our Manhattan campus.')
+_BX_VA_ES = ('Los beneficios de la VA y el GI Bill® Post-9/11 no se aceptan en la sede '
+             'del Bronx — se aceptan en nuestra sede de Manhattan.')
+_BX_VA_ES_FAQ = ('Los beneficios de la VA y el GI Bill® Post-9/11 no están disponibles '
+                 'en la sede del Bronx — se aceptan en nuestra sede de Manhattan.')
+
+BRONX_VA_SWAPS = {
+    'en': [
+        ('<b>Financial Assistance &mdash; ACCES-VR, VA</b>',
+         '<b>Financial Assistance &mdash; ACCES-VR</b>'),
+        ('<span>Financial aid — ACCES-VR, GI Bill® and VA</span>',
+         '<span>Financial aid — ACCES-VR</span>'),
+        ('<h3>Financial Assistance</h3><p>ACCES-VR, VA & more</p>',
+         '<h3>Financial Assistance</h3><p>ACCES-VR & more</p>'),
+        ('ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.',
+         'ACCES-VR financial assistance available. ' + _BX_VA_EN),
+        ('Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted.',
+         'Books and tools are extra. ACCES-VR funding is accepted. ' + _BX_VA_EN_FAQ),
+        ('with disabilities; Post-9/11 GI Bill® and VA benefits are accepted; NYS Department of Labor '
+         'grants may apply; and every plan includes weekly payments.',
+         'with disabilities; NYS Department of Labor grants may apply; and every plan includes '
+         'weekly payments. ' + _BX_VA_EN_FAQ),
+    ],
+    'es': [
+        ('<b>Asistencia Financiera &mdash; ACCES-VR, VA</b>',
+         '<b>Asistencia Financiera &mdash; ACCES-VR</b>'),
+        ('<span>Ayuda financiera: ACCES-VR, GI Bill y VA</span>',
+         '<span>Ayuda financiera: ACCES-VR</span>'),
+        ('<h3>Asistencia Financiera</h3><p>ACCES-VR, VA y más</p>',
+         '<h3>Asistencia Financiera</h3><p>ACCES-VR y más</p>'),
+        ('Asistencia financiera ACCES-VR disponible. Beneficios de Post-9/11 GI Bill® y VA aceptados.',
+         'Asistencia financiera ACCES-VR disponible. ' + _BX_VA_ES),
+        ('Libros y herramientas aparte. Se acepta ACCES-VR, Post-9/11 GI Bill® y beneficios de VA.',
+         'Libros y herramientas aparte. Se acepta ACCES-VR. ' + _BX_VA_ES_FAQ),
+        ('con discapacidades; se aceptan Post-9/11 GI Bill® y beneficios de VA; pueden aplicar '
+         'subvenciones del Departamento de Trabajo de NY; y todos los planes incluyen pagos semanales.',
+         'con discapacidades; pueden aplicar subvenciones del Departamento de Trabajo de NY; y todos '
+         'los planes incluyen pagos semanales. ' + _BX_VA_ES_FAQ),
+    ],
+}
+
+# Pages that belong to the Bronx campus. Their Programs ▾ menu and mobile
+# drawer drop "Veterans & GI Bill®" (nothing on a Bronx page should route to
+# the VA page) and "Barber Refresher Program" (Manhattan-only course).
+# Listed without the 'es/' prefix — the Spanish twins are matched by stripping it.
+BRONX_OUTS = {
+    'bronx.html',
+    'programs/bronx.html',
+    'programs/500-hour-master-barber-bronx.html',
+    'instructors/bronx.html',
+    'barber-school-bronx-new-york.html',
+    'best-barber-school-in-bronx.html',
+    'barbershop-bronx.html',
+}
+
 def build():
     written = []
     for out, partial, title, desc, lang, schemas in PAGES:
@@ -1365,6 +1434,15 @@ def build():
             body = body.replace(
                 'https://www.google.com/maps?q=American%20Barber%20Institute%2C%2048%20West%2039th%20Street%2C%20New%20York%2C%20NY%2010018&z=16&output=embed',
                 'https://www.google.com/maps?q=American%20Barber%20Institute%2C%20121%20Westchester%20Square%2C%20Bronx%2C%20NY%2010461&z=16&output=embed')
+            # ACCES-VR stays; VA / Post-9/11 GI Bill® is Manhattan-only. See BRONX_VA_SWAPS.
+            for _old, _new in BRONX_VA_SWAPS[lang]:
+                assert _old in body, \
+                    f'bronx VA swap missed in {partial} — did the homepage copy change? {_old[:70]!r}'
+                body = body.replace(_old, _new)
+            assert not any(s in body for s in
+                           ('VA benefits accepted', 'VA benefits are accepted',
+                            'beneficios de VA', 'beneficios de la VA aceptados')), \
+                f'{out} still claims VA benefits are accepted after the Bronx swaps'
         # Bronx leads must land in the Bronx GHL form, not the shared "edu" one the
         # homepage partial carries (client 2026-08-04). Same form the Bronx landing
         # funnel already uses, so both Bronx surfaces feed one pipeline.
@@ -1487,6 +1565,17 @@ def build():
                           '<a class="is-active" aria-current="true" href="%s%s" data-short="EN">English</a><a href="%s%s" data-short="ES">Español</a></div>'
                           % (root, out, root, es_twin))
         nav_main, nav_drawer = _shell_nav(navbase, root, lang)
+        # Bronx pages must not offer the VA page or the Manhattan-only refresher.
+        if out.replace('es/', '', 1) in BRONX_OUTS:
+            _vet_label = 'Veteranos y GI Bill&reg;' if lang == 'es' else 'Veterans &amp; GI Bill&reg;'
+            _ref_label = 'Curso de Actualización' if lang == 'es' else 'Barber Refresher Program'
+            _drop = (f'<a href="{navbase}veterans.html">{_vet_label}</a>',
+                     f'<a href="{navbase}programs/50-hour-barber-refresher.html">{_ref_label}</a>')
+            for _link in _drop:
+                assert _link in nav_main and _link in nav_drawer, \
+                    f'bronx nav trim missed on {out} — did _shell_nav change? {_link!r}'
+                nav_main = nav_main.replace(_link, '')
+                nav_drawer = nav_drawer.replace(_link, '')
         # ── i18n text for template sections ──
         if lang == 'es':
             i18n = dict(

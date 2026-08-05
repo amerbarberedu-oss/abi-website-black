@@ -263,6 +263,17 @@ TUITION_NOTE = {
     "en": "Every plan includes NY State Board Exam prep, hands-on training and job-placement support. Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
     "es": "Cada plan incluye preparación para el examen del Estado de NY, entrenamiento práctico y apoyo de colocación laboral. Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI u otros proveedores. Asistencia financiera ACCES-VR disponible. Se aceptan beneficios del GI Bill® Post-9/11 y de la VA.",
 }
+# The Bronx campus is not VA-approved (client 2026-08-06): ACCES-VR stays, the
+# VA/GI Bill® claim comes off, and the note says where VA *is* accepted. Only
+# the Bronx funnel uses these — Manhattan, Russian and Albanian keep the above.
+BRONX_VA_NOTE = {
+    "en": "VA benefits and the Post-9/11 GI Bill® are not accepted at the Bronx campus — they are accepted at our Manhattan campus.",
+    "es": "Los beneficios de la VA y el GI Bill® Post-9/11 no se aceptan en la sede del Bronx — se aceptan en nuestra sede de Manhattan.",
+}
+TUITION_NOTE_BRONX = {
+    "en": "Every plan includes NY State Board Exam prep, hands-on training and job-placement support. Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. " + BRONX_VA_NOTE["en"],
+    "es": "Cada plan incluye preparación para el examen del Estado de NY, entrenamiento práctico y apoyo de colocación laboral. Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI u otros proveedores. Asistencia financiera ACCES-VR disponible. " + BRONX_VA_NOTE["es"],
+}
 
 # ─── Entrance requirements (verbatim) ────────────────────────────────
 REQUIREMENTS = {
@@ -442,7 +453,7 @@ LOC_OPTS_BY_CAMPUS = {
 
 
 # ─── FAQ (verbatim — all 8 Q&As, phone + campus swapped per page) ────
-def faq(lang, phone_disp, campus_name):
+def _faq_base(lang, phone_disp, campus_name):
     if lang == "es":
         return [
             ("¿Cuánto cuesta la escuela de barbería en Nueva York?",
@@ -518,6 +529,47 @@ def faq(lang, phone_disp, campus_name):
         ("When do classes start?",
          "New classes begin the first Monday of every month at our %s. Call %s to reserve your seat — classes fill fast." % (campus_name, phone_disp)),
     ]
+
+# Two of the eight answers name the GI Bill®/VA. On the Bronx funnel they lose
+# that claim and gain the Manhattan-only line instead; ACCES-VR is untouched.
+# Only EN and ES need this — the RU and SQ funnels are Manhattan pages.
+_BRONX_FAQ_SUBS = {
+    "en": [
+        ("ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted.",
+         "ACCES-VR funding is accepted. " + BRONX_VA_NOTE["en"]),
+        ("with disabilities; Post-9/11 GI Bill® and VA benefits are accepted; NYS Department of Labor "
+         "grants may apply; and every plan includes weekly payments.",
+         "with disabilities; NYS Department of Labor grants may apply; and every plan includes weekly "
+         "payments. " + BRONX_VA_NOTE["en"]),
+    ],
+    "es": [
+        ("Se aceptan fondos de ACCES-VR, el GI Bill® Post-9/11 y beneficios de la VA.",
+         "Se aceptan fondos de ACCES-VR. " + BRONX_VA_NOTE["es"]),
+        ("con discapacidades; se aceptan el GI Bill® Post-9/11 y beneficios de la VA; pueden aplicar "
+         "subvenciones del Departamento de Trabajo del Estado de NY; y cada plan incluye pagos semanales.",
+         "con discapacidades; pueden aplicar subvenciones del Departamento de Trabajo del Estado de NY; "
+         "y cada plan incluye pagos semanales. " + BRONX_VA_NOTE["es"]),
+    ],
+}
+
+
+def faq(lang, phone_disp, campus_name, is_bronx=False):
+    items = _faq_base(lang, phone_disp, campus_name)
+    if not is_bronx:
+        return items
+    subs = _BRONX_FAQ_SUBS.get(lang, [])
+    out, hits = [], 0
+    for q, a in items:
+        for old, new in subs:
+            if old in a:
+                a, hits = a.replace(old, new), hits + 1
+        out.append((q, a))
+    assert hits == len(subs), \
+        'Bronx FAQ swap missed for lang=%s (%d/%d) — did the answer copy change?' % (
+            lang, hits, len(subs))
+    return out
+
+
 FAQ_HEAD = {
     "en": ("FAQs", "Barber School Questions, Answered"),
     "es": ("Preguntas Frecuentes", "Preguntas sobre la Escuela de Barbería, Respondidas"),
