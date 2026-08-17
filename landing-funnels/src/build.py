@@ -1001,7 +1001,7 @@ def mobile_cta_bar(p):
 def page_tail():
     return (
         '<script src="/assets/js/funnels.js?v=%s" defer></script>\n'
-        '<script src="/assets/js/chat.js?v=300" defer></script>\n'
+        '<script src="/assets/js/chat.js?v=301" defer></script>\n'
         '</body>\n</html>\n'
     ) % (JS_V,)
 

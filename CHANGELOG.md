@@ -8,6 +8,20 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Added
+- **TikTok joins the DM channel list** (2026-08-18) — client request; this was
+  what they actually meant by "the floating icons for dm". `assets/js/chat.js`
+  builds two surfaces from one config and both now carry five channels
+  (SMS, Instagram, WhatsApp, Messenger, TikTok):
+  - the **desktop floating rail** on the left edge (`buildRail()`, shown ≥1081px)
+  - the **chat panel** opened from the mobile bottom bar's "Text Us" button
+  - Added `CFG.tiktok`, `IC.tt`, `T.tt_t/tt_s` (EN + ES), and the
+    `.abichat-ic--tt` / `.abichat-rail--tt` gradients. Clicks report through the
+    existing `track()` call as channel `tiktok`, so they show up in GA4
+    alongside the other four.
+  - **The link opens the TikTok profile, not a DM thread** — TikTok has no
+    public deep link that opens a message compose view the way `ig.me/m/…` and
+    `m.me/…` do. Visitors tap through to the profile and message from there.
+  - `chat.js?v=` bumped 300 → 301 across all five script tags.
 - **TikTok joins the social icon row, site-wide** (2026-08-18) — client request.
   The icon sits between YouTube and Pinterest in every footer that already
   carried the set, so it appears on desktop and mobile alike (the row is one
