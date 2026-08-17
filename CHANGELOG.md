@@ -7,6 +7,30 @@ when the client approves the official production release.
 
 ## [Unreleased]
 
+### Added
+- **TikTok joins the social icon row, site-wide** (2026-08-18) — client request.
+  The icon sits between YouTube and Pinterest in every footer that already
+  carried the set, so it appears on desktop and mobile alike (the row is one
+  responsive `.socials` block; there is no separate mobile-only variant).
+  - Five sources carry a social row and all five were updated: the shell footer
+    in `src/build.py` (every interior page), the homepage/Bronx footers in
+    `src/pages/index.html` and `es-index.html`, the dormant regional-landing
+    generator `src/build_landing_pages.py`, and the funnel footer in
+    `landing-funnels/src/build.py`. 125 built pages now carry the link.
+  - `landing.css` gains `.soc-tt` — the cyan/black/magenta wash for the hover
+    slide-up, matching the per-provider brand colours already there. The funnel
+    `.lf-soc` style is provider-agnostic, so `funnels.css` needed nothing and
+    `CSS_V` stays at 75. `landing.css?v=` bumped 312 → 313 (`/assets` is
+    immutable for a year).
+  - The glyph uses `viewBox="-2 -2 28 28"` rather than the usual `0 0 24 24`:
+    the TikTok mark fills its box edge to edge, and at the shared 21px slot it
+    rendered ~21px tall against 13–18px for its neighbours. The inset brings it
+    to 15.6 × 18.0px, in line with Instagram, X and Pinterest.
+  - **`sameAs` now points at `@americanbarberins`** (both the org schema in
+    `src/build.py` and the funnel `SAME_AS`). The org schema previously listed
+    `tiktok.com/@americanbarberinstitute`, which does not match the handle the
+    client supplied; the funnel schema had no TikTok entry at all.
+
 ### Changed
 - **The Bronx campus no longer advertises VA / GI Bill® benefits, and no longer
   offers the 50-Hour Refresher** (2026-08-06) — the client confirmed the Bronx
