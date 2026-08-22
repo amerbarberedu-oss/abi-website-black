@@ -8,6 +8,40 @@ when the client approves the official production release.
 ## [Unreleased]
 
 ### Added
+- **Canonical class start-date list** (2026-08-23) — the client supplied the real
+  start dates through Dec 2027, and three of them are **Tuesdays**, not Mondays:
+  **Tue Sep 8 2026** (Labor Day falls on Mon Sep 7), **Tue Jul 6 2027**
+  (Independence Day observed Mon Jul 5) and **Tue Sep 7 2027** (Labor Day
+  Mon Sep 6). Every surface used to derive the date from a plain "first Monday
+  of the month" calculation, so all of them were a day early on those months —
+  and the schedules page contradicted itself by listing Mon Sep 7 2026 as both a
+  start date and a Labor Day closure.
+  - New `assets/js/start-dates.js` holds the published table plus `next()`,
+    `upcoming()` and `startFor()`. It is the **single source of truth**; add or
+    change a date there and nothing else needs touching.
+  - New `src/start_dates.py` parses that same table so the Python builders bake
+    identical dates into the generated HTML.
+  - Months past the published list fall back to the standing rule — first Monday,
+    pushed to Tuesday when an observed federal holiday (New Year's Day,
+    Independence Day, Labor Day) lands on it. That is why the 2028 column now
+    reads **Tue Sep 5** instead of the Labor-Day Monday it used to show.
+  - Wired through `assets/js/main.js` (`[data-start-date]` + countdown),
+    `assets/js/landing.js` (`[data-next-start]` + the `[data-start-dates]`
+    pills), `assets/js/funnels.js` (funnel countdown roll-forward),
+    `src/build.py`, `src/build_landing_pages.py` and
+    `landing-funnels/src/build.py`. Each JS entry point keeps a defensive
+    first-Monday fallback if `start-dates.js` fails to load.
+  - `src/build.py` now also bakes the homepage/Bronx hero (`data-next-start` and
+    the `data-cd-*` cells) — those were frozen at "Monday, July 6, 2026" in the
+    no-JS view, over a year stale.
+  - Funnel countdown targets rebuilt from `2026-09-07` to `2026-09-08`.
+  - `start-dates.js?v=1` added ahead of `main.js` / `landing.js` / `funnels.js`
+    on every page; `main.js` and `landing.js` bumped 300 → 301, funnel
+    `JS_V` 17 → 18.
+  - The schedules page's "first Monday of every month" line (EN + ES) now says
+    the start moves to Tuesday when a federal holiday lands on that Monday, so
+    the copy matches the Tuesday rows in the table.
+
 - **TikTok joins the DM channel list** (2026-08-18) — client request; this was
   what they actually meant by "the floating icons for dm". `assets/js/chat.js`
   builds two surfaces from one config and both now carry five channels

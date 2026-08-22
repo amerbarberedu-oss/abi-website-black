@@ -24,11 +24,13 @@
 
   /* ───── COUNTDOWN ─────────────────────────────────────────────────────
      Each .lf-cd element carries data-target="YYYY-MM-DD" for the date that
-     starts everything. We additionally roll the target forward to the
-     first Monday of the NEXT month if today is past it — that's how the
-     "5-year" promise is met: pure date math, never hard-coded.
+     starts everything. Once that date passes we roll the target forward to
+     the next published start date (assets/js/start-dates.js), so the funnel
+     countdowns stay correct for years without a redeploy.
   */
   function firstMondayOfNextMonth(after) {
+    if (window.ABIStartDates) return window.ABIStartDates.next(after);
+    // Defensive fallback if start-dates.js failed to load.
     var y = after.getFullYear(), m = after.getMonth() + 1;
     if (m > 11) { m = 0; y += 1; }
     var d = new Date(y, m, 1);

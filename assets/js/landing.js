@@ -12,11 +12,12 @@
      success only on response.ok and an error message otherwise.      */
   var FORM_ENDPOINT = 'https://formsubmit.co/ajax/admission@abi.edu';
 
-  /* ── Next start date: first Monday of next month ───────── */
+  /* ── Next start date (canonical list in start-dates.js) ── */
   function nextFirstMonday() {
     var now = new Date();
+    if (window.ABIStartDates) return window.ABIStartDates.next(now);
+    // Defensive fallback if start-dates.js failed to load: first Monday ahead.
     var d = new Date(now.getFullYear(), now.getMonth(), 1);
-    // first Monday of current month
     while (d.getDay() !== 1) d.setDate(d.getDate() + 1);
     if (d <= now) {
       d = new Date(now.getFullYear(), now.getMonth() + 1, 1);
@@ -219,18 +220,23 @@ document.querySelectorAll('.yt').forEach(function (f) {
   }, { once: true });
 });
 
-/* ── Upcoming start dates (first Monday of each month) ── */
+/* ── Upcoming start dates (canonical list in start-dates.js) ── */
 (function () {
   var host = document.querySelector('[data-start-dates]');
   if (!host) return;
   var lang = document.documentElement.lang === 'es' ? 'es-US' : 'en-US';
   var fmt = new Intl.DateTimeFormat(lang, { weekday: 'short', month: 'short', day: 'numeric' });
-  var out = [], d = new Date(), m = d.getMonth(), y = d.getFullYear();
-  while (out.length < 6) {
-    var c = new Date(y, m, 1);
-    while (c.getDay() !== 1) c.setDate(c.getDate() + 1);
-    if (c > new Date()) out.push(c);
-    m++; if (m > 11) { m = 0; y++; }
+  var out = [];
+  if (window.ABIStartDates) {
+    out = window.ABIStartDates.upcoming(6);
+  } else {
+    var d = new Date(), m = d.getMonth(), y = d.getFullYear();
+    while (out.length < 6) {
+      var c = new Date(y, m, 1);
+      while (c.getDay() !== 1) c.setDate(c.getDate() + 1);
+      if (c > new Date()) out.push(c);
+      m++; if (m > 11) { m = 0; y++; }
+    }
   }
   host.innerHTML = out.map(function (c, i) {
     var t = fmt.format(c);

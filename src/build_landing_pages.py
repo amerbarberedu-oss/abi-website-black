@@ -26,23 +26,14 @@ def clean_links(html):
         return 'href="%s%s"' % (path, suffix)
     return re.sub(r'href="([^"]*)"', repl, html)
 
-# ── Next class date: first Monday of the upcoming month (computed at build) ──
-def _next_first_monday():
-    today = datetime.date.today()
-    d = datetime.date(today.year, today.month, 1)
-    while d.weekday() != 0:
-        d += datetime.timedelta(days=1)
-    if d <= today:
-        y, m = (today.year, today.month + 1) if today.month < 12 else (today.year + 1, 1)
-        d = datetime.date(y, m, 1)
-        while d.weekday() != 0:
-            d += datetime.timedelta(days=1)
-    return d
+# ── Next class date, from the canonical list in assets/js/start-dates.js ──
+import start_dates
 
-NEXT_MON = _next_first_monday()
+NEXT_MON = start_dates.next_start()
 NEXT_START_EN = NEXT_MON.strftime("%a, %b ") + str(NEXT_MON.day)          # e.g. "Mon, Jul 6"
 _ES_MO = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
-NEXT_START_ES = "lun, %s %d" % (_ES_MO[NEXT_MON.month - 1], NEXT_MON.day)  # e.g. "lun, jul 6"
+_ES_WD = ['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom']
+NEXT_START_ES = "%s, %s %d" % (_ES_WD[NEXT_MON.weekday()], _ES_MO[NEXT_MON.month - 1], NEXT_MON.day)  # e.g. "mar, sep 8"
 
 # Countdown defaults baked at build time so the no-JS view shows real
 # numbers (not all-zeros). JS still enhances these into a live countdown.
@@ -1058,20 +1049,23 @@ def sec_gallery(p, s, pre):
             '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
             '</div></section>' % (eb, h, imgs, pre, more))
 
-START_DATES = [
-    ("2026", [("Aug","Monday, August 3"),("Sep","Monday, September 7"),("Oct","Monday, October 5"),
-              ("Nov","Monday, November 2"),("Dec","Monday, December 7")]),
-    ("2027", [("Jan","Monday, January 4"),("Feb","Monday, February 1"),("Mar","Monday, March 1"),
-              ("Apr","Monday, April 5"),("May","Monday, May 3"),("Jun","Monday, June 7"),
-              ("Jul","Monday, July 5"),("Aug","Monday, August 2"),("Sep","Monday, September 6"),
-              ("Oct","Monday, October 4"),("Nov","Monday, November 1"),("Dec","Monday, December 6")]),
-    ("2028", [("Jan","Monday, January 3"),("Feb","Monday, February 7"),("Mar","Monday, March 6"),
-              ("Apr","Monday, April 3"),("May","Monday, May 1"),("Jun","Monday, June 5"),
-              ("Jul","Monday, July 3"),("Aug","Monday, August 7"),("Sep","Monday, September 4"),
-              ("Oct","Monday, October 2"),("Nov","Monday, November 6"),("Dec","Monday, December 4")]),
-]
-# start dates that land on a federal holiday (the Labor-Day Mondays)
-HOLIDAY_START = {"Monday, September 7","Monday, September 6","Monday, September 4"}
+# Calendar table: the rest of the current year plus the next two years,
+# straight from the canonical start-date list (assets/js/start-dates.js).
+def _start_dates_table():
+    _MO = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    out, y0 = [], NEXT_MON.year
+    for y in (y0, y0 + 1, y0 + 2):
+        rows = []
+        for m in range(1, 13):
+            d = start_dates.start_for(y, m)
+            if d < NEXT_MON:
+                continue
+            rows.append((_MO[m - 1], '%s, %s %d' % (d.strftime('%A'), d.strftime('%B'), d.day)))
+        if rows:
+            out.append((str(y), rows))
+    return out
+
+START_DATES = _start_dates_table()
 HOLIDAYS = [
     ("2026", [("Independence Day","Friday, July 3"),("Labor Day","Monday, September 7"),
               ("Columbus Day","Monday, October 12"),("Veterans Day","Wednesday, November 11"),
@@ -1170,7 +1164,8 @@ def footer(p, s, pre):
   </div>
 </div>
 <script src="/assets/js/effects.js?v=300" defer></script>
-<script src="%sassets/js/landing.js?v=300" defer></script>
+<script src="/assets/js/start-dates.js?v=1" defer></script>
+<script src="%sassets/js/landing.js?v=301" defer></script>
 <script src="/assets/js/upgrade.js?v=300" defer></script>
 <script src="/assets/js/chatbot.js?v=3" defer></script>
 <script src="/assets/js/video-sound.js?v=301" defer></script>

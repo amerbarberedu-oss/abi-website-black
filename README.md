@@ -170,9 +170,22 @@ The site supports two campuses with dynamic switching:
 ### Build locally
 
 ```bash
-python3 src/build.py                 # → 115 pages + sitemap.xml + robots.txt
-python3 src/build_landing_pages.py   # → landing funnel pages
+python3 src/build.py                 # → 116 pages + sitemap.xml + robots.txt
+python3 landing-funnels/src/build.py # → 6 landing funnel pages
 ```
+
+### Class start dates
+
+Every "next class starts" date, countdown target and start-date table on the
+site comes from one list: the `PUBLISHED` table in
+[`assets/js/start-dates.js`](assets/js/start-dates.js) (published through
+Dec 2027). The browser loads that file directly; `src/start_dates.py` parses
+the same table so the builders bake matching dates into the HTML.
+
+To add or correct a start date, edit `PUBLISHED` and rebuild — nothing else
+needs touching. Months past the published list fall back to the standing rule:
+first Monday of the month, pushed to Tuesday when an observed federal holiday
+(New Year's Day, Independence Day, Labor Day) lands on it.
 
 ### Local dev server
 
@@ -193,6 +206,9 @@ vercel promote <deployment-id> --scope amerbarberedu-oss-projects --token $VERCE
 ### Cache busting
 
 When modifying CSS/JS files, bump the version number:
+- `start-dates.js?v=1` — in `src/build.py`, `src/pages/index.html`, `src/pages/es-index.html`,
+  `src/build_landing_pages.py`, and `landing-funnels/src/build.py`. Loads **before**
+  `main.js` / `landing.js` / `funnels.js`, which read `window.ABIStartDates` from it.
 - `landing.css?v=174` — in `src/build.py`, `landing-funnels/src/build.py`, and generated HTML files.
 - `style.css?v=34` — in `src/build.py` and generated HTML files.
 - `campus.js?v=5` — in `src/build.py`, `src/pages/index.html`, `src/pages/es-index.html`

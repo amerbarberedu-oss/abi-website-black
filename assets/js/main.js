@@ -14,19 +14,17 @@
   /* Mobile nav is handled by landing.js (.hamburger/.nav-drawer); the old
      .menu-btn/.nav markup no longer exists, so no wiring is needed here. */
 
-  /* ---------- Next start date: first Monday of next month (always current) ---------- */
-  function firstMonday(year, month) {
-    var d = new Date(year, month, 1);
-    var day = d.getDay();
-    var offset = (8 - day) % 7; // days until Monday
-    d.setDate(1 + offset);
-    return d;
-  }
+  /* ---------- Next start date (canonical list in start-dates.js) ---------- */
   function nextStartDate(now) {
-    // first Monday of current month if still ahead, else next month
-    var fm = firstMonday(now.getFullYear(), now.getMonth());
-    if (fm <= now) fm = firstMonday(now.getFullYear(), now.getMonth() + 1);
-    return fm;
+    if (window.ABIStartDates) return window.ABIStartDates.next(now);
+    // Defensive fallback if start-dates.js failed to load: first Monday ahead.
+    var d = new Date(now.getFullYear(), now.getMonth(), 1);
+    while (d.getDay() !== 1) d.setDate(d.getDate() + 1);
+    if (d <= now) {
+      d = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      while (d.getDay() !== 1) d.setDate(d.getDate() + 1);
+    }
+    return d;
   }
   var fmt = { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' };
   var startDateEls = document.querySelectorAll('[data-start-date]');
@@ -39,7 +37,7 @@
   renderStartDate(start);
 
   /* ---------- Countdown (perpetual: the instant the current cohort's start
-     time passes, it rolls forward to the next month's first Monday and keeps
+     time passes, it rolls forward to the next published start date and keeps
      ticking -- runs correctly indefinitely, no page reload ever required) --- */
   var cd = document.querySelector('[data-countdown]');
   if (cd) {

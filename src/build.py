@@ -9,24 +9,21 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src', 'pages')
 SITE_URL = 'https://www.abi.edu'
 
-# ── Next class date (first Monday of upcoming month), computed at build time ──
-def _next_first_monday():
-    today = datetime.date.today()
-    d = datetime.date(today.year, today.month, 1)
-    while d.weekday() != 0:
-        d += datetime.timedelta(days=1)
-    if d <= today:
-        y, m = (today.year, today.month + 1) if today.month < 12 else (today.year + 1, 1)
-        d = datetime.date(y, m, 1)
-        while d.weekday() != 0:
-            d += datetime.timedelta(days=1)
-    return d
+# ── Next class date, from the canonical list in assets/js/start-dates.js ──
+import start_dates
 
-_NEXT_MON = _next_first_monday()
+_NEXT_MON = start_dates.next_start()
 _NEXT_DT = datetime.datetime.combine(_NEXT_MON, datetime.time(0, 0))
 _DELTA = _NEXT_DT - datetime.datetime.now()
 _REMAIN = max(int(_DELTA.total_seconds()), 0)
-NEXT_START_LONG = _NEXT_MON.strftime('%A, %B ') + str(_NEXT_MON.day)   # "Monday, July 6"
+NEXT_START_LONG = _NEXT_MON.strftime('%A, %B ') + str(_NEXT_MON.day)   # "Tuesday, September 8"
+NEXT_START_FULL = NEXT_START_LONG + ', ' + str(_NEXT_MON.year)         # "Tuesday, September 8, 2026"
+_ES_DAY = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
+_ES_MON = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+           'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+_es_day = _ES_DAY[_NEXT_MON.weekday()]
+NEXT_START_FULL_ES = '%s%s, %d de %s de %d' % (
+    _es_day[0].upper(), _es_day[1:], _NEXT_MON.day, _ES_MON[_NEXT_MON.month - 1], _NEXT_MON.year)
 CD_D, CD_H = str(_REMAIN // 86400), str((_REMAIN % 86400) // 3600)
 CD_M, CD_S = str((_REMAIN % 3600) // 60), str(_REMAIN % 60)
 
@@ -243,9 +240,10 @@ TEMPLATE = """<!DOCTYPE html>
 <script>(function(){{var b=document.querySelector('[data-call-toggle]'),s=document.querySelector('.call-sheet');if(!b||!s)return;function close(){{s.hidden=true;b.setAttribute('aria-expanded','false');}}b.addEventListener('click',function(e){{e.stopPropagation();var open=s.hidden;s.hidden=!open;b.setAttribute('aria-expanded',String(open));}});document.addEventListener('click',function(e){{if(!s.hidden&&!s.contains(e.target)&&e.target!==b)close();}});document.addEventListener('keydown',function(e){{if(e.key==='Escape')close();}});s.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',close);}});}})();</script>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=300" defer></script>
+<script src="{root}assets/js/start-dates.js?v=1" defer></script>
+<script src="{root}assets/js/main.js?v=301" defer></script>
 <script src="{root}assets/js/effects.js?v=300" defer></script>
-<script src="{root}assets/js/landing.js?v=300" defer></script>
+<script src="{root}assets/js/landing.js?v=301" defer></script>
 <script src="{root}assets/js/upgrade.js?v=300" defer></script>
 <script src="{root}assets/js/campus.js?v=305" defer></script>
 <script src="{root}assets/js/video-sound.js?v=301" defer></script>
@@ -1673,6 +1671,13 @@ def build():
         html = (html
                 .replace('<span class="date" data-start-date>First Monday of next month</span>',
                          '<span class="date" data-start-date>%s</span>' % NEXT_START_LONG)
+                .replace('<span class="hx-next-date" data-next-start>Monday, July 6, 2026</span>',
+                         '<span class="hx-next-date" data-next-start>%s</span>'
+                         % (NEXT_START_FULL_ES if lang == 'es' else NEXT_START_FULL))
+                .replace('<b data-cd-d>4</b>', '<b data-cd-d>%s</b>' % CD_D)
+                .replace('<b data-cd-h>0</b>', '<b data-cd-h>%s</b>' % CD_H)
+                .replace('<b data-cd-m>0</b>', '<b data-cd-m>%s</b>' % CD_M)
+                .replace('<b data-cd-s>0</b>', '<b data-cd-s>%s</b>' % CD_S)
                 .replace('<b data-d>0</b>', '<b data-d>%s</b>' % CD_D)
                 .replace('<b data-h>0</b>', '<b data-h>%s</b>' % CD_H)
                 .replace('<b data-m>0</b>', '<b data-m>%s</b>' % CD_M)

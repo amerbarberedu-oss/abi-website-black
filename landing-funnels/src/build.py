@@ -28,7 +28,7 @@ import data as D
 
 SITE = "https://www.abi.edu"
 CSS_V = "75"
-JS_V  = "17"
+JS_V  = "18"
 
 # ── inline SVG icon library ─────────────────────────────────────────
 ICONS = {
@@ -52,27 +52,17 @@ def svg(name, size=22, stroke=True):
     return '<svg %s aria-hidden="true">%s</svg>' % (attrs, body)
 
 
-# ── date helpers (countdown rolls forward indefinitely) ─────────────
-def first_monday_of_next_month(after=None):
-    after = after or datetime.date.today()
-    y, m = after.year, after.month + 1
-    if m > 12:
-        m, y = 1, y + 1
-    d = datetime.date(y, m, 1)
-    while d.weekday() != 0:
-        d += datetime.timedelta(days=1)
-    return d
+# ── date helpers ────────────────────────────────────────────────────
+# The countdown target comes from the canonical start-date list in
+# assets/js/start-dates.js (parsed by src/start_dates.py); the same list is
+# loaded in the browser, so the countdown rolls forward on its own and stays
+# right for years without a rebuild.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))), 'src'))
+import start_dates
 
-def next_start():
-    today = datetime.date.today()
-    d = datetime.date(today.year, today.month, 1)
-    while d.weekday() != 0:
-        d += datetime.timedelta(days=1)
-    if d <= today:
-        d = first_monday_of_next_month(today)
-    return d
-
-NEXT_ISO = next_start().isoformat()
+NEXT_START = start_dates.next_start()
+NEXT_ISO = NEXT_START.isoformat()
 
 
 # ── small helpers ───────────────────────────────────────────────────
@@ -1000,6 +990,7 @@ def mobile_cta_bar(p):
 
 def page_tail():
     return (
+        '<script src="/assets/js/start-dates.js?v=1" defer></script>\n'
         '<script src="/assets/js/funnels.js?v=%s" defer></script>\n'
         '<script src="/assets/js/chat.js?v=301" defer></script>\n'
         '</body>\n</html>\n'
