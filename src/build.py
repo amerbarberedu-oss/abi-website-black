@@ -792,7 +792,7 @@ def article_schema(title, url, slug=None, body=None, date="2024-02-01"):
         "isPartOf": {"@type": "Blog", "name": "American Barber Institute Blog",
                      "url": SITE_URL + "/blog/"},
         "datePublished": date,
-        "dateModified": "2026-07-05",
+        "dateModified": max(date, "2026-07-05"),
         "image": {"@type": "ImageObject", "url": SITE_URL + "/assets/img/og-cover.jpg",
                   "width": 1200, "height": 630},
         "author": {
@@ -936,7 +936,22 @@ BLOG_AUTHORS = {
     "diverse-haircut-training-at-american-barber-inst": ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx"),
     "barber-school-instructors-in-nyc": ("David Ayeoribe", "Lead Senior Instructor & Director"),
     "exploring-the-benefits-of-enrolling-in-the-ameri": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "how-to-get-a-barber-license-in-new-york": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "ny-barber-practical-exam-what-to-expect": ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx"),
+    "how-long-does-barber-school-take-in-new-york": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "barber-vs-cosmetologist-in-new-york": ("Harold \"Barkim\" Brown", "Lead Instructor"),
+    "barber-school-without-high-school-diploma-atb-exam": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "how-to-pay-for-barber-school-in-nyc": ("David Ayeoribe", "Lead Senior Instructor & Director"),
+    "barber-school-while-working-full-time": ("Harold \"Barkim\" Brown", "Lead Instructor"),
+    "first-week-of-barber-school-what-to-expect": ("Harold \"Barkim\" Brown", "Lead Instructor"),
+    "types-of-fades-every-barber-student-learns": ("Truth \"The Barber Artist\" Quinones", "Founding Director, ABI Bronx"),
+    "is-it-too-late-to-become-a-barber": ("David Ayeoribe", "Lead Senior Instructor & Director"),
 }
+
+
+# slug -> ISO publish date, filled from src/blog_manifest.json below.
+BLOG_DATES = {}
+BLOG_HIDE_DATE = set()
 
 
 # Pages whose partials carry their own footer + scripts (full-page layout).
@@ -1176,7 +1191,12 @@ PAGES = [
 # BlogPosting schema carries real E-E-A-T signals (Person author, wordCount).
 _blog_manifest = os.path.join(ROOT, 'src', 'blog_manifest.json')
 if os.path.exists(_blog_manifest):
-    for _p in json.load(open(_blog_manifest)):
+    for _p in json.load(open(_blog_manifest, encoding='utf-8')):
+        # Posts without a "date" keep the original 2024-02-01 publish date.
+        BLOG_DATES[_p['slug']] = _p.get('date', '2024-02-01')
+        # "hide_date": true drops the visible date from the post's byline.
+        if _p.get('hide_date'):
+            BLOG_HIDE_DATE.add(_p['slug'])
         _partial_path = os.path.join(SRC, _p['partial'])
         _body = open(_partial_path, encoding='utf-8').read() if os.path.exists(_partial_path) else None
         PAGES.append((
@@ -1184,7 +1204,7 @@ if os.path.exists(_blog_manifest):
             f"{_p['title']} | ABI Blog",
             f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
             "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
-                                  slug=_p['slug'], body=_body)]))
+                                  slug=_p['slug'], body=_body, date=BLOG_DATES[_p['slug']])]))
 
 # ---- Spanish mirror: auto-register an es/ twin for every indexable EN page ----
 # The twin's source partial is es-<partial> (produced by translators). Until that
@@ -1498,13 +1518,16 @@ def build():
         if out.startswith('blog/') and out != 'blog/index.html':
             _slug = out[len('blog/'):-len('.html')]
             _bname, _brole = BLOG_AUTHORS.get(_slug, ("David Ayeoribe", "Lead Senior Instructor & Director"))
+            _bdate = datetime.date.fromisoformat(BLOG_DATES.get(_slug, '2024-02-01'))
             _byline = (
                 '<p class="post-meta" style="margin:.4rem 0 1.6rem;font-size:.92rem;'
                 'color:#5b6273;letter-spacing:.01em">'
                 f'By <a href="/instructors" rel="author" style="color:inherit;text-decoration:underline">'
-                f'<span itemprop="author">{_bname}</span></a> · {_brole} · '
-                '<time datetime="2024-02-01" itemprop="datePublished">February 1, 2024</time>'
-                '</p>'
+                f'<span itemprop="author">{_bname}</span></a> · {_brole}'
+                + ('' if _slug in BLOG_HIDE_DATE else
+                   f' · <time datetime="{_bdate.isoformat()}" itemprop="datePublished">'
+                   f'{_bdate:%B} {_bdate.day}, {_bdate.year}</time>')
+                + '</p>'
             )
             # Drop the byline right after the first </h1> if there is one,
             # otherwise prepend to the body.
@@ -1699,7 +1722,6 @@ def build():
     for _extra in ('index.html', 'es/index.html', 'bronx.html'):
         if _extra not in written:
             written.append(_extra)
-    import datetime
     _today = datetime.date.today().isoformat()
     def _pri(o):
         if o in ('index.html',):                                  return ('1.0', 'weekly')
