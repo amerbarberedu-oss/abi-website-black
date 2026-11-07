@@ -1199,12 +1199,18 @@ if os.path.exists(_blog_manifest):
             BLOG_HIDE_DATE.add(_p['slug'])
         _partial_path = os.path.join(SRC, _p['partial'])
         _body = open(_partial_path, encoding='utf-8').read() if os.path.exists(_partial_path) else None
+        _schemas = [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
+                                   slug=_p['slug'], body=_body, date=BLOG_DATES[_p['slug']])]
+        # Posts with a <details><summary> FAQ block also get FAQPage schema
+        # (resolved per page at build time, so the es/ twin gets its Spanish Q&As).
+        if _body and '<summary>' in _body:
+            _schemas.append("FAQ_SCHEMA")
+        # Optional "seo_title" / "desc" override the generic <title> and meta description.
         PAGES.append((
             f"blog/{_p['slug']}.html", _p['partial'],
-            f"{_p['title']} | ABI Blog",
-            f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
-            "en", [article_schema(_p['title'], f"{SITE_URL}/blog/{_p['slug']}",
-                                  slug=_p['slug'], body=_body, date=BLOG_DATES[_p['slug']])]))
+            _p.get('seo_title', f"{_p['title']} | ABI Blog"),
+            _p.get('desc', f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school."),
+            "en", _schemas))
 
 # ---- Spanish mirror: auto-register an es/ twin for every indexable EN page ----
 # The twin's source partial is es-<partial> (produced by translators). Until that
